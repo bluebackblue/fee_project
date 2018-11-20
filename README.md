@@ -13,12 +13,12 @@ https://github.com/bluebackblue/fee_project/blob/master/LICENSE.txt
 * _____ Fee
 * _______ Script [サブモジュール : https://github.com/bluebackblue/fee.git]
 * _____ TestScene
-* _____ TestScript
+* _____ TestScript [サブモジュール : https://github.com/bluebackblue/fee_testscript.git]
 * _ unity_2019_1 [Unity 2019.1.0a8 (64-bit)]
 * ___ Assets
 * _____ Fee
 * _______ Script [サブモジュール : https://github.com/bluebackblue/fee.git]
-* _____ TestScene
+* _____ TestScene [サブモジュール : https://github.com/bluebackblue/fee_testscript.git]
 * _____ TestScript
 
 ## webgl
