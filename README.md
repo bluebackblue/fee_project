@@ -11,15 +11,15 @@ https://github.com/bluebackblue/fee_project/blob/master/LICENSE.txt
 * _ unity_2018_2 [Unity 2018.2.16f1 (64-bit)]
 * ___ Assets
 * _____ Fee
-* _______ Script [サブモジュール : https://github.com/bluebackblue/fee.git]
+* _______ Script [ サブモジュール : https://github.com/bluebackblue/fee.git ]
 * _____ TestScene
-* _____ TestScript [サブモジュール : https://github.com/bluebackblue/fee_testscript.git]
+* _____ TestScript [ サブモジュール : https://github.com/bluebackblue/fee_testscript.git ]
 * _ unity_2019_1 [Unity 2019.1.0a8 (64-bit)]
 * ___ Assets
 * _____ Fee
-* _______ Script [サブモジュール : https://github.com/bluebackblue/fee.git]
-* _____ TestScene [サブモジュール : https://github.com/bluebackblue/fee_testscript.git]
-* _____ TestScript
+* _______ Script [ サブモジュール : https://github.com/bluebackblue/fee.git ]
+* _____ TestScene
+* _____ TestScript [ サブモジュール : https://github.com/bluebackblue/fee_testscript.git ]
 
 ## webgl
 http://bbbproject.sakura.ne.jp/www/project_webgl/fee/
