@@ -266,7 +266,6 @@
     <Compile Include="Assets\Fee\Script\UniVrm\Tool.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\UniVrm.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Work.cs" />
-    <None Include="Assets\Fee\license\pun2free\readme.txt" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\AlphaClip.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\UiText.shader" />
     <None Include="Assets\Fee\Resources\Shader\PerformanceCounter\Sprite.shader" />
@@ -274,15 +273,11 @@
     <None Include="Assets\Fee\Resources\Shader\Render2D\Simple.shader" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_LastAddUpSampling.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\UiImage.shader" />
-    <None Include="Assets\Fee\license\maoudamashii\maoudamashii.txt" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_DownSampling.shader" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_AddUpSampling.shader" />
-    <None Include="Assets\Fee\LICENSE.txt" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Alpha.shader" />
-    <None Include="Assets\Fee\license\soundeffect-lab\soundeffect-lab.txt" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_X.shader" />
     <None Include="Assets\AssetBundle\Raw\se.txt" />
-    <None Include="Assets\Fee\license\univrm\LICENSE.txt" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_Y.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Add.shader" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_FirstDownSampling.shader" />

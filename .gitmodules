@@ -4,3 +4,9 @@
 [submodule "unity_2019_1/Assets/Fee/Script"]
 	path = unity_2019_1/Assets/Fee/Script
 	url = https://github.com/bluebackblue/fee.git
+[submodule "unity_2018_2/Assets/TestScript"]
+	path = unity_2018_2/Assets/TestScript
+	url = https://github.com/bluebackblue/fee_testscript.git
+[submodule "unity_2019_1/Assets/TestScript"]
+	path = unity_2019_1/Assets/TestScript
+	url = https://github.com/bluebackblue/fee_testscript
