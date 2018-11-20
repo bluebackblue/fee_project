@@ -266,6 +266,28 @@
     <Compile Include="Assets\Fee\Script\UniVrm\Tool.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\UniVrm.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Work.cs" />
+    <Compile Include="Assets\TestScript\main.cs" />
+    <Compile Include="Assets\TestScript\test01.cs" />
+    <Compile Include="Assets\TestScript\test02.cs" />
+    <Compile Include="Assets\TestScript\test03.cs" />
+    <Compile Include="Assets\TestScript\test04.cs" />
+    <Compile Include="Assets\TestScript\test05.cs" />
+    <Compile Include="Assets\TestScript\test06.cs" />
+    <Compile Include="Assets\TestScript\test07.cs" />
+    <Compile Include="Assets\TestScript\test08.cs" />
+    <Compile Include="Assets\TestScript\test09.cs" />
+    <Compile Include="Assets\TestScript\test10.cs" />
+    <Compile Include="Assets\TestScript\test11.cs" />
+    <Compile Include="Assets\TestScript\test12.cs" />
+    <Compile Include="Assets\TestScript\test13.cs" />
+    <Compile Include="Assets\TestScript\test14.cs" />
+    <Compile Include="Assets\TestScript\test15.cs" />
+    <Compile Include="Assets\TestScript\test16.cs" />
+    <Compile Include="Assets\TestScript\test17.cs" />
+    <Compile Include="Assets\TestScript\test18.cs" />
+    <Compile Include="Assets\TestScript\test19.cs" />
+    <Compile Include="Assets\TestScript\test20.cs" />
+    <Compile Include="Assets\TestScript\test21.cs" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\AlphaClip.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\UiText.shader" />
     <None Include="Assets\Fee\Resources\Shader\PerformanceCounter\Sprite.shader" />
@@ -280,6 +302,7 @@
     <None Include="Assets\AssetBundle\Raw\se.txt" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_Y.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Add.shader" />
+    <None Include="Assets\TestScript\LICENSE.txt" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_FirstDownSampling.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/work/github/fee_project/unity_2019_1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
