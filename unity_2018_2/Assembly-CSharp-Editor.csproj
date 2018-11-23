@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{24295993-4ECD-7BEC-678D-AE48D42F0557}</ProjectGuid>
+    <ProjectGuid>{00768028-EBDB-AFFE-D26D-D327427B3F04}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2018.2.16f1</UnityVersion>
   </PropertyGroup>
@@ -60,469 +60,59 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Fee\Script\Audio\Audio.cs" />
-    <Compile Include="Assets\Fee\Script\Audio\Bank.cs" />
-    <Compile Include="Assets\Fee\Script\Audio\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Audio\MonoBehaviour_AudioSource_Bgm.cs" />
-    <Compile Include="Assets\Fee\Script\Audio\MonoBehaviour_AudioSource_Se.cs" />
-    <Compile Include="Assets\Fee\Script\Audio\Pack_AudioClip.cs" />
-    <Compile Include="Assets\Fee\Script\Audio\Pack_SoundPool.cs" />
-    <Compile Include="Assets\Fee\Script\Audio\SoundPool.cs" />
-    <Compile Include="Assets\Fee\Script\Audio\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Audio\Volume.cs" />
-    <Compile Include="Assets\Fee\Script\Bloom\Bloom.cs" />
-    <Compile Include="Assets\Fee\Script\Bloom\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Bloom\MonoBehaviour_Camera.cs" />
-    <Compile Include="Assets\Fee\Script\Bloom\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Blur\Blur.cs" />
-    <Compile Include="Assets\Fee\Script\Blur\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Blur\MonoBehaviour_Camera.cs" />
-    <Compile Include="Assets\Fee\Script\Blur\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Coroutine_CreateSignaturePrivateKey.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Coroutine_DecryptPass.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Coroutine_DecryptPrivateKey.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Coroutine_EncryptPass.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Coroutine_EncryptPublicKey.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Coroutine_VerifySignaturePublicKey.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Crypt.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Item.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\MonoBehaviour_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\MonoBehaviour_Security.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\OnCoroutine_CallBack.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Task_CreateSignaturePrivateKey.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Task_DecryptPass.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Task_DecryptPrivateKey.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Task_EncryptPass.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Task_EncryptPublicKey.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Task_VerifySignaturePublicKey.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\Work.cs" />
-    <Compile Include="Assets\Fee\Script\Deleter\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Deleter\Deleter.cs" />
-    <Compile Include="Assets\Fee\Script\Deleter\Item_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Deleter\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Directory\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Directory\Directory.cs" />
-    <Compile Include="Assets\Fee\Script\Directory\Item.cs" />
-    <Compile Include="Assets\Fee\Script\Directory\Root.cs" />
-    <Compile Include="Assets\Fee\Script\Directory\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Directory\Work.cs" />
-    <Compile Include="Assets\Fee\Script\EventPlate\BlockItem.cs" />
-    <Compile Include="Assets\Fee\Script\EventPlate\Config.cs" />
-    <Compile Include="Assets\Fee\Script\EventPlate\EventPlate.cs" />
-    <Compile Include="Assets\Fee\Script\EventPlate\EventType.cs" />
-    <Compile Include="Assets\Fee\Script\EventPlate\Item.cs" />
-    <Compile Include="Assets\Fee\Script\EventPlate\OnOverCallBack_Base.cs" />
-    <Compile Include="Assets\Fee\Script\EventPlate\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\EventPlate\Work.cs" />
-    <Compile Include="Assets\Fee\Script\Fade\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Fade\Fade.cs" />
-    <Compile Include="Assets\Fee\Script\Fade\Fade_Sprite2D.cs" />
-    <Compile Include="Assets\Fee\Script\Fade\MonoBehaviour_Flag.cs" />
-    <Compile Include="Assets\Fee\Script\Fade\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\File\AssetBundleList.cs" />
-    <Compile Include="Assets\Fee\Script\File\Config.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_DownLoadAssetBundle.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_DownLoadBinaryFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_DownLoadSoundPool.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_DownLoadTextFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_DownLoadTextureFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_LoadLocalBinaryFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_LoadLocalSoundPool.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_LoadLocalTextFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_LoadLocalTextureFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_SaveLocalBinaryFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_SaveLocalSoundPool.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_SaveLocalTextFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Coroutine_SaveLocalTextureFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\File.cs" />
-    <Compile Include="Assets\Fee\Script\File\Item.cs" />
-    <Compile Include="Assets\Fee\Script\File\MonoBehaviour_Base.cs" />
-    <Compile Include="Assets\Fee\Script\File\MonoBehaviour_Io.cs" />
-    <Compile Include="Assets\Fee\Script\File\MonoBehaviour_SoundPool.cs" />
-    <Compile Include="Assets\Fee\Script\File\MonoBehaviour_WebRequest.cs" />
-    <Compile Include="Assets\Fee\Script\File\OnCoroutine_CallBack.cs" />
-    <Compile Include="Assets\Fee\Script\File\ProgressMode.cs" />
-    <Compile Include="Assets\Fee\Script\File\Task_LoadLocalBinaryFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Task_LoadLocalTextFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Task_LoadLocalTextureFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Task_SaveLocalBinaryFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Task_SaveLocalTextFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Task_SaveLocalTextureFile.cs" />
-    <Compile Include="Assets\Fee\Script\File\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\File\Work.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Analog_Button.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Analog_Stick.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Digital_Button.cs" />
-    <Compile Include="Assets\Fee\Script\Input\DirType.cs" />
-    <Compile Include="Assets\Fee\Script\Input\EditInputManager.cs" />
-    <Compile Include="Assets\Fee\Script\Input\EditInputManager_Item.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Input.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Key.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Moter_Speed.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Mouse.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Mouse_Button.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Mouse_Pos.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Pad.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Touch.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Touch_Phase.cs" />
-    <Compile Include="Assets\Fee\Script\Input\Touch_Phase_Key_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Instantiate\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Instantiate\Instantiate.cs" />
-    <Compile Include="Assets\Fee\Script\Instantiate\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\Attribute.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\Config.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\Impl.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\JsonItem.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\JsonToObject.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\JsonToObject_SystemObject.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\JsonToObject_Work.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\ObjectToJson.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\ObjectToJson_Work.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\Value.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\ValueType.cs" />
-    <Compile Include="Assets\Fee\Script\Network\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Network\Connect_Auto.cs" />
-    <Compile Include="Assets\Fee\Script\Network\MonoBehaviour_Connect_Auto.cs" />
-    <Compile Include="Assets\Fee\Script\Network\Network.cs" />
-    <Compile Include="Assets\Fee\Script\Network\OnRemoteCallBack_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Network\Player.cs" />
-    <Compile Include="Assets\Fee\Script\Network\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\PerformanceCounter\Config.cs" />
-    <Compile Include="Assets\Fee\Script\PerformanceCounter\FrameData.cs" />
-    <Compile Include="Assets\Fee\Script\PerformanceCounter\MonoBehaviour_Camera.cs" />
-    <Compile Include="Assets\Fee\Script\PerformanceCounter\PerformanceCounter.cs" />
-    <Compile Include="Assets\Fee\Script\PerformanceCounter\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\InputField2D.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\InputField2D_Param.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\InputField2D_Rect.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\LayerItem.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\LayerList.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\MaterialList.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\MonoBehaviour_Camera_GL.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\MonoBehaviour_Camera_UI.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\MonoBehaviour_PreDraw.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Pos2D.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Rect2D.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Render2D.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Screen.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Size2D.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Sprite2D.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Sprite2D_Param.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Sprite2D_Rect.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Sprite2D_Rotate.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\State2D.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Text2D.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Text2D_Param.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Text2D_Rect.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Scene\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Scene\Scene.cs" />
-    <Compile Include="Assets\Fee\Script\Scene\Scene_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Scene\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\TaskW\CancelToken.cs" />
-    <Compile Include="Assets\Fee\Script\TaskW\Config.cs" />
-    <Compile Include="Assets\Fee\Script\TaskW\SyncContext.cs" />
-    <Compile Include="Assets\Fee\Script\TaskW\Task.cs" />
-    <Compile Include="Assets\Fee\Script\TaskW\TaskW.cs" />
-    <Compile Include="Assets\Fee\Script\TaskW\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Button.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Button_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Button_Mode.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Button_Sprite2D.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\CheckButton.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\CheckButton_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\CheckButton_Mode.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\ClipSprite.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\ClipSprite_Sprite2D.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Config.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\OnTargetCallBack_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_Horizontal.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_Horizontal_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_List_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_Vertical.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_Vertical_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\ScrollItem_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Slider.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Slider_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Slider_Bg_Sprite2D.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Slider_Button_Sprite2D.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Slider_Value_Sprite2D.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Ui.cs" />
-    <Compile Include="Assets\Fee\Script\UniVrm\Config.cs" />
-    <Compile Include="Assets\Fee\Script\UniVrm\Item.cs" />
-    <Compile Include="Assets\Fee\Script\UniVrm\MonoBehaviour_Base.cs" />
-    <Compile Include="Assets\Fee\Script\UniVrm\MonoBehaviour_Vrm.cs" />
-    <Compile Include="Assets\Fee\Script\UniVrm\Task_VrmParse.cs" />
-    <Compile Include="Assets\Fee\Script\UniVrm\Tool.cs" />
-    <Compile Include="Assets\Fee\Script\UniVrm\UniVrm.cs" />
-    <Compile Include="Assets\Fee\Script\UniVrm\Work.cs" />
-    <Compile Include="Assets\TestScript\main.cs" />
-    <Compile Include="Assets\TestScript\test01.cs" />
-    <Compile Include="Assets\TestScript\test02.cs" />
-    <Compile Include="Assets\TestScript\test03.cs" />
-    <Compile Include="Assets\TestScript\test04.cs" />
-    <Compile Include="Assets\TestScript\test05.cs" />
-    <Compile Include="Assets\TestScript\test06.cs" />
-    <Compile Include="Assets\TestScript\test07.cs" />
-    <Compile Include="Assets\TestScript\test08.cs" />
-    <Compile Include="Assets\TestScript\test09.cs" />
-    <Compile Include="Assets\TestScript\test10.cs" />
-    <Compile Include="Assets\TestScript\test11.cs" />
-    <Compile Include="Assets\TestScript\test12.cs" />
-    <Compile Include="Assets\TestScript\test13.cs" />
-    <Compile Include="Assets\TestScript\test14.cs" />
-    <Compile Include="Assets\TestScript\test15.cs" />
-    <Compile Include="Assets\TestScript\test16.cs" />
-    <Compile Include="Assets\TestScript\test17.cs" />
-    <Compile Include="Assets\TestScript\test18.cs" />
-    <Compile Include="Assets\TestScript\test19.cs" />
-    <Compile Include="Assets\TestScript\test20.cs" />
-    <Compile Include="Assets\TestScript\test21.cs" />
-    <Compile Include="Assets\VRM\MToon\MToon\Scripts\Utils.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\BlendShapeAvatar.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\BlendShapeBindingMerger.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\BlendShapeClip.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\BlendShapeClipHandler.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\BlendShapeKey.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\BlendShapeMerger.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\Blinker.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\MaterialValueBindingMerger.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\MeshPreviewItem.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\PreviewSceneManager.cs" />
-    <Compile Include="Assets\VRM\Scripts\BlendShape\VRMBlendShapeProxy.cs" />
-    <Compile Include="Assets\VRM\Scripts\EnumUtil.cs" />
-    <Compile Include="Assets\VRM\Scripts\FirstPerson\VRMFirstPerson.cs" />
-    <Compile Include="Assets\VRM\Scripts\FirstPerson\VRMFirstPersonCameraManager.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\glTF_VRM_BlendShape.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\glTF_VRM_FirstPerson.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\glTF_VRM_Humanoid.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\glTF_VRM_Material.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\glTF_VRM_Meta.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\glTF_VRM_SecondaryAnimation.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMException.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMExporSettings.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMExporter.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMExportObject.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMFormat.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMImporter.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMImporterContext.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMMaterialExporter.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMMaterialImporter.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMPreShaderPropExporter.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMVersion.cs" />
-    <Compile Include="Assets\VRM\Scripts\Format\VRMVersionPartial.cs" />
-    <Compile Include="Assets\VRM\Scripts\Humanoid\VRMHumanoidDescription.cs" />
-    <Compile Include="Assets\VRM\Scripts\IVRMComponent.cs" />
-    <Compile Include="Assets\VRM\Scripts\LookAt\CurveMapper.cs" />
-    <Compile Include="Assets\VRM\Scripts\LookAt\LookAtTargetSwitcher.cs" />
-    <Compile Include="Assets\VRM\Scripts\LookAt\LookTarget.cs" />
-    <Compile Include="Assets\VRM\Scripts\LookAt\Matrix4x4Extensions.cs" />
-    <Compile Include="Assets\VRM\Scripts\LookAt\OffsetOnTransform.cs" />
-    <Compile Include="Assets\VRM\Scripts\LookAt\VRMLookAt.cs" />
-    <Compile Include="Assets\VRM\Scripts\LookAt\VRMLookAtBlendShapeApplyer.cs" />
-    <Compile Include="Assets\VRM\Scripts\LookAt\VRMLookAtBoneApplyer.cs" />
-    <Compile Include="Assets\VRM\Scripts\LookAt\VRMLookAtHead.cs" />
-    <Compile Include="Assets\VRM\Scripts\Meta\VRMMeta.cs" />
-    <Compile Include="Assets\VRM\Scripts\Meta\VRMMetaInformation.cs" />
-    <Compile Include="Assets\VRM\Scripts\Meta\VRMMetaObject.cs" />
-    <Compile Include="Assets\VRM\Scripts\PreExportShaderProps\VRM_MToon.cs" />
-    <Compile Include="Assets\VRM\Scripts\PreExportShaderProps\VRM_UnlitCutout.cs" />
-    <Compile Include="Assets\VRM\Scripts\PreExportShaderProps\VRM_UnlitTexture.cs" />
-    <Compile Include="Assets\VRM\Scripts\PreExportShaderProps\VRM_UnlitTransparent.cs" />
-    <Compile Include="Assets\VRM\Scripts\PreExportShaderProps\VRM_UnlitTransparentZWrite.cs" />
-    <Compile Include="Assets\VRM\Scripts\SkinnedMeshUtility\BoneMeshEraser.cs" />
-    <Compile Include="Assets\VRM\Scripts\SkinnedMeshUtility\BoneNormalizer.cs" />
-    <Compile Include="Assets\VRM\Scripts\SkinnedMeshUtility\MeshExtensions.cs" />
-    <Compile Include="Assets\VRM\Scripts\SkinnedMeshUtility\VRMBindposeGizmo.cs" />
-    <Compile Include="Assets\VRM\Scripts\SpringBone\VRMSpringBone.cs" />
-    <Compile Include="Assets\VRM\Scripts\SpringBone\VRMSpringBoneColliderGroup.cs" />
-    <Compile Include="Assets\VRM\Scripts\SpringBone\VRMSpringUtility.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Extensions\ArrayExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Extensions\glTFExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Extensions\JsonParserExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Extensions\StringExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Extensions\UnityExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\BytesBuffer.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\ExtensionsAndExtras\glTFCameraExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\ExtensionsAndExtras\glTFExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\ExtensionsAndExtras\glTFMesh.Primitives.extras.targetNames.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\ExtensionsAndExtras\glTFNode.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\ExtensionsAndExtras\KHR_draco_mesh_compression.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\ExtensionsAndExtras\KHR_materials_unlit.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glbTypes.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glEnum.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glTF.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glTFAnimation.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glTFAssets.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glTFBuffer.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glTFCamera.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glTFMaterial.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glTFMesh.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glTFNode.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glTFSkin.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\glTFTexture.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\JsonFormatter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\JsonSerializableBase.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Format\MonoBehaviourComparator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\AnimationCurveData.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\AnimationExporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\AnimationImporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\AnimationKeyframeData.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\BytesReader.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\glbImporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\gltfExporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\gltfImporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\ImporterContext.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\IStorage.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\MaterialExporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\MaterialImporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\MeshImporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\MeshWithMaterials.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\NodeImporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\ShaderPropExporter\PreShaderPropExporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\ShaderPropExporter\ShaderProps.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\ShaderStore.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\StaticMeshIntegrator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\TextureConverter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\TextureExportManager.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\TextureIO.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\TextureItem.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\TextureLoader.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\TextureSamplerUtil.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\TriangleUtil.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\UnityPath.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\IO\ZipArchiveStorage.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\PreExportShaderProps\Standard.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\PreExportShaderProps\UniGLTF_UniUnlit.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\PreExportShaderProps\Unlit_Color.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\PreExportShaderProps\Unlit_Texture.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\PreExportShaderProps\Unlit_Transparent.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\PreExportShaderProps\Unlit_Transparent_Cutout.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\UniGLTFException.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\UniGLTFVersion.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\UniGLTFVersion_partial.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\Functor.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\IEnumeratorExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\LockQueue.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\MainThreadDispatcher.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\MonitorQueue.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\Schedulable.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\Scheduler.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\Scheduler\CurrentThreadScheduler.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\Scheduler\StepScheduler.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\Scheduler\ThreadPoolScheduler.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\Scheduler\ThreadScheduler.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\TaskChain.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\Unit.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\PoseModifier\HandPose.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\PoseModifier\HandRig.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\PoseModifier\IPoseModifier.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scenes\HumanBuilderTest.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scenes\RuntimeBvhLoader.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\AnimationClipUtility.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\AvatarDescription.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\BoneGizmoDrawer.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\BoneMapping.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\BvhBone.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\Format\Bvh.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\HumanPoseClip.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\HumanPoseTransfer.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\IBone.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\IO\BvhAnimationClip.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\IO\BvhImporter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\IO\Extensions\BvhExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\IO\Extensions\UnityExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\IO\ImporterContext.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\MuscleDebug.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\MuscleInspector.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\Skeleton.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\SkeletonEstimator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\SkeletonMeshUtility.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\ActionDisposer.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Extensions\ArraySegmentExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Extensions\ByteExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Extensions\EnumExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Extensions\ObjectExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Extensions\StringExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Extensions\TypeExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\FormatterExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\IFileSystemAccessor.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\IFormatter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\IStore\BytesStore.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\IStore\ByteUnion.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\IStore\IStore.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\IStore\StreamStore.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\IStore\StringBuilderStore.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\IValueNode.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Json\Exceptions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Json\JsonFormatter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Json\JsonNode.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Json\JsonParser.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Json\JsonSchema.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Json\JsonSchemaAttribute.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Json\JsonString.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Json\JsonValue.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\Json\SimpleJSON.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\JsonSchemaValidator\IJsonSchemaValidator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\JsonSchemaValidator\JsonArrayValidator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\JsonSchemaValidator\JsonBoolValidator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\JsonSchemaValidator\JsonDictionaryValidator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\JsonSchemaValidator\JsonEnumValidator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\JsonSchemaValidator\JsonNumberValidator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\JsonSchemaValidator\JsonObjectValidator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\JsonSchemaValidator\JsonSchemaValidator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\JsonSchemaValidator\JsonSchemaValidatorFactory.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\JsonSchemaValidator\JsonStringValidator.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\MsgPack\EndianConverter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\MsgPack\Exceptions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\MsgPack\MsgPackFormatter.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\MsgPack\MsgPackNode.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\MsgPack\MsgPackParser.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\MsgPack\MsgPackType.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\MsgPack\MsgPackTypeExtensions.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\MsgPack\MsgPackValue.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Scripts\StringSegment.cs" />
-    <Compile Include="Assets\VRM\UniGLTF\UniUnlit\Scripts\Utils.cs" />
-    <None Include="Assets\Fee\Script\license\pun2free\readme.txt" />
-    <None Include="Assets\VRM\Resources\Shaders\VRMUnlitTransparent.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Render2D\AlphaClip.shader" />
-    <None Include="Assets\VRM\UniGLTF\Resources\Shaders\StandardVColor.shader" />
-    <None Include="Assets\VRM\MToon\MToon\Resources\Shaders\MToonCore.cginc" />
-    <None Include="Assets\Fee\Resources\Shader\Render2D\UiText.shader" />
-    <None Include="Assets\VRM\UniGLTF\Resources\Shaders\NormalMapEncoder.shader" />
-    <None Include="Assets\Fee\Resources\Shader\PerformanceCounter\Sprite.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Render2D\Slice9.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Render2D\Simple.shader" />
-    <None Include="Assets\VRM\Resources\Shaders\VRMUnlitTransparentZWrite.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_LastAddUpSampling.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Render2D\UiImage.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_DownSampling.shader" />
-    <None Include="Assets\VRM\UniGLTF\Resources\Shaders\NormalMapDecoder.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_AddUpSampling.shader" />
-    <None Include="Assets\VRM\Resources\Shaders\VRMUnlitTexture.shader" />
-    <None Include="Assets\Fee\Script\LICENSE.txt" />
-    <None Include="Assets\VRM\MToon\MToon\Resources\Shaders\MToonSM4.cginc" />
-    <None Include="Assets\Fee\Resources\Shader\Render2D\Alpha.shader" />
-    <None Include="Assets\VRM\Resources\Shaders\VRMUnlitCutout.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Blur\Blur_X.shader" />
-    <None Include="Assets\AssetBundle\Raw\se.txt" />
-    <None Include="Assets\VRM\LICENSE.txt" />
-    <None Include="Assets\Fee\Script\license\univrm\LICENSE.txt" />
-    <None Include="Assets\VRM\MToon\MToon\Resources\Shaders\MToon.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Blur\Blur_Y.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Render2D\Add.shader" />
-    <None Include="Assets\TestScript\LICENSE.txt" />
-    <None Include="Assets\VRM\UniGLTF\UniUnlit\Resources\UniUnlit.shader" />
-    <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_FirstDownSampling.shader" />
-    <None Include="Assets\VRM\MToon\MToon\Resources\Shaders\MToonSM3.cginc" />
+    <Compile Include="Assets\VRM\MToon\MToon\Editor\MToonInspector.cs" />
+    <Compile Include="Assets\VRM\Scripts\BlendShape\Editor\BlendShapeAvatarEditor.cs" />
+    <Compile Include="Assets\VRM\Scripts\BlendShape\Editor\BlendShapeClipDrawer.cs" />
+    <Compile Include="Assets\VRM\Scripts\BlendShape\Editor\BlendShapeClipEditor.cs" />
+    <Compile Include="Assets\VRM\Scripts\BlendShape\Editor\BlendShapeClipEditorHelper.cs" />
+    <Compile Include="Assets\VRM\Scripts\BlendShape\Editor\BlendShapeClipSelector.cs" />
+    <Compile Include="Assets\VRM\Scripts\BlendShape\Editor\PreviewEditor.cs" />
+    <Compile Include="Assets\VRM\Scripts\BlendShape\Editor\PreviewFaceRenderer.cs" />
+    <Compile Include="Assets\VRM\Scripts\BlendShape\Editor\SerializedBlendShapeClipEditor.cs" />
+    <Compile Include="Assets\VRM\Scripts\BlendShape\Editor\VRMBlnedShapeProxyEditor.cs" />
+    <Compile Include="Assets\VRM\Scripts\Editor\Tests\EnumUtilTest.cs" />
+    <Compile Include="Assets\VRM\Scripts\Editor\Tests\MeshTests.cs" />
+    <Compile Include="Assets\VRM\Scripts\Editor\Tests\VRMBlendShapeKeyTest.cs" />
+    <Compile Include="Assets\VRM\Scripts\Editor\VRMMonoBehaviourComparator.cs" />
+    <Compile Include="Assets\VRM\Scripts\FirstPerson\Editor\RendererFirstPersonFlagsDrawer.cs" />
+    <Compile Include="Assets\VRM\Scripts\Format\Editor\vrmAssetPostprocessor.cs" />
+    <Compile Include="Assets\VRM\Scripts\Format\Editor\VRMAssetWriter.cs" />
+    <Compile Include="Assets\VRM\Scripts\Format\Editor\VRMExporterMenu.cs" />
+    <Compile Include="Assets\VRM\Scripts\Format\Editor\VRMExportObjectEditor.cs" />
+    <Compile Include="Assets\VRM\Scripts\Format\Editor\VRMHumanoidNormalizerMenu.cs" />
+    <Compile Include="Assets\VRM\Scripts\Format\Editor\VRMImporterMenu.cs" />
+    <Compile Include="Assets\VRM\Scripts\Format\Editor\VRMVersionMenu.cs" />
+    <Compile Include="Assets\VRM\Scripts\LookAt\Editor\VRMLookAtHeadEditor.cs" />
+    <Compile Include="Assets\VRM\Scripts\Meta\Editor\VRMMetaEditor.cs" />
+    <Compile Include="Assets\VRM\Scripts\SkinnedMeshUtility\Editor\BoneMeshEraserWizard.cs" />
+    <Compile Include="Assets\VRM\Scripts\SkinnedMeshUtility\Editor\MeshIntegrator.cs" />
+    <Compile Include="Assets\VRM\Scripts\SkinnedMeshUtility\Editor\MeshIntegratorWizard.cs" />
+    <Compile Include="Assets\VRM\Scripts\SpringBone\Editor\VRMSpringBoneColliderGroupEditor.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\Core\Editor\MaterialTests.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\Core\Editor\UniGLTFTests.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Editor\gltfAssetPostprocessor.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Editor\ImporterMenu.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\Core\Scripts\Editor\UniGLTFVersionMenu.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\DepthFirstScheduler\Editor\DepthFirstScheduler.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\Editor\BoneMappingEditor.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\Editor\bvhAssetPostprocessor.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\Editor\HumanPoseTransferEditor.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\Editor\MuscleInspectorEditor.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniHumanoid\Scripts\Editor\Tests\BvhLoaderTests.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\IWriteStreamTest.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\JsonDiffTests.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\JsonFormatterTest.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\JsonParserTest.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\MsgPack\ArrayTest.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\MsgPack\BooleanTest.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\MsgPack\FloatTest.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\MsgPack\IntTest.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\MsgPack\MapTest.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\MsgPack\RawTest.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\MsgPack\StringTest.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\SchemaTests.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniJSON\Editor\Tests\ValidatorTests.cs" />
+    <Compile Include="Assets\VRM\UniGLTF\UniUnlit\Editor\UniUnlitEditor.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/work/github/fee_project/unity_2018_2/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -631,6 +221,9 @@
     <Reference Include="UnityEngine.SharedInternalsModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/Managed/UnityEngine/UnityEngine.SharedInternalsModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.SpatialTrackingModule">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/Managed/UnityEngine/UnityEngine.SpatialTrackingModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.SpriteMaskModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll</HintPath>
     </Reference>
@@ -718,26 +311,83 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Timeline">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Timeline">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TreeEditor">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.GoogleAudioSpatializer">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.GoogleAudioSpatializer">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.HoloLens">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.SpatialTracking">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.VR">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Advertisements">
+      <HintPath>C:/Users/blueback/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/blueback/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Analytics">
+      <HintPath>C:/Users/blueback/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/Editor/UnityEditor.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>C:/Users/blueback/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/blueback/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -1084,6 +734,12 @@
     <Reference Include="Boo.Lang">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.16f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{24295993-4ECD-7BEC-678D-AE48D42F0557}</Project>
+      <Name>Assembly-CSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
