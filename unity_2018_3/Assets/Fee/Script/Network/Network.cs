@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NNetwork
+/** Fee.Network
 */
-namespace NNetwork
+namespace Fee.Network
 {
 	/** Network
 	*/
@@ -195,14 +195,14 @@ namespace NNetwork
 
 		/** プレイヤープレハブリスト。取得。
 		*/
-		public List<NNetwork.Player> GetPlayerList()
+		public List<Fee.Network.Player> GetPlayerList()
 		{
 			return this.player_list;
 		}
 
 		/** プレイヤー。取得。
 		*/
-		public NNetwork.Player GetPlayer(int a_playerindex)
+		public Fee.Network.Player GetPlayer(int a_playerindex)
 		{
 			if((0<=a_playerindex)&&(a_playerindex<this.player_list.Count)){
 				return this.player_list[a_playerindex];
@@ -212,14 +212,14 @@ namespace NNetwork
 
 		/** 自分のプレイヤープレハブ。取得。
 		*/
-		public NNetwork.Player GetMyPlayer()
+		public Fee.Network.Player GetMyPlayer()
 		{
 			return this.my_player;
 		}
 
 		/** プレイヤ‐プレハブ。追加。
 		*/
-		public int AddPlayer(NNetwork.Player a_player)
+		public int AddPlayer(Fee.Network.Player a_player)
 		{
 			if(a_player != null){
 				if(a_player.IsMine() == true){
@@ -234,7 +234,7 @@ namespace NNetwork
 
 		/** プレイヤープレハブ。削除。
 		*/
-		public void RemovePlayer(NNetwork.Player a_player)
+		public void RemovePlayer(Fee.Network.Player a_player)
 		{
 			if(this.my_player == a_player){
 				this.my_player = null;

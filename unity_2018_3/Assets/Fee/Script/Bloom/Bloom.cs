@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NBloom
+/** Fee.Bloom
 */
-namespace NBloom
+namespace Fee.Bloom
 {
 	/** Bloom
 	*/
@@ -87,7 +87,7 @@ namespace NBloom
 
 			{
 				//カメラ。
-				this.camera_gameobject = NInstantiate.Instantiate.CreateOrthographicCameraObject("Camera",t_root_transform,Config.DEFAULT_CAMERA_DEPTH);
+				this.camera_gameobject = Fee.Instantiate.Instantiate.CreateOrthographicCameraObject("Camera",t_root_transform,Config.DEFAULT_CAMERA_DEPTH);
 
 				//OnRenderImage
 				this.camera_monobehaviour = this.camera_gameobject.AddComponent<MonoBehaviour_Camera>();

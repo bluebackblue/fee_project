@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NRender2D
+/** Fee.Render2D
 */
-namespace NRender2D
+namespace Fee.Render2D
 {
 	/** LayerList
 	*/
@@ -58,11 +58,11 @@ namespace NRender2D
 				float t_ui_depth = Config.CAMERADEPTH_START + ii * Config.CAMERADEPTH_STEP + Config.CAMERADEPTH_OFFSET_UI;
 
 				//カメラ。ＧＬ描画。
-				GameObject t_gameobject_camera_gl = NInstantiate.Instantiate.CreateOrthographicCameraObject("Camera_" + ii.ToString() + "_GL",a_transform_root,t_gl_depth);
+				GameObject t_gameobject_camera_gl = Fee.Instantiate.Instantiate.CreateOrthographicCameraObject("Camera_" + ii.ToString() + "_GL",a_transform_root,t_gl_depth);
 				Camera t_camera_gl = t_gameobject_camera_gl.GetComponent<Camera>();
 
 				//カメラ。ＵＩ描画。
-				GameObject t_gameobject_camera_ui = NInstantiate.Instantiate.CreateOrthographicCameraObject("Camera_" + ii.ToString() + "_UI",a_transform_root,t_ui_depth);
+				GameObject t_gameobject_camera_ui = Fee.Instantiate.Instantiate.CreateOrthographicCameraObject("Camera_" + ii.ToString() + "_UI",a_transform_root,t_ui_depth);
 				Camera t_camera_ui = t_gameobject_camera_ui.GetComponent<Camera>();
 				t_camera_ui.cullingMask = (1 << LayerMask.NameToLayer("UI"));
 				

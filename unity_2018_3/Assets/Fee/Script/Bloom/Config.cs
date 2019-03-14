@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NBloom
+/** Fee.Bloom
 */
-namespace NBloom
+namespace Fee.Bloom
 {
 	/** Config
 	*/

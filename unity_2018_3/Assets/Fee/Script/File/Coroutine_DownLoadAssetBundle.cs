@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NFile
+/** Fee.File
 */
-namespace NFile
+namespace Fee.File
 {
 	/** ダウンロード。アセットバンドル。
 	*/
@@ -48,8 +48,8 @@ namespace NFile
 			this.result = new ResultType();
 
 			//キャッシュからの読み込み。
-			if(NFile.File.GetInstance() != null){
-				AssetBundle t_assetbundle = NFile.File.GetInstance().GetAssetBundleList().GetAssetBundle(a_assetbundle_id);
+			if(Fee.File.File.GetInstance() != null){
+				AssetBundle t_assetbundle = Fee.File.File.GetInstance().GetAssetBundleList().GetAssetBundle(a_assetbundle_id);
 				if(t_assetbundle != null){
 					//成功。
 					this.result.assetbundle = t_assetbundle;
@@ -108,8 +108,8 @@ namespace NFile
 				if(t_result != null){
 
 					//キャッシュに登録。
-					if(NFile.File.GetInstance() != null){
-						NFile.File.GetInstance().GetAssetBundleList().Regist(a_assetbundle_id,t_result);
+					if(Fee.File.File.GetInstance() != null){
+						Fee.File.File.GetInstance().GetAssetBundleList().Regist(a_assetbundle_id,t_result);
 					}
 
 					this.result.assetbundle = t_result;

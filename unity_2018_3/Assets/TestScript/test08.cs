@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,41 +21,41 @@ public class test08 : main_base
 {
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** Start
 	*/
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Config.LOG_ENABLE = true;
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Config.LOG_ENABLE = true;
+		Fee.Input.Mouse.CreateInstance();
 
 		//イベントプレート。
-		NEventPlate.Config.LOG_ENABLE = true;
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.Config.LOG_ENABLE = true;
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Config.LOG_ENABLE = true;
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Config.LOG_ENABLE = true;
+		Fee.Ui.Ui.CreateInstance();
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
-		NDirectory.Item t_item_root = NDirectory.Directory.GetDirectoryItem(Application.dataPath);
+		Fee.Directory.Item t_item_root = Fee.Directory.Directory.GetDirectoryItem(Application.dataPath);
 
 		//ルートのフルパス。
 		Debug.Log(t_item_root.GetRoot().GetFullPath());
@@ -64,7 +64,7 @@ public class test08 : main_base
 
 		//ルート。
 		{
-			List<NDirectory.Item> t_directory_list = t_item_root.GetDirectoryList();
+			List<Fee.Directory.Item> t_directory_list = t_item_root.GetDirectoryList();
 			for(int ii=0;ii<t_directory_list.Count;ii++){
 				Debug.Log(t_directory_list[ii].GetName());
 			}
@@ -72,10 +72,10 @@ public class test08 : main_base
 		}
 
 		//ルート => Fee
-		NDirectory.Item t_item_root_fee = t_item_root.FindDirectory("Fee");
+		Fee.Directory.Item t_item_root_fee = t_item_root.FindDirectory("Fee");
 		{
 			if(t_item_root_fee != null){
-				List<NDirectory.Item> t_directory_list = t_item_root_fee.GetDirectoryList();
+				List<Fee.Directory.Item> t_directory_list = t_item_root_fee.GetDirectoryList();
 				for(int ii=0;ii<t_directory_list.Count;ii++){
 					Debug.Log(t_directory_list[ii].GetName());
 				}
@@ -84,10 +84,10 @@ public class test08 : main_base
 		}
 
 		//ルート => Fee => フォント。
-		NDirectory.Item t_item_root_fee_font = t_item_root_fee.FindDirectory("Font");
+		Fee.Directory.Item t_item_root_fee_font = t_item_root_fee.FindDirectory("Font");
 		{
 			if(t_item_root_fee_font != null){
-				List<NDirectory.Item> t_file_list = t_item_root_fee_font.GetFileList();
+				List<Fee.Directory.Item> t_file_list = t_item_root_fee_font.GetFileList();
 				for(int ii=0;ii<t_file_list.Count;ii++){
 					Debug.Log(t_file_list[ii].GetName());
 				}
@@ -101,13 +101,13 @@ public class test08 : main_base
 	private void FixedUpdate()
 	{
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 	}
 
 	/** 削除前。

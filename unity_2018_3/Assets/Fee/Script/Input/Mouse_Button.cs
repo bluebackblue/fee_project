@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NInput
+/** Fee.Input
 */
-namespace NInput
+namespace Fee.Input
 {
 	/** Mouse_Button
 	*/
@@ -29,11 +29,11 @@ namespace NInput
 
 		/** ダウン位置。
 		*/
-		public NRender2D.Pos2D<int> last_down_pos;
+		public Fee.Render2D.Pos2D<int> last_down_pos;
 
 		/** アップ位置。
 		*/
-		public NRender2D.Pos2D<int> last_up_pos;
+		public Fee.Render2D.Pos2D<int> last_up_pos;
 
 		/** ドラッグ時間。
 		*/

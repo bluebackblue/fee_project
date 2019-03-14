@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** Render2D
+/** Fee.Render2D
 */
-namespace NRender2D
+namespace Fee.Render2D
 {
 	/** Sprite2D_Rotate
 	*/
@@ -26,7 +26,7 @@ namespace NRender2D
 	
 		/** 中心。
 		*/
-		NRender2D.Pos2D<int> center;
+		Fee.Render2D.Pos2D<int> center;
 
 		/** 回転。
 		*/

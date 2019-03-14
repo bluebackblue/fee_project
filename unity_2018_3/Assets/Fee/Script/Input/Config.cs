@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NInput
+/** Fee.Input
 */
-namespace NInput
+namespace Fee.Input
 {
 	/** Config
 	*/

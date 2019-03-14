@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NInput
+/** Fee.Input
 */
-namespace NInput
+namespace Fee.Input
 {
 	/** Touch_Phase_Key_Base
 	*/

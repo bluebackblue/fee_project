@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NCrypt
+/** Fee.Crypt
 */
-namespace NCrypt
+namespace Fee.Crypt
 {
 	/** 暗号化。パス。
 	*/
@@ -55,10 +55,10 @@ namespace NCrypt
 			this.taskprogress = 0.0f;
 
 			//キャンセルトークン。
-			NTaskW.CancelToken t_cancel_token = new NTaskW.CancelToken();
+			Fee.TaskW.CancelToken t_cancel_token = new Fee.TaskW.CancelToken();
 
 			//タスク起動。
-			NTaskW.Task<Task_EncryptPass.ResultType> t_task = Task_EncryptPass.Run(a_binary,a_pass,a_salt,t_cancel_token);
+			Fee.TaskW.Task<Task_EncryptPass.ResultType> t_task = Task_EncryptPass.Run(a_binary,a_pass,a_salt,t_cancel_token);
 
 			//終了待ち。
 			do{

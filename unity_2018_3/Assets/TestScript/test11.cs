@@ -41,7 +41,7 @@ public class test11 : main_base
 
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** Mode
 	*/
@@ -72,100 +72,100 @@ public class test11 : main_base
 
 	/** ダウンロード。
 	*/
-	private NFile.Item download_item_se;
+	private Fee.File.Item download_item_se;
 
 	/** ダウンロード。
 	*/
-	private NFile.Item download_item_bgm;
+	private Fee.File.Item download_item_bgm;
 
 	/** オーディオクリップパック。
 	*/
-	private NAudio.Pack_AudioClip pack_audioclip;
+	private Fee.Audio.Pack_AudioClip pack_audioclip;
 
 	/** サウンドプールパック。
 	*/
-	private NAudio.Pack_SoundPool pack_soundpool;
+	private Fee.Audio.Pack_SoundPool pack_soundpool;
 
 	/** ステータス。
 	*/
-	private NRender2D.Text2D status;
+	private Fee.Render2D.Text2D status;
 
 	/** ステータス。
 	*/
-	private NRender2D.Text2D status_2;
+	private Fee.Render2D.Text2D status_2;
 
 	/** ボタン。アンロード。
 	*/
-	private NUi.Button button_unload;
+	private Fee.Ui.Button button_unload;
 
 	/** ボタン。
 	*/
-	private NUi.Button button_assetbundle;
+	private Fee.Ui.Button button_assetbundle;
 
 	/** ボタン。
 	*/
-	private NUi.Button button_soundpool;
+	private Fee.Ui.Button button_soundpool;
 
 	/** ボタン。
 	*/
-	private NUi.Button button_bgm;
+	private Fee.Ui.Button button_bgm;
 
 	/** スライダー。
 	*/
-	private NUi.Slider slider_master;
+	private Fee.Ui.Slider slider_master;
 
 	/** スライダー。
 	*/
-	private NUi.Slider slider_bgm;
+	private Fee.Ui.Slider slider_bgm;
 
 	/** slider_se
 	*/
-	private NUi.Slider slider_se;
+	private Fee.Ui.Slider slider_se;
 
 	/** Start
 	*/
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//ファイル。インスタンス作成。
-		NFile.Config.LOG_ENABLE = true;
-		NFile.Config.SOUNDPOOL_CHECK_DATAVERSION = false;
-		NFile.File.CreateInstance();
+		Fee.File.Config.LOG_ENABLE = true;
+		Fee.File.Config.SOUNDPOOL_CHECK_DATAVERSION = false;
+		Fee.File.File.CreateInstance();
 
 		//オーディオ。インスタンス作成。
-		NAudio.Config.LOG_ENABLE = true;
-		NAudio.Audio.CreateInstance();
+		Fee.Audio.Config.LOG_ENABLE = true;
+		Fee.Audio.Audio.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Config.LOG_ENABLE = true;
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Config.LOG_ENABLE = true;
+		Fee.Ui.Ui.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//イベントプレート。インスタンス作成。
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//フォント。
 		Font t_font = Resources.Load<Font>("mplus-1p-medium");
 		if(t_font != null){
-			NRender2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//モード。
 		this.mode = Mode.Wait;
@@ -186,13 +186,13 @@ public class test11 : main_base
 		this.pack_soundpool = null;
 
 		//ステータス。
-		this.status = new NRender2D.Text2D(this.deleter,null,0);
+		this.status = new Fee.Render2D.Text2D(this.deleter,null,0);
 		this.status.SetRect(100,50,0,0);
 		this.status.SetText("-");
 		this.status.SetFontSize(13);
 
 		//ステータス。
-		this.status_2 = new NRender2D.Text2D(this.deleter,null,0);
+		this.status_2 = new Fee.Render2D.Text2D(this.deleter,null,0);
 		this.status_2.SetRect(100,100,0,0);
 		this.status_2.SetText("-");
 		this.status.SetFontSize(13);
@@ -200,7 +200,7 @@ public class test11 : main_base
 		int t_xx = 0;
 
 		//ボタン。
-		this.button_unload = new NUi.Button(this.deleter,null,0,this.CallBack_Click_Unload,-1);
+		this.button_unload = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Unload,-1);
 		this.button_unload.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_unload.SetRect(t_xx,130,170,30);
 		this.button_unload.SetText("アンロード");
@@ -208,7 +208,7 @@ public class test11 : main_base
 		t_xx += 210;
 
 		//ボタン。
-		this.button_assetbundle = new NUi.Button(this.deleter,null,0,this.CallBack_Click_AssetBundle,-1);
+		this.button_assetbundle = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_AssetBundle,-1);
 		this.button_assetbundle.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_assetbundle.SetRect(t_xx,130,170,30);
 		this.button_assetbundle.SetText("AssetBundleロード");
@@ -216,7 +216,7 @@ public class test11 : main_base
 		t_xx += 210;
 
 		//ボタン。
-		this.button_soundpool = new NUi.Button(this.deleter,null,0,this.CallBack_Click_SoundPool,-1);
+		this.button_soundpool = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_SoundPool,-1);
 		this.button_soundpool.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_soundpool.SetRect(t_xx,130,170,30);
 		this.button_soundpool.SetText("SoundPoolロード");
@@ -224,7 +224,7 @@ public class test11 : main_base
 		t_xx += 210;
 
 		//ボタン。
-		this.button_bgm = new NUi.Button(this.deleter,null,0,this.CallBack_Click_Bgm,-1);
+		this.button_bgm = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Bgm,-1);
 		this.button_bgm.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_bgm.SetRect(t_xx,130,170,30);
 		this.button_bgm.SetText("ＢＧＭ");
@@ -232,7 +232,7 @@ public class test11 : main_base
 		int t_yy = 300;
 
 		//スライダー。
-		this.slider_master = new NUi.Slider(this.deleter,null,0,this.CallBack_Change_Master,0);
+		this.slider_master = new Fee.Ui.Slider(this.deleter,null,0,this.CallBack_Change_Master,0);
 		this.slider_master.SetRect(100,t_yy,400,40);
 		this.slider_master.SetValue(0.0f);
 		this.slider_master.SetButtonTexture(Resources.Load<Texture2D>("button"));
@@ -243,7 +243,7 @@ public class test11 : main_base
 		t_yy += 60;
 
 		//スライダー。
-		this.slider_bgm = new NUi.Slider(this.deleter,null,0,this.CallBack_Change_Bgm,0);
+		this.slider_bgm = new Fee.Ui.Slider(this.deleter,null,0,this.CallBack_Change_Bgm,0);
 		this.slider_bgm.SetRect(100,t_yy,400,40);
 		this.slider_bgm.SetValue(0.0f);
 		this.slider_bgm.SetButtonTexture(Resources.Load<Texture2D>("button"));
@@ -254,7 +254,7 @@ public class test11 : main_base
 		t_yy += 60;
 
 		//スライダー。
-		this.slider_se = new NUi.Slider(this.deleter,null,0,this.CallBack_Change_Se,0);
+		this.slider_se = new Fee.Ui.Slider(this.deleter,null,0,this.CallBack_Change_Se,0);
 		this.slider_se.SetRect(100,t_yy,400,40);
 		this.slider_se.SetValue(0.0f);
 		this.slider_se.SetButtonTexture(Resources.Load<Texture2D>("button"));
@@ -263,16 +263,16 @@ public class test11 : main_base
 		this.slider_se.SetTexture(Resources.Load<Texture2D>("slider"));
 
 		//値設定。
-		this.slider_master.SetValue(NAudio.Audio.GetInstance().GetMasterVolume());
-		this.slider_bgm.SetValue(NAudio.Audio.GetInstance().GetBgmVolume());
-		this.slider_se.SetValue(NAudio.Audio.GetInstance().GetSeVolume());
+		this.slider_master.SetValue(Fee.Audio.Audio.GetInstance().GetMasterVolume());
+		this.slider_bgm.SetValue(Fee.Audio.Audio.GetInstance().GetBgmVolume());
+		this.slider_se.SetValue(Fee.Audio.Audio.GetInstance().GetSeVolume());
 	}
 
 	/** [Slider_Base]コールバック。変更。
 	*/
 	private void CallBack_Change_Master(int a_id,float a_value)
 	{
-		NAudio.Audio.GetInstance().SetMasterVolume(a_value);
+		Fee.Audio.Audio.GetInstance().SetMasterVolume(a_value);
 
 		if(a_value == 0.0f){
 			this.slider_bgm.SetLock(true);
@@ -287,14 +287,14 @@ public class test11 : main_base
 	*/
 	private void CallBack_Change_Bgm(int a_id,float a_value)
 	{
-		NAudio.Audio.GetInstance().SetBgmVolume(a_value);
+		Fee.Audio.Audio.GetInstance().SetBgmVolume(a_value);
 	}
 
 	/** [Slider_Base]コールバック。変更。
 	*/
 	private void CallBack_Change_Se(int a_id,float a_value)
 	{
-		NAudio.Audio.GetInstance().SetSeVolume(a_value);
+		Fee.Audio.Audio.GetInstance().SetSeVolume(a_value);
 	}
 
 	/** [Button_Base]コールバック。クリック。
@@ -302,10 +302,10 @@ public class test11 : main_base
 	private void CallBack_Click_Unload(int a_id)
 	{
 		//ＳＥのアンロード。
-		NAudio.Audio.GetInstance().UnLoadSe(SE_ID);
+		Fee.Audio.Audio.GetInstance().UnLoadSe(SE_ID);
 
 		//アセットバンドルのアンロード。
-		NFile.File.GetInstance().GetAssetBundleList().UnloadAssetBundle(ASSETBUNDLE_ID_SE);
+		Fee.File.File.GetInstance().GetAssetBundleList().UnloadAssetBundle(ASSETBUNDLE_ID_SE);
 	}
 
 	/** [Button_Base]コールバック。クリック。
@@ -347,7 +347,7 @@ public class test11 : main_base
 			t_url += "StandaloneWindows/";
 			#endif
 
-			this.download_item_bgm = NFile.File.GetInstance().RequestDownLoadAssetBundle(t_url + "bgm",ASSETBUNDLE_ID_BGM,DATA_VERSION);
+			this.download_item_bgm = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(t_url + "bgm",ASSETBUNDLE_ID_BGM,DATA_VERSION);
 		}
 	}
 
@@ -356,16 +356,16 @@ public class test11 : main_base
 	private void FixedUpdate()
 	{
 		//ファイル。
-		NFile.File.GetInstance().Main();
+		Fee.File.File.GetInstance().Main();
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＢＧＭ。
 		if(this.download_item_bgm != null){
@@ -373,16 +373,16 @@ public class test11 : main_base
 				//ダウンロード中。
 				this.status.SetText("bgm : " + this.download_item_bgm.GetResultProgress().ToString());
 			}else{
-				if(this.download_item_bgm.GetResultType() == NFile.Item.ResultType.AssetBundle){
+				if(this.download_item_bgm.GetResultType() == Fee.File.Item.ResultType.AssetBundle){
 					//ダウンロード成功。アセットバンドル。
 					AssetBundle t_assetbundle = this.download_item_bgm.GetResultAssetBundle();
 					if(t_assetbundle != null){
 						GameObject t_prefab = t_assetbundle.LoadAsset<GameObject>("bgm");
 						if(t_prefab != null){
-							NAudio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<NAudio.Pack_AudioClip>();
+							Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
 							if(t_pack_audioclip != null){
-								NAudio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
-								NAudio.Audio.GetInstance().PlayBgm(0);
+								Fee.Audio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
+								Fee.Audio.Audio.GetInstance().PlayBgm(0);
 							}
 						}
 					}
@@ -403,7 +403,7 @@ public class test11 : main_base
 
 				if(this.soundpool_flag == true){
 					string t_url = "https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/" + t_name + ".txt";
-					this.download_item_se = NFile.File.GetInstance().RequestDownLoadSoundPool(t_url,DATA_VERSION);
+					this.download_item_se = Fee.File.File.GetInstance().RequestDownLoadSoundPool(t_url,DATA_VERSION);
 				}else{
 					string t_url = "https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/";
 	
@@ -419,7 +419,7 @@ public class test11 : main_base
 					t_url += "StandaloneWindows/";
 					#endif
 
-					this.download_item_se = NFile.File.GetInstance().RequestDownLoadAssetBundle(t_url + "se",ASSETBUNDLE_ID_SE,DATA_VERSION);
+					this.download_item_se = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(t_url + "se",ASSETBUNDLE_ID_SE,DATA_VERSION);
 				}
 
 				this.mode = Mode.Now;
@@ -430,7 +430,7 @@ public class test11 : main_base
 					//ダウンロード中。
 					this.status.SetText("se : " + this.download_item_se.GetResultProgress().ToString());
 				}else{
-					if(this.download_item_se.GetResultType() == NFile.Item.ResultType.SoundPool){
+					if(this.download_item_se.GetResultType() == Fee.File.Item.ResultType.SoundPool){
 						//ダウンロード成功。サウンドプール。
 
 						this.pack_soundpool = this.download_item_se.GetResultSoundPool();
@@ -443,14 +443,14 @@ public class test11 : main_base
 							this.download_item_se = null;
 							this.mode = Mode.Fix;
 						}
-					}else if(this.download_item_se.GetResultType() == NFile.Item.ResultType.AssetBundle){
+					}else if(this.download_item_se.GetResultType() == Fee.File.Item.ResultType.AssetBundle){
 						//ダウンロード成功。アセットバンドル。
 
 						AssetBundle t_assetbundle = this.download_item_se.GetResultAssetBundle();
 						if(t_assetbundle != null){
 							GameObject t_prefab = t_assetbundle.LoadAsset<GameObject>("se");
 							if(t_prefab != null){
-								this.pack_audioclip = t_prefab.GetComponent<NAudio.Pack_AudioClip>();
+								this.pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
 							}
 						}
 						if(this.pack_audioclip == null){
@@ -475,9 +475,9 @@ public class test11 : main_base
 				this.status.SetText("Success");
 
 				if(this.soundpool_flag == true){
-					NAudio.Audio.GetInstance().LoadSe(this.pack_soundpool,SE_ID);
+					Fee.Audio.Audio.GetInstance().LoadSe(this.pack_soundpool,SE_ID);
 				}else{
-					NAudio.Audio.GetInstance().LoadSe(this.pack_audioclip,SE_ID);
+					Fee.Audio.Audio.GetInstance().LoadSe(this.pack_audioclip,SE_ID);
 				}
 
 				this.pack_audioclip = null;
@@ -487,13 +487,13 @@ public class test11 : main_base
 		}
 
 		//再生。
-		if(NInput.Mouse.GetInstance().InRectCheck(ref NRender2D.Render2D.VIRTUAL_RECT_MAX)){
-			if(NInput.Mouse.GetInstance().left.down == true){
-				NAudio.Audio.GetInstance().PlaySe(SE_ID,0);
+		if(Fee.Input.Mouse.GetInstance().InRectCheck(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX)){
+			if(Fee.Input.Mouse.GetInstance().left.down == true){
+				Fee.Audio.Audio.GetInstance().PlaySe(SE_ID,0);
 			}
 		}
 
-		this.status_2.SetText("soundpool = " + NAudio.Audio.GetInstance().GetSoundPoolCount().ToString() + " assetbundle = " + NFile.File.GetInstance().GetAssetBundleCount().ToString());
+		this.status_2.SetText("soundpool = " + Fee.Audio.Audio.GetInstance().GetSoundPoolCount().ToString() + " assetbundle = " + Fee.File.File.GetInstance().GetAssetBundleCount().ToString());
 	}
 
 	/** 削除前。
@@ -579,10 +579,10 @@ public class test11 : main_base
 	{
 		string t_assetbundle_name = "se";
 
-		NAudio.Pack_SoundPool t_pack_soundpool = new NAudio.Pack_SoundPool();
+		Fee.Audio.Pack_SoundPool t_pack_soundpool = new Fee.Audio.Pack_SoundPool();
 		GameObject t_prefab_se = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/AssetBundleData/" + t_assetbundle_name + ".prefab");
 		if(t_prefab_se != null){
-			NAudio.Pack_AudioClip t_pack_audioclip = t_prefab_se.GetComponent<NAudio.Pack_AudioClip>();
+			Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab_se.GetComponent<Fee.Audio.Pack_AudioClip>();
 			if(t_pack_audioclip != null){
 				for(int ii=0;ii<t_pack_audioclip.audioclip_list.Count;ii++){
 
@@ -624,7 +624,7 @@ public class test11 : main_base
 
 		//Rawフォルダに保存。
 		{
-			NJsonItem.JsonItem t_jsonitem = NJsonItem.ObjectToJson.Convert(t_pack_soundpool);
+			Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.ObjectToJson.Convert(t_pack_soundpool);
 			string t_json_string = t_jsonitem.ConvertJsonString();
 
 			System.IO.FileInfo t_fileinfo = new System.IO.FileInfo(Application.dataPath + "/AssetBundle/Raw/" + t_assetbundle_name + ".txt");

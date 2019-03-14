@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** Render2D
+/** Fee.Render2D
 */
-namespace NRender2D
+namespace Fee.Render2D
 {
 	/** Render2D
 	*/
@@ -168,7 +168,7 @@ namespace NRender2D
 		public void WorldToVirtualScreen(Camera a_camera,ref Vector3 a_position,out int a_virtual_x,out int a_virtual_y)
 		{
 			Vector2 t_gui_pos = RectTransformUtility.WorldToScreenPoint(a_camera,a_position);
-			NRender2D.Render2D.GetInstance().GuiScreenToVirtualScreen((int)t_gui_pos.x,(int)(this.screen.GetGuiH() - t_gui_pos.y),out a_virtual_x,out a_virtual_y);
+			Fee.Render2D.Render2D.GetInstance().GuiScreenToVirtualScreen((int)t_gui_pos.x,(int)(this.screen.GetGuiH() - t_gui_pos.y),out a_virtual_x,out a_virtual_y);
 		}
 
 		/** ＧＵＩスクリーン。取得。
@@ -223,14 +223,14 @@ namespace NRender2D
 		*/
 		public GameObject RawText_Create()
 		{
-			return NInstantiate.Instantiate.CreateUiText("Text",this.root_transform);
+			return Fee.Instantiate.Instantiate.CreateUiText("Text",this.root_transform);
 		}
 
 		/** [RawInputField]作成。
 		*/
 		public GameObject RawInputField_Create()
 		{
-			return NInstantiate.Instantiate.CreateUiInputField("InputField",this.root_transform);
+			return Fee.Instantiate.Instantiate.CreateUiInputField("InputField",this.root_transform);
 		}
 
 		/** [RawText]削除。

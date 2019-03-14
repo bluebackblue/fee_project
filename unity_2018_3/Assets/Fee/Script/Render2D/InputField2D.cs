@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,13 +12,13 @@ using UnityEngine;
 */
 
 
-/** Render2D
+/** NFee.Render2D
 */
-namespace NRender2D
+namespace Fee.Render2D
 {
 	/** InputField2D
 	*/
-	public class InputField2D : NDeleter.DeleteItem_Base
+	public class InputField2D : Fee.Deleter.DeleteItem_Base
 	{
 		/** 状態。
 		*/
@@ -46,7 +46,7 @@ namespace NRender2D
 
 		/** constructor
 		*/
-		public InputField2D(NDeleter.Deleter a_deleter,State2D a_state,long a_drawpriority)
+		public InputField2D(Fee.Deleter.Deleter a_deleter,State2D a_state,long a_drawpriority)
 		{
 			Render2D.GetInstance().AddInputField2D(this);
 
@@ -186,7 +186,7 @@ namespace NRender2D
 
 		/** クリップ矩形。設定。
 		*/
-		public void SetClipRect(ref NRender2D.Rect2D_R<int> a_rect)
+		public void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
 		{
 			this.param.SetClipRect(ref a_rect);
 		}

@@ -16,9 +16,9 @@ using UnityEngine;
 #pragma warning disable 0219
 
 
-/** NInput
+/** Fee.Input
 */
-namespace NInput
+namespace Fee.Input
 {
 	/** Pad
 	*/

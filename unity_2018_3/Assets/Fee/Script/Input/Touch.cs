@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NInput
+/** Fee.Input
 */
-namespace NInput
+namespace Fee.Input
 {
 	/** Touch
 	*/
@@ -179,7 +179,7 @@ namespace NInput
 
 		/** 更新。インプットシステムタッチスクリーン。タッチ。
 		*/
-		public bool Main_InputSystemTouchscreen_Touch(NRender2D.Render2D a_render2d)
+		public bool Main_InputSystemTouchscreen_Touch(Fee.Render2D.Render2D a_render2d)
 		{
 			#if(USE_DEF_INPUTSYSTEM)
 			{
@@ -250,7 +250,7 @@ namespace NInput
 
 		/** 更新。インプットマネージャタッチ。タッチ。
 		*/
-		public bool Main_InputManagerTouch_Touch(NRender2D.Render2D a_render2d)
+		public bool Main_InputManagerTouch_Touch(Fee.Render2D.Render2D a_render2d)
 		{
 			this.device_item_list_count = 0;
 
@@ -304,7 +304,7 @@ namespace NInput
 		/** 更新。インプットマネージャマウス。タッチ。
 		*/
 		#if(true)
-		public bool Main_InputManagerMouse_Touch(NRender2D.Render2D a_render2d)
+		public bool Main_InputManagerMouse_Touch(Fee.Render2D.Render2D a_render2d)
 		{
 			this.device_item_list_count = 0;
 
@@ -344,7 +344,7 @@ namespace NInput
 
 		/** 更新。タッチ。
 		*/
-		public void Main_Touch(NRender2D.Render2D a_render2d)
+		public void Main_Touch(Fee.Render2D.Render2D a_render2d)
 		{
 			//インプットシステムタッチ。
 			if(Config.USE_INPUTSYSTEM_TOUCHSCREEN == true){
@@ -370,7 +370,7 @@ namespace NInput
 
 		/** 更新。
 		*/
-		public void Main(NRender2D.Render2D a_render2d)
+		public void Main(Fee.Render2D.Render2D a_render2d)
 		{
 			try{
 				for(int ii=0;ii<this.list.Count;ii++){
@@ -473,7 +473,7 @@ namespace NInput
 
 		/** タッチリスト作成。
 		*/
-		public static Dictionary<TYPE,NInput.Touch_Phase> CreateTouchList<TYPE>()
+		public static Dictionary<TYPE,Fee.Input.Touch_Phase> CreateTouchList<TYPE>()
 			where TYPE : Touch_Phase_Key_Base
 		{
 			return new Dictionary<TYPE,Touch_Phase>();
@@ -481,12 +481,12 @@ namespace NInput
 
 		/** タッチリスト更新。
 		*/
-		public static void UpdateTouchList<TYPE>(Dictionary<TYPE,NInput.Touch_Phase> a_list)
+		public static void UpdateTouchList<TYPE>(Dictionary<TYPE,Fee.Input.Touch_Phase> a_list)
 			where TYPE : Touch_Phase_Key_Base
 		{
 			List<TYPE> t_delete_keylist = null;
 
-			foreach(KeyValuePair<TYPE,NInput.Touch_Phase> t_pair in a_list){
+			foreach(KeyValuePair<TYPE,Fee.Input.Touch_Phase> t_pair in a_list){
 				if(t_pair.Value.update == false){
 					if(t_delete_keylist == null){
 						t_delete_keylist = new List<TYPE>();

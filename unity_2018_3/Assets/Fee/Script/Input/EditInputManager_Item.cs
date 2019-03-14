@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NInput
+/** Fee.Input
 */
-namespace NInput
+namespace Fee.Input
 {
 	/** EditInputManager_Item
 	*/
@@ -151,8 +151,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = true;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.JoyStickAxis;
-			this.axis = NInput.EditInputManager_Item.Axis.Axis6;
+			this.type = Fee.Input.EditInputManager_Item.Type.JoyStickAxis;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.Axis6;
 			this.joyNum = 0;
 		}
 
@@ -172,8 +172,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = true;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.JoyStickAxis;
-			this.axis = NInput.EditInputManager_Item.Axis.Axis6;
+			this.type = Fee.Input.EditInputManager_Item.Type.JoyStickAxis;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.Axis6;
 			this.joyNum = 0;
 		}
 
@@ -193,8 +193,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = true;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.JoyStickAxis;
-			this.axis = NInput.EditInputManager_Item.Axis.Axis7;
+			this.type = Fee.Input.EditInputManager_Item.Type.JoyStickAxis;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.Axis7;
 			this.joyNum = 0;
 		}
 
@@ -214,8 +214,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = true;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.JoyStickAxis;
-			this.axis = NInput.EditInputManager_Item.Axis.Axis7;
+			this.type = Fee.Input.EditInputManager_Item.Type.JoyStickAxis;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.Axis7;
 			this.joyNum = 0;
 		}
 
@@ -235,8 +235,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.KeyOrMouseButton;
-			this.axis = NInput.EditInputManager_Item.Axis.None;
+			this.type = Fee.Input.EditInputManager_Item.Type.KeyOrMouseButton;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.None;
 			this.joyNum = 0;
 		}
 
@@ -256,8 +256,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.KeyOrMouseButton;
-			this.axis = NInput.EditInputManager_Item.Axis.None;
+			this.type = Fee.Input.EditInputManager_Item.Type.KeyOrMouseButton;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.None;
 			this.joyNum = 0;
 		}
 
@@ -277,8 +277,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.KeyOrMouseButton;
-			this.axis = NInput.EditInputManager_Item.Axis.None;
+			this.type = Fee.Input.EditInputManager_Item.Type.KeyOrMouseButton;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.None;
 			this.joyNum = 0;
 		}
 
@@ -298,8 +298,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.KeyOrMouseButton;
-			this.axis = NInput.EditInputManager_Item.Axis.None;
+			this.type = Fee.Input.EditInputManager_Item.Type.KeyOrMouseButton;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.None;
 			this.joyNum = 0;
 		}
 
@@ -319,8 +319,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.KeyOrMouseButton;
-			this.axis = NInput.EditInputManager_Item.Axis.None;
+			this.type = Fee.Input.EditInputManager_Item.Type.KeyOrMouseButton;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.None;
 			this.joyNum = 0;
 		}
 
@@ -340,8 +340,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.KeyOrMouseButton;
-			this.axis = NInput.EditInputManager_Item.Axis.None;
+			this.type = Fee.Input.EditInputManager_Item.Type.KeyOrMouseButton;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.None;
 			this.joyNum = 0;
 		}
 
@@ -361,8 +361,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.JoyStickAxis;
-			this.axis = NInput.EditInputManager_Item.Axis.XAxis;
+			this.type = Fee.Input.EditInputManager_Item.Type.JoyStickAxis;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.XAxis;
 			this.joyNum = 0;
 		}
 
@@ -382,8 +382,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.JoyStickAxis;
-			this.axis = NInput.EditInputManager_Item.Axis.YAxis;
+			this.type = Fee.Input.EditInputManager_Item.Type.JoyStickAxis;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.YAxis;
 			this.joyNum = 0;
 		}
 
@@ -403,8 +403,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.JoyStickAxis;
-			this.axis = NInput.EditInputManager_Item.Axis.Axis4;
+			this.type = Fee.Input.EditInputManager_Item.Type.JoyStickAxis;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.Axis4;
 			this.joyNum = 0;
 		}
 
@@ -424,8 +424,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.JoyStickAxis;
-			this.axis = NInput.EditInputManager_Item.Axis.Axis5;
+			this.type = Fee.Input.EditInputManager_Item.Type.JoyStickAxis;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.Axis5;
 			this.joyNum = 0;
 		}
 
@@ -445,8 +445,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.KeyOrMouseButton;
-			this.axis = NInput.EditInputManager_Item.Axis.None;
+			this.type = Fee.Input.EditInputManager_Item.Type.KeyOrMouseButton;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.None;
 			this.joyNum = 0;
 		}
 
@@ -466,8 +466,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.KeyOrMouseButton;
-			this.axis = NInput.EditInputManager_Item.Axis.None;
+			this.type = Fee.Input.EditInputManager_Item.Type.KeyOrMouseButton;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.None;
 			this.joyNum = 0;
 		}
 
@@ -487,8 +487,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.KeyOrMouseButton;
-			this.axis = NInput.EditInputManager_Item.Axis.None;
+			this.type = Fee.Input.EditInputManager_Item.Type.KeyOrMouseButton;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.None;
 			this.joyNum = 0;
 		}
 
@@ -508,8 +508,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.KeyOrMouseButton;
-			this.axis = NInput.EditInputManager_Item.Axis.None;
+			this.type = Fee.Input.EditInputManager_Item.Type.KeyOrMouseButton;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.None;
 			this.joyNum = 0;
 		}
 
@@ -529,8 +529,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = true;
-			this.type = NInput.EditInputManager_Item.Type.JoyStickAxis;
-			this.axis = NInput.EditInputManager_Item.Axis.Axis3;
+			this.type = Fee.Input.EditInputManager_Item.Type.JoyStickAxis;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.Axis3;
 			this.joyNum = 0;
 		}
 
@@ -550,8 +550,8 @@ namespace NInput
 			this.sensitivity = 1.0f;
 			this.snap = false;
 			this.invert = false;
-			this.type = NInput.EditInputManager_Item.Type.JoyStickAxis;
-			this.axis = NInput.EditInputManager_Item.Axis.Axis3;
+			this.type = Fee.Input.EditInputManager_Item.Type.JoyStickAxis;
+			this.axis = Fee.Input.EditInputManager_Item.Axis.Axis3;
 			this.joyNum = 0;
 		}
 	}

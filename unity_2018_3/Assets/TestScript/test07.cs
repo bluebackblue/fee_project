@@ -45,7 +45,7 @@ public class test07 : main_base
 
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** step
 	*/
@@ -53,23 +53,23 @@ public class test07 : main_base
 
 	/** button_key
 	*/
-	private NUi.Button button_key;
+	private Fee.Ui.Button button_key;
 
 	/** button_pass
 	*/
-	private NUi.Button button_pass;
+	private Fee.Ui.Button button_pass;
 
 	/** button_signature
 	*/
-	private NUi.Button button_signature;
+	private Fee.Ui.Button button_signature;
 
 	/** text
 	*/
-	private NRender2D.Text2D text;
+	private Fee.Render2D.Text2D text;
 
 	/** crypt_item
 	*/
-	private NCrypt.Item crypt_item;
+	private Fee.Crypt.Item crypt_item;
 
 	/** private_key
 	*/
@@ -104,64 +104,64 @@ public class test07 : main_base
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//イベントプレート。インスタンス作成。
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		//NUi.Config.LOG_ENABLE = true;
-		NUi.Ui.CreateInstance();
+		//Fee.Ui.Config.LOG_ENABLE = true;
+		Fee.Ui.Ui.CreateInstance();
 
 		//暗号。インスタンス作成。
-		NCrypt.Config.LOG_ENABLE = true;
-		NCrypt.Crypt.CreateInstance();
+		Fee.Crypt.Config.LOG_ENABLE = true;
+		Fee.Crypt.Crypt.CreateInstance();
 
 		//フォント。
 		Font t_font = Resources.Load<Font>("mplus-1p-medium");
 		if(t_font != null){
-			NRender2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//step
 		this.step = Step.None;
 
 		//button_key
-		this.button_key = new NUi.Button(this.deleter,null,0,this.CallBack_Click,0);
+		this.button_key = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,0);
 		this.button_key.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_key.SetRect(100 + 200 * 0,100,150,50);
 		this.button_key.SetText("公開鍵");
 
 		//button_pass
-		this.button_pass = new NUi.Button(this.deleter,null,0,this.CallBack_Click,1);
+		this.button_pass = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,1);
 		this.button_pass.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_pass.SetRect(100 + 200 * 1,100,150,50);
 		this.button_pass.SetText("共通鍵");
 
 		//button_signature
-		this.button_signature = new NUi.Button(this.deleter,null,0,this.CallBack_Click,2);
+		this.button_signature = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,2);
 		this.button_signature.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_signature.SetRect(100 + 200 * 2,100,150,50);
 		this.button_signature.SetText("署名");
 
 		//text
-		this.text = new NRender2D.Text2D(this.deleter,null,0);
+		this.text = new Fee.Render2D.Text2D(this.deleter,null,0);
 		this.text.SetRect(100,50,0,0);
 		this.text.SetText("---");
 
@@ -190,22 +190,22 @@ public class test07 : main_base
 
 			if(a_id == 0){
 				//public
-				NJsonItem.JsonItem t_item_public = new NJsonItem.JsonItem(Resources.Load<TextAsset>("public_key").text);
+				Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>("public_key").text);
 				this.public_key = null;
 				if(t_item_public != null){
 					if(t_item_public.IsAssociativeArray() == true){
-						if(t_item_public.IsExistItem("public",NJsonItem.ValueType.StringData) == true){
+						if(t_item_public.IsExistItem("public",Fee.JsonItem.ValueType.StringData) == true){
 							this.public_key = t_item_public.GetItem("public").GetStringData();
 						}
 					}
 				}
 
 				//private
-				NJsonItem.JsonItem t_item_private = new NJsonItem.JsonItem(Resources.Load<TextAsset>("private_key").text);
+				Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>("private_key").text);
 				this.private_key = null;
 				if(t_item_private != null){
 					if(t_item_private.IsAssociativeArray() == true){
-						if(t_item_private.IsExistItem("private",NJsonItem.ValueType.StringData) == true){
+						if(t_item_private.IsExistItem("private",Fee.JsonItem.ValueType.StringData) == true){
 							this.private_key = t_item_private.GetItem("private").GetStringData();
 						}
 					}
@@ -220,22 +220,22 @@ public class test07 : main_base
 				this.step = Step.EncryptPass_Start;
 			}else if(a_id == 2){
 				//public
-				NJsonItem.JsonItem t_item_public = new NJsonItem.JsonItem(Resources.Load<TextAsset>("public_key").text);
+				Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>("public_key").text);
 				this.public_key = null;
 				if(t_item_public != null){
 					if(t_item_public.IsAssociativeArray() == true){
-						if(t_item_public.IsExistItem("public",NJsonItem.ValueType.StringData) == true){
+						if(t_item_public.IsExistItem("public",Fee.JsonItem.ValueType.StringData) == true){
 							this.public_key = t_item_public.GetItem("public").GetStringData();
 						}
 					}
 				}
 
 				//private
-				NJsonItem.JsonItem t_item_private = new NJsonItem.JsonItem(Resources.Load<TextAsset>("private_key").text);
+				Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>("private_key").text);
 				this.private_key = null;
 				if(t_item_private != null){
 					if(t_item_private.IsAssociativeArray() == true){
-						if(t_item_private.IsExistItem("private",NJsonItem.ValueType.StringData) == true){
+						if(t_item_private.IsExistItem("private",Fee.JsonItem.ValueType.StringData) == true){
 							this.private_key = t_item_private.GetItem("private").GetStringData();
 						}
 					}
@@ -251,16 +251,16 @@ public class test07 : main_base
 	private void FixedUpdate()
 	{
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
 		//暗号。
-		NCrypt.Crypt.GetInstance().Main();
+		Fee.Crypt.Crypt.GetInstance().Main();
 
 		//ステップ。
 		switch(this.step){
@@ -272,7 +272,7 @@ public class test07 : main_base
 				}
 
 				//暗号化開始。
-				this.crypt_item = NCrypt.Crypt.GetInstance().RequestEncryptPublicKey(this.plane_binary,this.public_key);
+				this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestEncryptPublicKey(this.plane_binary,this.public_key);
 
 				this.step = Step.EncryptPublicKey_Do;
 			}break;
@@ -282,7 +282,7 @@ public class test07 : main_base
 					//暗号化中。
 					this.text.SetText(this.step.ToString());
 				}else{
-					if(this.crypt_item.GetResultType() == NCrypt.Item.ResultType.Binary){
+					if(this.crypt_item.GetResultType() == Fee.Crypt.Item.ResultType.Binary){
 						//成功。
 						byte[] t_binary = this.crypt_item.GetResultBinary();
 						this.text.SetText(this.step.ToString() + " : Success");
@@ -311,7 +311,7 @@ public class test07 : main_base
 		case Step.DecryptPrivateKey_Start:
 			{
 				//複合化開始。
-				this.crypt_item = NCrypt.Crypt.GetInstance().RequestDecryptPrivateKey(this.encrypt_binary,this.private_key);
+				this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestDecryptPrivateKey(this.encrypt_binary,this.private_key);
 
 				this.step = Step.DecryptPrivateKey_Do;
 			}break;
@@ -321,7 +321,7 @@ public class test07 : main_base
 					//暗号化中。
 					this.text.SetText(this.step.ToString());
 				}else{
-					if(this.crypt_item.GetResultType() == NCrypt.Item.ResultType.Binary){
+					if(this.crypt_item.GetResultType() == Fee.Crypt.Item.ResultType.Binary){
 						//成功。
 						byte[] t_binary = this.crypt_item.GetResultBinary();
 						this.text.SetText(this.step.ToString() + " : Success");
@@ -354,7 +354,7 @@ public class test07 : main_base
 				}
 
 				//暗号化開始。
-				this.crypt_item = NCrypt.Crypt.GetInstance().RequestEncryptPass(this.plane_binary,this.pass,this.salt);
+				this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestEncryptPass(this.plane_binary,this.pass,this.salt);
 
 				this.step = Step.EncryptPass_Do;
 			}break;
@@ -364,7 +364,7 @@ public class test07 : main_base
 					//暗号化中。
 					this.text.SetText(this.step.ToString());
 				}else{
-					if(this.crypt_item.GetResultType() == NCrypt.Item.ResultType.Binary){
+					if(this.crypt_item.GetResultType() == Fee.Crypt.Item.ResultType.Binary){
 						//成功。
 						byte[] t_binary = this.crypt_item.GetResultBinary();
 						this.text.SetText(this.step.ToString() + " : Success");
@@ -389,7 +389,7 @@ public class test07 : main_base
 		case Step.DecryptPass_Start:
 			{
 				//複合化開始。
-				this.crypt_item = NCrypt.Crypt.GetInstance().RequestDecryptPass(this.encrypt_binary,this.pass,this.salt);
+				this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestDecryptPass(this.encrypt_binary,this.pass,this.salt);
 
 				this.step = Step.DecryptPass_Do;
 			}break;
@@ -399,7 +399,7 @@ public class test07 : main_base
 					//暗号化中。
 					this.text.SetText(this.step.ToString());
 				}else{
-					if(this.crypt_item.GetResultType() == NCrypt.Item.ResultType.Binary){
+					if(this.crypt_item.GetResultType() == Fee.Crypt.Item.ResultType.Binary){
 						//成功。
 						byte[] t_binary = this.crypt_item.GetResultBinary();
 						this.text.SetText(this.step.ToString() + " : Success");
@@ -433,7 +433,7 @@ public class test07 : main_base
 				}
 
 				//証明作成開始。
-				this.crypt_item = NCrypt.Crypt.GetInstance().RequestCreateSignaturePrivateKey(this.plane_binary,this.private_key);
+				this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestCreateSignaturePrivateKey(this.plane_binary,this.private_key);
 
 				this.step = Step.CreateSignature_Do;
 			}break;
@@ -443,7 +443,7 @@ public class test07 : main_base
 					//署名中。
 					this.text.SetText(this.step.ToString());
 				}else{
-					if(this.crypt_item.GetResultType() == NCrypt.Item.ResultType.Binary){
+					if(this.crypt_item.GetResultType() == Fee.Crypt.Item.ResultType.Binary){
 						//成功。
 						byte[] t_binary = this.crypt_item.GetResultBinary();
 						this.text.SetText(this.step.ToString() + " : Success");
@@ -472,7 +472,7 @@ public class test07 : main_base
 		case Step.VerifySignature_Start:
 			{
 				//署名検証開始。
-				this.crypt_item = NCrypt.Crypt.GetInstance().RequestVerifySignaturePublicKey(this.plane_binary,this.signature_binary,this.public_key);
+				this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestVerifySignaturePublicKey(this.plane_binary,this.signature_binary,this.public_key);
 
 				this.step = Step.VerifySignature_Do;
 			}break;
@@ -482,7 +482,7 @@ public class test07 : main_base
 					//検証中。
 					this.text.SetText(this.step.ToString());
 				}else{
-					if(this.crypt_item.GetResultType() == NCrypt.Item.ResultType.VerifySuccess){
+					if(this.crypt_item.GetResultType() == Fee.Crypt.Item.ResultType.VerifySuccess){
 						//成功。
 						this.text.SetText(this.step.ToString() + " : Success");
 
@@ -517,7 +517,7 @@ public class test07 : main_base
 	/** ＪＳＯＮ保存。
 	*/
 	#if(UNITY_EDITOR)
-	private static void SaveJson(NJsonItem.JsonItem a_jsonitem,string a_full_path)
+	private static void SaveJson(Fee.JsonItem.JsonItem a_jsonitem,string a_full_path)
 	{
 		string t_json_string = a_jsonitem.ConvertJsonString();
 
@@ -553,12 +553,12 @@ public class test07 : main_base
 	{
 		string t_public_key;
 		string t_private_key;
-		if(NCrypt.Crypt.CreateNewKey(out t_public_key,out t_private_key) == true){
+		if(Fee.Crypt.Crypt.CreateNewKey(out t_public_key,out t_private_key) == true){
 
 			//public
 			{
-				NJsonItem.JsonItem t_jsonitem = new NJsonItem.JsonItem(new NJsonItem.Value_AssociativeArray());
-				NJsonItem.JsonItem t_jsonitem_public = new NJsonItem.JsonItem(new NJsonItem.Value_StringData(t_public_key));
+				Fee.JsonItem.JsonItem t_jsonitem = new Fee.JsonItem.JsonItem(new Fee.JsonItem.Value_AssociativeArray());
+				Fee.JsonItem.JsonItem t_jsonitem_public = new Fee.JsonItem.JsonItem(new Fee.JsonItem.Value_StringData(t_public_key));
 				t_jsonitem.SetItem("public",t_jsonitem_public,false);
 
 				SaveJson(t_jsonitem,Application.dataPath + "/Resources/public_key.json");
@@ -566,8 +566,8 @@ public class test07 : main_base
 
 			//private
 			{
-				NJsonItem.JsonItem t_jsonitem = new NJsonItem.JsonItem(new NJsonItem.Value_AssociativeArray());
-				NJsonItem.JsonItem t_jsonitem_private = new NJsonItem.JsonItem(new NJsonItem.Value_StringData(t_private_key));
+				Fee.JsonItem.JsonItem t_jsonitem = new Fee.JsonItem.JsonItem(new Fee.JsonItem.Value_AssociativeArray());
+				Fee.JsonItem.JsonItem t_jsonitem_private = new Fee.JsonItem.JsonItem(new Fee.JsonItem.Value_StringData(t_private_key));
 				t_jsonitem.SetItem("private",t_jsonitem_private,false);
 
 				SaveJson(t_jsonitem,Application.dataPath + "/Resources/private_key.json");

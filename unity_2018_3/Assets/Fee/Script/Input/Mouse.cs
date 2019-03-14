@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NInput
+/** Fee.Input
 */
-namespace NInput
+namespace Fee.Input
 {
 	/** Mouse
 	*/
@@ -122,7 +122,7 @@ namespace NInput
 
 		/** 更新。インプットシステムポインター。位置。
 		*/
-		private bool Main_InputSystemPointer_Position(NRender2D.Render2D a_render2d)
+		private bool Main_InputSystemPointer_Position(Fee.Render2D.Render2D a_render2d)
 		{
 			#if(USE_DEF_INPUTSYSTEM)
 			{
@@ -162,7 +162,7 @@ namespace NInput
 
 		/** 更新。インプットシステムマウス。位置。
 		*/
-		private bool Main_InputSystemMouse_Position(NRender2D.Render2D a_render2d)
+		private bool Main_InputSystemMouse_Position(Fee.Render2D.Render2D a_render2d)
 		{
 			#if(USE_DEF_INPUTSYSTEM)
 			{
@@ -203,7 +203,7 @@ namespace NInput
 		/** 更新。インプットマネージャマウス。位置。
 		*/
 		#if(true)
-		private bool Main_InputManagerMouse_Position(NRender2D.Render2D a_render2d)
+		private bool Main_InputManagerMouse_Position(Fee.Render2D.Render2D a_render2d)
 		{
 			//デバイス。
 			int t_mouse_x = (int)UnityEngine.Input.mousePosition.x;
@@ -364,7 +364,7 @@ namespace NInput
 
 		/** 更新。位置。
 		*/
-		private void Main_Pos(NRender2D.Render2D a_render2d)
+		private void Main_Pos(Fee.Render2D.Render2D a_render2d)
 		{
 			//インプットシステム。マウス。
 			if(Config.USE_INPUTSYSTEM_MOUSE == true){
@@ -435,7 +435,7 @@ namespace NInput
 
 		/** 更新。
 		*/
-		public void Main(NRender2D.Render2D a_render2d)
+		public void Main(Fee.Render2D.Render2D a_render2d)
 		{
 			try{
 				//位置。
@@ -471,7 +471,7 @@ namespace NInput
 
 		/** 範囲チェック。
 		*/
-		public bool InRectCheck(ref NRender2D.Rect2D_R<int> a_rect)
+		public bool InRectCheck(ref Fee.Render2D.Rect2D_R<int> a_rect)
 		{
 			if((a_rect.x <= this.pos.x) && (a_rect.y <= this.pos.y)){
 				if(((a_rect.x + a_rect.w) >= this.pos.x) && ((a_rect.y + a_rect.h) >= this.pos.y)){

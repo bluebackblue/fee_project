@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NFile
+/** Fee.File
 */
-namespace NFile
+namespace Fee.File
 {
 	/** ロードローカル。サウンドプール。
 	*/
@@ -24,7 +24,7 @@ namespace NFile
 		*/
 		public class ResultType
 		{
-			public NAudio.Pack_SoundPool soundpool;
+			public Fee.Audio.Pack_SoundPool soundpool;
 			public string errorstring;
 
 			/** constructor
@@ -55,10 +55,10 @@ namespace NFile
 			this.taskprogress = 0.0f;
 
 			//キャンセルトークン。
-			NTaskW.CancelToken t_cancel_token = new NTaskW.CancelToken();
+			Fee.TaskW.CancelToken t_cancel_token = new Fee.TaskW.CancelToken();
 
 			//タスク起動。
-			NTaskW.Task<Task_LoadLocalTextFile.ResultType> t_task = Task_LoadLocalTextFile.Run(a_full_path,t_cancel_token);
+			Fee.TaskW.Task<Task_LoadLocalTextFile.ResultType> t_task = Task_LoadLocalTextFile.Run(a_full_path,t_cancel_token);
 
 			//終了待ち。
 			do{
@@ -77,10 +77,10 @@ namespace NFile
 			//成功。
 			if(t_task.IsSuccess() == true){
 				if(t_result.text != null){
-					NAudio.Pack_SoundPool t_soundpool = NJsonItem.JsonToObject<NAudio.Pack_SoundPool>.Convert(new NJsonItem.JsonItem(t_result.text));
+					Fee.Audio.Pack_SoundPool t_soundpool = Fee.JsonItem.JsonToObject<Fee.Audio.Pack_SoundPool>.Convert(new Fee.JsonItem.JsonItem(t_result.text));
 
 					string t_errorstring;
-					if(NAudio.Pack_SoundPool.CheckSoundPool(t_soundpool,out t_errorstring) == true){
+					if(Fee.Audio.Pack_SoundPool.CheckSoundPool(t_soundpool,out t_errorstring) == true){
 						this.result.soundpool = t_soundpool;
 						yield break;
 					}else{

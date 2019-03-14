@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** Rect2D
+/** NFee.Rect2D
 */
-namespace NRender2D
+namespace Fee.Render2D
 {
 	/** Pos2D
 	*/

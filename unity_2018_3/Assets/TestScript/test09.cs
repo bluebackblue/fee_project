@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,56 +18,56 @@ public class test09 : main_base
 {
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** text
 	*/
-	private NRender2D.Text2D text;
+	private Fee.Render2D.Text2D text;
 
 	/** item
 	*/
-	private NFile.Item item;
+	private Fee.File.Item item;
 
 	/** Start
 	*/
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//イベントプレート。インスタンス作成。
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		//NUi.Config.LOG_ENABLE = true;
-		NUi.Ui.CreateInstance();
+		//Fee.Ui.Config.LOG_ENABLE = true;
+		Fee.Ui.Ui.CreateInstance();
 
 		//ファイル。インスタンス作成。
-		NFile.File.CreateInstance();
+		Fee.File.File.CreateInstance();
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//text
-		this.text = new NRender2D.Text2D(this.deleter,null,0);
+		this.text = new Fee.Render2D.Text2D(this.deleter,null,0);
 		this.text.SetRect(100,100,0,0);
 		this.text.SetText("---");
 
 		//item
-		this.item = NFile.File.GetInstance().RequestDownLoadTextFile("https://bbbproject.sakura.ne.jp/www/project_discord/main/",null,NFile.ProgressMode.DownLoad);
+		this.item = Fee.File.File.GetInstance().RequestDownLoadTextFile("https://bbbproject.sakura.ne.jp/www/project_discord/main/",null,Fee.File.ProgressMode.DownLoad);
 	}
 
 	/** FixedUpdate
@@ -75,21 +75,21 @@ public class test09 : main_base
 	private void FixedUpdate()
 	{
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
 		//ファイル。
-		NFile.File.GetInstance().Main();
+		Fee.File.File.GetInstance().Main();
 
 		if(this.item != null){
 			if(this.item.IsBusy() == true){
 			}else{
-				if(this.item.GetResultType() == NFile.Item.ResultType.Text){
+				if(this.item.GetResultType() == Fee.File.Item.ResultType.Text){
 					this.text.SetText(this.item.GetResultText());
 				}else{
 					this.text.SetText("error");

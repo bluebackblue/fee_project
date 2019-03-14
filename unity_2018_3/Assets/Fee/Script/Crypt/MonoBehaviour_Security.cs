@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NCrypt
+/** Fee.Crypt
 */
-namespace NCrypt
+namespace Fee.Crypt
 {
 	/** MonoBehaviour_Security
 	*/
@@ -80,7 +80,7 @@ namespace NCrypt
 		[SerializeField]
 		private string request_salt;
 
-		/** [NFile.OnCoroutine_CallBack]コルーチン実行中。
+		/** [Fee.File.OnCoroutine_CallBack]コルーチン実行中。
 
 		戻り値 == false : キャンセル。
 

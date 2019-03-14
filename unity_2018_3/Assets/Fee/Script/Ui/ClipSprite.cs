@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,28 +12,28 @@ using UnityEngine;
 */
 
 
-/** NUi
+/** Fee.Ui
 */
-namespace NUi
+namespace Fee.Ui
 {
 	/** ClipSprite
 	*/
-	public class ClipSprite : NDeleter.DeleteItem_Base
+	public class ClipSprite : Fee.Deleter.DeleteItem_Base
 	{
 		/** deleter
 		*/
-		private NDeleter.Deleter deleter;
+		private Fee.Deleter.Deleter deleter;
 
 		/** sprite
 		*/
-		private NUi.ClipSprite_Sprite2D sprite;
+		private Fee.Ui.ClipSprite_Sprite2D sprite;
 
 		/** constructor
 		*/
-		public ClipSprite(NDeleter.Deleter a_deleter,NRender2D.State2D a_state,long a_drawpriority)
+		public ClipSprite(Fee.Deleter.Deleter a_deleter,Fee.Render2D.State2D a_state,long a_drawpriority)
 		{
 			//deleter
-			this.deleter = new NDeleter.Deleter();
+			this.deleter = new Fee.Deleter.Deleter();
 
 			//sprite
 			this.sprite = new ClipSprite_Sprite2D(this.deleter,a_state,a_drawpriority);
@@ -67,7 +67,7 @@ namespace NUi
 
 		/** クリップ矩形。設定。
 		*/
-		public void SetClipRect(ref NRender2D.Rect2D_R<int> a_rect)
+		public void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
 		{
 			this.sprite.SetClipRect(ref a_rect);
 		}
@@ -81,7 +81,7 @@ namespace NUi
 
 		/** テクスチャ矩形。設定。
 		*/
-		public void SetTextureRect(ref NRender2D.Rect2D_R<float> a_texture_rect)
+		public void SetTextureRect(ref Fee.Render2D.Rect2D_R<float> a_texture_rect)
 		{
 			this.sprite.SetTextureRect(ref a_texture_rect);
 		}
@@ -95,7 +95,7 @@ namespace NUi
 		
 		/** 矩形。設定。
 		*/
-		public void SetRect(ref NRender2D.Rect2D_R<int> a_rect)
+		public void SetRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
 		{
 			this.sprite.SetRect(ref a_rect);
 		}

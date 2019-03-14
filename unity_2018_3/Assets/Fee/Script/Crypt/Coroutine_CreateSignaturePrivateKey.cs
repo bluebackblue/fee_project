@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NCrypt
+/** Fee.Crypt
 */
-namespace NCrypt
+namespace Fee.Crypt
 {
 	/** 証明作成。プライベートキー。
 	*/
@@ -55,10 +55,10 @@ namespace NCrypt
 			this.taskprogress = 0.0f;
 
 			//キャンセルトークン。
-			NTaskW.CancelToken t_cancel_token = new NTaskW.CancelToken();
+			Fee.TaskW.CancelToken t_cancel_token = new Fee.TaskW.CancelToken();
 
 			//タスク起動。
-			NTaskW.Task<Task_CreateSignaturePrivateKey.ResultType> t_task = Task_CreateSignaturePrivateKey.Run(a_binary,a_key,t_cancel_token);
+			Fee.TaskW.Task<Task_CreateSignaturePrivateKey.ResultType> t_task = Task_CreateSignaturePrivateKey.Run(a_binary,a_key,t_cancel_token);
 
 			//終了待ち。
 			do{

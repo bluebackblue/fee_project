@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,42 +17,42 @@ using UnityEngine;
 	ＵＮＩＶＲＭ。
 
 */
-public class test03 : main_base , NEventPlate.OnOverCallBack_Base
+public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 {
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** button
 	*/
-	private NUi.Button button;
+	private Fee.Ui.Button button;
 
 	/** inputfield
 	*/
-	private NRender2D.InputField2D inputfield;
+	private Fee.Render2D.InputField2D inputfield;
 
 	/** bg
 	*/
-	private NRender2D.Sprite2D bg;
+	private Fee.Render2D.Sprite2D bg;
 
 	/** bone
 	*/
 	private HumanBodyBones[] bone_index;
-	private NRender2D.Sprite2D[] bone_sprite;
-	private NRender2D.Text2D[] bone_name;
-	private NEventPlate.Item[] bone_eventplate;
+	private Fee.Render2D.Sprite2D[] bone_sprite;
+	private Fee.Render2D.Text2D[] bone_name;
+	private Fee.EventPlate.Item[] bone_eventplate;
 
 	/** ステータス。
 	*/
-	private NRender2D.Text2D status;
+	private Fee.Render2D.Text2D status;
 
 	/** ロードアイテム。
 	*/
-	private NFile.Item load_item;
+	private Fee.File.Item load_item;
 
 	/** ＶＲＭアイテム。
 	*/
-	private NUniVrm.Item vrm_item;
+	private Fee.UniVrm.Item vrm_item;
 	private bool vrm_item_load;
 
 	/** バイナリ。
@@ -85,60 +85,60 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//キー。インスタンス作成。
-		NInput.Key.CreateInstance();
+		Fee.Input.Key.CreateInstance();
 
 		//イベントプレート。インスタンス作成。
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Ui.CreateInstance();
 
 		//ファイル。インスタンス作成。
-		NFile.File.CreateInstance();
+		Fee.File.File.CreateInstance();
 
 		//ＵＮＩＶＲＭ。インスタンス作成。
-		NUniVrm.UniVrm.CreateInstance();
+		Fee.UniVrm.UniVrm.CreateInstance();
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//drawpriority
-		this.drawpriority_bg = (int)LayerIndex.LayerIndex_Bg * NRender2D.Render2D.DRAWPRIORITY_STEP;
-		this.drawpriority_mode = (int)LayerIndex.LayerIndex_Model * NRender2D.Render2D.DRAWPRIORITY_STEP;
-		this.drawpriority_ui = (int)LayerIndex.LayerIndex_Ui * NRender2D.Render2D.DRAWPRIORITY_STEP;
-		this.drawpriority_ui2 = ((int)LayerIndex.LayerIndex_Ui + 1) * NRender2D.Render2D.DRAWPRIORITY_STEP;
+		this.drawpriority_bg = (int)LayerIndex.LayerIndex_Bg * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
+		this.drawpriority_mode = (int)LayerIndex.LayerIndex_Model * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
+		this.drawpriority_ui = (int)LayerIndex.LayerIndex_Ui * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
+		this.drawpriority_ui2 = ((int)LayerIndex.LayerIndex_Ui + 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 
 		{
 			//button
-			this.button = new NUi.Button(this.deleter,null,this.drawpriority_ui,this.CallBack_Click,0);
+			this.button = new Fee.Ui.Button(this.deleter,null,this.drawpriority_ui,this.CallBack_Click,0);
 			this.button.SetRect(130,10,50,50);
 			this.button.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button.SetText("Load");
 
 			//inputfield
-			this.inputfield = new NRender2D.InputField2D(this.deleter,null,this.drawpriority_ui);
+			this.inputfield = new Fee.Render2D.InputField2D(this.deleter,null,this.drawpriority_ui);
 			this.inputfield.SetRect(130 + 50 + 10,10,700,50);
 			this.inputfield.SetText("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/StreamingAssets/nana.vrmx");
 			this.inputfield.SetMultiLine(false);
 
 			//ステータス。
-			this.status = new NRender2D.Text2D(this.deleter,null,this.drawpriority_ui);
+			this.status = new Fee.Render2D.Text2D(this.deleter,null,this.drawpriority_ui);
 			this.status.SetRect(100,100,0,0);
 
 			//bone
@@ -200,24 +200,24 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 					HumanBodyBones.RightLittleDistal,
 					HumanBodyBones.UpperChest,
 				};
-				this.bone_sprite = new NRender2D.Sprite2D[this.bone_index.Length];
-				this.bone_name = new NRender2D.Text2D[this.bone_index.Length];
-				this.bone_eventplate = new NEventPlate.Item[this.bone_index.Length];
+				this.bone_sprite = new Fee.Render2D.Sprite2D[this.bone_index.Length];
+				this.bone_name = new Fee.Render2D.Text2D[this.bone_index.Length];
+				this.bone_eventplate = new Fee.EventPlate.Item[this.bone_index.Length];
 
 				for(int ii=0;ii<this.bone_index.Length;ii++){
-					this.bone_sprite[ii] = new NRender2D.Sprite2D(this.deleter,null,this.drawpriority_ui + ii);
+					this.bone_sprite[ii] = new Fee.Render2D.Sprite2D(this.deleter,null,this.drawpriority_ui + ii);
 					this.bone_sprite[ii].SetTexture(Resources.Load<Texture2D>("maru"));
-					this.bone_sprite[ii].SetTextureRect(ref NRender2D.Render2D.TEXTURE_RECT_MAX);
+					this.bone_sprite[ii].SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 					this.bone_sprite[ii].SetRect(0,0,50,20);
-					this.bone_sprite[ii].SetMaterialType(NRender2D.Config.MaterialType.Alpha);
+					this.bone_sprite[ii].SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 					this.bone_sprite[ii].SetVisible(false);
 
-					this.bone_name[ii] = new NRender2D.Text2D(this.deleter,null,this.drawpriority_ui + ii);
+					this.bone_name[ii] = new Fee.Render2D.Text2D(this.deleter,null,this.drawpriority_ui + ii);
 					this.bone_name[ii].SetText(this.bone_index[ii].ToString());
 					this.bone_name[ii].SetRect(0,0,0,0);
 					this.bone_name[ii].SetVisible(false);
 
-					this.bone_eventplate[ii] = new NEventPlate.Item(this.deleter,NEventPlate.EventType.Button,this.drawpriority_ui + ii);
+					this.bone_eventplate[ii] = new Fee.EventPlate.Item(this.deleter,Fee.EventPlate.EventType.Button,this.drawpriority_ui + ii);
 					this.bone_eventplate[ii].SetOnOverCallBack(this);
 					this.bone_eventplate[ii].SetOnOverCallBackValue(ii);
 					this.bone_eventplate[ii].SetRect(0,0,50,20);
@@ -228,10 +228,10 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 
 		//bg
 		{
-			this.bg = new NRender2D.Sprite2D(this.deleter,null,this.drawpriority_bg);
+			this.bg = new Fee.Render2D.Sprite2D(this.deleter,null,this.drawpriority_bg);
 			this.bg.SetTexture(Texture2D.whiteTexture);
-			this.bg.SetTextureRect(ref NRender2D.Render2D.TEXTURE_RECT_MAX);
-			this.bg.SetRect(ref NRender2D.Render2D.VIRTUAL_RECT_MAX);
+			this.bg.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+			this.bg.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
 			this.bg.SetColor(0.1f,0.1f,0.1f,1.0f);
 		}
 
@@ -256,7 +256,7 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 			this.mycamera_camera.cullingMask = (1 << LayerMask.NameToLayer("Model"));
 
 			//デプスを２Ｄ描画の合わせる。
-			this.mycamera_camera.depth = NRender2D.Render2D.GetInstance().GetCameraAfterDepth((int)LayerIndex.LayerIndex_Model);
+			this.mycamera_camera.depth = Fee.Render2D.Render2D.GetInstance().GetCameraAfterDepth((int)LayerIndex.LayerIndex_Model);
 		}
 	}
 
@@ -271,14 +271,14 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 			}
 
 			#if(true)
-			this.load_item = NFile.File.GetInstance().RequestDownLoadBinaryFile(this.inputfield.GetText(),null,NFile.ProgressMode.DownLoad);
+			this.load_item = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(this.inputfield.GetText(),null,Fee.File.ProgressMode.DownLoad);
 			#else
-			this.load_item = NFile.File.GetInstance().RequestLoadStreamingAssetsBinaryFile("nana.vrmx");
+			this.load_item = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile("nana.vrmx");
 			#endif
 		}
 	}
 
-	/** [NEventPlate.OnOverCallBack_Base]イベントプレートに入場。
+	/** [Fee.EventPlateOnOverCallBack_Base]イベントプレートに入場。
 	*/
 	public void OnOverEnter(int a_value)
 	{
@@ -286,7 +286,7 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 		this.bone_name[a_value].SetColor(1.0f,0.0f,0.0f,1.0f);
 	}
 
-	/** [NEventPlate.OnOverCallBack_Base]イベントプレートから退場。
+	/** [Fee.EventPlateOnOverCallBack_Base]イベントプレートから退場。
 	*/
 	public void OnOverLeave(int a_value)
 	{
@@ -299,22 +299,22 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 	private void FixedUpdate()
 	{
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//キー。
-		NInput.Key.GetInstance().Main();
+		Fee.Input.Key.GetInstance().Main();
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
 		//ファイル。
-		NFile.File.GetInstance().Main();
+		Fee.File.File.GetInstance().Main();
 
 		//ＵＮＩＶＲＭ。
-		NUniVrm.UniVrm.GetInstance().Main();
+		Fee.UniVrm.UniVrm.GetInstance().Main();
 
 		if(this.load_item != null){
 			if(this.load_item.IsBusy() == true){
@@ -327,7 +327,7 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 				}
 			}else{
 				//ダウンロード完了。
-				if(this.load_item.GetResultType() == NFile.Item.ResultType.Binary){
+				if(this.load_item.GetResultType() == Fee.File.Item.ResultType.Binary){
 					this.status.SetText("Load : Fix");
 					this.binary = this.load_item.GetResultBinary();
 				}else{
@@ -349,7 +349,7 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 					}
 				}else{
 					//ロード完了。
-					if(this.vrm_item.GetResultType() == NUniVrm.Item.ResultType.Context){
+					if(this.vrm_item.GetResultType() == Fee.UniVrm.Item.ResultType.Context){
 						this.status.SetText("LoavVrm : Fix");
 
 						//レイヤー。設定。
@@ -377,20 +377,20 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 					this.vrm_item = null;
 				}
 
-				this.vrm_item = NUniVrm.UniVrm.GetInstance().Request(this.binary);
+				this.vrm_item = Fee.UniVrm.UniVrm.GetInstance().Request(this.binary);
 				this.vrm_item_load = true;
 			}
 			this.binary = null;
 		}
 
 		//マウスイベント。
-		if(NInput.Mouse.GetInstance().left.down == true){
+		if(Fee.Input.Mouse.GetInstance().left.down == true){
 			if(this.vrm_item != null){
 				if(this.vrm_item.IsBusy() == false){
 					this.vrm_item.SetAnime(Animator.StringToHash("Base Layer.standing_walk_forward_inPlace"));
 				}
 			}
-		}else if(NInput.Key.GetInstance().enter.down == true){
+		}else if(Fee.Input.Key.GetInstance().enter.down == true){
 			if(this.vrm_item != null){
 				if(this.vrm_item.IsBusy() == false){
 					if(this.vrm_item.IsAnimeEnable() == true){
@@ -434,7 +434,7 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 				{
 					int t_x;
 					int t_y;
-					NRender2D.Render2D.GetInstance().WorldToVirtualScreen(this.mycamera_camera,ref t_position,out t_x,out t_y);
+					Fee.Render2D.Render2D.GetInstance().WorldToVirtualScreen(this.mycamera_camera,ref t_position,out t_x,out t_y);
 					this.bone_sprite[ii].SetVisible(true);
 					this.bone_sprite[ii].SetX(t_x - this.bone_sprite[ii].GetW()/2);
 					this.bone_sprite[ii].SetY(t_y - this.bone_sprite[ii].GetH()/2);
@@ -451,7 +451,7 @@ public class test03 : main_base , NEventPlate.OnOverCallBack_Base
 				this.bone_eventplate[ii].SetEnable(false);
 
 				this.bone_name[ii].SetVisible(true);
-				this.bone_name[ii].SetRect(NRender2D.Render2D.VIRTUAL_W - 150,100 + t_none_index * 20,0,0);
+				this.bone_name[ii].SetRect(Fee.Render2D.Render2D.VIRTUAL_W - 150,100 + t_none_index * 20,0,0);
 				t_none_index++;
 			}
 		}

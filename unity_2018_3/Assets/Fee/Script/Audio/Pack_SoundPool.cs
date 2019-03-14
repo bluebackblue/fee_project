@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NAudio
+/** Fee.Audio
 */
-namespace NAudio
+namespace Fee.Audio
 {
 	/** Pack_SoundPool
 	*/
@@ -49,7 +49,7 @@ namespace NAudio
 
 		/** サウンドプールチェック。
 		*/
-		public static bool CheckSoundPool(NAudio.Pack_SoundPool a_soundpool,out string a_errorstring)
+		public static bool CheckSoundPool(Fee.Audio.Pack_SoundPool a_soundpool,out string a_errorstring)
 		{
 			//name_listチェック。
 			if(a_soundpool != null){

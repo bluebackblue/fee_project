@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,12 +12,12 @@ using UnityEngine;
 */
 
 
-/** NPerformanceCounter
+/** Fee.PerformanceCounter
 
 	https://docs.unity3d.com/ja/current/Manual/ExecutionOrder.html
 
 */
-namespace NPerformanceCounter
+namespace Fee.PerformanceCounter
 {
 	/** PerformanceCounter
 	*/
@@ -96,7 +96,7 @@ namespace NPerformanceCounter
 			this.framedata = new FrameData();
 
 			//カメラ。
-			this.camera_gameobject = NInstantiate.Instantiate.CreateOrthographicCameraObject("Camera",t_root_transform,999.0f);
+			this.camera_gameobject = Fee.Instantiate.Instantiate.CreateOrthographicCameraObject("Camera",t_root_transform,999.0f);
 			this.camera_script = this.camera_gameobject.AddComponent<MonoBehaviour_Camera>();
 			this.camera_script.Initialize();
 		}

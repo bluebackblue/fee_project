@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NPerformanceCounter
+/** Fee.PerformanceCounter
 */
-namespace NPerformanceCounter
+namespace Fee.PerformanceCounter
 {
 	/** MonoBehaviour_Camera
 	*/
@@ -50,7 +50,7 @@ namespace NPerformanceCounter
 		private void OnPostRender()
 		{
 			//フレーム終了。
-			FrameData t_framedata = NPerformanceCounter.PerformanceCounter.GetInstance().GetFrameData();
+			FrameData t_framedata = Fee.PerformanceCounter.PerformanceCounter.GetInstance().GetFrameData();
 			t_framedata.end_time = Time.realtimeSinceStartup;
 
 			{

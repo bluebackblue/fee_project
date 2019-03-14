@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NNetwork
+/** Fee.Network
 */
-namespace NNetwork
+namespace Fee.Network
 {
 	/** Player
 	*/
@@ -58,7 +58,7 @@ namespace NNetwork
 			this.mytransform = this.GetComponent<Transform>();
 
 			//親。設定。
-			Transform t_root = NNetwork.Network.GetInstance().GetRoot();
+			Transform t_root = Fee.Network.Network.GetInstance().GetRoot();
 			this.GetComponent<Transform>().SetParent(t_root);
 
 			//photon_view
@@ -86,7 +86,7 @@ namespace NNetwork
 
 			{
 				//プレイヤ－インデックス取得。
-				this.playerlist_index = NNetwork.Network.GetInstance().AddPlayer(this);
+				this.playerlist_index = Fee.Network.Network.GetInstance().AddPlayer(this);
 
 				//名前設定。
 				if(this.playerlist_index >= 0){
@@ -101,7 +101,7 @@ namespace NNetwork
 		{
 			Tool.Log("Player","OnDestroy");
 
-			NNetwork.Network.GetInstance().RemovePlayer(this);
+			Fee.Network.Network.GetInstance().RemovePlayer(this);
 		}
 
 		/** 位置。取得。
@@ -223,7 +223,7 @@ namespace NNetwork
 		[Photon.Pun.PunRPC]
 		public void RecvInt(int a_key,int a_value)
 		{
-			OnRemoteCallBack_Base t_callback = NNetwork.Network.GetInstance().GetRecvCallBack();
+			OnRemoteCallBack_Base t_callback = Fee.Network.Network.GetInstance().GetRecvCallBack();
 			if(t_callback != null){
 				t_callback.OnRemoteCallInt(this.playerlist_index,a_key,a_value);
 			}
@@ -236,7 +236,7 @@ namespace NNetwork
 		[Photon.Pun.PunRPC]
 		public void RecvString(int a_key,string a_value)
 		{
-			OnRemoteCallBack_Base t_callback = NNetwork.Network.GetInstance().GetRecvCallBack();
+			OnRemoteCallBack_Base t_callback = Fee.Network.Network.GetInstance().GetRecvCallBack();
 			if(t_callback != null){
 				t_callback.OnRemoteCallString(this.playerlist_index,a_key,a_value);
 			}

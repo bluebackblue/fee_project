@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NDijkstra
+/** Fee.Dijkstra
 */
-namespace NDijkstra
+namespace Fee.Dijkstra
 {
 	/** LinkBase
 	*/

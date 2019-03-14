@@ -16,9 +16,9 @@ using System.Linq;
 */
 
 
-/** NUniVrm
+/** Fee.UniVrm
 */
-namespace NUniVrm
+namespace Fee.UniVrm
 {
 	/** Item
 	*/

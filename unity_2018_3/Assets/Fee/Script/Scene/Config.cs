@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NScene
+/** Fee.Scene
 */
-namespace NScene
+namespace Fee.Scene
 {
 	/** Config
 	*/

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NFile
+/** Fee.File
 */
-namespace NFile
+namespace Fee.File
 {
 	/** セーブローカル。テクスチャーファイル。
 	*/
@@ -72,10 +72,10 @@ namespace NFile
 			}
 
 			//キャンセルトークン。
-			NTaskW.CancelToken t_cancel_token = new NTaskW.CancelToken();
+			Fee.TaskW.CancelToken t_cancel_token = new Fee.TaskW.CancelToken();
 
 			//タスク起動。
-			NTaskW.Task<Task_SaveLocalTextureFile.ResultType> t_task = Task_SaveLocalTextureFile.Run(a_full_path,t_binary_png,t_cancel_token);
+			Fee.TaskW.Task<Task_SaveLocalTextureFile.ResultType> t_task = Task_SaveLocalTextureFile.Run(a_full_path,t_binary_png,t_cancel_token);
 
 			//終了待ち。
 			do{

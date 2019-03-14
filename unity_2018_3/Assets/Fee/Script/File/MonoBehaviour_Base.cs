@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NFile
+/** Fee.File
 */
-namespace NFile
+namespace Fee.File
 {
 	/** MonoBehaviour_Base
 	*/
@@ -159,7 +159,7 @@ namespace NFile
 		/** result_soundpool
 		*/
 		[SerializeField]
-		private NAudio.Pack_SoundPool result_soundpool;
+		private Fee.Audio.Pack_SoundPool result_soundpool;
 
 		/** 結果フラグリセット。
 		*/
@@ -377,7 +377,7 @@ namespace NFile
 
 		/** 結果。設定。
 		*/
-		public void SetResultSoundPool(NAudio.Pack_SoundPool a_soundpool)
+		public void SetResultSoundPool(Fee.Audio.Pack_SoundPool a_soundpool)
 		{
 			this.result_type = ResultType.SoundPool;
 			this.result_soundpool = a_soundpool;
@@ -385,7 +385,7 @@ namespace NFile
 
 		/** 結果。取得。
 		*/
-		public NAudio.Pack_SoundPool GetResultSoundPool()
+		public Fee.Audio.Pack_SoundPool GetResultSoundPool()
 		{
 			return this.result_soundpool;
 		}

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,13 +12,13 @@ using UnityEngine;
 */
 
 
-/** Render2D
+/** Fee.Render2D
 */
-namespace NRender2D
+namespace Fee.Render2D
 {
 	/** Sprite2D
 	*/
-	public class Sprite2D : NDeleter.DeleteItem_Base
+	public class Sprite2D : Fee.Deleter.DeleteItem_Base
 	{
 		/** 状態。
 		*/
@@ -59,7 +59,7 @@ namespace NRender2D
 
 		/** constructor。
 		*/
-		public Sprite2D(NDeleter.Deleter a_deleter,State2D a_state,long a_drawpriority)
+		public Sprite2D(Fee.Deleter.Deleter a_deleter,State2D a_state,long a_drawpriority)
 		{
 			Render2D.GetInstance().AddSprite2D(this);
 
@@ -330,7 +330,7 @@ namespace NRender2D
 
 		/** テクスチャ矩形。設定。
 		*/
-		public void SetTextureRect(ref NRender2D.Rect2D_R<float> a_texture_rect)
+		public void SetTextureRect(ref Fee.Render2D.Rect2D_R<float> a_texture_rect)
 		{
 			this.rect.SetTextureRect(ref a_texture_rect);
 		}
@@ -347,7 +347,7 @@ namespace NRender2D
 
 		/** 矩形。設定。
 		*/
-		public void SetRect(ref NRender2D.Rect2D_R<int> a_rect)
+		public void SetRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
 		{
 			this.rect.SetRect(ref a_rect);
 		}

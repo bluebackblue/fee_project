@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NJsonItem
+/** Fee.JsonItem
 */
-namespace NJsonItem
+namespace Fee.JsonItem
 {
 	/** JsonToObject_SystemObject
 	*/
@@ -22,7 +22,7 @@ namespace NJsonItem
 	{
 		/** インスタンス作成。
 		*/
-		public static System.Object CreateInstance(System.Type a_type,NJsonItem.JsonItem a_jsonitem)
+		public static System.Object CreateInstance(System.Type a_type,Fee.JsonItem.JsonItem a_jsonitem)
 		{
 			if(
 				a_type == typeof(string) ||
@@ -194,7 +194,7 @@ namespace NJsonItem
 							if(t_member[ii].MemberType == System.Reflection.MemberTypes.Field){
 								System.Reflection.FieldInfo t_fieldinfo = t_member[ii] as System.Reflection.FieldInfo;
 								if(t_fieldinfo != null){
-									if(t_fieldinfo.IsDefined(typeof(NJsonItem.Ignore),false) == true){
+									if(t_fieldinfo.IsDefined(typeof(Fee.JsonItem.Ignore),false) == true){
 										//無視する。
 									}else{
 										if((t_fieldinfo.Attributes == System.Reflection.FieldAttributes.Public)||(t_fieldinfo.Attributes == System.Reflection.FieldAttributes.Private)){

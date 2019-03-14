@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NNetwork
+/** Fee.Network
 */
-namespace NNetwork
+namespace Fee.Network
 {
 	/** Config
 	*/

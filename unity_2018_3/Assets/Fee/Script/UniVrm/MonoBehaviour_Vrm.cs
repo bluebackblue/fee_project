@@ -16,9 +16,9 @@ using UnityEngine;
 #pragma warning disable 0414
 
 
-/** NUniVrm
+/** Fee.UniVrm
 */
-namespace NUniVrm
+namespace Fee.UniVrm
 {
 	/** MonoBehaviour_Vrm
 	*/
@@ -240,10 +240,10 @@ namespace NUniVrm
 
 				{
 					//キャンセルトークン。
-					NTaskW.CancelToken t_cancel_token = new NTaskW.CancelToken();
+					Fee.TaskW.CancelToken t_cancel_token = new Fee.TaskW.CancelToken();
 
 					//タスク起動。
-					NTaskW.Task<bool> t_task = Task_VrmParse.Run(this,this.work.context,this.request_binary,t_cancel_token);
+					Fee.TaskW.Task<bool> t_task = Task_VrmParse.Run(this,this.work.context,this.request_binary,t_cancel_token);
 
 					//終了待ち。
 					do{

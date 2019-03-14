@@ -12,10 +12,10 @@ using UnityEngine;
 */
 
 
-/** NNetwork
+/** Fee.Network
 */
 #if(USE_DEF_PUN)
-namespace NNetwork
+namespace Fee.Network
 {
 	/** MonoBehaviour_Connect_Auto
 	*/

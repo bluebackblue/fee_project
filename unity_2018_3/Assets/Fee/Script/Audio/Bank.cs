@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NAudio
+/** Fee.Audio
 */
-namespace NAudio
+namespace Fee.Audio
 {
 	/** Bank
 	*/
@@ -108,7 +108,7 @@ namespace NAudio
 			if(this.pack_soundpool != null){
 				for(int ii=0;ii<this.pack_soundpool.name_list.Count;ii++){
 					if(this.pack_soundpool.name_list[ii] != null){
-						NAudio.Audio.GetInstance().GetSoundPool().Load(this.pack_soundpool.name_list[ii]);
+						Fee.Audio.Audio.GetInstance().GetSoundPool().Load(this.pack_soundpool.name_list[ii]);
 					}
 				}
 			}
@@ -131,7 +131,7 @@ namespace NAudio
 			if(this.pack_soundpool != null){
 				for(int ii=0;ii<this.pack_soundpool.name_list.Count;ii++){
 					if(this.pack_soundpool.name_list[ii] != null){
-						NAudio.Audio.GetInstance().GetSoundPool().UnLoad(this.pack_soundpool.name_list[ii]);
+						Fee.Audio.Audio.GetInstance().GetSoundPool().UnLoad(this.pack_soundpool.name_list[ii]);
 					}
 				}
 			}

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** Render2D
+/** Fee.Render2D
 */
-namespace NRender2D
+namespace Fee.Render2D
 {
 	/** InputField2D_Param
 	*/
@@ -39,7 +39,7 @@ namespace NRender2D
 		/** クリップ。
 		*/
 		private bool clip;
-		private NRender2D.Rect2D_R<int> clip_rect;
+		private Fee.Render2D.Rect2D_R<int> clip_rect;
 
 		/** raw
 		*/
@@ -127,7 +127,7 @@ namespace NRender2D
 
 		/** クリップ矩形。設定。
 		*/
-		public void SetClipRect(ref NRender2D.Rect2D_R<int> a_rect)
+		public void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
 		{
 			if((this.clip_rect.x != a_rect.x)||(this.clip_rect.y != a_rect.y)||(this.clip_rect.w != a_rect.w)||(this.clip_rect.h != a_rect.h)){
 				this.clip_rect = a_rect;

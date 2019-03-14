@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NFade
+/** Fee.Fade
 */
-namespace NFade
+namespace Fee.Fade
 {
 	/** Fade
 	*/
@@ -68,15 +68,15 @@ namespace NFade
 
 		/** ＧＵＩ。
 		*/
-		private NRender2D.Size2D<int> gui_size;
+		private Fee.Render2D.Size2D<int> gui_size;
 
 		/** deleter
 		*/
-		private NDeleter.Deleter deleter;
+		private Fee.Deleter.Deleter deleter;
 
 		/** state
 		*/
-		private NRender2D.State2D state;
+		private Fee.Render2D.State2D state;
 
 		/** flag
 		*/
@@ -95,10 +95,10 @@ namespace NFade
 			this.gui_size.Set(0,0);
 
 			//deleter
-			this.deleter = new NDeleter.Deleter();
+			this.deleter = new Fee.Deleter.Deleter();
 
 			//state
-			this.state = new NRender2D.State2D(true);
+			this.state = new Fee.Render2D.State2D(true);
 
 			//flag
 			{
@@ -111,11 +111,11 @@ namespace NFade
 			}
 			
 			//sprite
-			this.sprite = new Fade_Sprite2D(this.deleter,this.state,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
-			this.sprite.SetTextureRect(0.0f,0.0f,NRender2D.Render2D.TEXTURE_W,NRender2D.Render2D.TEXTURE_H);
+			this.sprite = new Fade_Sprite2D(this.deleter,this.state,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
+			this.sprite.SetTextureRect(0.0f,0.0f,Fee.Render2D.Render2D.TEXTURE_W,Fee.Render2D.Render2D.TEXTURE_H);
 			this.sprite.SetRect(0,0,0,0);
 			this.sprite.SetColor(0.0f,0.0f,0.0f,0.0f);
-			this.sprite.SetMaterialType(NRender2D.Config.MaterialType.Alpha);
+			this.sprite.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 		}
 
 		/** [シングルトン]削除。
@@ -133,16 +133,16 @@ namespace NFade
 		{
 			try{
 				//画面サイズ変更チェック。
-				if((this.gui_size.w != NRender2D.Render2D.GetInstance().GetGuiW())||(this.gui_size.h != NRender2D.Render2D.GetInstance().GetGuiH())){
-					this.gui_size.Set(NRender2D.Render2D.GetInstance().GetGuiW(), NRender2D.Render2D.GetInstance().GetGuiH());
+				if((this.gui_size.w != Fee.Render2D.Render2D.GetInstance().GetGuiW())||(this.gui_size.h != Fee.Render2D.Render2D.GetInstance().GetGuiH())){
+					this.gui_size.Set(Fee.Render2D.Render2D.GetInstance().GetGuiW(), Fee.Render2D.Render2D.GetInstance().GetGuiH());
 
 					int t_x1;
 					int t_y1;
 					int t_x2;
 					int t_y2;
 
-					NRender2D.Render2D.GetInstance().GuiScreenToVirtualScreen(-2,-2,out t_x1,out t_y1);
-					NRender2D.Render2D.GetInstance().GuiScreenToVirtualScreen(this.gui_size.w + 2,this.gui_size.h + 2,out t_x2,out t_y2);
+					Fee.Render2D.Render2D.GetInstance().GuiScreenToVirtualScreen(-2,-2,out t_x1,out t_y1);
+					Fee.Render2D.Render2D.GetInstance().GuiScreenToVirtualScreen(this.gui_size.w + 2,this.gui_size.h + 2,out t_x2,out t_y2);
 
 					this.sprite.SetRect(t_x1,t_y1,(t_x2 - t_x1),(t_y2 - t_y1));
 				}

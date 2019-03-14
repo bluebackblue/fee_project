@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,9 +16,9 @@ using UnityEngine;
 #pragma warning disable 0162
 
 
-/** NUi
+/** Fee.Ui
 */
-namespace NUi
+namespace Fee.Ui
 {
 	/** Tool
 	*/

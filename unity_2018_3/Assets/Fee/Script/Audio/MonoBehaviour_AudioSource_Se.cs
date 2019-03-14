@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NAudio
+/** Fee.Audio
 */
-namespace NAudio
+namespace Fee.Audio
 {
 	/** MonoBehaviour_AudioSource_Se
 	*/
@@ -162,7 +162,7 @@ namespace NAudio
 		public Bank GetBank(long a_id)
 		{
 			if(this.bank_list != null){
-				NAudio.Bank t_bank;
+				Fee.Audio.Bank t_bank;
 				if(this.bank_list.TryGetValue(a_id,out t_bank) == true){
 					return t_bank;
 				}
@@ -174,7 +174,7 @@ namespace NAudio
 		*/
 		public void PlayOneShot(long a_id,int a_index)
 		{
-			NAudio.Bank t_bank = this.GetBank(a_id);
+			Fee.Audio.Bank t_bank = this.GetBank(a_id);
 			if(t_bank != null){
 
 				float t_volume = 0.0f;
@@ -187,7 +187,7 @@ namespace NAudio
 				}else{
 					t_bank.GetSoundPool(a_index,out t_name,out t_volume);
 					if(t_name != null){
-						NAudio.Audio.GetInstance().GetSoundPool().Play(t_name,this.volume_master.GetVolume() * this.volume_se.GetVolume() * t_volume);
+						Fee.Audio.Audio.GetInstance().GetSoundPool().Play(t_name,this.volume_master.GetVolume() * this.volume_se.GetVolume() * t_volume);
 					}
 				}
 			}

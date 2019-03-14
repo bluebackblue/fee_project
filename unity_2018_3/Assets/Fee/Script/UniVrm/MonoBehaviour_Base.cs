@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NUniVrm
+/** Fee.UniVrm
 */
-namespace NUniVrm
+namespace Fee.UniVrm
 {
 	/** MonoBehaviour_Base
 	*/

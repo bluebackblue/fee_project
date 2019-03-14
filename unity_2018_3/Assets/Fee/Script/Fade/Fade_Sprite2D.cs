@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,17 +12,17 @@ using UnityEngine;
 */
 
 
-/** NFade
+/** Fee.Fade
 */
-namespace NFade
+namespace Fee.Fade
 {
 	/** Fade_Sprite2D
 	*/
-	public class Fade_Sprite2D : NRender2D.Sprite2D
+	public class Fade_Sprite2D : Fee.Render2D.Sprite2D
 	{
 		/** constructor。
 		*/
-		public Fade_Sprite2D(NDeleter.Deleter a_deleter,NRender2D.State2D a_state,long a_drawpriority)
+		public Fade_Sprite2D(Fee.Deleter.Deleter a_deleter,Fee.Render2D.State2D a_state,long a_drawpriority)
 			:
 			base(a_deleter,a_state,a_drawpriority)
 		{

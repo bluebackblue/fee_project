@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ public class test02 : main_base
 	{
 		/** セーブから除外。
 		*/
-		[NJsonItem.Ignore]
+		[Fee.JsonItem.Ignore]
 		public int ignore;
 
 		/** SubSubData
@@ -90,27 +90,27 @@ public class test02 : main_base
 
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** ボタン。
 	*/
-	private NUi.Button button_save1;
-	private NUi.Button button_save2;
-	private NUi.Button button_load1;
-	private NUi.Button button_load2;
-	private NUi.Button button_random;
+	private Fee.Ui.Button button_save1;
+	private Fee.Ui.Button button_save2;
+	private Fee.Ui.Button button_load1;
+	private Fee.Ui.Button button_load2;
+	private Fee.Ui.Button button_random;
 
 	/** ステータス。
 	*/
-	private NRender2D.Text2D status;
+	private Fee.Render2D.Text2D status;
 
 	/** セーブ。
 	*/
-	private NFile.Item save_item;
+	private Fee.File.Item save_item;
 
 	/** ロード。
 	*/
-	private NFile.Item load_item;
+	private Fee.File.Item load_item;
 
 	/** セーブデータ。
 	*/
@@ -121,56 +121,56 @@ public class test02 : main_base
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Ui.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//イベントプレート。インスタンス作成。
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ファイル。インスタンス作成。
-		NFile.File.CreateInstance();
+		Fee.File.File.CreateInstance();
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//ボタン。
 		{
-			this.button_save1 = new NUi.Button(this.deleter,null,0,this.CallBack_Click_Save,1);
+			this.button_save1 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Save,1);
 			this.button_save1.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_save1.SetRect(100 + 110 * 0,100,100,50);
 			this.button_save1.SetText("Save1");
 
-			this.button_save2 = new NUi.Button(this.deleter,null,0,this.CallBack_Click_Save,2);
+			this.button_save2 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Save,2);
 			this.button_save2.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_save2.SetRect(100 + 110 * 1,100,100,50);
 			this.button_save2.SetText("Save2");
 
-			this.button_load1 = new NUi.Button(this.deleter,null,0,this.CallBack_Click_Load,1);
+			this.button_load1 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Load,1);
 			this.button_load1.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_load1.SetRect(100 + 110 * 2,100,100,50);
 			this.button_load1.SetText("Load1");
 
-			this.button_load2 = new NUi.Button(this.deleter,null,0,this.CallBack_Click_Load,2);
+			this.button_load2 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Load,2);
 			this.button_load2.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_load2.SetRect(100 + 110 * 3,100,100,50);
 			this.button_load2.SetText("Load2");
 
-			this.button_random = new NUi.Button(this.deleter,null,0,this.CallBack_Click_Random,-1);
+			this.button_random = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Random,-1);
 			this.button_random.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_random.SetRect(600,100,100,50);
 			this.button_random.SetText("Random");
@@ -178,7 +178,7 @@ public class test02 : main_base
 
 		//ステータス。
 		{
-			this.status = new NRender2D.Text2D(this.deleter,null,0);
+			this.status = new Fee.Render2D.Text2D(this.deleter,null,0);
 			this.status.SetRect(100,200,0,0);
 			this.status.SetText("");
 		}
@@ -199,13 +199,13 @@ public class test02 : main_base
 	{
 		if(this.savedata != null){
 			//オブジェクトをＪＳＯＮ化。
-			NJsonItem.JsonItem t_jsonitem = NJsonItem.ObjectToJson.Convert(this.savedata);
+			Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.ObjectToJson.Convert(this.savedata);
 
 			//ＪＳＯＮを文字列化。
 			string t_jsonstring = t_jsonitem.ConvertJsonString();
 
 			//ローカルセーブリクエスト。
-			this.save_item = NFile.File.GetInstance().RequestSaveLocalTextFile("save_" + a_id.ToString() + ".json",t_jsonstring);
+			this.save_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile("save_" + a_id.ToString() + ".json",t_jsonstring);
 			if(this.save_item != null){
 				this.button_save1.SetLock(true);
 				this.button_save2.SetLock(true);
@@ -221,7 +221,7 @@ public class test02 : main_base
 	private void CallBack_Click_Load(int a_id)
 	{
 		//ローカルロードリクエスト。
-		this.load_item = NFile.File.GetInstance().RequestLoadLocalTextFile("save_" + a_id.ToString() + ".json");
+		this.load_item = Fee.File.File.GetInstance().RequestLoadLocalTextFile("save_" + a_id.ToString() + ".json");
 		if(this.load_item != null){
 			this.button_save1.SetLock(true);
 			this.button_save2.SetLock(true);
@@ -295,22 +295,22 @@ public class test02 : main_base
 	private void FixedUpdate()
 	{
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ファイル。
-		NFile.File.GetInstance().Main();
+		Fee.File.File.GetInstance().Main();
 
 		if(this.load_item != null){
 			if(this.load_item.IsBusy() == true){
 				//ロード中。
 			}else{
-				if(this.load_item.GetResultType() != NFile.Item.ResultType.Text){
+				if(this.load_item.GetResultType() != Fee.File.Item.ResultType.Text){
 					//ロード失敗。
 					this.SetStatus("Load : Faild",this.savedata);
 				}else{
@@ -320,10 +320,10 @@ public class test02 : main_base
 					string t_jsonstring = this.load_item.GetResultText();
 					if(t_jsonstring != null){
 						//文字列をＪＳＯＮ化。
-						NJsonItem.JsonItem t_jsonitem = new NJsonItem.JsonItem(t_jsonstring);
+						Fee.JsonItem.JsonItem t_jsonitem = new Fee.JsonItem.JsonItem(t_jsonstring);
 						if(t_jsonitem != null){
 							//ＪＳＯＮをオブジェクト化。
-							t_savedata = NJsonItem.JsonToObject<SaveData>.Convert(t_jsonitem);
+							t_savedata = Fee.JsonItem.JsonToObject<SaveData>.Convert(t_jsonitem);
 						}
 					}
 
@@ -349,7 +349,7 @@ public class test02 : main_base
 			if(this.save_item.IsBusy() == true){
 				//セーブ中。
 			}else{
-				if(this.save_item.GetResultType() == NFile.Item.ResultType.SaveEnd){
+				if(this.save_item.GetResultType() == Fee.File.Item.ResultType.SaveEnd){
 					//セーブ成功。
 					this.SetStatus("Save : Success",this.savedata);
 				}else{

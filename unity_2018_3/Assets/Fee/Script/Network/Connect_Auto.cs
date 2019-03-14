@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NNetwork
+/** Fee.Network
 */
-namespace NNetwork
+namespace Fee.Network
 {
 	/** Connect_Auto
 	*/
@@ -116,7 +116,7 @@ namespace NNetwork
 		public Connect_Auto()
 		{
 			//ルート。
-			Transform t_root = NNetwork.Network.GetInstance().GetRoot();
+			Transform t_root = Fee.Network.Network.GetInstance().GetRoot();
 
 			//自動。
 			{
@@ -153,7 +153,7 @@ namespace NNetwork
 					this.connect_script.ResetAll();
 
 					//ニックネーム。
-					Photon.Pun.PhotonNetwork.NickName = Time.time.ToString();
+					Photon.Pun.PhotoFee.Network.NickName = Time.time.ToString();
 
 					this.SetMode(Mode.ConnectMaster);
 				}break;
@@ -162,10 +162,10 @@ namespace NNetwork
 					//マスターへの接続。
 
 					//バージョン違いとはマッチングしない。
-					Photon.Pun.PhotonNetwork.GameVersion = Config.GAME_VERSION;
+					Photon.Pun.PhotoFee.Network.GameVersion = Config.GAME_VERSION;
 
 					//接続開始。
-					bool t_ret = Photon.Pun.PhotonNetwork.ConnectUsingSettings();
+					bool t_ret = Photon.Pun.PhotoFee.Network.ConnectUsingSettings();
 
 					if(t_ret == true){
 						this.SetMode(Mode.ConnectMasterNow);
@@ -194,7 +194,7 @@ namespace NNetwork
 
 					this.connect_script.ResetCreateJoinRoom();
 
-					Photon.Pun.PhotonNetwork.JoinRandomRoom();
+					Photon.Pun.PhotoFee.Network.JoinRandomRoom();
 
 					this.SetMode(Mode.JoinNow);
 				}break;
@@ -233,7 +233,7 @@ namespace NNetwork
 						t_room_optopm.PublishUserId = true;
 					}
 
-					Photon.Pun.PhotonNetwork.CreateRoom(null,t_room_optopm);
+					Photon.Pun.PhotoFee.Network.CreateRoom(null,t_room_optopm);
 
 					this.SetMode(Mode.CreateRoomNow);
 				}break;
@@ -273,7 +273,7 @@ namespace NNetwork
 					//部屋。
 
 					//プレイヤー作成。
-					Photon.Pun.PhotonNetwork.Instantiate(Config.PREFAB_NAME_PLAYER,Vector3.zero,Quaternion.identity,0);					
+					Photon.Pun.PhotoFee.Network.Instantiate(Config.PREFAB_NAME_PLAYER,Vector3.zero,Quaternion.identity,0);					
 
 					this.SetMode(Mode.Room_CreatePlayerNow);
 				}break;
@@ -281,12 +281,12 @@ namespace NNetwork
 				{
 					//部屋。プレイヤー作成処理中。
 
-					if(NNetwork.Network.GetInstance().GetMyPlayer() != null){
+					if(Fee.Network.Network.GetInstance().GetMyPlayer() != null){
 						this.SetMode(Mode.RoomNow);
 						break;
 					}
 
-					if(NNetwork.Network.GetInstance().IsDisconnectRequest() == true){
+					if(Fee.Network.Network.GetInstance().IsDisconnectRequest() == true){
 						//切断リクエストあり。
 						this.SetMode(Mode.Disconnect);
 						break;
@@ -300,7 +300,7 @@ namespace NNetwork
 				{
 					//部屋処理中。
 
-					if(NNetwork.Network.GetInstance().IsDisconnectRequest() == true){
+					if(Fee.Network.Network.GetInstance().IsDisconnectRequest() == true){
 						//切断リクエストあり。
 						this.SetMode(Mode.Disconnect);
 						break;
@@ -314,7 +314,7 @@ namespace NNetwork
 				{
 					//切断。
 
-					Photon.Pun.PhotonNetwork.Disconnect();
+					Photon.Pun.PhotoFee.Network.Disconnect();
 					this.SetMode(Mode.DisconnectNow);
 				}break;
 			case Mode.DisconnectNow:
@@ -329,8 +329,8 @@ namespace NNetwork
 				{
 					//切断完了。
 
-					if(NNetwork.Network.GetInstance().IsDisconnectRequest() == true){
-						if(NNetwork.Network.GetInstance().GetPlayerList().Count == 0){
+					if(Fee.Network.Network.GetInstance().IsDisconnectRequest() == true){
+						if(Fee.Network.Network.GetInstance().GetPlayerList().Count == 0){
 							this.SetMode(Mode.End);
 						}
 					}

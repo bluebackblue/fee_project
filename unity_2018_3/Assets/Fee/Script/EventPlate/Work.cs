@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NEventPlate
+/** Fee.EventPlate
 */
-namespace NEventPlate
+namespace Fee.EventPlate
 {
 	/** Work
 	*/
@@ -85,7 +85,7 @@ namespace NEventPlate
 
 		/** 更新。
 		*/
-		public void Main(ref NRender2D.Pos2D<int> a_pos)
+		public void Main(ref Fee.Render2D.Pos2D<int> a_pos)
 		{
 			//追加。
 			if(this.add_list.Count > 0){

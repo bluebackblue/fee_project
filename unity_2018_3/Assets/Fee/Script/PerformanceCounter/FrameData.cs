@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,12 +12,12 @@ using UnityEngine;
 */
 
 
-/** NPerformanceCounter
+/** NNFee.PerformanceCounter
 
 	https://docs.unity3d.com/ja/current/Manual/ExecutionOrder.html
 
 */
-namespace NPerformanceCounter
+namespace Fee.PerformanceCounter
 {
 	/** FrameData
 	*/

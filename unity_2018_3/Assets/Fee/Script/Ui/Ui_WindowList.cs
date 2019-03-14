@@ -12,9 +12,9 @@ using UnityEngine;
 */
 
 
-/** NUi
+/** Fee.Ui
 */
-namespace NUi
+namespace Fee.Ui
 {
 	/** Ui_WindowList
 	*/
@@ -53,8 +53,8 @@ namespace NUi
 				for(int ii=0;ii<this.list.Count;ii++){
 					//layerindex
 					int t_layerindex = this.layerindex_start + ii;
-					if(t_layerindex >= NRender2D.Render2D.MAX_LAYER){
-						t_layerindex =  NRender2D.Render2D.MAX_LAYER - 1;
+					if(t_layerindex >= Fee.Render2D.Render2D.MAX_LAYER){
+						t_layerindex =  Fee.Render2D.Render2D.MAX_LAYER - 1;
 						Tool.Assert(false);
 					}
 
