@@ -544,7 +544,6 @@
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_DownSampling.shader" />
     <None Include="Assets\VRM\UniGLTF\Resources\Shaders\NormalMapDecoder.shader" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_AddUpSampling.shader" />
-    <None Include="Assets\Fee\license\univrm\LICENSE.txt" />
     <None Include="Assets\mcs.rsp" />
     <None Include="Assets\VRM\UniVRM\Resources\Shaders\VRMUnlitTexture.shader" />
     <None Include="Assets\Fee\LICENSE.txt" />
@@ -553,6 +552,7 @@
     <None Include="Assets\VRM\UniVRM\Resources\Shaders\VRMUnlitCutout.shader" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_X.shader" />
     <None Include="Assets\AssetBundle\Raw\se.txt" />
+    <None Include="Assets\Fee\license\univrm\LICENSE.txt" />
     <None Include="Assets\VRM\MToon\MToon\Resources\Shaders\MToon.shader" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_Y.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Add.shader" />
