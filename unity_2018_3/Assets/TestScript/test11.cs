@@ -383,6 +383,10 @@ public class test11 : main_base
 							if(t_pack_audioclip != null){
 								Fee.Audio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
 								Fee.Audio.Audio.GetInstance().PlayBgm(0);
+							}else{
+								//エラー。
+								GameObject t_object = Instantiate(t_prefab);
+								t_object.name = "load_bgm";
 							}
 						}
 					}
