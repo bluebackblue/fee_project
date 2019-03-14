@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -548,7 +548,7 @@ public class test07 : main_base
 	/** 公開鍵秘密鍵作成。
 	*/
 	#if(UNITY_EDITOR)
-	[UnityEditor.MenuItem("Test/Test07/MakePublicKeyPrivateKey")]
+	[UnityEditor.MenuItem("Fee/Test07/MakePublicKeyPrivateKey")]
 	private static void MakePublicKeyPrivateKey()
 	{
 		string t_public_key;

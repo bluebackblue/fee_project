@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,9 +33,9 @@ namespace NInput
 		*/
 		private UnityEditor.SerializedObject serialized_root;
 
-		/** serialized_axes
+		/** serialized_list
 		*/
-		private UnityEditor.SerializedProperty serialized_axes;
+		private UnityEditor.SerializedProperty serialized_list;
 
 		/** constructor
 		*/
@@ -45,11 +45,11 @@ namespace NInput
 
 			this.asset = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/InputManager.asset");
 			this.serialized_root = new UnityEditor.SerializedObject(this.asset);
-			this.serialized_axes = this.serialized_root.FindProperty("m_Axes");
+			this.serialized_list = this.serialized_root.FindProperty("m_Axes");
 
-			for(int ii=0;ii<this.serialized_axes.arraySize;ii++){
+			for(int ii=0;ii<this.serialized_list.arraySize;ii++){
 				EditInputManager_Item t_item = new EditInputManager_Item();
-				UnityEditor.SerializedProperty t_serialized_it = this.serialized_axes.GetArrayElementAtIndex(ii);
+				UnityEditor.SerializedProperty t_serialized_it = this.serialized_list.GetArrayElementAtIndex(ii);
 				t_serialized_it.Next(true);
 				do{
 					if(t_serialized_it.name == "m_Name"){
@@ -108,14 +108,14 @@ namespace NInput
 		public void Save()
 		{
 			//リストを空にする。
-			this.serialized_axes.ClearArray();
+			this.serialized_list.ClearArray();
 
 			for(int ii=0;ii<this.list.Count;ii++){
-				this.serialized_axes.arraySize++;
+				this.serialized_list.arraySize++;
 				
 				EditInputManager_Item t_item = this.list[ii];
 
-				UnityEditor.SerializedProperty t_serialized_it = this.serialized_axes.GetArrayElementAtIndex(this.serialized_axes.arraySize - 1);
+				UnityEditor.SerializedProperty t_serialized_it = this.serialized_list.GetArrayElementAtIndex(this.serialized_list.arraySize - 1);
 				t_serialized_it.Next(true);
 				do{
 					if(t_serialized_it.name == "m_Name"){
@@ -169,7 +169,7 @@ namespace NInput
 			this.serialized_root.ApplyModifiedProperties();
 		}
 
-		/** 検索。
+		/** リスト。取得。
 		*/
 		public List<EditInputManager_Item> GetList()
 		{

@@ -24,3 +24,5 @@
 /unity_2018_3/Assets/mcs.rsp
 /*.unitypackage
 /unity_2018_3/*.apk
+/unity_2019_2/Assets/*.rsp
+/unity_2019_2/Assets/csc.rsp.meta

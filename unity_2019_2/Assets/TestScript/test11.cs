@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -574,7 +574,7 @@ public class test11 : main_base
 	/** 作成。
 	*/
 	#if(UNITY_EDITOR)
-	[UnityEditor.MenuItem("Test/test11/MekeSoundPool")]
+	[UnityEditor.MenuItem("Fee/Test11/MekeSoundPool")]
 	private static void MekeSoundPool()
 	{
 		string t_assetbundle_name = "se";
@@ -650,58 +650,6 @@ public class test11 : main_base
 		}
 
 		UnityEditor.AssetDatabase.Refresh();
-	}
-	#endif
-
-	/** 作成。
-	*/
-	#if(UNITY_EDITOR)
-	[UnityEditor.MenuItem("Test/test11/MakeAssetBundle/SWA")]
-	private static void MakeAssetBundle_SWA()
-	{
-		MakeAssetBundle_StandaloneWindows();
-		MakeAssetBundle_WebGL();
-		MakeAssetBundle_Android();
-	}
-	#endif
-
-	/** 作成。
-	*/
-	#if(UNITY_EDITOR)
-	[UnityEditor.MenuItem("Test/test11/MakeAssetBundle/StandaloneWindows")]
-	private static void MakeAssetBundle_StandaloneWindows()
-	{
-		UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/StandaloneWindows",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.StandaloneWindows);
-	}
-	#endif
-
-	/** 作成。
-	*/
-	#if(UNITY_EDITOR)
-	[UnityEditor.MenuItem("Test/test11/MakeAssetBundle/WebGL")]
-	private static void MakeAssetBundle_WebGL()
-	{
-		UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/WebGL",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.WebGL);
-	}
-	#endif
-
-	/** 作成。
-	*/
-	#if(UNITY_EDITOR)
-	[UnityEditor.MenuItem("Test/test11/MakeAssetBundle/Android")]
-	private static void MakeAssetBundle_Android()
-	{
-		UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/Android",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.Android);
-	}
-	#endif
-
-	/** 作成。
-	*/
-	#if(UNITY_EDITOR)
-	[UnityEditor.MenuItem("Test/test11/MakeAssetBundle/iOS")]
-	private static void MakeAssetBundle_iOS()
-	{
-		UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/iOS",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.iOS);
 	}
 	#endif
 }

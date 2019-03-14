@@ -98,7 +98,7 @@ namespace NUniVrm
 		{
 			#if(USE_DEF_UNIVRM)
 			if(this.result_context != null){
-				this.result_context.Destroy(false);
+				this.result_context.Dispose();
 			}
 			#endif
 		}

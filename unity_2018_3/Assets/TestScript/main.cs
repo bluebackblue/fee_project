@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -210,10 +210,10 @@ public class main : MonoBehaviour
 		UnityEngine.SceneManagement.SceneManager.LoadScene(a_scene_name);
 	}
 
-	/** 追加。
+	/** シーンリスト初期化。
 	*/
 	#if(UNITY_EDITOR)
-	[UnityEditor.MenuItem("Test/main/EditSceneList")]
+	[UnityEditor.MenuItem("Fee/Initialize/EditSceneList")]
 	private static void EditSceneList()
 	{
 		List<UnityEditor.EditorBuildSettingsScene> t_list = new List<UnityEditor.EditorBuildSettingsScene>();
@@ -225,6 +225,254 @@ public class main : MonoBehaviour
 		}
 
 		UnityEditor.EditorBuildSettings.scenes = t_list.ToArray();
+	}
+	#endif
+
+	/** インプットマネージャ初期化。
+	*/
+	#if(UNITY_EDITOR)
+	[UnityEditor.MenuItem("Fee/Initialize/EditInputManager")]
+	private static void MakeInputManager()
+	{
+		NInput.EditInputManager t_inputmaanger = new NInput.EditInputManager();
+		{
+			List<NInput.EditInputManager_Item> t_list = t_inputmaanger.GetList();
+
+			bool t_find_left = false;
+			bool t_find_right = false;
+			bool t_find_up = false;
+			bool t_find_down = false;
+
+			bool t_find_enter = false;
+			bool t_find_escape = false;
+			bool t_find_sub1 = false;
+			bool t_find_sub2 = false;
+
+			bool t_find_left_menu = false;
+			bool t_find_right_menu = false;
+
+			bool t_left_stick_axis_x = false;
+			bool t_left_stick_axis_y = false;
+			bool t_right_stick_axis_x = false;
+			bool t_right_stick_axis_y = false;
+
+			bool t_left_stick_button = false;
+			bool t_right_stick_button = false;
+
+			bool t_left_trigger1_button = false;
+			bool t_right_trigger1_button = false;
+			bool t_left_trigger2_axis = false;
+			bool t_right_trigger2_axis = false;
+
+			for(int ii=0;ii<t_list.Count;ii++){
+				switch(t_list[ii].m_Name){
+				case NInput.EditInputManager_Item.ButtonName.LEFT:					t_find_left				= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.RIGHT:					t_find_right			= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.UP:					t_find_up				= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.DOWN:					t_find_down				= true;		break;
+
+				case NInput.EditInputManager_Item.ButtonName.ENTER:					t_find_enter			= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.ESCAPE:				t_find_escape			= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.SUB1:					t_find_sub1				= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.SUB2:					t_find_sub2				= true;		break;
+
+				case NInput.EditInputManager_Item.ButtonName.LEFT_MENU:				t_find_left_menu		= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.RIGHT_MENU:			t_find_right_menu		= true;		break;
+
+				case NInput.EditInputManager_Item.ButtonName.LEFT_STICK_AXIS_X:		t_left_stick_axis_x		= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.LEFT_STICK_AXIS_Y:		t_left_stick_axis_y		= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.RIGHT_STICK_AXIS_X:	t_right_stick_axis_x	= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.RIGHT_STICK_AXIS_Y:	t_right_stick_axis_y	= true;		break;
+
+				case NInput.EditInputManager_Item.ButtonName.LEFT_STICK_BUTTON:		t_left_stick_button		= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.RIGHT_STICK_BUTTON:	t_right_stick_button	= true;		break;
+
+				case NInput.EditInputManager_Item.ButtonName.LEFT_TRIGGER1_BUTTON:	t_left_trigger1_button	= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.RIGHT_TRIGGER1_BUTTON:	t_right_trigger1_button	= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.LEFT_TRIGGER2_AXIS:	t_left_trigger2_axis	= true;		break;
+				case NInput.EditInputManager_Item.ButtonName.RIGHT_TRIGGER2_AXIS:	t_right_trigger2_axis	= true;		break;
+				}
+			}
+
+			//存在しない場合は追加。
+			{
+				//デジタルボタン。上下左右。
+				if(t_find_left == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateDigitalButtonLeft();
+					t_list.Add(t_item);
+				}
+				if(t_find_right == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateDigitalButtonRight();
+					t_list.Add(t_item);
+				}
+				if(t_find_up == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateDigitalButtonUp();
+					t_list.Add(t_item);
+				}
+				if(t_find_down == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateDigitalButtonDown();
+					t_list.Add(t_item);
+				}
+
+				//デジタルボタン。
+				if(t_find_enter == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateDigitalButtonEnter();
+					t_list.Add(t_item);
+				}
+				if(t_find_escape == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateDigitalButtonEscape();
+					t_list.Add(t_item);
+				}
+				if(t_find_sub1 == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateDigitalButtonSub1();
+					t_list.Add(t_item);
+				}
+				if(t_find_sub2 == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateDigitalButtonSub2();
+					t_list.Add(t_item);
+				}
+
+				//デジタルボタン。
+				if(t_find_left_menu == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateDigitalButtonLeftMenu();
+					t_list.Add(t_item);
+				}
+				if(t_find_right_menu == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateDigitalButtonRightMenu();
+					t_list.Add(t_item);
+				}
+
+				//スティック。方向。
+				if(t_left_stick_axis_x == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateLeftStickAxisX();
+					t_list.Add(t_item);
+				}
+				if(t_left_stick_axis_y == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateLeftStickAxisY();
+					t_list.Add(t_item);
+				}
+				if(t_right_stick_axis_x == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateRightStickAxisX();
+					t_list.Add(t_item);
+				}
+				if(t_right_stick_axis_y == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateRightStickAxisY();
+					t_list.Add(t_item);
+				}
+
+				//スティック。ボタン。
+				if(t_left_stick_button == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateLeftStickButton();
+					t_list.Add(t_item);
+				}
+				if(t_right_stick_button == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateRightStickButton();
+					t_list.Add(t_item);
+				}
+
+				//トリガー。
+				if(t_left_trigger1_button == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateLeftTrigger1Button();
+					t_list.Add(t_item);
+				}
+				if(t_right_trigger1_button == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateRightTrigger1Button();
+					t_list.Add(t_item);
+				}
+				if(t_left_trigger2_axis == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateLeftTrigger2Button();
+					t_list.Add(t_item);
+				}
+				if(t_right_trigger2_axis == false){
+					NInput.EditInputManager_Item t_item = new NInput.EditInputManager_Item();
+					t_item.CreateRightTrigger2Button();
+					t_list.Add(t_item);
+				}
+			}
+		}
+
+		//セーブ。
+		t_inputmaanger.Save();
+	}
+	#endif
+
+	/** 作成。
+	*/
+	#if(UNITY_EDITOR)
+	[UnityEditor.MenuItem("Fee/MakeAssetBundle/All")]
+	private static void MakeAssetBundle_SWA()
+	{
+		MakeAssetBundle_StandaloneWindows();
+		MakeAssetBundle_WebGL();
+		MakeAssetBundle_Android();
+		MakeAssetBundle_iOS();
+	}
+	#endif
+
+	/** 作成。
+	*/
+	#if(UNITY_EDITOR)
+	[UnityEditor.MenuItem("Fee/MakeAssetBundle/StandaloneWindows")]
+	private static void MakeAssetBundle_StandaloneWindows()
+	{
+		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.Standalone,UnityEditor.BuildTarget.StandaloneWindows) == true){
+			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/StandaloneWindows",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.StandaloneWindows);
+		}
+	}
+	#endif
+
+	/** 作成。
+	*/
+	#if(UNITY_EDITOR)
+	[UnityEditor.MenuItem("Fee/MakeAssetBundle/WebGL")]
+	private static void MakeAssetBundle_WebGL()
+	{
+		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.WebGL,UnityEditor.BuildTarget.WebGL) == true){
+			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/WebGL",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.WebGL);
+		}
+	}
+	#endif
+
+	/** 作成。
+	*/
+	#if(UNITY_EDITOR)
+	[UnityEditor.MenuItem("Fee/MakeAssetBundle/Android")]
+	private static void MakeAssetBundle_Android()
+	{
+		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.Android,UnityEditor.BuildTarget.Android) == true){
+			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/Android",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.Android);
+		}
+	}
+	#endif
+
+	/** 作成。
+	*/
+	#if(UNITY_EDITOR)
+	[UnityEditor.MenuItem("Fee/MakeAssetBundle/iOS")]
+	private static void MakeAssetBundle_iOS()
+	{
+		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.iOS,UnityEditor.BuildTarget.iOS) == true){
+			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/iOS",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.iOS);
+		}
 	}
 	#endif
 }
