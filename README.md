@@ -8,18 +8,15 @@ https://github.com/bluebackblue/fee_project/blob/master/LICENSE.txt
 ## folder structure
 フォルダ構造
 * fee_project 「チェックアウト : https://github.com/bluebackblue/fee_project.git 」
-* _ unity_2018_2 [Unity 2018.2.16f1 (64-bit)]
+* _ unity_2018_3 [Unity 2018.3.8f1]
 * ___ Assets
-* _____ Fee
-* _______ Script [ サブモジュール : https://github.com/bluebackblue/fee.git ]
-* _____ TestScene
-* _____ TestScript [ サブモジュール : https://github.com/bluebackblue/fee_testscript.git ]
-* _ unity_2019_1 [Unity 2019.1.0a8 (64-bit)]
+* _____ Fee [ https://github.com/bluebackblue/fee/releases ]
+* _ unity_2019_1 [2019.1.0b7]
 * ___ Assets
-* _____ Fee
-* _______ Script [ サブモジュール : https://github.com/bluebackblue/fee.git ]
-* _____ TestScene
-* _____ TestScript [ サブモジュール : https://github.com/bluebackblue/fee_testscript.git ]
+* _____ Fee [ https://github.com/bluebackblue/fee/releases ]
+* _ unity_2019_2 [2019.2.0a8]
+* ___ Assets
+* _____ Fee [ https://github.com/bluebackblue/fee/releases ]
 
 ## webgl
 http://bbbproject.sakura.ne.jp/www/project_webgl/fee/
