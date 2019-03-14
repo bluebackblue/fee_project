@@ -30,11 +30,6 @@ http://bbbproject.sakura.ne.jp/www/project_webgl/fee/
 ### Fee内での使用ライセンス
 * https://github.com/bluebackblue/fee
 
-### M+ FONTS
-* https://github.com/bluebackblue/fee_project/tree/master/license/mplus
-* http://mplus-fonts.osdn.jp/
-* Copyright (C) 2002-2017 M+ FONTS PROJECT
-
 ### 魔王魂
 * https://github.com/bluebackblue/fee_project/tree/master/license/maoudamashii
 * https://maoudamashii.jokersounds.com/music_rule.html
