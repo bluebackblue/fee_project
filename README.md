@@ -5,6 +5,12 @@ Fee Sample Project
 MIT License
 https://github.com/bluebackblue/fee_project/blob/master/LICENSE.txt
 
+## core
+https://github.com/bluebackblue/fee_core
+
+## contact
+https://discord.gg/JH3B4SR
+
 ## folder structure
 フォルダ構造
 * fee_project 「チェックアウト : https://github.com/bluebackblue/fee_project.git 」
