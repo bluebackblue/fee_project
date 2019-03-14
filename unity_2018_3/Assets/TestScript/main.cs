@@ -435,7 +435,9 @@ public class main : MonoBehaviour
 	private static void MakeAssetBundle_StandaloneWindows()
 	{
 		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.Standalone,UnityEditor.BuildTarget.StandaloneWindows) == true){
+			Debug.Log("StandaloneWindows start");
 			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/StandaloneWindows",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.StandaloneWindows);
+			Debug.Log("StandaloneWindows end");
 		}
 	}
 	#endif
@@ -447,7 +449,9 @@ public class main : MonoBehaviour
 	private static void MakeAssetBundle_WebGL()
 	{
 		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.WebGL,UnityEditor.BuildTarget.WebGL) == true){
+			Debug.Log("WebGL start");
 			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/WebGL",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.WebGL);
+			Debug.Log("WebGL start");
 		}
 	}
 	#endif
@@ -459,7 +463,9 @@ public class main : MonoBehaviour
 	private static void MakeAssetBundle_Android()
 	{
 		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.Android,UnityEditor.BuildTarget.Android) == true){
+			Debug.Log("Android start");
 			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/Android",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.Android);
+			Debug.Log("Android start");
 		}
 	}
 	#endif
@@ -471,7 +477,9 @@ public class main : MonoBehaviour
 	private static void MakeAssetBundle_iOS()
 	{
 		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.iOS,UnityEditor.BuildTarget.iOS) == true){
+			Debug.Log("iOS start");
 			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/iOS",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.iOS);
+			Debug.Log("iOS start");
 		}
 	}
 	#endif
