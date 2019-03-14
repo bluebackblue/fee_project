@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -22,15 +19,15 @@ namespace Fee.EventPlate
 	{
 		/** list
 		*/
-		private List<Item> list;
+		private System.Collections.Generic.List<Item> list;
 
 		/** add_list
 		*/
-		private List<Item> add_list;
+		private System.Collections.Generic.List<Item> add_list;
 
 		/** remove_list
 		*/
-		private List<Item> remove_list;
+		private System.Collections.Generic.List<Item> remove_list;
 
 		/** current
 		*/
@@ -45,13 +42,13 @@ namespace Fee.EventPlate
 		public Work()
 		{
 			//list
-			this.list = new List<Item>();
+			this.list = new System.Collections.Generic.List<Item>();
 
 			//add_list
-			this.add_list = new List<Item>();
+			this.add_list = new System.Collections.Generic.List<Item>();
 
 			//remove_list
-			this.remove_list = new List<Item>();
+			this.remove_list = new System.Collections.Generic.List<Item>();
 
 			//current
 			this.current = null;

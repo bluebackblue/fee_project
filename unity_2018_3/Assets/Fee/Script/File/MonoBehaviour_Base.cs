@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -18,7 +15,7 @@ namespace Fee.File
 {
 	/** MonoBehaviour_Base
 	*/
-	public abstract class MonoBehaviour_Base : MonoBehaviour
+	public abstract class MonoBehaviour_Base : UnityEngine.MonoBehaviour
 	{
 		/** Mode
 		*/
@@ -92,73 +89,73 @@ namespace Fee.File
 
 		/** [MonoBehaviour_Base]コールバック。開始。
 		*/
-		protected abstract IEnumerator OnStart();
+		protected abstract System.Collections.IEnumerator OnStart();
 
 		/** [MonoBehaviour_Base]コールバック。実行。
 		*/
-		protected abstract IEnumerator OnDo();
+		protected abstract System.Collections.IEnumerator OnDo();
 
 		/** [MonoBehaviour_Base]コールバック。エラー終了。
 		*/
-		protected abstract IEnumerator OnDoError();
+		protected abstract System.Collections.IEnumerator OnDoError();
 
 		/** [MonoBehaviour_Base]コールバック。正常終了。
 		*/
-		protected abstract IEnumerator OnDoSuccess();
+		protected abstract System.Collections.IEnumerator OnDoSuccess();
 
 		/** mode
 		*/
-		[SerializeField]
+		[UnityEngine.SerializeField]
 		private Mode mode;
 
 		/** cancel_flag
 		*/
-		[SerializeField]
+		[UnityEngine.SerializeField]
 		private bool cancel_flag;
 
 		/** delete_flag
 		*/
-		[SerializeField]
+		[UnityEngine.SerializeField]
 		private bool delete_flag;
 
 		/** result_progress 
 		*/
-		[SerializeField]
+		[UnityEngine.SerializeField]
 		private float result_progress;
 
 		/** result_errorstring
 		*/
-		[SerializeField]
+		[UnityEngine.SerializeField]
 		private string result_errorstring;
 
 		/** result_type
 		*/
-		[SerializeField]
+		[UnityEngine.SerializeField]
 		private ResultType result_type;
 
 		/** result_binary
 		*/
-		[SerializeField]
+		[UnityEngine.SerializeField]
 		private byte[] result_binary;
 
 		/** result_text
 		*/
-		[SerializeField]
+		[UnityEngine.SerializeField]
 		private string result_text;
 
 		/** result_texture
 		*/
-		[SerializeField]
-		private Texture2D result_texture;
+		[UnityEngine.SerializeField]
+		private UnityEngine.Texture2D result_texture;
 
 		/** result_assetbundle
 		*/
-		[SerializeField]
-		private AssetBundle result_assetbundle;
+		[UnityEngine.SerializeField]
+		private UnityEngine.AssetBundle result_assetbundle;
 
 		/** result_soundpool
 		*/
-		[SerializeField]
+		[UnityEngine.SerializeField]
 		private Fee.Audio.Pack_SoundPool result_soundpool;
 
 		/** 結果フラグリセット。
@@ -347,7 +344,7 @@ namespace Fee.File
 
 		/** 結果。設定。
 		*/
-		public void SetResultTexture(Texture2D a_texture)
+		public void SetResultTexture(UnityEngine.Texture2D a_texture)
 		{
 			this.result_type = ResultType.Texture;
 			this.result_texture = a_texture;
@@ -355,14 +352,14 @@ namespace Fee.File
 
 		/** 結果。取得。
 		*/
-		public Texture2D GetResultTexture()
+		public UnityEngine.Texture2D GetResultTexture()
 		{
 			return this.result_texture;
 		}
 
 		/** 結果。設定。
 		*/
-		public void SetResultAssetBundle(AssetBundle a_assetbundle)
+		public void SetResultAssetBundle(UnityEngine.AssetBundle a_assetbundle)
 		{
 			this.result_type = ResultType.AssetBundle;
 			this.result_assetbundle = a_assetbundle;
@@ -370,7 +367,7 @@ namespace Fee.File
 
 		/** 結果。取得。
 		*/
-		public AssetBundle GetResultAssetBundle()
+		public UnityEngine.AssetBundle GetResultAssetBundle()
 		{
 			return this.result_assetbundle;
 		}
@@ -412,7 +409,7 @@ namespace Fee.File
 
 		/** Start
 		*/
-		private IEnumerator Start()
+		private System.Collections.IEnumerator Start()
 		{
 			bool t_loop = true;
 			while(t_loop){
@@ -451,7 +448,7 @@ namespace Fee.File
 			}
 
 			Tool.Log(this.gameObject.name,"GameObject.Destroy");
-			GameObject.Destroy(this.gameObject);
+			UnityEngine.GameObject.Destroy(this.gameObject);
 			yield break;
 		}
 	}

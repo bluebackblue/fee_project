@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -57,13 +54,13 @@ namespace Fee.Ui
 			//bg_sprite
 			this.bg_sprite = new Fee.Render2D.Sprite2D(this.deleter,null,0);
 			this.bg_sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
-			this.bg_sprite.SetTexture(Texture2D.whiteTexture);
+			this.bg_sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.bg_sprite.SetColor(0.0f,0.0f,0.0f,1.0f);
 
 			//titlebar
 			this.titlebar = new Fee.Render2D.Sprite2D(this.deleter,null,0);
 			this.titlebar.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
-			this.titlebar.SetTexture(Texture2D.whiteTexture);
+			this.titlebar.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.titlebar.SetColor(0.2f,0.2f,0.2f,1.0f);
 
 			//titlebar_h

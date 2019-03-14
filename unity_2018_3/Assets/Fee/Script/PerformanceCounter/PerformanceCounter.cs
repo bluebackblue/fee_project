@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -71,11 +68,11 @@ namespace Fee.PerformanceCounter
 
 		/** ルート。
 		*/
-		private GameObject root_gameobject;
+		private UnityEngine.GameObject root_gameobject;
 
 		/** camera_gameobject
 		*/
-		private GameObject camera_gameobject;
+		private UnityEngine.GameObject camera_gameobject;
 		private MonoBehaviour_Camera camera_script;
 
 		/** フレームデータ。
@@ -87,10 +84,10 @@ namespace Fee.PerformanceCounter
 		private PerformanceCounter()
 		{
 			//ルート。
-			this.root_gameobject = new GameObject();
+			this.root_gameobject = new UnityEngine.GameObject();
 			this.root_gameobject.name = "PerformanceCounter";
-			Transform t_root_transform = this.root_gameobject.GetComponent<Transform>();
-			GameObject.DontDestroyOnLoad(this.root_gameobject);
+			UnityEngine.Transform t_root_transform = this.root_gameobject.GetComponent<UnityEngine.Transform>();
+			UnityEngine.GameObject.DontDestroyOnLoad(this.root_gameobject);
 
 			//フレームデータ。
 			this.framedata = new FrameData();
@@ -106,7 +103,7 @@ namespace Fee.PerformanceCounter
 		private void Delete()
 		{
 			this.camera_script.Delete();
-			GameObject.Destroy(this.root_gameobject);
+			UnityEngine.GameObject.Destroy(this.root_gameobject);
 		}
 
 		/** フレームデータ。取得。

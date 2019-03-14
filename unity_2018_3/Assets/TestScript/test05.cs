@@ -124,7 +124,7 @@ public class test05 : main_base
 
 	/** touch_list
 	*/
-	private Dictionary<TouchView,Fee.Input.Touch_Phase> touch_list;
+	private System.Collections.Generic.Dictionary<TouchView,Fee.Input.Touch_Phase> touch_list;
 
 	/** Start
 	*/

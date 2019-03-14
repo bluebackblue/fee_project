@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -14,7 +13,7 @@ using UnityEngine;
 
 /** main
 */
-public class main : MonoBehaviour
+public class main : UnityEngine.MonoBehaviour
 {
 	/** scene_list
 	*/
@@ -38,7 +37,7 @@ public class main : MonoBehaviour
 
 	/** アプリ起動時。
 	*/
-	[RuntimeInitializeOnLoadMethod]
+	[UnityEngine.RuntimeInitializeOnLoadMethod]
 	private static void AppInitialize()
 	{
 	}
@@ -107,7 +106,7 @@ public class main : MonoBehaviour
 				}
 
 				this.button[ii] = new Fee.Ui.Button(this.deleter,null,0,Click,ii);
-				this.button[ii].SetTexture(Resources.Load<Texture2D>("button"));
+				this.button[ii].SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>("button"));
 				this.button[ii].SetRect(t_x,t_y,t_w,t_h);
 				this.button[ii].SetText(t_name);
 			}
@@ -216,7 +215,7 @@ public class main : MonoBehaviour
 	[UnityEditor.MenuItem("Fee/Initialize/EditSceneList")]
 	private static void EditSceneList()
 	{
-		List<UnityEditor.EditorBuildSettingsScene> t_list = new List<UnityEditor.EditorBuildSettingsScene>();
+		List<UnityEditor.EditorBuildSettingsScene> t_list = new System.Collections.Generic.List<UnityEditor.EditorBuildSettingsScene>();
 
 		t_list.Add(new UnityEditor.EditorBuildSettingsScene("Assets/TestScene/main.unity",true));
 
@@ -435,9 +434,9 @@ public class main : MonoBehaviour
 	private static void MakeAssetBundle_StandaloneWindows()
 	{
 		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.Standalone,UnityEditor.BuildTarget.StandaloneWindows) == true){
-			Debug.Log("StandaloneWindows start");
+			UnityEditor.EditorUtility.DisplayDialog("StandaloneWindows","Start","ok");
 			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/StandaloneWindows",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.StandaloneWindows);
-			Debug.Log("StandaloneWindows end");
+			UnityEditor.EditorUtility.DisplayDialog("StandaloneWindows","End","ok");
 		}
 	}
 	#endif
@@ -449,9 +448,9 @@ public class main : MonoBehaviour
 	private static void MakeAssetBundle_WebGL()
 	{
 		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.WebGL,UnityEditor.BuildTarget.WebGL) == true){
-			Debug.Log("WebGL start");
+			UnityEditor.EditorUtility.DisplayDialog("WebGL","Start","ok");
 			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/WebGL",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.WebGL);
-			Debug.Log("WebGL start");
+			UnityEditor.EditorUtility.DisplayDialog("WebGL","End","ok");
 		}
 	}
 	#endif
@@ -463,9 +462,9 @@ public class main : MonoBehaviour
 	private static void MakeAssetBundle_Android()
 	{
 		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.Android,UnityEditor.BuildTarget.Android) == true){
-			Debug.Log("Android start");
+			UnityEditor.EditorUtility.DisplayDialog("Android","Start","ok");
 			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/Android",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.Android);
-			Debug.Log("Android start");
+			UnityEditor.EditorUtility.DisplayDialog("Android","End","ok");
 		}
 	}
 	#endif
@@ -477,9 +476,9 @@ public class main : MonoBehaviour
 	private static void MakeAssetBundle_iOS()
 	{
 		if(UnityEditor.BuildPipeline.IsBuildTargetSupported(UnityEditor.BuildTargetGroup.iOS,UnityEditor.BuildTarget.iOS) == true){
-			Debug.Log("iOS start");
+			UnityEditor.EditorUtility.DisplayDialog("iOS","Start","ok");
 			UnityEditor.BuildPipeline.BuildAssetBundles("Assets/AssetBundle/iOS",UnityEditor.BuildAssetBundleOptions.None,UnityEditor.BuildTarget.iOS);
-			Debug.Log("iOS start");
+			UnityEditor.EditorUtility.DisplayDialog("iOS","End","ok");
 		}
 	}
 	#endif
@@ -488,7 +487,7 @@ public class main : MonoBehaviour
 
 /** main_base
 */
-public class main_base : MonoBehaviour
+public class main_base : UnityEngine.MonoBehaviour
 {
 	/** is_changescene
 	*/
@@ -503,7 +502,7 @@ public class main_base : MonoBehaviour
 	public void CreateReturnButton(Fee.Deleter.Deleter a_deleter,long a_drawpriority)
 	{
 		this.return_button = new Fee.Ui.Button(a_deleter,null,a_drawpriority,Click,0);
-		this.return_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.return_button.SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>("button"));
 		this.return_button.SetText("Return");
 		this.return_button.SetRect(0,0,80,40);
 	}
@@ -532,7 +531,7 @@ public class main_base : MonoBehaviour
 
 	/** シーン切り替え。
 	*/
-	public IEnumerator ChangeScene()
+	public System.Collections.IEnumerator ChangeScene()
 	{
 		bool t_first = true;
 
@@ -562,7 +561,7 @@ public class main_base : MonoBehaviour
 			}
 		}
 
-		GameObject.Destroy(this.gameObject);
+		UnityEngine.GameObject.Destroy(this.gameObject);
 
 		UnityEngine.SceneManagement.SceneManager.LoadScene("main");
 

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -22,7 +19,7 @@ namespace Fee.Render2D
 	{
 		/** キャンバス。
 		*/
-		public Transform canvas_transform;
+		public UnityEngine.Transform canvas_transform;
 
 		/** camera
 		*/

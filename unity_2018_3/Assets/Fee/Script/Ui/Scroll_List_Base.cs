@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -23,11 +20,11 @@ namespace Fee.Ui
 	{
 		/** リスト。
 		*/
-		protected List<ITEM> list;
+		protected System.Collections.Generic.List<ITEM> list;
 
 		/** 表示範囲内のアイテムをキャプチャしたリスト。
 		*/
-		protected List<ITEM> capture_list;
+		protected System.Collections.Generic.List<ITEM> capture_list;
 
 		/** constructor
 		*/
@@ -36,10 +33,10 @@ namespace Fee.Ui
 			base(a_deleter,a_drawpriority,a_item_length)
 		{
 			//リスト。
-			this.list = new List<ITEM>();
+			this.list = new System.Collections.Generic.List<ITEM>();
 
 			//表示範囲内のアイテムをキャプチャ。
-			this.capture_list = new List<ITEM>();
+			this.capture_list = new System.Collections.Generic.List<ITEM>();
 		}
 
 		/** [Scroll_List_Base]アイテムの位置更新。スクロール方向の座標。

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -30,7 +27,7 @@ namespace Fee.Render2D
 
 		/** 回転。
 		*/
-		Quaternion quaternion;
+		UnityEngine.Quaternion quaternion;
 
 		/** 初期化。
 		*/
@@ -43,7 +40,7 @@ namespace Fee.Render2D
 			this.center.Set(0,0);
 
 			//回転。
-			this.quaternion = Quaternion.identity;
+			this.quaternion = UnityEngine.Quaternion.identity;
 		}
 
 		/** 回転。設定。
@@ -92,29 +89,29 @@ namespace Fee.Render2D
 		*/
 		public void SetQuaternion(float a_euler_x,float a_euler_y,float a_euler_z)
 		{
-			this.quaternion = Quaternion.identity;
+			this.quaternion = UnityEngine.Quaternion.identity;
 
 			if(a_euler_x != 0.0f){
-				this.quaternion = Quaternion.AngleAxis(a_euler_x,new Vector3(1.0f,0.0f,0.0f)) * this.quaternion;
+				this.quaternion = UnityEngine.Quaternion.AngleAxis(a_euler_x,new UnityEngine.Vector3(1.0f,0.0f,0.0f)) * this.quaternion;
 			}
 			if(a_euler_y != 0.0f){
-				this.quaternion = Quaternion.AngleAxis(a_euler_y,new Vector3(0.0f,1.0f,0.0f)) * this.quaternion;
+				this.quaternion = UnityEngine.Quaternion.AngleAxis(a_euler_y,new UnityEngine.Vector3(0.0f,1.0f,0.0f)) * this.quaternion;
 			}
 			if(a_euler_z != 0.0f){
-				this.quaternion = Quaternion.AngleAxis(a_euler_z,new Vector3(0.0f,0.0f,1.0f)) * this.quaternion;
+				this.quaternion = UnityEngine.Quaternion.AngleAxis(a_euler_z,new UnityEngine.Vector3(0.0f,0.0f,1.0f)) * this.quaternion;
 			}
 		}
 
 		/** クォータニオン。設定。
 		*/
-		public void SetQuaternion(ref Quaternion a_quaternion)
+		public void SetQuaternion(ref UnityEngine.Quaternion a_quaternion)
 		{
 			this.quaternion = a_quaternion;
 		}
 
 		/** クォータニオン。取得。
 		*/
-		public Quaternion GetQuaternion()
+		public UnityEngine.Quaternion GetQuaternion()
 		{
 			return this.quaternion;
 		}

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -33,7 +30,7 @@ namespace Fee.Directory
 			Root t_root = new Root(a_full_path);
 			Item t_ret = new Item(t_root,"");
 
-			List<Work> t_dir_work_list = new List<Work>();
+			System.Collections.Generic.List<Work> t_dir_work_list = new System.Collections.Generic.List<Work>();
 			{
 				//相対パス。
 				string t_path = "";

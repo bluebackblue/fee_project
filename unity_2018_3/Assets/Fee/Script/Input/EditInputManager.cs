@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -23,7 +20,7 @@ namespace Fee.Input
 	{
 		/** list
 		*/
-		private List<EditInputManager_Item> list;
+		private System.Collections.Generic.List<EditInputManager_Item> list;
 
 		/** asset
 		*/
@@ -41,7 +38,7 @@ namespace Fee.Input
 		*/
 		public EditInputManager()
 		{
-			this.list = new List<EditInputManager_Item>();
+			this.list = new System.Collections.Generic.List<EditInputManager_Item>();
 
 			this.asset = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/InputManager.asset");
 			this.serialized_root = new UnityEditor.SerializedObject(this.asset);
@@ -171,7 +168,7 @@ namespace Fee.Input
 
 		/** リスト。取得。
 		*/
-		public List<EditInputManager_Item> GetList()
+		public System.Collections.Generic.List<EditInputManager_Item> GetList()
 		{
 			return this.list;
 		}

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -24,7 +21,7 @@ namespace Fee.File
 		*/
 		public class ResultType
 		{
-			public Texture2D texture;
+			public UnityEngine.Texture2D texture;
 			public string errorstring;
 
 			/** constructor
@@ -71,7 +68,7 @@ namespace Fee.File
 
 		/** CoroutineMain
 		*/
-		public IEnumerator CoroutineMain(OnCoroutine_CallBack a_instance,string a_full_path)
+		public System.Collections.IEnumerator CoroutineMain(OnCoroutine_CallBack a_instance,string a_full_path)
 		{
 			//result
 			this.result = new ResultType();
@@ -106,9 +103,9 @@ namespace Fee.File
 					int t_height;
 					GetSizeFromPngBinary(t_result.binary,out t_width,out t_height);
 					if((t_width > 0)&&(t_height > 0)&&(t_width <= 8192)&&(t_height <= 8192)){
-						Texture2D t_result_texture = new Texture2D(t_width,t_height);
+						UnityEngine.Texture2D t_result_texture = new UnityEngine.Texture2D(t_width,t_height);
 						if(t_result_texture != null){
-							if(t_result_texture.LoadImage(t_result.binary) == true){
+							if(UnityEngine.ImageConversion.LoadImage(t_result_texture,t_result.binary) == true){
 								this.result.texture = t_result_texture;
 								yield break;
 							}else{

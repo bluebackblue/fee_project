@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -61,7 +58,7 @@ namespace Fee.Audio
 
 		/** オーディオクリップ。取得。
 		*/
-		public void GetAudioClip(int a_index,out AudioClip a_audioclip,out float a_volume)
+		public void GetAudioClip(int a_index,out UnityEngine.AudioClip a_audioclip,out float a_volume)
 		{
 			if(this.pack_audioclip != null){
 				if((0<=a_index)&&(a_index<this.pack_audioclip.audioclip_list.Count)){

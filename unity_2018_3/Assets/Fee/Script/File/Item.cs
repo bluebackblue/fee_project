@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -83,11 +80,11 @@ namespace Fee.File
 
 		/** result_texture
 		*/
-		private Texture2D result_texture;
+		private UnityEngine.Texture2D result_texture;
 
 		/** result_assetbundle
 		*/
-		private AssetBundle result_assetbundle;
+		private UnityEngine.AssetBundle result_assetbundle;
 
 		/** result_soundpool
 		*/
@@ -233,7 +230,7 @@ namespace Fee.File
 
 		/** 結果。テクスチャ。設定。
 		*/
-		public void SetResultTexture(Texture2D a_texture)
+		public void SetResultTexture(UnityEngine.Texture2D a_texture)
 		{
 			this.result_type = ResultType.Texture;
 
@@ -242,14 +239,14 @@ namespace Fee.File
 
 		/** 結果。テクスチャ。取得。
 		*/
-		public Texture2D GetResultTexture()
+		public UnityEngine.Texture2D GetResultTexture()
 		{
 			return this.result_texture;
 		}
 
 		/** 結果。アセットバンドル。設定。
 		*/
-		public void SetResultAssetBundle(AssetBundle a_assetbundle)
+		public void SetResultAssetBundle(UnityEngine.AssetBundle a_assetbundle)
 		{
 			this.result_type = ResultType.AssetBundle;
 
@@ -258,7 +255,7 @@ namespace Fee.File
 
 		/** 結果。アセットバンドル。取得。
 		*/
-		public AssetBundle GetResultAssetBundle()
+		public UnityEngine.AssetBundle GetResultAssetBundle()
 		{
 			return this.result_assetbundle;
 		}

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -261,7 +258,7 @@ namespace Fee.Render2D
 
 		/** カスタムテキストマテリアル。取得。
 		*/
-		public Material GetCustomTextMaterial()
+		public UnityEngine.Material GetCustomTextMaterial()
 		{
 			return this.param.GetCustomTextMaterial();
 		}
@@ -360,7 +357,7 @@ namespace Fee.Render2D
 
 		/** 色。設定。
 		*/
-		public void SetColor(ref Color a_color)
+		public void SetColor(ref UnityEngine.Color a_color)
 		{
 			this.param.SetColor(ref a_color);
 		}
@@ -374,14 +371,14 @@ namespace Fee.Render2D
 
 		/** 色。取得。
 		*/
-		public Color GetColor()
+		public UnityEngine.Color GetColor()
 		{
 			return this.param.GetColor();
 		}
 
 		/** アウトライン色。設定。
 		*/
-		public void SetOutLineColor(ref Color a_color)
+		public void SetOutLineColor(ref UnityEngine.Color a_color)
 		{
 			this.param.SetOutLineColor(ref a_color);
 		}
@@ -395,7 +392,7 @@ namespace Fee.Render2D
 
 		/** アウトライン色。取得。
 		*/
-		public Color GetOutLineColor()
+		public UnityEngine.Color GetOutLineColor()
 		{
 			return this.param.GetOutLineColor();
 		}
@@ -423,14 +420,14 @@ namespace Fee.Render2D
 
 		/** フォント。設定。
 		*/
-		public void SetFont(Font a_font)
+		public void SetFont(UnityEngine.Font a_font)
 		{
 			this.param.SetFont(a_font);
 		}
 
 		/** フォント。取得。
 		*/
-		public Font GetFont()
+		public UnityEngine.Font GetFont()
 		{
 			return this.param.GetFont();
 		}
@@ -479,21 +476,21 @@ namespace Fee.Render2D
 
 		/** [内部からの呼び出し]サイズ。設定。
 		*/
-		public void Raw_SetRectTransformSizeDelta(ref Vector2 a_size)
+		public void Raw_SetRectTransformSizeDelta(ref UnityEngine.Vector2 a_size)
 		{
 			this.param.Raw_SetRectTransformSizeDelta(ref a_size);
 		}
 
 		/** [内部からの呼び出し]サイズ。取得。
 		*/
-		public void Raw_GetRectTransformSizeDelta(out Vector2 a_size)
+		public void Raw_GetRectTransformSizeDelta(out UnityEngine.Vector2 a_size)
 		{
 			this.param.Raw_GetRectTransformSizeDelta(out a_size);
 		}
 
 		/** [内部からの呼び出し]位置。設定。
 		*/
-		public void Raw_SetRectTransformLocalPosition(ref Vector3 a_position)
+		public void Raw_SetRectTransformLocalPosition(ref UnityEngine.Vector3 a_position)
 		{
 			this.param.Raw_SetRectTransformLocalPosition(ref a_position);
 		}
@@ -507,14 +504,14 @@ namespace Fee.Render2D
 
 		/** [内部からの呼び出し]テキストマテリアル。設定。
 		*/
-		public void Raw_SetTextMaterial(Material a_material)
+		public void Raw_SetTextMaterial(UnityEngine.Material a_material)
 		{
 			this.param.Raw_SetTextMaterial(a_material);
 		}
 
 		/** [内部からの呼び出し]レイヤー。設定。
 		*/
-		public void Raw_SetLayer(Transform a_layer_transform)
+		public void Raw_SetLayer(UnityEngine.Transform a_layer_transform)
 		{
 			this.param.Raw_SetLayer(a_layer_transform);
 		}

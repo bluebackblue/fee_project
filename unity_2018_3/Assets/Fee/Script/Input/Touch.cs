@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -114,7 +111,7 @@ namespace Fee.Input
 
 		/** リスト。
 		*/
-		public List<Touch_Phase> list;
+		public System.Collections.Generic.List<Touch_Phase> list;
 
 		/** デバイスアイテムリスト。
 		*/
@@ -136,7 +133,7 @@ namespace Fee.Input
 			this.callback = null;
 
 			//list
-			this.list = new List<Touch_Phase>();
+			this.list = new System.Collections.Generic.List<Touch_Phase>();
 
 			//device_item_list
 			this.device_item_list = new Touch_Device_Item[1];
@@ -263,19 +260,19 @@ namespace Fee.Input
 				UnityEngine.Touch t_touch = UnityEngine.Input.GetTouch(ii);
 
 				switch(t_touch.phase){
-				case TouchPhase.Began:
-				case TouchPhase.Moved:
-				case TouchPhase.Stationary:
+				case UnityEngine.TouchPhase.Began:
+				case UnityEngine.TouchPhase.Moved:
+				case UnityEngine.TouchPhase.Stationary:
 					{
 						//（ＧＵＩスクリーン座標）=>（仮想スクリーン座標）。
-						a_render2d.GuiScreenToVirtualScreen((int)t_touch.position.x,(int)(Screen.height - t_touch.position.y),out this.device_item_list[this.device_item_list_count].x,out this.device_item_list[this.device_item_list_count].y);
+						a_render2d.GuiScreenToVirtualScreen((int)t_touch.position.x,(int)(UnityEngine.Screen.height - t_touch.position.y),out this.device_item_list[this.device_item_list_count].x,out this.device_item_list[this.device_item_list_count].y);
 
 						//フェーズ。
-						if(t_touch.phase == TouchPhase.Began){
+						if(t_touch.phase == UnityEngine.TouchPhase.Began){
 							this.device_item_list[this.device_item_list_count].phasetype = Touch_Phase.PhaseType.Began;
-						}else if(t_touch.phase == TouchPhase.Moved){
+						}else if(t_touch.phase == UnityEngine.TouchPhase.Moved){
 							this.device_item_list[this.device_item_list_count].phasetype = Touch_Phase.PhaseType.Moved;
-						}else if(t_touch.phase == TouchPhase.Stationary){
+						}else if(t_touch.phase == UnityEngine.TouchPhase.Stationary){
 							this.device_item_list[this.device_item_list_count].phasetype = Touch_Phase.PhaseType.Stationary;
 						}else{
 							this.device_item_list[this.device_item_list_count].phasetype = Touch_Phase.PhaseType.None;
@@ -318,7 +315,7 @@ namespace Fee.Input
 				int t_touch_y = (int)UnityEngine.Input.mousePosition.y;
 
 				//（ＧＵＩスクリーン座標）=>（仮想スクリーン座標）。
-				a_render2d.GuiScreenToVirtualScreen((int)t_touch_x,(int)(Screen.height - t_touch_y),out this.device_item_list[this.device_item_list_count].x,out this.device_item_list[this.device_item_list_count].y);
+				a_render2d.GuiScreenToVirtualScreen((int)t_touch_x,(int)(UnityEngine.Screen.height - t_touch_y),out this.device_item_list[this.device_item_list_count].x,out this.device_item_list[this.device_item_list_count].y);
 
 				//フェーズ。
 				this.device_item_list[this.device_item_list_count].phasetype = Touch_Phase.PhaseType.Moved;
@@ -473,23 +470,23 @@ namespace Fee.Input
 
 		/** タッチリスト作成。
 		*/
-		public static Dictionary<TYPE,Fee.Input.Touch_Phase> CreateTouchList<TYPE>()
+		public static System.Collections.Generic.Dictionary<TYPE,Fee.Input.Touch_Phase> CreateTouchList<TYPE>()
 			where TYPE : Touch_Phase_Key_Base
 		{
-			return new Dictionary<TYPE,Touch_Phase>();
+			return new System.Collections.Generic.Dictionary<TYPE,Touch_Phase>();
 		}
 
 		/** タッチリスト更新。
 		*/
-		public static void UpdateTouchList<TYPE>(Dictionary<TYPE,Fee.Input.Touch_Phase> a_list)
+		public static void UpdateTouchList<TYPE>(System.Collections.Generic.Dictionary<TYPE,Fee.Input.Touch_Phase> a_list)
 			where TYPE : Touch_Phase_Key_Base
 		{
-			List<TYPE> t_delete_keylist = null;
+			System.Collections.Generic.List<TYPE> t_delete_keylist = null;
 
-			foreach(KeyValuePair<TYPE,Fee.Input.Touch_Phase> t_pair in a_list){
+			foreach(System.Collections.Generic.KeyValuePair<TYPE,Fee.Input.Touch_Phase> t_pair in a_list){
 				if(t_pair.Value.update == false){
 					if(t_delete_keylist == null){
-						t_delete_keylist = new List<TYPE>();
+						t_delete_keylist = new System.Collections.Generic.List<TYPE>();
 					}
 					t_delete_keylist.Add(t_pair.Key);
 				}else{

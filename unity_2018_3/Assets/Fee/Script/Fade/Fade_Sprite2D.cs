@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -33,10 +30,10 @@ namespace Fee.Fade
 		return = true : 変更あり。直後にSetPassの呼び出しが行われます。
 
 		*/
-		public override bool UpdateMaterial(ref Material a_material)
+		public override bool UpdateMaterial(ref UnityEngine.Material a_material)
 		{
 			//テクスチャ設定。
-			a_material.mainTexture = Texture2D.whiteTexture;
+			a_material.mainTexture = UnityEngine.Texture2D.whiteTexture;
 
 			//SetPass要求。
 			return true;

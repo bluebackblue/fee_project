@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -91,8 +88,8 @@ namespace Fee.Network
 
 		/** ルート。
 		*/
-		private GameObject root_gameobject;
-		private Transform root_transform;
+		private UnityEngine.GameObject root_gameobject;
+		private UnityEngine.Transform root_transform;
 
 		/** disconnect_request
 		*/
@@ -100,7 +97,7 @@ namespace Fee.Network
 
 		/** player_list
 		*/
-		private List<Player> player_list;
+		private System.Collections.Generic.List<Player> player_list;
 
 		/** my_player
 		*/
@@ -123,16 +120,16 @@ namespace Fee.Network
 			#endif
 
 			//ルート。
-			this.root_gameobject = new GameObject();
+			this.root_gameobject = new UnityEngine.GameObject();
 			this.root_gameobject.name = "Network";
-			GameObject.DontDestroyOnLoad(this.root_gameobject);
-			this.root_transform = this.root_gameobject.GetComponent<Transform>();
+			UnityEngine.GameObject.DontDestroyOnLoad(this.root_gameobject);
+			this.root_transform = this.root_gameobject.GetComponent<UnityEngine.Transform>();
 
 			//disconnect_request
 			this.disconnect_request = false;
 
 			//player_list
-			this.player_list = new List<Player>();
+			this.player_list = new System.Collections.Generic.List<Player>();
 
 			//my_player
 			this.my_player = null;
@@ -145,12 +142,12 @@ namespace Fee.Network
 		*/
 		private void Delete()
 		{
-			GameObject.Destroy(this.root_gameobject);
+			UnityEngine.GameObject.Destroy(this.root_gameobject);
 		}
 
 		/** ルート。取得。
 		*/
-		public Transform GetRoot()
+		public UnityEngine.Transform GetRoot()
 		{
 			return this.root_transform;
 		}
@@ -195,7 +192,7 @@ namespace Fee.Network
 
 		/** プレイヤープレハブリスト。取得。
 		*/
-		public List<Fee.Network.Player> GetPlayerList()
+		public System.Collections.Generic.List<Fee.Network.Player> GetPlayerList()
 		{
 			return this.player_list;
 		}

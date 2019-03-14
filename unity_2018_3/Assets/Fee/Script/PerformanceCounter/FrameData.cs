@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -30,8 +27,8 @@ namespace Fee.PerformanceCounter
 		*/
 		public FrameData()
 		{
-			this.start_time = Time.realtimeSinceStartup;
-			this.end_time = Time.realtimeSinceStartup;
+			this.start_time = UnityEngine.Time.realtimeSinceStartup;
+			this.end_time = UnityEngine.Time.realtimeSinceStartup;
 		}
 	}
 }

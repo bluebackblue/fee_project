@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -108,7 +105,7 @@ namespace Fee.Network
 
 		/** auto
 		*/
-		private GameObject connect_gameobject;
+		private UnityEngine.GameObject connect_gameobject;
 		private MonoBehaviour_Connect_Auto connect_script;
 
 		/** constructor

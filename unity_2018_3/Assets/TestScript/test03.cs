@@ -61,7 +61,7 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 
 	/** mycamera
 	*/
-	private GameObject mycamera_gameobject;
+	private UnityEngine.GameObject mycamera_gameobject;
 	private Camera mycamera_camera;
 
 	/** LayerIndex

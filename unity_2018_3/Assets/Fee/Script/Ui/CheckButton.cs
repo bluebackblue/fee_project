@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -140,7 +137,7 @@ namespace Fee.Ui
 
 		/** テクスチャ。設定。
 		*/
-		public void SetTexture(Texture2D a_texture)
+		public void SetTexture(UnityEngine.Texture2D a_texture)
 		{
 			this.sprite_bg.SetTexture(a_texture);
 			this.sprite_check.SetTexture(a_texture);

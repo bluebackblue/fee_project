@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -67,12 +64,12 @@ namespace Fee.JsonItem
 
 		/** Convert
 		*/
-		public static void Convert(ref System.Object a_to_object,System.Type a_type,JsonItem a_jsonitem,List<JsonToObject_Work> a_workpool = null)
+		public static void Convert(ref System.Object a_to_object,System.Type a_type,JsonItem a_jsonitem,System.Collections.Generic.List<JsonToObject_Work> a_workpool = null)
 		{
-			List<JsonToObject_Work> t_workpool = a_workpool;
+			System.Collections.Generic.List<JsonToObject_Work> t_workpool = a_workpool;
 
 			if(t_workpool == null){
-				t_workpool = new List<JsonToObject_Work>();
+				t_workpool = new System.Collections.Generic.List<JsonToObject_Work>();
 			}
 
 			{
@@ -112,10 +109,10 @@ namespace Fee.JsonItem
 					} 
 				}else if(a_jsonitem.IsIndexArray() == true){
 					if(t_type.IsGenericType == true){
-						if(t_type.GetGenericTypeDefinition() == typeof(List<>)){
+						if(t_type.GetGenericTypeDefinition() == typeof(System.Collections.Generic.List<>)){
 							//List
 
-							IList t_list = a_to_object as IList;
+							System.Collections.IList t_list = a_to_object as System.Collections.IList;
 							System.Type t_type_member = t_type.GetGenericArguments()[0];
 
 							for(int ii=0;ii<a_jsonitem.GetListMax();ii++){
@@ -159,13 +156,13 @@ namespace Fee.JsonItem
 					bool t_search_member = true;
 
 					if(t_type.IsGenericType == true){
-						if(t_type.GetGenericTypeDefinition() == typeof(Dictionary<,>)){
+						if(t_type.GetGenericTypeDefinition() == typeof(System.Collections.Generic.Dictionary<,>)){
 							//Dictionary
 
-							IDictionary t_list = a_to_object as IDictionary;
+							System.Collections.IDictionary t_list = a_to_object as System.Collections.IDictionary;
 							System.Type t_type_member = t_type.GetGenericArguments()[1];
 
-							List<string> t_key_list = a_jsonitem.CreateAssociativeKeyList();
+							System.Collections.Generic.List<string> t_key_list = a_jsonitem.CreateAssociativeKeyList();
 							for(int ii=0;ii<t_key_list.Count;ii++){
 								JsonItem t_jsonitem_member = a_jsonitem.GetItem(t_key_list[ii]);
 

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -108,12 +105,12 @@ namespace Fee.Ui
 		戻り値 = true : 変更あり。直後にSetPassの呼び出しが行われます。
 
 		*/
-		public override bool UpdateMaterial(ref Material a_material)
+		public override bool UpdateMaterial(ref UnityEngine.Material a_material)
 		{
 			bool t_setpass = false;
 
 			//テクスチャ設定。
-			Texture2D t_texture = this.GetTexture();
+			UnityEngine.Texture2D t_texture = this.GetTexture();
 			if(a_material.mainTexture != t_texture){
 				a_material.mainTexture = this.GetTexture();
 				t_setpass = true;

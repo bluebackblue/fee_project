@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -37,7 +34,7 @@ namespace Fee.Ui
 		{
 			//背景。
 			this.bg = new Fee.Render2D.Sprite2D(a_deleter,null,a_drawpriority);
-			this.bg.SetTexture(Texture2D.whiteTexture);
+			this.bg.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.bg.SetRect(0,0,0,0);
 			this.bg.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.bg.SetColor(0.0f,0.0f,0.0f,0.1f);
@@ -45,7 +42,7 @@ namespace Fee.Ui
 
 			//バー。
 			this.bar = new Fee.Render2D.Sprite2D(a_deleter,null,a_drawpriority + 1);
-			this.bar.SetTexture(Texture2D.whiteTexture);
+			this.bar.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.bar.SetRect(0,0,5,5);
 			this.bar.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.bar.SetColor(1.0f,1.0f,1.0f,0.3f);

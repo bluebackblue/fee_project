@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -46,7 +43,7 @@ namespace Fee.Crypt
 
 		/** CoroutineMain
 		*/
-		public IEnumerator CoroutineMain(OnCoroutine_CallBack a_instance,byte[] a_binary,string a_pass,string a_salt)
+		public System.Collections.IEnumerator CoroutineMain(OnCoroutine_CallBack a_instance,byte[] a_binary,string a_pass,string a_salt)
 		{
 			//result
 			this.result = new ResultType();

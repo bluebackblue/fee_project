@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -124,7 +121,7 @@ namespace Fee.File
 
 		/** request_post_data
 		*/
-		private WWWForm request_post_data;
+		private UnityEngine.WWWForm request_post_data;
 
 		/** request_assetbundle_id
 		*/
@@ -144,7 +141,7 @@ namespace Fee.File
 
 		/** request_texture
 		*/
-		private Texture2D request_texture;
+		private UnityEngine.Texture2D request_texture;
 
 		/** item
 		*/
@@ -235,7 +232,7 @@ namespace Fee.File
 
 		/** リクエスト。セーブローカル。テクスチャーファイル。
 		*/
-		public void RequestSaveLocalTextureFile(string a_filename,Texture2D a_texture)
+		public void RequestSaveLocalTextureFile(string a_filename,UnityEngine.Texture2D a_texture)
 		{
 			this.request_type = RequestType.SaveLocalTextureFile;
 			this.request_filename = a_filename;
@@ -244,7 +241,7 @@ namespace Fee.File
 
 		/** リクエスト。ダウンロード。バイナリファイル。
 		*/
-		public void RequestDownLoadBinaryFile(string a_url,WWWForm a_post_data,ProgressMode a_progress_mode)
+		public void RequestDownLoadBinaryFile(string a_url,UnityEngine.WWWForm a_post_data,ProgressMode a_progress_mode)
 		{
 			this.request_type = RequestType.DownLoadBinaryFile;
 			this.request_url = a_url;
@@ -254,7 +251,7 @@ namespace Fee.File
 
 		/** リクエスト。ダウンロード。テキストファイル。
 		*/
-		public void RequestDownLoadTextFile(string a_url,WWWForm a_post_data,ProgressMode a_progress_mode)
+		public void RequestDownLoadTextFile(string a_url,UnityEngine.WWWForm a_post_data,ProgressMode a_progress_mode)
 		{
 			this.request_type = RequestType.DownLoadTextFile;
 			this.request_url = a_url;

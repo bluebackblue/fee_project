@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 /**
  * Copyright (c) blueback
  * Released under the MIT License
@@ -81,11 +80,11 @@ public class test02 : main_base
 
 		/** data_dictionary
 		*/
-		public Dictionary<string,Item> data_dictionary;
+		public System.Collections.Generic.Dictionary<string,Item> data_dictionary;
 
 		/** data_list
 		*/
-		public List<Item> data_list;
+		public System.Collections.Generic.List<Item> data_list;
 	}
 
 	/** 削除管理。
@@ -244,10 +243,10 @@ public class test02 : main_base
 		this.savedata.maindata.sub.subsub = new SaveData.SubSubData();
 		this.savedata.maindata.sub.subsub.a = Random.Range(0,9999);
 
-		this.savedata.data_dictionary = new Dictionary<string,SaveData.Item>();
+		this.savedata.data_dictionary = new System.Collections.Generic.Dictionary<string,SaveData.Item>();
 		this.savedata.data_dictionary.Add("a",new SaveData.Item(Random.Range(0,9999)));
 
-		this.savedata.data_list = new List<SaveData.Item>();
+		this.savedata.data_list = new System.Collections.Generic.List<SaveData.Item>();
 		this.savedata.data_list.Add(new SaveData.Item(Random.Range(0,9999)));
 
 		this.SetStatus("Random",this.savedata);

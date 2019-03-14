@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -22,11 +19,11 @@ namespace Fee.Render2D
 	{
 		/** テクスチャ。
 		*/
-		private Texture2D texture;
+		private UnityEngine.Texture2D texture;
 
 		/** 色。
 		*/
-		private Color color;
+		private UnityEngine.Color color;
 
 		/** マテリアルタイプ。
 		*/
@@ -40,7 +37,7 @@ namespace Fee.Render2D
 			this.texture = null;
 
 			//色。
-			this.color = Color.white;
+			this.color = UnityEngine.Color.white;
 
 			//マテリアルタイプ。
 			this.materialtype = Config.DEFALUT_SPRITE_MATERIALTYPE;
@@ -48,21 +45,21 @@ namespace Fee.Render2D
 
 		/** テクスチャ。設定。
 		*/
-		public void SetTexture(Texture2D a_texture)
+		public void SetTexture(UnityEngine.Texture2D a_texture)
 		{
 			this.texture = a_texture;
 		}
 
 		/** テクスチャ。取得。
 		*/
-		public Texture2D GetTexture()
+		public UnityEngine.Texture2D GetTexture()
 		{
 			return this.texture;
 		}
 
 		/** 色。設定。
 		*/
-		public void SetColor(ref Color a_color)
+		public void SetColor(ref UnityEngine.Color a_color)
 		{
 			this.color = a_color;
 		}
@@ -79,7 +76,7 @@ namespace Fee.Render2D
 
 		/** 色。取得。
 		*/
-		public Color GetColor()
+		public UnityEngine.Color GetColor()
 		{
 			return this.color;
 		}

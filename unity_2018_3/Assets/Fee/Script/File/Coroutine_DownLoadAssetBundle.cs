@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -24,7 +21,7 @@ namespace Fee.File
 		*/
 		public class ResultType
 		{
-			public AssetBundle assetbundle;
+			public UnityEngine.AssetBundle assetbundle;
 			public string errorstring;
 
 			/** constructor
@@ -42,14 +39,14 @@ namespace Fee.File
 
 		/** CoroutineMain
 		*/
-		public IEnumerator CoroutineMain(OnCoroutine_CallBack a_instance,string a_url,long a_assetbundle_id,uint a_data_version,uint a_data_crc)
+		public System.Collections.IEnumerator CoroutineMain(OnCoroutine_CallBack a_instance,string a_url,long a_assetbundle_id,uint a_data_version,uint a_data_crc)
 		{
 			//result
 			this.result = new ResultType();
 
 			//キャッシュからの読み込み。
 			if(Fee.File.File.GetInstance() != null){
-				AssetBundle t_assetbundle = Fee.File.File.GetInstance().GetAssetBundleList().GetAssetBundle(a_assetbundle_id);
+				UnityEngine.AssetBundle t_assetbundle = Fee.File.File.GetInstance().GetAssetBundleList().GetAssetBundle(a_assetbundle_id);
 				if(t_assetbundle != null){
 					//成功。
 					this.result.assetbundle = t_assetbundle;
@@ -96,7 +93,7 @@ namespace Fee.File
 				}
 
 				//コンバート。
-				AssetBundle t_result = null;
+				UnityEngine.AssetBundle t_result = null;
 				try{
 					t_result = UnityEngine.Networking.DownloadHandlerAssetBundle.GetContent(t_webrequest);
 				}catch(System.Exception t_exception){

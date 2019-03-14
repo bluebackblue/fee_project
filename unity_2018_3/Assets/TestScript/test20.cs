@@ -82,7 +82,7 @@ public class test20 : main_base
 	private Fee.UniVrm.Item vrm1;
 	private Fee.UniVrm.Item vrm2;
 	private Fee.File.Item vrm_loaditem;
-	private GameObject vrm_camera;
+	private UnityEngine.GameObject vrm_camera;
 	private VrmStatus vrm_status;
 
 	/** Start

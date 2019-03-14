@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -21,7 +18,7 @@ namespace Fee.Ui
 	public class Ui_WindowList
 	{
 		//リスト。
-		private List<Window_Base> list;
+		private System.Collections.Generic.List<Window_Base> list;
 
 		//レイヤーインデックス。変更フラグ。
 		private bool change_layerindex;
@@ -34,7 +31,7 @@ namespace Fee.Ui
 		public Ui_WindowList()
 		{
 			//リスト。
-			this.list = new List<Window_Base>();
+			this.list = new System.Collections.Generic.List<Window_Base>();
 
 			//レイヤーインデックス。変更フラグ。
 			this.change_layerindex = false;

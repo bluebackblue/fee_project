@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -106,7 +103,7 @@ namespace Fee.Input
 		*/
 		public void SetVisible(bool a_flag)
 		{
-			Cursor.visible = a_flag;
+			UnityEngine.Cursor.visible = a_flag;
 		}
 
 		/** マウスロック。設定。
@@ -114,9 +111,9 @@ namespace Fee.Input
 		public void SetLock(bool a_flag)
 		{
 			if(a_flag == true){
-				Cursor.lockState = CursorLockMode.Locked;
+				UnityEngine.Cursor.lockState = UnityEngine.CursorLockMode.Locked;
 			}else{
-				Cursor.lockState = CursorLockMode.None;
+				UnityEngine.Cursor.lockState = UnityEngine.CursorLockMode.None;
 			}
 		}
 
@@ -207,7 +204,7 @@ namespace Fee.Input
 		{
 			//デバイス。
 			int t_mouse_x = (int)UnityEngine.Input.mousePosition.x;
-			int t_mouse_y = Screen.height - (int)UnityEngine.Input.mousePosition.y;
+			int t_mouse_y = UnityEngine.Screen.height - (int)UnityEngine.Input.mousePosition.y;
 
 			#if(UNITY_EDITOR)
 			{
@@ -487,28 +484,28 @@ namespace Fee.Input
 		{
 			if((this.left.up == true)&&(this.left.drag_dir_magnitude >= Config.DRAGUP_LENGTH_MIN)&&(this.left.drag_totallength <= (this.left.drag_dir_magnitude * Config.DRAGUP_LENGTH_SCALE))){
 				{
-					float t_dot = Vector2.Dot(this.left.drag_dir_normalized,Vector2.down);
+					float t_dot = UnityEngine.Vector2.Dot(this.left.drag_dir_normalized,UnityEngine.Vector2.down);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Up;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.left.drag_dir_normalized,Vector2.up);
+					float t_dot = UnityEngine.Vector2.Dot(this.left.drag_dir_normalized,UnityEngine.Vector2.up);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Down;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.left.drag_dir_normalized,Vector2.left);
+					float t_dot = UnityEngine.Vector2.Dot(this.left.drag_dir_normalized,UnityEngine.Vector2.left);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Left;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.left.drag_dir_normalized,Vector2.right);
+					float t_dot = UnityEngine.Vector2.Dot(this.left.drag_dir_normalized,UnityEngine.Vector2.right);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Right;
 					}
@@ -524,28 +521,28 @@ namespace Fee.Input
 		{
 			if((this.left.on == true)&&(this.left.drag_dir_magnitude >= Config.DRAGON_LENGTH_MIN)){
 				{
-					float t_dot = Vector2.Dot(this.left.drag_dir_normalized,Vector2.down);
+					float t_dot = UnityEngine.Vector2.Dot(this.left.drag_dir_normalized,UnityEngine.Vector2.down);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Up;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.left.drag_dir_normalized,Vector2.up);
+					float t_dot = UnityEngine.Vector2.Dot(this.left.drag_dir_normalized,UnityEngine.Vector2.up);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Down;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.left.drag_dir_normalized,Vector2.left);
+					float t_dot = UnityEngine.Vector2.Dot(this.left.drag_dir_normalized,UnityEngine.Vector2.left);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Left;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.left.drag_dir_normalized,Vector2.right);
+					float t_dot = UnityEngine.Vector2.Dot(this.left.drag_dir_normalized,UnityEngine.Vector2.right);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Right;
 					}
@@ -561,28 +558,28 @@ namespace Fee.Input
 		{
 			if((this.right.up == true)&&(this.right.drag_dir_magnitude >= Config.DRAGUP_LENGTH_MIN)&&(this.right.drag_totallength <= (this.right.drag_dir_magnitude * Config.DRAGUP_LENGTH_SCALE))){
 				{
-					float t_dot = Vector2.Dot(this.right.drag_dir_normalized,Vector2.down);
+					float t_dot = UnityEngine.Vector2.Dot(this.right.drag_dir_normalized,UnityEngine.Vector2.down);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Up;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.right.drag_dir_normalized,Vector2.up);
+					float t_dot = UnityEngine.Vector2.Dot(this.right.drag_dir_normalized,UnityEngine.Vector2.up);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Down;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.right.drag_dir_normalized,Vector2.left);
+					float t_dot = UnityEngine.Vector2.Dot(this.right.drag_dir_normalized,UnityEngine.Vector2.left);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Left;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.right.drag_dir_normalized,Vector2.right);
+					float t_dot = UnityEngine.Vector2.Dot(this.right.drag_dir_normalized,UnityEngine.Vector2.right);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Right;
 					}
@@ -598,28 +595,28 @@ namespace Fee.Input
 		{
 			if((this.right.on == true)&&(this.right.drag_dir_magnitude >= Config.DRAGON_LENGTH_MIN)){
 				{
-					float t_dot = Vector2.Dot(this.right.drag_dir_normalized,Vector2.down);
+					float t_dot = UnityEngine.Vector2.Dot(this.right.drag_dir_normalized,UnityEngine.Vector2.down);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Up;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.right.drag_dir_normalized,Vector2.up);
+					float t_dot = UnityEngine.Vector2.Dot(this.right.drag_dir_normalized,UnityEngine.Vector2.up);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Down;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.right.drag_dir_normalized,Vector2.left);
+					float t_dot = UnityEngine.Vector2.Dot(this.right.drag_dir_normalized,UnityEngine.Vector2.left);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Left;
 					}
 				}
 
 				{
-					float t_dot = Vector2.Dot(this.right.drag_dir_normalized,Vector2.right);
+					float t_dot = UnityEngine.Vector2.Dot(this.right.drag_dir_normalized,UnityEngine.Vector2.right);
 					if(t_dot >= Config.DRAG_DIR4_DOT){
 						return Dir4Type.Right;
 					}

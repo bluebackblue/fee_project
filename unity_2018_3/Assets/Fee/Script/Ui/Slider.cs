@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -41,17 +38,17 @@ namespace Fee.Ui
 			//bg_sprite
 			this.bg_sprite = new Fee.Ui.Slider_Bg_Sprite2D(this.deleter,null,a_drawpriority + 0);
 			this.bg_sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
-			this.bg_sprite.SetTexture(Texture2D.whiteTexture);
+			this.bg_sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 
 			//sprite_value
 			this.sprite_value = new Fee.Ui.Slider_Value_Sprite2D(this.deleter,null,a_drawpriority + 1);
 			this.sprite_value.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
-			this.sprite_value.SetTexture(Texture2D.whiteTexture);
+			this.sprite_value.SetTexture(UnityEngine.Texture2D.whiteTexture);
 
 			//button_sprite
 			this.button_sprite = new Slider_Button_Sprite2D(this.deleter,null,a_drawpriority + 2);
 			this.button_sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
-			this.button_sprite.SetTexture(Texture2D.whiteTexture);
+			this.button_sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 		}
 
 		/** [Slider_Base]コールバック。ロックフラグ変更。
@@ -119,7 +116,7 @@ namespace Fee.Ui
 
 		/** テクスチャ。設定。
 		*/
-		public void SetTexture(Texture2D a_texture)
+		public void SetTexture(UnityEngine.Texture2D a_texture)
 		{
 			this.bg_sprite.SetTexture(a_texture);
 			this.sprite_value.SetTexture(a_texture);
@@ -135,7 +132,7 @@ namespace Fee.Ui
 
 		/** ボタンテクスチャ。設定。
 		*/
-		public void SetButtonTexture(Texture2D a_texture)
+		public void SetButtonTexture(UnityEngine.Texture2D a_texture)
 		{
 			this.button_sprite.SetTexture(a_texture);
 		}

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -21,12 +18,12 @@ namespace Fee.Network
 	#if(USE_DEF_PUN)
 	public class Player : Photon.Pun.MonoBehaviourPun
 	#else
-	public class Player : MonoBehaviour
+	public class Player : UnityEngine.MonoBehaviour
 	#endif
 	{
 		/** トランスフォーム。
 		*/
-		private Transform mytransform;
+		private UnityEngine.Transform mytransform;
 
 		/** is_mine
 		*/
@@ -55,11 +52,11 @@ namespace Fee.Network
 			Tool.Log("Player", "Start");
 
 			//トランスフォーム。
-			this.mytransform = this.GetComponent<Transform>();
+			this.mytransform = this.GetComponent<UnityEngine.Transform>();
 
 			//親。設定。
-			Transform t_root = Fee.Network.Network.GetInstance().GetRoot();
-			this.GetComponent<Transform>().SetParent(t_root);
+			UnityEngine.Transform t_root = Fee.Network.Network.GetInstance().GetRoot();
+			this.GetComponent<UnityEngine.Transform>().SetParent(t_root);
 
 			//photon_view
 			#if(USE_DEF_PUN)
@@ -106,21 +103,21 @@ namespace Fee.Network
 
 		/** 位置。取得。
 		*/
-		public Vector3 GetPosition()
+		public UnityEngine.Vector3 GetPosition()
 		{
 			return this.mytransform.position;
 		}
 
 		/** 回転。取得。
 		*/
-		public Quaternion GetQuaternion()
+		public UnityEngine.Quaternion GetQuaternion()
 		{
 			return this.mytransform.rotation;
 		}
 
 		/** スケール。取得。
 		*/
-		public Vector3 GetScale()
+		public UnityEngine.Vector3 GetScale()
 		{
 			return this.mytransform.transform.localScale;
 		}
@@ -129,12 +126,12 @@ namespace Fee.Network
 		*/
 		public void SetPosition(float a_x,float a_y,float a_z)
 		{
-			this.mytransform.transform.position = new Vector3(a_x,a_y,a_z);
+			this.mytransform.transform.position = new UnityEngine.Vector3(a_x,a_y,a_z);
 		}
 
 		/** 回転。設定。
 		*/
-		public void SetQuaternion(ref Quaternion a_quaternion)
+		public void SetQuaternion(ref UnityEngine.Quaternion a_quaternion)
 		{
 			this.mytransform.transform.rotation = a_quaternion;
 		}
@@ -143,7 +140,7 @@ namespace Fee.Network
 		*/
 		public void SetScale(float a_x,float a_y,float a_z)
 		{
-			this.mytransform.transform.localScale = new Vector3(a_x,a_y,a_z);
+			this.mytransform.transform.localScale = new UnityEngine.Vector3(a_x,a_y,a_z);
 		}
 
 		/** 自分。チェック。

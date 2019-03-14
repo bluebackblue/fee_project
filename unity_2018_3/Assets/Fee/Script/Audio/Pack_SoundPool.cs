@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -30,21 +27,21 @@ namespace Fee.Audio
 
 		/** name_list
 		*/
-		public List<string> name_list;
+		public System.Collections.Generic.List<string> name_list;
 
 		/** volume_list
 		*/
-		public List<float> volume_list;
+		public System.Collections.Generic.List<float> volume_list;
 
 		/** constructor
 		*/
 		public Pack_SoundPool()
 		{
 			//name_list
-			this.name_list = new List<string>();
+			this.name_list = new System.Collections.Generic.List<string>();
 
 			//volume_list
-			this.volume_list = new List<float>();
+			this.volume_list = new System.Collections.Generic.List<float>();
 		}
 
 		/** サウンドプールチェック。

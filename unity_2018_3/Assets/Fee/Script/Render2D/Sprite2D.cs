@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -126,7 +123,7 @@ namespace Fee.Render2D
 		戻り値 = true : 変更あり。直後にSetPassの呼び出しが行われます。
 
 		*/
-		public virtual bool UpdateMaterial(ref Material a_material)
+		public virtual bool UpdateMaterial(ref UnityEngine.Material a_material)
 		{
 			if(a_material.mainTexture != this.GetTexture()){
 
@@ -407,14 +404,14 @@ namespace Fee.Render2D
 
 		/** クォータニオン。設定。
 		*/
-		public void SetQuaternion(ref Quaternion a_quaternion)
+		public void SetQuaternion(ref UnityEngine.Quaternion a_quaternion)
 		{
 			this.rotate.SetQuaternion(ref a_quaternion);
 		}
 
 		/** クォータニオン。取得。
 		*/
-		public Quaternion GetQuaternion()
+		public UnityEngine.Quaternion GetQuaternion()
 		{
 			return this.rotate.GetQuaternion();
 		}
@@ -485,21 +482,21 @@ namespace Fee.Render2D
 
 		/** テクスチャ。設定。
 		*/
-		public void SetTexture(Texture2D a_texture)
+		public void SetTexture(UnityEngine.Texture2D a_texture)
 		{
 			this.param.SetTexture(a_texture);
 		}
 
 		/** テクスチャ。取得。
 		*/
-		public Texture2D GetTexture()
+		public UnityEngine.Texture2D GetTexture()
 		{
 			return this.param.GetTexture();
 		}
 
 		/** 色。設定。
 		*/
-		public void SetColor(ref Color a_color)
+		public void SetColor(ref UnityEngine.Color a_color)
 		{
 			this.param.SetColor(ref a_color);
 		}
@@ -513,7 +510,7 @@ namespace Fee.Render2D
 
 		/** 色。取得。
 		*/
-		public Color GetColor()
+		public UnityEngine.Color GetColor()
 		{
 			return this.param.GetColor();
 		}

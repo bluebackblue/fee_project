@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -68,11 +65,11 @@ namespace Fee.Bloom
 
 		/** ルート。
 		*/
-		private GameObject root_gameobject;
+		private UnityEngine.GameObject root_gameobject;
 
 		/** monobehaviour_camera
 		*/
-		private GameObject camera_gameobject;
+		private UnityEngine.GameObject camera_gameobject;
 		private MonoBehaviour_Camera camera_monobehaviour;
 
 		/** [シングルトン]constructor
@@ -80,10 +77,10 @@ namespace Fee.Bloom
 		private Bloom()
 		{
 			//ルート。
-			this.root_gameobject = new GameObject();
+			this.root_gameobject = new UnityEngine.GameObject();
 			this.root_gameobject.name = "Bloom";
-			Transform t_root_transform = this.root_gameobject.GetComponent<Transform>();
-			GameObject.DontDestroyOnLoad(this.root_gameobject);
+			UnityEngine.Transform t_root_transform = this.root_gameobject.GetComponent<UnityEngine.Transform>();
+			UnityEngine.GameObject.DontDestroyOnLoad(this.root_gameobject);
 
 			{
 				//カメラ。
@@ -103,7 +100,7 @@ namespace Fee.Bloom
 		private void Delete()
 		{
 			this.camera_monobehaviour.Delete();
-			GameObject.Destroy(this.root_gameobject);
+			UnityEngine.GameObject.Destroy(this.root_gameobject);
 		}
 
 		/** カメラデプス。設定。

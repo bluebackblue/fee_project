@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -22,7 +19,7 @@ namespace Fee.Dijkstra
 	{
 		/** リンク。
 		*/
-		public List<LinkBase> link;
+		public System.Collections.Generic.List<LinkBase> link;
 
 		/** 到達コスト。
 		*/
@@ -40,7 +37,7 @@ namespace Fee.Dijkstra
 		*/
 		public NodeBase()
 		{
-			this.link = new List<LinkBase>();
+			this.link = new System.Collections.Generic.List<LinkBase>();
 			this.total_cost = -1;
 			this.fix = false;
 			this.prev_node = null;

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -95,7 +92,7 @@ namespace Fee.File
 
 		/** CoroutineMain
 		*/
-		public IEnumerator CoroutineMain(OnCoroutine_CallBack a_instance,string a_url,uint a_data_version)
+		public System.Collections.IEnumerator CoroutineMain(OnCoroutine_CallBack a_instance,string a_url,uint a_data_version)
 		{
 			//result
 			this.result = new ResultType();
@@ -122,7 +119,7 @@ namespace Fee.File
 			Fee.Audio.Pack_SoundPool t_local_soundpool = null;
 			{
 				Coroutine_LoadLocalSoundPool t_coroutine = new Coroutine_LoadLocalSoundPool();
-				yield return t_coroutine.CoroutineMain(this,Application.persistentDataPath + "/" + t_filename);
+				yield return t_coroutine.CoroutineMain(this,UnityEngine.Application.persistentDataPath + "/" + t_filename);
 
 				if(t_coroutine.result.soundpool != null){
 					t_local_soundpool = t_coroutine.result.soundpool;
@@ -209,7 +206,7 @@ namespace Fee.File
 					//セーブ。
 					{
 						Coroutine_SaveLocalBinaryFile t_coroutine = new Coroutine_SaveLocalBinaryFile();
-						yield return t_coroutine.CoroutineMain(this,Application.persistentDataPath + "/" + t_download_soundpool.name_list[ii],t_binary);
+						yield return t_coroutine.CoroutineMain(this,UnityEngine.Application.persistentDataPath + "/" + t_download_soundpool.name_list[ii],t_binary);
 
 						if(t_coroutine.result.saveend == true){
 							//続行。
@@ -228,7 +225,7 @@ namespace Fee.File
 			//セーブローカルサウンドプール。
 			{
 				Coroutine_SaveLocalSoundPool t_coroutine = new Coroutine_SaveLocalSoundPool();
-				yield return t_coroutine.CoroutineMain(this,Application.persistentDataPath + "/" + t_filename,t_download_soundpool);
+				yield return t_coroutine.CoroutineMain(this,UnityEngine.Application.persistentDataPath + "/" + t_filename,t_download_soundpool);
 
 				if(t_coroutine.result.saveend == true){
 					//続行。

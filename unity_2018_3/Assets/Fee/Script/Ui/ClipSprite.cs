@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -214,14 +211,14 @@ namespace Fee.Ui
 
 		/** クォータニオン。設定。
 		*/
-		public void SetQuaternion(ref Quaternion a_quaternion)
+		public void SetQuaternion(ref UnityEngine.Quaternion a_quaternion)
 		{
 			this.sprite.SetQuaternion(ref a_quaternion);
 		}
 
 		/** クォータニオン。取得。
 		*/
-		public Quaternion GetQuaternion()
+		public UnityEngine.Quaternion GetQuaternion()
 		{
 			return this.sprite.GetQuaternion();
 		}
@@ -256,14 +253,14 @@ namespace Fee.Ui
 
 		/** テクスチャ。設定。
 		*/
-		public void SetTexture(Texture2D a_texture)
+		public void SetTexture(UnityEngine.Texture2D a_texture)
 		{
 			this.sprite.SetTexture(a_texture);
 		}
 
 		/** テクスチャ。取得。
 		*/
-		public Texture2D GetTexture()
+		public UnityEngine.Texture2D GetTexture()
 		{
 			return this.sprite.GetTexture();
 		}
@@ -277,14 +274,14 @@ namespace Fee.Ui
 
 		/** 色。設定。
 		*/
-		public void SetColor(ref Color a_color)
+		public void SetColor(ref UnityEngine.Color a_color)
 		{
 			this.sprite.SetColor(ref a_color);
 		}
 
 		/** 色。取得。
 		*/
-		public Color GetColor()
+		public UnityEngine.Color GetColor()
 		{
 			return this.sprite.GetColor();
 		}

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -66,7 +63,7 @@ namespace Fee.JsonItem
 
 		/** 実行。
 		*/
-		public void Do(List<ObjectToJson_Work> a_work_pool)
+		public void Do(System.Collections.Generic.List<ObjectToJson_Work> a_work_pool)
 		{
 			JsonItem t_jsonitem_member = ObjectToJson.Convert(this.from_object,a_work_pool);
 

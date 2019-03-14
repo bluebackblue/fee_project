@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -81,7 +78,7 @@ namespace Fee.Fade
 		/** flag
 		*/
 		private MonoBehaviour_Flag flag;
-		private GameObject flag_gameobject;
+		private UnityEngine.GameObject flag_gameobject;
 
 		/** sprite
 		*/
@@ -102,12 +99,12 @@ namespace Fee.Fade
 
 			//flag
 			{
-				this.flag_gameobject = new GameObject();
+				this.flag_gameobject = new UnityEngine.GameObject();
 				this.flag_gameobject.name = "Fade";
 				this.flag = this.flag_gameobject.AddComponent<MonoBehaviour_Flag>();
 				this.flag .Initialize();
 
-				GameObject.DontDestroyOnLoad(this.flag_gameobject);
+				UnityEngine.GameObject.DontDestroyOnLoad(this.flag_gameobject);
 			}
 			
 			//sprite
@@ -124,7 +121,7 @@ namespace Fee.Fade
 		{
 			this.deleter.DeleteAll();
 
-			GameObject.Destroy(this.flag_gameobject);
+			UnityEngine.GameObject.Destroy(this.flag_gameobject);
 		}
 
 		/** 描画前処理。
@@ -243,7 +240,7 @@ namespace Fee.Fade
 
 		/** 色。設定。
 		*/
-		public void SetColor(ref Color a_color)
+		public void SetColor(ref UnityEngine.Color a_color)
 		{
 			this.flag.anime_color = a_color;
 		}
