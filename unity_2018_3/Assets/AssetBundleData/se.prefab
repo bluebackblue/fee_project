@@ -43,5 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a635aedd4eff57419b5a85c412530bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioclip_list: []
-  volume_list: []
+  audioclip_list:
+  - {fileID: 8300000, guid: 8cfc0fe5bb0011f4fb1d042e869f9893, type: 3}
+  - {fileID: 8300000, guid: 250e2f427b0e4774bba995bec88e92ee, type: 3}
+  - {fileID: 8300000, guid: 592952af0aa131249aef3684664e1009, type: 3}
+  - {fileID: 8300000, guid: 48994817706b69e4cac4e59481959f13, type: 3}
+  volume_list:
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
