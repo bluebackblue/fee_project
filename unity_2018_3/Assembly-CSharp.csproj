@@ -293,8 +293,10 @@
     <Compile Include="Assets\TestScript\test19.cs" />
     <Compile Include="Assets\TestScript\test20.cs" />
     <Compile Include="Assets\TestScript\test21.cs" />
+    <None Include="Assets\Fee\license\pun2free\readme.txt" />
     <None Include="Assets\Fee\Script\license\pun2free\readme.txt" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\AlphaClip.shader" />
+    <None Include="Assets\Fee\license\univrm\LICENSE.txt" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\UiText.shader" />
     <None Include="Assets\Fee\Resources\Shader\PerformanceCounter\Sprite.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Slice9.shader" />
