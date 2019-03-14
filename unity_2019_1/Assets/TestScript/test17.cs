@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,11 +21,11 @@ public class test17 : main_base
 {
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** ScrollItem
 	*/
-	public class ScrollItem : NUi.ScrollItem_Base , NDeleter.DeleteItem_Base
+	public class ScrollItem : Fee.Ui.ScrollItem_Base , Fee.Deleter.DeleteItem_Base
 	{
 		/** CallBack
 		*/
@@ -33,7 +33,7 @@ public class test17 : main_base
 
 		/** deleter
 		*/
-		private NDeleter.Deleter deleter;
+		private Fee.Deleter.Deleter deleter;
 
 		/** create_id
 		*/
@@ -45,15 +45,15 @@ public class test17 : main_base
 
 		/** sprite
 		*/
-		private NUi.ClipSprite sprite;
+		private Fee.Ui.ClipSprite sprite;
 
 		/** text
 		*/
-		private NRender2D.Text2D text;
+		private Fee.Render2D.Text2D text;
 
 		/** button
 		*/
-		private NUi.Button button;
+		private Fee.Ui.Button button;
 
 		/** 矩形。取得。
 		*/
@@ -71,10 +71,10 @@ public class test17 : main_base
 
 		/** constructor
 		*/
-		public ScrollItem(NDeleter.Deleter a_deleter,int a_create_id,CallBack_ScrollItem a_callback)
+		public ScrollItem(Fee.Deleter.Deleter a_deleter,int a_create_id,CallBack_ScrollItem a_callback)
 		{
 			//deleter
-			this.deleter = new NDeleter.Deleter();
+			this.deleter = new Fee.Deleter.Deleter();
 
 			//create_id
 			this.create_id = a_create_id;
@@ -86,17 +86,17 @@ public class test17 : main_base
 			long t_drawpriority = 1;
 
 			//sprite
-			this.sprite = new NUi.ClipSprite(this.deleter,null,t_drawpriority);
+			this.sprite = new Fee.Ui.ClipSprite(this.deleter,null,t_drawpriority);
 			this.sprite.SetRect(0,0,ScrollItem.GetW(),ScrollItem.GetH());
 			this.sprite.SetTexture(Texture2D.whiteTexture);
-			this.sprite.SetTextureRect(ref NRender2D.Render2D.TEXTURE_RECT_MAX);
+			this.sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.sprite.SetClipRect(0,0,0,0);
 			this.sprite.SetColor(Random.value,Random.value,Random.value,1.0f);
 			this.sprite.SetClip(true);
 			this.sprite.SetVisible(false);
 
 			//text
-			this.text = new NRender2D.Text2D(this.deleter,null,t_drawpriority);
+			this.text = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
 			this.text.SetRect(0,0,0,0);
 			this.text.SetClipRect(0,0,0,0);
 			this.text.SetText(this.create_id.ToString());
@@ -104,7 +104,7 @@ public class test17 : main_base
 			this.text.SetVisible(false);
 
 			//button
-			this.button = new NUi.Button(this.deleter,null,t_drawpriority + 1,this.CallBack_Click,-1);
+			this.button = new Fee.Ui.Button(this.deleter,null,t_drawpriority + 1,this.CallBack_Click,-1);
 			this.button.SetRect(0,0,20,20);
 			this.button.SetClipRect(0,0,0,0);
 			this.button.SetText("o");
@@ -146,7 +146,7 @@ public class test17 : main_base
 
 		/** [ScrollItem_Base]クリップ矩形。設定。
 		*/
-		public override void SetClipRect(ref NRender2D.Rect2D_R<int> a_rect)
+		public override void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
 		{
 			this.sprite.SetClipRect(ref a_rect);
 			this.text.SetClipRect(ref a_rect);
@@ -188,8 +188,8 @@ public class test17 : main_base
 
 	/** scrollview
 	*/
-	private NUi.Scroll_Vertical<ScrollItem> v_scrollview;
-	private NUi.Scroll_Horizontal<ScrollItem> h_scrollview;
+	private Fee.Ui.Scroll_Vertical<ScrollItem> v_scrollview;
+	private Fee.Ui.Scroll_Horizontal<ScrollItem> h_scrollview;
 	private int v_scrollview_create_id;
 	private int h_scrollview_create_id;
 
@@ -204,76 +204,76 @@ public class test17 : main_base
 
 	/** status_text
 	*/
-	private NRender2D.Text2D status_text;
+	private Fee.Render2D.Text2D status_text;
 
 	/** button
 	*/
-	private NUi.Button button_push;
-	private NUi.Button button_pop;
+	private Fee.Ui.Button button_push;
+	private Fee.Ui.Button button_pop;
 
-	private NUi.Button button_insert_top;
-	private NUi.Button button_remove_top;
+	private Fee.Ui.Button button_insert_top;
+	private Fee.Ui.Button button_remove_top;
 
-	private NUi.Button button_insert_top_5;
-	private NUi.Button button_remove_top_5;
+	private Fee.Ui.Button button_insert_top_5;
+	private Fee.Ui.Button button_remove_top_5;
 
-	private NUi.Button button_insert_last_5;
-	private NUi.Button button_remove_last_5;
+	private Fee.Ui.Button button_insert_last_5;
+	private Fee.Ui.Button button_remove_last_5;
 
-	private NUi.Button button_up;
-	private NUi.Button button_down;
+	private Fee.Ui.Button button_up;
+	private Fee.Ui.Button button_down;
 
-	private NUi.Button button_sort_a;
-	private NUi.Button button_sort_b;
+	private Fee.Ui.Button button_sort_a;
+	private Fee.Ui.Button button_sort_b;
 
 	/** Start
 	*/
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//２Ｄ描画。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//キー。インスタンス作成。
-		NInput.Key.CreateInstance();
+		Fee.Input.Key.CreateInstance();
 
 		//パッド。インスタンス作成。
-		NInput.Pad.CreateInstance();
+		Fee.Input.Pad.CreateInstance();
 
 		//イベントテンプレート。インスタンス作成。
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Ui.CreateInstance();
 
 		//フォント。
 		Font t_font = Resources.Load<Font>("mplus-1p-medium");
 		if(t_font != null){
-			NRender2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//v_scrollview
-		this.v_scrollview = new NUi.Scroll_Vertical<ScrollItem>(this.deleter,0,ScrollItem.GetH());
+		this.v_scrollview = new Fee.Ui.Scroll_Vertical<ScrollItem>(this.deleter,0,ScrollItem.GetH());
 		this.v_scrollview.SetRect(200,100,200,400);
 		this.v_scrollview_create_id = 0;
 
 		//h_scrollview
-		this.h_scrollview = new NUi.Scroll_Horizontal<ScrollItem>(this.deleter,0,ScrollItem.GetW());
+		this.h_scrollview = new Fee.Ui.Scroll_Horizontal<ScrollItem>(this.deleter,0,ScrollItem.GetW());
 		this.h_scrollview.SetRect(450,100,400,200);
 		this.h_scrollview_create_id = 0;
 
@@ -286,14 +286,14 @@ public class test17 : main_base
 		this.drag_speed_y = 0.0f;
 
 		//status_text
-		this.status_text = new NRender2D.Text2D(this.deleter,null,0);
+		this.status_text = new Fee.Render2D.Text2D(this.deleter,null,0);
 		this.status_text.SetText("");
 		this.status_text.SetRect(200,10,0,0);
 
 		int t_y_index = 0;
 
 		//button_push
-		this.button_push = new NUi.Button(this.deleter,null,0,this.CallBack_Click,9000);
+		this.button_push = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,9000);
 		this.button_push.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_push.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_push.SetText("最後尾追加");
@@ -301,7 +301,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_pop
-		this.button_pop = new NUi.Button(this.deleter,null,0,this.CallBack_Click,9001);
+		this.button_pop = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,9001);
 		this.button_pop.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_pop.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_pop.SetText("最後尾削除");
@@ -309,7 +309,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_insert_top
-		this.button_insert_top = new NUi.Button(this.deleter,null,0,this.CallBack_Click,9002);
+		this.button_insert_top = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,9002);
 		this.button_insert_top.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_insert_top.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_insert_top.SetText("先頭追加");
@@ -317,7 +317,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_remove_top
-		this.button_remove_top = new NUi.Button(this.deleter,null,0,this.CallBack_Click,9003);
+		this.button_remove_top = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,9003);
 		this.button_remove_top.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_remove_top.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_remove_top.SetText("先頭削除");
@@ -325,7 +325,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_insert_top_5
-		this.button_insert_top_5 = new NUi.Button(this.deleter,null,0,this.CallBack_Click,9004);
+		this.button_insert_top_5 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,9004);
 		this.button_insert_top_5.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_insert_top_5.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_insert_top_5.SetText("挿入(５番目)");
@@ -333,7 +333,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_remove_top_5
-		this.button_remove_top_5 = new NUi.Button(this.deleter,null,0,this.CallBack_Click,9005);
+		this.button_remove_top_5 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,9005);
 		this.button_remove_top_5.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_remove_top_5.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_remove_top_5.SetText("削除(５番目)");
@@ -341,7 +341,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_insert_last_5
-		this.button_insert_last_5 = new NUi.Button(this.deleter,null,0,this.CallBack_Click,9006);
+		this.button_insert_last_5 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,9006);
 		this.button_insert_last_5.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_insert_last_5.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_insert_last_5.SetText("挿入(後５)");
@@ -349,7 +349,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_remove_last_5
-		this.button_remove_last_5 = new NUi.Button(this.deleter,null,0,this.CallBack_Click,9007);
+		this.button_remove_last_5 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,9007);
 		this.button_remove_last_5.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_remove_last_5.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_remove_last_5.SetText("削除(後５)");
@@ -357,7 +357,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_up
-		this.button_up = new NUi.Button(this.deleter,null,0,this.CallBack_Click,1000);
+		this.button_up = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,1000);
 		this.button_up.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_up.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_up.SetText("前方に移動");
@@ -365,7 +365,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_down
-		this.button_down = new NUi.Button(this.deleter,null,0,this.CallBack_Click,1001);
+		this.button_down = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,1001);
 		this.button_down.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_down.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_down.SetText("後方に移動");
@@ -373,7 +373,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_sort
-		this.button_sort_a = new NUi.Button(this.deleter,null,0,this.CallBack_Click,2000);
+		this.button_sort_a = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,2000);
 		this.button_sort_a.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_sort_a.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_sort_a.SetText("ソート");
@@ -381,7 +381,7 @@ public class test17 : main_base
 		t_y_index++;
 
 		//button_sort
-		this.button_sort_b = new NUi.Button(this.deleter,null,0,this.CallBack_Click,2001);
+		this.button_sort_b = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,2001);
 		this.button_sort_b.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_sort_b.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_sort_b.SetText("ソート");
@@ -594,28 +594,28 @@ public class test17 : main_base
 	private void FixedUpdate()
 	{
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//キー。
-		NInput.Key.GetInstance().Main();
+		Fee.Input.Key.GetInstance().Main();
 
 		//パッド。
-		NInput.Pad.GetInstance().Main();
+		Fee.Input.Pad.GetInstance().Main();
 
 		//イベントテンプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
 		//ドラッグ中。
 		if(this.drag_v == true){
-			if(NInput.Mouse.GetInstance().left.on == true){
+			if(Fee.Input.Mouse.GetInstance().left.on == true){
 				{
-					int t_distance_y = NInput.Mouse.GetInstance().left.last_down_pos.y - NInput.Mouse.GetInstance().pos.y;
+					int t_distance_y = Fee.Input.Mouse.GetInstance().left.last_down_pos.y - Fee.Input.Mouse.GetInstance().pos.y;
 					this.v_scrollview.SetViewPosition(this.drag_old_value_y + t_distance_y);
 				}
-				this.drag_speed_y = this.drag_speed_y * 0.3f + (NInput.Mouse.GetInstance().pos.y - NInput.Mouse.GetInstance().pos.y_old) * 0.7f;
+				this.drag_speed_y = this.drag_speed_y * 0.3f + (Fee.Input.Mouse.GetInstance().pos.y - Fee.Input.Mouse.GetInstance().pos.y_old) * 0.7f;
 			}else{
 				this.drag_v = false;
 			}
@@ -624,12 +624,12 @@ public class test17 : main_base
 		//ドラッグ中。
 		if(this.drag_h == true){
 			
-			if(NInput.Mouse.GetInstance().left.on == true){
+			if(Fee.Input.Mouse.GetInstance().left.on == true){
 				{
-					int t_distance_x = NInput.Mouse.GetInstance().left.last_down_pos.x - NInput.Mouse.GetInstance().pos.x;
+					int t_distance_x = Fee.Input.Mouse.GetInstance().left.last_down_pos.x - Fee.Input.Mouse.GetInstance().pos.x;
 					this.h_scrollview.SetViewPosition(this.drag_old_value_x + t_distance_x);
 				}
-				this.drag_speed_x = this.drag_speed_x * 0.3f + (NInput.Mouse.GetInstance().pos.x - NInput.Mouse.GetInstance().pos.x_old) * 0.7f;
+				this.drag_speed_x = this.drag_speed_x * 0.3f + (Fee.Input.Mouse.GetInstance().pos.x - Fee.Input.Mouse.GetInstance().pos.x_old) * 0.7f;
 			}else{
 				this.drag_h = false;
 			}
@@ -637,14 +637,14 @@ public class test17 : main_base
 
 		//ドラッグ開始チェック。
 		if((this.drag_v == false)&&(this.drag_h == false)){
-			if(NInput.Mouse.GetInstance().InRectCheck(this.v_scrollview.GetX(),this.v_scrollview.GetY(),this.v_scrollview.GetW(),this.v_scrollview.GetH())){
-				if(NInput.Mouse.GetInstance().left.down == true){
+			if(Fee.Input.Mouse.GetInstance().InRectCheck(this.v_scrollview.GetX(),this.v_scrollview.GetY(),this.v_scrollview.GetW(),this.v_scrollview.GetH())){
+				if(Fee.Input.Mouse.GetInstance().left.down == true){
 					this.drag_v = true;
 					this.drag_old_value_y = this.v_scrollview.GetViewPosition();
 					this.drag_speed_y = 0.0f;
 				}
-			}else if(NInput.Mouse.GetInstance().InRectCheck(this.h_scrollview.GetX(),this.h_scrollview.GetY(),this.h_scrollview.GetW(),this.h_scrollview.GetH())){
-				if(NInput.Mouse.GetInstance().left.down == true){
+			}else if(Fee.Input.Mouse.GetInstance().InRectCheck(this.h_scrollview.GetX(),this.h_scrollview.GetY(),this.h_scrollview.GetW(),this.h_scrollview.GetH())){
+				if(Fee.Input.Mouse.GetInstance().left.down == true){
 					this.drag_h = true;
 					this.drag_old_value_x = this.h_scrollview.GetViewPosition();
 					this.drag_speed_x = 0.0f;

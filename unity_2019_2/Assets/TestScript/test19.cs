@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,43 +18,43 @@ public class test19 : main_base
 {
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** Start
 	*/
 	private void Start()
 	{
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Config.LOG_ENABLE = true;
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Config.LOG_ENABLE = true;
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Config.LOG_ENABLE = true;
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Config.LOG_ENABLE = true;
+		Fee.Input.Mouse.CreateInstance();
 
 		//イベントプレート。
-		NEventPlate.Config.LOG_ENABLE = true;
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.Config.LOG_ENABLE = true;
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Config.LOG_ENABLE = true;
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Config.LOG_ENABLE = true;
+		Fee.Ui.Ui.CreateInstance();
 
 		//フォント。
 		Font t_font = Resources.Load<Font>("mplus-1p-medium");
 		if(t_font != null){
-			NRender2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 	}
 
 	/** FixedUpdate
@@ -62,13 +62,13 @@ public class test19 : main_base
 	private void FixedUpdate()
 	{
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 	}
 
 	/** 削除前。

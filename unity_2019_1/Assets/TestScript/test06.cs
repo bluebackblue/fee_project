@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ public class test06 : main_base
 {
 	/** シーンＡ。
 	*/
-	class SceneA : NScene.Scene_Base
+	class SceneA : Fee.Scene.Scene_Base
 	{
 		/** [Scene.Scene_Base]更新。
 
@@ -31,15 +31,15 @@ public class test06 : main_base
 		*/
 		public bool Main()
 		{
-			if(NFade.Fade.GetInstance().IsAnime() == false){
-				if(NInput.Mouse.GetInstance().left.down == true){
+			if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
+				if(Fee.Input.Mouse.GetInstance().left.down == true){
 					Debug.Log("SceneA : request");
 					//遷移リクエスト。
-					NScene.Scene.GetInstance().SetNextScene(new SceneB());
+					Fee.Scene.Scene.GetInstance().SetNextScene(new SceneB());
 				}
 			}
 
-			return NScene.Scene.GetInstance().IsNextScene();
+			return Fee.Scene.Scene.GetInstance().IsNextScene();
 		}
 
 		/** [Scene.Scene_Base]削除。
@@ -58,7 +58,7 @@ public class test06 : main_base
 		{
 			Debug.Log("SceneA : SceneStart");
 
-			NFade.Fade.GetInstance().FadeIn();
+			Fee.Fade.Fade.GetInstance().FadeIn();
 			return true;
 		}
 
@@ -71,9 +71,9 @@ public class test06 : main_base
 		{
 			Debug.Log("SceneA : SceneEnd");
 
-			NFade.Fade.GetInstance().FadeOut();
+			Fee.Fade.Fade.GetInstance().FadeOut();
 
-			if(NFade.Fade.GetInstance().IsAnime() == false){
+			if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
 				return true;
 			}
 
@@ -83,7 +83,7 @@ public class test06 : main_base
 
 	/** シーンＢ。
 	*/
-	class SceneB : NScene.Scene_Base
+	class SceneB : Fee.Scene.Scene_Base
 	{
 		/** [Scene.Scene_Base]更新。
 
@@ -92,15 +92,15 @@ public class test06 : main_base
 		*/
 		public bool Main()
 		{
-			if(NFade.Fade.GetInstance().IsAnime() == false){
-				if(NInput.Mouse.GetInstance().left.down == true){
+			if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
+				if(Fee.Input.Mouse.GetInstance().left.down == true){
 					//遷移リクエスト。
 					Debug.Log("SceneB : request");
-					NScene.Scene.GetInstance().SetNextScene(new SceneA());
+					Fee.Scene.Scene.GetInstance().SetNextScene(new SceneA());
 				}
 			}
 
-			return NScene.Scene.GetInstance().IsNextScene();
+			return Fee.Scene.Scene.GetInstance().IsNextScene();
 		}
 
 		/** [Scene.Scene_Base]削除。
@@ -119,7 +119,7 @@ public class test06 : main_base
 		{
 			Debug.Log("SceneB : SceneStart");
 
-			NFade.Fade.GetInstance().FadeIn();
+			Fee.Fade.Fade.GetInstance().FadeIn();
 			return true;
 		}
 
@@ -132,9 +132,9 @@ public class test06 : main_base
 		{
 			Debug.Log("SceneB : SceneEnd");
 
-			NFade.Fade.GetInstance().FadeOut();
+			Fee.Fade.Fade.GetInstance().FadeOut();
 
-			if(NFade.Fade.GetInstance().IsAnime() == false){
+			if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
 				return true;
 			}
 			return false;
@@ -143,44 +143,44 @@ public class test06 : main_base
 
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** Start
 	*/
 	private void Start()
 	{
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//イベントプレート。
-		NEventPlate.Config.LOG_ENABLE = true;
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.Config.LOG_ENABLE = true;
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Config.LOG_ENABLE = true;
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Config.LOG_ENABLE = true;
+		Fee.Ui.Ui.CreateInstance();
 
 		//フェード。インスタンス作成。
-		NFade.Fade.CreateInstance();
-		NFade.Fade.GetInstance().SetSpeed(0.05f);
-		NFade.Fade.GetInstance().SetColor(0.0f,0.0f,0.0f,1.0f);
-		NFade.Fade.GetInstance().SetToColor(0.0f,0.0f,0.0f,1.0f);
-		NFade.Fade.GetInstance().SetAnime();
+		Fee.Fade.Fade.CreateInstance();
+		Fee.Fade.Fade.GetInstance().SetSpeed(0.05f);
+		Fee.Fade.Fade.GetInstance().SetColor(0.0f,0.0f,0.0f,1.0f);
+		Fee.Fade.Fade.GetInstance().SetToColor(0.0f,0.0f,0.0f,1.0f);
+		Fee.Fade.Fade.GetInstance().SetAnime();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//シーン。インスタンス作成。
-		NScene.Scene.CreateInstance();
+		Fee.Scene.Scene.CreateInstance();
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//シーンＡ。
-		NScene.Scene.GetInstance().SetNextScene(new SceneA());
+		Fee.Scene.Scene.GetInstance().SetNextScene(new SceneA());
 	}
 
 	/** FixedUpdate
@@ -188,24 +188,24 @@ public class test06 : main_base
 	private void FixedUpdate()
 	{
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//フェード。
-		NFade.Fade.GetInstance().Main_PreDraw();
-		NFade.Fade.GetInstance().Main();
+		Fee.Fade.Fade.GetInstance().Main_PreDraw();
+		Fee.Fade.Fade.GetInstance().Main();
 
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
 		//シーン。
-		NScene.Scene.GetInstance().Main();
+		Fee.Scene.Scene.GetInstance().Main();
 	}
 
 	/** 削除前。

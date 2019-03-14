@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 /**
  * Copyright (c) blueback
  * Released under the MIT License
@@ -36,7 +35,7 @@ public class test21 : main_base
 
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** step
 	*/
@@ -44,11 +43,11 @@ public class test21 : main_base
 
 	/** start_button
 	*/
-	private NUi.Button start_button;
+	private Fee.Ui.Button start_button;
 
 	/** status_text;
 	*/
-	private NRender2D.Text2D status_text;
+	private Fee.Render2D.Text2D status_text;
 
 	/** url
 	*/
@@ -56,7 +55,7 @@ public class test21 : main_base
 
 	/** file_vrm
 	*/
-	private NFile.Item file_vrm;
+	private Fee.File.Item file_vrm;
 
 	/** binary_vrm
 	*/
@@ -64,61 +63,61 @@ public class test21 : main_base
 
 	/** upload_vrm
 	*/
-	private NFile.Item upload_vrm;
+	private Fee.File.Item upload_vrm;
 
 	/** Start
 	*/
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//キー。インスタンス作成。
-		NInput.Key.CreateInstance();
+		Fee.Input.Key.CreateInstance();
 
 		//パッド。インスタンス作成。
-		NInput.Pad.CreateInstance();
+		Fee.Input.Pad.CreateInstance();
 
 		//イベントプレート。インスタンス作成。
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Ui.CreateInstance();
 
 		//ファイル。インスタンス作成。
-		NFile.File.CreateInstance();
+		Fee.File.File.CreateInstance();
 
 		//ＵＮＩＶＲＭ。インスタンス作成。
-		NUniVrm.UniVrm.CreateInstance();
+		Fee.UniVrm.UniVrm.CreateInstance();
 
 		//フォント。
 		Font t_font = Resources.Load<Font>("mplus-1p-medium");
 		if(t_font != null){
-			NRender2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//step
 		this.step = Step.Init;
 
 		//start_button
 		{
-			this.start_button = new NUi.Button(this.deleter,null,0,this.CallBack_Click_StartButton,-1);
+			this.start_button = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_StartButton,-1);
 			this.start_button.SetTexture(Resources.Load<Texture2D>("button"));
 			this.start_button.SetRect(100,100,100,50);
 			this.start_button.SetText("開始");
@@ -126,7 +125,7 @@ public class test21 : main_base
 
 		//status_text
 		{
-			this.status_text = new NRender2D.Text2D(this.deleter,null,0);
+			this.status_text = new Fee.Render2D.Text2D(this.deleter,null,0);
 			this.status_text.SetRect(100,150,0,0);
 			this.status_text.SetText("---");
 		}
@@ -158,25 +157,25 @@ public class test21 : main_base
 	private void FixedUpdate()
 	{
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//キー。
-		NInput.Key.GetInstance().Main();
+		Fee.Input.Key.GetInstance().Main();
 
 		//パッド。
-		NInput.Pad.GetInstance().Main();
+		Fee.Input.Pad.GetInstance().Main();
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
 		//ファイル。
-		NFile.File.GetInstance().Main();
+		Fee.File.File.GetInstance().Main();
 
 		//ＵＮＩＶＲＭ。
-		NUniVrm.UniVrm.GetInstance().Main();
+		Fee.UniVrm.UniVrm.GetInstance().Main();
 
 		switch(this.step){
 		case Step.Init:
@@ -205,7 +204,7 @@ public class test21 : main_base
 				this.status_text.SetText(this.step.ToString());
 
 				//ＵＲＬから。
-				this.file_vrm = NFile.File.GetInstance().RequestDownLoadBinaryFile(this.url,null,NFile.ProgressMode.DownLoad);
+				this.file_vrm = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(this.url,null,Fee.File.ProgressMode.DownLoad);
 				this.step = Step.LoadVrm_Do;
 			}break;
 		case Step.LoadVrm_Do:
@@ -215,7 +214,7 @@ public class test21 : main_base
 				if(this.file_vrm.IsBusy() == true){
 					this.status_text.SetText(this.step.ToString() + ":" + this.file_vrm.GetResultProgress().ToString());
 				}else{
-					if(this.file_vrm.GetResultType() == NFile.Item.ResultType.Binary){
+					if(this.file_vrm.GetResultType() == Fee.File.Item.ResultType.Binary){
 						this.binary_vrm = this.file_vrm.GetResultBinary();
 						this.step = Step.UploadVrm_Start;
 					}else{
@@ -240,7 +239,7 @@ public class test21 : main_base
 				t_post_data.AddBinaryData("file_vrm",this.binary_vrm);
 
 				//リクエスト。
-				this.upload_vrm = NFile.File.GetInstance().RequestDownLoadTextFile("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/set/",t_post_data,NFile.ProgressMode.UpLoad);
+				this.upload_vrm = Fee.File.File.GetInstance().RequestDownLoadTextFile("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/set/",t_post_data,Fee.File.ProgressMode.UpLoad);
 
 				this.step = Step.UploadVrm_Do;
 			}break;
@@ -251,7 +250,7 @@ public class test21 : main_base
 				if(this.upload_vrm.IsBusy() == true){
 					this.status_text.SetText(this.step.ToString() + ":" + this.upload_vrm.GetResultProgress().ToString());
 				}else{
-					if(this.upload_vrm.GetResultType() == NFile.Item.ResultType.Text){
+					if(this.upload_vrm.GetResultType() == Fee.File.Item.ResultType.Text){
 						this.status_text.SetText(this.step.ToString() + ":" + this.upload_vrm.GetResultText());
 						this.step = Step.End;
 					}else{

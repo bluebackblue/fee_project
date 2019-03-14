@@ -55,7 +55,7 @@ public class test20 : main_base
 
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** step
 	*/
@@ -63,26 +63,26 @@ public class test20 : main_base
 
 	/** status_text
 	*/
-	private NRender2D.Text2D status_text;
+	private Fee.Render2D.Text2D status_text;
 
 	/** login
 	*/
-	private NUi.Button login_button;
-	private NUi.Button login_apikey_button;
-	private NRender2D.InputField2D login_apikey_inputfield;
-	private NRender2D.InputField2D login_pass_inputfield;
-	private NRender2D.Text2D login_apikey_text;
-	private NRender2D.Text2D login_pass_text;
-	private NFile.Item login_api_vrm_get;
-	private NRender2D.Text2D login_last_error;
+	private Fee.Ui.Button login_button;
+	private Fee.Ui.Button login_apikey_button;
+	private Fee.Render2D.InputField2D login_apikey_inputfield;
+	private Fee.Render2D.InputField2D login_pass_inputfield;
+	private Fee.Render2D.Text2D login_apikey_text;
+	private Fee.Render2D.Text2D login_pass_text;
+	private Fee.File.Item login_api_vrm_get;
+	private Fee.Render2D.Text2D login_last_error;
 
 	/** vrm
 	*/
 	private string vrm_url;
-	private NUniVrm.Item vrm1;
-	private NUniVrm.Item vrm2;
-	private NFile.Item vrm_loaditem;
-	private GameObject vrm_camera;
+	private Fee.UniVrm.Item vrm1;
+	private Fee.UniVrm.Item vrm2;
+	private Fee.File.Item vrm_loaditem;
+	private UnityEngine.GameObject vrm_camera;
 	private VrmStatus vrm_status;
 
 	/** Start
@@ -90,53 +90,53 @@ public class test20 : main_base
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//キー。インスタンス作成。
-		NInput.Key.CreateInstance();
+		Fee.Input.Key.CreateInstance();
 
 		//パッド。インスタンス作成。
-		NInput.Pad.CreateInstance();
+		Fee.Input.Pad.CreateInstance();
 
 		//イベントプレート。インスタンス作成。
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Ui.CreateInstance();
 
 		//ファイル。インスタンス作成。
-		NFile.File.CreateInstance();
+		Fee.File.File.CreateInstance();
 
 		//ＵＮＩＶＲＭ。インスタンス作成。
-		NUniVrm.UniVrm.CreateInstance();
+		Fee.UniVrm.UniVrm.CreateInstance();
 
 		//フォント。
 		Font t_font = Resources.Load<Font>("mplus-1p-medium");
 		if(t_font != null){
-			NRender2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//step
 		this.step = Step.Init;
 
 		//status_text
-		this.status_text = new NRender2D.Text2D(this.deleter,null,0);
+		this.status_text = new Fee.Render2D.Text2D(this.deleter,null,0);
 		this.status_text.SetRect(100,10,0,0);
 		this.status_text.SetText("");
 
@@ -144,8 +144,8 @@ public class test20 : main_base
 		{
 			int t_button_w = 100;
 			int t_button_h = 50;
-			int t_button_x = 200;//(NRender2D.Render2D.VIRTUAL_W - t_button_w) / 2;
-			int t_button_y = (NRender2D.Render2D.VIRTUAL_H - t_button_h) / 2;
+			int t_button_x = 200;//(Fee.Render2D.Render2D.VIRTUAL_W - t_button_w) / 2;
+			int t_button_y = (Fee.Render2D.Render2D.VIRTUAL_H - t_button_h) / 2;
 
 			int t_pass_x = t_button_x;
 			int t_pass_y = t_button_y - 70;
@@ -154,39 +154,39 @@ public class test20 : main_base
 			int t_apikey_y = t_button_y - 140;
 			int t_apikey_h = 50;
 
-			this.login_button = new NUi.Button(this.deleter,null,0,this.CallBack_Click_Login,0);
+			this.login_button = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Login,0);
 			this.login_button.SetTexture(Resources.Load<Texture2D>("button"));
 			this.login_button.SetRect(t_button_x,t_button_y,t_button_w,t_button_h);
 			this.login_button.SetText("ログイン");
 			this.login_button.SetVisible(false);
 
-			this.login_pass_inputfield = new NRender2D.InputField2D(this.deleter,null,0);
+			this.login_pass_inputfield = new Fee.Render2D.InputField2D(this.deleter,null,0);
 			this.login_pass_inputfield.SetRect(t_pass_x,t_pass_y,300,t_pass_h);
 			this.login_pass_inputfield.SetVisible(false);
 
-			this.login_apikey_inputfield = new NRender2D.InputField2D(this.deleter,null,0);
+			this.login_apikey_inputfield = new Fee.Render2D.InputField2D(this.deleter,null,0);
 			this.login_apikey_inputfield.SetRect(t_apikey_x,t_apikey_y,400,t_apikey_h);
 			this.login_apikey_inputfield.SetVisible(false);
 
-			this.login_pass_text = new NRender2D.Text2D(this.deleter,null,0);
+			this.login_pass_text = new Fee.Render2D.Text2D(this.deleter,null,0);
 			this.login_pass_text.SetRect(t_pass_x - 100,t_pass_y,0,t_pass_h);
 			this.login_pass_text.SetText("PASS");
 			this.login_pass_text.SetCenter(false,true);
 			this.login_pass_text.SetVisible(false);
 
-			this.login_apikey_text = new NRender2D.Text2D(this.deleter,null,0);
+			this.login_apikey_text = new Fee.Render2D.Text2D(this.deleter,null,0);
 			this.login_apikey_text.SetRect(t_apikey_x - 100,t_apikey_y,0,t_apikey_h);
 			this.login_apikey_text.SetText("APIKEY");
 			this.login_apikey_text.SetCenter(false,true);
 			this.login_apikey_text.SetVisible(false);
 
-			this.login_apikey_button = new NUi.Button(this.deleter,null,0,this.CallBack_Click_ApiKeyPage,0);
+			this.login_apikey_button = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_ApiKeyPage,0);
 			this.login_apikey_button.SetTexture(Resources.Load<Texture2D>("button"));
 			this.login_apikey_button.SetRect(t_apikey_x + 450,t_apikey_y,t_button_w + 140,t_button_h);
 			this.login_apikey_button.SetText("ApiKey作成ページを開く");
 			this.login_apikey_button.SetVisible(false);
 
-			this.login_last_error = new NRender2D.Text2D(this.deleter,null,0);
+			this.login_last_error = new Fee.Render2D.Text2D(this.deleter,null,0);
 			this.login_last_error.SetRect(t_button_x + 130,t_button_y,0,t_pass_h);
 			this.login_last_error.SetText("---");
 			this.login_last_error.SetCenter(false,true);
@@ -224,25 +224,25 @@ public class test20 : main_base
 	private void FixedUpdate()
 	{
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//キー。
-		NInput.Key.GetInstance().Main();
+		Fee.Input.Key.GetInstance().Main();
 
 		//パッド。
-		NInput.Pad.GetInstance().Main();
+		Fee.Input.Pad.GetInstance().Main();
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
 		//ファイル。
-		NFile.File.GetInstance().Main();
+		Fee.File.File.GetInstance().Main();
 
 		//ＵＮＩＶＲＭ。
-		NUniVrm.UniVrm.GetInstance().Main();
+		Fee.UniVrm.UniVrm.GetInstance().Main();
 
 		switch(this.step){
 		case Step.Init:
@@ -283,7 +283,7 @@ public class test20 : main_base
 				WWWForm t_post_data = new WWWForm();
 				t_post_data.AddField("apikey_pass",this.login_pass_inputfield.GetText());
 				t_post_data.AddField("apikey_token",this.login_apikey_inputfield.GetText());
-				this.login_api_vrm_get = NFile.File.GetInstance().RequestDownLoadTextFile("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/get/",t_post_data,NFile.ProgressMode.DownLoad);
+				this.login_api_vrm_get = Fee.File.File.GetInstance().RequestDownLoadTextFile("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/get/",t_post_data,Fee.File.ProgressMode.DownLoad);
 
 				this.step = Step.Login_Connect_Do;
 			}break;
@@ -301,7 +301,7 @@ public class test20 : main_base
 							this.login_api_vrm_get.Cancel();
 						}
 					}else{
-						if(this.login_api_vrm_get.GetResultType() == NFile.Item.ResultType.Text){
+						if(this.login_api_vrm_get.GetResultType() == Fee.File.Item.ResultType.Text){
 							//ダウンロード成功。
 						}else{
 							//ダウンロード失敗。
@@ -320,10 +320,10 @@ public class test20 : main_base
 
 				if(this.login_api_vrm_get != null){
 
-					NJsonItem.JsonItem t_json = new NJsonItem.JsonItem(this.login_api_vrm_get.GetResultText());
+					Fee.JsonItem.JsonItem t_json = new Fee.JsonItem.JsonItem(this.login_api_vrm_get.GetResultText());
 					if(t_json != null){
 						if(t_json.IsAssociativeArray() == true){
-							if(t_json.IsExistItem("vrm_url", NJsonItem.ValueType.StringData) == true){
+							if(t_json.IsExistItem("vrm_url", Fee.JsonItem.ValueType.StringData) == true){
 								this.vrm_url = t_json.GetItem("vrm_url").GetStringData();
 							}
 						}
@@ -350,7 +350,7 @@ public class test20 : main_base
 						string t_error = "error";
 						if(t_json != null){
 							if(t_json.IsAssociativeArray() == true){
-								if(t_json.IsExistItem("error", NJsonItem.ValueType.StringData) == true){
+								if(t_json.IsExistItem("error", Fee.JsonItem.ValueType.StringData) == true){
 									t_error = t_json.GetItem("error").GetStringData();
 								}
 							}
@@ -372,10 +372,10 @@ public class test20 : main_base
 
 				if(this.login_api_vrm_get != null){
 
-					NJsonItem.JsonItem t_json = new NJsonItem.JsonItem(this.login_api_vrm_get.GetResultText());
+					Fee.JsonItem.JsonItem t_json = new Fee.JsonItem.JsonItem(this.login_api_vrm_get.GetResultText());
 					if(t_json != null){
 						if(t_json.IsAssociativeArray() == true){
-							if(t_json.IsExistItem("vrm_url", NJsonItem.ValueType.StringData) == true){
+							if(t_json.IsExistItem("vrm_url", Fee.JsonItem.ValueType.StringData) == true){
 								t_vrm_url = t_json.GetItem("vrm_url").GetStringData();
 							}
 						}
@@ -389,7 +389,7 @@ public class test20 : main_base
 
 						if(t_json != null){
 							if(t_json.IsAssociativeArray() == true){
-								if(t_json.IsExistItem("error", NJsonItem.ValueType.StringData) == true){
+								if(t_json.IsExistItem("error", Fee.JsonItem.ValueType.StringData) == true){
 									t_error = t_json.GetItem("error").GetStringData();
 								}
 							}
@@ -400,7 +400,7 @@ public class test20 : main_base
 				}
 
 				if(t_vrm_url != null){
-					this.vrm_loaditem = NFile.File.GetInstance().RequestDownLoadBinaryFile(t_vrm_url,null,NFile.ProgressMode.DownLoad);
+					this.vrm_loaditem = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(t_vrm_url,null,Fee.File.ProgressMode.DownLoad);
 				}else{
 					this.vrm_loaditem = null;
 				}
@@ -421,7 +421,7 @@ public class test20 : main_base
 							this.vrm_loaditem.Cancel();
 						}
 					}else{
-						if(this.vrm_loaditem.GetResultType() == NFile.Item.ResultType.Binary){
+						if(this.vrm_loaditem.GetResultType() == Fee.File.Item.ResultType.Binary){
 							//ダウンロード成功。
 						}else{
 							//ダウンロード失敗。
@@ -445,8 +445,8 @@ public class test20 : main_base
 				}
 
 				if(t_binary != null){
-					this.vrm1 = NUniVrm.UniVrm.GetInstance().Request(t_binary);
-					this.vrm2 = NUniVrm.UniVrm.GetInstance().Request(t_binary);
+					this.vrm1 = Fee.UniVrm.UniVrm.GetInstance().Request(t_binary);
+					this.vrm2 = Fee.UniVrm.UniVrm.GetInstance().Request(t_binary);
 				}
 
 				this.vrm_loaditem = null;
@@ -461,7 +461,7 @@ public class test20 : main_base
 						this.status_text.SetText(this.step.ToString() + " " + this.vrm1.GetResultProgress().ToString());
 
 					}else{
-						if(this.vrm1.GetResultType() == NUniVrm.Item.ResultType.Context){
+						if(this.vrm1.GetResultType() == Fee.UniVrm.Item.ResultType.Context){
 							//ＶＲＭ作成成功。
 
 							//レイヤーをモデルに設定。
@@ -498,7 +498,7 @@ public class test20 : main_base
 						this.status_text.SetText(this.step.ToString() + " " + this.vrm2.GetResultProgress().ToString());
 
 					}else{
-						if(this.vrm2.GetResultType() == NUniVrm.Item.ResultType.Context){
+						if(this.vrm2.GetResultType() == Fee.UniVrm.Item.ResultType.Context){
 							//ＶＲＭ作成成功。
 
 							//レイヤーをモデルに設定。
@@ -550,7 +550,7 @@ public class test20 : main_base
 				if(this.vrm1 != null){
 					VrmStatus t_request = VrmStatus.None;
 
-					if(NInput.Key.GetInstance().up.on == true){
+					if(Fee.Input.Key.GetInstance().up.on == true){
 						//前進。
 						t_request = VrmStatus.Walk;
 
@@ -563,7 +563,7 @@ public class test20 : main_base
 						this.vrm1.SetPosition(ref t_position);
 					}
 
-					if(NInput.Key.GetInstance().left.on == true){
+					if(Fee.Input.Key.GetInstance().left.on == true){
 						//左回転。
 						t_request = VrmStatus.Walk;
 
@@ -578,7 +578,7 @@ public class test20 : main_base
 						float t_speed_move = 0.005f;
 						Vector3 t_position = this.vrm1.GetPosition() + t_vrm_forward * t_speed_move;
 						this.vrm1.SetPosition(ref t_position);
-					}else if(NInput.Key.GetInstance().right.on == true){
+					}else if(Fee.Input.Key.GetInstance().right.on == true){
 						//右回転。
 						t_request = VrmStatus.Walk;
 

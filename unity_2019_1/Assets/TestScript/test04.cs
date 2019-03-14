@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +23,7 @@ public class test04 : main_base
 {
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** Step
 	*/
@@ -57,52 +57,52 @@ public class test04 : main_base
 
 	/** セーブロードアイテム。
 	*/
-	private NFile.Item saveload_item;
+	private Fee.File.Item saveload_item;
 
 	/** sprite
 	*/
-	private NRender2D.Sprite2D sprite;
+	private Fee.Render2D.Sprite2D sprite;
 
 	/** status
 	*/
-	private NRender2D.Text2D status;
+	private Fee.Render2D.Text2D status;
 
 	/** button
 	*/
-	private NUi.Button button;
+	private Fee.Ui.Button button;
 
 	/** Start
 	*/
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//ファイル。インスタンス作成。
-		NFile.Config.LOG_ENABLE = true;
-		NFile.File.CreateInstance();
+		Fee.File.Config.LOG_ENABLE = true;
+		Fee.File.File.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//イベントプレート。インスタンス作成。
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Ui.CreateInstance();
 	
 		//deleter
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//step
 		this.step = Step.None;
@@ -112,21 +112,21 @@ public class test04 : main_base
 
 		//drawpriority
 		int t_layerindex = 0;
-		long t_drawpriority = t_layerindex * NRender2D.Render2D.DRAWPRIORITY_STEP;
+		long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 
 		//sprite
-		this.sprite = new NRender2D.Sprite2D(this.deleter,null,t_drawpriority);
+		this.sprite = new Fee.Render2D.Sprite2D(this.deleter,null,t_drawpriority);
 		this.sprite.SetRect(100,300,64,64);
-		this.sprite.SetTextureRect(ref NRender2D.Render2D.TEXTURE_RECT_MAX);
+		this.sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 		this.sprite.SetTexture(Texture2D.whiteTexture);
-		this.sprite.SetMaterialType(NRender2D.Config.MaterialType.Alpha);
+		this.sprite.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 
 		//status
-		this.status = new NRender2D.Text2D(this.deleter,null,t_drawpriority);
+		this.status = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
 		this.status.SetRect(100,100,0,0);
 
 		//button
-		this.button = new NUi.Button(this.deleter,null,t_drawpriority,this.CallBack_Click,0);
+		this.button = new Fee.Ui.Button(this.deleter,null,t_drawpriority,this.CallBack_Click,0);
 		this.button.SetRect(100,150,100,100);
 		this.button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button.SetText("Start");
@@ -146,16 +146,16 @@ public class test04 : main_base
 	private void FixedUpdate()
 	{
 		//ファイル。
-		NFile.File.GetInstance().Main();
+		Fee.File.File.GetInstance().Main();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//イベントプレート。インスタンス作成。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。インスタンス作成。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
 		switch(this.step){
 		case Step.Start:
@@ -179,7 +179,7 @@ public class test04 : main_base
 					t_binary[ii] = (byte)(ii % 256);
 				}
 
-				this.saveload_item = NFile.File.GetInstance().RequestSaveLocalBinaryFile(t_filename,t_binary);
+				this.saveload_item = Fee.File.File.GetInstance().RequestSaveLocalBinaryFile(t_filename,t_binary);
 
 				{
 					string t_log_text = this.step.ToString() + " : " + t_filename + " : size = " + t_binary.Length.ToString();
@@ -200,7 +200,7 @@ public class test04 : main_base
 						Debug.Log(t_log_text); 
 					}
 				}else{
-					if(this.saveload_item.GetResultType() == NFile.Item.ResultType.SaveEnd){
+					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.SaveEnd){
 						//成功。
 
 						{
@@ -228,7 +228,7 @@ public class test04 : main_base
 				//ファイル名。
 				string t_filename = "test_binary.bin";
 
-				this.saveload_item = NFile.File.GetInstance().RequestLoadLocalBinaryFile(t_filename);
+				this.saveload_item = Fee.File.File.GetInstance().RequestLoadLocalBinaryFile(t_filename);
 
 				{
 					string t_log_text = this.step.ToString() + " : " + t_filename;
@@ -248,7 +248,7 @@ public class test04 : main_base
 						Debug.Log(t_log_text); 
 					}
 				}else{
-					if(this.saveload_item.GetResultType() == NFile.Item.ResultType.Binary){
+					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.Binary){
 						//成功。
 
 						//チェック。
@@ -289,7 +289,7 @@ public class test04 : main_base
 				//データ。
 				string t_text = Random.value.ToString();
 
-				this.saveload_item = NFile.File.GetInstance().RequestSaveLocalTextFile(t_filename,t_text);
+				this.saveload_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile(t_filename,t_text);
 
 				{
 					string t_log_text = this.step.ToString() + " : " + t_filename + " : text = " + t_text;
@@ -309,7 +309,7 @@ public class test04 : main_base
 						Debug.Log(t_log_text); 
 					}
 				}else{
-					if(this.saveload_item.GetResultType() == NFile.Item.ResultType.SaveEnd){
+					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.SaveEnd){
 						//成功。
 
 						{
@@ -337,7 +337,7 @@ public class test04 : main_base
 				//ファイル名。
 				string t_filename = "test_text.txt";
 
-				this.saveload_item = NFile.File.GetInstance().RequestLoadLocalTextFile(t_filename);
+				this.saveload_item = Fee.File.File.GetInstance().RequestLoadLocalTextFile(t_filename);
 
 				{
 					string t_log_text = this.step.ToString() + " : " + t_filename;
@@ -357,7 +357,7 @@ public class test04 : main_base
 						Debug.Log(t_log_text); 
 					}
 				}else{
-					if(this.saveload_item.GetResultType() == NFile.Item.ResultType.Text){
+					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.Text){
 						//成功。
 
 						{
@@ -397,7 +397,7 @@ public class test04 : main_base
 					t_texture.Apply();
 				}
 
-				this.saveload_item = NFile.File.GetInstance().RequestSaveLocalTextureFile(t_filename,t_texture);
+				this.saveload_item = Fee.File.File.GetInstance().RequestSaveLocalTextureFile(t_filename,t_texture);
 
 				{
 					string t_log_text = this.step.ToString() + " : " + t_filename;
@@ -417,7 +417,7 @@ public class test04 : main_base
 						Debug.Log(t_log_text); 
 					}
 				}else{
-					if(this.saveload_item.GetResultType() == NFile.Item.ResultType.SaveEnd){
+					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.SaveEnd){
 						//成功。
 
 						{
@@ -445,7 +445,7 @@ public class test04 : main_base
 				//ファイル名。
 				string t_filename = "test_png.png";
 
-				this.saveload_item = NFile.File.GetInstance().RequestLoadLocalTextureFile(t_filename);
+				this.saveload_item = Fee.File.File.GetInstance().RequestLoadLocalTextureFile(t_filename);
 
 				{
 					string t_log_text = this.step.ToString() + " : " + t_filename;
@@ -465,7 +465,7 @@ public class test04 : main_base
 						Debug.Log(t_log_text); 
 					}
 				}else{
-					if(this.saveload_item.GetResultType() == NFile.Item.ResultType.Texture){
+					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.Texture){
 						//成功。
 
 						Texture2D t_load_texture = this.saveload_item.GetResultTexture();

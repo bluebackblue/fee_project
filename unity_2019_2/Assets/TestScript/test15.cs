@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ public class test15 : main_base
 {
 	/** 削除管理。
 	*/
-	private NDeleter.Deleter deleter;
+	private Fee.Deleter.Deleter deleter;
 
 	/** is_clip
 	*/
@@ -33,65 +33,65 @@ public class test15 : main_base
 
 	/** clipsprite
 	*/
-	private NUi.ClipSprite clipsprite;
+	private Fee.Ui.ClipSprite clipsprite;
 
 	/** text
 	*/
-	private NRender2D.Text2D text;
+	private Fee.Render2D.Text2D text;
 
 	/** button
 	*/
-	private NUi.Button button;
+	private Fee.Ui.Button button;
 
 	/** checkbutton
 	*/
-	private NUi.CheckButton checkbutton;
+	private Fee.Ui.CheckButton checkbutton;
 
 	/** inputfield
 	*/
-	private NRender2D.InputField2D inputfield;
+	private Fee.Render2D.InputField2D inputfield;
 
 	/** slider
 	*/
-	private NUi.Slider slider;
+	private Fee.Ui.Slider slider;
 
 	/** Start
 	*/
 	private void Start()
 	{
 		//タスク。インスタンス作成。
-		NTaskW.TaskW.CreateInstance();
+		Fee.TaskW.TaskW.CreateInstance();
 
 		//パフォーマンスカウンター。インスタンス作成。
-		NPerformanceCounter.Config.LOG_ENABLE = true;
-		NPerformanceCounter.PerformanceCounter.CreateInstance();
+		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 		//２Ｄ描画。インスタンス作成。
-		NRender2D.Render2D.CreateInstance();
+		Fee.Render2D.Render2D.CreateInstance();
 
 		//マウス。インスタンス作成。
-		NInput.Mouse.CreateInstance();
+		Fee.Input.Mouse.CreateInstance();
 
 		//キ。インスタンス作成。
-		NInput.Key.CreateInstance();
+		Fee.Input.Key.CreateInstance();
 
 		//ＵＩ。インスタンス作成。
-		NUi.Ui.CreateInstance();
+		Fee.Ui.Ui.CreateInstance();
 
 		//イベントプレート。インスタンス作成。
-		NEventPlate.EventPlate.CreateInstance();
+		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//フォント。
 		Font t_font = Resources.Load<Font>("mplus-1p-medium");
 		if(t_font != null){
-			NRender2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
 
 		//削除管理。
-		this.deleter = new NDeleter.Deleter();
+		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(NRender2D.Render2D.MAX_LAYER - 1) * NRender2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//is_clip
 		this.is_clip = true;
@@ -100,26 +100,26 @@ public class test15 : main_base
 		this.update_clip_rect = true;
 
 		int t_layerindex = 0;
-		long t_drawpriority = t_layerindex * NRender2D.Render2D.DRAWPRIORITY_STEP;
+		long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 
 		//clipsprite
 		{
 			Texture2D t_texture = Resources.Load<Texture2D>("IMGP8657");
 
-			this.clipsprite = new NUi.ClipSprite(this.deleter,null,t_drawpriority + 1);
-			this.clipsprite.SetRect(ref NRender2D.Render2D.VIRTUAL_RECT_MAX);
+			this.clipsprite = new Fee.Ui.ClipSprite(this.deleter,null,t_drawpriority + 1);
+			this.clipsprite.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
 			this.clipsprite.SetTexture(Texture2D.whiteTexture);
-			this.clipsprite.SetTextureRect(ref NRender2D.Render2D.TEXTURE_RECT_MAX);
+			this.clipsprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.clipsprite.SetColor(0.7f,0.7f,0.7f,1.0f);
 			this.clipsprite.SetTexture(t_texture);
 		}
 
 		//text
 		{
-			int t_x = NRender2D.Render2D.VIRTUAL_W / 2;
+			int t_x = Fee.Render2D.Render2D.VIRTUAL_W / 2;
 			int t_y = 100;
 
-			this.text = new NRender2D.Text2D(this.deleter,null,t_drawpriority + 1);
+			this.text = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority + 1);
 			this.text.SetRect(t_x,t_y,0,0);
 			this.text.SetText("ESC ENTER");
 			this.text.SetCenter(true,true);
@@ -133,12 +133,12 @@ public class test15 : main_base
 		{
 			int t_w = 100;
 			int t_h = 30;
-			int t_x = (NRender2D.Render2D.VIRTUAL_W - t_w) /2;
+			int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 			int t_y = 300;
 
 			Texture2D t_texture = Resources.Load<Texture2D>("button");
 
-			this.button = new NUi.Button(this.deleter,null,t_drawpriority + 2,this.CallBack_Click,0);
+			this.button = new Fee.Ui.Button(this.deleter,null,t_drawpriority + 2,this.CallBack_Click,0);
 			this.button.SetRect(t_x,t_y,t_w,t_h);
 			this.button.SetTexture(t_texture);
 		}
@@ -147,12 +147,12 @@ public class test15 : main_base
 		{
 			int t_w = 50;
 			int t_h = 50;
-			int t_x = (NRender2D.Render2D.VIRTUAL_W - t_w) /2;
+			int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 			int t_y = 200;
 
 			Texture2D t_texture = Resources.Load<Texture2D>("checkbutton");
 
-			this.checkbutton = new NUi.CheckButton(this.deleter,null,t_drawpriority + 2,this.CallBack_Change,0);
+			this.checkbutton = new Fee.Ui.CheckButton(this.deleter,null,t_drawpriority + 2,this.CallBack_Change,0);
 			this.checkbutton.SetRect(t_x,t_y,t_w,t_h);
 			this.checkbutton.SetTexture(t_texture);
 		}
@@ -164,7 +164,7 @@ public class test15 : main_base
 			int t_x = 100;
 			int t_y = 100;
 
-			this.inputfield = new NRender2D.InputField2D(this.deleter,null,t_drawpriority + 2);
+			this.inputfield = new Fee.Render2D.InputField2D(this.deleter,null,t_drawpriority + 2);
 			this.inputfield.SetRect(t_x,t_y,t_w,t_h);
 		}
 
@@ -172,10 +172,10 @@ public class test15 : main_base
 		{
 			int t_w = 300;
 			int t_h = 20;
-			int t_x = (NRender2D.Render2D.VIRTUAL_W - t_w) /2;
+			int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 			int t_y = 350;
 
-			this.slider = new NUi.Slider(this.deleter,null,t_drawpriority + 2,this.CallBack_Change,0);
+			this.slider = new Fee.Ui.Slider(this.deleter,null,t_drawpriority + 2,this.CallBack_Change,0);
 			this.slider.SetRect(t_x,t_y,t_w,t_h);
 			this.slider.SetTexture(Resources.Load<Texture2D>("slider"));
 			this.slider.SetButtonTexture(Resources.Load<Texture2D>("button"));
@@ -198,18 +198,18 @@ public class test15 : main_base
 	private void FixedUpdate()
 	{
 		//マウス。
-		NInput.Mouse.GetInstance().Main(NRender2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
 
 		//キー。
-		NInput.Key.GetInstance().Main();
+		Fee.Input.Key.GetInstance().Main();
 
 		//イベントプレート。
-		NEventPlate.EventPlate.GetInstance().Main(NInput.Mouse.GetInstance().pos.x,NInput.Mouse.GetInstance().pos.y);
+		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 		//ＵＩ。
-		NUi.Ui.GetInstance().Main();
+		Fee.Ui.Ui.GetInstance().Main();
 
-		if(NInput.Key.GetInstance().enter.down == true){
+		if(Fee.Input.Key.GetInstance().enter.down == true){
 			this.is_clip = !this.is_clip;
 
 			this.clipsprite.SetClip(this.is_clip);
@@ -220,17 +220,17 @@ public class test15 : main_base
 			this.slider.SetClip(this.is_clip);
 		}
 
-		if(NInput.Key.GetInstance().escape.down == true){
+		if(Fee.Input.Key.GetInstance().escape.down == true){
 			this.update_clip_rect = !this.update_clip_rect;
 		}
 
 		if(this.update_clip_rect == true){
-			NRender2D.Rect2D_R<int> t_cliprect;
+			Fee.Render2D.Rect2D_R<int> t_cliprect;
 			{
 				t_cliprect.w = 200;
 				t_cliprect.h = 200;
-				t_cliprect.x = NInput.Mouse.GetInstance().pos.x - t_cliprect.w / 2;
-				t_cliprect.y = NInput.Mouse.GetInstance().pos.y - t_cliprect.h / 2;
+				t_cliprect.x = Fee.Input.Mouse.GetInstance().pos.x - t_cliprect.w / 2;
+				t_cliprect.y = Fee.Input.Mouse.GetInstance().pos.y - t_cliprect.h / 2;
 			}
 
 			this.clipsprite.SetClipRect(ref t_cliprect);
