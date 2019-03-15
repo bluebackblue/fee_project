@@ -15,7 +15,7 @@ namespace Fee.Dijkstra
 {
 	/** LinkEx
 	*/
-	public class LinkEx<NODEDATA,LINKDATA>
+	public class LinkEx<NODEKEY,NODEDATA,LINKDATA>
 		where NODEDATA : struct
 		where LINKDATA : struct
 	{
@@ -25,7 +25,7 @@ namespace Fee.Dijkstra
 
 		/** 接続先ノード。
 		*/
-		private NodeEx<NODEDATA,LINKDATA> to_node;
+		private NodeEx<NODEKEY,NODEDATA,LINKDATA> to_node;
 
 		/** 接続先ノードへの到達コスト。
 		*/
@@ -33,7 +33,7 @@ namespace Fee.Dijkstra
 
 		/** constructor
 		*/
-		public LinkEx(LINKDATA a_linkdata,NodeEx<NODEDATA,LINKDATA> a_to_node,long a_to_cost)
+		public LinkEx(LINKDATA a_linkdata,NodeEx<NODEKEY,NODEDATA,LINKDATA> a_to_node,long a_to_cost)
 		{
 			this.linkdata = a_linkdata;
 			this.to_node = a_to_node;
@@ -56,14 +56,14 @@ namespace Fee.Dijkstra
 
 		/** 接続先ノード。設定。
 		*/
-		public void SetToNode(NodeEx<NODEDATA,LINKDATA> a_to_node)
+		public void SetToNode(NodeEx<NODEKEY,NODEDATA,LINKDATA> a_to_node)
 		{
 			this.to_node = a_to_node;
 		}
 
 		/** 接続先ノード。取得。
 		*/
-		public NodeEx<NODEDATA,LINKDATA> GetToNode()
+		public NodeEx<NODEKEY,NODEDATA,LINKDATA> GetToNode()
 		{
 			return this.to_node;
 		}

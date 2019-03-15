@@ -23,6 +23,10 @@ public class test09 : main_base
 	*/
 	private Fee.Deleter.Deleter deleter;
 
+	/** status_text
+	*/
+	private Fee.Render2D.Text2D status_text;
+
 	/** map
 	*/
 	private int map_w;
@@ -39,6 +43,8 @@ public class test09 : main_base
 		Init,
 		GoA_Start,
 		GoB_Start,
+		GoA_Calc,
+		GoB_Calc,
 		GoA_Move,
 		GoB_Move,
 	};
@@ -123,11 +129,15 @@ public class test09 : main_base
 		//削除管理。
 		this.deleter = new Fee.Deleter.Deleter();
 
+		//status_text
+		this.status_text = new Fee.Render2D.Text2D(this.deleter,null,0);
+		this.status_text.SetRect(70,50,0,0);
+
 		//マップ。
 		this.map_w = 30;
 		this.map_h = 30;
-		this.map_x = 50;
-		this.map_y = 50;
+		this.map_x = 70;
+		this.map_y = 70;
 		this.map_tip_w = 16;
 		this.map_tip_h = 16;
 
@@ -158,7 +168,7 @@ public class test09 : main_base
 
 			//ダイクストラ法、ノード作成。
 			int t_key = ii;
-			this.dijkstra.AddNode(t_key,new Fee.Dijkstra.NodeEx<NodeData,LinkData>(new NodeData(t_tip_x,t_tip_y,0)));
+			this.dijkstra.AddNode(t_key,new Fee.Dijkstra.NodeEx<int,NodeData,LinkData>(t_key,new NodeData(t_tip_x,t_tip_y,0)));
 		}
 
 		//ノードをリンクでつなぐ。コストは仮設定で０。
@@ -166,57 +176,57 @@ public class test09 : main_base
 			int t_tip_x = ii % this.map_w;
 			int t_tip_y = ii / this.map_w;
 
-			Fee.Dijkstra.NodeEx<NodeData,LinkData> t_from = this.dijkstra.GetNode(ii);
+			Fee.Dijkstra.NodeEx<int,NodeData,LinkData> t_from = this.dijkstra.GetNode(ii);
 
 			//上。
 			{
-				Fee.Dijkstra.NodeEx<NodeData,LinkData> t_to = null;
+				Fee.Dijkstra.NodeEx<int,NodeData,LinkData> t_to = null;
 				int t_to_x = t_tip_x;
 				int t_to_y = t_tip_y - 1;
 				if(t_to_y >= 0){
 					t_to = this.dijkstra.GetNode(t_to_x + t_to_y * this.map_w);
 				}
 				if(t_to != null){
-					t_from.AddLink(new Fee.Dijkstra.LinkEx<NodeData,LinkData>(new LinkData(),t_to,0));
+					t_from.AddLink(new Fee.Dijkstra.LinkEx<int,NodeData,LinkData>(new LinkData(),t_to,0));
 				}
 			}
 
 			//下。
 			{
-				Fee.Dijkstra.NodeEx<NodeData,LinkData> t_to = null;
+				Fee.Dijkstra.NodeEx<int,NodeData,LinkData> t_to = null;
 				int t_to_x = t_tip_x;
 				int t_to_y = t_tip_y + 1;
 				if(t_to_y < this.map_h){
 					t_to = this.dijkstra.GetNode(t_to_x + t_to_y * this.map_w);
 				}
 				if(t_to != null){
-					t_from.AddLink(new Fee.Dijkstra.LinkEx<NodeData,LinkData>(new LinkData(),t_to,0));
+					t_from.AddLink(new Fee.Dijkstra.LinkEx<int,NodeData,LinkData>(new LinkData(),t_to,0));
 				}
 			}
 
 			//左。
 			{
-				Fee.Dijkstra.NodeEx<NodeData,LinkData> t_to = null;
+				Fee.Dijkstra.NodeEx<int,NodeData,LinkData> t_to = null;
 				int t_to_x = t_tip_x - 1;
 				int t_to_y = t_tip_y;
 				if(t_to_x >= 0){
 					t_to = this.dijkstra.GetNode(t_to_x + t_to_y * this.map_w);
 				}
 				if(t_to != null){
-					t_from.AddLink(new Fee.Dijkstra.LinkEx<NodeData,LinkData>(new LinkData(),t_to,0));
+					t_from.AddLink(new Fee.Dijkstra.LinkEx<int,NodeData,LinkData>(new LinkData(),t_to,0));
 				}
 			}
 
 			//右。
 			{
-				Fee.Dijkstra.NodeEx<NodeData,LinkData> t_to = null;
+				Fee.Dijkstra.NodeEx<int,NodeData,LinkData> t_to = null;
 				int t_to_x = t_tip_x + 1;
 				int t_to_y = t_tip_y;
 				if(t_to_x < this.map_w){
 					t_to = this.dijkstra.GetNode(t_to_x + t_to_y * this.map_w);
 				}
 				if(t_to != null){
-					t_from.AddLink(new Fee.Dijkstra.LinkEx<NodeData,LinkData>(new LinkData(),t_to,0));
+					t_from.AddLink(new Fee.Dijkstra.LinkEx<int,NodeData,LinkData>(new LinkData(),t_to,0));
 				}
 			}
 		}
@@ -257,16 +267,16 @@ public class test09 : main_base
 						}
 					}
 					for(int ii=0;ii<this.sprite_map.Length;ii++){
-						Fee.Dijkstra.NodeEx<NodeData,LinkData> t_node = this.dijkstra.GetNode(ii);
-						System.Collections.Generic.List<Fee.Dijkstra.LinkEx<NodeData,LinkData>> t_linklist = t_node.GetLinkList();
+						Fee.Dijkstra.NodeEx<int,NodeData,LinkData> t_node = this.dijkstra.GetNode(ii);
+						System.Collections.Generic.List<Fee.Dijkstra.LinkEx<int,NodeData,LinkData>> t_linklist = t_node.GetLinkList();
 
 						for(int jj=0;jj<t_linklist.Count;jj++){
 							//リンクの接続先ノードのチップコストをリンクのコストとする。
-							Fee.Dijkstra.NodeEx<NodeData,LinkData> t_to_node = t_linklist[jj].GetToNode();
-							t_linklist[jj].SetToCost(t_to_node.nodedata.tipcost);
-						}
+							Fee.Dijkstra.NodeEx<int,NodeData,LinkData> t_to_node = t_linklist[jj].GetToNode();
 
-						this.sprite_map[ii].SetColor((100 - t_node.nodedata.tipcost) / 100.0f,1.0f,1.0f,1.0f);
+							//ゴールからなのでToCostはt_to_node から t_node への移動コスト。
+							t_linklist[jj].SetToCost(t_node.nodedata.tipcost);
+						}
 					}
 				}
 			
@@ -279,22 +289,50 @@ public class test09 : main_base
 					int t_y = this.map_h - 1;
 					int t_key = t_x + t_y * this.map_w;
 					this.dijkstra.SetStartNode(this.dijkstra.GetNode(t_key));
+
+					this.time = 0;
+					this.mode = Mode.GoA_Calc;
 				}else{
 					int t_x = 0;
 					int t_y = 0;
 					int t_key = t_x + t_y * this.map_w;
 					this.dijkstra.SetStartNode(this.dijkstra.GetNode(t_key));
+
+					this.time = 0;
+					this.mode = Mode.GoB_Calc;
+				}
+			}break;
+		case Mode.GoA_Calc:
+		case Mode.GoB_Calc:
+			{
+				for(int ii=0;ii<2;ii++){
+					this.time++;
+					if(this.dijkstra.Calc() == true){
+						//計算中。
+					}else{
+						this.time = 0;
+						if(this.mode == Mode.GoA_Calc){
+							this.mode = Mode.GoA_Move;
+						}else{
+							this.mode = Mode.GoB_Move;
+						}
+						break;
+					}
 				}
 
-				//計算。
-				while(this.dijkstra.Calc() == true){}
+				string t_text = "Time = " + this.time.ToString() + " : ListCount = " + this.dijkstra.GetCalcList().Count.ToString(); 
+				this.status_text.SetText(t_text);
 
-				this.time = 0;
+				for(int ii=0;ii<this.sprite_map.Length;ii++){
+					Fee.Dijkstra.NodeEx<int,NodeData,LinkData> t_node = this.dijkstra.GetNode(ii);
 
-				if(this.mode == Mode.GoA_Start){
-					this.mode = Mode.GoA_Move;
-				}else{
-					this.mode = Mode.GoB_Move;
+					if(this.dijkstra.GetCalcList().ContainsKey(ii) == true){
+						//計算中。
+						this.sprite_map[ii].SetColor(1.0f,0.0f,0.0f,1.0f);
+					}else{
+						//通常表示。
+						this.sprite_map[ii].SetColor((100 - t_node.nodedata.tipcost) / 100.0f,1.0f,1.0f,1.0f);
+					}
 				}
 			}break;
 		case Mode.GoA_Move:
@@ -306,10 +344,10 @@ public class test09 : main_base
 
 					//現在位置。
 					int t_key_now = this.cursor_x + this.cursor_y * this.map_w;
-					Fee.Dijkstra.NodeEx<NodeData,LinkData> t_node_now = this.dijkstra.GetNode(t_key_now);
+					Fee.Dijkstra.NodeEx<int,NodeData,LinkData> t_node_now = this.dijkstra.GetNode(t_key_now);
 
 					//移動先ノード。
-					Fee.Dijkstra.NodeEx<NodeData,LinkData> t_node_to = t_node_now.GetPrevNode();
+					Fee.Dijkstra.NodeEx<int,NodeData,LinkData> t_node_to = t_node_now.GetPrevNode();
 
 					if(t_node_to != null){
 						if(t_node_now.nodedata.x < t_node_to.nodedata.x){
