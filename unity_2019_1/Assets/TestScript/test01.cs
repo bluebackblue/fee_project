@@ -14,13 +14,15 @@ using UnityEngine;
 /** test01
 
 	スプライト
-	仮想スクリーンサイズと同じサイズのスプライトを設置。
-
 	テキスト
-	中央に文字を設置。
-
 	入力フィールド
-	テキストの下に入力フィールドを設置。
+	ボタン
+
+	Screen = ＧＵＩスクリーンサイズ
+	Data = Asetsのパス
+	PersistentData  = データ保存パス
+	StreamingAssets = ストリーミングアセットのパス
+	TemporaryCache = 一時データ保存パス
 
 */
 public class test01 : main_base

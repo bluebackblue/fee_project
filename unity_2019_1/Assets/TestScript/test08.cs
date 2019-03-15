@@ -23,6 +23,76 @@ public class test08 : main_base
 	*/
 	private Fee.Deleter.Deleter deleter;
 
+	/** リストアイテム。
+	*/
+	private class Scroll_Item : Fee.Ui.ScrollItem_Base
+	{
+		/** text
+		*/
+		public Fee.Render2D.Text2D text;
+
+		/** GetItemLength
+		*/
+		public static int GetItemLength()
+		{
+			return 20;
+		}
+
+		/** constructor
+		*/
+		public Scroll_Item(Fee.Deleter.Deleter a_deleter,string a_text)
+		{
+			this.text = new Fee.Render2D.Text2D(a_deleter,null,1);
+			this.text.SetRect(0,0,0,0);
+			this.text.SetText(a_text);
+		}
+
+		/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+		*/
+		public override void SetY(int a_y)
+		{
+			this.text.SetY(a_y);
+		}
+
+		/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+		*/
+		public override void SetX(int a_x)
+		{
+			this.text.SetX(a_x);
+		}
+
+		/** [Fee.Ui.ScrollItem_Base]クリップ矩形。設定。
+		*/
+		public override void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
+		{
+			this.text.SetClipRect(ref a_rect);
+		}
+
+		/** [Fee.Ui.ScrollItem_Base]表示内。
+		*/
+		public override void OnViewIn()
+		{
+			this.text.SetVisible(true);
+		}
+
+		/** [Fee.Ui.ScrollItem_Base]表示外。
+		*/
+		public override void OnViewOut()
+		{
+			this.text.SetVisible(false);
+		}
+	}
+
+	/** root
+	*/
+	private Fee.Render2D.Text2D root_text;
+	private Fee.Ui.Scroll_Vertical<Scroll_Item> root_scroll;
+
+	/** fee
+	*/
+	private Fee.Render2D.Text2D fee_text;
+	private Fee.Ui.Scroll_Vertical<Scroll_Item> fee_scroll;
+
 	/** Start
 	*/
 	private void Start()
@@ -55,43 +125,43 @@ public class test08 : main_base
 		//戻るボタン作成。
 		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
+		{
+			this.root_text = new Fee.Render2D.Text2D(this.deleter,null,0);
+			this.root_text.SetRect(10,100,0,0);
+			this.root_scroll = new Fee.Ui.Scroll_Vertical<Scroll_Item>(this.deleter,0,Scroll_Item.GetItemLength());
+			this.root_scroll.SetRect(this.root_text.GetX(),this.root_text.GetY() + 30,150,300);
+
+			this.fee_text = new Fee.Render2D.Text2D(this.deleter,null,0);
+			this.fee_text.SetRect(10 + 500,100,0,0);
+			this.fee_scroll = new Fee.Ui.Scroll_Vertical<Scroll_Item>(this.deleter,0,Scroll_Item.GetItemLength());
+			this.fee_scroll.SetRect(this.fee_text.GetX(),this.fee_text.GetY() + 30,150,300);
+		}
+
 		Fee.Directory.Item t_item_root = Fee.Directory.Directory.GetDirectoryItem(Application.dataPath);
-
-		//ルートのフルパス。
-		Debug.Log(t_item_root.GetRoot().GetFullPath());
-
-		Debug.Log("----------");
 
 		//ルート。
 		{
+			this.root_text.SetText(t_item_root.GetRoot().GetFullPath());
+		
 			List<Fee.Directory.Item> t_directory_list = t_item_root.GetDirectoryList();
 			for(int ii=0;ii<t_directory_list.Count;ii++){
-				Debug.Log(t_directory_list[ii].GetName());
+				this.root_scroll.AddItem(new Scroll_Item(this.deleter,t_directory_list[ii].GetName()),this.root_scroll.GetListCount());
 			}
-			Debug.Log("----------");
 		}
 
 		//ルート => Fee
-		Fee.Directory.Item t_item_root_fee = t_item_root.FindDirectory("Fee");
 		{
-			if(t_item_root_fee != null){
-				List<Fee.Directory.Item> t_directory_list = t_item_root_fee.GetDirectoryList();
-				for(int ii=0;ii<t_directory_list.Count;ii++){
-					Debug.Log(t_directory_list[ii].GetName());
-				}
-				Debug.Log("----------");
-			}
-		}
+			Fee.Directory.Item t_item_root_fee = t_item_root.FindDirectory("Fee");
 
-		//ルート => Fee => フォント。
-		Fee.Directory.Item t_item_root_fee_font = t_item_root_fee.FindDirectory("Font");
-		{
-			if(t_item_root_fee_font != null){
-				List<Fee.Directory.Item> t_file_list = t_item_root_fee_font.GetFileList();
-				for(int ii=0;ii<t_file_list.Count;ii++){
-					Debug.Log(t_file_list[ii].GetName());
-				}
-				Debug.Log("----------");
+			this.fee_text.SetText(t_item_root_fee.GetName());
+		
+			List<Fee.Directory.Item> t_directory_list = t_item_root_fee.GetDirectoryList();
+			for(int ii=0;ii<t_directory_list.Count;ii++){
+				this.fee_scroll.AddItem(new Scroll_Item(this.deleter,t_directory_list[ii].GetName()),this.fee_scroll.GetListCount());
+			}
+			List<Fee.Directory.Item> t_file_list = t_item_root_fee.GetFileList();
+			for(int ii=0;ii<t_file_list.Count;ii++){
+				this.fee_scroll.AddItem(new Scroll_Item(this.deleter,t_file_list[ii].GetName()),this.fee_scroll.GetListCount());
 			}
 		}
 	}
