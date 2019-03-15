@@ -13,45 +13,44 @@
 */
 namespace Fee.Dijkstra
 {
-	/** NodeBase
+	/** Node
 	*/
-	public class NodeBase
+	public class NodeEx<NODEDATA,LINKDATA>
+		where NODEDATA : struct
+		where LINKDATA : struct
 	{
+		/** ノード追加情報。
+		*/
+		public NODEDATA nodedata;
+
 		/** リンク。
 		*/
-		public System.Collections.Generic.List<LinkBase> link;
+		private System.Collections.Generic.List<LinkEx<NODEDATA,LINKDATA>> link_list;
 
 		/** 到達コスト。
 		*/
-		public long total_cost;
+		private long total_cost;
 
 		/** 隣接ノード計算済みフラグ。
 		*/
-		public bool fix;
+		private bool fix;
 
 		/** このノードへ到達するための隣接ノード。
 		*/
-		public NodeBase prev_node;
+		private NodeEx<NODEDATA,LINKDATA> prev_node;
 
 		/** constructor
 		*/
-		public NodeBase()
+		public NodeEx(NODEDATA a_nodedata)
 		{
-			this.link = new System.Collections.Generic.List<LinkBase>();
+			this.nodedata = a_nodedata;
+			this.link_list = new System.Collections.Generic.List<LinkEx<NODEDATA,LINKDATA>>();
 			this.total_cost = -1;
 			this.fix = false;
 			this.prev_node = null;
 		}
 
-		/** 隣接ノードの追加。
-		*/
-		public void AddLink<LINK>(LINK a_link)
-			where LINK : LinkBase
-		{
-			this.link.Add(a_link);
-		}
-
-		/** 計算フラグのリセット。
+		/** [Node_Interface]計算フラグのリセット。
 		*/
 		public void ResetCalcFlag()
 		{
@@ -60,13 +59,69 @@ namespace Fee.Dijkstra
 			this.prev_node = null;
 		}
 
-		/** 開始ノードに設定。
+		/** [Node_Interface]開始ノードに設定。
 		*/
 		public void SetStartNode()
 		{
 			this.total_cost = 0;
 			this.fix = false;
 			this.prev_node = null;
+		}
+
+		/** [Node_Interface]隣接ノード計算済みフラグ。取得。
+		*/
+		public bool GetFixFlag()
+		{
+			return this.fix;
+		}
+
+		/** [Node_Interface]隣接ノード計算済みフラグ。設定。
+		*/
+		public void SetFixFlag(bool a_flag)
+		{
+			this.fix = a_flag;
+		}
+
+		/** [Node_Interface]到達コスト。取得。
+		*/
+		public long GetTotalCost()
+		{
+			return this.total_cost;
+		}
+
+		/** [Node_Interface]到達コスト。設定。
+		*/
+		public void SetTotalCost(long a_totalcost)
+		{
+			this.total_cost = a_totalcost;
+		}
+
+		/** 隣接ノードの追加。
+		*/
+		public void AddLink(LinkEx<NODEDATA,LINKDATA> a_link)
+		{
+			this.link_list.Add(a_link);
+		}
+
+		/** リンクリスト。取得。
+		*/
+		public System.Collections.Generic.List<LinkEx<NODEDATA,LINKDATA>> GetLinkList()
+		{
+			return this.link_list;
+		}
+
+		/** このノードへ到達するための隣接ノード。取得。
+		*/
+		public NodeEx<NODEDATA,LINKDATA> GetPrevNode()
+		{
+			return this.prev_node;
+		}
+
+		/** このノードへ到達するための隣接ノード。設定。
+		*/
+		public void SetPrevNode(NodeEx<NODEDATA,LINKDATA> a_prev_node)
+		{
+			this.prev_node = a_prev_node;
 		}
 	}
 }
