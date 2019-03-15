@@ -134,12 +134,12 @@ public class test09 : main_base
 		this.status_text.SetRect(70,50,0,0);
 
 		//マップ。
-		this.map_w = 30;
-		this.map_h = 30;
+		this.map_w = 60;
+		this.map_h = 60;
 		this.map_x = 70;
 		this.map_y = 70;
-		this.map_tip_w = 16;
-		this.map_tip_h = 16;
+		this.map_tip_w = 8;
+		this.map_tip_h = 8;
 
 		//mode
 		this.mode = Mode.Init;
@@ -285,8 +285,8 @@ public class test09 : main_base
 
 				//ゴールを設定。
 				if(this.mode == Mode.GoA_Start){
-					int t_x = this.map_w - 1;
-					int t_y = this.map_h - 1;
+					int t_x = this.map_w / 2;
+					int t_y = this.map_h / 2;
 					int t_key = t_x + t_y * this.map_w;
 					this.dijkstra.SetStartNode(this.dijkstra.GetNode(t_key));
 
@@ -326,7 +326,7 @@ public class test09 : main_base
 				for(int ii=0;ii<this.sprite_map.Length;ii++){
 					Fee.Dijkstra.Node<int,NodeData,LinkData> t_node = this.dijkstra.GetNode(ii);
 
-					if(this.dijkstra.GetCalcList().ContainsKey(ii) == true){
+					if(t_node.GetCalcFlag() == true){
 						//計算中。
 						this.sprite_map[ii].SetColor(1.0f,0.0f,0.0f,1.0f);
 					}else{
