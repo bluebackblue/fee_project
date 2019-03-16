@@ -186,13 +186,13 @@ public class test11 : main_base
 		this.pack_soundpool = null;
 
 		//ステータス。
-		this.status = new Fee.Render2D.Text2D(this.deleter,null,0);
+		this.status = new Fee.Render2D.Text2D(this.deleter,0);
 		this.status.SetRect(100,50,0,0);
 		this.status.SetText("-");
 		this.status.SetFontSize(13);
 
 		//ステータス。
-		this.status_2 = new Fee.Render2D.Text2D(this.deleter,null,0);
+		this.status_2 = new Fee.Render2D.Text2D(this.deleter,0);
 		this.status_2.SetRect(100,100,0,0);
 		this.status_2.SetText("-");
 		this.status.SetFontSize(13);
@@ -200,7 +200,7 @@ public class test11 : main_base
 		int t_xx = 0;
 
 		//ボタン。
-		this.button_unload = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Unload,-1);
+		this.button_unload = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Unload,-1);
 		this.button_unload.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_unload.SetRect(t_xx,130,170,30);
 		this.button_unload.SetText("アンロード");
@@ -208,7 +208,7 @@ public class test11 : main_base
 		t_xx += 210;
 
 		//ボタン。
-		this.button_assetbundle = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_AssetBundle,-1);
+		this.button_assetbundle = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_AssetBundle,-1);
 		this.button_assetbundle.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_assetbundle.SetRect(t_xx,130,170,30);
 		this.button_assetbundle.SetText("AssetBundleロード");
@@ -216,7 +216,7 @@ public class test11 : main_base
 		t_xx += 210;
 
 		//ボタン。
-		this.button_soundpool = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_SoundPool,-1);
+		this.button_soundpool = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SoundPool,-1);
 		this.button_soundpool.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_soundpool.SetRect(t_xx,130,170,30);
 		this.button_soundpool.SetText("SoundPoolロード");
@@ -224,7 +224,7 @@ public class test11 : main_base
 		t_xx += 210;
 
 		//ボタン。
-		this.button_bgm = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Bgm,-1);
+		this.button_bgm = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Bgm,-1);
 		this.button_bgm.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_bgm.SetRect(t_xx,130,170,30);
 		this.button_bgm.SetText("ＢＧＭ");
@@ -232,7 +232,7 @@ public class test11 : main_base
 		int t_yy = 300;
 
 		//スライダー。
-		this.slider_master = new Fee.Ui.Slider(this.deleter,null,0,this.CallBack_Change_Master,0);
+		this.slider_master = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Master,0);
 		this.slider_master.SetRect(100,t_yy,400,40);
 		this.slider_master.SetValue(0.0f);
 		this.slider_master.SetButtonTexture(Resources.Load<Texture2D>("button"));
@@ -243,7 +243,7 @@ public class test11 : main_base
 		t_yy += 60;
 
 		//スライダー。
-		this.slider_bgm = new Fee.Ui.Slider(this.deleter,null,0,this.CallBack_Change_Bgm,0);
+		this.slider_bgm = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Bgm,0);
 		this.slider_bgm.SetRect(100,t_yy,400,40);
 		this.slider_bgm.SetValue(0.0f);
 		this.slider_bgm.SetButtonTexture(Resources.Load<Texture2D>("button"));
@@ -254,7 +254,7 @@ public class test11 : main_base
 		t_yy += 60;
 
 		//スライダー。
-		this.slider_se = new Fee.Ui.Slider(this.deleter,null,0,this.CallBack_Change_Se,0);
+		this.slider_se = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Se,0);
 		this.slider_se.SetRect(100,t_yy,400,40);
 		this.slider_se.SetValue(0.0f);
 		this.slider_se.SetButtonTexture(Resources.Load<Texture2D>("button"));

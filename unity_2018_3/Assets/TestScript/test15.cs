@@ -106,7 +106,7 @@ public class test15 : main_base
 		{
 			Texture2D t_texture = Resources.Load<Texture2D>("IMGP8657");
 
-			this.clipsprite = new Fee.Ui.ClipSprite(this.deleter,null,t_drawpriority + 1);
+			this.clipsprite = new Fee.Ui.ClipSprite(this.deleter,t_drawpriority + 1);
 			this.clipsprite.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
 			this.clipsprite.SetTexture(Texture2D.whiteTexture);
 			this.clipsprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
@@ -119,7 +119,7 @@ public class test15 : main_base
 			int t_x = Fee.Render2D.Render2D.VIRTUAL_W / 2;
 			int t_y = 100;
 
-			this.text = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority + 1);
+			this.text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority + 1);
 			this.text.SetRect(t_x,t_y,0,0);
 			this.text.SetText("ESC ENTER");
 			this.text.SetCenter(true,true);
@@ -138,7 +138,7 @@ public class test15 : main_base
 
 			Texture2D t_texture = Resources.Load<Texture2D>("button");
 
-			this.button = new Fee.Ui.Button(this.deleter,null,t_drawpriority + 2,this.CallBack_Click,0);
+			this.button = new Fee.Ui.Button(this.deleter,t_drawpriority + 2,this.CallBack_Click,0);
 			this.button.SetRect(t_x,t_y,t_w,t_h);
 			this.button.SetTexture(t_texture);
 		}
@@ -152,7 +152,7 @@ public class test15 : main_base
 
 			Texture2D t_texture = Resources.Load<Texture2D>("checkbutton");
 
-			this.checkbutton = new Fee.Ui.CheckButton(this.deleter,null,t_drawpriority + 2,this.CallBack_Change,0);
+			this.checkbutton = new Fee.Ui.CheckButton(this.deleter,t_drawpriority + 2,this.CallBack_Change,0);
 			this.checkbutton.SetRect(t_x,t_y,t_w,t_h);
 			this.checkbutton.SetTexture(t_texture);
 		}
@@ -164,7 +164,7 @@ public class test15 : main_base
 			int t_x = 100;
 			int t_y = 100;
 
-			this.inputfield = new Fee.Render2D.InputField2D(this.deleter,null,t_drawpriority + 2);
+			this.inputfield = new Fee.Render2D.InputField2D(this.deleter,t_drawpriority + 2);
 			this.inputfield.SetRect(t_x,t_y,t_w,t_h);
 		}
 
@@ -175,7 +175,7 @@ public class test15 : main_base
 			int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 			int t_y = 350;
 
-			this.slider = new Fee.Ui.Slider(this.deleter,null,t_drawpriority + 2,this.CallBack_Change,0);
+			this.slider = new Fee.Ui.Slider(this.deleter,t_drawpriority + 2,this.CallBack_Change,0);
 			this.slider.SetRect(t_x,t_y,t_w,t_h);
 			this.slider.SetTexture(Resources.Load<Texture2D>("slider"));
 			this.slider.SetButtonTexture(Resources.Load<Texture2D>("button"));

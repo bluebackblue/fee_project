@@ -136,7 +136,7 @@ public class test20 : main_base
 		this.step = Step.Init;
 
 		//status_text
-		this.status_text = new Fee.Render2D.Text2D(this.deleter,null,0);
+		this.status_text = new Fee.Render2D.Text2D(this.deleter,0);
 		this.status_text.SetRect(100,10,0,0);
 		this.status_text.SetText("");
 
@@ -154,39 +154,39 @@ public class test20 : main_base
 			int t_apikey_y = t_button_y - 140;
 			int t_apikey_h = 50;
 
-			this.login_button = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Login,0);
+			this.login_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Login,0);
 			this.login_button.SetTexture(Resources.Load<Texture2D>("button"));
 			this.login_button.SetRect(t_button_x,t_button_y,t_button_w,t_button_h);
 			this.login_button.SetText("ログイン");
 			this.login_button.SetVisible(false);
 
-			this.login_pass_inputfield = new Fee.Render2D.InputField2D(this.deleter,null,0);
+			this.login_pass_inputfield = new Fee.Render2D.InputField2D(this.deleter,0);
 			this.login_pass_inputfield.SetRect(t_pass_x,t_pass_y,300,t_pass_h);
 			this.login_pass_inputfield.SetVisible(false);
 
-			this.login_apikey_inputfield = new Fee.Render2D.InputField2D(this.deleter,null,0);
+			this.login_apikey_inputfield = new Fee.Render2D.InputField2D(this.deleter,0);
 			this.login_apikey_inputfield.SetRect(t_apikey_x,t_apikey_y,400,t_apikey_h);
 			this.login_apikey_inputfield.SetVisible(false);
 
-			this.login_pass_text = new Fee.Render2D.Text2D(this.deleter,null,0);
+			this.login_pass_text = new Fee.Render2D.Text2D(this.deleter,0);
 			this.login_pass_text.SetRect(t_pass_x - 100,t_pass_y,0,t_pass_h);
 			this.login_pass_text.SetText("PASS");
 			this.login_pass_text.SetCenter(false,true);
 			this.login_pass_text.SetVisible(false);
 
-			this.login_apikey_text = new Fee.Render2D.Text2D(this.deleter,null,0);
+			this.login_apikey_text = new Fee.Render2D.Text2D(this.deleter,0);
 			this.login_apikey_text.SetRect(t_apikey_x - 100,t_apikey_y,0,t_apikey_h);
 			this.login_apikey_text.SetText("APIKEY");
 			this.login_apikey_text.SetCenter(false,true);
 			this.login_apikey_text.SetVisible(false);
 
-			this.login_apikey_button = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_ApiKeyPage,0);
+			this.login_apikey_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_ApiKeyPage,0);
 			this.login_apikey_button.SetTexture(Resources.Load<Texture2D>("button"));
 			this.login_apikey_button.SetRect(t_apikey_x + 450,t_apikey_y,t_button_w + 140,t_button_h);
 			this.login_apikey_button.SetText("ApiKey作成ページを開く");
 			this.login_apikey_button.SetVisible(false);
 
-			this.login_last_error = new Fee.Render2D.Text2D(this.deleter,null,0);
+			this.login_last_error = new Fee.Render2D.Text2D(this.deleter,0);
 			this.login_last_error.SetRect(t_button_x + 130,t_button_y,0,t_pass_h);
 			this.login_last_error.SetText("---");
 			this.login_last_error.SetCenter(false,true);

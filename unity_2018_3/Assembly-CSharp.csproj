@@ -221,7 +221,6 @@
     <Compile Include="Assets\Fee\Script\Render2D\Sprite2D_Param.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Sprite2D_Rect.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Sprite2D_Rotate.cs" />
-    <Compile Include="Assets\Fee\Script\Render2D\State2D.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Text2D.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Text2D_Param.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Text2D_Rect.cs" />

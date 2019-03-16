@@ -149,27 +149,27 @@ public class test02 : main_base
 
 		//ボタン。
 		{
-			this.button_save1 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Save,1);
+			this.button_save1 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Save,1);
 			this.button_save1.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_save1.SetRect(100 + 110 * 0,100,100,50);
 			this.button_save1.SetText("Save1");
 
-			this.button_save2 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Save,2);
+			this.button_save2 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Save,2);
 			this.button_save2.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_save2.SetRect(100 + 110 * 1,100,100,50);
 			this.button_save2.SetText("Save2");
 
-			this.button_load1 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Load,1);
+			this.button_load1 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Load,1);
 			this.button_load1.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_load1.SetRect(100 + 110 * 2,100,100,50);
 			this.button_load1.SetText("Load1");
 
-			this.button_load2 = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Load,2);
+			this.button_load2 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Load,2);
 			this.button_load2.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_load2.SetRect(100 + 110 * 3,100,100,50);
 			this.button_load2.SetText("Load2");
 
-			this.button_random = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_Random,-1);
+			this.button_random = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Random,-1);
 			this.button_random.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_random.SetRect(600,100,100,50);
 			this.button_random.SetText("Random");
@@ -177,7 +177,7 @@ public class test02 : main_base
 
 		//ステータス。
 		{
-			this.status = new Fee.Render2D.Text2D(this.deleter,null,0);
+			this.status = new Fee.Render2D.Text2D(this.deleter,0);
 			this.status.SetRect(100,200,0,0);
 			this.status.SetText("");
 		}

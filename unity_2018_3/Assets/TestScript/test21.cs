@@ -117,7 +117,7 @@ public class test21 : main_base
 
 		//start_button
 		{
-			this.start_button = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click_StartButton,-1);
+			this.start_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_StartButton,-1);
 			this.start_button.SetTexture(Resources.Load<Texture2D>("button"));
 			this.start_button.SetRect(100,100,100,50);
 			this.start_button.SetText("開始");
@@ -125,7 +125,7 @@ public class test21 : main_base
 
 		//status_text
 		{
-			this.status_text = new Fee.Render2D.Text2D(this.deleter,null,0);
+			this.status_text = new Fee.Render2D.Text2D(this.deleter,0);
 			this.status_text.SetRect(100,150,0,0);
 			this.status_text.SetText("---");
 		}
