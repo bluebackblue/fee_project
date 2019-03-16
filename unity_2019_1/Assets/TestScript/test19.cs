@@ -24,6 +24,9 @@ public class test19 : main_base
 	*/
 	private void Start()
 	{
+		//タスク。インスタンス作成。
+		Fee.TaskW.TaskW.CreateInstance();
+
 		//パフォーマンスカウンター。インスタンス作成。
 		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
 		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
