@@ -102,9 +102,11 @@
     <Compile Include="Assets\Fee\Script\Deleter\Deleter.cs" />
     <Compile Include="Assets\Fee\Script\Deleter\Item_Base.cs" />
     <Compile Include="Assets\Fee\Script\Deleter\Tool.cs" />
+    <Compile Include="Assets\Fee\Script\Dijkstra\Config.cs" />
     <Compile Include="Assets\Fee\Script\Dijkstra\Dijkstra.cs" />
     <Compile Include="Assets\Fee\Script\Dijkstra\Link.cs" />
     <Compile Include="Assets\Fee\Script\Dijkstra\Node.cs" />
+    <Compile Include="Assets\Fee\Script\Dijkstra\Tool.cs" />
     <Compile Include="Assets\Fee\Script\Directory\Config.cs" />
     <Compile Include="Assets\Fee\Script\Directory\Directory.cs" />
     <Compile Include="Assets\Fee\Script\Directory\Item.cs" />

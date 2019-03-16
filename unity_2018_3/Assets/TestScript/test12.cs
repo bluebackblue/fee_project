@@ -20,6 +20,10 @@ public class test12 : main_base
 	*/
 	private Fee.Deleter.Deleter deleter;
 
+	/** root
+	*/
+	private Transform root;
+
 	/** Start
 	*/
 	private void Start()
@@ -49,6 +53,26 @@ public class test12 : main_base
 
 		//戻るボタン作成。
 		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
+
+		//find
+		GameObject t_prefab_sphere = Resources.Load<GameObject>("sphere");
+		GameObject t_prefab_cube = Resources.Load<GameObject>("cube");
+
+		//root
+		{
+			GameObject t_gameobject = GameObject.Instantiate<GameObject>(t_prefab_sphere,new Vector3(0,0,0),Quaternion.identity);
+			this.root = t_gameobject.GetComponent<Transform>();
+		}
+
+		//a
+		{
+			GameObject t_gameobject = GameObject.Instantiate<GameObject>(t_prefab_cube,new Vector3(0,0,0),Quaternion.identity);
+			t_gameobject.name = "a";
+			Transform t_transform = t_gameobject.GetComponent<Transform>();
+			t_transform.SetParent(this.root);
+			t_transform.localPosition = new Vector3(0,0.5f,0);
+			t_transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+		}
 	}
 
 	/** FixedUpdate
