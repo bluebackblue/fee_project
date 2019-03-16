@@ -5,13 +5,13 @@
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
  * http://bbbproject.sakura.ne.jp/wordpress/mitlicense
- * @brief シーン。コンフィグ。
+ * @brief ダイクストラ法。コンフィグ。
 */
 
 
-/** Fee.Scene
+/** Fee.Dijkstra
 */
-namespace Fee.Scene
+namespace Fee.Dijkstra
 {
 	/** Config
 	*/
@@ -19,7 +19,7 @@ namespace Fee.Scene
 	{
 		/** ログ。
 		*/
-		public static bool LOG_ENABLE = false;
+		public const bool LOG_ENABLE = false;
 
 		/** ログエラー。
 		*/

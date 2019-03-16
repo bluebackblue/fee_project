@@ -5,7 +5,7 @@
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
  * http://bbbproject.sakura.ne.jp/wordpress/mitlicense
- * @brief イベントプレート。ツール。
+ * @brief ダイクストラ法。ツール。
 */
 
 
@@ -13,9 +13,9 @@
 #pragma warning disable 0162
 
 
-/** Fee.EventPlate
+/** Fee.Dijkstra
 */
-namespace Fee.EventPlate
+namespace Fee.Dijkstra
 {
 	/** Tool
 	*/
