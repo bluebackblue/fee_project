@@ -234,7 +234,7 @@ namespace Fee.Audio
 					}
 
 					if(t_ret == false){
-						Tool.LogError("SoundPool","unload : error : " + a_name);
+						Tool.Log("SoundPool","unload : error : " + a_name);
 					}
 				}catch(System.Exception t_exception){
 					Tool.LogError(t_exception);
@@ -280,7 +280,7 @@ namespace Fee.Audio
 					}
 
 					if(t_ret == 0){
-						Tool.LogError("SoundPool","play : error : " + a_name);
+						Tool.Log("SoundPool","play : error : " + a_name);
 					}
 				}catch(System.Exception t_exception){
 					Tool.LogError(t_exception);
