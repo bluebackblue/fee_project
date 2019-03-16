@@ -307,6 +307,7 @@
     <None Include="Assets\Fee\LICENSE.txt" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Alpha.shader" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_X.shader" />
+    <None Include="Assets\Fee\readme.txt" />
     <None Include="Assets\AssetBundle\Raw\se.txt" />
     <None Include="Assets\Fee\license\univrm\LICENSE.txt" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_Y.shader" />
