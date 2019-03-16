@@ -193,15 +193,6 @@ public class test17 : main_base
 	private int v_scrollview_create_id;
 	private int h_scrollview_create_id;
 
-	/** drag
-	*/
-	private bool drag_v;
-	private bool drag_h;
-	private int drag_old_value_x;
-	private int drag_old_value_y;
-	private float drag_speed_x;
-	private float drag_speed_y;
-
 	/** status_text
 	*/
 	private Fee.Render2D.Text2D status_text;
@@ -278,12 +269,14 @@ public class test17 : main_base
 		this.h_scrollview_create_id = 0;
 
 		//drag
+		/*
 		this.drag_v = false;
 		this.drag_h = false;
 		this.drag_old_value_x = 0;
 		this.drag_old_value_y = 0;
 		this.drag_speed_x = 0.0f;
 		this.drag_speed_y = 0.0f;
+		*/
 
 		//status_text
 		this.status_text = new Fee.Render2D.Text2D(this.deleter,null,0);
@@ -417,14 +410,14 @@ public class test17 : main_base
 		case 1000:
 			{
 				//上に移動。
-				this.drag_speed_y += 15.0f;
-				this.drag_speed_x += 15.0f;
+				this.v_scrollview.SetDragScrollSpeed(this.v_scrollview.GetDragScrollSpeed() - 15.0f);
+				this.h_scrollview.SetDragScrollSpeed(this.h_scrollview.GetDragScrollSpeed() - 15.0f);
 			}break;
 		case 1001:
 			{
 				//下に移動。
-				this.drag_speed_y -= 15.0f;
-				this.drag_speed_x -= 15.0f;
+				this.v_scrollview.SetDragScrollSpeed(this.v_scrollview.GetDragScrollSpeed() + 15.0f);
+				this.h_scrollview.SetDragScrollSpeed(this.h_scrollview.GetDragScrollSpeed() + 15.0f);
 			}break;
 		case 2000:
 			{
@@ -608,79 +601,9 @@ public class test17 : main_base
 		//ＵＩ。
 		Fee.Ui.Ui.GetInstance().Main();
 
-		//ドラッグ中。
-		if(this.drag_v == true){
-			if(Fee.Input.Mouse.GetInstance().left.on == true){
-				{
-					int t_distance_y = Fee.Input.Mouse.GetInstance().left.last_down_pos.y - Fee.Input.Mouse.GetInstance().pos.y;
-					this.v_scrollview.SetViewPosition(this.drag_old_value_y + t_distance_y);
-				}
-				this.drag_speed_y = this.drag_speed_y * 0.3f + (Fee.Input.Mouse.GetInstance().pos.y - Fee.Input.Mouse.GetInstance().pos.y_old) * 0.7f;
-			}else{
-				this.drag_v = false;
-			}
-		}
-
-		//ドラッグ中。
-		if(this.drag_h == true){
-			
-			if(Fee.Input.Mouse.GetInstance().left.on == true){
-				{
-					int t_distance_x = Fee.Input.Mouse.GetInstance().left.last_down_pos.x - Fee.Input.Mouse.GetInstance().pos.x;
-					this.h_scrollview.SetViewPosition(this.drag_old_value_x + t_distance_x);
-				}
-				this.drag_speed_x = this.drag_speed_x * 0.3f + (Fee.Input.Mouse.GetInstance().pos.x - Fee.Input.Mouse.GetInstance().pos.x_old) * 0.7f;
-			}else{
-				this.drag_h = false;
-			}
-		}
-
-		//ドラッグ開始チェック。
-		if((this.drag_v == false)&&(this.drag_h == false)){
-			if(Fee.Input.Mouse.GetInstance().InRectCheck(this.v_scrollview.GetX(),this.v_scrollview.GetY(),this.v_scrollview.GetW(),this.v_scrollview.GetH())){
-				if(Fee.Input.Mouse.GetInstance().left.down == true){
-					this.drag_v = true;
-					this.drag_old_value_y = this.v_scrollview.GetViewPosition();
-					this.drag_speed_y = 0.0f;
-				}
-			}else if(Fee.Input.Mouse.GetInstance().InRectCheck(this.h_scrollview.GetX(),this.h_scrollview.GetY(),this.h_scrollview.GetW(),this.h_scrollview.GetH())){
-				if(Fee.Input.Mouse.GetInstance().left.down == true){
-					this.drag_h = true;
-					this.drag_old_value_x = this.h_scrollview.GetViewPosition();
-					this.drag_speed_x = 0.0f;
-				}
-			}
-		}
-
-		//減速。
-		if(this.drag_v == false){
-			if(this.drag_speed_y != 0.0f){
-				int t_move = (int)this.drag_speed_y;
-				this.drag_speed_y /= 1.08f;
-				{
-					if(t_move != 0){
-						this.v_scrollview.SetViewPosition(this.v_scrollview.GetViewPosition() - t_move);
-					}else{
-						this.drag_speed_y = 0.0f;
-					}
-				}
-			}
-		}
-
-		//減速。
-		if(this.drag_h == false){
-			if(this.drag_speed_x != 0.0f){
-				int t_move = (int)this.drag_speed_x;
-				this.drag_speed_x /= 1.08f;
-				{
-					if(t_move != 0){
-						this.h_scrollview.SetViewPosition(this.h_scrollview.GetViewPosition() - t_move);
-					}else{
-						this.drag_speed_x = 0.0f;
-					}
-				}
-			}
-		}
+		//ドラッグスクロールアップデート。
+		this.v_scrollview.DragScrollUpdate(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y,Fee.Input.Mouse.GetInstance().left.on);
+		this.h_scrollview.DragScrollUpdate(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y,Fee.Input.Mouse.GetInstance().left.on);
 	}
 
 	/** 削除前。

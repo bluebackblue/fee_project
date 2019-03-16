@@ -267,28 +267,28 @@ public class main : UnityEngine.MonoBehaviour
 				switch(t_list[ii].m_Name){
 				case Fee.Input.EditInputManager_Item.ButtonName.LEFT:					t_find_left				= true;		break;
 				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT:					t_find_right			= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.UP:					t_find_up				= true;		break;
+				case Fee.Input.EditInputManager_Item.ButtonName.UP:						t_find_up				= true;		break;
 				case Fee.Input.EditInputManager_Item.ButtonName.DOWN:					t_find_down				= true;		break;
 
 				case Fee.Input.EditInputManager_Item.ButtonName.ENTER:					t_find_enter			= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.ESCAPE:				t_find_escape			= true;		break;
+				case Fee.Input.EditInputManager_Item.ButtonName.ESCAPE:					t_find_escape			= true;		break;
 				case Fee.Input.EditInputManager_Item.ButtonName.SUB1:					t_find_sub1				= true;		break;
 				case Fee.Input.EditInputManager_Item.ButtonName.SUB2:					t_find_sub2				= true;		break;
 
 				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_MENU:				t_find_left_menu		= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_MENU:			t_find_right_menu		= true;		break;
+				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_MENU:				t_find_right_menu		= true;		break;
 
 				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_STICK_AXIS_X:		t_left_stick_axis_x		= true;		break;
 				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_STICK_AXIS_Y:		t_left_stick_axis_y		= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_STICK_AXIS_X:	t_right_stick_axis_x	= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_STICK_AXIS_Y:	t_right_stick_axis_y	= true;		break;
+				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_STICK_AXIS_X:		t_right_stick_axis_x	= true;		break;
+				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_STICK_AXIS_Y:		t_right_stick_axis_y	= true;		break;
 
 				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_STICK_BUTTON:		t_left_stick_button		= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_STICK_BUTTON:	t_right_stick_button	= true;		break;
+				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_STICK_BUTTON:		t_right_stick_button	= true;		break;
 
 				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_TRIGGER1_BUTTON:	t_left_trigger1_button	= true;		break;
 				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_TRIGGER1_BUTTON:	t_right_trigger1_button	= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_TRIGGER2_AXIS:	t_left_trigger2_axis	= true;		break;
+				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_TRIGGER2_AXIS:		t_left_trigger2_axis	= true;		break;
 				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_TRIGGER2_AXIS:	t_right_trigger2_axis	= true;		break;
 				}
 			}
