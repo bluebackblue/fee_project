@@ -214,6 +214,7 @@
     <Compile Include="Assets\Fee\Script\Render2D\MonoBehaviour_PreDraw.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Pos2D.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Rect2D.cs" />
+    <Compile Include="Assets\Fee\Script\Render2D\RectTool.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Render2D.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Screen.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Size2D.cs" />
