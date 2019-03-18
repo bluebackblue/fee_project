@@ -24,7 +24,7 @@ namespace Fee.JsonItem
 			if(
 				a_type == typeof(string) ||
 				a_type == typeof(uint) ||
-				a_type == typeof(uint) ||
+				a_type == typeof(ulong) ||
 				a_type == typeof(int) ||
 				a_type == typeof(long) ||
 				a_type == typeof(float) ||
@@ -85,19 +85,21 @@ namespace Fee.JsonItem
 						//bool
 						a_to_object = a_jsonitem.GetBoolData();
 					}
-				}else if(a_jsonitem.IsIntegerNumber() == true){
+				}else if(a_jsonitem.IsSignedNumber() == true){
 					if(t_type == typeof(int)){
 						//int
 						a_to_object = (int)a_jsonitem.GetInteger();
 					}else if(t_type == typeof(long)){
 						//long
-						a_to_object = (long)a_jsonitem.GetInteger();
-					}else if(t_type == typeof(uint)){
+						a_to_object = (long)a_jsonitem.GetLong();
+					}
+				}else if(a_jsonitem.IsUnSignedNumber() == true){
+					if(t_type == typeof(uint)){
 						//uint
-						a_to_object = (uint)a_jsonitem.GetInteger();
+						a_to_object = (uint)a_jsonitem.GetUnsignedInteger();
 					}else if(t_type == typeof(ulong)){
 						//ulong
-						a_to_object = (ulong)a_jsonitem.GetInteger();
+						a_to_object = (ulong)a_jsonitem.GetUnsignedLong();
 					}
 				}else if(a_jsonitem.IsFloatNumber() == true){
 					if(t_type == typeof(float)){
@@ -105,7 +107,7 @@ namespace Fee.JsonItem
 						a_to_object = (float)a_jsonitem.GetFloat();
 					}else if(t_type == typeof(double)){
 						//double
-						a_to_object = (double)a_jsonitem.GetFloat();
+						a_to_object = (double)a_jsonitem.GetDouble();
 					} 
 				}else if(a_jsonitem.IsIndexArray() == true){
 					if(t_type.IsGenericType == true){
