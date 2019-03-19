@@ -197,6 +197,8 @@ public class test02 : main_base
 			for(int ii=0;ii<20;ii++){
 				this.array[ii] = new SpeedTest_ArrayItem(a_create);
 			}
+
+			this.ignoremember = 0;
 		}
 
 		/** GetItem
@@ -300,12 +302,12 @@ public class test02 : main_base
 			this.button_speedtest_utf8json = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest_Utf8Json,-1);
 			this.button_speedtest_utf8json.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_speedtest_utf8json.SetRect(600 + 110*1,100 + 60 * 1,100,50);
-			this.button_speedtest_utf8json.SetText("SpeedTest");
+			this.button_speedtest_utf8json.SetText("Utf8Json Test");
 
 			this.button_speedtest_fee = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest_Fee,-1);
 			this.button_speedtest_fee.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_speedtest_fee.SetRect(600 + 110*1,100  + 60 * 2,100,50);
-			this.button_speedtest_fee.SetText("SpeedTest");
+			this.button_speedtest_fee.SetText("Fee Test");
 		}
 
 		//ステータス。
@@ -389,13 +391,15 @@ public class test02 : main_base
 	*/
 	private void CallBack_Click_SpeedTest_Utf8Json(int a_id)
 	{
+		#if(USE_DEF_FEE_UTF8JSON)
 		SpeedTest_Data t_data_from = new SpeedTest_Data(true);
-
 		string t_jsonstring_utf8json = "";
+		#endif
 
 		string t_log = "";
 
 		//Utf8Json使用。
+		#if(USE_DEF_FEE_UTF8JSON)
 		try{
 			float t_start = UnityEngine.Time.realtimeSinceStartup;
 			{
@@ -408,10 +412,12 @@ public class test02 : main_base
 			t_log += "Utf8Json : ToJsonString : ----------------- \n";
 			Debug.LogError(t_exception);
 		}
+		#endif
 
 		t_log += "\n";
 
 		//Utf8Json使用。
+		#if(USE_DEF_FEE_UTF8JSON)
 		try{
 			int t_value = 0;
 
@@ -427,6 +433,7 @@ public class test02 : main_base
 			t_log += "Utf8Json : JsonStringToObject : ----------------- \n";
 			Debug.LogError(t_exception);
 		}
+		#endif
 
 		this.status.SetText(t_log);
 	}
