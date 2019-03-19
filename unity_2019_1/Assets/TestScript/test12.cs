@@ -24,6 +24,18 @@ public class test12 : main_base
 	*/
 	private Transform root;
 
+	/**
+	*/
+	private int pos_m;
+	private int pos_v;
+	private int pos_u;
+
+	/**
+	*/
+	private class DataBase_Block
+	{
+	}
+
 	/** Start
 	*/
 	private void Start()

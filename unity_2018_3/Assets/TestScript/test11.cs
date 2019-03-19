@@ -628,7 +628,7 @@ public class test11 : main_base
 
 		//Rawフォルダに保存。
 		{
-			Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.ObjectToJson.Convert(t_pack_soundpool);
+			Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.ObjectToJsonItem(t_pack_soundpool);
 			string t_json_string = t_jsonitem.ConvertJsonString();
 
 			System.IO.FileInfo t_fileinfo = new System.IO.FileInfo(Application.dataPath + "/AssetBundle/Raw/" + t_assetbundle_name + ".txt");

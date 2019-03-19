@@ -42,6 +42,18 @@ public class test06 : main_base
 			return Fee.Scene.Scene.GetInstance().IsNextScene();
 		}
 
+		/** [Scene_Base]更新。
+		*/
+		public void Unity_Update(float a_delta)
+		{
+		}
+
+		/** [Scene_Base]更新。
+		*/
+		public void Unity_LastUpdate()
+		{
+		}
+
 		/** [Scene.Scene_Base]削除。
 		*/
 		public void Delete()
@@ -101,6 +113,18 @@ public class test06 : main_base
 			}
 
 			return Fee.Scene.Scene.GetInstance().IsNextScene();
+		}
+
+		/** [Scene_Base]更新。
+		*/
+		public void Unity_Update(float a_delta)
+		{
+		}
+
+		/** [Scene_Base]更新。
+		*/
+		public void Unity_LastUpdate()
+		{
 		}
 
 		/** [Scene.Scene_Base]削除。

@@ -100,7 +100,7 @@ public class test01 : main_base
 
 		{
 			//スプライト。
-			this.sprite = new Fee.Render2D.Sprite2D(this.deleter,null,t_drawpriority);
+			this.sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
 			this.sprite.SetTexture(Texture2D.whiteTexture);
 			this.sprite.SetTextureRect(0,0,Fee.Render2D.Render2D.TEXTURE_W,Fee.Render2D.Render2D.TEXTURE_H);
 			this.sprite.SetRect(0,0,Fee.Render2D.Render2D.VIRTUAL_W,Fee.Render2D.Render2D.VIRTUAL_H);
@@ -113,7 +113,7 @@ public class test01 : main_base
 			int t_yy = 100;
 
 			//テキスト。
-			this.text = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
+			this.text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 			this.text.SetRect(t_xx,t_yy,0,0);
 			this.text.SetText("abcあいうえおxyz");
 			this.text.SetColor(0.0f,0.0f,0.0f,1.0f);
@@ -130,7 +130,7 @@ public class test01 : main_base
 				int t_x = t_xx;
 				int t_y = t_yy;
 		
-				this.inputfield = new Fee.Render2D.InputField2D(this.deleter,null,t_drawpriority);
+				this.inputfield = new Fee.Render2D.InputField2D(this.deleter,t_drawpriority);
 				this.inputfield.SetRect(t_x,t_y,t_w,t_h);
 				this.inputfield.SetText("defaultテキスト");
 				this.inputfield.SetMultiLine(true);
@@ -160,7 +160,7 @@ public class test01 : main_base
 			t_text += "USE_DEF_UNIVRM = false\n";
 			#endif
 
-			this.status = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
+			this.status = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 			this.status.SetRect(10,100,0,0);
 			this.status.SetFontSize(15);
 			this.status.SetText(t_text);
@@ -170,21 +170,21 @@ public class test01 : main_base
 			int t_xx = 150;
 			int t_yy = 10;
 
-			this.button_log = new Fee.Ui.Button(this.deleter,null,t_drawpriority + 1,this.CallBack_Click,100);
+			this.button_log = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,100);
 			this.button_log.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_log.SetRect(t_xx,t_yy,80,50);
 			this.button_log.SetText("Log");
 
 			t_xx += 100;
 
-			this.button_logerror = new Fee.Ui.Button(this.deleter,null,t_drawpriority + 1,this.CallBack_Click,200);
+			this.button_logerror = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,200);
 			this.button_logerror.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_logerror.SetRect(t_xx,t_yy,80,50);
 			this.button_logerror.SetText("LogError");
 
 			t_xx += 100;
 
-			this.button_assert = new Fee.Ui.Button(this.deleter,null,t_drawpriority + 1,this.CallBack_Click,300);
+			this.button_assert = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,300);
 			this.button_assert.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button_assert.SetRect(t_xx,t_yy,80,50);
 			this.button_assert.SetText("Assert");

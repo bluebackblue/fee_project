@@ -42,7 +42,7 @@ public class test08 : main_base
 		*/
 		public Scroll_Item(Fee.Deleter.Deleter a_deleter,string a_text)
 		{
-			this.text = new Fee.Render2D.Text2D(a_deleter,null,1);
+			this.text = new Fee.Render2D.Text2D(a_deleter,1);
 			this.text.SetRect(0,0,0,0);
 			this.text.SetText(a_text);
 			this.text.SetClip(true);
@@ -127,12 +127,12 @@ public class test08 : main_base
 		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		{
-			this.root_text = new Fee.Render2D.Text2D(this.deleter,null,0);
+			this.root_text = new Fee.Render2D.Text2D(this.deleter,0);
 			this.root_text.SetRect(10,100,0,0);
 			this.root_scroll = new Fee.Ui.Scroll_Vertical<Scroll_Item>(this.deleter,0,Scroll_Item.GetItemLength());
 			this.root_scroll.SetRect(this.root_text.GetX(),this.root_text.GetY() + 30,150,250);
 
-			this.fee_text = new Fee.Render2D.Text2D(this.deleter,null,0);
+			this.fee_text = new Fee.Render2D.Text2D(this.deleter,0);
 			this.fee_text.SetRect(10 + 500,100,0,0);
 			this.fee_scroll = new Fee.Ui.Scroll_Vertical<Scroll_Item>(this.deleter,0,Scroll_Item.GetItemLength());
 			this.fee_scroll.SetRect(this.fee_text.GetX(),this.fee_text.GetY() + 30,150,250);

@@ -105,14 +105,14 @@ public class main : UnityEngine.MonoBehaviour
 					t_name = "-";
 				}
 
-				this.button[ii] = new Fee.Ui.Button(this.deleter,null,0,Click,ii);
+				this.button[ii] = new Fee.Ui.Button(this.deleter,0,Click,ii);
 				this.button[ii].SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>("button"));
 				this.button[ii].SetRect(t_x,t_y,t_w,t_h);
 				this.button[ii].SetText(t_name);
 			}
 
 			//text
-			this.text = new Fee.Render2D.Text2D(this.deleter,null,0);
+			this.text = new Fee.Render2D.Text2D(this.deleter,0);
 			this.text.SetRect(0,0,0,0);
 			this.text.SetText("---");
 		}
@@ -235,176 +235,130 @@ public class main : UnityEngine.MonoBehaviour
 	{
 		Fee.Input.EditInputManager t_inputmaanger = new Fee.Input.EditInputManager();
 		{
-			List<Fee.Input.EditInputManager_Item> t_list = t_inputmaanger.GetList();
+			System.Collections.Generic.List<Fee.Input.EditInputManager_Item> t_list = t_inputmaanger.GetList();
 
-			bool t_find_left = false;
-			bool t_find_right = false;
-			bool t_find_up = false;
-			bool t_find_down = false;
+			System.Collections.Generic.Dictionary<string,Fee.Input.EditInputManager_Item> t_flag_list = new System.Collections.Generic.Dictionary<string,Fee.Input.EditInputManager_Item>();
+			{
+				//トリガー。
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateLeftTrigger1Button();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LT1,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateRightTrigger1Button();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RT1,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateLeftTrigger2Button();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LT2,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateRightTrigger2Button();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RT2,t_item);
+				}
 
-			bool t_find_enter = false;
-			bool t_find_escape = false;
-			bool t_find_sub1 = false;
-			bool t_find_sub2 = false;
+				//ボタン。
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateDigitalButtonLeft();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LEFT,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateDigitalButtonRight();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RIGHT,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateDigitalButtonUp();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_UP,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateDigitalButtonDown();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_DOWN,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateDigitalButtonEnter();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_ENTER,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateDigitalButtonEscape();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_ESCAPE,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateDigitalButtonSub1();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_SUB1,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateDigitalButtonSub2();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_SUB2,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateDigitalButtonLeftMenu();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LMENU,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateDigitalButtonRightMenu();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RMENU,t_item);
+				}
 
-			bool t_find_left_menu = false;
-			bool t_find_right_menu = false;
-
-			bool t_left_stick_axis_x = false;
-			bool t_left_stick_axis_y = false;
-			bool t_right_stick_axis_x = false;
-			bool t_right_stick_axis_y = false;
-
-			bool t_left_stick_button = false;
-			bool t_right_stick_button = false;
-
-			bool t_left_trigger1_button = false;
-			bool t_right_trigger1_button = false;
-			bool t_left_trigger2_axis = false;
-			bool t_right_trigger2_axis = false;
-
-			for(int ii=0;ii<t_list.Count;ii++){
-				switch(t_list[ii].m_Name){
-				case Fee.Input.EditInputManager_Item.ButtonName.LEFT:					t_find_left				= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT:					t_find_right			= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.UP:						t_find_up				= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.DOWN:					t_find_down				= true;		break;
-
-				case Fee.Input.EditInputManager_Item.ButtonName.ENTER:					t_find_enter			= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.ESCAPE:					t_find_escape			= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.SUB1:					t_find_sub1				= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.SUB2:					t_find_sub2				= true;		break;
-
-				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_MENU:				t_find_left_menu		= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_MENU:				t_find_right_menu		= true;		break;
-
-				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_STICK_AXIS_X:		t_left_stick_axis_x		= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_STICK_AXIS_Y:		t_left_stick_axis_y		= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_STICK_AXIS_X:		t_right_stick_axis_x	= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_STICK_AXIS_Y:		t_right_stick_axis_y	= true;		break;
-
-				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_STICK_BUTTON:		t_left_stick_button		= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_STICK_BUTTON:		t_right_stick_button	= true;		break;
-
-				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_TRIGGER1_BUTTON:	t_left_trigger1_button	= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_TRIGGER1_BUTTON:	t_right_trigger1_button	= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.LEFT_TRIGGER2_AXIS:		t_left_trigger2_axis	= true;		break;
-				case Fee.Input.EditInputManager_Item.ButtonName.RIGHT_TRIGGER2_AXIS:	t_right_trigger2_axis	= true;		break;
+				//スティック。
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateLeftStickAxisX();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LSX,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateLeftStickAxisY();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LSY,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateRightStickAxisX();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RSX,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateRightStickAxisY();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RSY,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateLeftStickButton();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LSB,t_item);
+				}
+				{
+					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
+					t_item.CreateRightStickButton();
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RSB,t_item);
 				}
 			}
 
-			//存在しない場合は追加。
-			{
-				//デジタルボタン。上下左右。
-				if(t_find_left == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateDigitalButtonLeft();
-					t_list.Add(t_item);
+			//すでにリストに存在するものはリストから外す。
+			for(int ii=0;ii<t_list.Count;ii++){
+				Fee.Input.EditInputManager_Item t_item;
+				if(t_flag_list.TryGetValue(t_list[ii].m_Name,out t_item) == true){
+					//すでに存在する。
+					t_flag_list[t_list[ii].m_Name] = null;
 				}
-				if(t_find_right == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateDigitalButtonRight();
-					t_list.Add(t_item);
-				}
-				if(t_find_up == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateDigitalButtonUp();
-					t_list.Add(t_item);
-				}
-				if(t_find_down == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateDigitalButtonDown();
-					t_list.Add(t_item);
-				}
+			}
 
-				//デジタルボタン。
-				if(t_find_enter == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateDigitalButtonEnter();
-					t_list.Add(t_item);
-				}
-				if(t_find_escape == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateDigitalButtonEscape();
-					t_list.Add(t_item);
-				}
-				if(t_find_sub1 == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateDigitalButtonSub1();
-					t_list.Add(t_item);
-				}
-				if(t_find_sub2 == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateDigitalButtonSub2();
-					t_list.Add(t_item);
-				}
-
-				//デジタルボタン。
-				if(t_find_left_menu == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateDigitalButtonLeftMenu();
-					t_list.Add(t_item);
-				}
-				if(t_find_right_menu == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateDigitalButtonRightMenu();
-					t_list.Add(t_item);
-				}
-
-				//スティック。方向。
-				if(t_left_stick_axis_x == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateLeftStickAxisX();
-					t_list.Add(t_item);
-				}
-				if(t_left_stick_axis_y == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateLeftStickAxisY();
-					t_list.Add(t_item);
-				}
-				if(t_right_stick_axis_x == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateRightStickAxisX();
-					t_list.Add(t_item);
-				}
-				if(t_right_stick_axis_y == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateRightStickAxisY();
-					t_list.Add(t_item);
-				}
-
-				//スティック。ボタン。
-				if(t_left_stick_button == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateLeftStickButton();
-					t_list.Add(t_item);
-				}
-				if(t_right_stick_button == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateRightStickButton();
-					t_list.Add(t_item);
-				}
-
-				//トリガー。
-				if(t_left_trigger1_button == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateLeftTrigger1Button();
-					t_list.Add(t_item);
-				}
-				if(t_right_trigger1_button == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateRightTrigger1Button();
-					t_list.Add(t_item);
-				}
-				if(t_left_trigger2_axis == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateLeftTrigger2Button();
-					t_list.Add(t_item);
-				}
-				if(t_right_trigger2_axis == false){
-					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
-					t_item.CreateRightTrigger2Button();
-					t_list.Add(t_item);
+			//リストに追加。
+			foreach(System.Collections.Generic.KeyValuePair<string,Fee.Input.EditInputManager_Item> t_pair in t_flag_list){
+				if(t_pair.Value != null){
+					t_list.Add(t_pair.Value);
 				}
 			}
 		}
@@ -501,7 +455,7 @@ public class main_base : UnityEngine.MonoBehaviour
 	*/
 	public void CreateReturnButton(Fee.Deleter.Deleter a_deleter,long a_drawpriority)
 	{
-		this.return_button = new Fee.Ui.Button(a_deleter,null,a_drawpriority,Click,0);
+		this.return_button = new Fee.Ui.Button(a_deleter,a_drawpriority,Click,0);
 		this.return_button.SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>("button"));
 		this.return_button.SetText("Return");
 		this.return_button.SetRect(0,0,80,40);

@@ -165,6 +165,7 @@
     <Compile Include="Assets\Fee\Script\Input\EditInputManager.cs" />
     <Compile Include="Assets\Fee\Script\Input\EditInputManager_Item.cs" />
     <Compile Include="Assets\Fee\Script\Input\Input.cs" />
+    <Compile Include="Assets\Fee\Script\Input\InputSystem_Dummy.cs" />
     <Compile Include="Assets\Fee\Script\Input\Key.cs" />
     <Compile Include="Assets\Fee\Script\Input\Moter_Speed.cs" />
     <Compile Include="Assets\Fee\Script\Input\Mouse.cs" />
@@ -180,12 +181,12 @@
     <Compile Include="Assets\Fee\Script\Instantiate\Tool.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\Attribute.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\Config.cs" />
+    <Compile Include="Assets\Fee\Script\JsonItem\Convert.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\Impl.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\JsonItem.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\JsonToObject.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\JsonToObject_SystemObject.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\JsonToObject_Work.cs" />
-    <Compile Include="Assets\Fee\Script\JsonItem\ObjectToJson.cs" />
+    <Compile Include="Assets\Fee\Script\JsonItem\ObjectToJson_SystemObject.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\ObjectToJson_Work.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\Tool.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\Value.cs" />

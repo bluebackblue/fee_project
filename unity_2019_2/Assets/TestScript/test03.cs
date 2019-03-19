@@ -126,19 +126,19 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 
 		{
 			//button
-			this.button = new Fee.Ui.Button(this.deleter,null,this.drawpriority_ui,this.CallBack_Click,0);
+			this.button = new Fee.Ui.Button(this.deleter,this.drawpriority_ui,this.CallBack_Click,0);
 			this.button.SetRect(130,10,50,50);
 			this.button.SetTexture(Resources.Load<Texture2D>("button"));
 			this.button.SetText("Load");
 
 			//inputfield
-			this.inputfield = new Fee.Render2D.InputField2D(this.deleter,null,this.drawpriority_ui);
+			this.inputfield = new Fee.Render2D.InputField2D(this.deleter,this.drawpriority_ui);
 			this.inputfield.SetRect(130 + 50 + 10,10,700,50);
 			this.inputfield.SetText("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/StreamingAssets/nana.vrmx");
 			this.inputfield.SetMultiLine(false);
 
 			//ステータス。
-			this.status = new Fee.Render2D.Text2D(this.deleter,null,this.drawpriority_ui);
+			this.status = new Fee.Render2D.Text2D(this.deleter,this.drawpriority_ui);
 			this.status.SetRect(100,100,0,0);
 
 			//bone
@@ -205,14 +205,14 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 				this.bone_eventplate = new Fee.EventPlate.Item[this.bone_index.Length];
 
 				for(int ii=0;ii<this.bone_index.Length;ii++){
-					this.bone_sprite[ii] = new Fee.Render2D.Sprite2D(this.deleter,null,this.drawpriority_ui + ii);
+					this.bone_sprite[ii] = new Fee.Render2D.Sprite2D(this.deleter,this.drawpriority_ui + ii);
 					this.bone_sprite[ii].SetTexture(Resources.Load<Texture2D>("maru"));
 					this.bone_sprite[ii].SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 					this.bone_sprite[ii].SetRect(0,0,50,20);
 					this.bone_sprite[ii].SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 					this.bone_sprite[ii].SetVisible(false);
 
-					this.bone_name[ii] = new Fee.Render2D.Text2D(this.deleter,null,this.drawpriority_ui + ii);
+					this.bone_name[ii] = new Fee.Render2D.Text2D(this.deleter,this.drawpriority_ui + ii);
 					this.bone_name[ii].SetText(this.bone_index[ii].ToString());
 					this.bone_name[ii].SetRect(0,0,0,0);
 					this.bone_name[ii].SetVisible(false);
@@ -228,7 +228,7 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 
 		//bg
 		{
-			this.bg = new Fee.Render2D.Sprite2D(this.deleter,null,this.drawpriority_bg);
+			this.bg = new Fee.Render2D.Sprite2D(this.deleter,this.drawpriority_bg);
 			this.bg.SetTexture(Texture2D.whiteTexture);
 			this.bg.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.bg.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);

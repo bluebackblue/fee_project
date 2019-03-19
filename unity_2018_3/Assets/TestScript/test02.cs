@@ -198,7 +198,7 @@ public class test02 : main_base
 	{
 		if(this.savedata != null){
 			//オブジェクトをＪＳＯＮ化。
-			Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.ObjectToJson.Convert(this.savedata);
+			Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.ObjectToJsonItem(this.savedata);
 
 			//ＪＳＯＮを文字列化。
 			string t_jsonstring = t_jsonitem.ConvertJsonString();
@@ -322,7 +322,7 @@ public class test02 : main_base
 						Fee.JsonItem.JsonItem t_jsonitem = new Fee.JsonItem.JsonItem(t_jsonstring);
 						if(t_jsonitem != null){
 							//ＪＳＯＮをオブジェクト化。
-							t_savedata = Fee.JsonItem.JsonToObject<SaveData>.Convert(t_jsonitem);
+							t_savedata = Fee.JsonItem.Convert.JsonItemToObject<SaveData>(t_jsonitem);
 						}
 					}
 

@@ -150,7 +150,7 @@ public class test16 : main_base , Fee.Network.OnRemoteCallBack_Base
 			int t_x = 100;
 			int t_y = 100;
 
-			this.status_text = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
+			this.status_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 			this.status_text.SetRect(t_x,t_y,0,0);
 			this.status_text.SetText("");
 		}
@@ -162,7 +162,7 @@ public class test16 : main_base , Fee.Network.OnRemoteCallBack_Base
 
 			this.player_text = new Fee.Render2D.Text2D[8];
 			for(int ii=0;ii<player_text.Length;ii++){
-				this.player_text[ii] = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
+				this.player_text[ii] = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 				this.player_text[ii].SetRect(t_x,t_y + 35*ii,0,0);
 			}
 		}
@@ -187,7 +187,7 @@ public class test16 : main_base , Fee.Network.OnRemoteCallBack_Base
 
 			Texture2D t_texture = Resources.Load<Texture2D>("button");
 
-			this.start_button = new Fee.Ui.Button(this.deleter,null,t_drawpriority,this.CallBack_Click_Start,0);
+			this.start_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_Start,0);
 			this.start_button.SetRect(t_x,t_y,t_w,t_h);
 			this.start_button.SetTexture(t_texture);
 			this.start_button.SetText("接続");
@@ -203,7 +203,7 @@ public class test16 : main_base , Fee.Network.OnRemoteCallBack_Base
 
 			Texture2D t_texture = Resources.Load<Texture2D>("button");
 
-			this.end_button = new Fee.Ui.Button(this.deleter,null,t_drawpriority,this.CallBack_Click_End,0);
+			this.end_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_End,0);
 			this.end_button.SetRect(t_x,t_y,t_w,t_h);
 			this.end_button.SetTexture(t_texture);
 			this.end_button.SetText("切断");

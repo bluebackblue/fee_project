@@ -115,18 +115,18 @@ public class test04 : main_base
 		long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 
 		//sprite
-		this.sprite = new Fee.Render2D.Sprite2D(this.deleter,null,t_drawpriority);
+		this.sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
 		this.sprite.SetRect(100,300,64,64);
 		this.sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 		this.sprite.SetTexture(Texture2D.whiteTexture);
 		this.sprite.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 
 		//status
-		this.status = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
+		this.status = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 		this.status.SetRect(100,100,0,0);
 
 		//button
-		this.button = new Fee.Ui.Button(this.deleter,null,t_drawpriority,this.CallBack_Click,0);
+		this.button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,0);
 		this.button.SetRect(100,150,100,100);
 		this.button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button.SetText("Start");

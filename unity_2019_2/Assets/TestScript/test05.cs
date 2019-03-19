@@ -68,7 +68,7 @@ public class test05 : main_base
 			this.deleter = a_deleter;
 			this.touch_phase = a_touch_phase;
 
-			this.sprite = new Fee.Render2D.Sprite2D(this.deleter,null,1);
+			this.sprite = new Fee.Render2D.Sprite2D(this.deleter,1);
 			{
 				int t_size = 100;
 
@@ -78,7 +78,7 @@ public class test05 : main_base
 				this.sprite.SetRect(this.touch_phase.value_x-t_size/2,this.touch_phase.value_y-t_size/2,t_size,t_size);
 			}
 
-			this.text = new Fee.Render2D.Text2D(this.deleter,null,1);
+			this.text = new Fee.Render2D.Text2D(this.deleter,1);
 			{
 				this.text.SetRect(this.touch_phase.value_x,this.touch_phase.value_y,0,0);
 			}
@@ -170,7 +170,7 @@ public class test05 : main_base
 		//背景。
 		int t_layerindex = 0;
 		long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
-		this.sprite_bg = new Fee.Render2D.Sprite2D(this.deleter,null,t_drawpriority);
+		this.sprite_bg = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
 		this.sprite_bg.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 		this.sprite_bg.SetTexture(Texture2D.whiteTexture);
 		this.sprite_bg.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
@@ -178,27 +178,27 @@ public class test05 : main_base
 		this.sprite_bg.SetColor(0.0f,0.0f,0.0f,1.0f);
 
 		//テキスト。
-		this.text_mouse = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
+		this.text_mouse = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 		this.text_mouse.SetRect(10,100 + 50 * 0,0,0);
 		this.text_mouse.SetFontSize(17);
 
 		//テキスト。
-		this.text_key = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
+		this.text_key = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 		this.text_key.SetRect(10,100 + 50 * 1,0,0);
 		this.text_key.SetFontSize(20);
 
 		//テキスト。
-		this.text_pad_1 = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
+		this.text_pad_1 = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 		this.text_pad_1.SetRect(10,100 + 50 * 2,0,0);
 		this.text_pad_1.SetFontSize(20);
 
 		//テキスト。
-		this.text_pad_2 = new Fee.Render2D.Text2D(this.deleter,null,t_drawpriority);
+		this.text_pad_2 = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 		this.text_pad_2.SetRect(10,100 + 50 * 3,0,0);
 		this.text_pad_2.SetFontSize(20);
 
 		//スプライト。
-		this.mouse_sprite = new Fee.Render2D.Sprite2D(this.deleter,null,t_drawpriority + 1);
+		this.mouse_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority + 1);
 		this.mouse_sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 		this.mouse_sprite.SetTexture(Texture2D.whiteTexture);
 		this.mouse_sprite.SetRect(0,0,10,10);

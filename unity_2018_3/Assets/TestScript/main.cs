@@ -243,106 +243,106 @@ public class main : UnityEngine.MonoBehaviour
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateLeftTrigger1Button();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_LT1,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LT1,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateRightTrigger1Button();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_RT1,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RT1,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateLeftTrigger2Button();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_LT2,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LT2,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateRightTrigger2Button();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_RT2,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RT2,t_item);
 				}
 
 				//ボタン。
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateDigitalButtonLeft();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_LEFT,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LEFT,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateDigitalButtonRight();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_RIGHT,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RIGHT,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateDigitalButtonUp();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_UP,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_UP,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateDigitalButtonDown();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_DOWN,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_DOWN,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateDigitalButtonEnter();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_ENTER,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_ENTER,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateDigitalButtonEscape();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_ESCAPE,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_ESCAPE,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateDigitalButtonSub1();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_SUB1,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_SUB1,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateDigitalButtonSub2();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_SUB2,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_SUB2,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateDigitalButtonLeftMenu();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_LMENU,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LMENU,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateDigitalButtonRightMenu();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_RMENU,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RMENU,t_item);
 				}
 
 				//スティック。
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateLeftStickAxisX();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_LSX,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LSX,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateLeftStickAxisY();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_LSY,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LSY,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateRightStickAxisX();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_RSX,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RSX,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateRightStickAxisY();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_RSY,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RSY,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateLeftStickButton();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_LSB,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_LSB,t_item);
 				}
 				{
 					Fee.Input.EditInputManager_Item t_item = new Fee.Input.EditInputManager_Item();
 					t_item.CreateRightStickButton();
-					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_KEYNAME_RSB,t_item);
+					t_flag_list.Add(Fee.Input.Config.INPUTMANAGER_RSB,t_item);
 				}
 			}
 

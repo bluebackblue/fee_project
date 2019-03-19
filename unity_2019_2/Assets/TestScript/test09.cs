@@ -130,7 +130,7 @@ public class test09 : main_base
 		this.deleter = new Fee.Deleter.Deleter();
 
 		//status_text
-		this.status_text = new Fee.Render2D.Text2D(this.deleter,null,0);
+		this.status_text = new Fee.Render2D.Text2D(this.deleter,0);
 		this.status_text.SetRect(70,50,0,0);
 
 		//マップ。
@@ -150,7 +150,7 @@ public class test09 : main_base
 		//cursor
 		this.cursor_x = 0;
 		this.cursor_y = 0;
-		this.cursor_sprite = new Fee.Render2D.Sprite2D(this.deleter,null,10);
+		this.cursor_sprite = new Fee.Render2D.Sprite2D(this.deleter,10);
 		this.cursor_sprite.SetRect(0,0,0,0);
 		this.cursor_sprite.SetColor(0.5f,0.5f,0.5f,0.5f);
 		this.cursor_sprite.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
@@ -163,7 +163,7 @@ public class test09 : main_base
 			int t_tip_y = ii / this.map_w;
 
 			//スプライト。
-			this.sprite_map[ii] = new Fee.Render2D.Sprite2D(this.deleter,null,0);
+			this.sprite_map[ii] = new Fee.Render2D.Sprite2D(this.deleter,0);
 			this.sprite_map[ii].SetRect(this.map_x + t_tip_x * this.map_tip_w,this.map_y + t_tip_y * this.map_tip_h,this.map_tip_w-1,this.map_tip_h-1);
 
 			//ダイクストラ法、ノード作成。

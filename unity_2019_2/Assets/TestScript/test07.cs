@@ -143,25 +143,25 @@ public class test07 : main_base
 		this.step = Step.None;
 
 		//button_key
-		this.button_key = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,0);
+		this.button_key = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,0);
 		this.button_key.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_key.SetRect(100 + 200 * 0,100,150,50);
 		this.button_key.SetText("公開鍵");
 
 		//button_pass
-		this.button_pass = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,1);
+		this.button_pass = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,1);
 		this.button_pass.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_pass.SetRect(100 + 200 * 1,100,150,50);
 		this.button_pass.SetText("共通鍵");
 
 		//button_signature
-		this.button_signature = new Fee.Ui.Button(this.deleter,null,0,this.CallBack_Click,2);
+		this.button_signature = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,2);
 		this.button_signature.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_signature.SetRect(100 + 200 * 2,100,150,50);
 		this.button_signature.SetText("署名");
 
 		//text
-		this.text = new Fee.Render2D.Text2D(this.deleter,null,0);
+		this.text = new Fee.Render2D.Text2D(this.deleter,0);
 		this.text.SetRect(100,50,0,0);
 		this.text.SetText("---");
 
