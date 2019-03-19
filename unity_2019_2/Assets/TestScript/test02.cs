@@ -219,7 +219,8 @@ public class test02 : main_base
 	private Fee.Ui.Button button_load2;
 	private Fee.Ui.Button button_random;
 
-	private Fee.Ui.Button button_speedtest;
+	private Fee.Ui.Button button_speedtest_utf8json;
+	private Fee.Ui.Button button_speedtest_fee;
 
 	/** ステータス。
 	*/
@@ -293,13 +294,18 @@ public class test02 : main_base
 
 			this.button_random = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Random,-1);
 			this.button_random.SetTexture(Resources.Load<Texture2D>("button"));
-			this.button_random.SetRect(600 + 110*1,100,100,50);
+			this.button_random.SetRect(600 + 110*1,100 + 60 * 0,100,50);
 			this.button_random.SetText("Random");
 
-			this.button_speedtest = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest,-1);
-			this.button_speedtest.SetTexture(Resources.Load<Texture2D>("button"));
-			this.button_speedtest.SetRect(600 + 110*2,100,100,50);
-			this.button_speedtest.SetText("SpeedTest");
+			this.button_speedtest_utf8json = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest_Utf8Json,-1);
+			this.button_speedtest_utf8json.SetTexture(Resources.Load<Texture2D>("button"));
+			this.button_speedtest_utf8json.SetRect(600 + 110*1,100 + 60 * 1,100,50);
+			this.button_speedtest_utf8json.SetText("SpeedTest");
+
+			this.button_speedtest_fee = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest_Fee,-1);
+			this.button_speedtest_fee.SetTexture(Resources.Load<Texture2D>("button"));
+			this.button_speedtest_fee.SetRect(600 + 110*1,100  + 60 * 2,100,50);
+			this.button_speedtest_fee.SetText("SpeedTest");
 		}
 
 		//ステータス。
@@ -381,13 +387,11 @@ public class test02 : main_base
 
 	/** [Button_Base]コールバック。クリック。
 	*/
-	private void CallBack_Click_SpeedTest(int a_id)
+	private void CallBack_Click_SpeedTest_Utf8Json(int a_id)
 	{
 		SpeedTest_Data t_data_from = new SpeedTest_Data(true);
 
 		string t_jsonstring_utf8json = "";
-		string t_jsonstring_fee = "";
-		string t_jsonstring_define = "";
 
 		string t_log = "";
 
@@ -402,34 +406,6 @@ public class test02 : main_base
 			t_log += "Utf8Json : ToJsonString : Time = " + (t_end - t_start).ToString() + " : Size = " + t_jsonstring_utf8json.Length.ToString() + "\n";
 		}catch(System.Exception t_exception){
 			t_log += "Utf8Json : ToJsonString : ----------------- \n";
-			Debug.LogError(t_exception);
-		}
-
-		//Fee使用。
-		try{
-			float t_start = UnityEngine.Time.realtimeSinceStartup;
-			{
-				t_jsonstring_fee = Fee.JsonItem.Convert.ObjectToJsonString_Fee(t_data_from);
-			}
-			float t_end = UnityEngine.Time.realtimeSinceStartup;
-
-			t_log += "Fee : ToJsonString : Time = " + (t_end - t_start).ToString() + " : Size = " + t_jsonstring_fee.Length.ToString() + "\n";
-		}catch(System.Exception t_exception){
-			t_log += "Fee : ToJsonString : ----------------- \n";
-			Debug.LogError(t_exception);
-		}
-
-		//デファイン制御。
-		try{
-			float t_start = UnityEngine.Time.realtimeSinceStartup;
-			{
-				t_jsonstring_define = Fee.JsonItem.Convert.ObjectToJsonString(t_data_from);
-			}
-			float t_end = UnityEngine.Time.realtimeSinceStartup;
-
-			t_log += "Define : ToJsonString : Time = " + (t_end - t_start).ToString() + " : Size = " + t_jsonstring_fee.Length.ToString() + "\n";
-		}catch(System.Exception t_exception){
-			t_log += "Define : ToJsonString : ----------------- \n";
 			Debug.LogError(t_exception);
 		}
 
@@ -452,13 +428,42 @@ public class test02 : main_base
 			Debug.LogError(t_exception);
 		}
 
+		this.status.SetText(t_log);
+	}
+
+	/** [Button_Base]コールバック。クリック。
+	*/
+	private void CallBack_Click_SpeedTest_Fee(int a_id)
+	{
+		SpeedTest_Data t_data_from = new SpeedTest_Data(true);
+
+		string t_jsonstring_fee = "";
+
+		string t_log = "";
+
+		//Fee使用。
+		try{
+			float t_start = UnityEngine.Time.realtimeSinceStartup;
+			{
+				t_jsonstring_fee = Fee.JsonItem.Convert.ObjectToJsonString_Fee(t_data_from);
+			}
+			float t_end = UnityEngine.Time.realtimeSinceStartup;
+
+			t_log += "Fee : ToJsonString : Time = " + (t_end - t_start).ToString() + " : Size = " + t_jsonstring_fee.Length.ToString() + "\n";
+		}catch(System.Exception t_exception){
+			t_log += "Fee : ToJsonString : ----------------- \n";
+			Debug.LogError(t_exception);
+		}
+
+		t_log += "\n";
+
 		//Fee使用。
 		try{
 			int t_value = 0;
 
 			float t_start = UnityEngine.Time.realtimeSinceStartup;
 			{
-				Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.JsonStringToJsonItem(t_jsonstring_utf8json);
+				Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.JsonStringToJsonItem(t_jsonstring_fee);
 				t_value = t_jsonitem.GetItem("array").GetItem(0).GetItem("list").GetItem(0).GetItem("dictionary").GetItem("0").GetItem("value_int").GetInt();
 			}
 			float t_end = UnityEngine.Time.realtimeSinceStartup;
@@ -469,25 +474,9 @@ public class test02 : main_base
 			Debug.LogError(t_exception);
 		}
 
-		//デファイン制御。
-		try{
-			int t_value = 0;
-
-			float t_start = UnityEngine.Time.realtimeSinceStartup;
-			{
-				SpeedTest_Data t_data_utf8json = Fee.JsonItem.Convert.JsonStringToObject<SpeedTest_Data>(t_jsonstring_define);
-				t_value = t_data_utf8json.GetItem(0).list[0].dictionary["0"].value_int;
-			}
-			float t_end = UnityEngine.Time.realtimeSinceStartup;
-
-			t_log += "Define : ToJsonString : Time = " + (t_end - t_start).ToString() + " : Value = " + t_value.ToString() + "\n";
-		}catch(System.Exception t_exception){
-			t_log += "Define : ToJsonString : ----------------- \n";
-			Debug.LogError(t_exception);
-		}
-
 		this.status.SetText(t_log);
 	}
+
 
 	/** ステータス表示。
 	*/
