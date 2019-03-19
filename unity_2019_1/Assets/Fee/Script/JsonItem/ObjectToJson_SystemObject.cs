@@ -13,13 +13,13 @@
 */
 namespace Fee.JsonItem
 {
-	/** ObjectToJson
+	/** ObjectToJson_SystemObject
 	*/
-	public class ObjectToJson
+	public class ObjectToJson_SystemObject
 	{
 		/** Convert
 		*/
-		public static JsonItem Convert(System.Object a_instance,System.Collections.Generic.List<ObjectToJson_Work> a_workpool = null)
+		public static JsonItem Convert(System.Object a_instance,ObjectToJson_Work.ObjectOption a_objectoption,System.Collections.Generic.List<ObjectToJson_Work> a_workpool = null)
 		{
 			System.Collections.Generic.List<ObjectToJson_Work> t_workpool = a_workpool;
 
@@ -95,10 +95,37 @@ namespace Fee.JsonItem
 					t_jsonitem.ReSize(t_array_raw.Length);
 					for(int ii=0;ii<t_array_raw.Length;ii++){
 						System.Object t_list_item_raw = t_array_raw.GetValue(ii);
-						t_workpool.Add(new ObjectToJson_Work(t_list_item_raw,ii,t_jsonitem));
+						t_workpool.Add(new ObjectToJson_Work(t_list_item_raw,null,ii,t_jsonitem));
 					}
 
 					t_return = t_jsonitem;
+				}else if(t_type.IsEnum == true){
+					//enum
+
+					bool t_string_mode = false;
+					if(a_objectoption != null){
+						if(a_objectoption.attribute_enumstring == true){
+							t_string_mode = true;
+						}
+					}
+
+					if(t_string_mode == true){
+						//enumの文字列化。
+
+						string t_value_raw = a_instance.ToString();
+
+						if(t_value_raw != null){
+							t_return = new JsonItem(new Value_StringData(t_value_raw));
+						}else{
+							//nullの場合は追加しない。
+							t_return = null;
+						}
+					}else{
+						//enumの数値化。
+
+						int t_value_raw = (int)a_instance;
+						t_return = new JsonItem(new Value_Int(t_value_raw));
+					}
 				}else if(t_type.IsGenericType == true){
 					System.Type t_type_g = t_type.GetGenericTypeDefinition();
 
@@ -112,7 +139,7 @@ namespace Fee.JsonItem
 							t_jsonitem.ReSize(t_value_raw.Count);
 							for(int ii=0;ii<t_value_raw.Count;ii++){
 								System.Object t_list_item_raw = t_value_raw[ii];
-								t_workpool.Add(new ObjectToJson_Work(t_list_item_raw,ii,t_jsonitem));
+								t_workpool.Add(new ObjectToJson_Work(t_list_item_raw,null,ii,t_jsonitem));
 							}
 
 							t_return = t_jsonitem;
@@ -133,7 +160,7 @@ namespace Fee.JsonItem
 								foreach(string t_key_string in t_collection){
 									if(t_key_string != null){
 										System.Object t_list_item_raw = t_value_raw[t_key_string];
-										t_workpool.Add(new ObjectToJson_Work(t_list_item_raw,t_key_string,t_jsonitem));
+										t_workpool.Add(new ObjectToJson_Work(t_list_item_raw,null,t_key_string,t_jsonitem));
 									}else{
 										//nullの場合は追加しない。
 									}
@@ -168,10 +195,15 @@ namespace Fee.JsonItem
 								if(t_fieldinfo.IsDefined(typeof(Fee.JsonItem.Ignore),false) == true){
 									//無視する。
 								}else{
+									ObjectToJson_Work.ObjectOption t_objectoption = new ObjectToJson_Work.ObjectOption();
+									if(t_fieldinfo.IsDefined(typeof(Fee.JsonItem.EnumString),false) == true){
+										t_objectoption.attribute_enumstring = true;
+									}
+
 									if((t_fieldinfo.Attributes == System.Reflection.FieldAttributes.Public)||(t_fieldinfo.Attributes == System.Reflection.FieldAttributes.Private)){
 										System.Object t_raw = t_fieldinfo.GetValue(a_instance);
 										if(t_raw != null){
-											t_workpool.Add(new ObjectToJson_Work(t_raw,t_fieldinfo.Name,t_jsonitem));
+											t_workpool.Add(new ObjectToJson_Work(t_raw,t_objectoption,t_fieldinfo.Name,t_jsonitem));
 										}else{
 											//nullの子は追加しない。
 										}

@@ -79,6 +79,9 @@ namespace Fee.JsonItem
 					if(t_type == typeof(string)){
 						//string
 						a_to_object = a_jsonitem.GetStringData();
+					}else if(t_type.IsEnum == true){
+						//enum
+						a_to_object = (System.Enum)(System.Enum.Parse(t_type,a_jsonitem.GetStringData()));
 					}
 				}else if(a_jsonitem.IsBoolData() == true){
 					if(t_type == typeof(bool)){
@@ -92,6 +95,9 @@ namespace Fee.JsonItem
 					}else if(t_type == typeof(long)){
 						//long
 						a_to_object = (long)a_jsonitem.GetLong();
+					}else if(t_type.IsEnum == true){
+						//enum
+						a_to_object = (System.Enum)(System.Enum.ToObject(t_type,a_jsonitem.GetInteger()));
 					}
 				}else if(a_jsonitem.IsUnSignedNumber() == true){
 					if(t_type == typeof(uint)){

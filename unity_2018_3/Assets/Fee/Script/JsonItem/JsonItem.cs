@@ -912,6 +912,16 @@ namespace Fee.JsonItem
 			return t_ret_keylist;
 		}
 
+		/** オブジェクトへコンバート。
+		*/
+		public Type ConvertObject<Type>()
+		{
+			System.Type t_type = typeof(Type);
+			System.Object t_object = JsonToObject_SystemObject.CreateInstance(t_type,this);
+			JsonToObject_SystemObject.Convert(ref t_object,t_type,this);
+			return (Type)System.Convert.ChangeType(t_object,t_type);
+		}
+
 		/** JsonStringへコンバート。
 		*/
 		public string ConvertJsonString()
