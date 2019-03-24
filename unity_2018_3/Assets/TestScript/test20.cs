@@ -80,7 +80,9 @@ public class test20 : main_base
 	*/
 	private string vrm_url;
 	private Fee.UniVrm.Item vrm1;
+	private Fee.UniVrm.Controller vrm1_controller;
 	private Fee.UniVrm.Item vrm2;
+	private Fee.UniVrm.Controller vrm2_controller;
 	private Fee.File.Item vrm_loaditem;
 	private UnityEngine.GameObject vrm_camera;
 	private VrmStatus vrm_status;
@@ -199,6 +201,8 @@ public class test20 : main_base
 		this.vrm_url = null;
 		this.vrm1 = null;
 		this.vrm2 = null;
+		this.vrm1_controller = null;
+		this.vrm2_controller = null;
 		this.vrm_loaditem = null;
 		this.vrm_status = VrmStatus.None;
 	}
@@ -465,16 +469,17 @@ public class test20 : main_base
 							//ＶＲＭ作成成功。
 
 							//レイヤーをモデルに設定。
-							this.vrm1.SetLayer("Model");
+							//this.vrm1.SetLayer("Model");
 
 							//表示開始。
-							this.vrm1.SetRendererEnable(true);
+							this.vrm1_controller = this.vrm1.CreateRuntimeAnimatorController();
+							this.vrm1_controller.SetVisible(true);
 
 							//アニメータコントローラ設定。
-							this.vrm1.SetAnimatorController(Resources.Load<RuntimeAnimatorController>("Anime/AnimatorController"));
+							this.vrm1_controller.SetRuntimeAnimatorController(Resources.Load<RuntimeAnimatorController>("Anime/AnimatorController"));
 
 							//モーション停止。
-							this.vrm1.SetAnimeEnable(false);
+							//this.vrm1.SetAnimeEnable(false);
 							this.vrm_status = VrmStatus.None;
 
 							//追従カメラ。
@@ -502,16 +507,17 @@ public class test20 : main_base
 							//ＶＲＭ作成成功。
 
 							//レイヤーをモデルに設定。
-							this.vrm2.SetLayer("Model");
+							//this.vrm2.SetLayer("Model");
 
 							//表示開始。
-							this.vrm2.SetRendererEnable(true);
+							this.vrm2_controller = this.vrm1.CreateRuntimeAnimatorController();
+							this.vrm2_controller.SetVisible(true);
 
 							//アニメータコントローラ設定。
-							this.vrm2.SetAnimatorController(Resources.Load<RuntimeAnimatorController>("Anime/AnimatorController"));
+							this.vrm2_controller.SetRuntimeAnimatorController(Resources.Load<RuntimeAnimatorController>("Anime/AnimatorController"));
 
 							//モーション停止。
-							this.vrm2.SetAnimeEnable(false);
+							//this.vrm2.SetAnimeEnable(false);
 							this.vrm_status = VrmStatus.None;
 
 							//追従カメラ。
@@ -555,12 +561,12 @@ public class test20 : main_base
 						t_request = VrmStatus.Walk;
 
 						//前方向。
-						Vector3 t_vrm_forward = this.vrm1.GetForward();
+						Vector3 t_vrm_forward = this.vrm1_controller.GetTransform().forward;
 
 						//移動。
 						float t_speed_move = 0.02f;
-						Vector3 t_position = this.vrm1.GetPosition() + t_vrm_forward * t_speed_move;
-						this.vrm1.SetPosition(ref t_position);
+						Vector3 t_position = this.vrm1_controller.GetTransform().position + t_vrm_forward * t_speed_move;
+						this.vrm1_controller.GetTransform().position = t_position;
 					}
 
 					if(Fee.Input.Key.GetInstance().left.on == true){
@@ -568,45 +574,45 @@ public class test20 : main_base
 						t_request = VrmStatus.Walk;
 
 						//前方向。
-						Vector3 t_vrm_forward = this.vrm1.GetForward();
+						Vector3 t_vrm_forward = this.vrm1_controller.GetTransform().forward;
 
 						float t_speed_rotate = 0.3f;
-						Transform t_vrm_transform = this.vrm1.GetTransform();
+						Transform t_vrm_transform = this.vrm1_controller.GetTransform();
 						t_vrm_transform.rotation = Quaternion.AngleAxis(-t_speed_rotate,Vector3.up) * t_vrm_transform.rotation;
 
 						//移動。
 						float t_speed_move = 0.005f;
-						Vector3 t_position = this.vrm1.GetPosition() + t_vrm_forward * t_speed_move;
-						this.vrm1.SetPosition(ref t_position);
+						Vector3 t_position = this.vrm1_controller.GetTransform().position + t_vrm_forward * t_speed_move;
+						this.vrm1_controller.GetTransform().position = t_position;
 					}else if(Fee.Input.Key.GetInstance().right.on == true){
 						//右回転。
 						t_request = VrmStatus.Walk;
 
 						//前方向。
-						Vector3 t_vrm_forward = this.vrm1.GetForward();
+						Vector3 t_vrm_forward = this.vrm1_controller.GetTransform().forward;
 
 						float t_speed_rotate = 0.3f;
-						Transform t_vrm_transform = this.vrm1.GetTransform();
+						Transform t_vrm_transform = this.vrm1_controller.GetTransform();
 						t_vrm_transform.rotation = Quaternion.AngleAxis(t_speed_rotate,Vector3.up) * t_vrm_transform.rotation;
 
 						//移動。
 						float t_speed_move = 0.005f;
-						Vector3 t_position = this.vrm1.GetPosition() + t_vrm_forward * t_speed_move;
-						this.vrm1.SetPosition(ref t_position);
+						Vector3 t_position = this.vrm1_controller.GetTransform().position + t_vrm_forward * t_speed_move;
+						this.vrm1_controller.GetTransform().position = t_position;
 					}
 
 					if(this.vrm_status != t_request){
 						if(this.vrm_status == VrmStatus.None){
-							this.vrm1.SetAnimeEnable(true);
+							//this.vrm1.SetAnimeEnable(true);
 						}else if(t_request == VrmStatus.None){
-							this.vrm1.SetAnimeEnable(false);
+							//this.vrm1.SetAnimeEnable(false);
 						}
 
 						switch(t_request){
 						case VrmStatus.Walk:
 							{
 								this.vrm_status = VrmStatus.Walk;
-								this.vrm1.SetAnime(Animator.StringToHash("Base Layer.standing_walk_forward_inPlace"));
+								this.vrm1_controller.PlayMotion_RuntimeAnimatorController("standing_walk_forward_inPlace");
 							}break;
 						default:
 							{
@@ -617,7 +623,7 @@ public class test20 : main_base
 				}
 
 				if(this.vrm2 != null){
-					this.vrm2.GetBoneTransform(HumanBodyBones.Head).position = new Vector3(1.0f,1.0f,1.0f);
+					this.vrm2_controller.GetTransform(HumanBodyBones.Head).position = new Vector3(1.0f,1.0f,1.0f);
 					
 				}
 
@@ -633,10 +639,10 @@ public class test20 : main_base
 	{
 		if(this.vrm1 != null){
 			//前方向。
-			Vector3 t_vrm_forward = this.vrm1.GetForward();
+			Vector3 t_vrm_forward = this.vrm1_controller.GetTransform().forward;
 
 			//位置。
-			Transform t_vrm_transform = this.vrm1.GetTransform();
+			Transform t_vrm_transform = this.vrm1_controller.GetTransform();
 
 			//カメラ位置。
 			Vector3 t_to_camerapos = t_vrm_transform.position - t_vrm_forward * 3 + Vector3.up * 1.5f;

@@ -191,6 +191,8 @@
     <Compile Include="Assets\Fee\Script\JsonItem\Tool.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\Value.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\ValueType.cs" />
+    <Compile Include="Assets\Fee\Script\MakeAssetBundle\MakeAssetBundle.cs" />
+    <Compile Include="Assets\Fee\Script\Model\LayeMaskTool.cs" />
     <Compile Include="Assets\Fee\Script\Network\Config.cs" />
     <Compile Include="Assets\Fee\Script\Network\Connect_Auto.cs" />
     <Compile Include="Assets\Fee\Script\Network\MonoBehaviour_Connect_Auto.cs" />
@@ -203,6 +205,12 @@
     <Compile Include="Assets\Fee\Script\PerformanceCounter\MonoBehaviour_Camera.cs" />
     <Compile Include="Assets\Fee\Script\PerformanceCounter\PerformanceCounter.cs" />
     <Compile Include="Assets\Fee\Script\PerformanceCounter\Tool.cs" />
+    <Compile Include="Assets\Fee\Script\Platform\Config.cs" />
+    <Compile Include="Assets\Fee\Script\Platform\Platform.cs" />
+    <Compile Include="Assets\Fee\Script\Platform\Tool.cs" />
+    <Compile Include="Assets\Fee\Script\Platform\WebGL_OpenPrompt.cs" />
+    <Compile Include="Assets\Fee\Script\Platform\WebGL_OpenUrl.cs" />
+    <Compile Include="Assets\Fee\Script\Platform\WebGL_SyncFs.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\Config.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\InputField2D.cs" />
     <Compile Include="Assets\Fee\Script\Render2D\InputField2D_Param.cs" />
@@ -266,13 +274,18 @@
     <Compile Include="Assets\Fee\Script\Ui\Ui_WindowList.cs" />
     <Compile Include="Assets\Fee\Script\Ui\Window.cs" />
     <Compile Include="Assets\Fee\Script\Ui\Window_Base.cs" />
+    <Compile Include="Assets\Fee\Script\UnityInitialize\Build.cs" />
+    <Compile Include="Assets\Fee\Script\UnityInitialize\Main.temp.cs" />
+    <Compile Include="Assets\Fee\Script\UnityInitialize\UnityInitialize.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Config.cs" />
+    <Compile Include="Assets\Fee\Script\UniVrm\Controller.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Item.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\MonoBehaviour_Base.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\MonoBehaviour_Vrm.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Task_VrmParse.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Tool.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\UniVrm.cs" />
+    <Compile Include="Assets\Fee\Script\UniVrm\Vrm_Dummy.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Work.cs" />
     <Compile Include="Assets\TestScript\main.cs" />
     <Compile Include="Assets\TestScript\test01.cs" />
@@ -543,6 +556,7 @@
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_LastAddUpSampling.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\UiImage.shader" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_DownSampling.shader" />
+    <None Include="Assets\Fee\license\standardassets\readme.txt" />
     <None Include="Assets\VRM\UniGLTF\Resources\Shaders\NormalMapDecoder.shader" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_AddUpSampling.shader" />
     <None Include="Assets\VRM\UniVRM\Resources\Shaders\VRMUnlitTexture.shader" />
@@ -560,6 +574,7 @@
     <None Include="Assets\TestScript\LICENSE.txt" />
     <None Include="Assets\VRM\UniUnlit\Resources\UniUnlit.shader" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_FirstDownSampling.shader" />
+    <None Include="Assets\Fee\license\simpleanimation\readme.txt" />
     <None Include="Assets\VRM\MToon\MToon\Resources\Shaders\MToonSM3.cginc" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/work/github/fee/fee_project/unity_2018_3/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
