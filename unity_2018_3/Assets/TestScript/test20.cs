@@ -556,7 +556,7 @@ public class test20 : main_base
 				if(this.vrm1 != null){
 					VrmStatus t_request = VrmStatus.None;
 
-					if(Fee.Input.Key.GetInstance().up.on == true){
+					if(Fee.Input.Key.GetInstance().l_up.on == true){
 						//前進。
 						t_request = VrmStatus.Walk;
 
@@ -569,7 +569,7 @@ public class test20 : main_base
 						this.vrm1_controller.GetTransform().position = t_position;
 					}
 
-					if(Fee.Input.Key.GetInstance().left.on == true){
+					if(Fee.Input.Key.GetInstance().l_left.on == true){
 						//左回転。
 						t_request = VrmStatus.Walk;
 
@@ -584,7 +584,7 @@ public class test20 : main_base
 						float t_speed_move = 0.005f;
 						Vector3 t_position = this.vrm1_controller.GetTransform().position + t_vrm_forward * t_speed_move;
 						this.vrm1_controller.GetTransform().position = t_position;
-					}else if(Fee.Input.Key.GetInstance().right.on == true){
+					}else if(Fee.Input.Key.GetInstance().l_right.on == true){
 						//右回転。
 						t_request = VrmStatus.Walk;
 
