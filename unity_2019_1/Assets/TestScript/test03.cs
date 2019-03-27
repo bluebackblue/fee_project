@@ -54,6 +54,7 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 	*/
 	private Fee.UniVrm.Item vrm_item;
 	private bool vrm_item_load;
+	private Fee.UniVrm.Controller vrm_controller;
 
 	/** バイナリ。
 	*/
@@ -241,6 +242,7 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 		//vrm
 		this.vrm_item = null;
 		this.vrm_item_load = false;
+		this.vrm_controller = null;
 
 		//binary
 		this.binary = null;
@@ -353,13 +355,14 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 						this.status.SetText("LoavVrm : Fix");
 
 						//レイヤー。設定。
-						this.vrm_item.SetLayer("Model");
+						//this.vrm_item.SetLayer("Model");
 
 						//表示。設定。
-						this.vrm_item.SetRendererEnable(true);
+						this.vrm_controller = this.vrm_item.CreateRuntimeAnimatorController();
+						this.vrm_controller.SetVisible(true);
 
 						//アニメータコントローラ。設定。
-						this.vrm_item.SetAnimatorController(Resources.Load<RuntimeAnimatorController>("Anime/AnimatorController"));
+						this.vrm_controller.SetRuntimeAnimatorController(Resources.Load<RuntimeAnimatorController>("Anime/AnimatorController"));
 
 					}else{
 						this.status.SetText("LoavVrm : Error");
@@ -385,26 +388,23 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 
 		//マウスイベント。
 		if(Fee.Input.Mouse.GetInstance().left.down == true){
-			if(this.vrm_item != null){
-				if(this.vrm_item.IsBusy() == false){
-					this.vrm_item.SetAnime(Animator.StringToHash("Base Layer.standing_walk_forward_inPlace"));
-				}
+			if(this.vrm_controller != null){
+				//Animator.StringToHash("Base Layer.standing_walk_forward_inPlace")
+				this.vrm_controller.PlayMotion_RuntimeAnimatorController("standing_walk_forward_inPlace");
 			}
 		}else if(Fee.Input.Key.GetInstance().enter.down == true){
-			if(this.vrm_item != null){
-				if(this.vrm_item.IsBusy() == false){
-					if(this.vrm_item.IsAnimeEnable() == true){
-						this.vrm_item.SetAnimeEnable(false);
-					}else{
-						this.vrm_item.SetAnimeEnable(true);
-					}
-				}
+			if(this.vrm_controller != null){
+				//if(this.vrm_item.IsAnimeEnable() == true){
+				//	this.vrm_item.SetAnimeEnable(false);
+				//}else{
+				//	this.vrm_item.SetAnimeEnable(true);
+				//}
 			}
 		}
 
 		//カメラを回す。
-		if(this.vrm_item != null){
-			if(this.vrm_item.IsAnimeEnable() == true){
+		if(this.vrm_controller != null){
+			//if(this.vrm_item.IsAnimeEnable() == true){
 				if(this.mycamera_gameobject != null){
 					float t_time = Time.realtimeSinceStartup / 3;
 					Vector3 t_position = new Vector3(Mathf.Sin(t_time) * 2.0f,1.0f,Mathf.Cos(t_time) * 2.0f);
@@ -412,7 +412,7 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 					t_camera_transform.position = t_position;
 					t_camera_transform.LookAt(new Vector3(0.0f,1.0f,0.0f));
 				}
-			}
+			//}
 		}
 
 		int t_none_index = 0;
@@ -420,9 +420,9 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 		for(int ii=0;ii<this.bone_sprite.Length;ii++){
 
 			Transform t_transcorm_hand = null;
-			if(this.vrm_item != null){
+			if(this.vrm_controller != null){
 				if(this.mycamera_camera != null){
-					t_transcorm_hand = this.vrm_item.GetBoneTransform(this.bone_index[ii]);
+					t_transcorm_hand = this.vrm_controller.GetTransform(this.bone_index[ii]);
 				}
 			}
 

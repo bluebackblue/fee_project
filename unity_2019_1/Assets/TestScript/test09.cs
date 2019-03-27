@@ -62,7 +62,7 @@ public class test09 : main_base
 
 	/** ノード追加情報。
 	*/
-	private struct NodeData
+	private struct NodeData : Fee.Dijkstra.Node_Base
 	{
 		/** x
 		*/
@@ -76,6 +76,14 @@ public class test09 : main_base
 		*/
 		public int tipcost;
 
+		/** calcflag
+		*/
+		public bool calcflag;
+
+		/** totalcost
+		*/
+		public long totalcost;
+
 		/** constructor
 		*/
 		public NodeData(int a_x,int a_y,int a_tipcost)
@@ -83,13 +91,60 @@ public class test09 : main_base
 			this.x = a_x;
 			this.y = a_y;
 			this.tipcost = a_tipcost;
+			this.calcflag = Fee.Dijkstra.Node<int,NodeData,LinkData>.CALCFALG_DEFAULT;
+			this.totalcost = Fee.Dijkstra.Node<int,NodeData,LinkData>.TOTALCOST_DEFAULT;
+		}
+
+		/** 計算フラグ。設定。
+		*/
+		public void SetCalcFlag(bool a_flag)
+		{
+			this.calcflag = a_flag;
+		}
+
+		/** 計算フラグ。取得。
+		*/
+		public bool GetCalcFlag()
+		{
+			return this.calcflag;
+		}
+
+		/** 到達コスト。設定。
+		*/
+		public void SetTotalCost(long a_totalcost)
+		{
+			this.totalcost = a_totalcost;
+		}
+
+		/** 到達コスト。取得。
+		*/
+		public long GetTotalCost()
+		{
+			return this.totalcost;
 		}
 	};
 
 	/** リンク追加情報。
 	*/
-	private struct LinkData
+	private struct LinkData : Fee.Dijkstra.Link_Base
 	{
+		/** 接続先ノードへの到達コスト。
+		*/
+		public long tocost;
+
+		/** 接続先ノードへの到達コスト。取得。
+		*/
+		public long GetToCost()
+		{
+			return this.tocost;
+		}
+
+		/** 接続先ノードへの到達コスト。設定。
+		*/
+		public void SetToCost(long a_to_cost)
+		{
+			this.tocost = a_to_cost;
+		}
 	};
 
 	/** dijkstra
@@ -187,7 +242,7 @@ public class test09 : main_base
 					t_to = this.dijkstra.GetNode(t_to_x + t_to_y * this.map_w);
 				}
 				if(t_to != null){
-					t_from.AddLink(new Fee.Dijkstra.Link<int,NodeData,LinkData>(new LinkData(),t_to,0));
+					t_from.AddLink(new Fee.Dijkstra.Link<int,NodeData,LinkData>(new LinkData(),t_to));
 				}
 			}
 
@@ -200,7 +255,7 @@ public class test09 : main_base
 					t_to = this.dijkstra.GetNode(t_to_x + t_to_y * this.map_w);
 				}
 				if(t_to != null){
-					t_from.AddLink(new Fee.Dijkstra.Link<int,NodeData,LinkData>(new LinkData(),t_to,0));
+					t_from.AddLink(new Fee.Dijkstra.Link<int,NodeData,LinkData>(new LinkData(),t_to));
 				}
 			}
 
@@ -213,7 +268,7 @@ public class test09 : main_base
 					t_to = this.dijkstra.GetNode(t_to_x + t_to_y * this.map_w);
 				}
 				if(t_to != null){
-					t_from.AddLink(new Fee.Dijkstra.Link<int,NodeData,LinkData>(new LinkData(),t_to,0));
+					t_from.AddLink(new Fee.Dijkstra.Link<int,NodeData,LinkData>(new LinkData(),t_to));
 				}
 			}
 
@@ -226,7 +281,7 @@ public class test09 : main_base
 					t_to = this.dijkstra.GetNode(t_to_x + t_to_y * this.map_w);
 				}
 				if(t_to != null){
-					t_from.AddLink(new Fee.Dijkstra.Link<int,NodeData,LinkData>(new LinkData(),t_to,0));
+					t_from.AddLink(new Fee.Dijkstra.Link<int,NodeData,LinkData>(new LinkData(),t_to));
 				}
 			}
 		}
@@ -309,6 +364,17 @@ public class test09 : main_base
 					this.time++;
 					if(this.dijkstra.Calc() == true){
 						//計算中。
+						int t_key_now = this.cursor_x + this.cursor_y * this.map_w;
+						long t_totalcost = this.dijkstra.GetNode(t_key_now).GetTotalCost();
+						if(t_totalcost >= 0){
+							//現在位置からゴールまでの経路の計算が終了したので中断。
+							this.time = 0;
+							if(this.mode == Mode.GoA_Calc){
+								this.mode = Mode.GoA_Move;
+							}else{
+								this.mode = Mode.GoB_Move;
+							}
+						}
 					}else{
 						this.time = 0;
 						if(this.mode == Mode.GoA_Calc){

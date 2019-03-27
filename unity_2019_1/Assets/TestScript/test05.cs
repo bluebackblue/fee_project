@@ -310,25 +310,51 @@ public class test05 : main_base
 
 			t_text += " ";
 
-			if(Fee.Input.Key.GetInstance().left.on == true){
+			if(Fee.Input.Key.GetInstance().l_left.on == true){
 				t_text += "l[o]";
 			}else{
 				t_text += "l[ ]";
 			}
 
-			if(Fee.Input.Key.GetInstance().right.on == true){
+			if(Fee.Input.Key.GetInstance().l_right.on == true){
 				t_text += "r[o]";
 			}else{
 				t_text += "r[ ]";
 			}
 
-			if(Fee.Input.Key.GetInstance().up.on == true){
+			if(Fee.Input.Key.GetInstance().l_up.on == true){
 				t_text += "u[o]";
 			}else{
 				t_text += "u[ ]";
 			}
 
-			if(Fee.Input.Key.GetInstance().down.on == true){
+			if(Fee.Input.Key.GetInstance().l_down.on == true){
+				t_text += "d[o]";
+			}else{
+				t_text += "d[ ]";
+			}
+
+			t_text += " ";
+
+			if(Fee.Input.Key.GetInstance().r_left.on == true){
+				t_text += "l[o]";
+			}else{
+				t_text += "l[ ]";
+			}
+
+			if(Fee.Input.Key.GetInstance().r_right.on == true){
+				t_text += "r[o]";
+			}else{
+				t_text += "r[ ]";
+			}
+
+			if(Fee.Input.Key.GetInstance().r_up.on == true){
+				t_text += "u[o]";
+			}else{
+				t_text += "u[ ]";
+			}
+
+			if(Fee.Input.Key.GetInstance().r_down.on == true){
 				t_text += "d[o]";
 			}else{
 				t_text += "d[ ]";
