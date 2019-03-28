@@ -147,6 +147,8 @@ public class test05 : main_base
 		Fee.Input.Key.CreateInstance();
 
 		//パッド。インスタンス作成。
+		Fee.Input.Config.USE_INPUTMANAGER_GAMEPAD = false;
+		Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD = true;
 		Fee.Input.Pad.CreateInstance();
 
 		//タッチ。
