@@ -272,6 +272,8 @@ public class test02 : main_base
 		//戻るボタン作成。
 		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
+		Fee.Input.Pad.GetInstance().SetPadType(Fee.Input.Pad.PadType.Type0);
+
 		//ボタン。
 		{
 			this.button_save1 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Save,1);
