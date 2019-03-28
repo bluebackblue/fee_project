@@ -87,12 +87,12 @@ public class test08 : main_base
 	/** root
 	*/
 	private Fee.Render2D.Text2D root_text;
-	private Fee.Ui.Scroll_Vertical<Scroll_Item> root_scroll;
+	private Fee.Ui.Scroll<Scroll_Item> root_scroll;
 
 	/** fee
 	*/
 	private Fee.Render2D.Text2D fee_text;
-	private Fee.Ui.Scroll_Vertical<Scroll_Item> fee_scroll;
+	private Fee.Ui.Scroll<Scroll_Item> fee_scroll;
 
 	/** Start
 	*/
@@ -129,12 +129,12 @@ public class test08 : main_base
 		{
 			this.root_text = new Fee.Render2D.Text2D(this.deleter,0);
 			this.root_text.SetRect(10,100,0,0);
-			this.root_scroll = new Fee.Ui.Scroll_Vertical<Scroll_Item>(this.deleter,0,Scroll_Item.GetItemLength());
+			this.root_scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,0,Fee.Ui.ScrollType.Vertical,Scroll_Item.GetItemLength());
 			this.root_scroll.SetRect(this.root_text.GetX(),this.root_text.GetY() + 30,150,250);
 
 			this.fee_text = new Fee.Render2D.Text2D(this.deleter,0);
 			this.fee_text.SetRect(10 + 500,100,0,0);
-			this.fee_scroll = new Fee.Ui.Scroll_Vertical<Scroll_Item>(this.deleter,0,Scroll_Item.GetItemLength());
+			this.fee_scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,0,Fee.Ui.ScrollType.Vertical,Scroll_Item.GetItemLength());
 			this.fee_scroll.SetRect(this.fee_text.GetX(),this.fee_text.GetY() + 30,150,250);
 		}
 

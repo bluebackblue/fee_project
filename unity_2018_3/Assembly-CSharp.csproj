@@ -257,12 +257,10 @@
     <Compile Include="Assets\Fee\Script\Ui\Config.cs" />
     <Compile Include="Assets\Fee\Script\Ui\OnTargetCallBack_Base.cs" />
     <Compile Include="Assets\Fee\Script\Ui\OnWindowCallBack_Base.cs" />
+    <Compile Include="Assets\Fee\Script\Ui\Scroll.cs" />
     <Compile Include="Assets\Fee\Script\Ui\Scroll_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_Horizontal.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_Horizontal_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_List_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_Vertical.cs" />
-    <Compile Include="Assets\Fee\Script\Ui\Scroll_Vertical_Base.cs" />
+    <Compile Include="Assets\Fee\Script\Ui\Scroll_Drag.cs" />
+    <Compile Include="Assets\Fee\Script\Ui\Scroll_Value.cs" />
     <Compile Include="Assets\Fee\Script\Ui\ScrollItem_Base.cs" />
     <Compile Include="Assets\Fee\Script\Ui\Slider.cs" />
     <Compile Include="Assets\Fee\Script\Ui\Slider_Base.cs" />
