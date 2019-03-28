@@ -188,8 +188,8 @@ public class test17 : main_base
 
 	/** scrollview
 	*/
-	private Fee.Ui.Scroll_Vertical<ScrollItem> v_scrollview;
-	private Fee.Ui.Scroll_Horizontal<ScrollItem> h_scrollview;
+	private Fee.Ui.Scroll<ScrollItem> v_scrollview;
+	private Fee.Ui.Scroll<ScrollItem> h_scrollview;
 	private int v_scrollview_create_id;
 	private int h_scrollview_create_id;
 
@@ -216,6 +216,8 @@ public class test17 : main_base
 
 	private Fee.Ui.Button button_sort_a;
 	private Fee.Ui.Button button_sort_b;
+
+	private Fee.Ui.Button button_swap;
 
 	/** Start
 	*/
@@ -259,24 +261,14 @@ public class test17 : main_base
 		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
 
 		//v_scrollview
-		this.v_scrollview = new Fee.Ui.Scroll_Vertical<ScrollItem>(this.deleter,0,ScrollItem.GetH());
+		this.v_scrollview = new Fee.Ui.Scroll<ScrollItem>(this.deleter,0,Fee.Ui.ScrollType.Vertical,ScrollItem.GetH());
 		this.v_scrollview.SetRect(200,100,200,400);
 		this.v_scrollview_create_id = 0;
 
 		//h_scrollview
-		this.h_scrollview = new Fee.Ui.Scroll_Horizontal<ScrollItem>(this.deleter,0,ScrollItem.GetW());
+		this.h_scrollview = new Fee.Ui.Scroll<ScrollItem>(this.deleter,0,Fee.Ui.ScrollType.Horizontal,ScrollItem.GetW());
 		this.h_scrollview.SetRect(450,100,400,200);
 		this.h_scrollview_create_id = 0;
-
-		//drag
-		/*
-		this.drag_v = false;
-		this.drag_h = false;
-		this.drag_old_value_x = 0;
-		this.drag_old_value_y = 0;
-		this.drag_speed_x = 0.0f;
-		this.drag_speed_y = 0.0f;
-		*/
 
 		//status_text
 		this.status_text = new Fee.Render2D.Text2D(this.deleter,0);
@@ -378,6 +370,14 @@ public class test17 : main_base
 		this.button_sort_b.SetRect(10,100 + 30 * t_y_index,100,30);
 		this.button_sort_b.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_sort_b.SetText("ソート");
+
+		t_y_index++;
+
+		//button_swap
+		this.button_swap = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,3000);
+		this.button_swap.SetRect(10,100 + 30 * t_y_index,100,30);
+		this.button_swap.SetTexture(Resources.Load<Texture2D>("button"));
+		this.button_swap.SetText("SWAP(20,25)");
 	}
 
 	/** CallBack_ScrollItem_V
@@ -430,6 +430,12 @@ public class test17 : main_base
 				//ソート。
 				this.v_scrollview.Sort((ScrollItem a_test,ScrollItem a_target) => {return a_target.GetCreateID() - a_test.GetCreateID();});
 				this.h_scrollview.Sort((ScrollItem a_test,ScrollItem a_target) => {return a_target.GetCreateID() - a_test.GetCreateID();});
+			}break;
+		case 3000:
+			{
+				//入れ替え。
+				this.v_scrollview.Swap(20,25);
+				this.h_scrollview.Swap(20,25);
 			}break;
 		case 9000:
 			{
