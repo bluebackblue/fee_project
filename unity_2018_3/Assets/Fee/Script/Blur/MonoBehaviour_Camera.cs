@@ -33,17 +33,7 @@ namespace Fee.Blur
 		*/
 		private UnityEngine.RenderTexture work_rendertexture;
 
-		/** 比率Ｘ。
-		*/
-		[UnityEngine.SerializeField,UnityEngine.Range(0.0f,1.0f)]
-		private float rate_x;
-
-		/** 比率Ｙ。
-		*/
-		[UnityEngine.SerializeField,UnityEngine.Range(0.0f,1.0f)]
-		private float rate_y;
-
-		/** ブレンド。
+		/** ブレンド比率。
 		*/
 		[UnityEngine.SerializeField,UnityEngine.Range(0.0f,1.0f)]
 		private float rate_blend;
@@ -60,8 +50,6 @@ namespace Fee.Blur
 			this.material_blur_y = UnityEngine.Resources.Load<UnityEngine.Material>(Config.MATERIAL_NAME_BLURY);
 
 			//比率。
-			this.rate_x = 1.0f;
-			this.rate_y = 1.0f;
 			this.rate_blend = 1.0f;
 
 			//レンダーテクスチャー。
@@ -103,49 +91,16 @@ namespace Fee.Blur
 			this.mycamera.depth = a_depth;
 		}
 
-		/** 比率Ｘ。設定。
+		/** カメラ深度。取得。
 		*/
-		public void SetRateX(float a_rate_x)
+		public float GetCameraDepth()
 		{
-			this.rate_x = a_rate_x;
-
-			if(this.rate_x < 0.0f){
-				this.rate_x = 0.0f;
-			}else if(this.rate_x > 1.0f){
-				this.rate_x = 1.0f;
-			}
+			return this.mycamera.depth;
 		}
 
-		/** 比率Ｘ。取得。
+		/** ブレンド比率。設定。
 		*/
-		public float GetRateX()
-		{
-			return this.rate_x;
-		}
-
-		/** 比率Ｙ。設定。
-		*/
-		public void SetRateY(float a_rate_y)
-		{
-			this.rate_y = a_rate_y;
-
-			if(this.rate_y < 0.0f){
-				this.rate_y = 0.0f;
-			}else if(this.rate_y > 1.0f){
-				this.rate_y = 1.0f;
-			}
-		}
-
-		/** 比率Ｙ。取得。
-		*/
-		public float GetRateY()
-		{
-			return this.rate_y;
-		}
-
-		/** 比率ブレンド。設定。
-		*/
-		public void SetRateBlend(float a_blend)
+		public void SetBlendRate(float a_blend)
 		{
 			this.rate_blend = a_blend;
 
@@ -156,9 +111,9 @@ namespace Fee.Blur
 			}
 		}
 
-		/** 比率ブレンド。取得。
+		/** ブレンド比率。取得。
 		*/
-		public float GetRateBlend()
+		public float GetBlendRate()
 		{
 			return this.rate_blend;
 		}
@@ -171,10 +126,8 @@ namespace Fee.Blur
 			this.work_rendertexture = UnityEngine.RenderTexture.GetTemporary(a_source.width,a_source.height,0,a_source.format,UnityEngine.RenderTextureReadWrite.Default);
 
 			try{
-				this.material_blur_x.SetFloat("rate_x",this.rate_x);
 				UnityEngine.Graphics.Blit(a_source,this.work_rendertexture,this.material_blur_x);
 
-				this.material_blur_y.SetFloat("rate_y",this.rate_y);
 				this.material_blur_y.SetFloat("rate_blend",this.rate_blend);
 				this.material_blur_y.SetTexture("texture_original",a_source);
 				UnityEngine.Graphics.Blit(this.work_rendertexture,a_dest,this.material_blur_y);

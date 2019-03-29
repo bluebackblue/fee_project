@@ -12,7 +12,6 @@ Shader "Blur/BlurX"
     Properties
 	{
         _MainTex ("Texture", 2D) = "white" {}
-		rate_x ("rate_x", Float) = 1
     }
     SubShader
     {
@@ -51,10 +50,6 @@ Shader "Blur/BlurX"
 			float4 _MainTex_ST;
 			float4 _MainTex_TexelSize;
 
-			/** rate_x
-			*/
-			float rate_x;
-
 			/** vert
 			*/
 			v2f vert(appdata v)
@@ -85,23 +80,24 @@ Shader "Blur/BlurX"
 				//total = 0.5f
 				*/
 
-				float t_weight_a_1 = 0.16637f;
-				float t_weight_a_2 = 0.14677f;
-				float t_weight_a_3 = 0.10087f;
-				float t_weight_a_4 = 0.05399f;
-				float t_weight_a_5 = 0.02250f;
-				float t_weight_a_6 = 0.00730f;
-				float t_weight_a_7 = 0.00184f;
-				float t_weight_a_8 = 0.00036f;
+				float t_weight_1 = 0.16637f;
+				float t_weight_2 = 0.14677f;
+				float t_weight_3 = 0.10087f;
+				float t_weight_4 = 0.05399f;
+				float t_weight_5 = 0.02250f;
+				float t_weight_6 = 0.00730f;
+				float t_weight_7 = 0.00184f;
+				float t_weight_8 = 0.00036f;
 
-				float t_weight_b_1 = 0.28520f;
-				float t_weight_b_2 = 0.17296f;
-				float t_weight_b_3 = 0.03859f;
-				float t_weight_b_4 = 0.00316f;
-				float t_weight_b_5 = 0.00009f;
-				float t_weight_b_6 = 0.00000f;
-				float t_weight_b_7 = 0.00000f;
-				float t_weight_b_8 = 0.00000f;
+				/*
+				float t_weight_1 = 0.28520f;
+				float t_weight_2 = 0.17296f;
+				float t_weight_3 = 0.03859f;
+				float t_weight_4 = 0.00316f;
+				float t_weight_5 = 0.00009f;
+				float t_weight_6 = 0.00000f;
+				float t_weight_7 = 0.00000f;
+				float t_weight_8 = 0.00000f;
 
 				float t_weight_1 = (t_weight_a_1 * rate_x) + (t_weight_b_1 * (1.0f - rate_x));
 				float t_weight_2 = (t_weight_a_2 * rate_x) + (t_weight_b_2 * (1.0f - rate_x));
@@ -111,6 +107,7 @@ Shader "Blur/BlurX"
 				float t_weight_6 = (t_weight_a_6 * rate_x) + (t_weight_b_6 * (1.0f - rate_x));
 				float t_weight_7 = (t_weight_a_7 * rate_x) + (t_weight_b_7 * (1.0f - rate_x));
 				float t_weight_8 = (t_weight_a_8 * rate_x) + (t_weight_b_8 * (1.0f - rate_x));
+				*/
 
 				t_color += tex2D(_MainTex,i.uv + float2( _MainTex_TexelSize.x *  1,0)).rgb * t_weight_1;
 				t_color += tex2D(_MainTex,i.uv + float2(-_MainTex_TexelSize.x *  1,0)).rgb * t_weight_1;
@@ -122,15 +119,12 @@ Shader "Blur/BlurX"
 				t_color += tex2D(_MainTex,i.uv + float2(-_MainTex_TexelSize.x *  7,0)).rgb * t_weight_4;
 				t_color += tex2D(_MainTex,i.uv + float2( _MainTex_TexelSize.x *  9,0)).rgb * t_weight_5;
 				t_color += tex2D(_MainTex,i.uv + float2(-_MainTex_TexelSize.x *  9,0)).rgb * t_weight_5;
-
-				if(t_weight_6 > 0.0f){
-					t_color += tex2D(_MainTex,i.uv + float2( _MainTex_TexelSize.x * 11,0)).rgb * t_weight_6;
-					t_color += tex2D(_MainTex,i.uv + float2(-_MainTex_TexelSize.x * 11,0)).rgb * t_weight_6;
-					t_color += tex2D(_MainTex,i.uv + float2( _MainTex_TexelSize.x * 13,0)).rgb * t_weight_7;
-					t_color += tex2D(_MainTex,i.uv + float2(-_MainTex_TexelSize.x * 13,0)).rgb * t_weight_7;
-					t_color += tex2D(_MainTex,i.uv + float2( _MainTex_TexelSize.x * 15,0)).rgb * t_weight_8;
-					t_color += tex2D(_MainTex,i.uv + float2(-_MainTex_TexelSize.x * 15,0)).rgb * t_weight_8;
-				}
+				t_color += tex2D(_MainTex,i.uv + float2( _MainTex_TexelSize.x * 11,0)).rgb * t_weight_6;
+				t_color += tex2D(_MainTex,i.uv + float2(-_MainTex_TexelSize.x * 11,0)).rgb * t_weight_6;
+				t_color += tex2D(_MainTex,i.uv + float2( _MainTex_TexelSize.x * 13,0)).rgb * t_weight_7;
+				t_color += tex2D(_MainTex,i.uv + float2(-_MainTex_TexelSize.x * 13,0)).rgb * t_weight_7;
+				t_color += tex2D(_MainTex,i.uv + float2( _MainTex_TexelSize.x * 15,0)).rgb * t_weight_8;
+				t_color += tex2D(_MainTex,i.uv + float2(-_MainTex_TexelSize.x * 15,0)).rgb * t_weight_8;
 
 				return fixed4(t_color,1.0f);
 			}

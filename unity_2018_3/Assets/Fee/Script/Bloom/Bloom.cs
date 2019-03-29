@@ -108,11 +108,18 @@ namespace Fee.Bloom
 			UnityEngine.GameObject.Destroy(this.root_gameobject);
 		}
 
-		/** カメラデプス。設定。
+		/** カメラ深度。設定。
 		*/
 		public void SetCameraDepth(float a_depth)
 		{
 			this.camera_monobehaviour.SetCameraDepth(a_depth);
+		}
+
+		/** カメラ深度。取得。
+		*/
+		public float GetCameraDepth()
+		{
+			return this.camera_monobehaviour.GetCameraDepth();
 		}
 
 		/** 有効。設定。

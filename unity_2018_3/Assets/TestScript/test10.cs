@@ -37,8 +37,11 @@ public class test10 : main_base
 	/** ブラー。
 	*/
 	private Fee.Ui.Button blur_button;
-	private Fee.Ui.Slider blur_rate_x_slider;
-	private Fee.Ui.Slider blur_rate_y_slider;
+	private Fee.Ui.Slider blur_rate_blend_slider;
+
+	/** depthchange_button
+	*/
+	private Fee.Ui.Button depthchange_button;
 
 	/** Start
 	*/
@@ -96,6 +99,15 @@ public class test10 : main_base
 			int t_y = 100;
 
 			{
+				this.depthchange_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,999);
+				this.depthchange_button.SetTexture(Resources.Load<Texture2D>("button"));
+				this.depthchange_button.SetRect(100,t_y,100,40);
+				this.depthchange_button.SetText("DepthChange");
+			}
+
+			t_y += 100;
+
+			{
 				this.bloom_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,0);
 				this.bloom_button.SetTexture(Resources.Load<Texture2D>("button"));
 				this.bloom_button.SetRect(100,t_y,100,40);
@@ -135,26 +147,14 @@ public class test10 : main_base
 
 				t_y += 70;
 
-				this.blur_rate_x_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,200);
-				this.blur_rate_x_slider.SetTexture(Resources.Load<Texture2D>("slider"));
-				this.blur_rate_x_slider.SetButtonTexture(Resources.Load<Texture2D>("button"));
-				this.blur_rate_x_slider.SetRect(100,t_y,200,10);
-				this.blur_rate_x_slider.SetTextureCornerSize(3);
-				this.blur_rate_x_slider.SetButtonTextureCornerSize(3);
-				this.blur_rate_x_slider.SetButtonSize(20,25);
-				this.blur_rate_x_slider.SetValue(Fee.Blur.Blur.GetInstance().GetRateX());
-
-				t_y += 50;
-
-				this.blur_rate_y_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,201);
-				this.blur_rate_y_slider.SetTexture(Resources.Load<Texture2D>("slider"));
-				this.blur_rate_y_slider.SetButtonTexture(Resources.Load<Texture2D>("button"));
-				this.blur_rate_y_slider.SetRect(100,t_y,200,10);
-				this.blur_rate_y_slider.SetTextureCornerSize(3);
-				this.blur_rate_y_slider.SetButtonTextureCornerSize(3);
-				this.blur_rate_y_slider.SetButtonSize(20,25);
-				this.blur_rate_y_slider.SetValue(Fee.Blur.Blur.GetInstance().GetRateY());
-				this.blur_rate_y_slider.SetValueScale(5.0f);
+				this.blur_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,200);
+				this.blur_rate_blend_slider.SetTexture(Resources.Load<Texture2D>("slider"));
+				this.blur_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>("button"));
+				this.blur_rate_blend_slider.SetRect(100,t_y,200,10);
+				this.blur_rate_blend_slider.SetTextureCornerSize(3);
+				this.blur_rate_blend_slider.SetButtonTextureCornerSize(3);
+				this.blur_rate_blend_slider.SetButtonSize(20,25);
+				this.blur_rate_blend_slider.SetValue(Fee.Blur.Blur.GetInstance().GetBlendRate());
 			}
 		}
 	}
@@ -191,7 +191,15 @@ public class test10 : main_base
 	*/
 	public void CallBack_Click_Enable(int a_id)
 	{
-		if(a_id == 0){
+		if(a_id == 999){
+			if(Fee.Bloom.Bloom.GetInstance().GetCameraDepth() > Fee.Blur.Blur.GetInstance().GetCameraDepth()){
+				Fee.Bloom.Bloom.GetInstance().SetCameraDepth(800.1f);
+				Fee.Blur.Blur.GetInstance().SetCameraDepth(800.2f);
+			}else{
+				Fee.Bloom.Bloom.GetInstance().SetCameraDepth(800.2f);
+				Fee.Blur.Blur.GetInstance().SetCameraDepth(800.1f);
+			}
+		}else if(a_id == 0){
 			//ブルーム。
 			if(Fee.Bloom.Bloom.GetInstance().IsEnable() == true){
 				Fee.Bloom.Bloom.GetInstance().SetEnable(false);
@@ -223,11 +231,7 @@ public class test10 : main_base
 			Fee.Bloom.Bloom.GetInstance().SetIntensity(a_value);	
 		}else if(a_id == 200){
 			//threshold
-			Fee.Blur.Blur.GetInstance().SetRateX(a_value);			
-
-		}else if(a_id == 201){
-			//intensity
-			Fee.Blur.Blur.GetInstance().SetRateY(a_value);	
+			Fee.Blur.Blur.GetInstance().SetBlendRate(a_value);			
 		}
 	}
 }

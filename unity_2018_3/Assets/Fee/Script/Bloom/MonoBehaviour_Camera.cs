@@ -47,10 +47,6 @@ namespace Fee.Bloom
 		[UnityEngine.SerializeField,UnityEngine.Range(0.0f,30.0f)]
 		private float intensity;
 
-		/** flag
-		*/
-		private bool flag;
-
 		/** work_rendertexture
 		*/
 		private UnityEngine.RenderTexture[] work_rendertexture;
@@ -85,11 +81,18 @@ namespace Fee.Bloom
 		{
 		}
 
-		/** カメラデプス。設定。
+		/** カメラ深度。設定。
 		*/
 		public void SetCameraDepth(float a_depth)
 		{
 			this.mycamera.depth = a_depth;
+		}
+
+		/** カメラ深度。取得。
+		*/
+		public float GetCameraDepth()
+		{
+			return this.mycamera.depth;
 		}
 
 		/** 閾値。設定。

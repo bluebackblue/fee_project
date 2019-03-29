@@ -96,7 +96,7 @@ namespace Fee.Blur
 
 				//無効。
 				this.flag = false;
-				this.camera_gameobject.SetActive(this.flag );
+				this.camera_gameobject.SetActive(this.flag);
 			}
 		}
 
@@ -108,11 +108,18 @@ namespace Fee.Blur
 			UnityEngine.GameObject.Destroy(this.root_gameobject);
 		}
 
-		/** カメラデプス。設定。
+		/** カメラ深度。設定。
 		*/
 		public void SetCameraDepth(float a_depth)
 		{
 			this.camera_monobehaviour.SetCameraDepth(a_depth);
+		}
+
+		/** カメラ深度。取得。
+		*/
+		public float GetCameraDepth()
+		{
+			return this.camera_monobehaviour.GetCameraDepth();
 		}
 
 		/** 有効。設定。
@@ -130,46 +137,18 @@ namespace Fee.Blur
 			return this.flag;
 		}
 
-		/** 比率Ｘ。設定。
+		/** ブレンド比率。設定。
 		*/
-		public void SetRateX(float a_rate_x)
+		public void SetBlendRate(float a_blend)
 		{
-			this.camera_monobehaviour.SetRateX(a_rate_x);
+			this.camera_monobehaviour.SetBlendRate(a_blend);
 		}
 
-		/** 比率Ｘ。取得。
+		/** ブレンド比率。取得。
 		*/
-		public float GetRateX()
+		public float GetBlendRate()
 		{
-			return this.camera_monobehaviour.GetRateX();
-		}
-
-		/** 比率Ｙ。設定。
-		*/
-		public void SetRateY(float a_rate_y)
-		{
-			this.camera_monobehaviour.SetRateY(a_rate_y);
-		}
-
-		/** 比率Ｙ。取得。
-		*/
-		public float GetRateY()
-		{
-			return this.camera_monobehaviour.GetRateY();
-		}
-
-		/** 比率ブレンド。設定。
-		*/
-		public void SetRateBlend(float a_blend)
-		{
-			this.camera_monobehaviour.SetRateBlend(a_blend);
-		}
-
-		/** 比率ブレンド。取得。
-		*/
-		public float GetRateBlend()
-		{
-			return this.camera_monobehaviour.GetRateBlend();
+			return this.camera_monobehaviour.GetBlendRate();
 		}
 	}
 }
