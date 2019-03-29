@@ -72,6 +72,10 @@ namespace Fee.Blur
 		private UnityEngine.GameObject camera_gameobject;
 		private MonoBehaviour_Camera camera_monobehaviour;
 
+		/** flag
+		*/
+		private bool flag;
+
 		/** [シングルトン]constructor
 		*/
 		private Blur()
@@ -91,7 +95,8 @@ namespace Fee.Blur
 				this.camera_monobehaviour.Initialize();
 
 				//無効。
-				this.camera_gameobject.SetActive(false);
+				this.flag = false;
+				this.camera_gameobject.SetActive(this.flag );
 			}
 		}
 
@@ -114,7 +119,57 @@ namespace Fee.Blur
 		*/
 		public void SetEnable(bool a_bool)
 		{
-			this.camera_gameobject.SetActive(a_bool);
+			this.flag = a_bool;
+			this.camera_gameobject.SetActive(this.flag);
+		}
+
+		/** 有効。取得。
+		*/
+		public bool IsEnable()
+		{
+			return this.flag;
+		}
+
+		/** 比率Ｘ。設定。
+		*/
+		public void SetRateX(float a_rate_x)
+		{
+			this.camera_monobehaviour.SetRateX(a_rate_x);
+		}
+
+		/** 比率Ｘ。取得。
+		*/
+		public float GetRateX()
+		{
+			return this.camera_monobehaviour.GetRateX();
+		}
+
+		/** 比率Ｙ。設定。
+		*/
+		public void SetRateY(float a_rate_y)
+		{
+			this.camera_monobehaviour.SetRateY(a_rate_y);
+		}
+
+		/** 比率Ｙ。取得。
+		*/
+		public float GetRateY()
+		{
+			return this.camera_monobehaviour.GetRateY();
+		}
+
+		/** 比率ブレンド。設定。
+		*/
+		public void SetRateBlend(float a_blend)
+		{
+			this.camera_monobehaviour.SetRateBlend(a_blend);
+		}
+
+		/** 比率ブレンド。取得。
+		*/
+		public float GetRateBlend()
+		{
+			return this.camera_monobehaviour.GetRateBlend();
 		}
 	}
 }

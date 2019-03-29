@@ -47,6 +47,10 @@ namespace Fee.Bloom
 		[UnityEngine.SerializeField,UnityEngine.Range(0.0f,30.0f)]
 		private float intensity;
 
+		/** flag
+		*/
+		private bool flag;
+
 		/** work_rendertexture
 		*/
 		private UnityEngine.RenderTexture[] work_rendertexture;
@@ -101,6 +105,13 @@ namespace Fee.Bloom
 			}
 		}
 
+		/** 閾値。取得。
+		*/
+		public float GetThreshold()
+		{
+			return this.threshold;
+		}
+
 		/** 加算強度。設定。
 		*/
 		public void SetIntensity(float a_intensity)
@@ -110,6 +121,13 @@ namespace Fee.Bloom
 			if(this.intensity < 0.0f){
 				this.intensity = 0.0f;
 			}
+		}
+
+		/** 加算強度。取得。
+		*/
+		public float GetIntensity()
+		{
+			return this.intensity;
 		}
 
 		/** OnRenderImage
