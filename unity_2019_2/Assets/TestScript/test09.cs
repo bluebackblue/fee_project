@@ -60,7 +60,7 @@ public class test09 : main_base
 	private int cursor_y;
 	private Fee.Render2D.Sprite2D cursor_sprite;
 
-	/** ノード追加情報。
+	/** ノード。
 	*/
 	private struct NodeData : Fee.Dijkstra.Node_Base
 	{
@@ -95,36 +95,36 @@ public class test09 : main_base
 			this.totalcost = Fee.Dijkstra.Node<int,NodeData,LinkData>.TOTALCOST_DEFAULT;
 		}
 
-		/** 計算フラグ。設定。
+		/** [Node_Base]計算フラグ。設定。
 		*/
 		public void SetCalcFlag(bool a_flag)
 		{
 			this.calcflag = a_flag;
 		}
 
-		/** 計算フラグ。取得。
+		/** [Node_Base]計算フラグ。取得。
 		*/
 		public bool GetCalcFlag()
 		{
 			return this.calcflag;
 		}
 
-		/** 到達コスト。設定。
+		/** [Node_Base]到達コスト。設定。
 		*/
 		public void SetTotalCost(long a_totalcost)
 		{
 			this.totalcost = a_totalcost;
 		}
 
-		/** 到達コスト。取得。
+		/** [Node_Base]到達コスト。取得。
 		*/
 		public long GetTotalCost()
 		{
 			return this.totalcost;
 		}
-	};
+	}
 
-	/** リンク追加情報。
+	/** リンク。
 	*/
 	private struct LinkData : Fee.Dijkstra.Link_Base
 	{
@@ -132,14 +132,14 @@ public class test09 : main_base
 		*/
 		public long tocost;
 
-		/** 接続先ノードへの到達コスト。取得。
+		/** [Link_Base]接続先ノードへの到達コスト。取得。
 		*/
 		public long GetToCost()
 		{
 			return this.tocost;
 		}
 
-		/** 接続先ノードへの到達コスト。設定。
+		/** [Link_Base]接続先ノードへの到達コスト。設定。
 		*/
 		public void SetToCost(long a_to_cost)
 		{

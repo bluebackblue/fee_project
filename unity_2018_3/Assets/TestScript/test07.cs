@@ -15,7 +15,7 @@ using UnityEngine;
 /** test07
 
 	公開鍵暗号
-	署名
+	証明書
 	共通鍵暗号
 
 */
@@ -158,7 +158,7 @@ public class test07 : main_base
 		this.button_signature = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,2);
 		this.button_signature.SetTexture(Resources.Load<Texture2D>("button"));
 		this.button_signature.SetRect(100 + 200 * 2,100,150,50);
-		this.button_signature.SetText("署名");
+		this.button_signature.SetText("証明書");
 
 		//text
 		this.text = new Fee.Render2D.Text2D(this.deleter,0);
@@ -318,7 +318,7 @@ public class test07 : main_base
 		case Step.DecryptPrivateKey_Do:
 			{
 				if(this.crypt_item.IsBusy() == true){
-					//暗号化中。
+					//複合化中。
 					this.text.SetText(this.step.ToString());
 				}else{
 					if(this.crypt_item.GetResultType() == Fee.Crypt.Item.ResultType.Binary){
@@ -396,7 +396,7 @@ public class test07 : main_base
 		case Step.DecryptPass_Do:
 			{
 				if(this.crypt_item.IsBusy() == true){
-					//暗号化中。
+					//複合化中。
 					this.text.SetText(this.step.ToString());
 				}else{
 					if(this.crypt_item.GetResultType() == Fee.Crypt.Item.ResultType.Binary){
@@ -432,7 +432,7 @@ public class test07 : main_base
 					this.plane_binary[this.plane_binary.Length - ii - 1] = (byte)(ii % 256);
 				}
 
-				//証明作成開始。
+				//証明書作成開始。
 				this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestCreateSignaturePrivateKey(this.plane_binary,this.private_key);
 
 				this.step = Step.CreateSignature_Do;
@@ -440,7 +440,7 @@ public class test07 : main_base
 		case Step.CreateSignature_Do:
 			{
 				if(this.crypt_item.IsBusy() == true){
-					//署名中。
+					//作成中。
 					this.text.SetText(this.step.ToString());
 				}else{
 					if(this.crypt_item.GetResultType() == Fee.Crypt.Item.ResultType.Binary){
@@ -471,7 +471,7 @@ public class test07 : main_base
 			}break;
 		case Step.VerifySignature_Start:
 			{
-				//署名検証開始。
+				//証明書検証開始。
 				this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestVerifySignaturePublicKey(this.plane_binary,this.signature_binary,this.public_key);
 
 				this.step = Step.VerifySignature_Do;

@@ -224,14 +224,14 @@ public class test10 : main_base
 	{
 		if(a_id == 100){
 			//threshold
-			Fee.Bloom.Bloom.GetInstance().SetThreshold(a_value);			
+			Fee.Bloom.Bloom.GetInstance().SetThreshold(a_value);
 
 		}else if(a_id == 101){
 			//intensity
-			Fee.Bloom.Bloom.GetInstance().SetIntensity(a_value);	
+			Fee.Bloom.Bloom.GetInstance().SetIntensity(a_value);
 		}else if(a_id == 200){
-			//threshold
-			Fee.Blur.Blur.GetInstance().SetBlendRate(a_value);			
+			//blendrate
+			Fee.Blur.Blur.GetInstance().SetBlendRate(a_value);
 		}
 	}
 }
