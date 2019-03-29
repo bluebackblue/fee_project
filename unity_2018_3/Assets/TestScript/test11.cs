@@ -133,6 +133,9 @@ public class test11 : main_base
 		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
 		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
+		//関数呼び出し。
+		Fee.Function.Function.SetMonoBehaviour(this);
+
 		//ファイル。インスタンス作成。
 		Fee.File.Config.LOG_ENABLE = true;
 		Fee.File.Config.SOUNDPOOL_CHECK_DATAVERSION = false;

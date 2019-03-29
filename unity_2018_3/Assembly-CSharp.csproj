@@ -87,8 +87,7 @@
     <Compile Include="Assets\Fee\Script\Crypt\Coroutine_VerifySignaturePublicKey.cs" />
     <Compile Include="Assets\Fee\Script\Crypt\Crypt.cs" />
     <Compile Include="Assets\Fee\Script\Crypt\Item.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\MonoBehaviour_Base.cs" />
-    <Compile Include="Assets\Fee\Script\Crypt\MonoBehaviour_Security.cs" />
+    <Compile Include="Assets\Fee\Script\Crypt\Main_Security.cs" />
     <Compile Include="Assets\Fee\Script\Crypt\OnCoroutine_CallBack.cs" />
     <Compile Include="Assets\Fee\Script\Crypt\Task_CreateSignaturePrivateKey.cs" />
     <Compile Include="Assets\Fee\Script\Crypt\Task_DecryptPass.cs" />
@@ -157,6 +156,7 @@
     <Compile Include="Assets\Fee\Script\File\Task_SaveLocalTextureFile.cs" />
     <Compile Include="Assets\Fee\Script\File\Tool.cs" />
     <Compile Include="Assets\Fee\Script\File\Work.cs" />
+    <Compile Include="Assets\Fee\Script\Function\Function.cs" />
     <Compile Include="Assets\Fee\Script\Input\Analog_Button.cs" />
     <Compile Include="Assets\Fee\Script\Input\Analog_Stick.cs" />
     <Compile Include="Assets\Fee\Script\Input\Config.cs" />
@@ -273,8 +273,10 @@
     <Compile Include="Assets\Fee\Script\Ui\Window.cs" />
     <Compile Include="Assets\Fee\Script\Ui\Window_Base.cs" />
     <Compile Include="Assets\Fee\Script\UnityInitialize\Build.cs" />
+    <Compile Include="Assets\Fee\Script\UnityInitialize\CryptKey.cs" />
     <Compile Include="Assets\Fee\Script\UnityInitialize\Main.temp.cs" />
-    <Compile Include="Assets\Fee\Script\UnityInitialize\UnityInitialize.cs" />
+    <Compile Include="Assets\Fee\Script\UnityInitialize\MakeMainScript.cs" />
+    <Compile Include="Assets\Fee\Script\UnityInitialize\Utility.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Config.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Controller.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Item.cs" />

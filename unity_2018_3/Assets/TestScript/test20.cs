@@ -101,6 +101,9 @@ public class test20 : main_base
 		//２Ｄ描画。インスタンス作成。
 		Fee.Render2D.Render2D.CreateInstance();
 
+		//関数呼び出し。
+		Fee.Function.Function.SetMonoBehaviour(this);
+
 		//マウス。インスタンス作成。
 		Fee.Input.Mouse.CreateInstance();
 
