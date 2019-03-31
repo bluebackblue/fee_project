@@ -129,6 +129,7 @@ namespace Fee.Crypt
 			this.is_cancel = false;
 			this.is_shutdown = false;
 
+			//request
 			this.request_type = RequestType.None;
 			this.request_binary = null;
 			this.request_key = null;
@@ -136,6 +137,7 @@ namespace Fee.Crypt
 			this.request_pass = null;
 			this.request_salt = null;
 
+			//result
 			this.result_progress = 0.0f;
 			this.result_errorstring = null;
 			this.result_type = ResultType.None;
@@ -170,6 +172,14 @@ namespace Fee.Crypt
 			return this.result_progress;
 		}
 
+		/** GetResultErrorString
+		*/
+		public string GetResultErrorString()
+		{
+			return this.result_errorstring;
+		}
+
+
 		/** GetResultType
 		*/
 		public ResultType GetResultType()
@@ -182,13 +192,6 @@ namespace Fee.Crypt
 		public byte[] GetResultBinary()
 		{
 			return this.result_binary;
-		}
-
-		/** GetResultErrorString
-		*/
-		public string GetResultErrorString()
-		{
-			return this.result_errorstring;
 		}
 
 		/** [Fee.File.OnCoroutine_CallBack]コルーチンからのコールバック。

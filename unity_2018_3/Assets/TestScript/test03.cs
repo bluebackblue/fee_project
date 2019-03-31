@@ -276,7 +276,7 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 			}
 
 			#if(true)
-			this.load_item = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(this.inputfield.GetText(),null,Fee.File.ProgressMode.DownLoad);
+			this.load_item = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(new Fee.File.Path(this.inputfield.GetText()),null,Fee.File.ProgressMode.DownLoad);
 			#else
 			this.load_item = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile("nana.vrmx");
 			#endif

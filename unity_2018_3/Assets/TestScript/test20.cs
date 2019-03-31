@@ -290,7 +290,7 @@ public class test20 : main_base
 				WWWForm t_post_data = new WWWForm();
 				t_post_data.AddField("apikey_pass",this.login_pass_inputfield.GetText());
 				t_post_data.AddField("apikey_token",this.login_apikey_inputfield.GetText());
-				this.login_api_vrm_get = Fee.File.File.GetInstance().RequestDownLoadTextFile("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/get/",t_post_data,Fee.File.ProgressMode.DownLoad);
+				this.login_api_vrm_get = Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/get/"),t_post_data,Fee.File.ProgressMode.DownLoad);
 
 				this.step = Step.Login_Connect_Do;
 			}break;
@@ -375,7 +375,7 @@ public class test20 : main_base
 			{
 				//ダウンロードＶＲＭ。開始。
 
-				string t_vrm_url = null;
+				Fee.File.Path t_vrm_url = null;
 
 				if(this.login_api_vrm_get != null){
 
@@ -383,13 +383,16 @@ public class test20 : main_base
 					if(t_json != null){
 						if(t_json.IsAssociativeArray() == true){
 							if(t_json.IsExistItem("vrm_url", Fee.JsonItem.ValueType.StringData) == true){
-								t_vrm_url = t_json.GetItem("vrm_url").GetStringData();
+								string t_vrm_url_string = t_json.GetItem("vrm_url").GetStringData();
+								if(t_vrm_url_string != null){
+									t_vrm_url = new Fee.File.Path(t_vrm_url_string);
+								}
 							}
 						}
 					}
 
 					if(t_vrm_url != null){
-						this.status_text.SetText(t_vrm_url);
+						this.status_text.SetText(t_vrm_url.GetPath());
 					}else{
 
 						string t_error = "error";

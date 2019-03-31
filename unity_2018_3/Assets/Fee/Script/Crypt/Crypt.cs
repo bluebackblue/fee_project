@@ -79,6 +79,7 @@ namespace Fee.Crypt
 		*/
 		private Crypt()
 		{
+			//main_security
 			this.main_security = new Main_Security();
 
 			//work_list

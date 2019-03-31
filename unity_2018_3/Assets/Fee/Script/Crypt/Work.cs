@@ -202,43 +202,37 @@ namespace Fee.Crypt
 					switch(this.request_type){
 					case RequestType.EncryptPublicKey:
 						{
-							Main_Security t_security = Fee.Crypt.Crypt.GetInstance().GetMainSecurity();
-							if(t_security.RequestEncryptPublicKey(this.request_binary,this.request_key) == true){
+							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestEncryptPublicKey(this.request_binary,this.request_key) == true){
 								this.mode = Mode.Do_Security;
 							}
 						}break;
 					case RequestType.DecryptPrivateKey:
 						{
-							Main_Security t_security = Fee.Crypt.Crypt.GetInstance().GetMainSecurity();
-							if(t_security.RequestDecryptPrivateKey(this.request_binary,this.request_key) == true){
+							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestDecryptPrivateKey(this.request_binary,this.request_key) == true){
 								this.mode = Mode.Do_Security;
 							}
 						}break;
 					case RequestType.CreateSignaturePrivateKey:
 						{
-							Main_Security t_security = Fee.Crypt.Crypt.GetInstance().GetMainSecurity();
-							if(t_security.RequestCreateSignaturePrivateKey(this.request_binary,this.request_key) == true){
+							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestCreateSignaturePrivateKey(this.request_binary,this.request_key) == true){
 								this.mode = Mode.Do_Security;
 							}
 						}break;
 					case RequestType.VerifySignaturePublicKey:
 						{
-							Main_Security t_security = Fee.Crypt.Crypt.GetInstance().GetMainSecurity();
-							if(t_security.RequestVerifySignaturePublicKey(this.request_binary,this.request_signature_binary,this.request_key) == true){
+							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestVerifySignaturePublicKey(this.request_binary,this.request_signature_binary,this.request_key) == true){
 								this.mode = Mode.Do_Security;
 							}
 						}break;
 					case RequestType.EncryptPass:
 						{
-							Main_Security t_security = Fee.Crypt.Crypt.GetInstance().GetMainSecurity();
-							if(t_security.RequestEncryptPass(this.request_binary,this.request_pass,this.request_salt) == true){
+							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestEncryptPass(this.request_binary,this.request_pass,this.request_salt) == true){
 								this.mode = Mode.Do_Security;
 							}
 						}break;
 					case RequestType.DecryptPass:
 						{
-							Main_Security t_security = Fee.Crypt.Crypt.GetInstance().GetMainSecurity();
-							if(t_security.RequestDecryptPass(this.request_binary,this.request_pass,this.request_salt) == true){
+							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestDecryptPass(this.request_binary,this.request_pass,this.request_salt) == true){
 								this.mode = Mode.Do_Security;
 							}
 						}break;
@@ -249,18 +243,18 @@ namespace Fee.Crypt
 				}return true;
 			case Mode.Do_Security:
 				{
-					Main_Security t_security = Fee.Crypt.Crypt.GetInstance().GetMainSecurity();
+					Main_Security t_main = Fee.Crypt.Crypt.GetInstance().GetMainSecurity();
 
-					this.item.SetResultProgress(t_security.GetResultProgress());
+					this.item.SetResultProgress(t_main.GetResultProgress());
 
-					if(t_security.GetResultType() != Main_Security.ResultType.None){
+					if(t_main.GetResultType() != Main_Security.ResultType.None){
 						//結果。
 						bool t_success = false;
-						switch(t_security.GetResultType()){
+						switch(t_main.GetResultType()){
 						case Main_Security.ResultType.Binary:
 							{
-								if(t_security.GetResultBinary() != null){
-									this.item.SetResultBinary(t_security.GetResultBinary());
+								if(t_main.GetResultBinary() != null){
+									this.item.SetResultBinary(t_main.GetResultBinary());
 									t_success = true;
 								}
 							}break;
@@ -272,16 +266,16 @@ namespace Fee.Crypt
 						}
 
 						if(t_success == false){
-							this.item.SetResultErrorString(t_security.GetResultErrorString());
+							this.item.SetResultErrorString(t_main.GetResultErrorString());
 						}
 
-						//完了・
-						t_security.Fix();					
+						//完了。
+						t_main.Fix();
 
 						this.mode = Mode.End;
 					}else if(this.item.IsCancel() == true){
 						//キャンセル。
-						t_security.Cancel();
+						t_main.Cancel();
 					}
 				}break;
 			}
