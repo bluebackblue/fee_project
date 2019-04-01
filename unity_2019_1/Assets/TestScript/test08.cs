@@ -108,6 +108,9 @@ public class test08 : main_base
 		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
 		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
+		//関数呼び出し。
+		Fee.Function.Function.SetMonoBehaviour(this);
+
 		//マウス。インスタンス作成。
 		Fee.Input.Config.LOG_ENABLE = true;
 		Fee.Input.Mouse.CreateInstance();

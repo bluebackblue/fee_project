@@ -176,6 +176,13 @@ public class test06 : main_base
 		//２Ｄ描画。インスタンス作成。
 		Fee.Render2D.Render2D.CreateInstance();
 
+		//パフォーマンスカウンター。インスタンス作成。
+		//Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+		//Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
+
+		//関数呼び出し。
+		Fee.Function.Function.SetMonoBehaviour(this);
+
 		//イベントプレート。
 		Fee.EventPlate.Config.LOG_ENABLE = true;
 		Fee.EventPlate.EventPlate.CreateInstance();

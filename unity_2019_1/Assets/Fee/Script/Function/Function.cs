@@ -45,14 +45,18 @@ namespace Fee.Function
 		*/
 		public static void CallFromCoroutine(System.Func<ReturnType> a_function)
 		{
-			s_monobehaviour.StartCoroutine(Do_Coroutine(a_function));
+			if(s_monobehaviour != null){
+				s_monobehaviour.StartCoroutine(Do_Coroutine(a_function));
+			}
 		}
 
 		/** コルーチンから呼び出し。遅延。
 		*/
 		public static void CallFromCoroutineDelay(System.Func<ReturnType> a_function)
 		{
-			s_monobehaviour.StartCoroutine(Do_Coroutine_Delay(a_function));
+			if(s_monobehaviour != null){
+				s_monobehaviour.StartCoroutine(Do_Coroutine_Delay(a_function));
+			}
 		}
 
 		/** 処理。コルーチン。
@@ -73,6 +77,15 @@ namespace Fee.Function
 				yield return null;
 			}
 			yield break;
+		}
+
+		/** コルーチン。開始。
+		*/
+		public static void StartCoroutine(System.Collections.IEnumerator a_coroutine)
+		{
+			if(s_monobehaviour != null){
+				s_monobehaviour.StartCoroutine(a_coroutine);
+			}
 		}
 	}
 }

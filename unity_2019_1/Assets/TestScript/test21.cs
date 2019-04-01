@@ -49,9 +49,9 @@ public class test21 : main_base
 	*/
 	private Fee.Render2D.Text2D status_text;
 
-	/** url
+	/** path
 	*/
-	private string url;
+	private Fee.File.Path path;
 
 	/** file_vrm
 	*/
@@ -75,6 +75,9 @@ public class test21 : main_base
 		//パフォーマンスカウンター。インスタンス作成。
 		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
 		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
+
+		//関数呼び出し。
+		Fee.Function.Function.SetMonoBehaviour(this);
 
 		//２Ｄ描画。インスタンス作成。
 		Fee.Render2D.Render2D.CreateInstance();
@@ -130,8 +133,8 @@ public class test21 : main_base
 			this.status_text.SetText("---");
 		}
 
-		//url
-		this.url = null;
+		//path
+		this.path = null;
 
 		//file_vrm
 		this.file_vrm = null;
@@ -194,7 +197,7 @@ public class test21 : main_base
 				this.status_text.SetText(this.step.ToString());
 
 				//TODO:ＵＲＬ固定。
-				this.url = "https://bbbproject.sakura.ne.jp/www/project_webgl/fee/StreamingAssets/nana.vrmx";
+				this.path = new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/StreamingAssets/","nana.vrmx");
 
 				this.step = Step.LoadVrm_Start;
 			}break;
@@ -204,7 +207,7 @@ public class test21 : main_base
 				this.status_text.SetText(this.step.ToString());
 
 				//ＵＲＬから。
-				this.file_vrm = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(this.url,null,Fee.File.ProgressMode.DownLoad);
+				this.file_vrm = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(this.path,null,Fee.File.ProgressMode.DownLoad);
 				this.step = Step.LoadVrm_Do;
 			}break;
 		case Step.LoadVrm_Do:
@@ -239,7 +242,7 @@ public class test21 : main_base
 				t_post_data.AddBinaryData("file_vrm",this.binary_vrm);
 
 				//リクエスト。
-				this.upload_vrm = Fee.File.File.GetInstance().RequestDownLoadTextFile("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/set/",t_post_data,Fee.File.ProgressMode.UpLoad);
+				this.upload_vrm = Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/set/"),t_post_data,Fee.File.ProgressMode.UpLoad);
 
 				this.step = Step.UploadVrm_Do;
 			}break;

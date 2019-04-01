@@ -110,6 +110,9 @@ public class test07 : main_base
 		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
 		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
+		//関数呼び出し。
+		Fee.Function.Function.SetMonoBehaviour(this);
+
 		//２Ｄ描画。インスタンス作成。
 		Fee.Render2D.Render2D.CreateInstance();
 
@@ -514,68 +517,8 @@ public class test07 : main_base
 		this.deleter.DeleteAll();
 	}
 
-	/** ＪＳＯＮ保存。
-	*/
-	#if(UNITY_EDITOR)
-	private static void SaveJson(Fee.JsonItem.JsonItem a_jsonitem,string a_full_path)
-	{
-		string t_json_string = a_jsonitem.ConvertJsonString();
 
-		System.IO.FileInfo t_fileinfo = new System.IO.FileInfo(a_full_path);
-		System.IO.StreamWriter t_filestream_write = null;
 
-		try{
-			//open
-			t_filestream_write = t_fileinfo.CreateText();
 
-			//write
-			if(t_filestream_write != null){
-				t_filestream_write.Write(t_json_string);
-				t_filestream_write.Flush();
-			}
-		}catch(System.Exception){
-			Debug.Assert(false);
-		}
-
-		//close
-		if(t_filestream_write != null){
-			t_filestream_write.Close();
-			t_filestream_write = null;
-		}
-	}
-	#endif
-
-	/** 公開鍵秘密鍵作成。
-	*/
-	#if(UNITY_EDITOR)
-	[UnityEditor.MenuItem("Fee/Test07/MakePublicKeyPrivateKey")]
-	private static void MakePublicKeyPrivateKey()
-	{
-		string t_public_key;
-		string t_private_key;
-		if(Fee.Crypt.Crypt.CreateNewKey(out t_public_key,out t_private_key) == true){
-
-			//public
-			{
-				Fee.JsonItem.JsonItem t_jsonitem = new Fee.JsonItem.JsonItem(new Fee.JsonItem.Value_AssociativeArray());
-				Fee.JsonItem.JsonItem t_jsonitem_public = new Fee.JsonItem.JsonItem(new Fee.JsonItem.Value_StringData(t_public_key));
-				t_jsonitem.SetItem("public",t_jsonitem_public,false);
-
-				SaveJson(t_jsonitem,Application.dataPath + "/Resources/public_key.json");
-			}
-
-			//private
-			{
-				Fee.JsonItem.JsonItem t_jsonitem = new Fee.JsonItem.JsonItem(new Fee.JsonItem.Value_AssociativeArray());
-				Fee.JsonItem.JsonItem t_jsonitem_private = new Fee.JsonItem.JsonItem(new Fee.JsonItem.Value_StringData(t_private_key));
-				t_jsonitem.SetItem("private",t_jsonitem_private,false);
-
-				SaveJson(t_jsonitem,Application.dataPath + "/Resources/private_key.json");
-			}
-			
-			UnityEditor.AssetDatabase.Refresh();
-		}
-	}
-	#endif
 }
 

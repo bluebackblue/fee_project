@@ -251,6 +251,9 @@ public class test02 : main_base
 		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
 		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
+		//関数呼び出し。
+		Fee.Function.Function.SetMonoBehaviour(this);
+
 		//２Ｄ描画。インスタンス作成。
 		Fee.Render2D.Render2D.CreateInstance();
 
@@ -271,8 +274,6 @@ public class test02 : main_base
 
 		//戻るボタン作成。
 		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
-
-		Fee.Input.Pad.GetInstance().SetPadType(Fee.Input.Pad.PadType.Type0);
 
 		//ボタン。
 		{
@@ -340,8 +341,8 @@ public class test02 : main_base
 			//ＪＳＯＮを文字列化。
 			string t_jsonstring = t_jsonitem.ConvertJsonString();
 
-			//ローカルセーブリクエスト。
-			this.save_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile("save_" + a_id.ToString() + ".json",t_jsonstring);
+			//セーブローカル。リクエスト。。
+			this.save_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path("save_" + a_id.ToString() + ".json"),t_jsonstring);
 			if(this.save_item != null){
 				this.button_save1.SetLock(true);
 				this.button_save2.SetLock(true);
@@ -356,8 +357,8 @@ public class test02 : main_base
 	*/
 	private void CallBack_Click_Load(int a_id)
 	{
-		//ローカルロードリクエスト。
-		this.load_item = Fee.File.File.GetInstance().RequestLoadLocalTextFile("save_" + a_id.ToString() + ".json");
+		//ロードローカル。リクエスト。
+		this.load_item = Fee.File.File.GetInstance().RequestLoadLocalTextFile(new Fee.File.Path("save_" + a_id.ToString() + ".json"));
 		if(this.load_item != null){
 			this.button_save1.SetLock(true);
 			this.button_save2.SetLock(true);

@@ -92,6 +92,9 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
 		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
+		//関数呼び出し。
+		Fee.Function.Function.SetMonoBehaviour(this);
+
 		//２Ｄ描画。インスタンス作成。
 		Fee.Render2D.Render2D.CreateInstance();
 
@@ -273,7 +276,7 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 			}
 
 			#if(true)
-			this.load_item = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(this.inputfield.GetText(),null,Fee.File.ProgressMode.DownLoad);
+			this.load_item = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(new Fee.File.Path(this.inputfield.GetText()),null,Fee.File.ProgressMode.DownLoad);
 			#else
 			this.load_item = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile("nana.vrmx");
 			#endif

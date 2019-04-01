@@ -230,6 +230,9 @@ public class test17 : main_base
 		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
 		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
+		//関数呼び出し。
+		Fee.Function.Function.SetMonoBehaviour(this);
+
 		//２Ｄ描画。
 		Fee.Render2D.Render2D.CreateInstance();
 
