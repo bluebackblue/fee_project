@@ -47,6 +47,56 @@ namespace Fee.SoundPool
 		*/
 		public ResultType result;
 
+		/** MainStep
+		*/
+		private enum MainStep
+		{
+			LoadLocal_SoundPool = 0,
+			DownLoad_SoundPool,
+			Sound,
+			SaveLocal_SoundPool,
+			Max,
+		}
+
+		/** mainstep_per_list
+		*/
+		private float[] mainstep_per_list;
+
+		/** CalcProgress
+		*/
+		private float CalcProgress(float[] a_mainstep_per_list,int a_mainstep,int a_substep_max,int a_substep,float a_progress)
+		{
+			float t_progress = 0;
+
+			//main
+			for(int ii=0;ii<a_mainstep;ii++){
+				t_progress += a_mainstep_per_list[ii];
+			}
+
+			//sub
+			t_progress += a_mainstep_per_list[a_mainstep] * a_substep / a_substep_max;
+
+			//subsub
+			float t_sub_sub_use_progress = a_mainstep_per_list[a_mainstep] / a_substep_max;
+			t_progress += t_sub_sub_use_progress * a_progress;
+
+			//progress
+			if(t_progress > 1.0f){
+				t_progress = 1.0f;
+			}
+			return t_progress;
+		}
+
+		/** プログレス更新。
+		*/
+		private void UpdateProgress(OnCoroutine_CallBack a_instance,int a_mainstep,int a_substep_max,int a_substep,float a_progress)
+		{
+			float t_progress = this.CalcProgress(this.mainstep_per_list,a_mainstep,a_substep_max,a_substep,a_progress);
+			if(a_instance != null){
+				a_instance.OnCoroutine(1.0f,t_progress);
+			}
+		}
+
 		/** CoroutineMain
 		*/
 		public System.Collections.IEnumerator CoroutineMain(OnCoroutine_CallBack a_instance,File.Path a_path,UnityEngine.WWWForm a_post_data,uint a_data_version)
@@ -54,18 +104,32 @@ namespace Fee.SoundPool
 			//result
 			this.result = new ResultType();
 
+			//mainstep_per_list
+			this.mainstep_per_list = new float[(int)MainStep.Max]{
+				0.05f,
+				0.1f,
+				0.8f,
+				0.05f
+			};
+
+			//■ロードローカル。
+			MainStep t_main_step = MainStep.LoadLocal_SoundPool;
+
 			//ローカル、サウンロプール管理ファイル。相対パス。
 			Fee.File.Path t_local_caoundpool_path = new File.Path(a_path.GetFileName());
 
 			//ローカル、サウンドプール管理ファイルのロード。
 			Fee.JsonItem.JsonItem t_local_soundpool_json = null;
 			if(Config.USE_DOWNLOAD_SOUNDPOOL_CACHE == true){
-				Fee.File.Item t_item_a = Fee.File.File.GetInstance().RequestLoadLocalTextFile(t_local_caoundpool_path);
-				while(t_item_a.IsBusy() == true){
+				Fee.File.Item t_item = Fee.File.File.GetInstance().RequestLoadLocalTextFile(t_local_caoundpool_path);
+				while(t_item.IsBusy() == true){
+
+					this.UpdateProgress(a_instance,(int)t_main_step,1,0,t_item.GetResultProgressDown());
 					yield return null;
+
 				}
-				if(t_item_a.GetResultType()==File.Item.ResultType.Text){
-					t_local_soundpool_json = new JsonItem.JsonItem(t_item_a.GetResultText());
+				if(t_item.GetResultType()==File.Item.ResultType.Text){
+					t_local_soundpool_json = new JsonItem.JsonItem(t_item.GetResultText());
 					if(t_local_soundpool_json == null){
 						//コンバート失敗。
 						this.result.errorstring = "Coroutine_DownLoadSoundPool : local_soundpool_json == null";
@@ -84,6 +148,15 @@ namespace Fee.SoundPool
 						Fee.Audio.Pack_SoundPool t_local_soundpool = Fee.JsonItem.Convert.JsonItemToObject<Fee.Audio.Pack_SoundPool>(t_local_soundpool_json);
 						if(t_local_soundpool != null){
 							//最新を取得する必要なし。
+
+							//パス解決。
+							{
+								t_local_soundpool.fullpath_list = new System.Collections.Generic.List<File.Path>();
+								for(int ii=0;ii<t_local_soundpool.name_list.Count;ii++){
+									t_local_soundpool.fullpath_list.Add(File.File.GetLocalPath(new File.Path(t_local_soundpool.name_list[ii])));
+								}
+							}
+
 							this.result.soundpool = t_local_soundpool;
 							this.result.responseheader = null;
 							yield break;
@@ -100,15 +173,21 @@ namespace Fee.SoundPool
 				t_local_soundpool_json = null;
 			}
 
+			//■ダウンロード。
+			t_main_step = MainStep.DownLoad_SoundPool;
+
 			//ダウンロード。
 			string t_download_stringjson = null;
 			Fee.Audio.Pack_SoundPool t_download_soundpool = null;
 
 			//サウンドプール管理ファイルのダウンロード。
 			{
-				Fee.File.Item t_item = Fee.File.File.GetInstance().RequestDownLoadTextFile(a_path,a_post_data,File.ProgressMode.DownLoad);
+				Fee.File.Item t_item = Fee.File.File.GetInstance().RequestDownLoadTextFile(a_path,a_post_data);
 				while(t_item.IsBusy() == true){
+
+					this.UpdateProgress(a_instance,(int)t_main_step,1,0,t_item.GetResultProgressDown());
 					yield return null;
+
 				}
 				this.result.responseheader = t_item.GetResultResponseHeader();
 
@@ -138,8 +217,13 @@ namespace Fee.SoundPool
 				}
 			}
 
+			//■サウンド。
+			t_main_step = MainStep.Sound;
+
 			//登録サウンドのダウンロード。
 			{
+				int t_substep_max = t_download_soundpool.name_list.Count * 2;
+
 				for(int ii=0;ii<t_download_soundpool.name_list.Count;ii++){
 
 					byte[] t_sound_binary = null;
@@ -148,11 +232,12 @@ namespace Fee.SoundPool
 					{
 						Fee.File.Path t_sound_url = a_path.CreateUrl_ChangeFileName(t_download_soundpool.name_list[ii]);
 
-						//TODO:ここのポスト通信のカスタマイズは必要？
-
-						Fee.File.Item t_item = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(t_sound_url,null,File.ProgressMode.DownLoad);
+						Fee.File.Item t_item = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(t_sound_url,null);
 						while(t_item.IsBusy() == true){
+
+							this.UpdateProgress(a_instance,(int)t_main_step,t_substep_max,ii*2+0,t_item.GetResultProgressDown());
 							yield return null;
+
 						}
 						if(t_item.GetResultType()==File.Item.ResultType.Binary){
 							//成功。
@@ -170,7 +255,10 @@ namespace Fee.SoundPool
 
 						File.Item t_item = Fee.File.File.GetInstance().RequestSaveLocalBinaryFile(t_sound_url,t_sound_binary);
 						while(t_item.IsBusy() == true){
+
+							this.UpdateProgress(a_instance,(int)t_main_step,t_substep_max,ii*2+1,t_item.GetResultProgressDown());
 							yield return null;
+
 						}
 						if(t_item.GetResultType() == File.Item.ResultType.SaveEnd){
 							//成功。
@@ -183,11 +271,17 @@ namespace Fee.SoundPool
 				}
 			}
 
+			//■サウンド。
+			t_main_step = MainStep.SaveLocal_SoundPool;
+
 			//ローカル、サウンドプール管理ファイルのセーブ。
 			{
 				File.Item t_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile(t_local_caoundpool_path,t_download_stringjson);
 				while(t_item.IsBusy() == true){
+
+					this.UpdateProgress(a_instance,(int)t_main_step,1,0,t_item.GetResultProgressDown());
 					yield return null;
+
 				}
 				if(t_item.GetResultType()==File.Item.ResultType.SaveEnd){
 					//成功。
@@ -195,6 +289,14 @@ namespace Fee.SoundPool
 					//失敗。
 					this.result.errorstring = t_item.GetResultErrorString();
 					yield break;
+				}
+			}
+
+			//パス解決。
+			{
+				t_download_soundpool.fullpath_list = new System.Collections.Generic.List<File.Path>();
+				for(int ii=0;ii<t_download_soundpool.name_list.Count;ii++){
+					t_download_soundpool.fullpath_list.Add(File.File.GetLocalPath(new File.Path(t_download_soundpool.name_list[ii])));
 				}
 			}
 
