@@ -353,7 +353,7 @@ namespace Fee.File
 						}break;
 					case RequestType.LoadStreamingAssetsBinaryFile:
 						{
-							#if((UNITY_EDITOR)||(UNITY_STANDALONE_WIN))
+							#if(UNITY_STANDALONE_WIN)
 							{
 								if( Fee.File.File.GetInstance().GetMainIo().RequestLoadStreamingAssetsBinaryFile(this.request_path) == true){
 									this.mode = Mode.Do_Io;
@@ -369,7 +369,7 @@ namespace Fee.File
 						}break;
 					case RequestType.LoadStreamingAssetsTextFile:
 						{
-							#if((UNITY_EDITOR)||(UNITY_STANDALONE_WIN))
+							#if(UNITY_STANDALONE_WIN)
 							{
 								if( Fee.File.File.GetInstance().GetMainIo().RequestLoadStreamingAssetsTextFile(this.request_path) == true){
 									this.mode = Mode.Do_Io;

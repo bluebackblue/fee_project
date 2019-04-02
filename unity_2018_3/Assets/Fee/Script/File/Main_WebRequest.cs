@@ -561,7 +561,7 @@ namespace Fee.File
 		*/
 		private System.Collections.IEnumerator DoLoadStreamingAssetsBinaryFile()
 		{
-			Tool.Assert(this.request_type == RequestType.DownLoadBinaryFile);
+			Tool.Assert(this.request_type == RequestType.LoadStreamingAssetsBinaryFile);
 
 			//request_pathは相対パス。
 			Fee.File.Path t_path = new Path(UnityEngine.Application.streamingAssetsPath + "/",this.request_path.GetPath());
@@ -584,6 +584,71 @@ namespace Fee.File
 				yield break;
 			}
 		}
+
+
+		/** リクエスト。ロードストリーミングアセット。バイナリファイル。
+		*/
+		public bool RequestLoadStreamingAssetsTextFile(Path a_relative_path)
+		{
+			if(this.is_busy == false){
+				this.is_busy = true;
+
+				//is_cancel
+				this.is_cancel = false;
+
+				//request
+				this.request_type = RequestType.LoadStreamingAssetsTextFile;
+				this.request_post_data = null;
+				this.request_path = a_relative_path;
+				this.request_assetbundle_id = 0;
+				this.request_data_version = 0;
+				this.request_data_crc = 0;
+
+				//result
+				this.result_progress_up = 0.0f;
+				this.result_progress_down = 0.0f;
+				this.result_errorstring = null;
+				this.result_type = ResultType.None;
+				this.result_binary = null;
+				this.result_text = null;
+				this.result_texture = null;
+				this.result_assetbundle = null;
+
+				Function.Function.StartCoroutine(this.DoLoadStreamingAssetsTextFile());
+				return true;
+			}
+
+			return false;
+		}
+
+		/** 実行。ロードストリーミングアセット。バイナリファイル。
+		*/
+		private System.Collections.IEnumerator DoLoadStreamingAssetsTextFile()
+		{
+			Tool.Assert(this.request_type == RequestType.LoadStreamingAssetsTextFile);
+
+			//request_pathは相対パス。
+			Fee.File.Path t_path = new Path(UnityEngine.Application.streamingAssetsPath + "/",this.request_path.GetPath());
+
+			Coroutine_DownLoadTextFile t_coroutine = new Coroutine_DownLoadTextFile();
+			yield return t_coroutine.CoroutineMain(this,t_path,null);
+
+			if(t_coroutine.result.text != null){
+				this.result_progress_up = 1.0f;
+				this.result_progress_down = 1.0f;
+				this.result_text = t_coroutine.result.text;
+				this.result_responseheader = t_coroutine.result.responseheader;
+				this.result_type = ResultType.Text;
+				yield break;
+			}else{
+				this.result_progress_up = 1.0f;
+				this.result_progress_down = 1.0f;
+				this.result_errorstring = t_coroutine.result.errorstring;
+				this.result_type = ResultType.Error;
+				yield break;
+			}
+		}
+
 	}
 }
 

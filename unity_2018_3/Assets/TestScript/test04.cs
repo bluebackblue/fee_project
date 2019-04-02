@@ -33,16 +33,23 @@ public class test04 : main_base
 		LoadLocal_SoundPool,
 		LoadStreamingAssets_SoundPool,
 
+		SaveLocal_TextFile,
+		DownLoad_TextFile,
+		LoadLocal_TextFile,
+		LoadStreamingAssets_TextFile,
+
+		SaveLocal_BinaryFile,
+		DownLoad_BinaryFile,
+		LoadLocal_BinaryFile,
+		LoadStreamingAssets_BinaryFile,
+
 		/*
 		SaveBinaryNow,
 		LoadBinaryNow,
-
 		SaveTextNow,
 		LoadTextNow,
-
 		SavePngNow,
 		LoadPngNow,
-
 		*/
 	}
 
@@ -66,13 +73,153 @@ public class test04 : main_base
 	*/
 	private Fee.Ui.Button loadstreamingassets_soundpool_button;
 
-	/** file_item
+	/** savelocal_textfile_button
 	*/
-	private Fee.File.Item file_item;
+	private Fee.Ui.Button savelocal_textfile_button;
 
-	/** soundpool_item
+	/** download_textfile_button
 	*/
-	private Fee.SoundPool.Item soundpool_item;
+	private Fee.Ui.Button download_textfile_button;
+
+	/** loadlocal_textfile_button
+	*/
+	private Fee.Ui.Button loadlocal_textfile_button;
+
+	/** loadstreamingassets_textfile_button
+	*/
+	private Fee.Ui.Button loadstreamingassets_textfile_button;
+
+	/** Item
+	*/
+	class Item
+	{
+		/** item_file
+		*/
+		private Fee.File.Item_Base item_file;
+
+		/** item_soundpool
+		*/
+		private Fee.SoundPool.Item_Base item_soundpool;
+
+		/** ResultType
+		*/
+		public enum ResultType
+		{
+			None,
+			SaveEnd,
+			Error,
+			Binary,
+			Text,
+			Texture,
+			AssetBundle,
+			SoundPool,
+		}
+
+		/** constructor
+		*/
+		public Item(Fee.File.Item a_item)
+		{
+			this.item_file = a_item;
+			this.item_soundpool = null;
+		}
+
+		/** constructor
+		*/
+		public Item(Fee.SoundPool.Item a_item)
+		{
+			this.item_file = null;
+			this.item_soundpool = a_item;
+		}
+
+		/** IsBusy
+		*/
+		public bool IsBusy()
+		{
+			if(this.item_file != null){
+				return this.item_file.IsBusy();
+			}
+			return this.item_soundpool.IsBusy();
+		}
+
+		/** GetResultProgressDown
+		*/
+		public float GetResultProgressDown()
+		{
+			if(this.item_file != null){
+				return this.item_file.GetResultProgressDown();
+			}
+			return this.item_soundpool.GetResultProgressDown();
+		}
+
+		/** GetResultErrorString
+		*/
+		public string GetResultErrorString()
+		{
+			if(this.item_file != null){
+				return this.item_file.GetResultErrorString();
+			}
+			return this.item_soundpool.GetResultErrorString();
+		}
+
+		/** GetResultResponseHeader
+		*/
+		public System.Collections.Generic.Dictionary<string,string> GetResultResponseHeader()
+		{
+			if(this.item_file != null){
+				return this.item_file.GetResultResponseHeader();
+			}
+			return this.item_soundpool.GetResultResponseHeader();
+		}
+
+		/** GetResultType
+		*/
+		public ResultType GetResultType()
+		{
+			if(this.item_file != null){
+				switch(this.item_file.GetResultType()){
+				case Fee.File.Item.ResultType.None:
+					{
+					}return ResultType.None;
+				case Fee.File.Item.ResultType.SaveEnd:
+					{
+					}return ResultType.SaveEnd;
+				case Fee.File.Item.ResultType.Error:
+					{
+					}return ResultType.Error;
+				case Fee.File.Item.ResultType.Binary:
+					{
+					}return ResultType.Binary;
+				case Fee.File.Item.ResultType.Text:
+					{
+					}return ResultType.Text;
+				case Fee.File.Item.ResultType.Texture:
+					{
+					}return ResultType.Texture;
+				case Fee.File.Item.ResultType.AssetBundle:
+					{
+					}return ResultType.AssetBundle;
+				}
+			}
+
+			switch(this.item_soundpool.GetResultType()){
+			case Fee.SoundPool.Item.ResultType.None:
+				{
+				}return ResultType.None;
+			case Fee.SoundPool.Item.ResultType.Error:
+				{
+				}return ResultType.Error;
+			case Fee.SoundPool.Item.ResultType.SoundPool:
+				{
+				}return ResultType.SoundPool;
+			}
+
+			return ResultType.None;
+		}
+	}
+
+	/** item
+	*/
+	private Item item;
 
 	/** Start
 	*/
@@ -110,6 +257,12 @@ public class test04 : main_base
 		Fee.SoundPool.Config.USE_LOADSTREAMINGASSETS_SOUNDPOOL_CACHE = false;
 		Fee.SoundPool.SoundPool.CreateInstance();
 	
+		//フォント。
+		Font t_font = Resources.Load<Font>("mplus-1p-medium");
+		if(t_font != null){
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+		}
+
 		//deleter
 		this.deleter = new Fee.Deleter.Deleter();
 
@@ -158,8 +311,44 @@ public class test04 : main_base
 		this.loadstreamingassets_soundpool_button.SetText("LoadStreamingAssets SoundPool");
 		this.loadstreamingassets_soundpool_button.SetFrontSize(15);
 
-		//file_item
-		this.file_item = null;
+		t_y += 35;
+
+		//savelocal_textfile_button
+		this.savelocal_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.SaveLocal_TextFile);
+		this.savelocal_textfile_button.SetRect(50,t_y,300,30);
+		this.savelocal_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.savelocal_textfile_button.SetText("SaveLocal Text");
+		this.savelocal_textfile_button.SetFrontSize(15);
+
+		t_y += 35;
+
+		//download_textfile_button
+		this.download_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.DownLoad_TextFile);
+		this.download_textfile_button.SetRect(50,t_y,300,30);
+		this.download_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.download_textfile_button.SetText("DownLoad Text");
+		this.download_textfile_button.SetFrontSize(15);
+
+		t_y += 35;
+
+		//loadlocal_textfile_button
+		this.loadlocal_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadLocal_TextFile);
+		this.loadlocal_textfile_button.SetRect(50,t_y,300,30);
+		this.loadlocal_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadlocal_textfile_button.SetText("LoadLocal Text");
+		this.loadlocal_textfile_button.SetFrontSize(15);
+
+		t_y += 35;
+
+		//loadstreamingassets_textfile_button
+		this.loadstreamingassets_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadStreamingAssets_TextFile);
+		this.loadstreamingassets_textfile_button.SetRect(50,t_y,300,30);
+		this.loadstreamingassets_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadstreamingassets_textfile_button.SetText("LoadStreamingAssets Text");
+		this.loadstreamingassets_textfile_button.SetFrontSize(15);
+
+		//item
+		this.item = null;
 	}
 
 	/** [Button_Base]コールバック。クリック。
@@ -172,20 +361,44 @@ public class test04 : main_base
 				//ダウンロード。サウンドプール。
 
 				uint t_data_version = 1;
-				this.soundpool_item = Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/","se.txt"),null,t_data_version);
+				this.item = new Item(Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/","se.txt"),null,t_data_version));
 			}break;
 		case CallBackId.LoadLocal_SoundPool:
 			{
 				//ロードローカル。サウンドプール。
 
-				this.soundpool_item = Fee.SoundPool.SoundPool.GetInstance().RequestLoadLocalSoundPool(new Fee.File.Path("se.txt"));
+				this.item = new Item(Fee.SoundPool.SoundPool.GetInstance().RequestLoadLocalSoundPool(new Fee.File.Path("se.txt")));
 			}break;
 		case CallBackId.LoadStreamingAssets_SoundPool:
 			{
 				//ロードストリーミングアセット。サウンドプール。
 
 				uint t_data_version = 1;
-				this.soundpool_item = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path("se.txt"),t_data_version);
+				this.item = new Item(Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path("se.txt"),t_data_version));
+			}break;
+		case CallBackId.SaveLocal_TextFile:
+			{
+				//セーブローカル。テキスト。
+
+				this.item = new Item(Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path("se.txt"),"{}"));
+			}break;
+		case CallBackId.DownLoad_TextFile:
+			{
+				//ダウンロード。テキスト。
+
+				this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/","se.txt"),null));
+			}break;
+		case CallBackId.LoadLocal_TextFile:
+			{
+				//ロードローカル。テキスト。
+
+				this.item = new Item(Fee.File.File.GetInstance().RequestLoadLocalTextFile(new Fee.File.Path("se.txt")));
+			}break;
+		case CallBackId.LoadStreamingAssets_TextFile:
+			{
+				//ロードストリーミングアセット。テキスト。
+
+				this.item = new Item(Fee.File.File.GetInstance().RequestLoadStreamingAssetsTextFile(new Fee.File.Path("se.txt")));
 			}break;
 		}
 	}
@@ -209,32 +422,46 @@ public class test04 : main_base
 		//サウンドプール。インスタンス作成。
 		Fee.SoundPool.SoundPool.GetInstance().Main();
 
-		if(this.soundpool_item != null){
-			if(this.soundpool_item.IsBusy() == true){
+		if(this.item != null){
+			if(this.item.IsBusy() == true){
 				this.status_text.SetText("処理中");
 
-				this.progress_sprite.SetW((int)(300 * this.soundpool_item.GetResultProgressDown()));
+				this.progress_sprite.SetW((int)(300 * this.item.GetResultProgressDown()));
 			}else{
-				switch(this.soundpool_item.GetResultType()){
-				case Fee.SoundPool.Item.ResultType.Error:
+				switch(this.item.GetResultType()){
+				case Item.ResultType.Error:
 					{
-						this.status_text.SetText("結果:エラー : \n" + this.soundpool_item.GetResultErrorString());
+						this.status_text.SetText("結果:エラー : \n" + this.item.GetResultErrorString());
 					}break;
-				case Fee.SoundPool.Item.ResultType.None:
+				case Item.ResultType.None:
 					{
 						this.status_text.SetText("結果:なし");
 					}break;
-				case Fee.SoundPool.Item.ResultType.SoundPool:
+				case Item.ResultType.SaveEnd:
+					{
+						this.status_text.SetText("結果:セーブ完了");
+					}break;
+				case Item.ResultType.SoundPool:
 					{
 						string t_responsheader = "";
-						if(this.soundpool_item.GetResponseHeader() != null){
-							t_responsheader = this.soundpool_item.GetResponseHeader().Count.ToString();
+						if(this.item.GetResultResponseHeader() != null){
+							t_responsheader = this.item.GetResultResponseHeader().Count.ToString();
 						}
 
 						this.status_text.SetText("結果:サウンドプール取得 : " + t_responsheader);
 					}break;
+				case Item.ResultType.Text:
+					{
+						string t_responsheader = "";
+						if(this.item.GetResultResponseHeader() != null){
+							t_responsheader = this.item.GetResultResponseHeader().Count.ToString();
+						}
+
+						this.status_text.SetText("結果:テキスト取得 : " + t_responsheader);
+					}break;
 				}
-				this.soundpool_item = null;
+
+				this.item = null;
 			}
 		}
 

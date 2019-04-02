@@ -144,6 +144,9 @@ public class test11 : main_base
 		Fee.File.Config.LOG_ENABLE = true;
 		Fee.File.File.CreateInstance();
 
+		//サウンドプール。インスタンス作成。
+		Fee.SoundPool.SoundPool.CreateInstance();
+
 		//オーディオ。インスタンス作成。
 		Fee.Audio.Config.LOG_ENABLE = true;
 		Fee.Audio.Audio.CreateInstance();
@@ -366,6 +369,9 @@ public class test11 : main_base
 	{
 		//ファイル。
 		Fee.File.File.GetInstance().Main();
+
+		//サウンドプール。
+		Fee.SoundPool.SoundPool.GetInstance().Main();
 
 		//ＵＩ。
 		Fee.Ui.Ui.GetInstance().Main();
