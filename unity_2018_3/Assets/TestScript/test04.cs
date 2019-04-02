@@ -31,7 +31,7 @@ public class test04 : main_base
 	{
 		DownLoad_SoundPool,
 		LoadLocal_SoundPool,
-		SaveLocal_SoundPool,
+		LoadStreamingAssets_SoundPool,
 
 		/*
 		SaveBinaryNow,
@@ -48,7 +48,11 @@ public class test04 : main_base
 
 	/** status
 	*/
-	private Fee.Render2D.Text2D status;
+	private Fee.Render2D.Text2D status_text;
+
+	/** progress_sprite
+	*/
+	private Fee.Render2D.Sprite2D progress_sprite;
 
 	/** download_soundpool_button
 	*/
@@ -57,6 +61,10 @@ public class test04 : main_base
 	/** loadlocal_soundpool_button
 	*/
 	private Fee.Ui.Button loadlocal_soundpool_button;
+
+	/** loadstreamingassets_soundpool_button
+	*/
+	private Fee.Ui.Button loadstreamingassets_soundpool_button;
 
 	/** file_item
 	*/
@@ -99,6 +107,7 @@ public class test04 : main_base
 		//サウンドプール。インスタンス作成。
 		Fee.SoundPool.Config.LOG_ENABLE = true;
 		Fee.SoundPool.Config.USE_DOWNLOAD_SOUNDPOOL_CACHE = false;
+		Fee.SoundPool.Config.USE_LOADSTREAMINGASSETS_SOUNDPOOL_CACHE = false;
 		Fee.SoundPool.SoundPool.CreateInstance();
 	
 		//deleter
@@ -112,16 +121,21 @@ public class test04 : main_base
 		long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 
 		//status
-		this.status = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
-		this.status.SetRect(Fee.Render2D.Config.VIRTUAL_W/2,50,0,0);
-		this.status.SetCenter(true,false);
-		this.status.SetFontSize(9);
+		this.status_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+		this.status_text.SetRect(Fee.Render2D.Config.VIRTUAL_W/2,50,0,0);
+		this.status_text.SetCenter(true,false);
+		this.status_text.SetFontSize(9);
+
+		//progress_sprite
+		this.progress_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
+		this.progress_sprite.SetTexture(Texture2D.whiteTexture);
+		this.progress_sprite.SetRect(50,70,0,10);
 
 		int t_y = 100;
 
 		//download_soundpool_button
 		this.download_soundpool_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.DownLoad_SoundPool);
-		this.download_soundpool_button.SetRect(50,t_y,170,30);
+		this.download_soundpool_button.SetRect(50,t_y,300,30);
 		this.download_soundpool_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.download_soundpool_button.SetText("DownLoad SoundPool");
 		this.download_soundpool_button.SetFrontSize(15);
@@ -130,10 +144,19 @@ public class test04 : main_base
 
 		//loadlocal_soundpool_button
 		this.loadlocal_soundpool_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadLocal_SoundPool);
-		this.loadlocal_soundpool_button.SetRect(50,t_y,170,30);
+		this.loadlocal_soundpool_button.SetRect(50,t_y,300,30);
 		this.loadlocal_soundpool_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.loadlocal_soundpool_button.SetText("LoadLocal SoundPool");
 		this.loadlocal_soundpool_button.SetFrontSize(15);
+
+		t_y += 35;
+
+		//loadstreamingassets_soundpool_button
+		this.loadstreamingassets_soundpool_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadStreamingAssets_SoundPool);
+		this.loadstreamingassets_soundpool_button.SetRect(50,t_y,300,30);
+		this.loadstreamingassets_soundpool_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadstreamingassets_soundpool_button.SetText("LoadStreamingAssets SoundPool");
+		this.loadstreamingassets_soundpool_button.SetFrontSize(15);
 
 		//file_item
 		this.file_item = null;
@@ -157,17 +180,12 @@ public class test04 : main_base
 
 				this.soundpool_item = Fee.SoundPool.SoundPool.GetInstance().RequestLoadLocalSoundPool(new Fee.File.Path("se.txt"));
 			}break;
-		case CallBackId.SaveLocal_SoundPool:
+		case CallBackId.LoadStreamingAssets_SoundPool:
 			{
-				//サーブローカル。サウンドプール。
+				//ロードストリーミングアセット。サウンドプール。
 
-				Fee.Audio.Pack_SoundPool t_soundpool = new Fee.Audio.Pack_SoundPool();
-				{
-					t_soundpool.data_hash = 0;
-					t_soundpool.data_version = 1;
-				}
-
-				this.soundpool_item = Fee.SoundPool.SoundPool.GetInstance().RequestSaveLocalSoundPool(new Fee.File.Path("se.txt"),t_soundpool);
+				uint t_data_version = 1;
+				this.soundpool_item = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path("se.txt"),t_data_version);
 			}break;
 		}
 	}
@@ -193,24 +211,27 @@ public class test04 : main_base
 
 		if(this.soundpool_item != null){
 			if(this.soundpool_item.IsBusy() == true){
-				this.status.SetText("処理中");
+				this.status_text.SetText("処理中");
+
+				this.progress_sprite.SetW((int)(300 * this.soundpool_item.GetResultProgressDown()));
 			}else{
 				switch(this.soundpool_item.GetResultType()){
 				case Fee.SoundPool.Item.ResultType.Error:
 					{
-						this.status.SetText("結果:エラー : \n" + this.soundpool_item.GetResultErrorString());
+						this.status_text.SetText("結果:エラー : \n" + this.soundpool_item.GetResultErrorString());
 					}break;
 				case Fee.SoundPool.Item.ResultType.None:
 					{
-						this.status.SetText("結果:なし");
-					}break;
-				case Fee.SoundPool.Item.ResultType.SaveEnd:
-					{
-						this.status.SetText("結果:セーブ完了");
+						this.status_text.SetText("結果:なし");
 					}break;
 				case Fee.SoundPool.Item.ResultType.SoundPool:
 					{
-						this.status.SetText("結果:サウンドプール取得");
+						string t_responsheader = "";
+						if(this.soundpool_item.GetResponseHeader() != null){
+							t_responsheader = this.soundpool_item.GetResponseHeader().Count.ToString();
+						}
+
+						this.status_text.SetText("結果:サウンドプール取得 : " + t_responsheader);
 					}break;
 				}
 				this.soundpool_item = null;

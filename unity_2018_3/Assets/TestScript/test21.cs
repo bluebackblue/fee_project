@@ -207,7 +207,7 @@ public class test21 : main_base
 				this.status_text.SetText(this.step.ToString());
 
 				//ＵＲＬから。
-				this.file_vrm = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(this.path,null,Fee.File.ProgressMode.DownLoad);
+				this.file_vrm = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(this.path,null);
 				this.step = Step.LoadVrm_Do;
 			}break;
 		case Step.LoadVrm_Do:
@@ -215,7 +215,7 @@ public class test21 : main_base
 				//ＶＲＭ読み込み。処理中。
 
 				if(this.file_vrm.IsBusy() == true){
-					this.status_text.SetText(this.step.ToString() + ":" + this.file_vrm.GetResultProgress().ToString());
+					this.status_text.SetText(this.step.ToString() + ":" + this.file_vrm.GetResultProgressDown().ToString());
 				}else{
 					if(this.file_vrm.GetResultType() == Fee.File.Item.ResultType.Binary){
 						this.binary_vrm = this.file_vrm.GetResultBinary();
@@ -242,7 +242,7 @@ public class test21 : main_base
 				t_post_data.AddBinaryData("file_vrm",this.binary_vrm);
 
 				//リクエスト。
-				this.upload_vrm = Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/set/"),t_post_data,Fee.File.ProgressMode.UpLoad);
+				this.upload_vrm = Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/set/"),t_post_data);
 
 				this.step = Step.UploadVrm_Do;
 			}break;
@@ -251,7 +251,7 @@ public class test21 : main_base
 				//ＶＲＭアップロード。処理中。
 
 				if(this.upload_vrm.IsBusy() == true){
-					this.status_text.SetText(this.step.ToString() + ":" + this.upload_vrm.GetResultProgress().ToString());
+					this.status_text.SetText(this.step.ToString() + ":" + this.upload_vrm.GetResultProgressUp().ToString());
 				}else{
 					if(this.upload_vrm.GetResultType() == Fee.File.Item.ResultType.Text){
 						this.status_text.SetText(this.step.ToString() + ":" + this.upload_vrm.GetResultText());

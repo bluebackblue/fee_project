@@ -290,7 +290,7 @@ public class test20 : main_base
 				WWWForm t_post_data = new WWWForm();
 				t_post_data.AddField("apikey_pass",this.login_pass_inputfield.GetText());
 				t_post_data.AddField("apikey_token",this.login_apikey_inputfield.GetText());
-				this.login_api_vrm_get = Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/get/"),t_post_data,Fee.File.ProgressMode.DownLoad);
+				this.login_api_vrm_get = Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_gameparam/api/vrm/get/"),t_post_data);
 
 				this.step = Step.Login_Connect_Do;
 			}break;
@@ -301,7 +301,7 @@ public class test20 : main_base
 				if(this.login_api_vrm_get != null){
 					if(this.login_api_vrm_get.IsBusy() == true){
 						//ダウンロード中。
-						this.status_text.SetText(this.step.ToString() + " " + this.login_api_vrm_get.GetResultProgress().ToString());
+						this.status_text.SetText(this.step.ToString() + " " + this.login_api_vrm_get.GetResultProgressDown().ToString());
 
 						//キャンセル。
 						if(this.IsChangeScene() == true){
@@ -410,7 +410,7 @@ public class test20 : main_base
 				}
 
 				if(t_vrm_url != null){
-					this.vrm_loaditem = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(t_vrm_url,null,Fee.File.ProgressMode.DownLoad);
+					this.vrm_loaditem = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(t_vrm_url,null);
 				}else{
 					this.vrm_loaditem = null;
 				}
@@ -424,7 +424,7 @@ public class test20 : main_base
 				if(this.vrm_loaditem != null){
 					if(this.vrm_loaditem.IsBusy() == true){
 						//ダウンロード中。
-						this.status_text.SetText(this.step.ToString() + " " + this.vrm_loaditem.GetResultProgress().ToString());
+						this.status_text.SetText(this.step.ToString() + " " + this.vrm_loaditem.GetResultProgressDown().ToString());
 
 						//キャンセル。
 						if(this.IsChangeScene() == true){

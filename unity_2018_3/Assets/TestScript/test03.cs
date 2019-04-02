@@ -276,7 +276,7 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 			}
 
 			#if(true)
-			this.load_item = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(new Fee.File.Path(this.inputfield.GetText()),null,Fee.File.ProgressMode.DownLoad);
+			this.load_item = Fee.File.File.GetInstance().RequestDownLoadBinaryFile(new Fee.File.Path(this.inputfield.GetText()),null);
 			#else
 			this.load_item = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile("nana.vrmx");
 			#endif
@@ -324,7 +324,7 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 		if(this.load_item != null){
 			if(this.load_item.IsBusy() == true){
 				//ダウンロード中。
-				this.status.SetText("Load : " + this.load_item.GetResultProgress().ToString());
+				this.status.SetText("Load : " + this.load_item.GetResultProgressDown().ToString());
 
 				//キャンセル。
 				if(this.IsChangeScene() == true){

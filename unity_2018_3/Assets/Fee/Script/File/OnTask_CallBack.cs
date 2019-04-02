@@ -5,26 +5,21 @@
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
  * http://bbbproject.sakura.ne.jp/wordpress/mitlicense
- * @brief ファイル。タスク。
+ * @brief ファイル。コルーチン。
 */
-
-
-//Async block lacks `await' operator and will run synchronously.
-#pragma warning disable 1998
 
 
 /** Fee.File
 */
 namespace Fee.File
 {
-	/**  ProgressMode
+	/** OnTask_CallBack
 	*/
-	public enum ProgressMode
+	public interface OnTask_CallBack
 	{
-		None,
-
-		DownLoad,
-		UpLoad,
-	};
+		/** [Fee.File.OnTask_CallBack]タスク実行中。
+		*/
+		void OnTask(float a_progress);
+	}
 }
 

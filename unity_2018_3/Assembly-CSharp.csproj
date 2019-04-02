@@ -142,8 +142,8 @@
     <Compile Include="Assets\Fee\Script\File\Main_Io.cs" />
     <Compile Include="Assets\Fee\Script\File\Main_WebRequest.cs" />
     <Compile Include="Assets\Fee\Script\File\OnCoroutine_CallBack.cs" />
+    <Compile Include="Assets\Fee\Script\File\OnTask_CallBack.cs" />
     <Compile Include="Assets\Fee\Script\File\Path.cs" />
-    <Compile Include="Assets\Fee\Script\File\ProgressMode.cs" />
     <Compile Include="Assets\Fee\Script\File\Task_LoadLocalBinaryFile.cs" />
     <Compile Include="Assets\Fee\Script\File\Task_LoadLocalTextFile.cs" />
     <Compile Include="Assets\Fee\Script\File\Task_LoadLocalTextureFile.cs" />
@@ -238,7 +238,7 @@
     <Compile Include="Assets\Fee\Script\SoundPool\Config.cs" />
     <Compile Include="Assets\Fee\Script\SoundPool\Coroutine_DownLoadSoundPool.cs" />
     <Compile Include="Assets\Fee\Script\SoundPool\Coroutine_LoadLocalSoundPool.cs" />
-    <Compile Include="Assets\Fee\Script\SoundPool\Coroutine_SaveLocalSoundPool.cs" />
+    <Compile Include="Assets\Fee\Script\SoundPool\Coroutine_LoadStreamingAssetsSoundPool.cs" />
     <Compile Include="Assets\Fee\Script\SoundPool\Item.cs" />
     <Compile Include="Assets\Fee\Script\SoundPool\Main_File.cs" />
     <Compile Include="Assets\Fee\Script\SoundPool\OnCoroutine_CallBack.cs" />
@@ -563,6 +563,7 @@
     <None Include="Assets\Fee\Resources\Shader\Render2D\UiImage.shader" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_DownSampling.shader" />
     <None Include="Assets\Fee\license\standardassets\readme.txt" />
+    <None Include="Assets\StreamingAssets\se.txt" />
     <None Include="Assets\VRM\UniGLTF\Resources\Shaders\NormalMapDecoder.shader" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_AddUpSampling.shader" />
     <None Include="Assets\VRM\UniVRM\Resources\Shaders\VRMUnlitTexture.shader" />

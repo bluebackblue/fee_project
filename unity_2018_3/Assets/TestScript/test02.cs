@@ -183,11 +183,9 @@ public class test02 : main_base
 
 		/** constructor
 		*/
-		#if(USE_DEF_FEE_UTF8JSON)
 		public SpeedTest_Data()
 		{
 		}
-		#endif
 
 		/** constructor
 		*/
