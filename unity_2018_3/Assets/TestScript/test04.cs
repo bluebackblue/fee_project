@@ -14,9 +14,28 @@ using UnityEngine;
 
 /** test04
 
-	バイナリ。セーブ。ロード。
-	テキスト。セーブ。ロード。
-	ＰＮＧ。セーブ。ロード。
+	サウンドプール
+		ダウンロード
+		ロードローカル
+		ロードストリーミングアセット
+
+	テキスト
+		セーブローカル
+		ダウンロード
+		ロードローカル
+		ロードストリーミングアセット
+
+	バイナリー
+		セーブローカル
+		ダウンロード
+		ロードローカル
+		ロードストリーミングアセット
+
+	テクスチャー
+		セーブローカル
+		ダウンロード
+		ロードローカル
+		ロードストリーミングアセット
 
 */
 public class test04 : main_base
@@ -130,10 +149,6 @@ public class test04 : main_base
 	/** loadstreamingassets_texturefile_button
 	*/
 	private Fee.Ui.Button loadstreamingassets_texturefile_button;
-
-
-
-
 
 
 	/** Item
@@ -491,18 +506,6 @@ public class test04 : main_base
 		this.loadstreamingassets_texturefile_button.SetText("LoadStreamingAssets Texture");
 		this.loadstreamingassets_texturefile_button.SetFrontSize(15);
 
-
-
-
-
-
-
-
-
-
-
-
-
 		//item
 		this.item = null;
 	}
@@ -534,9 +537,6 @@ public class test04 : main_base
 				uint t_data_version = 1;
 				this.item = new Item(Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path("se.txt"),t_data_version));
 			}break;
-
-
-
 		case CallBackId.SaveLocal_TextFile:
 			{
 				//セーブローカル。テキストファイル。
@@ -561,9 +561,6 @@ public class test04 : main_base
 
 				this.item = new Item(Fee.File.File.GetInstance().RequestLoadStreamingAssetsTextFile(new Fee.File.Path("text.txt")));
 			}break;
-
-
-
 		case CallBackId.SaveLocal_BinaryFile:
 			{
 				//セーブローカル。バイナリファイル。
@@ -589,9 +586,6 @@ public class test04 : main_base
 
 				this.item = new Item(Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path("binary")));
 			}break;
-
-
-
 		case CallBackId.SaveLocal_TextureFile:
 			{
 				//セーブローカル。テクスチャーファイル。
@@ -614,7 +608,7 @@ public class test04 : main_base
 			{
 				//ダウンロード。テクスチャーファイル。
 
-				this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadTextureFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/Data/","texture.jpg"),null));
+				this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadTextureFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/Data/","texture.png"),null));
 			}break;
 		case CallBackId.LoadLocal_TextureFile:
 			{
