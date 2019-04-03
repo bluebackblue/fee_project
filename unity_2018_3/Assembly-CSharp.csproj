@@ -126,6 +126,7 @@
     <Compile Include="Assets\Fee\Script\Fade\MonoBehaviour_Flag.cs" />
     <Compile Include="Assets\Fee\Script\Fade\Tool.cs" />
     <Compile Include="Assets\Fee\Script\File\AssetBundleList.cs" />
+    <Compile Include="Assets\Fee\Script\File\BinaryToTexture2D.cs" />
     <Compile Include="Assets\Fee\Script\File\Config.cs" />
     <Compile Include="Assets\Fee\Script\File\Coroutine_DownLoadAssetBundle.cs" />
     <Compile Include="Assets\Fee\Script\File\Coroutine_DownLoadBinaryFile.cs" />

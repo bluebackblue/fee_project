@@ -43,15 +43,12 @@ public class test04 : main_base
 		LoadLocal_BinaryFile,
 		LoadStreamingAssets_BinaryFile,
 
-		SaveLocal_BngFile,
-		DownLoad_BngFile,
-		LoadLocal_PngFile,
-		LoadStreamingAssets_PngFile,
+		SaveLocal_TextureFile,
+		DownLoad_TextureFile,
+		LoadLocal_TextureFile,
+		LoadStreamingAssets_TextureFile,
 
-		/*
-		SavePngNow,
-		LoadPngNow,
-		*/
+
 	}
 
 	/** status
@@ -61,6 +58,12 @@ public class test04 : main_base
 	/** progress_sprite
 	*/
 	private Fee.Render2D.Sprite2D progress_sprite;
+
+	/** result_sprite
+	*/
+	private Fee.Render2D.Sprite2D result_sprite;
+
+
 
 	/** download_soundpool_button
 	*/
@@ -110,17 +113,40 @@ public class test04 : main_base
 	*/
 	private Fee.Ui.Button loadstreamingassets_binaryfile_button;
 
+
+
+	/** savelocal_texturefile_button
+	*/
+	private Fee.Ui.Button savelocal_texturefile_button;
+
+	/** download_texturefile_button
+	*/
+	private Fee.Ui.Button download_texturefile_button;
+
+	/** loadlocal_texturefile_button
+	*/
+	private Fee.Ui.Button loadlocal_texturefile_button;
+
+	/** loadstreamingassets_texturefile_button
+	*/
+	private Fee.Ui.Button loadstreamingassets_texturefile_button;
+
+
+
+
+
+
 	/** Item
 	*/
 	class Item
 	{
 		/** item_file
 		*/
-		private Fee.File.Item_Base item_file;
+		private Fee.File.Item item_file;
 
 		/** item_soundpool
 		*/
-		private Fee.SoundPool.Item_Base item_soundpool;
+		private Fee.SoundPool.Item item_soundpool;
 
 		/** ResultType
 		*/
@@ -190,6 +216,26 @@ public class test04 : main_base
 				return this.item_file.GetResultResponseHeader();
 			}
 			return this.item_soundpool.GetResultResponseHeader();
+		}
+
+		/** GetResultText
+		*/
+		public string GetResultText()
+		{
+			if(this.item_file != null){
+				return this.item_file.GetResultText();
+			}
+			return null;
+		}
+
+		/** GetResultTexture
+		*/
+		public Texture2D GetResultTexture()
+		{
+			if(this.item_file != null){
+				return this.item_file.GetResultTexture();
+			}
+			return null;
 		}
 
 		/** GetResultType
@@ -296,70 +342,75 @@ public class test04 : main_base
 
 		//status
 		this.status_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
-		this.status_text.SetRect(Fee.Render2D.Config.VIRTUAL_W/2,50,0,0);
-		this.status_text.SetCenter(true,false);
-		this.status_text.SetFontSize(9);
+		this.status_text.SetRect(50,60,0,0);
+		this.status_text.SetFontSize(13);
+
+		//result_sprite
+		this.result_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
+		this.result_sprite.SetRect(400,30,64,64);
 
 		//progress_sprite
 		this.progress_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
 		this.progress_sprite.SetTexture(Texture2D.whiteTexture);
-		this.progress_sprite.SetRect(50,70,0,10);
+		this.progress_sprite.SetRect(50,90,300,10);
 
-		int t_y = 100;
+		int t_y = 120;
+
+		int t_button_h = 27;
 
 		//download_soundpool_button
 		this.download_soundpool_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.DownLoad_SoundPool);
-		this.download_soundpool_button.SetRect(50,t_y,300,30);
+		this.download_soundpool_button.SetRect(50,t_y,300,t_button_h);
 		this.download_soundpool_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.download_soundpool_button.SetText("DownLoad SoundPool");
 		this.download_soundpool_button.SetFrontSize(15);
 
-		t_y += 35;
+		t_y += t_button_h + 3;
 
 		//loadlocal_soundpool_button
 		this.loadlocal_soundpool_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadLocal_SoundPool);
-		this.loadlocal_soundpool_button.SetRect(50,t_y,300,30);
+		this.loadlocal_soundpool_button.SetRect(50,t_y,300,t_button_h);
 		this.loadlocal_soundpool_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.loadlocal_soundpool_button.SetText("LoadLocal SoundPool");
 		this.loadlocal_soundpool_button.SetFrontSize(15);
 
-		t_y += 35;
+		t_y += t_button_h + 3;
 
 		//loadstreamingassets_soundpool_button
 		this.loadstreamingassets_soundpool_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadStreamingAssets_SoundPool);
-		this.loadstreamingassets_soundpool_button.SetRect(50,t_y,300,30);
+		this.loadstreamingassets_soundpool_button.SetRect(50,t_y,300,t_button_h);
 		this.loadstreamingassets_soundpool_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.loadstreamingassets_soundpool_button.SetText("LoadStreamingAssets SoundPool");
 		this.loadstreamingassets_soundpool_button.SetFrontSize(15);
 
-		t_y += 35;
+		t_y += t_button_h + 3;
 
 		//savelocal_textfile_button
 		this.savelocal_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.SaveLocal_TextFile);
-		this.savelocal_textfile_button.SetRect(50,t_y,300,30);
+		this.savelocal_textfile_button.SetRect(50,t_y,300,t_button_h);
 		this.savelocal_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.savelocal_textfile_button.SetText("SaveLocal Text");
 		this.savelocal_textfile_button.SetFrontSize(15);
 
-		t_y += 35;
+		t_y += t_button_h + 3;
 
 		//download_textfile_button
 		this.download_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.DownLoad_TextFile);
-		this.download_textfile_button.SetRect(50,t_y,300,30);
+		this.download_textfile_button.SetRect(50,t_y,300,t_button_h);
 		this.download_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.download_textfile_button.SetText("DownLoad Text");
 		this.download_textfile_button.SetFrontSize(15);
 
-		t_y += 35;
+		t_y += t_button_h + 3;
 
 		//loadlocal_textfile_button
 		this.loadlocal_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadLocal_TextFile);
-		this.loadlocal_textfile_button.SetRect(50,t_y,300,30);
+		this.loadlocal_textfile_button.SetRect(50,t_y,300,t_button_h);
 		this.loadlocal_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.loadlocal_textfile_button.SetText("LoadLocal Text");
 		this.loadlocal_textfile_button.SetFrontSize(15);
 
-		t_y += 35;
+		t_y += t_button_h + 3;
 
 		//loadstreamingassets_textfile_button
 		this.loadstreamingassets_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadStreamingAssets_TextFile);
@@ -368,41 +419,89 @@ public class test04 : main_base
 		this.loadstreamingassets_textfile_button.SetText("LoadStreamingAssets Text");
 		this.loadstreamingassets_textfile_button.SetFrontSize(15);
 
-		t_y += 35;
+		t_y += t_button_h + 3;
 
 		//savelocal_binaryfile_button
 		this.savelocal_binaryfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.SaveLocal_BinaryFile);
-		this.savelocal_binaryfile_button.SetRect(50,t_y,300,30);
+		this.savelocal_binaryfile_button.SetRect(50,t_y,300,t_button_h);
 		this.savelocal_binaryfile_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.savelocal_binaryfile_button.SetText("SaveLocal Binary");
 		this.savelocal_binaryfile_button.SetFrontSize(15);
 
-		t_y += 35;
+		t_y += t_button_h + 3;
 
 		//download_binaryfile_button
 		this.download_binaryfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.DownLoad_BinaryFile);
-		this.download_binaryfile_button.SetRect(50,t_y,300,30);
+		this.download_binaryfile_button.SetRect(50,t_y,300,t_button_h);
 		this.download_binaryfile_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.download_binaryfile_button.SetText("DownLoad Binary");
 		this.download_binaryfile_button.SetFrontSize(15);
 
-		t_y += 35;
+		t_y += t_button_h + 3;
 
 		//loadlocal_binaryfile_button
 		this.loadlocal_binaryfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadLocal_BinaryFile);
-		this.loadlocal_binaryfile_button.SetRect(50,t_y,300,30);
+		this.loadlocal_binaryfile_button.SetRect(50,t_y,300,t_button_h);
 		this.loadlocal_binaryfile_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.loadlocal_binaryfile_button.SetText("LoadLocal Binary");
 		this.loadlocal_binaryfile_button.SetFrontSize(15);
 
-		t_y += 35;
+		t_y += t_button_h + 3;
 
 		//loadstreamingassets_binaryfile_button
 		this.loadstreamingassets_binaryfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadStreamingAssets_BinaryFile);
-		this.loadstreamingassets_binaryfile_button.SetRect(50,t_y,300,30);
+		this.loadstreamingassets_binaryfile_button.SetRect(50,t_y,300,t_button_h);
 		this.loadstreamingassets_binaryfile_button.SetTexture(Resources.Load<Texture2D>("button"));
 		this.loadstreamingassets_binaryfile_button.SetText("LoadStreamingAssets Binary");
 		this.loadstreamingassets_binaryfile_button.SetFrontSize(15);
+
+		t_y += t_button_h + 3;
+
+		//savelocal_texturefile_button
+		this.savelocal_texturefile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.SaveLocal_TextureFile);
+		this.savelocal_texturefile_button.SetRect(50,t_y,300,t_button_h);
+		this.savelocal_texturefile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.savelocal_texturefile_button.SetText("SaveLocal Texture");
+		this.savelocal_texturefile_button.SetFrontSize(15);
+
+		t_y += t_button_h + 3;
+
+		//download_texturefile_button
+		this.download_texturefile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.DownLoad_TextureFile);
+		this.download_texturefile_button.SetRect(50,t_y,300,t_button_h);
+		this.download_texturefile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.download_texturefile_button.SetText("DownLoad Texture");
+		this.download_texturefile_button.SetFrontSize(15);
+
+		t_y += t_button_h + 3;
+
+		//loadlocal_texturefile_button
+		this.loadlocal_texturefile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadLocal_TextureFile);
+		this.loadlocal_texturefile_button.SetRect(50,t_y,300,t_button_h);
+		this.loadlocal_texturefile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadlocal_texturefile_button.SetText("LoadLocal Texture");
+		this.loadlocal_texturefile_button.SetFrontSize(15);
+
+		t_y += t_button_h + 3;
+
+		//loadstreamingassets_texturefile_button
+		this.loadstreamingassets_texturefile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadStreamingAssets_TextureFile);
+		this.loadstreamingassets_texturefile_button.SetRect(50,t_y,300,t_button_h);
+		this.loadstreamingassets_texturefile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadstreamingassets_texturefile_button.SetText("LoadStreamingAssets Texture");
+		this.loadstreamingassets_texturefile_button.SetFrontSize(15);
+
+
+
+
+
+
+
+
+
+
+
+
 
 		//item
 		this.item = null;
@@ -412,6 +511,8 @@ public class test04 : main_base
 	*/
 	private void CallBack_Click(int a_id)
 	{
+		this.result_sprite.SetVisible(false);
+
 		switch((CallBackId)a_id){
 		case CallBackId.DownLoad_SoundPool:
 			{
@@ -491,9 +592,9 @@ public class test04 : main_base
 
 
 
-		case CallBackId.SaveLocal_BngFile:
+		case CallBackId.SaveLocal_TextureFile:
 			{
-				//セーブローカル。ＰＮＧファイル。
+				//セーブローカル。テクスチャーファイル。
 
 				Texture2D t_texture = new Texture2D(64,64);
 				{
@@ -509,26 +610,24 @@ public class test04 : main_base
 
 				this.item = new Item(Fee.File.File.GetInstance().RequestSaveLocalTextureFile(new Fee.File.Path("texture.png"),t_texture));
 			}break;
-		case CallBackId.DownLoad_BngFile:
+		case CallBackId.DownLoad_TextureFile:
 			{
-				//ダウンロード。ＰＮＧファイル。
+				//ダウンロード。テクスチャーファイル。
 
-				this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadTextureFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/Data/","texture.png"),null));
+				this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadTextureFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/Data/","texture.jpg"),null));
 			}break;
-		case CallBackId.LoadLocal_PngFile:
+		case CallBackId.LoadLocal_TextureFile:
 			{
-				//ロードローカル。ＰＮＧファイル。
+				//ロードローカル。テクスチャーファイル。
 
 				this.item = new Item(Fee.File.File.GetInstance().RequestLoadLocalTextureFile(new Fee.File.Path("texture.png")));
 			}break;
-		case CallBackId.LoadStreamingAssets_PngFile:
+		case CallBackId.LoadStreamingAssets_TextureFile:
 			{
-				//ロードストリーミングアセット。ＰＮＧファイル。
+				//ロードストリーミングアセット。テクスチャーファイル。
 
 				this.item = new Item(Fee.File.File.GetInstance().RequestLoadStreamingAssetsTextureFile(new Fee.File.Path("texture.png")));
 			}break;
-
-
 		}
 	}
 
@@ -586,7 +685,7 @@ public class test04 : main_base
 							t_responsheader = this.item.GetResultResponseHeader().Count.ToString();
 						}
 
-						this.status_text.SetText("結果:テキスト取得 : " + t_responsheader);
+						this.status_text.SetText("結果:テキスト取得 : " + t_responsheader + " : " + this.item.GetResultText());
 					}break;
 				case Item.ResultType.Binary:
 					{
@@ -597,357 +696,23 @@ public class test04 : main_base
 
 						this.status_text.SetText("結果:バイナリ取得 : " + t_responsheader);
 					}break;
+				case Item.ResultType.Texture:
+					{
+						string t_responsheader = "";
+						if(this.item.GetResultResponseHeader() != null){
+							t_responsheader = this.item.GetResultResponseHeader().Count.ToString();
+						}
+
+						this.result_sprite.SetVisible(true);
+						this.result_sprite.SetTexture(this.item.GetResultTexture());
+
+						this.status_text.SetText("結果:テクスチャー取得 : " + t_responsheader);
+					}break;
 				}
 
 				this.item = null;
 			}
 		}
-
-		/*
-		switch(this.step){
-		case Step.Start:
-			{
-				{
-					string t_log_text = this.step.ToString();
-					this.status.SetText(t_log_text);
-					Debug.Log(t_log_text);
-				}
-
-				this.step = Step.SaveBinaryStart;
-			}break;
-		case Step.SaveBinaryStart:
-			{
-				//ファイル名。
-				string t_filename = "test_binary.bin";
-
-				//データ。
-				byte[] t_binary = new byte[1 * 1024 * 1024 * 100];
-				for(int ii=0;ii<t_binary.Length;ii++){
-					t_binary[ii] = (byte)(ii % 256);
-				}
-
-				this.saveload_item = Fee.File.File.GetInstance().RequestSaveLocalBinaryFile(t_filename,t_binary);
-
-				{
-					string t_log_text = this.step.ToString() + " : " + t_filename + " : size = " + t_binary.Length.ToString();
-					this.status.SetText(t_log_text);
-					Debug.Log(t_log_text);
-				}
-
-				this.step = Step.SaveBinaryNow;
-			}break;
-		case Step.SaveBinaryNow:
-			{
-				if(this.saveload_item.IsBusy() == true){
-					//セーブ中。
-				
-					{
-						string t_log_text = this.step.ToString();
-						this.status.SetText(t_log_text);
-						Debug.Log(t_log_text); 
-					}
-				}else{
-					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.SaveEnd){
-						//成功。
-
-						{
-							string t_log_text = this.step.ToString() + " : Success";
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.LoadBinaryStart;
-					}else{
-						//失敗。
-
-						{
-							string t_log_text = this.step.ToString() + " : Faild";
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.End;
-					}
-				}
-			}break;
-		case Step.LoadBinaryStart:
-			{
-				//ファイル名。
-				string t_filename = "test_binary.bin";
-
-				this.saveload_item = Fee.File.File.GetInstance().RequestLoadLocalBinaryFile(t_filename);
-
-				{
-					string t_log_text = this.step.ToString() + " : " + t_filename;
-					this.status.SetText(t_log_text);
-					Debug.Log(t_log_text); 
-				}
-
-				this.step = Step.LoadBinaryNow;
-			}break;
-		case Step.LoadBinaryNow:
-			{
-				if(this.saveload_item.IsBusy() == true){
-					//ロード中。
-					{
-						string t_log_text = this.step.ToString();
-						this.status.SetText(t_log_text);
-						Debug.Log(t_log_text); 
-					}
-				}else{
-					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.Binary){
-						//成功。
-
-						//チェック。
-						bool t_error = false;
-						byte[] t_binary = this.saveload_item.GetResultBinary();
-
-						for(int ii=0;ii<t_binary.Length;ii++){
-							if(t_binary[ii] != (byte)(ii % 256)){
-								t_error = true;
-							}
-						}
-
-						{
-							string t_log_text = this.step.ToString() + " : Success : size = " +  this.saveload_item.GetResultBinary().Length.ToString() + " error = " + t_error.ToString();
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.SaveTextStart;
-					}else{
-						//失敗。
-
-						{
-							string t_log_text = this.step.ToString() + " : Faild";
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.End;
-					}
-				}
-			}break;
-		case Step.SaveTextStart:
-			{
-				//ファイル名。
-				string t_filename = "test_text.txt";
-
-				//データ。
-				string t_text = Random.value.ToString();
-
-				this.saveload_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile(t_filename,t_text);
-
-				{
-					string t_log_text = this.step.ToString() + " : " + t_filename + " : text = " + t_text;
-					this.status.SetText(t_log_text);
-					Debug.Log(t_log_text); 
-				}
-
-				this.step = Step.SaveTextNow;
-			}break;
-		case Step.SaveTextNow:
-			{
-				if(this.saveload_item.IsBusy() == true){
-					//セーブ中。
-					{
-						string t_log_text = this.step.ToString();
-						this.status.SetText(t_log_text);
-						Debug.Log(t_log_text); 
-					}
-				}else{
-					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.SaveEnd){
-						//成功。
-
-						{
-							string t_log_text = this.step.ToString() + " : Success";
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.LoadTextStart;
-					}else{
-						//失敗。
-
-						{
-							string t_log_text = this.step.ToString() + " : Faild";
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.End;
-					}
-				}
-			}break;
-		case Step.LoadTextStart:
-			{
-				//ファイル名。
-				string t_filename = "test_text.txt";
-
-				this.saveload_item = Fee.File.File.GetInstance().RequestLoadLocalTextFile(t_filename);
-
-				{
-					string t_log_text = this.step.ToString() + " : " + t_filename;
-					this.status.SetText(t_log_text);
-					Debug.Log(t_log_text); 
-				}
-
-				this.step = Step.LoadTextNow;
-			}break;
-		case Step.LoadTextNow:
-			{
-				if(this.saveload_item.IsBusy() == true){
-					//ロード中。
-					{
-						string t_log_text = this.step.ToString();
-						this.status.SetText(t_log_text);
-						Debug.Log(t_log_text); 
-					}
-				}else{
-					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.Text){
-						//成功。
-
-						{
-							string t_log_text = this.step.ToString() + " : Success : = " + this.saveload_item.GetResultText();
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.SavePngStart;
-					}else{
-						//失敗。
-						
-						{
-							string t_log_text = this.step.ToString() + " : Faild";
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.End;
-					}
-				}
-			}break;
-		case Step.SavePngStart:
-			{
-				//ファイル名。
-				string t_filename = "test_png.png";
-
-				Texture2D t_texture = new Texture2D(64,64);
-				{
-					t_texture.filterMode = FilterMode.Point;
-					t_texture.wrapMode = TextureWrapMode.Clamp;
-					for(int xx=0;xx<t_texture.width;xx++){
-						for(int yy=0;yy<t_texture.height;yy++){
-							t_texture.SetPixel(xx,yy,new Color((float)xx / t_texture.width,(float)yy / t_texture.height,0.0f,(float)xx / t_texture.width));
-						}
-					}
-					t_texture.Apply();
-				}
-
-				this.saveload_item = Fee.File.File.GetInstance().RequestSaveLocalTextureFile(t_filename,t_texture);
-
-				{
-					string t_log_text = this.step.ToString() + " : " + t_filename;
-					this.status.SetText(t_log_text);
-					Debug.Log(t_log_text); 
-				}
-
-				this.step = Step.SavePngNow;
-			}break;
-		case Step.SavePngNow:
-			{
-				if(this.saveload_item.IsBusy() == true){
-					//セーブ中。
-					{
-						string t_log_text = this.step.ToString();
-						this.status.SetText(t_log_text);
-						Debug.Log(t_log_text); 
-					}
-				}else{
-					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.SaveEnd){
-						//成功。
-
-						{
-							string t_log_text = this.step.ToString() + " : Success";
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.LoadPngStart;
-					}else{
-						//失敗。
-
-						{
-							string t_log_text = this.step.ToString() + " : Faild";
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.End;
-					}
-				}
-			}break;
-		case Step.LoadPngStart:
-			{
-				//ファイル名。
-				string t_filename = "test_png.png";
-
-				this.saveload_item = Fee.File.File.GetInstance().RequestLoadLocalTextureFile(t_filename);
-
-				{
-					string t_log_text = this.step.ToString() + " : " + t_filename;
-					this.status.SetText(t_log_text);
-					Debug.Log(t_log_text); 
-				}
-
-				this.step = Step.LoadPngNow;
-			}break;
-		case Step.LoadPngNow:
-			{
-				if(this.saveload_item.IsBusy() == true){
-					//ロード中。
-					{
-						string t_log_text = this.step.ToString();
-						this.status.SetText(t_log_text);
-						Debug.Log(t_log_text); 
-					}
-				}else{
-					if(this.saveload_item.GetResultType() == Fee.File.Item.ResultType.Texture){
-						//成功。
-
-						Texture2D t_load_texture = this.saveload_item.GetResultTexture();
-						{
-							t_load_texture.filterMode = FilterMode.Point;
-							t_load_texture.wrapMode = TextureWrapMode.Clamp;
-						}
-						this.sprite.SetTexture(t_load_texture);
-
-						{
-							string t_log_text = this.step.ToString() + " : success";
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.End;
-					}else{
-						//失敗。
-
-						{
-							string t_log_text = this.step.ToString() + " : Faild";
-							this.status.SetText(t_log_text);
-							Debug.Log(t_log_text); 
-						}
-
-						this.step = Step.End;
-					}
-				}
-			}break;
-		case Step.End:
-			{
-				this.step = Step.None;
-			}break;
-		}
-		*/
 	}
 
 	/** 削除前。
