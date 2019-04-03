@@ -548,6 +548,7 @@
     <Compile Include="Assets\VRM\UniVRM\Scripts\SpringBone\VRMSpringBone.cs" />
     <Compile Include="Assets\VRM\UniVRM\Scripts\SpringBone\VRMSpringBoneColliderGroup.cs" />
     <Compile Include="Assets\VRM\UniVRM\Scripts\SpringBone\VRMSpringUtility.cs" />
+    <None Include="Assets\StreamingAssets\text.txt" />
     <None Include="Assets\Fee\license\pun2free\readme.txt" />
     <None Include="Assets\VRM\UniVRM\Resources\Shaders\VRMUnlitTransparent.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\AlphaClip.shader" />
