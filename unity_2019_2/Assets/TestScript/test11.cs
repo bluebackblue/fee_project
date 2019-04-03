@@ -144,6 +144,9 @@ public class test11 : main_base
 		Fee.File.Config.LOG_ENABLE = true;
 		Fee.File.File.CreateInstance();
 
+		//サウンドプール。インスタンス作成。
+		Fee.SoundPool.SoundPool.CreateInstance();
+
 		//オーディオ。インスタンス作成。
 		Fee.Audio.Config.LOG_ENABLE = true;
 		Fee.Audio.Audio.CreateInstance();
@@ -367,6 +370,9 @@ public class test11 : main_base
 		//ファイル。
 		Fee.File.File.GetInstance().Main();
 
+		//サウンドプール。
+		Fee.SoundPool.SoundPool.GetInstance().Main();
+
 		//ＵＩ。
 		Fee.Ui.Ui.GetInstance().Main();
 
@@ -380,7 +386,7 @@ public class test11 : main_base
 		if(this.download_item_bgm != null){
 			if(this.download_item_bgm.IsBusy() == true){
 				//ダウンロード中。
-				this.status.SetText("bgm : " + this.download_item_bgm.GetResultProgress().ToString());
+				this.status.SetText("bgm : " + this.download_item_bgm.GetResultProgressDown().ToString());
 			}else{
 				if(this.download_item_bgm.GetResultType() == Fee.File.Item.ResultType.AssetBundle){
 					//ダウンロード成功。アセットバンドル。
@@ -446,7 +452,7 @@ public class test11 : main_base
 				if(this.soundpool_item_se != null){
 					if(this.soundpool_item_se.IsBusy() == true){
 						//ダウンロード中。
-						this.status.SetText("se : " + this.soundpool_item_se.GetResultProgress().ToString());
+						this.status.SetText("se : " + this.soundpool_item_se.GetResultProgressDown().ToString());
 					}else{
 						if(this.soundpool_item_se.GetResultType() == Fee.SoundPool.Item.ResultType.SoundPool){
 							//ダウンロード成功。サウンドプール。
@@ -470,7 +476,7 @@ public class test11 : main_base
 				}else if(this.download_item_se != null){
 					if(this.download_item_se.IsBusy() == true){
 						//ダウンロード中。
-						this.status.SetText("se : " + this.download_item_se.GetResultProgress().ToString());
+						this.status.SetText("se : " + this.download_item_se.GetResultProgressDown().ToString());
 					}else{
 						if(this.download_item_se.GetResultType() == Fee.File.Item.ResultType.AssetBundle){
 							//ダウンロード成功。アセットバンドル。

@@ -13,70 +13,9 @@
 */
 namespace Fee.SoundPool
 {
-	/** Item_Base
-	*/
-	public interface Item_Base
-	{
-		/** 処理中。チェック。
-		*/
-		bool IsBusy();
-
-		/** キャンセル。設定。
-		*/
-		void Cancel();
-
-		/** キャンセル。取得。
-		*/
-		bool IsCancel();
-
-		/** 結果。タイプ。取得。
-		*/
-		Item.ResultType GetResultType();
-
-		/** プログレス。設定。
-		*/
-		void SetResultProgressUp(float a_result_progress_up);
-
-		/** プログレス。取得。
-		*/
-		float GetResultProgressUp();
-
-		/** プログレス。設定。
-		*/
-		void SetResultProgressDown(float a_result_progress_down);
-
-		/** プログレス。取得。
-		*/
-		float GetResultProgressDown();
-
-		/** 結果。エラー文字。設定。
-		*/
-		void SetResultErrorString(string a_error_string);
-
-		/** 結果。エラー文字。取得。
-		*/
-		string GetResultErrorString();
-
-		/** 結果。サウンドプール。設定。
-		*/
-		void SetResultSoundPool(Fee.Audio.Pack_SoundPool a_soundpool);
-
-		/** 結果。サウンドプール。取得。
-		*/
-		Fee.Audio.Pack_SoundPool GetResultSoundPool();
-
-		/** 結果。レスポンスヘッダー。設定。
-		*/
-		void SetResultResponseHeader(System.Collections.Generic.Dictionary<string,string> a_responseheader);
-
-		/** 結果。レスポンスヘッダー。取得。
-		*/
-		System.Collections.Generic.Dictionary<string,string> GetResultResponseHeader();
-	}
-
 	/** Item
 	*/
-	public class Item : Item_Base
+	public class Item
 	{
 		/** ResultType
 		*/
