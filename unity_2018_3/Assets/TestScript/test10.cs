@@ -102,19 +102,22 @@ public class test10 : main_base
 		{
 			Camera t_main_camera = GameObject.Find("Main Camera").GetComponent<Camera>();
 
-			t_main_camera.clearFlags = CameraClearFlags.SolidColor;
+			t_main_camera.clearFlags = CameraClearFlags.Nothing;
 			t_main_camera.depthTextureMode = DepthTextureMode.Depth;
 			t_main_camera.depth = 20.0f;
 
-			this.render_texture_color = new RenderTexture(Screen.width,Screen.height,0,RenderTextureFormat.ARGB32);
-			this.render_texture_color.Create();
-			this.render_texture_depth = new RenderTexture(Screen.width,Screen.height,24,RenderTextureFormat.Depth);
-			this.render_texture_depth.Create();
-
-			t_main_camera.SetTargetBuffers(this.render_texture_color.colorBuffer,this.render_texture_depth.depthBuffer);
-
 			Fee.Depth.Depth.GetInstance().SetBlendRate(0.5f);
-			Fee.Depth.Depth.GetInstance().SetDepthTexture(this.render_texture_depth);
+
+			if(false){
+				this.render_texture_color = new RenderTexture(Screen.width,Screen.height,0,RenderTextureFormat.ARGB32);
+				this.render_texture_color.Create();
+				this.render_texture_depth = new RenderTexture(Screen.width,Screen.height,24,RenderTextureFormat.Depth);
+				this.render_texture_depth.Create();
+				t_main_camera.SetTargetBuffers(this.render_texture_color.colorBuffer,this.render_texture_depth.depthBuffer);
+				Fee.Depth.Depth.GetInstance().SetDepthTexture(this.render_texture_depth);
+			}else{
+				Fee.Depth.Depth.GetInstance().SetDepthTexture(null);
+			}
 		}
 
 		//スプライト。
@@ -270,7 +273,7 @@ public class test10 : main_base
 			}else{
 				Fee.Bloom.Bloom.GetInstance().SetEnable(true);
 			}
-			this.bloom_button.SetText("Bloom" + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
+			this.bloom_button.SetText("Bloom " + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
 		}else if(a_id == 1){
 			//ブラー。
 			if(Fee.Blur.Blur.GetInstance().IsEnable() == true){
@@ -278,7 +281,7 @@ public class test10 : main_base
 			}else{
 				Fee.Blur.Blur.GetInstance().SetEnable(true);
 			}
-			this.blur_button.SetText("Blur" + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
+			this.blur_button.SetText("Blur " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
 		}else{
 			//デプス。
 			if(Fee.Depth.Depth.GetInstance().IsEnable() == true){
@@ -286,7 +289,7 @@ public class test10 : main_base
 			}else{
 				Fee.Depth.Depth.GetInstance().SetEnable(true);
 			}
-			this.depth_button.SetText("Depth" + Fee.Depth.Depth.GetInstance().IsEnable().ToString());
+			this.depth_button.SetText("Depth " + Fee.Depth.Depth.GetInstance().IsEnable().ToString());
 		}
 	}
 
