@@ -677,6 +677,10 @@
     <Compile Include="Assets\Fee\Script\Deleter\Deleter.cs" />
     <Compile Include="Assets\Fee\Script\Deleter\Item_Base.cs" />
     <Compile Include="Assets\Fee\Script\Deleter\Tool.cs" />
+    <Compile Include="Assets\Fee\Script\Depth\Config.cs" />
+    <Compile Include="Assets\Fee\Script\Depth\Depth.cs" />
+    <Compile Include="Assets\Fee\Script\Depth\MonoBehaviour_Camera.cs" />
+    <Compile Include="Assets\Fee\Script\Depth\Tool.cs" />
     <Compile Include="Assets\Fee\Script\Dijkstra\Config.cs" />
     <Compile Include="Assets\Fee\Script\Dijkstra\Dijkstra.cs" />
     <Compile Include="Assets\Fee\Script\Dijkstra\Link.cs" />
@@ -702,6 +706,7 @@
     <Compile Include="Assets\Fee\Script\Fade\MonoBehaviour_Flag.cs" />
     <Compile Include="Assets\Fee\Script\Fade\Tool.cs" />
     <Compile Include="Assets\Fee\Script\File\AssetBundleList.cs" />
+    <Compile Include="Assets\Fee\Script\File\BinaryToTexture2D.cs" />
     <Compile Include="Assets\Fee\Script\File\Config.cs" />
     <Compile Include="Assets\Fee\Script\File\Coroutine_DownLoadAssetBundle.cs" />
     <Compile Include="Assets\Fee\Script\File\Coroutine_DownLoadBinaryFile.cs" />
@@ -1134,6 +1139,7 @@
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_LastAddUpSampling.shader" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_X.shader" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_Y.shader" />
+    <None Include="Assets\Fee\Resources\Shader\Depth\Depth_View.shader" />
     <None Include="Assets\Fee\Resources\Shader\PerformanceCounter\Sprite.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Add.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Alpha.shader" />
@@ -1148,6 +1154,7 @@
     <None Include="Assets\Fee\license\univrm\LICENSE.txt" />
     <None Include="Assets\Fee\readme.txt" />
     <None Include="Assets\StreamingAssets\se.txt" />
+    <None Include="Assets\StreamingAssets\text.txt" />
     <None Include="Assets\TestScript\LICENSE.txt" />
     <None Include="Assets\VRM\MToon\MToon\Resources\Shaders\MToon.shader" />
     <None Include="Assets\VRM\MToon\MToon\Resources\Shaders\MToonCore.cginc" />

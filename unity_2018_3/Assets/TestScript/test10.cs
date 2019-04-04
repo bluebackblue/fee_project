@@ -43,6 +43,16 @@ public class test10 : main_base
 	*/
 	private Fee.Ui.Button depthchange_button;
 
+	/** デプス。
+	*/
+	private Fee.Ui.Button depth_button;
+	private Fee.Ui.Slider depth_rate_blend_slider;
+
+	/** render_texture
+	*/
+	RenderTexture render_texture_color;
+	RenderTexture render_texture_depth;
+
 	/** Start
 	*/
 	private void Start()
@@ -58,6 +68,8 @@ public class test10 : main_base
 		Fee.Function.Function.SetMonoBehaviour(this);
 
 		//２Ｄ描画。インスタンス作成。
+		Fee.Render2D.Config.CAMERADEPTH_START = 10.0f;
+		Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 		Fee.Render2D.Render2D.CreateInstance();
 
 		//ブラー。インスタンス作成。
@@ -66,6 +78,9 @@ public class test10 : main_base
 
 		//ブルーム。インスタンス作成。
 		Fee.Bloom.Bloom.CreateInstance();
+
+		//深度。インスタンス作成。
+		Fee.Depth.Depth.CreateInstance();
 
 		//マウス。インスタンス作成。
 		Fee.Input.Mouse.CreateInstance();
@@ -82,6 +97,25 @@ public class test10 : main_base
 
 		//戻るボタン作成。
 		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
+
+		//深度。カメラに設定。
+		{
+			Camera t_main_camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+
+			t_main_camera.clearFlags = CameraClearFlags.SolidColor;
+			t_main_camera.depthTextureMode = DepthTextureMode.Depth;
+			t_main_camera.depth = 20.0f;
+
+			this.render_texture_color = new RenderTexture(Screen.width,Screen.height,0,RenderTextureFormat.ARGB32);
+			this.render_texture_color.Create();
+			this.render_texture_depth = new RenderTexture(Screen.width,Screen.height,24,RenderTextureFormat.Depth);
+			this.render_texture_depth.Create();
+
+			t_main_camera.SetTargetBuffers(this.render_texture_color.colorBuffer,this.render_texture_depth.depthBuffer);
+
+			Fee.Depth.Depth.GetInstance().SetBlendRate(0.5f);
+			Fee.Depth.Depth.GetInstance().SetDepthTexture(this.render_texture_depth);
+		}
 
 		//スプライト。
 		{
@@ -101,22 +135,27 @@ public class test10 : main_base
 		{
 			int t_y = 100;
 
+			int t_button_h = 25;
+			int t_button_w = 120;
+
+			//優先度。
 			{
 				this.depthchange_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,999);
 				this.depthchange_button.SetTexture(Resources.Load<Texture2D>("button"));
-				this.depthchange_button.SetRect(100,t_y,100,40);
+				this.depthchange_button.SetRect(100,t_y,t_button_w,t_button_h);
 				this.depthchange_button.SetText("DepthChange");
 			}
 
-			t_y += 100;
+			t_y += 40;
 
+			//ブルーム。
 			{
 				this.bloom_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,0);
 				this.bloom_button.SetTexture(Resources.Load<Texture2D>("button"));
-				this.bloom_button.SetRect(100,t_y,100,40);
+				this.bloom_button.SetRect(100,t_y,t_button_w,t_button_h);
 				this.bloom_button.SetText("Bloom" + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
 
-				t_y += 70;
+				t_y += 40;
 
 				this.bloom_threshold_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,100);
 				this.bloom_threshold_slider.SetTexture(Resources.Load<Texture2D>("slider"));
@@ -127,7 +166,7 @@ public class test10 : main_base
 				this.bloom_threshold_slider.SetButtonSize(20,25);
 				this.bloom_threshold_slider.SetValue(Fee.Bloom.Bloom.GetInstance().GetThreshold());
 
-				t_y += 50;
+				t_y += 30;
 
 				this.bloom_intensity_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,101);
 				this.bloom_intensity_slider.SetTexture(Resources.Load<Texture2D>("slider"));
@@ -140,15 +179,16 @@ public class test10 : main_base
 				this.bloom_intensity_slider.SetValueScale(5.0f);
 			}
 
-			t_y += 100;
+			t_y += 60;
 
+			//ブラー。
 			{
 				this.blur_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,1);
 				this.blur_button.SetTexture(Resources.Load<Texture2D>("button"));
-				this.blur_button.SetRect(100,t_y,100,40);
+				this.blur_button.SetRect(100,t_y,t_button_w,t_button_h);
 				this.blur_button.SetText("Blur" + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
 
-				t_y += 70;
+				t_y += 40;
 
 				this.blur_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,200);
 				this.blur_rate_blend_slider.SetTexture(Resources.Load<Texture2D>("slider"));
@@ -158,6 +198,27 @@ public class test10 : main_base
 				this.blur_rate_blend_slider.SetButtonTextureCornerSize(3);
 				this.blur_rate_blend_slider.SetButtonSize(20,25);
 				this.blur_rate_blend_slider.SetValue(Fee.Blur.Blur.GetInstance().GetBlendRate());
+			}
+
+			t_y += 60;
+
+			//デプス。
+			{
+				this.depth_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,2);
+				this.depth_button.SetTexture(Resources.Load<Texture2D>("button"));
+				this.depth_button.SetRect(100,t_y,t_button_w,t_button_h);
+				this.depth_button.SetText("Depth" + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
+
+				t_y += 40;
+
+				this.depth_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,300);
+				this.depth_rate_blend_slider.SetTexture(Resources.Load<Texture2D>("slider"));
+				this.depth_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>("button"));
+				this.depth_rate_blend_slider.SetRect(100,t_y,200,10);
+				this.depth_rate_blend_slider.SetTextureCornerSize(3);
+				this.depth_rate_blend_slider.SetButtonTextureCornerSize(3);
+				this.depth_rate_blend_slider.SetButtonSize(20,25);
+				this.depth_rate_blend_slider.SetValue(Fee.Depth.Depth.GetInstance().GetBlendRate());
 			}
 		}
 	}
@@ -210,7 +271,7 @@ public class test10 : main_base
 				Fee.Bloom.Bloom.GetInstance().SetEnable(true);
 			}
 			this.bloom_button.SetText("Bloom" + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
-		}else{
+		}else if(a_id == 1){
 			//ブラー。
 			if(Fee.Blur.Blur.GetInstance().IsEnable() == true){
 				Fee.Blur.Blur.GetInstance().SetEnable(false);
@@ -218,6 +279,14 @@ public class test10 : main_base
 				Fee.Blur.Blur.GetInstance().SetEnable(true);
 			}
 			this.blur_button.SetText("Blur" + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
+		}else{
+			//デプス。
+			if(Fee.Depth.Depth.GetInstance().IsEnable() == true){
+				Fee.Depth.Depth.GetInstance().SetEnable(false);
+			}else{
+				Fee.Depth.Depth.GetInstance().SetEnable(true);
+			}
+			this.depth_button.SetText("Depth" + Fee.Depth.Depth.GetInstance().IsEnable().ToString());
 		}
 	}
 
@@ -228,13 +297,15 @@ public class test10 : main_base
 		if(a_id == 100){
 			//threshold
 			Fee.Bloom.Bloom.GetInstance().SetThreshold(a_value);
-
 		}else if(a_id == 101){
 			//intensity
 			Fee.Bloom.Bloom.GetInstance().SetIntensity(a_value);
 		}else if(a_id == 200){
 			//blendrate
 			Fee.Blur.Blur.GetInstance().SetBlendRate(a_value);
+		}else if(a_id == 300){
+			//depth
+			Fee.Depth.Depth.GetInstance().SetBlendRate(a_value);
 		}
 	}
 }
