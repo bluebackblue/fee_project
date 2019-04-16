@@ -47,7 +47,7 @@ namespace Fee.Audio
 
 		/** サウンドプール。
 		*/
-		#if(UNITY_ANDROID)
+		#if(UNITY_ANDROID)&&false
 		private UnityEngine.AndroidJavaObject java_soundpool;
 		#endif
 
@@ -91,7 +91,7 @@ namespace Fee.Audio
 			this.list = new System.Collections.Generic.Dictionary<string,Item>();
 
 			//サウンドプールインスタンス。作成。
-			#if(UNITY_ANDROID)
+			#if(UNITY_ANDROID)&&false
 			{
 				this.java_soundpool = null;
 
@@ -186,7 +186,7 @@ namespace Fee.Audio
 				int t_sound_id = 0;
 
 				//読み込み。
-				#if(UNITY_ANDROID)
+				#if(UNITY_ANDROID)&&false
 				try{
 					//1固定。
 					int t_priority = (int)LoadPriority.RESERVATION;
@@ -227,7 +227,7 @@ namespace Fee.Audio
 				Tool.Log("SoundPool","UnLoad : " + a_name);
 
 				//アンロード。
-				#if(UNITY_ANDROID)
+				#if(UNITY_ANDROID)&&false
 				try{
 					bool t_ret = false;
 
@@ -255,7 +255,7 @@ namespace Fee.Audio
 			Item t_item = null;
 			this.list.TryGetValue(a_name,out t_item);
 
-			#if(UNITY_ANDROID)
+			#if(UNITY_ANDROID)&&false
 			if(t_item != null){
 
 				//サウンドＩＤ。
@@ -309,7 +309,7 @@ namespace Fee.Audio
 			}
 
 			//サウンドプールインスタンス。解放。
-			#if(UNITY_ANDROID)
+			#if(UNITY_ANDROID)&&false
 			try{
 				if(this.java_soundpool != null){
 					this.java_soundpool.Call("release");

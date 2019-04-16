@@ -304,10 +304,10 @@ public class test03 : main_base , Fee.EventPlate.OnOverCallBack_Base
 	private void FixedUpdate()
 	{
 		//マウス。
-		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 		//キー。
-		Fee.Input.Key.GetInstance().Main();
+		Fee.Input.Key.GetInstance().Main(true);
 
 		//イベントプレート。
 		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);

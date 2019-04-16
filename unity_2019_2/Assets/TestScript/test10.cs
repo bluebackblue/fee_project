@@ -108,16 +108,20 @@ public class test10 : main_base
 
 			Fee.Depth.Depth.GetInstance().SetBlendRate(0.5f);
 
-			if(false){
+			#if(false)
+			{
 				this.render_texture_color = new RenderTexture(Screen.width,Screen.height,0,RenderTextureFormat.ARGB32);
 				this.render_texture_color.Create();
 				this.render_texture_depth = new RenderTexture(Screen.width,Screen.height,24,RenderTextureFormat.Depth);
 				this.render_texture_depth.Create();
 				t_main_camera.SetTargetBuffers(this.render_texture_color.colorBuffer,this.render_texture_depth.depthBuffer);
 				Fee.Depth.Depth.GetInstance().SetDepthTexture(this.render_texture_depth);
-			}else{
+			}
+			#else
+			{
 				Fee.Depth.Depth.GetInstance().SetDepthTexture(null);
 			}
+			#endif
 		}
 
 		//スプライト。
@@ -231,7 +235,7 @@ public class test10 : main_base
 	private void FixedUpdate()
 	{
 		//マウス。
-		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 		//イベントプレート。
 		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
