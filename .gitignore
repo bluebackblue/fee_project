@@ -8,6 +8,8 @@
 /unity_2019_1/Assets/VRM.meta
 /unity_2019_1/Assets/*.rsp
 /unity_2019_1/Assets/*.rsp.meta
+/unity_2019_1/Exe
+/unity_2019_1/WebGL
 /unity_2019_1/*.apk
 /unity_2019_2/Library
 /unity_2019_2/Logs
@@ -18,7 +20,9 @@
 /unity_2019_2/Assets/VRM.meta
 /unity_2019_2/Assets/*.rsp
 /unity_2019_2/Assets/*.rsp.meta
-/unity_2019_2/*.apk
+/unity_2018_2/Exe
+/unity_2018_2/WebGL
+/unity_2018_2/*.apk
 /unity_2018_3/Library
 /unity_2018_3/Logs
 /unity_2018_3/obj
@@ -28,11 +32,12 @@
 /unity_2018_3/Assets/VRM.meta
 /unity_2018_3/Assets/*.rsp
 /unity_2018_3/Assets/*.rsp.meta
-/unity_2018_3/*.apk
 /unity_2018_3/Assets/Scripts/Utf8Json
 /unity_2018_3/Assets/Scripts/Utf8Json.meta
-/unity_2018_3/Exe
-/unity_2018_3/WebGL
 /unity_2018_3/Assets/Scripts.meta
 /unity_2019_2/Assets/Scripts.meta
 /unity_2018_3/build.log
+/unity_2018_3/Exe
+/unity_2018_3/WebGL
+/unity_2018_3/*.apk
+
