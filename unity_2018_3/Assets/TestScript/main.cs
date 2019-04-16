@@ -176,7 +176,7 @@ public class main : UnityEngine.MonoBehaviour
 	private void FixedUpdate()
 	{
 		//マウス。
-		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 		//イベントプレート。
 		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);

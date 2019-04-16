@@ -226,13 +226,13 @@ public class test05 : main_base
 	private void FixedUpdate()
 	{
 		//マウス。
-		Fee.Input.Mouse.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
+		Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 		//キー。
-		Fee.Input.Key.GetInstance().Main();
+		Fee.Input.Key.GetInstance().Main(true);
 
 		//パッド。
-		Fee.Input.Pad.GetInstance().Main();
+		Fee.Input.Pad.GetInstance().Main(true);
 
 		//タッチ。
 		Fee.Input.Touch.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
