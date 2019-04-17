@@ -340,7 +340,7 @@ public class test04 : main_base
 		Fee.SoundPool.SoundPool.CreateInstance();
 	
 		//フォント。
-		Font t_font = Resources.Load<Font>("mplus-1p-medium");
+		Font t_font = Resources.Load<Font>(Data.FONT);
 		if(t_font != null){
 			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
@@ -349,7 +349,7 @@ public class test04 : main_base
 		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 		//drawpriority
 		int t_layerindex = 0;
@@ -376,7 +376,7 @@ public class test04 : main_base
 		//download_soundpool_button
 		this.download_soundpool_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.DownLoad_SoundPool);
 		this.download_soundpool_button.SetRect(50,t_y,300,t_button_h);
-		this.download_soundpool_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.download_soundpool_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.download_soundpool_button.SetText("DownLoad SoundPool");
 		this.download_soundpool_button.SetFrontSize(15);
 
@@ -385,7 +385,7 @@ public class test04 : main_base
 		//loadlocal_soundpool_button
 		this.loadlocal_soundpool_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadLocal_SoundPool);
 		this.loadlocal_soundpool_button.SetRect(50,t_y,300,t_button_h);
-		this.loadlocal_soundpool_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadlocal_soundpool_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.loadlocal_soundpool_button.SetText("LoadLocal SoundPool");
 		this.loadlocal_soundpool_button.SetFrontSize(15);
 
@@ -394,7 +394,7 @@ public class test04 : main_base
 		//loadstreamingassets_soundpool_button
 		this.loadstreamingassets_soundpool_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadStreamingAssets_SoundPool);
 		this.loadstreamingassets_soundpool_button.SetRect(50,t_y,300,t_button_h);
-		this.loadstreamingassets_soundpool_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadstreamingassets_soundpool_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.loadstreamingassets_soundpool_button.SetText("LoadStreamingAssets SoundPool");
 		this.loadstreamingassets_soundpool_button.SetFrontSize(15);
 
@@ -403,7 +403,7 @@ public class test04 : main_base
 		//savelocal_textfile_button
 		this.savelocal_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.SaveLocal_TextFile);
 		this.savelocal_textfile_button.SetRect(50,t_y,300,t_button_h);
-		this.savelocal_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.savelocal_textfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.savelocal_textfile_button.SetText("SaveLocal Text");
 		this.savelocal_textfile_button.SetFrontSize(15);
 
@@ -412,7 +412,7 @@ public class test04 : main_base
 		//download_textfile_button
 		this.download_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.DownLoad_TextFile);
 		this.download_textfile_button.SetRect(50,t_y,300,t_button_h);
-		this.download_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.download_textfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.download_textfile_button.SetText("DownLoad Text");
 		this.download_textfile_button.SetFrontSize(15);
 
@@ -421,7 +421,7 @@ public class test04 : main_base
 		//loadlocal_textfile_button
 		this.loadlocal_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadLocal_TextFile);
 		this.loadlocal_textfile_button.SetRect(50,t_y,300,t_button_h);
-		this.loadlocal_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadlocal_textfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.loadlocal_textfile_button.SetText("LoadLocal Text");
 		this.loadlocal_textfile_button.SetFrontSize(15);
 
@@ -430,7 +430,7 @@ public class test04 : main_base
 		//loadstreamingassets_textfile_button
 		this.loadstreamingassets_textfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadStreamingAssets_TextFile);
 		this.loadstreamingassets_textfile_button.SetRect(50,t_y,300,30);
-		this.loadstreamingassets_textfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadstreamingassets_textfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.loadstreamingassets_textfile_button.SetText("LoadStreamingAssets Text");
 		this.loadstreamingassets_textfile_button.SetFrontSize(15);
 
@@ -439,7 +439,7 @@ public class test04 : main_base
 		//savelocal_binaryfile_button
 		this.savelocal_binaryfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.SaveLocal_BinaryFile);
 		this.savelocal_binaryfile_button.SetRect(50,t_y,300,t_button_h);
-		this.savelocal_binaryfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.savelocal_binaryfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.savelocal_binaryfile_button.SetText("SaveLocal Binary");
 		this.savelocal_binaryfile_button.SetFrontSize(15);
 
@@ -448,7 +448,7 @@ public class test04 : main_base
 		//download_binaryfile_button
 		this.download_binaryfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.DownLoad_BinaryFile);
 		this.download_binaryfile_button.SetRect(50,t_y,300,t_button_h);
-		this.download_binaryfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.download_binaryfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.download_binaryfile_button.SetText("DownLoad Binary");
 		this.download_binaryfile_button.SetFrontSize(15);
 
@@ -457,7 +457,7 @@ public class test04 : main_base
 		//loadlocal_binaryfile_button
 		this.loadlocal_binaryfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadLocal_BinaryFile);
 		this.loadlocal_binaryfile_button.SetRect(50,t_y,300,t_button_h);
-		this.loadlocal_binaryfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadlocal_binaryfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.loadlocal_binaryfile_button.SetText("LoadLocal Binary");
 		this.loadlocal_binaryfile_button.SetFrontSize(15);
 
@@ -466,7 +466,7 @@ public class test04 : main_base
 		//loadstreamingassets_binaryfile_button
 		this.loadstreamingassets_binaryfile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadStreamingAssets_BinaryFile);
 		this.loadstreamingassets_binaryfile_button.SetRect(50,t_y,300,t_button_h);
-		this.loadstreamingassets_binaryfile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadstreamingassets_binaryfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.loadstreamingassets_binaryfile_button.SetText("LoadStreamingAssets Binary");
 		this.loadstreamingassets_binaryfile_button.SetFrontSize(15);
 
@@ -475,7 +475,7 @@ public class test04 : main_base
 		//savelocal_texturefile_button
 		this.savelocal_texturefile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.SaveLocal_TextureFile);
 		this.savelocal_texturefile_button.SetRect(50,t_y,300,t_button_h);
-		this.savelocal_texturefile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.savelocal_texturefile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.savelocal_texturefile_button.SetText("SaveLocal Texture");
 		this.savelocal_texturefile_button.SetFrontSize(15);
 
@@ -484,7 +484,7 @@ public class test04 : main_base
 		//download_texturefile_button
 		this.download_texturefile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.DownLoad_TextureFile);
 		this.download_texturefile_button.SetRect(50,t_y,300,t_button_h);
-		this.download_texturefile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.download_texturefile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.download_texturefile_button.SetText("DownLoad Texture");
 		this.download_texturefile_button.SetFrontSize(15);
 
@@ -493,7 +493,7 @@ public class test04 : main_base
 		//loadlocal_texturefile_button
 		this.loadlocal_texturefile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadLocal_TextureFile);
 		this.loadlocal_texturefile_button.SetRect(50,t_y,300,t_button_h);
-		this.loadlocal_texturefile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadlocal_texturefile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.loadlocal_texturefile_button.SetText("LoadLocal Texture");
 		this.loadlocal_texturefile_button.SetFrontSize(15);
 
@@ -502,7 +502,7 @@ public class test04 : main_base
 		//loadstreamingassets_texturefile_button
 		this.loadstreamingassets_texturefile_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,(int)CallBackId.LoadStreamingAssets_TextureFile);
 		this.loadstreamingassets_texturefile_button.SetRect(50,t_y,300,t_button_h);
-		this.loadstreamingassets_texturefile_button.SetTexture(Resources.Load<Texture2D>("button"));
+		this.loadstreamingassets_texturefile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.loadstreamingassets_texturefile_button.SetText("LoadStreamingAssets Texture");
 		this.loadstreamingassets_texturefile_button.SetFrontSize(15);
 

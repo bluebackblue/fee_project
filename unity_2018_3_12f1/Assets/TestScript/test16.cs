@@ -133,7 +133,7 @@ public class test16 : main_base , Fee.Network.OnRemoteCallBack_Base
 		Fee.Network.Network.GetInstance().SetRecvCallBack(this);
 
 		//フォント。
-		Font t_font = Resources.Load<Font>("mplus-1p-medium");
+		Font t_font = Resources.Load<Font>(Data.FONT);
 		if(t_font != null){
 			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
@@ -142,7 +142,7 @@ public class test16 : main_base , Fee.Network.OnRemoteCallBack_Base
 		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 		//layerindex
 		int t_layerindex = 0;
@@ -172,7 +172,7 @@ public class test16 : main_base , Fee.Network.OnRemoteCallBack_Base
 
 		//player_list
 		{
-			GameObject t_prefab = Resources.Load<GameObject>("box");
+			GameObject t_prefab = Resources.Load<GameObject>(Data.PREFAB_CUBE);
 
 			this.player_list = new GameObject[8];
 			for(int ii=0;ii<this.player_list.Length;ii++){
@@ -188,7 +188,7 @@ public class test16 : main_base , Fee.Network.OnRemoteCallBack_Base
 			int t_x = 100;
 			int t_y = 300;
 
-			Texture2D t_texture = Resources.Load<Texture2D>("button");
+			Texture2D t_texture = Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON);
 
 			this.start_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_Start,0);
 			this.start_button.SetRect(t_x,t_y,t_w,t_h);
@@ -204,7 +204,7 @@ public class test16 : main_base , Fee.Network.OnRemoteCallBack_Base
 			int t_x = 100 + 110;
 			int t_y = 300;
 
-			Texture2D t_texture = Resources.Load<Texture2D>("button");
+			Texture2D t_texture = Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON);
 
 			this.end_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_End,0);
 			this.end_button.SetRect(t_x,t_y,t_w,t_h);

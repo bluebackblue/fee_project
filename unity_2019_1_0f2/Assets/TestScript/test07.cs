@@ -131,7 +131,7 @@ public class test07 : main_base
 		Fee.Crypt.Crypt.CreateInstance();
 
 		//フォント。
-		Font t_font = Resources.Load<Font>("mplus-1p-medium");
+		Font t_font = Resources.Load<Font>(Data.FONT);
 		if(t_font != null){
 			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
@@ -140,26 +140,26 @@ public class test07 : main_base
 		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 		//step
 		this.step = Step.None;
 
 		//button_key
 		this.button_key = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,0);
-		this.button_key.SetTexture(Resources.Load<Texture2D>("button"));
+		this.button_key.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.button_key.SetRect(100 + 200 * 0,100,150,50);
 		this.button_key.SetText("公開鍵");
 
 		//button_pass
 		this.button_pass = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,1);
-		this.button_pass.SetTexture(Resources.Load<Texture2D>("button"));
+		this.button_pass.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.button_pass.SetRect(100 + 200 * 1,100,150,50);
 		this.button_pass.SetText("共通鍵");
 
 		//button_signature
 		this.button_signature = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,2);
-		this.button_signature.SetTexture(Resources.Load<Texture2D>("button"));
+		this.button_signature.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 		this.button_signature.SetRect(100 + 200 * 2,100,150,50);
 		this.button_signature.SetText("証明書");
 
@@ -193,7 +193,7 @@ public class test07 : main_base
 
 			if(a_id == 0){
 				//public
-				Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>("public_key").text);
+				Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.KEY_PUBLIC).text);
 				this.public_key = null;
 				if(t_item_public != null){
 					if(t_item_public.IsAssociativeArray() == true){
@@ -204,7 +204,7 @@ public class test07 : main_base
 				}
 
 				//private
-				Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>("private_key").text);
+				Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.KEY_PRIVATE).text);
 				this.private_key = null;
 				if(t_item_private != null){
 					if(t_item_private.IsAssociativeArray() == true){
@@ -223,7 +223,7 @@ public class test07 : main_base
 				this.step = Step.EncryptPass_Start;
 			}else if(a_id == 2){
 				//public
-				Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>("public_key").text);
+				Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.KEY_PUBLIC).text);
 				this.public_key = null;
 				if(t_item_public != null){
 					if(t_item_public.IsAssociativeArray() == true){
@@ -234,7 +234,7 @@ public class test07 : main_base
 				}
 
 				//private
-				Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>("private_key").text);
+				Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.KEY_PRIVATE).text);
 				this.private_key = null;
 				if(t_item_private != null){
 					if(t_item_private.IsAssociativeArray() == true){

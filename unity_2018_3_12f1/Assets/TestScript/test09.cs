@@ -182,7 +182,7 @@ public class test09 : main_base
 		Fee.Ui.Ui.CreateInstance();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 		//削除管理。
 		this.deleter = new Fee.Deleter.Deleter();
@@ -374,18 +374,21 @@ public class test09 : main_base
 							this.time = 0;
 							if(this.mode == Mode.GoA_Calc){
 								this.mode = Mode.GoA_Move;
+								break;
 							}else{
 								this.mode = Mode.GoB_Move;
+								break;
 							}
 						}
 					}else{
 						this.time = 0;
 						if(this.mode == Mode.GoA_Calc){
 							this.mode = Mode.GoA_Move;
+							break;
 						}else{
 							this.mode = Mode.GoB_Move;
+							break;
 						}
-						break;
 					}
 				}
 
@@ -437,8 +440,10 @@ public class test09 : main_base
 						//ゴールに到達。
 						if(this.mode == Mode.GoA_Move){
 							this.mode = Mode.GoB_Start;
+							break;
 						}else{
 							this.mode = Mode.GoA_Start;
+							break;
 						}
 					}
 				}

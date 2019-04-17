@@ -84,7 +84,7 @@ public class test01 : main_base
 		Fee.Ui.Ui.CreateInstance();
 
 		//フォント。
-		Font t_font = Resources.Load<Font>("mplus-1p-medium");
+		Font t_font = Resources.Load<Font>(Data.FONT);
 		if(t_font != null){
 			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
@@ -93,7 +93,7 @@ public class test01 : main_base
 		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 		//レイヤインデックス。
 		int t_layerindex = 0;
@@ -174,21 +174,21 @@ public class test01 : main_base
 			int t_yy = 10;
 
 			this.button_log = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,100);
-			this.button_log.SetTexture(Resources.Load<Texture2D>("button"));
+			this.button_log.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.button_log.SetRect(t_xx,t_yy,80,50);
 			this.button_log.SetText("Log");
 
 			t_xx += 100;
 
 			this.button_logerror = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,200);
-			this.button_logerror.SetTexture(Resources.Load<Texture2D>("button"));
+			this.button_logerror.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.button_logerror.SetRect(t_xx,t_yy,80,50);
 			this.button_logerror.SetText("LogError");
 
 			t_xx += 100;
 
 			this.button_assert = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,300);
-			this.button_assert.SetTexture(Resources.Load<Texture2D>("button"));
+			this.button_assert.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.button_assert.SetRect(t_xx,t_yy,80,50);
 			this.button_assert.SetText("Assert");
 		}

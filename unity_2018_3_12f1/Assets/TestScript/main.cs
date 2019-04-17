@@ -106,7 +106,7 @@ public class main : UnityEngine.MonoBehaviour
 				}
 
 				this.button[ii] = new Fee.Ui.Button(this.deleter,0,Click,ii);
-				this.button[ii].SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>("button"));
+				this.button[ii].SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.UI_TEXTURE_BUTTON));
 				this.button[ii].SetRect(t_x,t_y,t_w,t_h);
 				this.button[ii].SetText(t_name);
 			}
@@ -243,12 +243,13 @@ public class main_base : UnityEngine.MonoBehaviour
 
 	/** 戻るボタン作成。
 	*/
-	public void CreateReturnButton(Fee.Deleter.Deleter a_deleter,long a_drawpriority)
+	public void CreateReturnButton(Fee.Deleter.Deleter a_deleter,long a_drawpriority,string a_text)
 	{
 		this.return_button = new Fee.Ui.Button(a_deleter,a_drawpriority,Click,0);
-		this.return_button.SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>("button"));
-		this.return_button.SetText("Return");
+		this.return_button.SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.UI_TEXTURE_BUTTON));
+		this.return_button.SetText(a_text);
 		this.return_button.SetRect(0,0,80,40);
+		this.return_button.SetFrontSize(10);
 	}
 
 	/** クリック。

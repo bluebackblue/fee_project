@@ -85,7 +85,7 @@ public class test15 : main_base
 		Fee.EventPlate.EventPlate.CreateInstance();
 
 		//フォント。
-		Font t_font = Resources.Load<Font>("mplus-1p-medium");
+		Font t_font = Resources.Load<Font>(Data.FONT);
 		if(t_font != null){
 			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 		}
@@ -94,7 +94,7 @@ public class test15 : main_base
 		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 		//is_clip
 		this.is_clip = true;
@@ -107,7 +107,7 @@ public class test15 : main_base
 
 		//clipsprite
 		{
-			Texture2D t_texture = Resources.Load<Texture2D>("IMGP8657");
+			Texture2D t_texture = Resources.Load<Texture2D>(Data.TEXTURE_SKYIMAGE);
 
 			this.clipsprite = new Fee.Ui.ClipSprite(this.deleter,t_drawpriority + 1);
 			this.clipsprite.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
@@ -139,7 +139,7 @@ public class test15 : main_base
 			int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 			int t_y = 300;
 
-			Texture2D t_texture = Resources.Load<Texture2D>("button");
+			Texture2D t_texture = Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON);
 
 			this.button = new Fee.Ui.Button(this.deleter,t_drawpriority + 2,this.CallBack_Click,0);
 			this.button.SetRect(t_x,t_y,t_w,t_h);
@@ -153,7 +153,7 @@ public class test15 : main_base
 			int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 			int t_y = 200;
 
-			Texture2D t_texture = Resources.Load<Texture2D>("checkbutton");
+			Texture2D t_texture = Resources.Load<Texture2D>(Data.UI_TEXTURE_CHECKBUTTON);
 
 			this.checkbutton = new Fee.Ui.CheckButton(this.deleter,t_drawpriority + 2,this.CallBack_Change,0);
 			this.checkbutton.SetRect(t_x,t_y,t_w,t_h);
@@ -180,8 +180,8 @@ public class test15 : main_base
 
 			this.slider = new Fee.Ui.Slider(this.deleter,t_drawpriority + 2,this.CallBack_Change,0);
 			this.slider.SetRect(t_x,t_y,t_w,t_h);
-			this.slider.SetTexture(Resources.Load<Texture2D>("slider"));
-			this.slider.SetButtonTexture(Resources.Load<Texture2D>("button"));
+			this.slider.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
+			this.slider.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.slider.SetButtonSize(0,30);
 		}
 
