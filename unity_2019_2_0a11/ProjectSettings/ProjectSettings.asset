@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 17
-  productGUID: e1fc44568702c7b41aac198a59c3e927
+  productGUID: 006cb257635932d48a1aa9f5fe84f81f
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: blueback
+  companyName: DefaultCompany
   productName: unity_2019_2_0a11
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
