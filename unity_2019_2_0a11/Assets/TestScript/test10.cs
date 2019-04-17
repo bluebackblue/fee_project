@@ -96,7 +96,7 @@ public class test10 : main_base
 		this.deleter = new Fee.Deleter.Deleter();
 
 		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP);
+		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 		//深度。カメラに設定。
 		{
@@ -136,7 +136,7 @@ public class test10 : main_base
 			this.sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
 			this.sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.sprite.SetRect(t_x,t_y,t_w,t_h);
-			this.sprite.SetTexture(Resources.Load<Texture2D>("IMGP8657"));
+			this.sprite.SetTexture(Resources.Load<Texture2D>(Data.TEXTURE_SKYIMAGE));
 		}
 
 		{
@@ -148,7 +148,7 @@ public class test10 : main_base
 			//優先度。
 			{
 				this.depthchange_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,999);
-				this.depthchange_button.SetTexture(Resources.Load<Texture2D>("button"));
+				this.depthchange_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 				this.depthchange_button.SetRect(100,t_y,t_button_w,t_button_h);
 				this.depthchange_button.SetText("DepthChange");
 			}
@@ -158,15 +158,15 @@ public class test10 : main_base
 			//ブルーム。
 			{
 				this.bloom_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,0);
-				this.bloom_button.SetTexture(Resources.Load<Texture2D>("button"));
+				this.bloom_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 				this.bloom_button.SetRect(100,t_y,t_button_w,t_button_h);
 				this.bloom_button.SetText("Bloom" + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
 
 				t_y += 40;
 
 				this.bloom_threshold_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,100);
-				this.bloom_threshold_slider.SetTexture(Resources.Load<Texture2D>("slider"));
-				this.bloom_threshold_slider.SetButtonTexture(Resources.Load<Texture2D>("button"));
+				this.bloom_threshold_slider.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
+				this.bloom_threshold_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 				this.bloom_threshold_slider.SetRect(100,t_y,200,10);
 				this.bloom_threshold_slider.SetTextureCornerSize(3);
 				this.bloom_threshold_slider.SetButtonTextureCornerSize(3);
@@ -176,8 +176,8 @@ public class test10 : main_base
 				t_y += 30;
 
 				this.bloom_intensity_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,101);
-				this.bloom_intensity_slider.SetTexture(Resources.Load<Texture2D>("slider"));
-				this.bloom_intensity_slider.SetButtonTexture(Resources.Load<Texture2D>("button"));
+				this.bloom_intensity_slider.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
+				this.bloom_intensity_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 				this.bloom_intensity_slider.SetRect(100,t_y,200,10);
 				this.bloom_intensity_slider.SetTextureCornerSize(3);
 				this.bloom_intensity_slider.SetButtonTextureCornerSize(3);
@@ -191,15 +191,15 @@ public class test10 : main_base
 			//ブラー。
 			{
 				this.blur_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,1);
-				this.blur_button.SetTexture(Resources.Load<Texture2D>("button"));
+				this.blur_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 				this.blur_button.SetRect(100,t_y,t_button_w,t_button_h);
 				this.blur_button.SetText("Blur" + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
 
 				t_y += 40;
 
 				this.blur_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,200);
-				this.blur_rate_blend_slider.SetTexture(Resources.Load<Texture2D>("slider"));
-				this.blur_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>("button"));
+				this.blur_rate_blend_slider.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
+				this.blur_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 				this.blur_rate_blend_slider.SetRect(100,t_y,200,10);
 				this.blur_rate_blend_slider.SetTextureCornerSize(3);
 				this.blur_rate_blend_slider.SetButtonTextureCornerSize(3);
@@ -212,15 +212,15 @@ public class test10 : main_base
 			//デプス。
 			{
 				this.depth_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,2);
-				this.depth_button.SetTexture(Resources.Load<Texture2D>("button"));
+				this.depth_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 				this.depth_button.SetRect(100,t_y,t_button_w,t_button_h);
 				this.depth_button.SetText("Depth" + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
 
 				t_y += 40;
 
 				this.depth_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,300);
-				this.depth_rate_blend_slider.SetTexture(Resources.Load<Texture2D>("slider"));
-				this.depth_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>("button"));
+				this.depth_rate_blend_slider.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
+				this.depth_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 				this.depth_rate_blend_slider.SetRect(100,t_y,200,10);
 				this.depth_rate_blend_slider.SetTextureCornerSize(3);
 				this.depth_rate_blend_slider.SetButtonTextureCornerSize(3);
