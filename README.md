@@ -14,13 +14,13 @@ https://discord.gg/JH3B4SR
 ## folder structure
 フォルダ構造
 * fee_project 「チェックアウト : https://github.com/bluebackblue/fee_project.git 」
-* _ unity_2018_3 [Unity 2018.3.8f1]
+* _ unity_2018_3_12f1 [Unity 2018.3.12f1]
 * ___ Assets
 * _____ Fee [ https://github.com/bluebackblue/fee/releases ]
-* _ unity_2019_1 [2019.1.0b7]
+* _ unity_2019_1_0f2 [2019.1.0f2]
 * ___ Assets
 * _____ Fee [ https://github.com/bluebackblue/fee/releases ]
-* _ unity_2019_2 [2019.2.0a8]
+* _ unity_2019_2_0a11 [2019.2.0a11]
 * ___ Assets
 * _____ Fee [ https://github.com/bluebackblue/fee/releases ]
 
