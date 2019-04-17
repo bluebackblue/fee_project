@@ -11,6 +11,7 @@
 /unity_2018_3_12f1/Exe
 /unity_2018_3_12f1/WebGL
 /unity_2018_3_12f1/*.apk
+/unity_2018_3_12f1/*.log
 /unity_2018_3_12f1_
 
 /unity_2019_1_0f2/Library
@@ -25,6 +26,7 @@
 /unity_2019_1_0f2/Exe
 /unity_2019_1_0f2/WebGL
 /unity_2019_1_0f2/*.apk
+/unity_2019_1_0f2/*.log
 /unity_2019_1_0f2_
 
 /unity_2019_2/Library
@@ -39,4 +41,5 @@
 /unity_2019_2/Exe
 /unity_2019_2/WebGL
 /unity_2019_2/*.apk
+/unity_2019_2/*.log
 /unity_2019_2_
