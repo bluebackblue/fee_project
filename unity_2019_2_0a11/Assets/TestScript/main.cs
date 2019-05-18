@@ -212,7 +212,7 @@ public class main : UnityEngine.MonoBehaviour
 	/** シーンリスト初期化。
 	*/
 	#if(UNITY_EDITOR)
-	[UnityEditor.MenuItem("Fee/Initialize/EditSceneList")]
+	[UnityEditor.MenuItem("Fee/Test/Initialize/EditSceneList")]
 	private static void EditSceneList()
 	{
 		List<UnityEditor.EditorBuildSettingsScene> t_list = new System.Collections.Generic.List<UnityEditor.EditorBuildSettingsScene>();
