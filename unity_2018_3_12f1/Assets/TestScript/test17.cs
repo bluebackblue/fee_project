@@ -611,8 +611,8 @@ public class test17 : main_base
 		Fee.Ui.Ui.GetInstance().Main();
 
 		//ドラッグスクロールアップデート。
-		this.v_scrollview.DragScrollUpdate(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y,Fee.Input.Mouse.GetInstance().left.on);
-		this.h_scrollview.DragScrollUpdate(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y,Fee.Input.Mouse.GetInstance().left.on);
+		this.v_scrollview.DragScrollUpdate();
+		this.h_scrollview.DragScrollUpdate();
 	}
 
 	/** 削除前。

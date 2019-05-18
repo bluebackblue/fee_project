@@ -184,8 +184,8 @@ public class test08 : main_base
 		Fee.Ui.Ui.GetInstance().Main();
 
 		//ドラッグスクロールアップデート。
-		this.root_scroll.DragScrollUpdate(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y,Fee.Input.Mouse.GetInstance().left.on);
-		this.fee_scroll.DragScrollUpdate(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y,Fee.Input.Mouse.GetInstance().left.on);
+		this.root_scroll.DragScrollUpdate();
+		this.fee_scroll.DragScrollUpdate();
 	}
 
 	/** 削除前。
