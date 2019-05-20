@@ -612,7 +612,7 @@ namespace Fee.Ui
 		*/
 		public void DragScrollUpdate()
 		{
-			this.scroll_drag.Main();
+			this.scroll_drag.Main(this.is_onover);
 		}
 	}
 }

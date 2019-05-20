@@ -97,9 +97,9 @@ namespace Fee.Ui
 
 		/** 更新。
 		*/
-		public void Main()
+		public void Main(bool a_is_onover)
 		{
-			if((this.flag == false)&&(Fee.Input.Mouse.GetInstance().left.down == true)){
+			if((this.flag == false)&&(Fee.Input.Mouse.GetInstance().left.down == true)&&(a_is_onover == true)){
 				int t_x = Fee.Input.Mouse.GetInstance().pos.x;
 				int t_y = Fee.Input.Mouse.GetInstance().pos.y;
 
