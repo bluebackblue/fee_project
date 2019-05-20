@@ -118,6 +118,11 @@
     <Compile Include="Assets\Fee\Script\Directory\Root.cs" />
     <Compile Include="Assets\Fee\Script\Directory\Tool.cs" />
     <Compile Include="Assets\Fee\Script\Directory\Work.cs" />
+    <Compile Include="Assets\Fee\Script\EditorTool\Build.cs" />
+    <Compile Include="Assets\Fee\Script\EditorTool\Crypt.cs" />
+    <Compile Include="Assets\Fee\Script\EditorTool\Main.temp.cs" />
+    <Compile Include="Assets\Fee\Script\EditorTool\MakeMainScript.cs" />
+    <Compile Include="Assets\Fee\Script\EditorTool\Utility.cs" />
     <Compile Include="Assets\Fee\Script\EventPlate\BlockItem.cs" />
     <Compile Include="Assets\Fee\Script\EventPlate\Config.cs" />
     <Compile Include="Assets\Fee\Script\EventPlate\EventPlate.cs" />
@@ -132,6 +137,7 @@
     <Compile Include="Assets\Fee\Script\Fade\MonoBehaviour_Flag.cs" />
     <Compile Include="Assets\Fee\Script\Fade\Tool.cs" />
     <Compile Include="Assets\Fee\Script\File\AssetBundleList.cs" />
+    <Compile Include="Assets\Fee\Script\File\Binary_Component.cs" />
     <Compile Include="Assets\Fee\Script\File\BinaryToTexture2D.cs" />
     <Compile Include="Assets\Fee\Script\File\Config.cs" />
     <Compile Include="Assets\Fee\Script\File\Coroutine_DownLoadAssetBundle.cs" />
@@ -195,7 +201,9 @@
     <Compile Include="Assets\Fee\Script\JsonItem\Value.cs" />
     <Compile Include="Assets\Fee\Script\JsonItem\ValueType.cs" />
     <Compile Include="Assets\Fee\Script\MakeAssetBundle\MakeAssetBundle.cs" />
+    <Compile Include="Assets\Fee\Script\Model\AnimationClipTool.cs" />
     <Compile Include="Assets\Fee\Script\Model\LayeMaskTool.cs" />
+    <Compile Include="Assets\Fee\Script\Model\MeshTool.cs" />
     <Compile Include="Assets\Fee\Script\Network\Config.cs" />
     <Compile Include="Assets\Fee\Script\Network\Connect_Auto.cs" />
     <Compile Include="Assets\Fee\Script\Network\MonoBehaviour_Connect_Auto.cs" />
@@ -285,11 +293,6 @@
     <Compile Include="Assets\Fee\Script\Ui\Ui_WindowList.cs" />
     <Compile Include="Assets\Fee\Script\Ui\Window.cs" />
     <Compile Include="Assets\Fee\Script\Ui\Window_Base.cs" />
-    <Compile Include="Assets\Fee\Script\UnityInitialize\Build.cs" />
-    <Compile Include="Assets\Fee\Script\UnityInitialize\CryptKey.cs" />
-    <Compile Include="Assets\Fee\Script\UnityInitialize\Main.temp.cs" />
-    <Compile Include="Assets\Fee\Script\UnityInitialize\MakeMainScript.cs" />
-    <Compile Include="Assets\Fee\Script\UnityInitialize\Utility.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Config.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Controller.cs" />
     <Compile Include="Assets\Fee\Script\UniVrm\Item.cs" />
@@ -340,8 +343,10 @@
     <None Include="Assets\Fee\LICENSE.txt" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Alpha.shader" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_X.shader" />
+    <None Include="Assets\Fee\Resources\Shader\WireFrame\WireFrame.shader" />
     <None Include="Assets\Fee\readme.txt" />
     <None Include="Assets\Fee\Resources\Shader\Depth\Depth_View.shader" />
+    <None Include="Assets\Fee\Resources\Shader\WireFrame\WireFrame.cginc" />
     <None Include="Assets\Fee\license\univrm\LICENSE.txt" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_Y.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Add.shader" />

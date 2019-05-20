@@ -40,28 +40,18 @@ namespace Fee.Dijkstra
 		*/
 		private Node<NODEKEY,NODEDATA,LINKDATA> to_node;
 
-		/** 接続先ノードへの到達コスト。
-		*/
-		/*
-		private long to_cost;
-		*/
-
 		/** constructor
 		*/
 		public Link(LINKDATA a_linkdata,Node<NODEKEY,NODEDATA,LINKDATA> a_to_node)
 		{
 			this.linkdata = a_linkdata;
 			this.to_node = a_to_node;
-
-			//this.to_cost = a_to_cost;
-			//this.linkdata.SetToCost(a_to_cost);
 		}
 
 		/** 接続先ノードへの到達コスト。設定。
 		*/
 		public void SetToCost(Fee.Dijkstra.Instance_Base a_instance,long a_to_cost)
 		{
-			//this.to_cost = a_to_cost;
 			this.linkdata.SetToCost(a_instance,a_to_cost);
 		}
 
@@ -69,7 +59,6 @@ namespace Fee.Dijkstra
 		*/
 		public long GetToCost(Fee.Dijkstra.Instance_Base a_instance)
 		{
-			//return this.to_cost;
 			return this.linkdata.GetToCost(a_instance);
 		}
 
