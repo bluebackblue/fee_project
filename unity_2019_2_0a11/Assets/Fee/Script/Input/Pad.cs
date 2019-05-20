@@ -395,7 +395,6 @@ namespace Fee.Input
 					float t_raw_value_low = this.moter_low.GetRawValue();
 					float t_raw_value_high = this.moter_high.GetRawValue();
 
-					//if((t_value_low != t_raw_value_low)||(t_value_high != t_raw_value_high))
 					{
 						this.moter_low.SetRawValue(t_value_low);
 						this.moter_high.SetRawValue(t_value_high);

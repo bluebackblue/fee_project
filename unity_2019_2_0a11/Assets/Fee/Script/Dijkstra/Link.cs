@@ -19,11 +19,11 @@ namespace Fee.Dijkstra
 	{
 		/** [Link_Base]接続先ノードへの到達コスト。取得。
 		*/
-		long GetToCost();
+		long GetToCost(Fee.Dijkstra.Instance_Base a_instance);
 
 		/** [Link_Base]接続先ノードへの到達コスト。設定。
 		*/
-		void SetToCost(long a_to_cost);
+		void SetToCost(Fee.Dijkstra.Instance_Base a_instance,long a_to_cost);
 	}
 
 	/** Link
@@ -59,18 +59,18 @@ namespace Fee.Dijkstra
 
 		/** 接続先ノードへの到達コスト。設定。
 		*/
-		public void SetToCost(long a_to_cost)
+		public void SetToCost(Fee.Dijkstra.Instance_Base a_instance,long a_to_cost)
 		{
 			//this.to_cost = a_to_cost;
-			this.linkdata.SetToCost(a_to_cost);
+			this.linkdata.SetToCost(a_instance,a_to_cost);
 		}
 
 		/** 接続先ノードへの到達コスト。取得。
 		*/
-		public long GetToCost()
+		public long GetToCost(Fee.Dijkstra.Instance_Base a_instance)
 		{
 			//return this.to_cost;
-			return this.linkdata.GetToCost();
+			return this.linkdata.GetToCost(a_instance);
 		}
 
 		/** 接続先ノード。設定。
