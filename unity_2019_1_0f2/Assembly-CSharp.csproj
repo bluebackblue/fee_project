@@ -354,11 +354,13 @@
     <None Include="Assets\Fee\license\univrm\LICENSE.txt" />
     <None Include="Assets\Fee\Resources\Shader\Blur\Blur_Y.shader" />
     <None Include="Assets\Fee\Resources\Shader\Render2D\Add.shader" />
-    <None Include="Assets\LICENSE.txt" />
     <None Include="Assets\Fee\Resources\Shader\Bloom\Bloom_FirstDownSampling.shader" />
     <None Include="Assets\Fee\license\simpleanimation\readme.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/work/github/fee/fee_project/unity_2019_1_0f2/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>C:/work/github/fee/fee_project/unity_2019_1_0f2/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/work/github/fee/fee_project/unity_2019_1_0f2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -377,9 +379,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>C:/work/github/fee/fee_project/unity_2019_1_0f2/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>C:/work/github/fee/fee_project/unity_2019_1_0f2/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
