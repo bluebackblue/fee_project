@@ -12,74 +12,93 @@ using UnityEngine;
 */
 
 
-/** test12
+/** TestScript
 */
-public class test12 : main_base
+namespace TestScript
 {
-	/** 削除管理。
+	/** test12
 	*/
-	private Fee.Deleter.Deleter deleter;
-
-	/** Start
-	*/
-	private void Start()
+	public class test12 : MainBase
 	{
-		//タスク。インスタンス作成。
-		Fee.TaskW.TaskW.CreateInstance();
+		/** CreateStatus
+		*/
+		public static TestStatus CreateStatus()
+		{
+			return new TestStatus(
+				"test12",
+				"test12",
 
-		//パフォーマンスカウンター。インスタンス作成。
-		Fee.PerformanceCounter.Config.LOG_ENABLE = true;
-		Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
+				@"
+				---
+				"
+			);
+		}
 
-		//関数呼び出し。
-		Fee.Function.Function.SetMonoBehaviour(this);
+		/** 削除管理。
+		*/
+		private Fee.Deleter.Deleter deleter;
 
-		//２Ｄ描画。インスタンス作成。
-		Fee.Render2D.Render2D.CreateInstance();
+		/** Start
+		*/
+		private void Start()
+		{
+			//タスク。インスタンス作成。
+			Fee.TaskW.TaskW.CreateInstance();
 
-		//マウス。インスタンス作成。
-		Fee.Input.Mouse.CreateInstance();
+			//パフォーマンスカウンター。インスタンス作成。
+			Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+			Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
-		//イベントプレート。インスタンス作成。
-		Fee.EventPlate.EventPlate.CreateInstance();
+			//関数呼び出し。
+			Fee.Function.Function.SetMonoBehaviour(this);
 
-		//ＵＩ。インスタンス作成。
-		//Fee.Ui.Config.LOG_ENABLE = true;
-		Fee.Ui.Ui.CreateInstance();
+			//２Ｄ描画。インスタンス作成。
+			Fee.Render2D.Render2D.CreateInstance();
 
-		//削除管理。
-		this.deleter = new Fee.Deleter.Deleter();
+			//マウス。インスタンス作成。
+			Fee.Input.Mouse.CreateInstance();
 
-		//戻るボタン作成。
-		this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
-	}
+			//イベントプレート。インスタンス作成。
+			Fee.EventPlate.EventPlate.CreateInstance();
 
-	/** FixedUpdate
-	*/
-	private void FixedUpdate()
-	{
-		//マウス。
-		Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
+			//ＵＩ。インスタンス作成。
+			//Fee.Ui.Config.LOG_ENABLE = true;
+			Fee.Ui.Ui.CreateInstance();
 
-		//イベントプレート。
-		Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			//削除管理。
+			this.deleter = new Fee.Deleter.Deleter();
 
-		//ＵＩ。
-		Fee.Ui.Ui.GetInstance().Main();
-	}
+			//戻るボタン作成。
+			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+		}
 
-	/** 削除前。
-	*/
-	public override bool PreDestroy(bool a_first)
-	{
-		return true;
-	}
+		/** FixedUpdate
+		*/
+		private void FixedUpdate()
+		{
+			//マウス。
+			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
-	/** OnDestroy
-	*/
-	private void OnDestroy()
-	{
-		this.deleter.DeleteAll();
+			//イベントプレート。
+			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+
+			//ＵＩ。
+			Fee.Ui.Ui.GetInstance().Main();
+		}
+
+		/** 削除前。
+		*/
+		public override bool PreDestroy(bool a_first)
+		{
+			return true;
+		}
+
+		/** OnDestroy
+		*/
+		private void OnDestroy()
+		{
+			this.deleter.DeleteAll();
+		}
 	}
 }
 
