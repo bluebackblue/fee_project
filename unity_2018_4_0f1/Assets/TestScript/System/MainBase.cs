@@ -37,7 +37,7 @@ namespace TestScript
 
 		/** クリック。
 		*/
-		private void Click(int a_id)
+		public void Click(int a_id)
 		{
 			this.is_changescene = true;
 			this.StartCoroutine(ChangeScene());	
