@@ -255,28 +255,28 @@ namespace Fee.Input
 		#if(USE_DEF_FEE_INPUTSYSTEM)
 		public static UnityEngine_InputSystem.Key INPUTSYSTEM_B_ENTER = UnityEngine_InputSystem.Key.Enter;
 		#endif
-		public static UnityEngine.KeyCode INPUTMANAGER_B_ENTER = UnityEngine.KeyCode.K;
+		public static UnityEngine.KeyCode INPUTMANAGER_B_ENTER = UnityEngine.KeyCode.Return;
 
 		/** インプットシステム。エスケープ。
 		*/
 		#if(USE_DEF_FEE_INPUTSYSTEM)
 		public static UnityEngine_InputSystem.Key INPUTSYSTEM_B_ESCAPE = UnityEngine_InputSystem.Key.Escape;
 		#endif
-		public static UnityEngine.KeyCode INPUTMANAGER_B_ESCAPE = UnityEngine.KeyCode.K;
+		public static UnityEngine.KeyCode INPUTMANAGER_B_ESCAPE = UnityEngine.KeyCode.Escape;
 
 		/** インプットシステム。サブ１。
 		*/
 		#if(USE_DEF_FEE_INPUTSYSTEM)
 		public static UnityEngine_InputSystem.Key INPUTSYSTEM_B_SUB1 = UnityEngine_InputSystem.Key.LeftShift;
 		#endif
-		public static UnityEngine.KeyCode INPUTMANAGER_B_SUB1 = UnityEngine.KeyCode.K;
+		public static UnityEngine.KeyCode INPUTMANAGER_B_SUB1 = UnityEngine.KeyCode.LeftShift;
 
 		/** インプットシステム。サブ２。
 		*/
 		#if(USE_DEF_FEE_INPUTSYSTEM)
 		public static UnityEngine_InputSystem.Key INPUTSYSTEM_B_SUB2 = UnityEngine_InputSystem.Key.LeftCtrl;
 		#endif
-		public static UnityEngine.KeyCode INPUTMANAGER_B_SUB2 = UnityEngine.KeyCode.K;
+		public static UnityEngine.KeyCode INPUTMANAGER_B_SUB2 = UnityEngine.KeyCode.LeftControl;
 
 
 
