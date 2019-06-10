@@ -29,7 +29,7 @@ namespace TestScript
 				"test12",
 
 				@"
-				---
+				エクセル
 				"
 			);
 		}
@@ -70,6 +70,25 @@ namespace TestScript
 
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+
+			//エクセル。
+			Fee.Excel.Excel t_excel = new Fee.Excel.Excel(new Fee.File.Path(UnityEngine.Application.streamingAssetsPath + "/","excel.xlsx"));
+			if(t_excel != null){
+				if(t_excel.ReadOpen() == true){
+					int t_sheet_max = t_excel.GetSheetMax();
+					for(int ii=0;ii<t_sheet_max;ii++){
+						if(t_excel.OpenSheet(ii) == true){
+						
+							string t_cell_string = t_excel.GetCell(2,6);
+							UnityEngine.Debug.Log(t_cell_string);
+
+							t_excel.CloseSheet();
+						}
+					}
+
+					t_excel.Close();
+				}
+			}
 		}
 
 		/** FixedUpdate

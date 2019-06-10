@@ -258,8 +258,8 @@ namespace TestScript
 
 			//モーター。
 			{
-				Fee.Input.Pad.GetInstance().moter_low.Request(Fee.Input.Pad.GetInstance().left_trigger2_button.value);
-				Fee.Input.Pad.GetInstance().moter_high.Request(Fee.Input.Pad.GetInstance().right_trigger2_button.value);
+				Fee.Input.Pad.GetInstance().moter_low.Request(Fee.Input.Pad.GetInstance().l_trigger_2.value);
+				Fee.Input.Pad.GetInstance().moter_high.Request(Fee.Input.Pad.GetInstance().r_trigger_2.value);
 			}
 
 			//タッチ。
@@ -481,25 +481,25 @@ namespace TestScript
 					t_text += "r_stick[ ]";
 				}
 
-				if(Fee.Input.Pad.GetInstance().left_trigger1_button.on == true){
+				if(Fee.Input.Pad.GetInstance().l_trigger_1.on == true){
 					t_text += "l_trigger1[o]";
 				}else{
 					t_text += "l_trigger1[ ]";
 				}
 
-				if(Fee.Input.Pad.GetInstance().right_trigger1_button.on == true){
+				if(Fee.Input.Pad.GetInstance().r_trigger_1.on == true){
 					t_text += "r_trigger1[o]";
 				}else{
 					t_text += "r_trigger1[ ]";
 				}
 
-				if(Fee.Input.Pad.GetInstance().left_trigger2_button.on == true){
+				if(Fee.Input.Pad.GetInstance().l_trigger_2.on == true){
 					t_text += "l_trigger2[o]";
 				}else{
 					t_text += "l_trigger2[ ]";
 				}
 
-				if(Fee.Input.Pad.GetInstance().right_trigger2_button.on == true){
+				if(Fee.Input.Pad.GetInstance().r_trigger_2.on == true){
 					t_text += "r_trigger2[o]";
 				}else{
 					t_text += "r_trigger2[ ]";
@@ -511,7 +511,7 @@ namespace TestScript
 
 				t_text += "r stick = " + ((int)(Fee.Input.Pad.GetInstance().right_stick.x * 100)).ToString() + " " + ((int)(Fee.Input.Pad.GetInstance().right_stick.y * 100)).ToString() + "\n";
 
-				t_text += "trigger2 = "+ ((int)(Fee.Input.Pad.GetInstance().left_trigger2_button.value * 100)).ToString() + " " + ((int)(Fee.Input.Pad.GetInstance().right_trigger2_button.value * 100)).ToString() + "\n";
+				t_text += "trigger2 = "+ ((int)(Fee.Input.Pad.GetInstance().l_trigger_2.value * 100)).ToString() + " " + ((int)(Fee.Input.Pad.GetInstance().r_trigger_2.value * 100)).ToString() + "\n";
 
 				this.text_pad_2.SetText(t_text);
 			}

@@ -184,6 +184,12 @@ namespace TestScript
 				t_text += "USE_DEF_UNIVRM = false\n";
 				#endif
 
+				#if(USE_DEF_NPOI)
+				t_text += "USE_DEF_NPOI = true\n";
+				#else
+				t_text += "USE_DEF_NPOI = false\n";
+				#endif
+
 				this.status = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 				this.status.SetRect(10,100,0,0);
 				this.status.SetFontSize(15);
