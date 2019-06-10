@@ -249,7 +249,7 @@ namespace TestScript
 			long t_drawpriority = 0;
 
 			//button
-			this.button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.Click,-1);
+			this.button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,-1);
 			this.button.SetRect(10,50,100,50);
 			this.button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.button.SetText("表示");
@@ -296,7 +296,7 @@ namespace TestScript
 
 		/** [Button_Base]コールバック。クリック。
 		*/
-		public void Click(int a_id)
+		public void CallBack_Click(int a_id)
 		{
 			if(this.view_flag == true){
 				this.view_flag = false;

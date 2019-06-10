@@ -72,6 +72,7 @@ namespace TestScript
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//エクセル。
+			/*
 			Fee.Excel.Excel t_excel = new Fee.Excel.Excel(new Fee.File.Path(UnityEngine.Application.streamingAssetsPath + "/","excel.xlsx"));
 			if(t_excel != null){
 				if(t_excel.ReadOpen() == true){
@@ -89,6 +90,20 @@ namespace TestScript
 					t_excel.Close();
 				}
 			}
+			*/
+
+			//エクセルＴＯＪＳＯＮ。
+			{
+				Fee.Excel.ExcelToJson t_excel_to_json = new Fee.Excel.ExcelToJson(new Fee.File.Path(UnityEngine.Application.streamingAssetsPath + "/","excel.xlsx"));
+				if(t_excel_to_json.Convert() == true){
+					UnityEngine.Debug.Log("success");
+				}else{
+					UnityEngine.Debug.Log("error");
+				}
+			}
+
+
+
 		}
 
 		/** FixedUpdate

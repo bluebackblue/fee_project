@@ -69,7 +69,7 @@ namespace TestScript
 
 			/** [Scene_Base]更新。
 			*/
-			public void Unity_LastUpdate()
+			public void Unity_LateUpdate(float a_delta)
 			{
 			}
 
@@ -142,7 +142,7 @@ namespace TestScript
 
 			/** [Scene_Base]更新。
 			*/
-			public void Unity_LastUpdate()
+			public void Unity_LateUpdate(float a_delta)
 			{
 			}
 

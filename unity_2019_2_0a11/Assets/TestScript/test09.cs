@@ -18,7 +18,7 @@ namespace TestScript
 {
 	/** test09
 
-	ダイクストラ法
+		ダイクストラ法
 
 	*/
 	public class test09 : MainBase

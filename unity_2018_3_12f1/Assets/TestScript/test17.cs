@@ -162,6 +162,12 @@ namespace TestScript
 				this.button.SetY(a_y + 5);
 			}
 
+			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			*/
+			public override void SetWH(int a_w,int a_h)
+			{
+			}
+
 			/** [ScrollItem_Base]クリップ矩形。設定。
 			*/
 			public override void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)

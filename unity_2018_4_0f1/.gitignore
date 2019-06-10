@@ -3,8 +3,8 @@
 /obj
 /.vs
 /Temp
-/Assets/VRM
-/Assets/VRM.meta
+/Assets/Other
+/Assets/*.Other
 /Assets/*.rsp
 /Assets/*.rsp.meta
 /Exe
