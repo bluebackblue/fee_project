@@ -579,6 +579,18 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.0f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI">
+      <HintPath>C:/work/github/fee/fee_project/unity_2018_4_0f1/Assets/Other/NPOI/Plugins/net40/NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>C:/work/github/fee/fee_project/unity_2018_4_0f1/Assets/Other/NPOI/Plugins/net40/NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>C:/work/github/fee/fee_project/unity_2018_4_0f1/Assets/Other/NPOI/Plugins/net40/NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>C:/work/github/fee/fee_project/unity_2018_4_0f1/Assets/Other/NPOI/Plugins/net40/NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>C:/work/github/fee/fee_project/unity_2018_4_0f1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -587,18 +599,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>C:/work/github/fee/fee_project/unity_2018_4_0f1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>C:/work/github/fee/fee_project/unity_2018_4_0f1/Assets/Other/NPOI/Plugins/net40/NPOI.OpenXmlFormats.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>C:/work/github/fee/fee_project/unity_2018_4_0f1/Assets/Other/NPOI/Plugins/net40/NPOI.OpenXml4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML">
-      <HintPath>C:/work/github/fee/fee_project/unity_2018_4_0f1/Assets/Other/NPOI/Plugins/net40/NPOI.OOXML.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI">
-      <HintPath>C:/work/github/fee/fee_project/unity_2018_4_0f1/Assets/Other/NPOI/Plugins/net40/NPOI.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.0f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
