@@ -4,7 +4,7 @@
 /.vs
 /Temp
 /Assets/Other
-/Assets/*.Other
+/Assets/Other.meta
 /Assets/*.rsp
 /Assets/*.rsp.meta
 /Exe
