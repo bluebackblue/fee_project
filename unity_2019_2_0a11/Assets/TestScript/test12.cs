@@ -92,18 +92,24 @@ namespace TestScript
 			}
 			*/
 
-			//エクセルＴＯＪＳＯＮ。
+			
 			{
-				Fee.Excel.ExcelToJson t_excel_to_json = new Fee.Excel.ExcelToJson(new Fee.File.Path(UnityEngine.Application.streamingAssetsPath + "/","excel.xlsx"));
-				if(t_excel_to_json.Convert() == true){
-					UnityEngine.Debug.Log("success");
+				//エクセルからＪＳＯＮシートを作成。
+				Fee.Excel.ExcelToJsonSheet t_excel_to_jsonsheet = new Fee.Excel.ExcelToJsonSheet();
+				if(t_excel_to_jsonsheet.Convert(new Fee.File.Path(null,UnityEngine.Application.streamingAssetsPath + "/","excel.xlsx")) == true){
+					Fee.JsonItem.JsonItem t_jsonsheet = t_excel_to_jsonsheet.GetJsonSheet();
+					if(t_jsonsheet != null){
+						//コンバート。
+						if(Fee.JsonSheet.Convert.ConvertFromJsonSheet(t_jsonsheet) == false){
+							UnityEngine.Debug.LogError("faild");
+						}
+					}else{
+						UnityEngine.Debug.LogError("faild");
+					}
 				}else{
-					UnityEngine.Debug.Log("error");
+					UnityEngine.Debug.LogError("faild");
 				}
 			}
-
-
-
 		}
 
 		/** FixedUpdate

@@ -377,7 +377,7 @@ namespace TestScript
 				t_url += "StandaloneWindows/";
 				#endif
 
-				this.download_item_bgm = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(new Fee.File.Path(t_url,"bgm"),ASSETBUNDLE_ID_BGM,DATA_VERSION);
+				this.download_item_bgm = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(new Fee.File.Path(null,t_url,"bgm"),ASSETBUNDLE_ID_BGM,DATA_VERSION);
 			}
 		}
 
@@ -440,7 +440,7 @@ namespace TestScript
 
 					if(this.soundpool_flag == true){
 
-						Fee.File.Path t_path = new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/",t_name + ".txt");
+						Fee.File.Path t_path = new Fee.File.Path(null,"https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/",t_name + ".txt");
 						this.soundpool_item_se = Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(t_path,null,DATA_VERSION);
 
 					}else{
@@ -459,7 +459,7 @@ namespace TestScript
 						t_url += "StandaloneWindows/";
 						#endif
 
-						this.download_item_se = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(new Fee.File.Path(t_url,"se"),ASSETBUNDLE_ID_SE,DATA_VERSION);
+						this.download_item_se = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(new Fee.File.Path(null,t_url,"se"),ASSETBUNDLE_ID_SE,DATA_VERSION);
 
 					}
 

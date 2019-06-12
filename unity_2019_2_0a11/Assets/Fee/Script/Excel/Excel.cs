@@ -101,16 +101,20 @@ namespace Fee.Excel
 			#if(USE_DEF_NPOI)
 			{
 				this.raw_excel = Excel_Npoi.Open(a_path);
-				if(this.raw_excel != null){
-					return true;
+				if(this.raw_excel == null){
+					return false;
 				}
+
+				return true;
 			}
 			#elif(USE_DEF_EXCELDATAREADER)
 			{
 				this.raw_excel = Excel_ExcelDataReader.Open(a_path);
-				if(this.raw_excel != null){
-					return true;
+				if(this.raw_excel == null){
+					return false;
 				}
+
+				return true;
 			}
 			#else
 			{
@@ -172,6 +176,8 @@ namespace Fee.Excel
 					Tool.Assert(false);
 					return false;
 				}
+
+				return true;
 			}
 			#elif(USE_DEF_EXCELDATAREADER)
 			{
@@ -180,6 +186,8 @@ namespace Fee.Excel
 					Tool.Assert(false);
 					return false;
 				}
+
+				return true;
 			}
 			#else
 			{
