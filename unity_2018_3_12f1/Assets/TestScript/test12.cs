@@ -93,17 +93,16 @@ namespace TestScript
 			*/
 
 			//エクセルＴＯＪＳＯＮ。
+			/*
 			{
-				Fee.Excel.ExcelToJson t_excel_to_json = new Fee.Excel.ExcelToJson(new Fee.File.Path(UnityEngine.Application.streamingAssetsPath + "/","excel.xlsx"));
+				Fee.Excel.ExcelToJson t_excel_to_json = new Fee.Excel.ExcelToJson(new Fee.File.Path(null,UnityEngine.Application.streamingAssetsPath + "/","excel.xlsx"));
 				if(t_excel_to_json.Convert() == true){
 					UnityEngine.Debug.Log("success");
 				}else{
 					UnityEngine.Debug.Log("error");
 				}
 			}
-
-
-
+			*/
 		}
 
 		/** FixedUpdate

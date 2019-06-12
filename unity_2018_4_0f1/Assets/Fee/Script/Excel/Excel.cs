@@ -118,8 +118,6 @@ namespace Fee.Excel
 				return false;
 			}
 			#endif
-
-			return false;
 		}
 
 		/** 閉じる。
@@ -189,8 +187,6 @@ namespace Fee.Excel
 				return false;
 			}
 			#endif
-
-			return true;
 		}
 
 		/** アクティブセル。設定。
@@ -200,35 +196,28 @@ namespace Fee.Excel
 			#if(USE_DEF_NPOI)
 			{
 				this.raw_line = Excel_Npoi.GetLine(this.raw_sheet,a_y);
-			}
-			#elif(USE_DEF_EXCELDATAREADER)
-			{
-				this.raw_line = Excel_ExcelDataReader.GetLine(this.raw_sheet,a_y);
-			}
-			#else
-			{
-				Tool.Assert(false);
-				return false;
-			}
-			#endif
 
-			#if(USE_DEF_NPOI)
-			{
 				if(this.raw_line == null){
 					//データのないライン。
 					this.raw_cell = null;
 				}else{
 					this.raw_cell = Excel_Npoi.GetCell(this.raw_line,a_x);
 				}
+
+				return true;
 			}
 			#elif(USE_DEF_EXCELDATAREADER)
 			{
+				this.raw_line = Excel_ExcelDataReader.GetLine(this.raw_sheet,a_y);
+
 				if(this.raw_line == null){
 					//データのないライン。
 					this.raw_cell = null;
 				}else{
 					this.raw_cell = Excel_ExcelDataReader.GetCell(this.raw_line,a_x);
 				}
+
+				return true;
 			}
 			#else
 			{
@@ -236,8 +225,6 @@ namespace Fee.Excel
 				return false;
 			}
 			#endif
-
-			return true;
 		}
 
 		/** 文字列。取得。
