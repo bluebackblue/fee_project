@@ -712,7 +712,7 @@ namespace TestScript
 
 			//マウス。
 			{
-				string t_text = "";
+				string t_text = "mouse\n";
 
 				t_text += "left   = " + Fee.Input.Mouse.GetInstance().left.on.ToString() + "\n";
 				t_text += "right  = " + Fee.Input.Mouse.GetInstance().right.on.ToString() + "\n";
@@ -729,7 +729,7 @@ namespace TestScript
 
 			//キー。
 			{
-				string t_text = "";
+				string t_text = "key\n";
 
 				t_text += "left        = " + Fee.Input.Key.GetInstance().left.on.ToString() + "\n";
 				t_text += "right       = " + Fee.Input.Key.GetInstance().right.on.ToString() + "\n";
