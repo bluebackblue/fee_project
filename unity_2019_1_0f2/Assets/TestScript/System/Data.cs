@@ -20,6 +20,10 @@ namespace TestScript
 		*/
 		public const string UI_TEXTURE_BUTTON = "Texture/button";
 
+		/** UI_TEXTURE_BUTTON_ACTIVE
+		*/
+		public const string UI_TEXTURE_BUTTON_ACTIVE = "Texture/button_active";
+
 		/** UI_TEXTURE_SLIDER
 		*/
 		public const string UI_TEXTURE_SLIDER = "Texture/slider";
