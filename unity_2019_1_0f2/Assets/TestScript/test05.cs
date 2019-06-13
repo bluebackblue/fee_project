@@ -308,19 +308,18 @@ namespace TestScript
 
 			//キー。
 			this.key_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
-			this.key_text.SetRect(400,50,0,0);
+			this.key_text.SetRect(400,50,300,0);
 			this.key_text.SetFontSize(17);
 
 			//パッド。
 			this.pad_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
-			this.pad_text.SetRect(570,50,0,0);
+			this.pad_text.SetRect(570,50,300,0);
 			this.pad_text.SetFontSize(17);
 
 			//マウス。
 			this.mouse_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
-			this.mouse_text.SetRect(750,50,0,0);
+			this.mouse_text.SetRect(750,50,300,0);
 			this.mouse_text.SetFontSize(17);
-
 
 			/*
 			//touch_list
@@ -787,13 +786,13 @@ namespace TestScript
 				t_text += "l_trigger_2 = " + Fee.Input.Pad.GetInstance().l_trigger_2.value.ToString() + "\n";
 				t_text += "r_trigger_2 = " + Fee.Input.Pad.GetInstance().r_trigger_2.value.ToString() + "\n";
 
-				t_text += "left_stick   = " + Fee.Input.Pad.GetInstance().left_stick.x.ToString() + "\n";
-				t_text += "left_stick   = " + Fee.Input.Pad.GetInstance().left_stick.y.ToString() + "\n";
-				t_text += "right_stick  = " + Fee.Input.Pad.GetInstance().right_stick.x.ToString() + "\n";
-				t_text += "right_stick  = " + Fee.Input.Pad.GetInstance().right_stick.y.ToString() + "\n";
+				t_text += "l_stick_x   = " + Fee.Input.Pad.GetInstance().l_stick.x.ToString() + "\n";
+				t_text += "l_stick_y   = " + Fee.Input.Pad.GetInstance().l_stick.y.ToString() + "\n";
+				t_text += "r_stick_x   = " + Fee.Input.Pad.GetInstance().r_stick.x.ToString() + "\n";
+				t_text += "r_stick_y   = " + Fee.Input.Pad.GetInstance().r_stick.y.ToString() + "\n";
 
-				t_text += "left_stick_button  = " + Fee.Input.Pad.GetInstance().left_stick_button.on.ToString() + "\n";
-				t_text += "right_stick_button = " + Fee.Input.Pad.GetInstance().right_stick_button.on.ToString() + "\n";
+				t_text += "l_stick_button = " + Fee.Input.Pad.GetInstance().l_stick_button.on.ToString() + "\n";
+				t_text += "r_stick_button = " + Fee.Input.Pad.GetInstance().r_stick_button.on.ToString() + "\n";
 
 				this.pad_text.SetText(t_text);
 			}
