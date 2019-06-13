@@ -35,7 +35,6 @@ namespace TestScript
 
 				@"
 				マウス
-				ジョイスティック
 				キー
 				"
 			);
@@ -47,31 +46,118 @@ namespace TestScript
 
 		/** 背景。
 		*/
-		private Fee.Render2D.Sprite2D sprite_bg;
+		private Fee.Render2D.Sprite2D bg;
 
-		/** テキスト。
+		/** ClickId
 		*/
-		private Fee.Render2D.Text2D text_mouse;
+		private enum ClickId
+		{
+			Fex,
 
-		/** テキスト。
+			MousePosition_InputSystem_Mouse,
+			MousePosition_InputSystem_Pointer,
+			MousePosition_InputManager_InputMouse,
+
+			MouseButton_InputSystem_Mouse,
+			MouseButton_InputSystem_Pointer,
+			MouseButton_InputManager_MouseButton,
+
+			MouseWheel_InputSystem_Mouse,
+			MouseWheel_InputManager_InputName,
+
+			Key_InputSystem_KeyBoard,
+			Key_InputManager_GetKey,
+		}
+
+		/** button_fix
 		*/
-		private Fee.Render2D.Text2D text_key;
+		private Fee.Ui.Button button_fix;
 
-		/** テキスト。
+		/** mouseposition
 		*/
-		private Fee.Render2D.Text2D text_pad_1;
-		private Fee.Render2D.Text2D text_pad_2;
+		private Fee.Ui.Button button_inputsystem_mouse_mouseposition;
+		private Fee.Ui.Button button_inputsystem_pointer_mouseposition;
+		private Fee.Ui.Button button_inputmanager_inputmouse_mouseposition;
 
-		/** mouse_sprite
+		/** mousebutton
+		*/
+		private Fee.Ui.Button button_inputsystem_mouse_mousebutton;
+		private Fee.Ui.Button button_inputsystem_pointer_mousebutton;
+		private Fee.Ui.Button button_inputmanager_inputmouse_mousebutton;
+
+		/** mousewheel
+		*/
+		private Fee.Ui.Button button_inputsystem_mouse_mousewheel;
+		private Fee.Ui.Button button_inputmanager_inputname_mousewheel;
+
+		/** key
+		*/
+		private Fee.Ui.Button button_inputsystem_keyboard_key;
+		private Fee.Ui.Button button_inputmanager_getkey_key;
+
+		/** マウス。
+		*/
+		private Fee.Render2D.Text2D mouse_text;
+
+		/** マウス。
 		*/
 		private Fee.Render2D.Sprite2D mouse_sprite;
 
+		/** キー。
+		*/
+		private Fee.Render2D.Text2D key_text;
+
+		/** バックアップ。ロールバックカウント。
+		*/
+		private int backup_rollbackcount;
+
+		/** バックアップ。マウス位置。
+		*/
+		private bool backup_INPUTSYSTEM_MOUSE_MOUSEPOSITION = true;
+		private bool backup_INPUTSYSTEM_POINTER_MOUSEPOSITION = false;
+		private bool backup_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION = false;
+
+		/** バックアップ。マウスボタン。
+		*/
+		private bool backup_INPUTSYSTEM_MOUSE_MOUSEBUTTON = true;
+		private bool backup_INPUTSYSTEM_POINTER_MOUSEBUTTON = false;
+		private bool backup_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON = false;
+
+		/** バックアップ。マウスホイール。
+		*/
+		private bool backup_INPUTSYSTEM_MOUSE_MOUSEWHEEL = true;
+		private bool backup_INPUTMANAGER_INPUTNAME_MOUSEWHEEL = false;
+
+		/** バックアップ。キー。
+		*/
+		private bool backup_INPUTSYSTEM_KEYBOARD_KEY = true;
+		private bool backup_INPUTMANAGER_GETKEY_KEY = false;
+
+
+
+		/** テキスト。
+		*/
+		/*
+		private Fee.Render2D.Text2D text_key;
+		*/
+
+		/** テキスト。
+		*/
+		/*
+		private Fee.Render2D.Text2D text_pad_1;
+		private Fee.Render2D.Text2D text_pad_2;
+		*/
+
+
 		/** タッチビューＩＤ。
 		*/
+		/*
 		private int touchview_id;
+		*/
 
 		/** タッチビュー。
 		*/
+		#if(false)
 		class TouchView : Fee.Input.Touch_Phase_Key_Base
 		{
 			public int id;
@@ -134,10 +220,13 @@ namespace TestScript
 				this.text = null;
 			}
 		};
+		#endif
 
 		/** touch_list
 		*/
+		/*
 		private System.Collections.Generic.Dictionary<TouchView,Fee.Input.Touch_Phase> touch_list;
+		*/
 
 		/** Start
 		*/
@@ -157,19 +246,62 @@ namespace TestScript
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//マウス。インスタンス作成。
+			{
+				//マウス位置。
+				Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION = true;
+				Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION = false;
+				Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION = false;
+
+				//マウスボタン。
+				Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON = true;
+				Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON = false;
+				Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON = false;
+
+				//マウスホイール。
+				Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL = true;
+				Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL = false;
+			}
 			Fee.Input.Mouse.CreateInstance();
 
 			//キー。インスタンス作成。
+			{
+				//キー。
+				Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY = true;
+				Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY = false;
+			}
 			Fee.Input.Key.CreateInstance();
 
+			/*
 			//パッド。インスタンス作成。
-			Fee.Input.Config.USE_INPUTMANAGER_GAMEPAD = false;
-			Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD = true;
-			Fee.Input.Pad.CreateInstance();
+			{
+				//パッドデジタルボタン。
+				Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON = true;
+				Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON = true;
 
+				//パッドスティック。
+				Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK = true;
+				Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK = false;
+
+				//パッドトリガー。
+				Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER = true;
+				Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER = false;
+
+				//パッドモーター。
+				Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR = true;
+			}
+			Fee.Input.Pad.CreateInstance();
+			*/
+
+			/*
 			//タッチ。
+			{
+				Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH = true;
+				Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH = false;
+				Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH = false;
+			}
 			Fee.Input.Touch.CreateInstance();
 			Fee.Input.Touch.GetInstance().SetCallBack(CallBack_OnTouch);
+			*/
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -188,18 +320,33 @@ namespace TestScript
 			//背景。
 			int t_layerindex = 0;
 			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
-			this.sprite_bg = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
-			this.sprite_bg.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
-			this.sprite_bg.SetTexture(Texture2D.whiteTexture);
-			this.sprite_bg.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
-			this.sprite_bg.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
-			this.sprite_bg.SetColor(0.0f,0.0f,0.0f,1.0f);
+			this.bg = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
+			this.bg.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+			this.bg.SetTexture(Texture2D.whiteTexture);
+			this.bg.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
+			this.bg.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
+			this.bg.SetColor(0.0f,0.0f,0.0f,1.0f);
 
-			//テキスト。
-			this.text_mouse = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
-			this.text_mouse.SetRect(10,100 + 50 * 0,0,0);
-			this.text_mouse.SetFontSize(17);
+			//マウス。
+			this.mouse_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+			this.mouse_text.SetRect(400,50,0,0);
+			this.mouse_text.SetFontSize(17);
 
+			//マウス。
+			this.mouse_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority + 1);
+			this.mouse_sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+			this.mouse_sprite.SetTexture(Texture2D.whiteTexture);
+			this.mouse_sprite.SetRect(0,0,10,10);
+			this.mouse_sprite.SetColor(1.0f,1.0f,1.0f,1.0f);
+
+
+			//キー。
+			this.key_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+			this.key_text.SetRect(600,50,0,0);
+			this.key_text.SetFontSize(17);
+			
+
+			/*
 			//テキスト。
 			this.text_key = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 			this.text_key.SetRect(10,100 + 50 * 1,0,0);
@@ -215,23 +362,242 @@ namespace TestScript
 			this.text_pad_2.SetRect(10,100 + 50 * 3,0,0);
 			this.text_pad_2.SetFontSize(20);
 
-			//スプライト。
-			this.mouse_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority + 1);
-			this.mouse_sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
-			this.mouse_sprite.SetTexture(Texture2D.whiteTexture);
-			this.mouse_sprite.SetRect(0,0,10,10);
-			this.mouse_sprite.SetColor(1.0f,1.0f,1.0f,1.0f);
 
 			//touch_list
 			this.touch_list = Fee.Input.Touch.CreateTouchList<TouchView>();
+			*/
+
+			//button_fix
+			{
+				this.button_fix = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Fex);
+				this.button_fix.SetRect(100,1,100,40);
+				this.button_fix.SetText("確定");
+				this.button_fix.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			}
+
+			int t_xx = 10;
+			int t_yy = 50;
+			int t_w = 350;
+			int t_h = 30;
+
+			//mouseposition
+			{
+				this.button_inputsystem_mouse_mouseposition = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MousePosition_InputSystem_Mouse);
+				this.button_inputsystem_mouse_mouseposition.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputsystem_mouse_mouseposition.SetText("InputSystem.Mouse => MousePosition");
+
+				t_yy += 40;
+
+				this.button_inputsystem_pointer_mouseposition = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MousePosition_InputSystem_Pointer);
+				this.button_inputsystem_pointer_mouseposition.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputsystem_pointer_mouseposition.SetText("InputSystem.Pointer => MousePosition");
+
+				t_yy += 40;
+
+				this.button_inputmanager_inputmouse_mouseposition = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MousePosition_InputManager_InputMouse);
+				this.button_inputmanager_inputmouse_mouseposition.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputmanager_inputmouse_mouseposition.SetText("InputManager.InputMouse => MousePosition");
+			}
+
+			t_yy += 60;
+
+			//mousebutton
+			{
+				this.button_inputsystem_mouse_mousebutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MouseButton_InputSystem_Mouse);
+				this.button_inputsystem_mouse_mousebutton.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputsystem_mouse_mousebutton.SetText("InputSystem.Mouse => MouseButton");
+
+				t_yy += 40;
+
+				this.button_inputsystem_pointer_mousebutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MouseButton_InputSystem_Pointer);
+				this.button_inputsystem_pointer_mousebutton.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputsystem_pointer_mousebutton.SetText("InputSystem.Pointer => MouseButton");
+
+				t_yy += 40;
+
+				this.button_inputmanager_inputmouse_mousebutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MouseButton_InputManager_MouseButton);
+				this.button_inputmanager_inputmouse_mousebutton.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputmanager_inputmouse_mousebutton.SetText("InputManager.InputMouse => MouseButton");
+			}
+
+			t_yy += 60;
+
+			//mousewheel
+			{
+				this.button_inputsystem_mouse_mousewheel = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MouseWheel_InputSystem_Mouse);
+				this.button_inputsystem_mouse_mousewheel.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputsystem_mouse_mousewheel.SetText("InputSystem.Mouse => MouseWheel");
+
+				t_yy += 40;
+
+				this.button_inputmanager_inputname_mousewheel = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MouseWheel_InputManager_InputName);
+				this.button_inputmanager_inputname_mousewheel.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputmanager_inputname_mousewheel.SetText("InputManager.InputName => MouseWheel");
+
+				t_yy += 40;
+			}
+
+			t_yy += 60;
+
+			//key
+			{
+				this.button_inputsystem_keyboard_key = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Key_InputSystem_KeyBoard);
+				this.button_inputsystem_keyboard_key.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputsystem_keyboard_key.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_inputsystem_keyboard_key.SetText("InputSystem.KeyBoard => Key");
+
+				t_yy += 40;
+
+				this.button_inputmanager_getkey_key = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Key_InputManager_GetKey);
+				this.button_inputmanager_getkey_key.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputmanager_getkey_key.SetText("InputManager.GetKey => Key");
+			}
+
+			this.UpdateButtonStatus();
+
+			this.backup_rollbackcount = 0;
+			this.SaveFlag();
+		}
+
+		/** SaveFlag
+		*/
+		public void SaveFlag()
+		{
+			//マウス位置。
+			this.backup_INPUTSYSTEM_MOUSE_MOUSEPOSITION = Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION;
+			this.backup_INPUTSYSTEM_POINTER_MOUSEPOSITION = Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION;
+			this.backup_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION = Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION;
+
+			//マウスボタン。
+			this.backup_INPUTSYSTEM_MOUSE_MOUSEBUTTON = Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON;
+			this.backup_INPUTSYSTEM_POINTER_MOUSEBUTTON = Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON;
+			this.backup_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON = Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON;
+
+			//マウスホイール。
+			this.backup_INPUTSYSTEM_MOUSE_MOUSEWHEEL = Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL;
+			this.backup_INPUTMANAGER_INPUTNAME_MOUSEWHEEL = Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL;
+
+			//キー。
+			this.backup_INPUTSYSTEM_KEYBOARD_KEY = Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY;
+			this.backup_INPUTMANAGER_GETKEY_KEY = Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY;
+		}
+
+		/** LoadFlag
+		*/
+		public void LoadFlag()
+		{
+			//マウス位置。
+			Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION = this.backup_INPUTSYSTEM_MOUSE_MOUSEPOSITION;
+			Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION = this.backup_INPUTSYSTEM_POINTER_MOUSEPOSITION;
+			Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION = this.backup_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION;
+
+			//マウスボタン。
+			Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON = this.backup_INPUTSYSTEM_MOUSE_MOUSEBUTTON;
+			Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON = this.backup_INPUTSYSTEM_POINTER_MOUSEBUTTON;
+			Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON = this.backup_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON;
+
+			//マウスホイール。
+			Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL = this.backup_INPUTSYSTEM_MOUSE_MOUSEWHEEL;
+			Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL = this.backup_INPUTMANAGER_INPUTNAME_MOUSEWHEEL;
+
+			//キー。
+			Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY = this.backup_INPUTSYSTEM_KEYBOARD_KEY;
+			Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY = this.backup_INPUTMANAGER_GETKEY_KEY;
+		}
+
+		/** [Button_Base]コールバック。クリック。
+		*/
+		public void CallBack_Click(int a_id)
+		{
+			switch((ClickId)a_id)
+			{
+			case ClickId.Fex:
+				{
+					this.SaveFlag();
+					this.backup_rollbackcount = 0;
+				}break;
+			case ClickId.MousePosition_InputSystem_Mouse:
+				{
+					Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ^= true;
+					this.backup_rollbackcount = 60 * 15;
+				}break;
+			case ClickId.MousePosition_InputSystem_Pointer:
+				{
+					Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ^= true;
+					this.backup_rollbackcount = 60 * 15;
+				}break;
+			case ClickId.MousePosition_InputManager_InputMouse:
+				{
+					Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ^= true;
+					this.backup_rollbackcount = 60 * 15;
+				}break;
+			case ClickId.MouseButton_InputSystem_Mouse:
+				{
+					Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ^= true;
+					this.backup_rollbackcount = 60 * 15;
+				}break;
+			case ClickId.MouseButton_InputSystem_Pointer:
+				{
+					Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ^= true;
+					this.backup_rollbackcount = 60 * 15;
+				}break;
+			case ClickId.MouseButton_InputManager_MouseButton:
+				{
+					Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ^= true;
+					this.backup_rollbackcount = 60 * 15;
+				}break;
+			case ClickId.MouseWheel_InputSystem_Mouse:
+				{
+					Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ^= true;
+					this.backup_rollbackcount = 60 * 15;
+				}break;
+			case ClickId.MouseWheel_InputManager_InputName:
+				{
+					Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ^= true;
+					this.backup_rollbackcount = 60 * 15;
+				}break;
+			case ClickId.Key_InputSystem_KeyBoard:
+				{
+					Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ^= true;
+					this.backup_rollbackcount = 60 * 15;
+				}break;
+			case ClickId.Key_InputManager_GetKey:
+				{
+					Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ^= true;
+					this.backup_rollbackcount = 60 * 15;
+				}break;
+			}
+
+			this.UpdateButtonStatus();
+		}
+
+		/** UpdateButtonStatus
+		*/
+		public void UpdateButtonStatus()
+		{
+			this.button_inputsystem_mouse_mouseposition.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_pointer_mouseposition.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputmouse_mouseposition.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+
+			this.button_inputsystem_mouse_mousebutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_pointer_mousebutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputmouse_mousebutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+
+			this.button_inputsystem_mouse_mousewheel.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputname_mousewheel.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+
+			this.button_inputsystem_keyboard_key.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_getkey_key.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));;
 		}
 
 		/** コールバック。
 		*/
 		public void CallBack_OnTouch(Fee.Input.Touch_Phase a_touch_phase)
 		{
+			/*
 			this.touchview_id++;
 			this.touch_list.Add(new TouchView(this.touchview_id,this.deleter,a_touch_phase),a_touch_phase);
+			*/
 		}
 
 		/** FixedUpdate
@@ -244,56 +610,65 @@ namespace TestScript
 			//キー。
 			Fee.Input.Key.GetInstance().Main(true);
 
-			//パッド。
-			Fee.Input.Pad.GetInstance().Main(true);
-
-			//タッチ。
-			Fee.Input.Touch.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
-
 			//イベントプレート。
 			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
 
+			//パッド。
+			/*
+			Fee.Input.Pad.GetInstance().Main(true);
+			*/
+
+			//タッチ。
+			/*
+			Fee.Input.Touch.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
+			*/
+
 			//モーター。
+			/*
 			{
 				Fee.Input.Pad.GetInstance().moter_low.Request(Fee.Input.Pad.GetInstance().l_trigger_2.value);
 				Fee.Input.Pad.GetInstance().moter_high.Request(Fee.Input.Pad.GetInstance().r_trigger_2.value);
 			}
+			*/
 
 			//タッチ。
+			/*
 			{
 				Fee.Input.Touch.UpdateTouchList(this.touch_list);
 			}
+			*/
 
-			//マウス位置。
+			if(this.backup_rollbackcount > 0){
+				this.backup_rollbackcount--;
+				if(this.backup_rollbackcount == 0){
+					this.LoadFlag();
+					this.UpdateButtonStatus();
+				}
+			}
+
+			//確定ボタン。
+			if(this.backup_rollbackcount == 0){
+				this.button_fix.SetText("確定");
+			}else{
+				this.button_fix.SetText("確定(" + (this.backup_rollbackcount / 60).ToString() + ")");
+			}
+
+			//マウス。
 			{
 				string t_text = "";
 
-				if(Fee.Input.Mouse.GetInstance().left.on == true){
-					t_text += "l[o]";
-				}else{
-					t_text += "l[ ]";
-				}
+				t_text += "left   [" + (Fee.Input.Mouse.GetInstance().left.on ? "o" : " ") + "]\n";
+				t_text += "right  [" + (Fee.Input.Mouse.GetInstance().right.on ? "o" : " ") + "]\n";
+				t_text += "middle [" + (Fee.Input.Mouse.GetInstance().middle.on ? "o" : " ") + "]\n";
 
-				if(Fee.Input.Mouse.GetInstance().right.on == true){
-					t_text += "r[o]";
-				}else{
-					t_text += "r[ ]";
-				}
+				t_text += "x = " + Fee.Input.Mouse.GetInstance().pos.x.ToString() + "\n";
+				t_text += "y = " + Fee.Input.Mouse.GetInstance().pos.y.ToString() + "\n";
+				t_text += "m = " + Fee.Input.Mouse.GetInstance().mouse_wheel.y.ToString() + "\n";
 
-				if(Fee.Input.Mouse.GetInstance().middle.on == true){
-					t_text += "m[o]";
-				}else{
-					t_text += "m[ ]";
-				}
-
-				t_text += "x = " + Fee.Input.Mouse.GetInstance().pos.x.ToString() + " ";
-				t_text += "y = " + Fee.Input.Mouse.GetInstance().pos.y.ToString() + " ";
-				t_text += "m = " + Fee.Input.Mouse.GetInstance().mouse_wheel.y.ToString() + " ";
-
-				this.text_mouse.SetText(t_text);
+				this.mouse_text.SetText(t_text);
 
 				this.mouse_sprite.SetXY(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 			}
@@ -302,100 +677,39 @@ namespace TestScript
 			{
 				string t_text = "";
 
-				if(Fee.Input.Key.GetInstance().enter.on == true){
-					t_text += "enter[o]";
-				}else{
-					t_text += "enter[ ]";
-				}
+				t_text += "left       [" + (Fee.Input.Key.GetInstance().left.on ? "o" : " ") + "]\n";
+				t_text += "right      [" + (Fee.Input.Key.GetInstance().right.on ? "o" : " ") + "]\n";
+				t_text += "up         [" + (Fee.Input.Key.GetInstance().up.on ? "o" : " ") + "]\n";
+				t_text += "down       [" + (Fee.Input.Key.GetInstance().down.on ? "o" : " ") + "]\n";
 
-				if(Fee.Input.Key.GetInstance().escape.on == true){
-					t_text += "escape[o]";
-				}else{
-					t_text += "escape[ ]";
-				}
+				t_text += "l_left     [" + (Fee.Input.Key.GetInstance().l_left.on ? "o" : " ") + "]\n";
+				t_text += "l_right    [" + (Fee.Input.Key.GetInstance().l_right.on ? "o" : " ") + "]\n";
+				t_text += "l_up       [" + (Fee.Input.Key.GetInstance().l_up.on ? "o" : " ") + "]\n";
+				t_text += "l_down     [" + (Fee.Input.Key.GetInstance().l_down.on ? "o" : " ") + "]\n";
 
-				if(Fee.Input.Key.GetInstance().sub1.on == true){
-					t_text += "sub1[o]";
-				}else{
-					t_text += "sub1[ ]";
-				}
+				t_text += "r_left     [" + (Fee.Input.Key.GetInstance().r_left.on ? "o" : " ") + "]\n";
+				t_text += "r_right    [" + (Fee.Input.Key.GetInstance().r_right.on ? "o" : " ") + "]\n";
+				t_text += "r_up       [" + (Fee.Input.Key.GetInstance().r_up.on ? "o" : " ") + "]\n";
+				t_text += "r_down     [" + (Fee.Input.Key.GetInstance().r_down.on ? "o" : " ") + "]\n";
 
-				if(Fee.Input.Key.GetInstance().sub2.on == true){
-					t_text += "sub2[o]";
-				}else{
-					t_text += "sub2[ ]";
-				}
+				t_text += "enter      [" + (Fee.Input.Key.GetInstance().enter.on ? "o" : " ") + "]\n";
+				t_text += "escape     [" + (Fee.Input.Key.GetInstance().escape.on ? "o" : " ") + "]\n";
+				t_text += "sub1       [" + (Fee.Input.Key.GetInstance().sub1.on ? "o" : " ") + "]\n";
+				t_text += "sub2       [" + (Fee.Input.Key.GetInstance().sub2.on ? "o" : " ") + "]\n";
 
-				t_text += " ";
+				t_text += "left_menu  [" + (Fee.Input.Key.GetInstance().left_menu.on ? "o" : " ") + "]\n";
+				t_text += "right_menu [" + (Fee.Input.Key.GetInstance().right_menu.on ? "o" : " ") + "]\n";
 
-				if(Fee.Input.Key.GetInstance().l_left.on == true){
-					t_text += "l[o]";
-				}else{
-					t_text += "l[ ]";
-				}
+				t_text += "l_trigger_1 [" + (Fee.Input.Key.GetInstance().l_trigger_1.on ? "o" : " ") + "]\n";
+				t_text += "r_trigger_1 [" + (Fee.Input.Key.GetInstance().r_trigger_1.on ? "o" : " ") + "]\n";
+				t_text += "l_trigger_2 [" + (Fee.Input.Key.GetInstance().l_trigger_2.on ? "o" : " ") + "]\n";
+				t_text += "r_trigger_2 [" + (Fee.Input.Key.GetInstance().r_trigger_2.on ? "o" : " ") + "]\n";
 
-				if(Fee.Input.Key.GetInstance().l_right.on == true){
-					t_text += "r[o]";
-				}else{
-					t_text += "r[ ]";
-				}
-
-				if(Fee.Input.Key.GetInstance().l_up.on == true){
-					t_text += "u[o]";
-				}else{
-					t_text += "u[ ]";
-				}
-
-				if(Fee.Input.Key.GetInstance().l_down.on == true){
-					t_text += "d[o]";
-				}else{
-					t_text += "d[ ]";
-				}
-
-				t_text += " ";
-
-				if(Fee.Input.Key.GetInstance().r_left.on == true){
-					t_text += "l[o]";
-				}else{
-					t_text += "l[ ]";
-				}
-
-				if(Fee.Input.Key.GetInstance().r_right.on == true){
-					t_text += "r[o]";
-				}else{
-					t_text += "r[ ]";
-				}
-
-				if(Fee.Input.Key.GetInstance().r_up.on == true){
-					t_text += "u[o]";
-				}else{
-					t_text += "u[ ]";
-				}
-
-				if(Fee.Input.Key.GetInstance().r_down.on == true){
-					t_text += "d[o]";
-				}else{
-					t_text += "d[ ]";
-				}
-
-				t_text += " ";
-
-				if(Fee.Input.Key.GetInstance().left_menu.on == true){
-					t_text += "left_menu[o]";
-				}else{
-					t_text += "left_menu[ ]";
-				}
-
-				if(Fee.Input.Key.GetInstance().right_menu.on == true){
-					t_text += "right_menu[o]";
-				}else{
-					t_text += "right_menu[ ]";
-				}
-
-				this.text_key.SetText(t_text);
+				this.key_text.SetText(t_text);
 			}
 
 			//パッド。
+			/*
 			{
 				string t_text = "";
 
@@ -465,7 +779,9 @@ namespace TestScript
 
 				this.text_pad_1.SetText(t_text);
 			}
+			*/
 
+			/*
 			{
 				string t_text = "";
 
@@ -515,6 +831,7 @@ namespace TestScript
 
 				this.text_pad_2.SetText(t_text);
 			}
+			*/
 		}
 
 		/** 削除前。

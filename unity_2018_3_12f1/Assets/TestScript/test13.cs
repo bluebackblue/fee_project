@@ -29,7 +29,7 @@ namespace TestScript
 				"test13",
 
 				@"
-				---
+				
 				"
 			);
 		}
