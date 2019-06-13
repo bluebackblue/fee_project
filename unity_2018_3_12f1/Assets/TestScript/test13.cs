@@ -212,7 +212,7 @@ namespace TestScript
 
 				this.button_inputmanager_inputtouch_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputManager_InputTouch);
 				this.button_inputmanager_inputtouch_touch.SetRect(t_xx,t_yy,t_w,t_h);
-				this.button_inputmanager_inputtouch_touch.SetText("InputSystem.InputTouch => Touch");
+				this.button_inputmanager_inputtouch_touch.SetText("InputManager.InputTouch => Touch");
 				this.button_inputmanager_inputtouch_touch.SetFrontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;

@@ -264,7 +264,7 @@ namespace Fee.SoundPool
 
 		/** リクエスト。ロードストリーミングアセット。サウンドプール。
 		*/
-		public bool RequestLoadStreamingAssetsSoundPool(Fee.File.Path a_path)
+		public bool RequestLoadStreamingAssetsSoundPool(Fee.File.Path a_path,uint a_data_version)
 		{
 			if(this.is_busy == false){
 				this.is_busy = true;
@@ -276,7 +276,7 @@ namespace Fee.SoundPool
 				this.request_type = RequestType.LoadStreamingAssetsSoundPool;
 				this.request_path = a_path;
 				this.request_post_data = null;
-				this.request_data_version = 0;
+				this.request_data_version = a_data_version;
 
 				//result
 				this.result_progress_up = 0.0f;
