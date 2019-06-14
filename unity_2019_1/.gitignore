@@ -1,0 +1,15 @@
+/Library
+/Logs
+/obj
+/.vs
+/Temp
+/Assets/Other
+/Assets/Other.meta
+/Assets/*.rsp
+/Assets/*.rsp.meta
+/Exe
+/WebGL
+/*.apk
+/*.log
+/*.csproj
+/*.sln
