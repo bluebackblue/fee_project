@@ -97,6 +97,14 @@ namespace TestScript
 			}
 
 			{
+				//フォント。
+				UnityEngine.Font t_font = UnityEngine.Resources.Load<UnityEngine.Font>(Data.FONT);
+				if(t_font != null){
+					Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+				}
+			}
+
+			{
 				//deleter
 				this.deleter = new Fee.Deleter.Deleter();
 
