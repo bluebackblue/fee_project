@@ -9,13 +9,15 @@ CD %HOME%
 @REM ■出力先
 @REM ---------------------------------------
 SET OUTPUT_PATH=%HOME%output
+MKDIR result
+
 
 
 
 @REM ---------------------------------------
 @REM ■リセット
 @REM ---------------------------------------
-RMDIR /s /q %OUTPUT_PATH%
+RMDIR /q %OUTPUT_PATH%
 MKDIR %OUTPUT_PATH%
 
 @REM ---------------------------------------
@@ -28,21 +30,21 @@ SET UNITY_EXE=%UNITY_2018_3_14F1%
 @REM WebGL
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_WebGL ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\WebGL .\WebGL_2018_3\
+XCOPY /y /e output\WebGL .result\\WebGL_2018_3\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
 @REM StandaloneWindows
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_StandAloneWindows ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\Exe .\Exe_2018_3\
+XCOPY /y /e output\Exe .\result\Exe_2018_3\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
 @REM Android
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_Android ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\Fee.apk .\unity_2018_3.apk
+COPY /y output\Fee.apk .\result\unity_2018_3.apk
 @REM ---------------------------------------
 
 
@@ -63,21 +65,21 @@ SET UNITY_EXE=%UNITY_2018_4_2F1%
 @REM WebGL
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_WebGL ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\WebGL .\WebGL_2018_4\
+XCOPY /y /e output\WebGL .\result\WebGL_2018_4\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
 @REM StandaloneWindows
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_StandAloneWindows ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\Exe .\Exe_2018_4\
+XCOPY /y /e output\Exe .\result\Exe_2018_4\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
 @REM Android
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_Android ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\Fee.apk .\unity_2018_4.apk
+COPY /y output\Fee.apk .\result\unity_2018_4.apk
 @REM ---------------------------------------
 
 
@@ -98,21 +100,21 @@ SET UNITY_EXE=%UNITY_2019_1_6F1%
 @REM WebGL
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_WebGL ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\WebGL .\WebGL_2019_1\
+XCOPY /y /e output\WebGL .\result\WebGL_2019_1\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
 @REM StandaloneWindows
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_StandAloneWindows ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\Exe .\Exe_2019_1\
+XCOPY /y /e output\Exe .\result\Exe_2019_1\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
 @REM Android
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_Android ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\Fee.apk .\unity_2019_1.apk
+COPY /y output\Fee.apk .\result\unity_2019_1.apk
 @REM ---------------------------------------
 
 
@@ -133,21 +135,21 @@ SET UNITY_EXE=%UNITY_2019_2_0A11%
 @REM WebGL
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_WebGL ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\WebGL .\WebGL_2019_2\
+XCOPY /y /e output\WebGL .\result\WebGL_2019_2\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
 @REM StandaloneWindows
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_StandAloneWindows ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\Exe .\Exe_2019_2\
+XCOPY /y /e output\Exe .\result\Exe_2019_2\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
 @REM Android
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_Android ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\Fee.apk .\unity_2019_2.apk
+COPY /y output\Fee.apk .\result\unity_2019_2.apk
 @REM ---------------------------------------
 
 
