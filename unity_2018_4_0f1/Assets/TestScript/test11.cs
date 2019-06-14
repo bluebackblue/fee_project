@@ -217,7 +217,7 @@ namespace TestScript
 
 			//ステータス。
 			this.status = new Fee.Render2D.Text2D(this.deleter,0);
-			this.status.SetRect(100,50,0,0);
+			this.status.SetRect(100,50,Fee.Render2D.Config.VIRTUAL_W - 100,200);
 			this.status.SetText("-");
 			this.status.SetFontSize(13);
 
@@ -363,21 +363,23 @@ namespace TestScript
 		private void CallBack_Click_Bgm(int a_id)
 		{
 			if(this.download_item_bgm == null){
-				string t_url = "https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/";
-	
+				//string t_path = "https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/";
+				string t_path = "AssetBundle/";
+
 				#if((UNITY_STANDALONE_WIN)||(UNITY_EDITOR_WIN))
-				t_url += "StandaloneWindows/";
+				t_path += "StandaloneWindows/";
 				#elif(UNITY_WEBGL)
-				t_url += "WebGL/";
+				t_path += "WebGL/";
 				#elif(UNITY_ANDROID)
-				t_url += "Android/";
+				t_path += "Android/";
 				#elif(UNITY_IOS)
-				t_url += "iOS/";
+				t_path += "iOS/";
 				#else
-				t_url += "StandaloneWindows/";
+				t_path += "StandaloneWindows/";
 				#endif
 
-				this.download_item_bgm = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(new Fee.File.Path(null,t_url,"bgm"),ASSETBUNDLE_ID_BGM,DATA_VERSION);
+				//this.download_item_bgm = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(new Fee.File.Path(null,t_path,"bgm"),ASSETBUNDLE_ID_BGM,DATA_VERSION);
+				this.download_item_bgm = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path(null,t_path,"bgm"));
 			}
 		}
 
@@ -406,24 +408,35 @@ namespace TestScript
 					//ダウンロード中。
 					this.status.SetText("bgm : " + this.download_item_bgm.GetResultProgressDown().ToString());
 				}else{
+					AssetBundle t_assetbundle = null;
+
 					if(this.download_item_bgm.GetResultType() == Fee.File.Item.ResultType.AssetBundle){
 						//ダウンロード成功。アセットバンドル。
-						AssetBundle t_assetbundle = this.download_item_bgm.GetResultAssetBundle();
-						if(t_assetbundle != null){
-							GameObject t_prefab = t_assetbundle.LoadAsset<GameObject>("bgm");
-							if(t_prefab != null){
-								Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
-								if(t_pack_audioclip != null){
-									Fee.Audio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
-									Fee.Audio.Audio.GetInstance().PlayBgm(0);
-								}else{
-									//エラー。
-									GameObject t_object = Instantiate(t_prefab);
-									t_object.name = "load_bgm";
-								}
+						t_assetbundle = this.download_item_bgm.GetResultAssetBundle();
+
+					}else if(this.download_item_bgm.GetResultType() == Fee.File.Item.ResultType.Binary){
+						//ダウンロード成功。バイナリ。
+
+						//TODO:
+						t_assetbundle = AssetBundle.LoadFromMemory(this.download_item_bgm.GetResultBinary());
+						Fee.File.File.GetInstance().GetAssetBundleList().Regist(ASSETBUNDLE_ID_BGM,t_assetbundle);
+					}
+
+					if(t_assetbundle != null){
+						GameObject t_prefab = t_assetbundle.LoadAsset<GameObject>("bgm");
+						if(t_prefab != null){
+							Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
+							if(t_pack_audioclip != null){
+								Fee.Audio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
+								Fee.Audio.Audio.GetInstance().PlayBgm(0);
+							}else{
+								//エラー。
+								GameObject t_object = Instantiate(t_prefab);
+								t_object.name = "load_bgm";
 							}
 						}
 					}
+
 					this.download_item_bgm = null;
 
 					this.status.SetText("bgm : end");
@@ -440,27 +453,31 @@ namespace TestScript
 
 					if(this.soundpool_flag == true){
 
-						Fee.File.Path t_path = new Fee.File.Path(null,"https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/",t_name + ".txt");
-						this.soundpool_item_se = Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(t_path,null,DATA_VERSION);
+						//Fee.File.Path t_path = new Fee.File.Path(null,"https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/",t_name + ".txt");
+						Fee.File.Path t_path = new Fee.File.Path(null,null,t_name + ".txt");
+
+						//this.soundpool_item_se = Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(t_path,null,DATA_VERSION);
+						this.soundpool_item_se = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(t_path,DATA_VERSION);
 
 					}else{
 
-						string t_url = "https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/";
+						//string t_path = "https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/";
+						string t_path = "AssetBundle/";
 
 						#if((UNITY_STANDALONE_WIN)||(UNITY_EDITOR_WIN))
-						t_url += "StandaloneWindows/";
+						t_path += "StandaloneWindows/";
 						#elif(UNITY_WEBGL)
-						t_url += "WebGL/";
+						t_path += "WebGL/";
 						#elif(UNITY_ANDROID)
-						t_url += "Android/";
+						t_path += "Android/";
 						#elif(UNITY_IOS)
-						t_url += "iOS/";
+						t_path += "iOS/";
 						#else
-						t_url += "StandaloneWindows/";
+						t_path += "StandaloneWindows/";
 						#endif
 
-						this.download_item_se = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(new Fee.File.Path(null,t_url,"se"),ASSETBUNDLE_ID_SE,DATA_VERSION);
-
+						//this.download_item_se = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(new Fee.File.Path(null,t_path,"se"),ASSETBUNDLE_ID_SE,DATA_VERSION);
+						this.download_item_se = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path(null,t_path,"se"));
 					}
 
 					this.mode = Mode.Now;
@@ -487,8 +504,8 @@ namespace TestScript
 								}
 							}else{
 								//ダウンロード失敗。
-								this.status.SetText("Error : " + this.download_item_se.GetResultErrorString());
-								this.download_item_se = null;
+								this.status.SetText("Error : " + this.soundpool_item_se.GetResultErrorString());
+								this.soundpool_item_se = null;
 							}
 						}
 					}else if(this.download_item_se != null){
@@ -496,16 +513,28 @@ namespace TestScript
 							//ダウンロード中。
 							this.status.SetText("se : " + this.download_item_se.GetResultProgressDown().ToString());
 						}else{
-							if(this.download_item_se.GetResultType() == Fee.File.Item.ResultType.AssetBundle){
+							
+
+							if((this.download_item_se.GetResultType() == Fee.File.Item.ResultType.AssetBundle)||(this.download_item_se.GetResultType() == Fee.File.Item.ResultType.Binary)){
 								//ダウンロード成功。アセットバンドル。
 
-								AssetBundle t_assetbundle = this.download_item_se.GetResultAssetBundle();
+								AssetBundle t_assetbundle = null;
+
+								if(this.download_item_se.GetResultType() == Fee.File.Item.ResultType.AssetBundle){
+									t_assetbundle = this.download_item_se.GetResultAssetBundle();
+								}else if(this.download_item_se.GetResultType() == Fee.File.Item.ResultType.Binary){
+									//TODO:
+									t_assetbundle = AssetBundle.LoadFromMemory(this.download_item_se.GetResultBinary());
+									Fee.File.File.GetInstance().GetAssetBundleList().Regist(ASSETBUNDLE_ID_SE,t_assetbundle);
+								}
+
 								if(t_assetbundle != null){
 									GameObject t_prefab = t_assetbundle.LoadAsset<GameObject>("se");
 									if(t_prefab != null){
 										this.pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
 									}
 								}
+
 								if(this.pack_audioclip == null){
 									//不正なオーディオクリップパック。
 									this.status.SetText("Error : " + this.mode.ToString());
@@ -515,12 +544,17 @@ namespace TestScript
 									this.download_item_se = null;
 									this.mode = Mode.Fix;
 								}
+
 							}else{
 								//ダウンロード失敗。
 								this.status.SetText("Error : " + this.download_item_se.GetResultErrorString());
 								this.download_item_se = null;
 								this.mode = Mode.Wait;
 							}
+
+
+
+
 						}
 					}
 				}break;
