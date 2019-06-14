@@ -5,11 +5,13 @@ CD %HOME%
 
 
 
+
 @REM ---------------------------------------
 @REM ■削除
 @REM ---------------------------------------
 DEL build.log
 RMDIR result
+RMDIR output
 
 
 
@@ -58,6 +60,7 @@ COPY /y output\Fee.apk .\result\unity_2018_3.apk
 
 
 
+
 @REM ---------------------------------------
 @REM ■リセット
 @REM ---------------------------------------
@@ -93,6 +96,7 @@ COPY /y output\Fee.apk .\result\unity_2018_4.apk
 
 
 
+
 @REM ---------------------------------------
 @REM ■リセット
 @REM ---------------------------------------
@@ -125,6 +129,7 @@ XCOPY /y /e output\Exe .\result\Exe_2019_1\
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_Android ---outputpath %OUTPUT_PATH%
 COPY /y output\Fee.apk .\result\unity_2019_1.apk
 @REM ---------------------------------------
+
 
 
 
