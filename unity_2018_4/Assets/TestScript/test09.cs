@@ -212,6 +212,12 @@ namespace TestScript
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
+			//フォント。
+			Font t_font = Resources.Load<Font>(Data.FONT);
+			if(t_font != null){
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			}
+
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 

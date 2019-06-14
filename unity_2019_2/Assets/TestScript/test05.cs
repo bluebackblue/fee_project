@@ -158,85 +158,6 @@ namespace TestScript
 		private bool backup_INPUTSYSTEM_POINTER_MOUSEBUTTON = false;
 		private bool backup_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON = false;
 
-		/** タッチビューＩＤ。
-		*/
-		/*
-		private int touchview_id;
-		*/
-
-		/** タッチビュー。
-		*/
-		#if(false)
-		class TouchView : Fee.Input.Touch_Phase_Key_Base
-		{
-			public int id;
-			public Fee.Render2D.Sprite2D sprite;
-			public Fee.Render2D.Text2D text;
-			public Fee.Input.Touch_Phase touch_phase;
-			public Fee.Deleter.Deleter deleter;
-
-			/** constructor
-			*/
-			public TouchView(int a_id,Fee.Deleter.Deleter a_deleter,Fee.Input.Touch_Phase a_touch_phase)
-			{
-				this.id = a_id;
-				this.deleter = a_deleter;
-				this.touch_phase = a_touch_phase;
-
-				this.sprite = new Fee.Render2D.Sprite2D(this.deleter,1);
-				{
-					int t_size = 100;
-
-					this.sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
-					this.sprite.SetTexture(Texture2D.whiteTexture);
-					this.sprite.SetColor(Random.value,Random.value,Random.value,1.0f);
-					this.sprite.SetRect(this.touch_phase.value_x-t_size/2,this.touch_phase.value_y-t_size/2,t_size,t_size);
-				}
-
-				this.text = new Fee.Render2D.Text2D(this.deleter,1);
-				{
-					this.text.SetRect(this.touch_phase.value_x,this.touch_phase.value_y,0,0);
-				}
-			}
-
-			/** [Touch_Phase_Key_Base]更新。
-			*/
-			public void OnUpdate()
-			{
-				int t_size = 100;
-				this.sprite.SetRect(this.touch_phase.value_x-t_size/2,this.touch_phase.value_y-t_size/2,t_size,t_size);
-				this.text.SetRect(this.touch_phase.value_x,this.touch_phase.value_y - 100,0,0);
-
-				string t_text = "";
-				t_text += "id = " + this.id.ToString() + " ";
-				t_text += this.touch_phase.phasetype.ToString().Substring(0,1) + " ";
-				t_text += "rawid = " + this.touch_phase.raw_id.ToString() + " ";
-
-				this.text.SetText(t_text);
-			}
-
-			/** [Touch_Phase_Key_Base]削除。
-			*/
-			public void OnRemove()
-			{
-				this.deleter.UnRegister(this.sprite);
-				this.deleter.UnRegister(this.text);
-
-				this.sprite.Delete();
-				this.text.Delete();
-
-				this.sprite = null;
-				this.text = null;
-			}
-		};
-		#endif
-
-		/** touch_list
-		*/
-		/*
-		private System.Collections.Generic.Dictionary<TouchView,Fee.Input.Touch_Phase> touch_list;
-		*/
-
 		/** Start
 		*/
 		private void Start()
@@ -263,17 +184,6 @@ namespace TestScript
 			//パッド。インスタンス作成。
 			Fee.Input.Pad.CreateInstance();
 
-			/*
-			//タッチ。
-			{
-				Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH = true;
-				Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH = false;
-				Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH = false;
-			}
-			Fee.Input.Touch.CreateInstance();
-			Fee.Input.Touch.GetInstance().SetCallBack(CallBack_OnTouch);
-			*/
-
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
 			Fee.EventPlate.EventPlate.CreateInstance();
@@ -281,6 +191,12 @@ namespace TestScript
 			//ＵＩ。インスタンス作成。
 			Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
+
+			//フォント。
+			Font t_font = Resources.Load<Font>(Data.FONT);
+			if(t_font != null){
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
@@ -320,11 +236,6 @@ namespace TestScript
 			this.mouse_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 			this.mouse_text.SetRect(750,50,300,0);
 			this.mouse_text.SetFontSize(17);
-
-			/*
-			//touch_list
-			this.touch_list = Fee.Input.Touch.CreateTouchList<TouchView>();
-			*/
 
 			//button_fix
 			{
@@ -647,16 +558,6 @@ namespace TestScript
 			this.button_inputsystem_gamepad_padmotor.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
 		}
 
-		/** コールバック。
-		*/
-		/*
-		public void CallBack_OnTouch(Fee.Input.Touch_Phase a_touch_phase)
-		{
-			this.touchview_id++;
-			this.touch_list.Add(new TouchView(this.touchview_id,this.deleter,a_touch_phase),a_touch_phase);
-		}
-		*/
-
 		/** FixedUpdate
 		*/
 		private void FixedUpdate()
@@ -681,18 +582,6 @@ namespace TestScript
 				Fee.Input.Pad.GetInstance().moter_low.Request(Fee.Input.Pad.GetInstance().l_trigger_2.value);
 				Fee.Input.Pad.GetInstance().moter_high.Request(Fee.Input.Pad.GetInstance().r_trigger_2.value);
 			}
-
-			//タッチ。
-			/*
-			Fee.Input.Touch.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
-			*/
-
-			//タッチ。
-			/*
-			{
-				Fee.Input.Touch.UpdateTouchList(this.touch_list);
-			}
-			*/
 
 			if(this.backup_rollbackcount > 0){
 				this.backup_rollbackcount--;

@@ -287,6 +287,12 @@ namespace TestScript
 			//ファイル。インスタンス作成。
 			Fee.File.File.CreateInstance();
 
+			//フォント。
+			Font t_font = Resources.Load<Font>(Data.FONT);
+			if(t_font != null){
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			}
+
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
