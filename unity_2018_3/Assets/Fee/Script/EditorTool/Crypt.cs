@@ -20,6 +20,7 @@ namespace Fee.EditorTool
 	{
 		/** 公開鍵秘密鍵作成。
 		*/
+		#if(USE_DEF_FEE_EDITORMENU)
 		[UnityEditor.MenuItem("Fee/EditorTool/Crypt/MakePublicKeyPrivateKey")]
 		private static void MakePublicKeyPrivateKey()
 		{
@@ -48,6 +49,7 @@ namespace Fee.EditorTool
 				UnityEditor.AssetDatabase.Refresh();
 			}
 		}
+		#endif
 
 		/** 暗号鍵作成。
 		*/

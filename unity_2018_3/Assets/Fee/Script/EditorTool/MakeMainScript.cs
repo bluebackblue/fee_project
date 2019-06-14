@@ -20,6 +20,7 @@ namespace Fee.EditorTool
 	{
 		/** メインスクリプト作成。
 		*/
+		#if(USE_DEF_FEE_EDITORMENU)
 		[UnityEditor.MenuItem("Fee/EditorTool/CreateMainScript")]
 		private static void CreateMainScript()
 		{
@@ -50,6 +51,7 @@ namespace Fee.EditorTool
 			//更新。
 			UnityEditor.AssetDatabase.Refresh();
 		}
+		#endif
 	}
 	#endif
 }

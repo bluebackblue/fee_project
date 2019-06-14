@@ -621,7 +621,10 @@ PlayerSettings:
   webGLCompressionFormat: 1
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: USE_DEF_FEE_EDITORMENU
+    7: USE_DEF_FEE_EDITORMENU
+    13: USE_DEF_FEE_EDITORMENU
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

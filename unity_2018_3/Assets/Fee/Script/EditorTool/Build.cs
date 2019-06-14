@@ -23,6 +23,7 @@ namespace Fee.EditorTool
 	{
 		/** パッケージ。作成。
 		*/
+		#if(USE_DEF_FEE_EDITORMENU)
 		[UnityEditor.MenuItem("Fee/EditorTool/BuildPackage")]
 		private static void Build_Package()
 		{
@@ -38,6 +39,7 @@ namespace Fee.EditorTool
 			//出力。
 			UnityEditor.AssetDatabase.ExportPackage("Assets/Fee",t_filename,t_options);
 		}
+		#endif
 
 		/** CommandLineParam
 		*/
