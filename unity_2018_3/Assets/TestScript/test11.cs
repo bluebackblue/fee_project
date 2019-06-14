@@ -663,7 +663,7 @@ namespace TestScript
 		*/
 		#if(UNITY_EDITOR)
 		[UnityEditor.MenuItem("Fee/Test/Test11/MekeSoundPool")]
-		private static void MekeSoundPool()
+		private static void MenuItem_MekeSoundPool()
 		{
 			string t_assetbundle_name = "se";
 

@@ -184,7 +184,7 @@ namespace Fee.Input
 		*/
 		#if((USE_DEF_FEE_EDITORMENU)&&(UNITY_EDITOR))
 		[UnityEditor.MenuItem("Fee/Initialize/InputManager")]
-		private static void MakeInputManager()
+		private static void MenuItem_MakeInputManager()
 		{
 			Fee.Input.EditInputManager t_inputmaanger = new Fee.Input.EditInputManager();
 			{

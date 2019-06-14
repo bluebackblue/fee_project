@@ -238,7 +238,7 @@ namespace TestScript
 		*/
 		#if(UNITY_EDITOR)
 		[UnityEditor.MenuItem("Fee/Test/Initialize/EditSceneList")]
-		private static void EditSceneList()
+		private static void MenuItem_EditSceneList()
 		{
 			System.Collections.Generic.List<UnityEditor.EditorBuildSettingsScene> t_scene_list = new System.Collections.Generic.List<UnityEditor.EditorBuildSettingsScene>();
 

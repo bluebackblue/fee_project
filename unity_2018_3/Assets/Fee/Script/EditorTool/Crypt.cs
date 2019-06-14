@@ -22,7 +22,7 @@ namespace Fee.EditorTool
 		*/
 		#if(USE_DEF_FEE_EDITORMENU)
 		[UnityEditor.MenuItem("Fee/EditorTool/Crypt/MakePublicKeyPrivateKey")]
-		private static void MakePublicKeyPrivateKey()
+		private static void MenuItem_MakePublicKeyPrivateKey()
 		{
 			string t_public_key;
 			string t_private_key;

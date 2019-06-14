@@ -166,29 +166,83 @@ namespace TestScript
 			{
 				string t_text = "";
 
+				t_text += "UnityVersion = "		+ Application.unityVersion + "\n";
 				t_text += "Screen = "			+ Screen.width.ToString() + " x " + Screen.height.ToString() + "\n";
 				t_text += "Data = "				+ Application.dataPath + "\n";
 				t_text += "Persistent Data = "	+ Application.persistentDataPath + "\n";
 				t_text += "Streaming Assets = "	+ Application.streamingAssetsPath + "\n";
 				t_text += "Temporary Cache = "	+ Application.temporaryCachePath + "\n";
 
-				#if(USE_DEF_PUN)
-				t_text += "USE_DEF_PUN = true\n";
-				#else
-				t_text += "USE_DEF_PUN = false\n";
-				#endif
-
-				#if(USE_DEF_UNIVRM)
-				t_text += "USE_DEF_UNIVRM = true\n";
-				#else
-				t_text += "USE_DEF_UNIVRM = false\n";
-				#endif
-
-				#if(USE_DEF_NPOI)
-				t_text += "USE_DEF_NPOI = true\n";
-				#else
-				t_text += "USE_DEF_NPOI = false\n";
-				#endif
+				{
+					#if(USE_DEF_FEE_INPUTSYSTEM)
+					t_text += "USE_DEF_FEE_INPUTSYSTEM = TRUE\n";
+					#else
+					t_text += "USE_DEF_FEE_INPUTSYSTEM = FALSE\n";
+					#endif
+				}
+				{
+					#if(USE_DEF_FEE_UTF8JSON)
+					t_text += "USE_DEF_FEE_UTF8JSON = TRUE\n";
+					#else
+					t_text += "USE_DEF_FEE_UTF8JSON = FALSE\n";
+					#endif
+				}
+				{
+					#if(USE_DEF_FEE_NPOI)
+					t_text += "USE_DEF_FEE_NPOI = TRUE\n";
+					#else
+					t_text += "USE_DEF_FEE_NPOI = FALSE\n";
+					#endif
+				}
+				{
+					#if(USE_DEF_FEE_EXCELDATAREADER)
+					t_text += "USE_DEF_FEE_EXCELDATAREADER = TRUE\n";
+					#else
+					t_text += "USE_DEF_FEE_EXCELDATAREADER = FALSE\n";
+					#endif
+				}
+				{
+					#if(USE_DEF_FEE_PUN)
+					t_text += "USE_DEF_FEE_PUN = TRUE\n";
+					#else
+					t_text += "USE_DEF_FEE_PUN = FALSE\n";
+					#endif
+				}
+				{
+					#if(USE_DEF_FEE_UNIVRM)
+					t_text += "USE_DEF_FEE_UNIVRM = TRUE\n";
+					#else
+					t_text += "USE_DEF_FEE_UNIVRM = FALSE\n";
+					#endif
+				}
+				{
+					#if(USE_DEF_FEE_SIMPLEANIMATION)
+					t_text += "USE_DEF_FEE_SIMPLEANIMATION = TRUE\n";
+					#else
+					t_text += "USE_DEF_FEE_SIMPLEANIMATION = FALSE\n";
+					#endif
+				}
+				{
+					#if(USE_DEF_FEE_TEMP)
+					t_text += "USE_DEF_FEE_TEMP = TRUE\n";
+					#else
+					t_text += "USE_DEF_FEE_TEMP = FALSE\n";
+					#endif
+				}
+				{
+					#if(USE_DEF_FEE_EDITORMENU)
+					t_text += "USE_DEF_FEE_EDITORMENU = TRUE\n";
+					#else
+					t_text += "USE_DEF_FEE_EDITORMENU = FALSE\n";
+					#endif
+				}
+				{
+					#if(USE_DEF_FEE_DEBUGTOOL)
+					t_text += "USE_DEF_FEE_DEBUGTOOL = TRUE\n";
+					#else
+					t_text += "USE_DEF_FEE_DEBUGTOOL = FALSE\n";
+					#endif
+				}
 
 				this.status = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
 				this.status.SetRect(10,100,0,0);

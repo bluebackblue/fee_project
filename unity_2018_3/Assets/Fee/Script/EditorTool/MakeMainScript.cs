@@ -22,7 +22,7 @@ namespace Fee.EditorTool
 		*/
 		#if(USE_DEF_FEE_EDITORMENU)
 		[UnityEditor.MenuItem("Fee/EditorTool/CreateMainScript")]
-		private static void CreateMainScript()
+		private static void MenuItem_CreateMainScript()
 		{
 			string t_fullpath = UnityEngine.Application.dataPath + "/" + "Main.cs";
 

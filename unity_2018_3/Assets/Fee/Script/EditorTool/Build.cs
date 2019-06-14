@@ -25,6 +25,14 @@ namespace Fee.EditorTool
 		*/
 		#if(USE_DEF_FEE_EDITORMENU)
 		[UnityEditor.MenuItem("Fee/EditorTool/BuildPackage")]
+		private static void MenuItem_Build_Package()
+		{
+			Build.Build_Package();
+		}
+		#endif
+
+		/** パッケージ。作成。
+		*/
 		private static void Build_Package()
 		{
 			//サブディレクトリの再帰探査。
@@ -39,7 +47,6 @@ namespace Fee.EditorTool
 			//出力。
 			UnityEditor.AssetDatabase.ExportPackage("Assets/Fee",t_filename,t_options);
 		}
-		#endif
 
 		/** CommandLineParam
 		*/
