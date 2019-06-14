@@ -6,6 +6,15 @@ CD %HOME%
 
 
 @REM ---------------------------------------
+@REM Å°çÌèú
+@REM ---------------------------------------
+DEL build.log
+RMDIR result
+
+
+
+
+@REM ---------------------------------------
 @REM Å°èoóÕêÊ
 @REM ---------------------------------------
 SET OUTPUT_PATH=%HOME%output
@@ -30,7 +39,7 @@ SET UNITY_EXE=%UNITY_2018_3_14F1%
 @REM WebGL
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_WebGL ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\WebGL .result\\WebGL_2018_3\
+XCOPY /y /e output\WebGL .\result\\WebGL_2018_3\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
