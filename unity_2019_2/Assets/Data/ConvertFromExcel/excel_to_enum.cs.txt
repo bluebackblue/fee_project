@@ -22,15 +22,15 @@ namespace Game.Item
 
 		/** 追加のアイテム
 		*/
-		AddType1,
+		,
 
 		/** 追加のアイテム
 		*/
-		AddType2,
+		,
 
 		/** 追加のアイテム
 		*/
-		AddType3,
+		,
 
 	}
 }

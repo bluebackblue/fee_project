@@ -264,12 +264,7 @@ namespace Fee.JsonSheet
 					System.Collections.Generic.List<SeSheet_ListItem> t_enum_sheet = Fee.JsonItem.Convert.JsonItemToObject<System.Collections.Generic.List<SeSheet_ListItem>>(a_json[ii]);
 					for(int jj=0;jj<t_enum_sheet.Count;jj++){
 
-						if(Config.SESHEET_COMMAND_NAME == t_enum_sheet[jj].se_command){
-							//<sename>
-
-							//t_prefab_name = t_enum_sheet[jj].se_name;
-
-						}else if(Config.SESHEET_COMMAND_ITEM == t_enum_sheet[jj].se_command){
+						if(Config.SESHEET_COMMAND_ITEM == t_enum_sheet[jj].se_command){
 							//<item>
 
 							t_list.Add(new System.Tuple<string,float>(
