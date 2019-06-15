@@ -10,8 +10,8 @@ CD %HOME%
 @REM Å°ê›íË
 @REM ---------------------------------------
 DEL build.log
-RMDIR /q result
-RMDIR /q output
+RMDIR /s /q result
+RMDIR /s /q output
 MKDIR result
 SET OUTPUT_PATH=%HOME%output
 
