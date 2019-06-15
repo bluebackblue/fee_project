@@ -258,6 +258,40 @@ namespace TestScript
 			UnityEditor.EditorBuildSettings.scenes = t_scene_list.ToArray();
 		}
 		#endif
+
+		/** パッケージ。作成。
+		*/
+		#if(UNITY_EDITOR)
+		[UnityEditor.MenuItem("Fee/Test/BuildThirdPartyPackage")]
+		private static void MenuItem_BuildThirdPartyPackage()
+		{
+			BuildThirdPartyPackage();
+		}
+		#endif
+
+		/** パッケージ。作成。
+		*/
+		#if(UNITY_EDITOR)
+		private static void BuildThirdPartyPackage()
+		{
+			//サブディレクトリの再帰探査。
+			UnityEditor.ExportPackageOptions t_options = UnityEditor.ExportPackageOptions.Recurse;
+
+			//非同期実行。
+			t_options |= UnityEditor.ExportPackageOptions.Interactive;
+
+			//出力。
+			System.Collections.Generic.List<string> t_directoryname_list = Fee.EditorTool.Utility.GetDirectoryNameList("ThirdParty/");
+			for(int ii=0;ii<t_directoryname_list.Count;ii++){
+				string t_filename = t_directoryname_list[ii] + ".unitypackage";
+				if(Fee.EditorTool.Utility.IsExistFile("./" + t_filename) == false){
+					UnityEditor.AssetDatabase.ExportPackage("Assets/ThirdParty",t_filename,t_options);
+				}else{
+					UnityEngine.Debug.Log("Exist : " + t_filename);
+				}
+			}
+		}
+		#endif
 	}
 }
 
