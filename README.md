@@ -44,37 +44,37 @@ https://discord.gg/JH3B4SR
 * https://soundeffect-lab.info/faq/
 
 ### M+ FONTS
-https://github.com/bluebackblue/fee_core/tree/master/license/mplus
-http://mplus-fonts.osdn.jp/
-Copyright (C) 2002-2017 M+ FONTS PROJECT
+* https://github.com/bluebackblue/fee_core/tree/master/license/mplus
+* http://mplus-fonts.osdn.jp/
+* Copyright (C) 2002-2017 M+ FONTS PROJECT
 
 ### PUN 2 - FREE
-https://github.com/bluebackblue/fee_core/tree/master/license/pun2free
-https://assetstore.unity.com/packages/tools/network/pun-2-free-119922
-https://dashboard.photonengine.com/ja-jp/Account/Terms
+* https://github.com/bluebackblue/fee_core/tree/master/license/pun2free
+* https://assetstore.unity.com/packages/tools/network/pun-2-free-119922
+* https://dashboard.photonengine.com/ja-jp/Account/Terms
 
 ### UniVRM
-https://github.com/bluebackblue/fee/tree/master/license/univrm
-https://github.com/dwango/UniVRM
+* https://github.com/bluebackblue/fee/tree/master/license/univrm
+* https://github.com/dwango/UniVRM
 
 ### Utf8Json
-https://github.com/bluebackblue/fee/tree/master/license/utf8json
-https://github.com/neuecc/Utf8Json
+* https://github.com/bluebackblue/fee/tree/master/license/utf8json
+* https://github.com/neuecc/Utf8Json
 
 ### SimpleAnimation
-https://github.com/bluebackblue/fee/tree/master/license/simpleanimation
-https://github.com/Unity-Technologies/SimpleAnimation
+* https://github.com/bluebackblue/fee/tree/master/license/simpleanimation
+* https://github.com/Unity-Technologies/SimpleAnimation
 
 ### StandardAssets
-https://github.com/bluebackblue/fee/tree/master/license/standardassets
-https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-32351
+* https://github.com/bluebackblue/fee/tree/master/license/standardassets
+* https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-32351
 
 ### NPOI
-https://github.com/bluebackblue/fee_core/tree/master/license/npoi
-https://github.com/tonyqus/npoi/
+* https://github.com/bluebackblue/fee_core/tree/master/license/npoi
+* https://github.com/tonyqus/npoi/
 
 ### ExcelDataReader
-https://github.com/bluebackblue/fee_core/tree/master/license/exceldatareader
-https://github.com/ExcelDataReader/ExcelDataReader/
+* https://github.com/bluebackblue/fee_core/tree/master/license/exceldatareader
+* https://github.com/ExcelDataReader/ExcelDataReader/
 
 
