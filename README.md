@@ -27,7 +27,7 @@ https://discord.gg/JH3B4SR
 * ___ Assets
 * _____ Fee [ https://github.com/bluebackblue/fee/releases ]
 
-## 使用ライセンス
+## ライセンス
 
 ### Fee
 * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
