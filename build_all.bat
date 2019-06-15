@@ -7,20 +7,13 @@ CD %HOME%
 
 
 @REM ---------------------------------------
-@REM ■削除
+@REM ■設定
 @REM ---------------------------------------
 DEL build.log
-RMDIR result
-RMDIR output
-
-
-
-
-@REM ---------------------------------------
-@REM ■出力先
-@REM ---------------------------------------
-SET OUTPUT_PATH=%HOME%output
+RMDIR /q result
+RMDIR /q output
 MKDIR result
+SET OUTPUT_PATH=%HOME%output
 
 
 
@@ -28,7 +21,7 @@ MKDIR result
 @REM ---------------------------------------
 @REM ■リセット
 @REM ---------------------------------------
-RMDIR /q %OUTPUT_PATH%
+RMDIR /s /q %OUTPUT_PATH%
 MKDIR %OUTPUT_PATH%
 
 @REM ---------------------------------------
