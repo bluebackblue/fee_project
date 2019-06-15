@@ -399,7 +399,7 @@ namespace TestScript
 			this.download_soundpool_button.SetRect(50,t_y,300,t_button_h);
 			this.download_soundpool_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.download_soundpool_button.SetText("DownLoad SoundPool");
-			this.download_soundpool_button.SetFrontSize(15);
+			this.download_soundpool_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -408,7 +408,7 @@ namespace TestScript
 			this.loadlocal_soundpool_button.SetRect(50,t_y,300,t_button_h);
 			this.loadlocal_soundpool_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.loadlocal_soundpool_button.SetText("LoadLocal SoundPool");
-			this.loadlocal_soundpool_button.SetFrontSize(15);
+			this.loadlocal_soundpool_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -417,7 +417,7 @@ namespace TestScript
 			this.loadstreamingassets_soundpool_button.SetRect(50,t_y,300,t_button_h);
 			this.loadstreamingassets_soundpool_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.loadstreamingassets_soundpool_button.SetText("LoadStreamingAssets SoundPool");
-			this.loadstreamingassets_soundpool_button.SetFrontSize(15);
+			this.loadstreamingassets_soundpool_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -426,7 +426,7 @@ namespace TestScript
 			this.savelocal_textfile_button.SetRect(50,t_y,300,t_button_h);
 			this.savelocal_textfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.savelocal_textfile_button.SetText("SaveLocal Text");
-			this.savelocal_textfile_button.SetFrontSize(15);
+			this.savelocal_textfile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -435,7 +435,7 @@ namespace TestScript
 			this.download_textfile_button.SetRect(50,t_y,300,t_button_h);
 			this.download_textfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.download_textfile_button.SetText("DownLoad Text");
-			this.download_textfile_button.SetFrontSize(15);
+			this.download_textfile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -444,7 +444,7 @@ namespace TestScript
 			this.loadlocal_textfile_button.SetRect(50,t_y,300,t_button_h);
 			this.loadlocal_textfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.loadlocal_textfile_button.SetText("LoadLocal Text");
-			this.loadlocal_textfile_button.SetFrontSize(15);
+			this.loadlocal_textfile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -453,7 +453,7 @@ namespace TestScript
 			this.loadstreamingassets_textfile_button.SetRect(50,t_y,300,30);
 			this.loadstreamingassets_textfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.loadstreamingassets_textfile_button.SetText("LoadStreamingAssets Text");
-			this.loadstreamingassets_textfile_button.SetFrontSize(15);
+			this.loadstreamingassets_textfile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -462,7 +462,7 @@ namespace TestScript
 			this.savelocal_binaryfile_button.SetRect(50,t_y,300,t_button_h);
 			this.savelocal_binaryfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.savelocal_binaryfile_button.SetText("SaveLocal Binary");
-			this.savelocal_binaryfile_button.SetFrontSize(15);
+			this.savelocal_binaryfile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -471,7 +471,7 @@ namespace TestScript
 			this.download_binaryfile_button.SetRect(50,t_y,300,t_button_h);
 			this.download_binaryfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.download_binaryfile_button.SetText("DownLoad Binary");
-			this.download_binaryfile_button.SetFrontSize(15);
+			this.download_binaryfile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -480,7 +480,7 @@ namespace TestScript
 			this.loadlocal_binaryfile_button.SetRect(50,t_y,300,t_button_h);
 			this.loadlocal_binaryfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.loadlocal_binaryfile_button.SetText("LoadLocal Binary");
-			this.loadlocal_binaryfile_button.SetFrontSize(15);
+			this.loadlocal_binaryfile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -489,7 +489,7 @@ namespace TestScript
 			this.loadstreamingassets_binaryfile_button.SetRect(50,t_y,300,t_button_h);
 			this.loadstreamingassets_binaryfile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.loadstreamingassets_binaryfile_button.SetText("LoadStreamingAssets Binary");
-			this.loadstreamingassets_binaryfile_button.SetFrontSize(15);
+			this.loadstreamingassets_binaryfile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -498,7 +498,7 @@ namespace TestScript
 			this.savelocal_texturefile_button.SetRect(50,t_y,300,t_button_h);
 			this.savelocal_texturefile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.savelocal_texturefile_button.SetText("SaveLocal Texture");
-			this.savelocal_texturefile_button.SetFrontSize(15);
+			this.savelocal_texturefile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -507,7 +507,7 @@ namespace TestScript
 			this.download_texturefile_button.SetRect(50,t_y,300,t_button_h);
 			this.download_texturefile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.download_texturefile_button.SetText("DownLoad Texture");
-			this.download_texturefile_button.SetFrontSize(15);
+			this.download_texturefile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -516,7 +516,7 @@ namespace TestScript
 			this.loadlocal_texturefile_button.SetRect(50,t_y,300,t_button_h);
 			this.loadlocal_texturefile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.loadlocal_texturefile_button.SetText("LoadLocal Texture");
-			this.loadlocal_texturefile_button.SetFrontSize(15);
+			this.loadlocal_texturefile_button.SetFontSize(15);
 
 			t_y += t_button_h + 3;
 
@@ -525,7 +525,7 @@ namespace TestScript
 			this.loadstreamingassets_texturefile_button.SetRect(50,t_y,300,t_button_h);
 			this.loadstreamingassets_texturefile_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.loadstreamingassets_texturefile_button.SetText("LoadStreamingAssets Texture");
-			this.loadstreamingassets_texturefile_button.SetFrontSize(15);
+			this.loadstreamingassets_texturefile_button.SetFontSize(15);
 
 			//item
 			this.item = null;

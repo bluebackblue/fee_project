@@ -32,7 +32,7 @@ namespace TestScript
 			this.return_button.SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.UI_TEXTURE_BUTTON));
 			this.return_button.SetText(a_text);
 			this.return_button.SetRect(0,0,80,40);
-			this.return_button.SetFrontSize(10);
+			this.return_button.SetFontSize(10);
 		}
 
 		/** クリック。

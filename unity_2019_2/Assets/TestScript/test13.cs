@@ -212,21 +212,21 @@ namespace TestScript
 				this.button_inputsystem_touchscreen_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputSystem_TouchScreen);
 				this.button_inputsystem_touchscreen_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_touchscreen_touch.SetText("InputSystem.TouchScreen => Touch");
-				this.button_inputsystem_touchscreen_touch.SetFrontSize(t_fontsize);
+				this.button_inputsystem_touchscreen_touch.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
 				this.button_inputmanager_inputtouch_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputManager_InputTouch);
 				this.button_inputmanager_inputtouch_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputtouch_touch.SetText("InputManager.InputTouch => Touch");
-				this.button_inputmanager_inputtouch_touch.SetFrontSize(t_fontsize);
+				this.button_inputmanager_inputtouch_touch.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
 				this.button_inputmanager_inputmouse_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputManager_InputMouse);
 				this.button_inputmanager_inputmouse_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputmouse_touch.SetText("InputManager.InputMouse => Touch");
-				this.button_inputmanager_inputmouse_touch.SetFrontSize(t_fontsize);
+				this.button_inputmanager_inputmouse_touch.SetFontSize(t_fontsize);
 			}
 
 			t_yy += t_h + t_separate_h;
