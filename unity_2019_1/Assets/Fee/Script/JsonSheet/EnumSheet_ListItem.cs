@@ -5,7 +5,7 @@
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
  * http://bbbproject.sakura.ne.jp/wordpress/mitlicense
- * @brief ＪＳＯＮシート。コンフィグ。
+ * @brief ＪＳＯＮシート。インデックスリストアイテム。
 */
 
 
@@ -17,17 +17,17 @@ namespace Fee.JsonSheet
 	*/
 	public class EnumSheet_ListItem
 	{
-		/** command
+		/** enum_command
 		*/
-		public string command;
+		public string enum_command;
 
-		/** text
+		/** enum_name
 		*/
-		public string text;
+		public string enum_name;
 
-		/** comment
+		/** enum_comment
 		*/
-		public string comment;
+		public string enum_comment;
 	}
 }
 
