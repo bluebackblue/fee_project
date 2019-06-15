@@ -52,6 +52,7 @@ https://discord.gg/JH3B4SR
 * https://github.com/bluebackblue/fee_core/tree/master/license/pun2free
 * https://assetstore.unity.com/packages/tools/network/pun-2-free-119922
 * https://dashboard.photonengine.com/ja-jp/Account/Terms
+* アセットを容易に取り出せる状態での配布は禁止。
 
 ### UniVRM
 * https://github.com/bluebackblue/fee/tree/master/license/univrm
@@ -68,6 +69,7 @@ https://discord.gg/JH3B4SR
 ### StandardAssets
 * https://github.com/bluebackblue/fee/tree/master/license/standardassets
 * https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-32351
+* アセットを容易に取り出せる状態での配布は禁止。
 
 ### NPOI
 * https://github.com/bluebackblue/fee_core/tree/master/license/npoi
