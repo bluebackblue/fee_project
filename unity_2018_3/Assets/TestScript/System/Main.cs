@@ -281,9 +281,14 @@ namespace TestScript
 			t_options |= UnityEditor.ExportPackageOptions.Interactive;
 
 			//出力。
-			System.Collections.Generic.List<string> t_path_list = Fee.EditorTool.Utility.GetDirectoryNameList("ThirdParty/");
-			for(int ii=0;ii<t_path_list.Count;ii++){
-				UnityEditor.AssetDatabase.ExportPackage("Assets/ThirdParty",t_path_list[ii] + ".unitypackage",t_options);
+			System.Collections.Generic.List<string> t_directoryname_list = Fee.EditorTool.Utility.GetDirectoryNameList("ThirdParty/");
+			for(int ii=0;ii<t_directoryname_list.Count;ii++){
+				string t_filename = t_directoryname_list[ii] + ".unitypackage";
+				if(Fee.EditorTool.Utility.IsExistFile("./" + t_filename) == false){
+					UnityEditor.AssetDatabase.ExportPackage("Assets/ThirdParty",t_filename,t_options);
+				}else{
+					UnityEngine.Debug.Log("Exist : " + t_filename);
+				}
 			}
 		}
 		#endif
