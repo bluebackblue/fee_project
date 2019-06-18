@@ -136,7 +136,7 @@ namespace TestScript
 
 			//エクセルからＪＳＯＮシートを作成。
 			Fee.Excel.ExcelToJsonSheet t_excel_to_jsonsheet = new Fee.Excel.ExcelToJsonSheet();
-			if(t_excel_to_jsonsheet.Convert(new Fee.File.Path(UnityEngine.Application.streamingAssetsPath + "/","excel.xlsx")) == true){
+			if(t_excel_to_jsonsheet.Convert(Fee.File.Path.CreateStreamingAssetsPath("excel.xlsx")) == true){
 				Fee.JsonItem.JsonItem t_jsonsheet = t_excel_to_jsonsheet.GetJsonSheet();
 				if(t_jsonsheet != null){
 					//コンバート。

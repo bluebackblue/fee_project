@@ -110,6 +110,81 @@ namespace Fee.File
 		{
 			return new Path(a_directorypath,this.filename);
 		}
+
+		/** CreateLocalPath
+		*/
+		public static Path CreateLocalPath()
+		{
+			return new Path(UnityEngine.Application.persistentDataPath);
+		}
+
+		/** CreateLocalPath
+		*/
+		public static Path CreateLocalPath(Path a_relative_path)
+		{
+			//a_relative_pathは相対パス。
+			return new Path(UnityEngine.Application.persistentDataPath + "/" + a_relative_path.GetPath());
+		}
+
+		/** CreateLocalPath
+		*/
+		public static Path CreateLocalPath(string a_relative_path)
+		{
+			//a_relative_pathは相対パス。
+			return new Path(UnityEngine.Application.persistentDataPath + "/" + a_relative_path);
+		}
+
+		/** CreateStreamingAssetsPath
+		*/
+		public static Path CreateStreamingAssetsPath()
+		{
+			return new Path(UnityEngine.Application.streamingAssetsPath);
+		}
+
+		/** CreateStreamingAssetsPath
+		*/
+		public static Path CreateStreamingAssetsPath(Path a_relative_path)
+		{
+			//a_relative_pathは相対パス。
+			return new Path(UnityEngine.Application.streamingAssetsPath + "/" + a_relative_path.GetPath());
+		}
+
+		/** CreateStreamingAssetsPath
+		*/
+		public static Path CreateStreamingAssetsPath(string a_relative_path)
+		{
+			//a_relative_pathは相対パス。
+			return new Path(UnityEngine.Application.streamingAssetsPath + "/" + a_relative_path);
+		}
+
+		/** CreateAssetsPath
+		*/
+		#if(UNITY_EDITOR)
+		public static Path CreateAssetsPath()
+		{
+			return new Path(UnityEngine.Application.dataPath);
+		}
+		#endif
+
+		/** CreateAssetsPath
+		*/
+		#if(UNITY_EDITOR)
+		public static Path CreateAssetsPath(Path a_relative_path)
+		{
+			//a_relative_pathは相対パス。
+			return new Path(UnityEngine.Application.dataPath + "/" + a_relative_path.GetPath());
+		}
+		#endif
+
+		/** CreateAssetsPath
+		*/
+		#if(UNITY_EDITOR)
+		public static Path CreateAssetsPath(string a_relative_path)
+		{
+			//a_relative_pathは相対パス。
+			return new Path(UnityEngine.Application.dataPath + "/" + a_relative_path);
+		}
+		#endif
 	}
 }
 

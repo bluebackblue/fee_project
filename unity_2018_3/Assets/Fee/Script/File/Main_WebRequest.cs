@@ -572,7 +572,7 @@ namespace Fee.File
 			Tool.Assert(this.request_type == RequestType.LoadStreamingAssetsBinaryFile);
 
 			//request_pathは相対パス。
-			Fee.File.Path t_path = new Path(UnityEngine.Application.streamingAssetsPath + "/" + this.request_path.GetPath());
+			Fee.File.Path t_path = Fee.File.Path.CreateStreamingAssetsPath(this.request_path);
 
 			Coroutine_DownLoadBinaryFile t_coroutine = new Coroutine_DownLoadBinaryFile();
 			yield return t_coroutine.CoroutineMain(this,t_path,null);
@@ -636,7 +636,7 @@ namespace Fee.File
 			Tool.Assert(this.request_type == RequestType.LoadStreamingAssetsTextFile);
 
 			//request_pathは相対パス。
-			Fee.File.Path t_path = new Path(UnityEngine.Application.streamingAssetsPath + "/" + this.request_path.GetPath());
+			Fee.File.Path t_path = Fee.File.Path.CreateStreamingAssetsPath(this.request_path);
 
 			Coroutine_DownLoadTextFile t_coroutine = new Coroutine_DownLoadTextFile();
 			yield return t_coroutine.CoroutineMain(this,t_path,null);
@@ -700,7 +700,7 @@ namespace Fee.File
 			Tool.Assert(this.request_type == RequestType.LoadStreamingAssetsTextureFile);
 
 			//request_pathは相対パス。
-			Fee.File.Path t_path = new Path(UnityEngine.Application.streamingAssetsPath + "/" + this.request_path.GetPath());
+			Fee.File.Path t_path = Fee.File.Path.CreateStreamingAssetsPath(this.request_path);
 
 			Coroutine_DownLoadTextureFile t_coroutine = new Coroutine_DownLoadTextureFile();
 			yield return t_coroutine.CoroutineMain(this,t_path,null);

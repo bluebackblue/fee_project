@@ -40,14 +40,29 @@ namespace TestScript
 		/** 削除管理。
 		*/
 		private Fee.Deleter.Deleter deleter;
+		private Fee.Deleter.Deleter deleter_scrollitem;
 
 		/** リストアイテム。
 		*/
-		private class Scroll_Item : Fee.Ui.ScrollItem_Base
+		private class Scroll_Item : Fee.Ui.ScrollItem_Base //, Fee.EventPlate.OnOverCallBack_Base
 		{
+			/** button
+			*/
+			public Fee.Ui.Button button;
+
 			/** text
 			*/
 			public Fee.Render2D.Text2D text;
+
+			/** name
+			*/
+			public string name;
+
+			/** CallBackType_Select
+			*/
+			public delegate void CallBackType_Select(string a_name);
+			public CallBackType_Select callback;
+			public string callback_path;
 
 			/** GetItemLength
 			*/
@@ -58,12 +73,52 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Scroll_Item(Fee.Deleter.Deleter a_deleter,string a_text)
+			public Scroll_Item(Fee.Deleter.Deleter a_deleter,string a_name,CallBackType_Select a_callback,string a_callback_path)
 			{
+				//button
+				if(a_callback != null){
+					this.button = new Fee.Ui.Button(a_deleter,1,this.CallBack_Click,-1);
+				}else{
+					this.button = null;
+				}
+
+				//text
 				this.text = new Fee.Render2D.Text2D(a_deleter,1);
 				this.text.SetRect(0,0,0,0);
-				this.text.SetText(a_text);
+				this.text.SetText(a_name);
 				this.text.SetClip(true);
+
+				//name
+				this.name = a_name;
+
+				//callback
+				this.callback = a_callback;
+
+				//callback_path
+				this.callback_path = a_callback_path;
+			}
+
+			/** [Button_Base]コールバック。クリック。
+			*/
+			public void CallBack_Click(int a_id)
+			{
+				if(this.callback != null){
+					this.callback(this.name);
+				}
+			}
+
+			/** [Fee.EventPlateOnOverCallBack_Base]イベントプレートに入場。
+			*/
+			/*
+			public void OnOverEnter(int a_value)
+			{ 
+			}
+			*/
+
+			/** [Fee.EventPlateOnOverCallBack_Base]イベントプレートから退場。
+			*/
+			public void OnOverLeave(int a_value)
+			{
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
@@ -71,19 +126,30 @@ namespace TestScript
 			public override void SetY(int a_y)
 			{
 				this.text.SetY(a_y);
+
+				if(this.button != null){
+					this.button.SetY(a_y);
+				}
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
 			*/
 			public override void SetX(int a_x)
 			{
-				this.text.SetX(a_x);
+				this.text.SetX(15 + a_x);
+
+				if(this.button != null){
+					this.button.SetX(a_x);
+				}
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
 			*/
 			public override void SetWH(int a_w,int a_h)
 			{
+				if(this.button != null){
+					this.button.SetWH(15,a_h);
+				}
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]クリップ矩形。設定。
@@ -91,6 +157,10 @@ namespace TestScript
 			public override void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
 			{
 				this.text.SetClipRect(ref a_rect);
+
+				if(this.button != null){
+					this.button.SetClipRect(ref a_rect);
+				}
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]表示内。
@@ -98,6 +168,10 @@ namespace TestScript
 			public override void OnViewIn()
 			{
 				this.text.SetVisible(true);
+
+				if(this.button != null){
+					this.button.SetVisible(true);
+				}
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]表示外。
@@ -105,18 +179,17 @@ namespace TestScript
 			public override void OnViewOut()
 			{
 				this.text.SetVisible(false);
+
+				if(this.button != null){
+					this.button.SetVisible(false);
+				}
 			}
 		}
 
-		/** root
+		/** scroll
 		*/
-		private Fee.Render2D.Text2D root_text;
-		private Fee.Ui.Scroll<Scroll_Item> root_scroll;
-
-		/** fee
-		*/
-		private Fee.Render2D.Text2D fee_text;
-		private Fee.Ui.Scroll<Scroll_Item> fee_scroll;
+		private Fee.Render2D.Text2D text;
+		private Fee.Ui.Scroll<Scroll_Item> scroll;
 
 		/** Start
 		*/
@@ -155,49 +228,54 @@ namespace TestScript
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
+			this.deleter_scrollitem = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			{
-				this.root_text = new Fee.Render2D.Text2D(this.deleter,0);
-				this.root_text.SetRect(10,100,0,0);
-				this.root_scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,0,Fee.Ui.ScrollType.Vertical,Scroll_Item.GetItemLength());
-				this.root_scroll.SetRect(this.root_text.GetX(),this.root_text.GetY() + 30,150,250);
-
-				this.fee_text = new Fee.Render2D.Text2D(this.deleter,0);
-				this.fee_text.SetRect(10 + 500,100,0,0);
-				this.fee_scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,0,Fee.Ui.ScrollType.Vertical,Scroll_Item.GetItemLength());
-				this.fee_scroll.SetRect(this.fee_text.GetX(),this.fee_text.GetY() + 30,150,250);
+				this.text = new Fee.Render2D.Text2D(this.deleter,0);
+				this.text.SetRect(100,100,0,0);
+				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,0,Fee.Ui.ScrollType.Vertical,Scroll_Item.GetItemLength());
+				this.scroll.SetRect(this.text.GetX(),this.text.GetY() + 30,150,250);
 			}
 
-			Fee.Directory.Item t_item_root = Fee.Directory.Directory.GetDirectoryItem(Application.dataPath);
+			//Listup
+			this.Listup();
+		}
 
-			//ルート。
-			{
-				this.root_text.SetText(t_item_root.GetRoot().GetFullPath());
+		/** リストアップ。
+		*/
+		private void Listup()
+		{
+			Fee.Directory.Item t_item_root = Fee.Directory.Directory.GetDirectoryItem(Fee.File.Path.CreateLocalPath().GetPath());
+
+			//text
+			this.text.SetText(t_item_root.GetRoot().GetFullPath());
 		
-				List<Fee.Directory.Item> t_directory_list = t_item_root.GetDirectoryList();
-				for(int ii=0;ii<t_directory_list.Count;ii++){
-					this.root_scroll.AddItem(new Scroll_Item(this.deleter,t_directory_list[ii].GetName()),this.root_scroll.GetListCount());
-				}
+			//removeall
+			this.scroll.RemoveAllItem();
+			this.deleter_scrollitem.DeleteAll();
+
+			//directory
+			List<Fee.Directory.Item> t_directory_list = t_item_root.GetDirectoryList();
+			for(int ii=0;ii<t_directory_list.Count;ii++){
+				string t_path = t_item_root.GetRoot().GetFullPath() + t_directory_list[ii].GetName();
+				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,"[D]" + t_directory_list[ii].GetName(),this.CallBackType_Select,t_path),this.scroll.GetListCount());
 			}
 
-			//ルート => Fee
-			{
-				Fee.Directory.Item t_item_root_fee = t_item_root.FindDirectory("Fee");
-
-				this.fee_text.SetText(t_item_root_fee.GetName());
-		
-				List<Fee.Directory.Item> t_directory_list = t_item_root_fee.GetDirectoryList();
-				for(int ii=0;ii<t_directory_list.Count;ii++){
-					this.fee_scroll.AddItem(new Scroll_Item(this.deleter,t_directory_list[ii].GetName()),this.fee_scroll.GetListCount());
-				}
-				List<Fee.Directory.Item> t_file_list = t_item_root_fee.GetFileList();
-				for(int ii=0;ii<t_file_list.Count;ii++){
-					this.fee_scroll.AddItem(new Scroll_Item(this.deleter,t_file_list[ii].GetName()),this.fee_scroll.GetListCount());
-				}
+			//file
+			List<Fee.Directory.Item> t_file_list = t_item_root.GetFileList();
+			for(int ii=0;ii<t_file_list.Count;ii++){
+				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,"[F]" + t_file_list[ii].GetName(),null,null),this.scroll.GetListCount());
 			}
+		}
+
+		/** 選択。
+		*/
+		private void CallBackType_Select(string a_path)
+		{
+			this.Listup();
 		}
 
 		/** FixedUpdate
@@ -214,8 +292,7 @@ namespace TestScript
 			Fee.Ui.Ui.GetInstance().Main();
 
 			//ドラッグスクロールアップデート。
-			this.root_scroll.DragScrollUpdate();
-			this.fee_scroll.DragScrollUpdate();
+			this.scroll.DragScrollUpdate();
 		}
 
 		/** 削除前。
@@ -230,6 +307,7 @@ namespace TestScript
 		private void OnDestroy()
 		{
 			this.deleter.DeleteAll();
+			this.deleter_scrollitem.DeleteAll();
 		}
 	}
 }

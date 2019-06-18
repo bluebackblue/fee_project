@@ -146,14 +146,6 @@ namespace Fee.File
 			return this.assetbundle_list;
 		}
 
-		/** GetLocalPath
-		*/
-		public static Path GetLocalPath(Path a_relative_path)
-		{
-			//a_relative_pathは相対パス。
-			return new Path(UnityEngine.Application.persistentDataPath + "/" + a_relative_path.GetPath());
-		}
-
 		/** リクエスト。ロードローカル。バイナリファイル。
 		*/
 		public Item RequestLoadLocalBinaryFile(Path a_relative_path)
