@@ -366,7 +366,7 @@ namespace TestScript
 
 				//バイナリ。ＢＧＭ。
 
-				string t_path = "Test11/";
+				string t_path = "AssetBundle/";
 				{
 					#if((UNITY_STANDALONE_WIN)||(UNITY_EDITOR_WIN))
 					t_path += "StandaloneWindows/";
@@ -454,7 +454,7 @@ namespace TestScript
 
 						//サウンドプール。ＳＥ。
 
-						string t_path = "Test11/SoundPool/se.txt";
+						string t_path = "SoundPool/se.txt";
 
 						this.load_item_se_soundpool = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(t_path),DATA_VERSION);
 
@@ -462,7 +462,7 @@ namespace TestScript
 
 						//バイナリ。ＳＥ。
 
-						string t_path = "Test11/";
+						string t_path = "AssetBundle/";
 						{
 							#if((UNITY_STANDALONE_WIN)||(UNITY_EDITOR_WIN))
 							t_path += "StandaloneWindows/";

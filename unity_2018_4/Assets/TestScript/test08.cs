@@ -44,7 +44,7 @@ namespace TestScript
 
 		/** リストアイテム。
 		*/
-		private class Scroll_Item : Fee.Ui.ScrollItem_Base //, Fee.EventPlate.OnOverCallBack_Base
+		private class Scroll_Item : Fee.Ui.ScrollItem_Base
 		{
 			/** button
 			*/
