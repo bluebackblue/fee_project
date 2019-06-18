@@ -68,7 +68,7 @@ namespace TestScript
 			*/
 			public static int GetItemLength()
 			{
-				return 30;
+				return 40;
 			}
 
 			/** constructor
@@ -78,12 +78,14 @@ namespace TestScript
 				//button
 				if(a_callback != null){
 					this.button = new Fee.Ui.Button(a_deleter,1,this.CallBack_Click,-1);
+					this.button.SetClip(true);
+					this.button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
 				}else{
 					this.button = null;
 				}
 
 				//text
-				this.text = new Fee.Render2D.Text2D(a_deleter,1);
+				this.text = new Fee.Render2D.Text2D(a_deleter,2);
 				this.text.SetRect(0,0,0,0);
 				this.text.SetText(a_name);
 				this.text.SetClip(true);
@@ -103,7 +105,7 @@ namespace TestScript
 			public void CallBack_Click(int a_id)
 			{
 				if(this.callback != null){
-					this.callback(this.name);
+					this.callback(this.callback_path);
 				}
 			}
 
@@ -125,8 +127,7 @@ namespace TestScript
 			*/
 			public override void SetY(int a_y)
 			{
-				this.text.SetY(a_y);
-
+				this.text.SetY(a_y + 10);
 				if(this.button != null){
 					this.button.SetY(a_y);
 				}
@@ -136,8 +137,7 @@ namespace TestScript
 			*/
 			public override void SetX(int a_x)
 			{
-				this.text.SetX(15 + a_x);
-
+				this.text.SetX(20 + a_x);
 				if(this.button != null){
 					this.button.SetX(a_x);
 				}
@@ -148,7 +148,7 @@ namespace TestScript
 			public override void SetWH(int a_w,int a_h)
 			{
 				if(this.button != null){
-					this.button.SetWH(15,a_h);
+					this.button.SetWH(550,a_h);
 				}
 			}
 
@@ -157,7 +157,6 @@ namespace TestScript
 			public override void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
 			{
 				this.text.SetClipRect(ref a_rect);
-
 				if(this.button != null){
 					this.button.SetClipRect(ref a_rect);
 				}
@@ -168,7 +167,6 @@ namespace TestScript
 			public override void OnViewIn()
 			{
 				this.text.SetVisible(true);
-
 				if(this.button != null){
 					this.button.SetVisible(true);
 				}
@@ -179,7 +177,6 @@ namespace TestScript
 			public override void OnViewOut()
 			{
 				this.text.SetVisible(false);
-
 				if(this.button != null){
 					this.button.SetVisible(false);
 				}
@@ -190,6 +187,8 @@ namespace TestScript
 		*/
 		private Fee.Render2D.Text2D text;
 		private Fee.Ui.Scroll<Scroll_Item> scroll;
+		private System.Collections.Generic.List<string> prev_list;
+		private string now_path;
 
 		/** Start
 		*/
@@ -233,22 +232,24 @@ namespace TestScript
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
-			{
-				this.text = new Fee.Render2D.Text2D(this.deleter,0);
-				this.text.SetRect(100,100,0,0);
-				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,0,Fee.Ui.ScrollType.Vertical,Scroll_Item.GetItemLength());
-				this.scroll.SetRect(this.text.GetX(),this.text.GetY() + 30,150,250);
-			}
+			this.text = new Fee.Render2D.Text2D(this.deleter,0);
+			this.text.SetRect(100,100,0,0);
+			
+			this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,0,Fee.Ui.ScrollType.Vertical,Scroll_Item.GetItemLength());
+			this.scroll.SetRect(this.text.GetX(),this.text.GetY() + 30,550,250);
+
+			this.prev_list = new List<string>();
+			this.now_path = Fee.File.Path.CreateLocalPath().GetPath();
 
 			//Listup
-			this.Listup();
+			this.Listup(this.now_path);
 		}
 
 		/** リストアップ。
 		*/
-		private void Listup()
+		private void Listup(string a_path)
 		{
-			Fee.Directory.Item t_item_root = Fee.Directory.Directory.GetDirectoryItem(Fee.File.Path.CreateLocalPath().GetPath());
+			Fee.Directory.Item t_item_root = Fee.Directory.Directory.GetDirectoryItem(a_path);
 
 			//text
 			this.text.SetText(t_item_root.GetRoot().GetFullPath());
@@ -257,17 +258,21 @@ namespace TestScript
 			this.scroll.RemoveAllItem();
 			this.deleter_scrollitem.DeleteAll();
 
+			if(this.prev_list.Count > 0){
+				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,"..",this.CallBackType_Select,".."),this.scroll.GetListCount());
+			}
+
 			//directory
 			List<Fee.Directory.Item> t_directory_list = t_item_root.GetDirectoryList();
 			for(int ii=0;ii<t_directory_list.Count;ii++){
 				string t_path = t_item_root.GetRoot().GetFullPath() + t_directory_list[ii].GetName();
-				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,"[D]" + t_directory_list[ii].GetName(),this.CallBackType_Select,t_path),this.scroll.GetListCount());
+				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,t_directory_list[ii].GetName(),this.CallBackType_Select,t_path),this.scroll.GetListCount());
 			}
 
 			//file
 			List<Fee.Directory.Item> t_file_list = t_item_root.GetFileList();
 			for(int ii=0;ii<t_file_list.Count;ii++){
-				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,"[F]" + t_file_list[ii].GetName(),null,null),this.scroll.GetListCount());
+				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,t_file_list[ii].GetName(),null,null),this.scroll.GetListCount());
 			}
 		}
 
@@ -275,7 +280,17 @@ namespace TestScript
 		*/
 		private void CallBackType_Select(string a_path)
 		{
-			this.Listup();
+			if(a_path == ".."){
+				//戻る。
+				this.now_path = this.prev_list[this.prev_list.Count - 1];
+				this.prev_list.RemoveAt(this.prev_list.Count - 1);
+			}else{
+				//進む。
+				this.prev_list.Add(this.now_path);
+				this.now_path = a_path;
+			}
+
+			this.Listup(this.now_path);
 		}
 
 		/** FixedUpdate
