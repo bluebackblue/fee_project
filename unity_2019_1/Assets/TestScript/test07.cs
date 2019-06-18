@@ -119,6 +119,16 @@ namespace TestScript
 		*/
 		private byte[] signature_binary;
 
+		/** 公開鍵秘密鍵作成。
+		*/
+		[UnityEditor.MenuItem("Fee/Test/Test07/MakePublicKeyPrivateKey")]
+		private static void MenuItem_MakePublicKeyPrivateKey()
+		{
+			Fee.File.Path t_path_public = new Fee.File.Path(UnityEngine.Application.dataPath + "/" + Data.KEY_PUBLIC_FILENAME);
+			Fee.File.Path t_path_private = new Fee.File.Path(UnityEngine.Application.dataPath + "/" + Data.KEY_PRIVATE_FILENAME);
+			Fee.EditorTool.Crypt.MakePublicKeyPrivateKey(t_path_public,t_path_private);
+		}
+
 		/** Start
 		*/
 		private void Start()

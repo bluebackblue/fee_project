@@ -286,7 +286,7 @@ namespace TestScript
 				string t_filename = t_directoryname_list[ii] + ".unitypackage";
 				string t_path = "Assets/ThirdParty/" + t_directoryname_list[ii];
 
-				if(Fee.EditorTool.Utility.IsExistFile("./" + t_filename) == false){
+				if(Fee.EditorTool.Utility.IsExistFile(new Fee.File.Path(t_filename)) == false){
 					UnityEditor.AssetDatabase.ExportPackage(t_path,t_filename,t_options);
 				}else{
 					UnityEngine.Debug.Log("Exist : " + t_filename);

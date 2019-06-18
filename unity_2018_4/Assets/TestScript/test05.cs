@@ -224,18 +224,18 @@ namespace TestScript
 
 			//キー。
 			this.key_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
-			this.key_text.SetRect(400,50,300,0);
-			this.key_text.SetFontSize(17);
+			this.key_text.SetRect(400,10,300,0);
+			this.key_text.SetFontSize(16);
 
 			//パッド。
 			this.pad_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
-			this.pad_text.SetRect(570,50,300,0);
-			this.pad_text.SetFontSize(17);
+			this.pad_text.SetRect(570,10,300,0);
+			this.pad_text.SetFontSize(16);
 
 			//マウス。
 			this.mouse_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
-			this.mouse_text.SetRect(750,50,300,0);
-			this.mouse_text.SetFontSize(17);
+			this.mouse_text.SetRect(750,10,300,0);
+			this.mouse_text.SetFontSize(16);
 
 			//button_fix
 			{

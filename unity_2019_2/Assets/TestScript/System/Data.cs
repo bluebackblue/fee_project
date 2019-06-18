@@ -18,43 +18,47 @@ namespace TestScript
 	{
 		/** UI_TEXTURE_BUTTON
 		*/
-		public const string UI_TEXTURE_BUTTON = "Texture/button";
+		public const string UI_TEXTURE_BUTTON = "Data/Texture/ui_button";
 
 		/** UI_TEXTURE_BUTTON_ACTIVE
 		*/
-		public const string UI_TEXTURE_BUTTON_ACTIVE = "Texture/button_active";
+		public const string UI_TEXTURE_BUTTON_ACTIVE = "Data/Texture/ui_button_active";
 
 		/** UI_TEXTURE_SLIDER
 		*/
-		public const string UI_TEXTURE_SLIDER = "Texture/slider";
+		public const string UI_TEXTURE_SLIDER = "Data/Texture/ui_slider";
 
 		/** UI_TEXTURE_CHECKBUTTON
 		*/
-		public const string UI_TEXTURE_CHECKBUTTON = "Texture/checkbutton";
+		public const string UI_TEXTURE_CHECKBUTTON = "Data/Texture/ui_checkbutton";
 
 		/** TEXTURE_SKYIMAGE
 		*/
-		public const string TEXTURE_SKYIMAGE = "Texture/skyimage";
-
-		/** TEXTURE_MARU
-		*/
-		public const string TEXTURE_MARU = "Texture/maru";
+		public const string TEXTURE_SKYIMAGE = "Data/Texture/skyimage";
 
 		/** FONT
 		*/
-		public const string FONT = "Font/mplus-1p-medium";
+		public const string FONT = "Data/Font/mplus-1p-medium";
 
 		/** PREFAB_CUBE
 		*/
-		public const string PREFAB_CUBE = "Prefab/cube";
+		public const string PREFAB_CUBE = "Data/Prefab/cube";
 
 		/** KEY_PRIVATE
 		*/
-		public const string KEY_PRIVATE = "Key/private_key";
+		public const string KEY_PRIVATE = "Data/Key/private_key";
 
 		/** KEY_PUBLIC
 		*/
-		public const string KEY_PUBLIC = "Key/public_key";
+		public const string KEY_PUBLIC = "Data/Key/public_key";
+
+		/** KEY_PRIVATE_FILENAME
+		*/
+		public const string KEY_PRIVATE_FILENAME = "Resources/Data/Key/private_key.json";
+
+		/** KEY_PUBLIC_FILENAME
+		*/
+		public const string KEY_PUBLIC_FILENAME = "Resources/Data/Key/public_key.json";
 	}
 }
 

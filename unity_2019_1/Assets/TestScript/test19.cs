@@ -98,8 +98,7 @@ namespace TestScript
 		/** 削除前。
 		*/
 		public override bool PreDestroy(bool a_first)
-		{
-			return true;
+		{			return true;
 		}
 
 		/** OnDestroy
