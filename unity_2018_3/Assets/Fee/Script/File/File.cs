@@ -71,6 +71,10 @@ namespace Fee.File
 		*/
 		private Main_WebRequest main_webrequest;
 
+		/** main_resources
+		*/
+		private Main_Resources main_resources;
+
 		/** work_list
 		*/
 		private System.Collections.Generic.List<Work> work_list;
@@ -92,6 +96,9 @@ namespace Fee.File
 
 			//main_webrequest
 			this.main_webrequest = new Main_WebRequest();
+
+			//main_resources
+			this.main_resources = new Main_Resources();
 
 			//work_list
 			this.work_list = new System.Collections.Generic.List<Work>();
@@ -123,6 +130,13 @@ namespace Fee.File
 		public Main_WebRequest GetMainWebRequest()
 		{
 			return this.main_webrequest;
+		}
+
+		/** main_resources。取得。
+		*/
+		public Main_Resources GetMainResources()
+		{
+			return this.main_resources;
 		}
 
 		/** アセットバンドルリスト。取得。
@@ -271,6 +285,16 @@ namespace Fee.File
 		{
 			Work t_work = new Work();
 			t_work.RequestLoadStreamingAssetsTextureFile(a_relative_path);
+			this.add_list.Add(t_work);
+			return t_work.GetItem();
+		}
+
+		/** リクエスト。ロードリソース。アセットファイル。
+		*/
+		public Item RequestLoadResourcesAssetFile(Path a_relative_path)
+		{
+			Work t_work = new Work();
+			t_work.RequestLoadResourcesAssetFile(a_relative_path);
 			this.add_list.Add(t_work);
 			return t_work.GetItem();
 		}

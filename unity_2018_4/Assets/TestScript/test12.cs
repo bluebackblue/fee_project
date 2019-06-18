@@ -76,26 +76,6 @@ namespace TestScript
 
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
-
-			#if(UNITY_EDITOR)
-			{
-				//エクセルからＪＳＯＮシートを作成。
-				Fee.Excel.ExcelToJsonSheet t_excel_to_jsonsheet = new Fee.Excel.ExcelToJsonSheet();
-				if(t_excel_to_jsonsheet.Convert(new Fee.File.Path(null,UnityEngine.Application.streamingAssetsPath + "/","excel.xlsx")) == true){
-					Fee.JsonItem.JsonItem t_jsonsheet = t_excel_to_jsonsheet.GetJsonSheet();
-					if(t_jsonsheet != null){
-						//コンバート。
-						if(Fee.JsonSheet.Convert.ConvertFromJsonSheet(t_jsonsheet) == false){
-							UnityEngine.Debug.LogError("faild");
-						}
-					}else{
-						UnityEngine.Debug.LogError("faild");
-					}
-				}else{
-					UnityEngine.Debug.LogError("faild");
-				}
-			}
-			#endif
 		}
 
 		/** FixedUpdate
@@ -125,6 +105,52 @@ namespace TestScript
 		{
 			this.deleter.DeleteAll();
 		}
+
+		/** シーンリスト初期化。
+		*/
+		#if(UNITY_EDITOR)
+		[UnityEditor.MenuItem("Fee/Test/ConvertFromExcel")]
+		private static void MenuItem_ConvertFromExcel()
+		{
+			/*
+			{
+				//object
+				UnityEditor.AssetBundleBuild[] t_object = new UnityEditor.AssetBundleBuild[1];
+				{
+					t_object[0].assetBundleName = "se.assetbundle";
+					t_object[0].assetBundleVariant = null;
+					t_object[0].assetNames = new string[1]{
+						"Assets/Data/ConvertFromExcel/excel_to_se_prefab.prefab"
+					};
+				}
+
+				//outputpath
+				string t_output_path = "Assets/Data/AssetBundle";
+
+				//option
+				UnityEditor.BuildAssetBundleOptions t_option = UnityEditor.BuildAssetBundleOptions.None;
+
+				UnityEditor.BuildPipeline.BuildAssetBundles(t_output_path,t_object,t_option,UnityEditor.BuildTarget.StandaloneWindows);
+			}
+			*/
+
+			//エクセルからＪＳＯＮシートを作成。
+			Fee.Excel.ExcelToJsonSheet t_excel_to_jsonsheet = new Fee.Excel.ExcelToJsonSheet();
+			if(t_excel_to_jsonsheet.Convert(new Fee.File.Path(null,UnityEngine.Application.streamingAssetsPath + "/","excel.xlsx")) == true){
+				Fee.JsonItem.JsonItem t_jsonsheet = t_excel_to_jsonsheet.GetJsonSheet();
+				if(t_jsonsheet != null){
+					//コンバート。
+					if(Fee.JsonSheet.Convert.ConvertFromJsonSheet(t_jsonsheet) == false){
+						UnityEngine.Debug.LogError("faild");
+					}
+				}else{
+					UnityEngine.Debug.LogError("faild");
+				}
+			}else{
+				UnityEngine.Debug.LogError("faild");
+			}
+		}
+		#endif
 	}
 }
 

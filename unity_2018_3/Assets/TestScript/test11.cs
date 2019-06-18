@@ -379,7 +379,7 @@ namespace TestScript
 				#endif
 
 				//this.download_item_bgm = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(new Fee.File.Path(null,t_path,"bgm"),ASSETBUNDLE_ID_BGM,DATA_VERSION);
-				this.download_item_bgm = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path(null,t_path,"bgm"));
+				this.download_item_bgm = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path(t_path,"bgm"));
 			}
 		}
 
@@ -454,7 +454,7 @@ namespace TestScript
 					if(this.soundpool_flag == true){
 
 						//Fee.File.Path t_path = new Fee.File.Path(null,"https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/",t_name + ".txt");
-						Fee.File.Path t_path = new Fee.File.Path(null,null,t_name + ".txt");
+						Fee.File.Path t_path = new Fee.File.Path(null,t_name + ".txt");
 
 						//this.soundpool_item_se = Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(t_path,null,DATA_VERSION);
 						this.soundpool_item_se = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(t_path,DATA_VERSION);
@@ -477,7 +477,7 @@ namespace TestScript
 						#endif
 
 						//this.download_item_se = Fee.File.File.GetInstance().RequestDownLoadAssetBundle(new Fee.File.Path(null,t_path,"se"),ASSETBUNDLE_ID_SE,DATA_VERSION);
-						this.download_item_se = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path(null,t_path,"se"));
+						this.download_item_se = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path(t_path,"se"));
 					}
 
 					this.mode = Mode.Now;

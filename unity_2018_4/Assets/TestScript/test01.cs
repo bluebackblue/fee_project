@@ -21,12 +21,7 @@ namespace TestScript
 		テキスト
 		入力フィールド
 		ボタン
-
-		Screen = ＧＵＩスクリーンサイズ
-		Data = Asetsのパス
-		PersistentData  = データ保存パス
-		StreamingAssets = ストリーミングアセットのパス
-		TemporaryCache = 一時データ保存パス
+		パス
 
 	*/
 	public class test01 : MainBase
@@ -44,6 +39,7 @@ namespace TestScript
 				テキスト
 				入力フィールド
 				ボタン
+				パス
 				"
 			);
 		}

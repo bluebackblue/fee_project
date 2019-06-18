@@ -179,7 +179,9 @@ namespace Fee.JsonSheet
 					Convert.Convert_Write_SeSheet(new Fee.File.Path(t_list_convert[ii].convert_output),t_jsonitem_list);
 				}else if(t_list_convert[ii].convert_command == Config.CONVERTSHEET_COMMAND_DATA){
 					//データシートを連続出力。
+					/*
 					Convert.Convert_Write_DataSheet(new Fee.File.Path(t_list_convert[ii].convert_output),t_jsonitem_list);
+					*/
 				}
 			}
 
@@ -314,6 +316,7 @@ namespace Fee.JsonSheet
 
 		/** データシートを連続出力。
 		*/
+		/*
 		public static void Convert_Write_DataSheet(Fee.File.Path a_path,Fee.JsonItem.JsonItem[] a_json)
 		{
 			System.Collections.Generic.Dictionary<string,Data.DataItem> t_list = new System.Collections.Generic.Dictionary<string,Data.DataItem>();
@@ -423,6 +426,7 @@ namespace Fee.JsonSheet
 				UnityEditor.BuildPipeline.BuildAssetBundles(t_output_path,t_assetbundlebuild,t_option,UnityEditor.BuildTarget.StandaloneWindows);
 			}
 		}
+		*/
 	}
 	#endif
 }

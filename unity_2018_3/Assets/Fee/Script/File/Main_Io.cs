@@ -322,10 +322,10 @@ namespace Fee.File
 			Coroutine_LoadLocalBinaryFile t_coroutine = new Coroutine_LoadLocalBinaryFile();
 			yield return t_coroutine.CoroutineMain(this,t_path);
 
-			if(t_coroutine.result.binary != null){
+			if(t_coroutine.result.binary_file != null){
 				this.result_progress_up = 1.0f;
 				this.result_progress_down = 1.0f;
-				this.result_binary = t_coroutine.result.binary;
+				this.result_binary = t_coroutine.result.binary_file;
 				this.result_type = ResultType.Binary;
 				yield break;
 			}else{
@@ -383,10 +383,10 @@ namespace Fee.File
 			Coroutine_LoadLocalTextFile t_coroutine = new Coroutine_LoadLocalTextFile();
 			yield return t_coroutine.CoroutineMain(this,t_path);
 
-			if(t_coroutine.result.text != null){
+			if(t_coroutine.result.text_file != null){
 				this.result_progress_up = 1.0f;
 				this.result_progress_down = 1.0f;
-				this.result_text = t_coroutine.result.text;
+				this.result_text = t_coroutine.result.text_file;
 				this.result_type = ResultType.Text;
 				yield break;
 			}else{
@@ -444,10 +444,10 @@ namespace Fee.File
 			Coroutine_LoadLocalTextureFile t_coroutine = new Coroutine_LoadLocalTextureFile();
 			yield return t_coroutine.CoroutineMain(this,t_path);
 
-			if(t_coroutine.result.texture != null){
+			if(t_coroutine.result.texture_file != null){
 				this.result_progress_up = 1.0f;
 				this.result_progress_down = 1.0f;
-				this.result_texture = t_coroutine.result.texture;
+				this.result_texture = t_coroutine.result.texture_file;
 				this.result_type = ResultType.Texture;
 				yield break;
 			}else{
@@ -685,10 +685,10 @@ namespace Fee.File
 			Coroutine_LoadLocalBinaryFile t_coroutine = new Coroutine_LoadLocalBinaryFile();
 			yield return t_coroutine.CoroutineMain(this,t_path);
 
-			if(t_coroutine.result.binary != null){
+			if(t_coroutine.result.binary_file != null){
 				this.result_progress_up = 1.0f;
 				this.result_progress_down = 1.0f;
-				this.result_binary = t_coroutine.result.binary;
+				this.result_binary = t_coroutine.result.binary_file;
 				this.result_type = ResultType.Binary;
 				yield break;
 			}else{
@@ -746,10 +746,10 @@ namespace Fee.File
 			Coroutine_LoadLocalTextFile t_coroutine = new Coroutine_LoadLocalTextFile();
 			yield return t_coroutine.CoroutineMain(this,t_path);
 
-			if(t_coroutine.result.text != null){
+			if(t_coroutine.result.text_file != null){
 				this.result_progress_up = 1.0f;
 				this.result_progress_down = 1.0f;
-				this.result_text = t_coroutine.result.text;
+				this.result_text = t_coroutine.result.text_file;
 				this.result_type = ResultType.Text;
 				yield break;
 			}else{
@@ -807,10 +807,10 @@ namespace Fee.File
 			Coroutine_LoadLocalTextureFile t_coroutine = new Coroutine_LoadLocalTextureFile();
 			yield return t_coroutine.CoroutineMain(this,t_path);
 
-			if(t_coroutine.result.texture != null){
+			if(t_coroutine.result.texture_file != null){
 				this.result_progress_up = 1.0f;
 				this.result_progress_down = 1.0f;
-				this.result_texture = t_coroutine.result.texture;
+				this.result_texture = t_coroutine.result.texture_file;
 				this.result_type = ResultType.Texture;
 				yield break;
 			}else{

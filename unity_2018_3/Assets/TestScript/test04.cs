@@ -543,7 +543,7 @@ namespace TestScript
 					//ダウンロード。サウンドプール。
 
 					uint t_data_version = 1;
-					this.item = new Item(Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(new Fee.File.Path(null,"https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/","se.txt"),null,t_data_version));
+					this.item = new Item(Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/AssetBundle/Raw/","se.txt"),null,t_data_version));
 				}break;
 			case CallBackId.LoadLocal_SoundPool:
 				{
@@ -568,7 +568,7 @@ namespace TestScript
 				{
 					//ダウンロード。テキストファイル。
 
-					this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path(null,"https://bbbproject.sakura.ne.jp/www/project_webgl/fee/Data/","text.txt"),null));
+					this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/Data/","text.txt"),null));
 				}break;
 			case CallBackId.LoadLocal_TextFile:
 				{
@@ -593,7 +593,7 @@ namespace TestScript
 				{
 					//ダウンロード。バイナリファイル。
 
-					this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadBinaryFile(new Fee.File.Path(null,"https://bbbproject.sakura.ne.jp/www/project_webgl/fee/Data/","binary"),null));
+					this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadBinaryFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/Data/","binary"),null));
 				}break;
 			case CallBackId.LoadLocal_BinaryFile:
 				{
@@ -629,7 +629,7 @@ namespace TestScript
 				{
 					//ダウンロード。テクスチャーファイル。
 
-					this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadTextureFile(new Fee.File.Path(null,"https://bbbproject.sakura.ne.jp/www/project_webgl/fee/Data/","texture.png"),null));
+					this.item = new Item(Fee.File.File.GetInstance().RequestDownLoadTextureFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/fee/Data/","texture.png"),null));
 				}break;
 			case CallBackId.LoadLocal_TextureFile:
 				{

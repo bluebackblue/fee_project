@@ -237,7 +237,7 @@ namespace Fee.SoundPool
 
 					//ロード。
 					{
-						Fee.File.Path t_sound_url = a_path.CreateUrl_ChangeFileName(t_load_soundpool.name_list[ii]);
+						Fee.File.Path t_sound_url = a_path.CreateFileNameChangePath(t_load_soundpool.name_list[ii]);
 
 						Fee.File.Item t_item = null;
 
