@@ -129,6 +129,7 @@ namespace TestScript
 				this.button.SetClip(true);
 				this.button.SetVisible(false);
 				this.button.SetTextureCornerSize(10);
+				this.button.SetDragCancelFlag(true);
 
 				//削除管理。
 				if(a_deleter != null){
