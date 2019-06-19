@@ -113,6 +113,8 @@ namespace TestScript
 				t_text += "id = " + this.id.ToString() + " ";
 				t_text += this.touch_phase.phasetype.ToString().Substring(0,1) + " ";
 				t_text += "rawid = " + this.touch_phase.raw_id.ToString() + " ";
+				t_text += " " + this.touch_phase.update.ToString();
+				t_text += " " + this.touch_phase.fadeoutframe.ToString();
 
 				this.text.SetText(t_text);
 			}
