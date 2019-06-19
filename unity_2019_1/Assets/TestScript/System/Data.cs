@@ -80,8 +80,17 @@ namespace TestScript
 			*/
 			public const string SOUNDPOOL_SE = "Common/SoundPool/se.txt";
 
+			/** BGM
+			*/
+			public const string BGM_ANDROID = "Common/AssetBundle/Android/bgm";
+			public const string BGM_WEBGL = "Common/AssetBundle/WebGL/bgm";
+			public const string BGM_STANDALONEWINDOWS = "Common/AssetBundle/StandaloneWindows/bgm";
 
-
+			/** SE
+			*/
+			public const string SE_ANDROID = "Common/AssetBundle/Android/se";
+			public const string SE_WEBGL = "Common/AssetBundle/WebGL/se";
+			public const string SE_STANDALONEWINDOWS = "Common/AssetBundle/StandaloneWindows/se";
 
 			/** TEST04_TEXT
 			*/

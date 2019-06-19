@@ -334,8 +334,12 @@ namespace TestScript
 			//ＳＥのアンロード。
 			Fee.Audio.Audio.GetInstance().UnLoadSe(SE_ID);
 
+			//ＢＧＭのアンロード。
+			Fee.Audio.Audio.GetInstance().UnLoadBgm();
+
 			//アセットバンドルのアンロード。
 			Fee.File.File.GetInstance().GetAssetBundleList().UnloadAssetBundle(ASSETBUNDLE_ID_SE);
+			Fee.File.File.GetInstance().GetAssetBundleList().UnloadAssetBundle(ASSETBUNDLE_ID_BGM);
 		}
 
 		/** [Button_Base]コールバック。クリック。
@@ -366,23 +370,17 @@ namespace TestScript
 
 				//バイナリ。ＢＧＭ。
 
-				string t_path = "AssetBundle/";
-				{
-					#if((UNITY_STANDALONE_WIN)||(UNITY_EDITOR_WIN))
-					t_path += "StandaloneWindows/";
-					#elif(UNITY_WEBGL)
-					t_path += "WebGL/";
-					#elif(UNITY_ANDROID)
-					t_path += "Android/";
-					#elif(UNITY_IOS)
-					t_path += "iOS/";
-					#else
-					t_path += "StandaloneWindows/";
-					#endif
-					t_path += "bgm";
-				}
+				#if((UNITY_STANDALONE_WIN)||(UNITY_EDITOR_WIN))
+				Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.BGM_STANDALONEWINDOWS);
+				#elif(UNITY_WEBGL)
+				Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.BGM_WEBGL);
+				#elif(UNITY_ANDROID)
+				Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.BGM_ANDROID);
+				#else
+				Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.BGM_STANDALONEWINDOWS);
+				#endif
 
-				this.load_item_bgm_binary = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path(t_path));
+				this.load_item_bgm_binary = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(t_path);
 			}
 		}
 
@@ -416,9 +414,10 @@ namespace TestScript
 					if(this.load_item_bgm_binary.GetResultType() == Fee.File.Item.ResultType.Binary){
 						//ロード成功。バイナリ。
 
-						//TODO:
-						t_assetbundle = AssetBundle.LoadFromMemory(this.load_item_bgm_binary.GetResultBinary());
-						Fee.File.File.GetInstance().GetAssetBundleList().Regist(ASSETBUNDLE_ID_BGM,t_assetbundle);
+						if(Fee.File.File.GetInstance().GetAssetBundleList().GetAssetBundle(ASSETBUNDLE_ID_BGM) == null){
+							t_assetbundle = AssetBundle.LoadFromMemory(this.load_item_bgm_binary.GetResultBinary());
+							Fee.File.File.GetInstance().GetAssetBundleList().Regist(ASSETBUNDLE_ID_BGM,t_assetbundle);
+						}
 					}
 
 					if(t_assetbundle != null){
@@ -454,32 +453,25 @@ namespace TestScript
 
 						//サウンドプール。ＳＥ。
 
-						string t_path = "SoundPool/se.txt";
+						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SOUNDPOOL_SE);
 
-						this.load_item_se_soundpool = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(t_path),DATA_VERSION);
+						this.load_item_se_soundpool = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(t_path,DATA_VERSION);
 
 					}else{
 
 						//バイナリ。ＳＥ。
 
-						string t_path = "AssetBundle/";
-						{
-							#if((UNITY_STANDALONE_WIN)||(UNITY_EDITOR_WIN))
-							t_path += "StandaloneWindows/";
-							#elif(UNITY_WEBGL)
-							t_path += "WebGL/";
-							#elif(UNITY_ANDROID)
-							t_path += "Android/";
-							#elif(UNITY_IOS)
-							t_path += "iOS/";
-							#else
-							t_path += "StandaloneWindows/";
-							#endif
+						#if((UNITY_STANDALONE_WIN)||(UNITY_EDITOR_WIN))
+						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SE_STANDALONEWINDOWS);
+						#elif(UNITY_WEBGL)
+						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SE_WEBGL);
+						#elif(UNITY_ANDROID)
+						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SE_ANDROID);
+						#else
+						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SE_STANDALONEWINDOWS);
+						#endif
 
-							t_path += "se";
-						}
-
-						this.load_item_se_binary = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path(t_path));
+						this.load_item_se_binary = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(t_path);
 					}
 
 					this.mode = Mode.Now;
