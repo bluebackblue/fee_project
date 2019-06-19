@@ -12,7 +12,7 @@
 */
 namespace Fee.File
 {
-	/** ロードリソース。オブジェクトファイル。
+	/** ロードリソース。アセットファイル。
 	*/
 	public class Coroutine_LoadResourcesAssetFile
 	{

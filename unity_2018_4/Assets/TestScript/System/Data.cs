@@ -69,6 +69,10 @@ namespace TestScript
 			*/
 			public const string TEST04_TEXTURE = "Test04/texture";
 
+			/** TEST04_TEXT
+			*/
+			public const string TEST04_TEXT = "Test04/text";
+
 		}
 
 		/** StreamingAssets

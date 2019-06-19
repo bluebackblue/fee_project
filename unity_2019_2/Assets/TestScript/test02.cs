@@ -381,7 +381,7 @@ namespace TestScript
 		private void CallBack_Click_Load(int a_id)
 		{
 			//ロードローカル。リクエスト。
-			this.load_item = Fee.File.File.GetInstance().RequestLoadLocalTextFile(new Fee.File.Path("save_" + a_id.ToString() + ".json"));
+			this.load_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadLocalTextFile,new Fee.File.Path("save_" + a_id.ToString() + ".json"));
 			if(this.load_item != null){
 				this.button_save1.SetLock(true);
 				this.button_save2.SetLock(true);

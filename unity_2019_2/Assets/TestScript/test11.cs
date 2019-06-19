@@ -379,7 +379,7 @@ namespace TestScript
 				Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.BGM_STANDALONEWINDOWS);
 				#endif
 
-				this.load_item_bgm_binary = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(t_path);
+				this.load_item_bgm_binary = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsBinaryFile,t_path);
 			}
 		}
 
@@ -470,7 +470,7 @@ namespace TestScript
 						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SE_STANDALONEWINDOWS);
 						#endif
 
-						this.load_item_se_binary = Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(t_path);
+						this.load_item_se_binary = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsBinaryFile,t_path);
 					}
 
 					this.mode = Mode.Now;
