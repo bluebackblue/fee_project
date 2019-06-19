@@ -103,7 +103,7 @@ namespace TestScript
 			Fee.EventPlate.EventPlate.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.FONT);
+			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
@@ -125,7 +125,7 @@ namespace TestScript
 
 			//clipsprite
 			{
-				Texture2D t_texture = Resources.Load<Texture2D>(Data.TEXTURE_SKYIMAGE);
+				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.TEXTURE_SKYIMAGE);
 
 				this.clipsprite = new Fee.Ui.ClipSprite(this.deleter,t_drawpriority + 1);
 				this.clipsprite.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
@@ -157,7 +157,7 @@ namespace TestScript
 				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 				int t_y = 300;
 
-				Texture2D t_texture = Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON);
+				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON);
 
 				this.button = new Fee.Ui.Button(this.deleter,t_drawpriority + 2,this.CallBack_Click,0);
 				this.button.SetRect(t_x,t_y,t_w,t_h);
@@ -171,7 +171,7 @@ namespace TestScript
 				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 				int t_y = 200;
 
-				Texture2D t_texture = Resources.Load<Texture2D>(Data.UI_TEXTURE_CHECKBUTTON);
+				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON);
 
 				this.checkbutton = new Fee.Ui.CheckButton(this.deleter,t_drawpriority + 2,this.CallBack_Change,0);
 				this.checkbutton.SetRect(t_x,t_y,t_w,t_h);
@@ -198,8 +198,8 @@ namespace TestScript
 
 				this.slider = new Fee.Ui.Slider(this.deleter,t_drawpriority + 2,this.CallBack_Change,0);
 				this.slider.SetRect(t_x,t_y,t_w,t_h);
-				this.slider.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
-				this.slider.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.slider.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+				this.slider.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.slider.SetButtonSize(0,30);
 			}
 

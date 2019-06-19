@@ -49,6 +49,10 @@ namespace TestScript
 		*/
 		private Fee.Render2D.Sprite2D sprite;
 
+		/** cube
+		*/
+		private GameObject[] cube;
+
 		/** ブルーム。
 		*/
 		private Fee.Ui.Button bloom_button;
@@ -110,7 +114,7 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.FONT);
+			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
@@ -147,6 +151,20 @@ namespace TestScript
 				#endif
 			}
 
+			//キューブ。
+			{
+				GameObject t_prefab = Resources.Load<GameObject>(Data.Resources.PREFAB_CUBE);
+				this.cube = new GameObject[2];
+				for(int ii=0;ii<this.cube.Length;ii++){
+					if(ii == 0){
+						this.cube[ii] = GameObject.Instantiate(t_prefab,new Vector3(1 + 1,0,10),Quaternion.identity);
+					}else{
+						this.cube[ii] = GameObject.Instantiate(t_prefab,new Vector3(1 + 4,0,10),Quaternion.identity);
+					}
+					this.cube[ii].transform.localScale = new Vector3(2,2,2);
+				}
+			}
+
 			//スプライト。
 			{
 				int t_w = 200;
@@ -159,7 +177,7 @@ namespace TestScript
 				this.sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
 				this.sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetRect(t_x,t_y,t_w,t_h);
-				this.sprite.SetTexture(Resources.Load<Texture2D>(Data.TEXTURE_SKYIMAGE));
+				this.sprite.SetTexture(Resources.Load<Texture2D>(Data.Resources.TEXTURE_SKYIMAGE));
 			}
 
 			{
@@ -171,15 +189,15 @@ namespace TestScript
 				//ブルーム。
 				{
 					this.bloom_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,0);
-					this.bloom_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+					this.bloom_button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_button.SetRect(100,t_y,t_button_w,t_button_h);
 					this.bloom_button.SetText("Bloom : " + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
 
 					t_y += 40;
 
 					this.bloom_threshold_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,100);
-					this.bloom_threshold_slider.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
-					this.bloom_threshold_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+					this.bloom_threshold_slider.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_threshold_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_threshold_slider.SetRect(100,t_y,200,10);
 					this.bloom_threshold_slider.SetTextureCornerSize(3);
 					this.bloom_threshold_slider.SetButtonTextureCornerSize(3);
@@ -189,8 +207,8 @@ namespace TestScript
 					t_y += 30;
 
 					this.bloom_intensity_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,101);
-					this.bloom_intensity_slider.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
-					this.bloom_intensity_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+					this.bloom_intensity_slider.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_intensity_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_intensity_slider.SetRect(100,t_y,200,10);
 					this.bloom_intensity_slider.SetTextureCornerSize(3);
 					this.bloom_intensity_slider.SetButtonTextureCornerSize(3);
@@ -204,15 +222,15 @@ namespace TestScript
 				//ブラー。
 				{
 					this.blur_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,1);
-					this.blur_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+					this.blur_button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.blur_button.SetRect(100,t_y,t_button_w,t_button_h);
 					this.blur_button.SetText("Blur : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
 
 					t_y += 40;
 
 					this.blur_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,200);
-					this.blur_rate_blend_slider.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
-					this.blur_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+					this.blur_rate_blend_slider.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.blur_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.blur_rate_blend_slider.SetRect(100,t_y,200,10);
 					this.blur_rate_blend_slider.SetTextureCornerSize(3);
 					this.blur_rate_blend_slider.SetButtonTextureCornerSize(3);
@@ -225,15 +243,15 @@ namespace TestScript
 				//デプス。
 				{
 					this.depth_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,2);
-					this.depth_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+					this.depth_button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.depth_button.SetRect(100,t_y,t_button_w,t_button_h);
 					this.depth_button.SetText("Depth : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
 
 					t_y += 40;
 
 					this.depth_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,300);
-					this.depth_rate_blend_slider.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
-					this.depth_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+					this.depth_rate_blend_slider.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.depth_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.depth_rate_blend_slider.SetRect(100,t_y,200,10);
 					this.depth_rate_blend_slider.SetTextureCornerSize(3);
 					this.depth_rate_blend_slider.SetButtonTextureCornerSize(3);
@@ -255,6 +273,15 @@ namespace TestScript
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
+
+			//キューブ。
+			for(int ii=0;ii<this.cube.Length;ii++){
+				if(ii == 0){
+					this.cube[ii].transform.Rotate(Vector3.up,0.1f);
+				}else{
+					this.cube[ii].transform.Rotate(Vector3.up,-0.1f);
+				}
+			}
 		}
 
 		/** 削除前。

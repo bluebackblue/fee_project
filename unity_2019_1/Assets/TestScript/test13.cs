@@ -170,7 +170,7 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.FONT);
+			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
@@ -261,9 +261,9 @@ namespace TestScript
 		*/
 		public void UpdateButtonStatus()
 		{
-			this.button_inputsystem_touchscreen_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputtouch_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputmouse_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_touchscreen_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputtouch_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputmouse_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 		}
 
 		/** コールバック。

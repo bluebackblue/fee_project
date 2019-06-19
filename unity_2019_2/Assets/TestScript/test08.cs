@@ -79,7 +79,7 @@ namespace TestScript
 				if(a_callback != null){
 					this.button = new Fee.Ui.Button(a_deleter,1,this.CallBack_Click,-1);
 					this.button.SetClip(true);
-					this.button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+					this.button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				}else{
 					this.button = null;
 				}
@@ -220,7 +220,7 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.FONT);
+			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}

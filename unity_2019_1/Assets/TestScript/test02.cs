@@ -288,7 +288,7 @@ namespace TestScript
 			Fee.File.File.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.FONT);
+			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
@@ -302,37 +302,37 @@ namespace TestScript
 			//ボタン。
 			{
 				this.button_save1 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Save,1);
-				this.button_save1.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_save1.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_save1.SetRect(100 + 110 * 0,100,100,50);
 				this.button_save1.SetText("Save1");
 
 				this.button_save2 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Save,2);
-				this.button_save2.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_save2.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_save2.SetRect(100 + 110 * 1,100,100,50);
 				this.button_save2.SetText("Save2");
 
 				this.button_load1 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Load,1);
-				this.button_load1.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_load1.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_load1.SetRect(100 + 110 * 2,100,100,50);
 				this.button_load1.SetText("Load1");
 
 				this.button_load2 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Load,2);
-				this.button_load2.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_load2.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_load2.SetRect(100 + 110 * 3,100,100,50);
 				this.button_load2.SetText("Load2");
 
 				this.button_random = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Random,-1);
-				this.button_random.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_random.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_random.SetRect(600 + 110*1,100 + 60 * 0,130,50);
 				this.button_random.SetText("Random");
 
 				this.button_speedtest_utf8json = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest_Utf8Json,-1);
-				this.button_speedtest_utf8json.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_speedtest_utf8json.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_speedtest_utf8json.SetRect(600 + 110*1,100 + 60 * 1,130,50);
 				this.button_speedtest_utf8json.SetText("Utf8Json Test");
 
 				this.button_speedtest_fee = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest_Fee,-1);
-				this.button_speedtest_fee.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_speedtest_fee.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_speedtest_fee.SetRect(600 + 110*1,100  + 60 * 2,130,50);
 				this.button_speedtest_fee.SetText("Fee Test");
 			}

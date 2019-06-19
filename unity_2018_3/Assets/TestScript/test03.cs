@@ -121,7 +121,7 @@ namespace TestScript
 
 				//close_button
 				this.close_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_Close,-1);
-				this.close_button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.close_button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.close_button.SetText("x");
 				this.close_button.SetWH(this.window.GetTitleBarH(),this.window.GetTitleBarH());
 
@@ -240,7 +240,7 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.FONT);
+			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
@@ -254,7 +254,7 @@ namespace TestScript
 			//button
 			this.button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,-1);
 			this.button.SetRect(10,50,100,50);
-			this.button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button.SetText("表示");
 
 			//view_flag

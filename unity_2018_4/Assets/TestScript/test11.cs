@@ -183,7 +183,7 @@ namespace TestScript
 			Fee.EventPlate.EventPlate.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.FONT);
+			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
@@ -231,7 +231,7 @@ namespace TestScript
 
 			//ボタン。
 			this.button_unload = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Unload,-1);
-			this.button_unload.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.button_unload.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_unload.SetRect(t_xx,130,170,30);
 			this.button_unload.SetText("アンロード");
 
@@ -239,7 +239,7 @@ namespace TestScript
 
 			//ボタン。
 			this.button_assetbundle = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_AssetBundle,-1);
-			this.button_assetbundle.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.button_assetbundle.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_assetbundle.SetRect(t_xx,130,170,30);
 			this.button_assetbundle.SetText("AssetBundleロード");
 
@@ -247,7 +247,7 @@ namespace TestScript
 
 			//ボタン。
 			this.button_soundpool = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SoundPool,-1);
-			this.button_soundpool.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.button_soundpool.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_soundpool.SetRect(t_xx,130,170,30);
 			this.button_soundpool.SetText("SoundPoolロード");
 
@@ -255,7 +255,7 @@ namespace TestScript
 
 			//ボタン。
 			this.button_bgm = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Bgm,-1);
-			this.button_bgm.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.button_bgm.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_bgm.SetRect(t_xx,130,170,30);
 			this.button_bgm.SetText("ＢＧＭ");
 
@@ -265,10 +265,10 @@ namespace TestScript
 			this.slider_master = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Master,0);
 			this.slider_master.SetRect(100,t_yy,400,40);
 			this.slider_master.SetValue(0.0f);
-			this.slider_master.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.slider_master.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.slider_master.SetButtonSize(10,80);
 			this.slider_master.SetButtonTextureCornerSize(2);
-			this.slider_master.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
+			this.slider_master.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 
 			t_yy += 60;
 
@@ -276,10 +276,10 @@ namespace TestScript
 			this.slider_bgm = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Bgm,0);
 			this.slider_bgm.SetRect(100,t_yy,400,40);
 			this.slider_bgm.SetValue(0.0f);
-			this.slider_bgm.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.slider_bgm.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.slider_bgm.SetButtonSize(10,80);
 			this.slider_bgm.SetButtonTextureCornerSize(2);
-			this.slider_bgm.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
+			this.slider_bgm.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 
 			t_yy += 60;
 
@@ -287,10 +287,10 @@ namespace TestScript
 			this.slider_se = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Se,0);
 			this.slider_se.SetRect(100,t_yy,400,40);
 			this.slider_se.SetValue(0.0f);
-			this.slider_se.SetButtonTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.slider_se.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.slider_se.SetButtonSize(10,80);
 			this.slider_se.SetButtonTextureCornerSize(2);
-			this.slider_se.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_SLIDER));
+			this.slider_se.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 
 			//値設定。
 			this.slider_master.SetValue(Fee.Audio.Audio.GetInstance().GetMasterVolume());

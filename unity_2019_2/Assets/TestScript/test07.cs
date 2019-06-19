@@ -124,8 +124,8 @@ namespace TestScript
 		[UnityEditor.MenuItem("Fee/Test/Test07/MakePublicKeyPrivateKey")]
 		private static void MenuItem_MakePublicKeyPrivateKey()
 		{
-			Fee.File.Path t_path_public = new Fee.File.Path(UnityEngine.Application.dataPath + "/" + Data.KEY_PUBLIC_FILENAME);
-			Fee.File.Path t_path_private = new Fee.File.Path(UnityEngine.Application.dataPath + "/" + Data.KEY_PRIVATE_FILENAME);
+			Fee.File.Path t_path_public = Fee.File.Path.CreateAssetsPath(Data.Resources.KEY_PUBLIC_ASSETSPATH);
+			Fee.File.Path t_path_private = Fee.File.Path.CreateAssetsPath(Data.Resources.KEY_PRIVATE_ASSETSPATH);
 			Fee.EditorTool.Crypt.MakePublicKeyPrivateKey(t_path_public,t_path_private);
 		}
 
@@ -161,7 +161,7 @@ namespace TestScript
 			Fee.Crypt.Crypt.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.FONT);
+			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
@@ -177,19 +177,19 @@ namespace TestScript
 
 			//button_key
 			this.button_key = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,0);
-			this.button_key.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.button_key.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_key.SetRect(100 + 200 * 0,100,150,50);
 			this.button_key.SetText("公開鍵");
 
 			//button_pass
 			this.button_pass = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,1);
-			this.button_pass.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.button_pass.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_pass.SetRect(100 + 200 * 1,100,150,50);
 			this.button_pass.SetText("共通鍵");
 
 			//button_signature
 			this.button_signature = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,2);
-			this.button_signature.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+			this.button_signature.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_signature.SetRect(100 + 200 * 2,100,150,50);
 			this.button_signature.SetText("証明書");
 
@@ -223,7 +223,7 @@ namespace TestScript
 
 				if(a_id == 0){
 					//public
-					Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.KEY_PUBLIC).text);
+					Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.KEY_PUBLIC).text);
 					this.public_key = null;
 					if(t_item_public != null){
 						if(t_item_public.IsAssociativeArray() == true){
@@ -234,7 +234,7 @@ namespace TestScript
 					}
 
 					//private
-					Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.KEY_PRIVATE).text);
+					Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.KEY_PRIVATE).text);
 					this.private_key = null;
 					if(t_item_private != null){
 						if(t_item_private.IsAssociativeArray() == true){
@@ -253,7 +253,7 @@ namespace TestScript
 					this.step = Step.EncryptPass_Start;
 				}else if(a_id == 2){
 					//public
-					Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.KEY_PUBLIC).text);
+					Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.KEY_PUBLIC).text);
 					this.public_key = null;
 					if(t_item_public != null){
 						if(t_item_public.IsAssociativeArray() == true){
@@ -264,7 +264,7 @@ namespace TestScript
 					}
 
 					//private
-					Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.KEY_PRIVATE).text);
+					Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.KEY_PRIVATE).text);
 					this.private_key = null;
 					if(t_item_private != null){
 						if(t_item_private.IsAssociativeArray() == true){

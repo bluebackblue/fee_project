@@ -193,7 +193,7 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.FONT);
+			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
@@ -242,7 +242,7 @@ namespace TestScript
 				this.button_fix = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Fex);
 				this.button_fix.SetRect(100,1,100,40);
 				this.button_fix.SetText("確定");
-				this.button_fix.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_fix.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			}
 
 			int t_xx = 10;
@@ -322,7 +322,7 @@ namespace TestScript
 			{
 				this.button_inputsystem_keyboard_key = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Key_InputSystem_KeyBoard);
 				this.button_inputsystem_keyboard_key.SetRect(t_xx,t_yy,t_w,t_h);
-				this.button_inputsystem_keyboard_key.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_inputsystem_keyboard_key.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_inputsystem_keyboard_key.SetText("InputSystem.KeyBoard => Key");
 				this.button_inputsystem_keyboard_key.SetFontSize(t_fontsize);
 
@@ -340,7 +340,7 @@ namespace TestScript
 			{
 				this.button_inputsystem_gamepad_paddigitalbutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadDigitalButton_InputSystem_GamePad);
 				this.button_inputsystem_gamepad_paddigitalbutton.SetRect(t_xx,t_yy,t_w,t_h);
-				this.button_inputsystem_gamepad_paddigitalbutton.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_inputsystem_gamepad_paddigitalbutton.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_inputsystem_gamepad_paddigitalbutton.SetText("InputSystem.GamePad => PadDigitalButton");
 				this.button_inputsystem_gamepad_paddigitalbutton.SetFontSize(t_fontsize);
 
@@ -348,7 +348,7 @@ namespace TestScript
 
 				this.button_inputmanager_inputname_paddigitalbutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadDigitalButton_InputManager_InputName);
 				this.button_inputmanager_inputname_paddigitalbutton.SetRect(t_xx,t_yy,t_w,t_h);
-				this.button_inputmanager_inputname_paddigitalbutton.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_inputmanager_inputname_paddigitalbutton.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_inputmanager_inputname_paddigitalbutton.SetText("InputManager.InputName => PadDigitalButton");
 				this.button_inputmanager_inputname_paddigitalbutton.SetFontSize(t_fontsize);
 			}
@@ -359,7 +359,7 @@ namespace TestScript
 			{
 				this.button_inputsystem_gamepad_padstick = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadStick_InputSystem_GamePad);
 				this.button_inputsystem_gamepad_padstick.SetRect(t_xx,t_yy,t_w,t_h);
-				this.button_inputsystem_gamepad_padstick.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_inputsystem_gamepad_padstick.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_inputsystem_gamepad_padstick.SetText("InputSystem.GamePad => PadStick");
 				this.button_inputsystem_gamepad_padstick.SetFontSize(t_fontsize);
 
@@ -367,7 +367,7 @@ namespace TestScript
 
 				this.button_inputmanager_inputname_padstick = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadStick_InputManager_InputName);
 				this.button_inputmanager_inputname_padstick.SetRect(t_xx,t_yy,t_w,t_h);
-				this.button_inputmanager_inputname_padstick.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_inputmanager_inputname_padstick.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_inputmanager_inputname_padstick.SetText("InputManager.InputName => PadStick");
 				this.button_inputmanager_inputname_padstick.SetFontSize(t_fontsize);
 			}
@@ -378,7 +378,7 @@ namespace TestScript
 			{
 				this.button_inputsystem_gamepad_padtrigger = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadTrigger_InputSystem_GamePad);
 				this.button_inputsystem_gamepad_padtrigger.SetRect(t_xx,t_yy,t_w,t_h);
-				this.button_inputsystem_gamepad_padtrigger.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_inputsystem_gamepad_padtrigger.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_inputsystem_gamepad_padtrigger.SetText("InputSystem.GamePad => PadTrigger");
 				this.button_inputsystem_gamepad_padtrigger.SetFontSize(t_fontsize);
 
@@ -386,7 +386,7 @@ namespace TestScript
 
 				this.button_inputmanager_inputname_padtrigger = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadTrigger_InputManager_InputName);
 				this.button_inputmanager_inputname_padtrigger.SetRect(t_xx,t_yy,t_w,t_h);
-				this.button_inputmanager_inputname_padtrigger.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_inputmanager_inputname_padtrigger.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_inputmanager_inputname_padtrigger.SetText("InputManager.InputName => PadTrigger");
 				this.button_inputmanager_inputname_padtrigger.SetFontSize(t_fontsize);
 			}
@@ -397,7 +397,7 @@ namespace TestScript
 			{
 				this.button_inputsystem_gamepad_padmotor = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadMorotr_InputSystem_GamePad);
 				this.button_inputsystem_gamepad_padmotor.SetRect(t_xx,t_yy,t_w,t_h);
-				this.button_inputsystem_gamepad_padmotor.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button_inputsystem_gamepad_padmotor.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_inputsystem_gamepad_padmotor.SetText("InputSystem.GamePad => PadMotor");
 				this.button_inputsystem_gamepad_padmotor.SetFontSize(t_fontsize);
 			}
@@ -532,30 +532,30 @@ namespace TestScript
 		*/
 		public void UpdateButtonStatus()
 		{
-			this.button_inputsystem_mouse_mouseposition.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_pointer_mouseposition.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputmouse_mouseposition.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_mouse_mouseposition.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_pointer_mouseposition.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputmouse_mouseposition.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 
-			this.button_inputsystem_mouse_mousebutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_pointer_mousebutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputmouse_mousebutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_mouse_mousebutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_pointer_mousebutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputmouse_mousebutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 
-			this.button_inputsystem_mouse_mousewheel.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputname_mousewheel.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_mouse_mousewheel.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputname_mousewheel.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 
-			this.button_inputsystem_keyboard_key.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_getkey_key.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_keyboard_key.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_getkey_key.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 
-			this.button_inputsystem_gamepad_paddigitalbutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputname_paddigitalbutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_gamepad_paddigitalbutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputname_paddigitalbutton.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 		
-			this.button_inputsystem_gamepad_padstick.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputname_padstick.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_gamepad_padstick.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputname_padstick.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 		
-			this.button_inputsystem_gamepad_padtrigger.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputname_padtrigger.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_gamepad_padtrigger.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputname_padtrigger.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 		
-			this.button_inputsystem_gamepad_padmotor.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? Data.UI_TEXTURE_BUTTON_ACTIVE : Data.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_gamepad_padmotor.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 		}
 
 		/** FixedUpdate

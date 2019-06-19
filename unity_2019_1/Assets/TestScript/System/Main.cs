@@ -98,7 +98,7 @@ namespace TestScript
 
 			{
 				//フォント。
-				UnityEngine.Font t_font = UnityEngine.Resources.Load<UnityEngine.Font>(Data.FONT);
+				UnityEngine.Font t_font = UnityEngine.Resources.Load<UnityEngine.Font>(Data.Resources.FONT);
 				if(t_font != null){
 					Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 				}
@@ -123,7 +123,7 @@ namespace TestScript
 					int t_h = 40;
 
 					this.button[ii] = new Fee.Ui.Button(this.deleter,0,Click,ii);
-					this.button[ii].SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.UI_TEXTURE_BUTTON));
+					this.button[ii].SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.button[ii].SetRect(t_x,t_y,t_w,t_h);
 					this.button[ii].SetText(this.scene_list[ii].view);
 					this.button[ii].SetChangeOnOverCallBack(ChangeOnOver,ii);

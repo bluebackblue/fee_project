@@ -216,6 +216,16 @@ namespace TestScript
 				return null;
 			}
 
+			/** GetResultBinary
+			*/
+			public byte[] GetResultBinary()
+			{
+				if(this.item_file != null){
+					return this.item_file.GetResultBinary();
+				}
+				return null;
+			}
+
 			/** GetResultType
 			*/
 			public ResultType GetResultType()
@@ -287,7 +297,7 @@ namespace TestScript
 				this.button = new Fee.Ui.Button(a_deleter,1,a_callback_click,(int)a_callback_click_id);
 				this.button.SetClip(true);
 				this.button.SetDragCancelFlag(true);
-				this.button.SetTexture(Resources.Load<Texture2D>(Data.UI_TEXTURE_BUTTON));
+				this.button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetText(a_callback_click_id.ToString());
 			}
 
@@ -379,7 +389,7 @@ namespace TestScript
 			Fee.SoundPool.SoundPool.CreateInstance();
 	
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.FONT);
+			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
@@ -452,69 +462,69 @@ namespace TestScript
 					//ダウンロード。サウンドプール。
 
 					uint t_data_version = 1;
-					this.loaditem = new loadItem(Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/SoundPool/","se.txt"),null,t_data_version));
+					this.loaditem = new loadItem(Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(new Fee.File.Path(Data.Url.SOUNDPOOL_SE),null,t_data_version));
 				}break;
 			case CallBackId.LoadLocal_SoundPool:
 				{
 					//ロードローカル。サウンドプール。
 
-					this.loaditem = new loadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadLocalSoundPool(new Fee.File.Path("se.txt")));
+					this.loaditem = new loadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadLocalSoundPool(new Fee.File.Path(Data.Local.SOUNDPOOL_SE)));
 				}break;
 			case CallBackId.LoadStreamingAssets_SoundPool:
 				{
 					//ロードストリーミングアセット。サウンドプール。
 
 					uint t_data_version = 1;
-					this.loaditem = new loadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path("SoundPool/se.txt"),t_data_version));
+					this.loaditem = new loadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Data.StreamingAssets.SOUNDPOOL_SE),t_data_version));
 				}break;
 			case CallBackId.SaveLocal_TextFile:
 				{
 					//セーブローカル。テキストファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path("text.txt"),"xyz"));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path(Data.Local.TEST04_TEXT),"qwerasdfzxcv"));
 				}break;
 			case CallBackId.DownLoad_TextFile:
 				{
 					//ダウンロード。テキストファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/Test04/","text.txt"),null));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestDownLoadTextFile(new Fee.File.Path(Data.Url.TEST04_TEXT),null));
 				}break;
 			case CallBackId.LoadLocal_TextFile:
 				{
 					//ロードローカル。テキストファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadLocalTextFile(new Fee.File.Path("text.txt")));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadLocalTextFile(new Fee.File.Path(Data.Local.TEST04_TEXT)));
 				}break;
 			case CallBackId.LoadStreamingAssets_TextFile:
 				{
 					//ロードストリーミングアセット。テキストファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadStreamingAssetsTextFile(new Fee.File.Path("Test04/text.txt")));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadStreamingAssetsTextFile(new Fee.File.Path(Data.StreamingAssets.TEST04_TEXT)));
 				}break;
 			case CallBackId.SaveLocal_BinaryFile:
 				{
 					//セーブローカル。バイナリファイル。
 
 					byte[] t_binary = new byte[16];
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestSaveLocalBinaryFile(new Fee.File.Path("binary"),t_binary));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestSaveLocalBinaryFile(new Fee.File.Path(Data.Local.TEST04_BINARY),t_binary));
 				}break;
 			case CallBackId.DownLoad_BinaryFile:
 				{
 					//ダウンロード。バイナリファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestDownLoadBinaryFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/Test04/","binary"),null));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestDownLoadBinaryFile(new Fee.File.Path(Data.Url.TEST04_BINARY),null));
 				}break;
 			case CallBackId.LoadLocal_BinaryFile:
 				{
 					//ロードローカル。バイナリファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadLocalBinaryFile(new Fee.File.Path("binary")));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadLocalBinaryFile(new Fee.File.Path(Data.Local.TEST04_BINARY)));
 				}break;
 			case CallBackId.LoadStreamingAssets_BinaryFile:
 				{
 					//ロードストリーミングアセット。バイナリファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path("Test04/binary")));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadStreamingAssetsBinaryFile(new Fee.File.Path(Data.StreamingAssets.TEST04_BINARY)));
 				}break;
 			case CallBackId.SaveLocal_TextureFile:
 				{
@@ -532,31 +542,31 @@ namespace TestScript
 						t_texture.Apply();
 					}
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestSaveLocalTextureFile(new Fee.File.Path("texture.png"),t_texture));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestSaveLocalTextureFile(new Fee.File.Path(Data.Local.TEST04_TEXT),t_texture));
 				}break;
 			case CallBackId.DownLoad_TextureFile:
 				{
 					//ダウンロード。テクスチャーファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestDownLoadTextureFile(new Fee.File.Path("https://bbbproject.sakura.ne.jp/www/project_webgl/Test04/","texture.png"),null));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestDownLoadTextureFile(new Fee.File.Path(Data.Url.TEST04_TEXTURE),null));
 				}break;
 			case CallBackId.LoadLocal_TextureFile:
 				{
 					//ロードローカル。テクスチャーファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadLocalTextureFile(new Fee.File.Path("texture.png")));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadLocalTextureFile(new Fee.File.Path(Data.Local.TEST04_TEXT)));
 				}break;
 			case CallBackId.LoadStreamingAssets_TextureFile:
 				{
 					//ロードストリーミングアセット。テクスチャーファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadStreamingAssetsTextureFile(new Fee.File.Path("Test04/texture.png")));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadStreamingAssetsTextureFile(new Fee.File.Path(Data.StreamingAssets.TEST04_TEXTURE)));
 				}break;
 			case CallBackId.LoadResources_AssetFile:
 				{
 					//ロードリソース。アセットファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadResourcesAssetFile(new Fee.File.Path("Test04/texture")));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoadResourcesAssetFile(new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
 				}break;
 			}
 		}
@@ -604,58 +614,33 @@ namespace TestScript
 						}break;
 					case loadItem.ResultType.SoundPool:
 						{
-							string t_responsheader = "";
-							if(this.loaditem.GetResultResponseHeader() != null){
-								t_responsheader = this.loaditem.GetResultResponseHeader().Count.ToString();
-							}
-
-							this.status_text.SetText("結果:サウンドプール取得 : " + t_responsheader);
+							this.status_text.SetText("結果:サウンドプール取得");
 						}break;
 					case loadItem.ResultType.Text:
 						{
-							string t_responsheader = "";
-							if(this.loaditem.GetResultResponseHeader() != null){
-								t_responsheader = this.loaditem.GetResultResponseHeader().Count.ToString();
-							}
-
-							this.status_text.SetText("結果:テキスト取得 : " + t_responsheader + " : " + this.loaditem.GetResultText());
+							this.status_text.SetText("結果:テキスト取得 : " + this.loaditem.GetResultText());
 						}break;
 					case loadItem.ResultType.Binary:
 						{
-							string t_responsheader = "";
-							if(this.loaditem.GetResultResponseHeader() != null){
-								t_responsheader = this.loaditem.GetResultResponseHeader().Count.ToString();
-							}
-
-							this.status_text.SetText("結果:バイナリ取得 : " + t_responsheader);
+							this.status_text.SetText("結果:バイナリ取得 : size = " + this.loaditem.GetResultBinary().Length.ToString());
 						}break;
 					case loadItem.ResultType.Texture:
 						{
-							string t_responsheader = "";
-							if(this.loaditem.GetResultResponseHeader() != null){
-								t_responsheader = this.loaditem.GetResultResponseHeader().Count.ToString();
-							}
-
 							this.result_sprite.SetVisible(true);
 							this.result_sprite.SetTexture(this.loaditem.GetResultTexture());
 
-							this.status_text.SetText("結果:テクスチャー取得 : " + t_responsheader);
+							this.status_text.SetText("結果:テクスチャー取得");
 						}break;
 					case loadItem.ResultType.Asset:
 						{
-							string t_responsheader = "";
-							if(this.loaditem.GetResultResponseHeader() != null){
-								t_responsheader = this.loaditem.GetResultResponseHeader().Count.ToString();
-							}
-
 							UnityEngine.Object t_asset = this.loaditem.GetResultAsset();
 							if(t_asset is Texture2D){
 								this.result_sprite.SetVisible(true);
 								this.result_sprite.SetTexture(t_asset as Texture2D);
 
-								this.status_text.SetText("結果:テクスチャー取得 : " + t_responsheader);
+								this.status_text.SetText("結果:テクスチャー取得");
 							}else{
-								this.status_text.SetText("結果:不明アッセット取得 : " + t_responsheader);
+								this.status_text.SetText("結果:不明アッセット取得");
 							}
 						}break;
 					}
