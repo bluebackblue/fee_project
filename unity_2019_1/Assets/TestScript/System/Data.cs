@@ -155,6 +155,17 @@ namespace TestScript
 			*/
 			public const string TEST04_TEXTURE = "texture.png";
 		}
+
+		/** Assets
+		*/
+		#if(UNITY_EDITOR)
+		public static class Assets
+		{
+			/** EXCEL
+			*/
+			public const string EXCEL = "Editor/Excel/excel.xlsx";
+		}
+		#endif
 	}
 }
 

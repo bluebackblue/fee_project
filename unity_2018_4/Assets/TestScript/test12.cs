@@ -108,7 +108,7 @@ namespace TestScript
 		/** シーンリスト初期化。
 		*/
 		#if(UNITY_EDITOR)
-		[UnityEditor.MenuItem("Fee/Test/ConvertFromExcel")]
+		[UnityEditor.MenuItem("Fee/Test/Test12/ConvertFromExcel")]
 		private static void MenuItem_ConvertFromExcel()
 		{
 			/*
@@ -135,11 +135,11 @@ namespace TestScript
 
 			//エクセルからＪＳＯＮシートを作成。
 			Fee.Excel.ExcelToJsonSheet t_excel_to_jsonsheet = new Fee.Excel.ExcelToJsonSheet();
-			if(t_excel_to_jsonsheet.Convert(Fee.File.Path.CreateStreamingAssetsPath("excel.xlsx")) == true){
+			if(t_excel_to_jsonsheet.Convert(Fee.File.Path.CreateAssetsPath(Data.Assets.EXCEL)) == true){
 				Fee.JsonItem.JsonItem t_jsonsheet = t_excel_to_jsonsheet.GetJsonSheet();
 				if(t_jsonsheet != null){
 					//コンバート。
-					if(Fee.JsonSheet.Convert.ConvertFromJsonSheet(t_jsonsheet) == false){
+					if(Fee.JsonSheet.JsonSheet.ConvertFromJsonSheet(t_jsonsheet) == false){
 						UnityEngine.Debug.LogError("faild");
 					}
 				}else{

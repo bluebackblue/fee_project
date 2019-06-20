@@ -410,11 +410,11 @@ namespace TestScript
 				}else{
 					AssetBundle t_assetbundle = null;
 
-					if(this.load_item_bgm_binary.GetResultType() == Fee.File.Item.ResultType.Binary){
+					if(this.load_item_bgm_binary.GetResultAssetType() == Fee.Asset.AssetType.Binary){
 						//ロード成功。バイナリ。
 
 						if(Fee.File.File.GetInstance().GetAssetBundleList().GetAssetBundle(ASSETBUNDLE_ID_BGM) == null){
-							t_assetbundle = AssetBundle.LoadFromMemory(this.load_item_bgm_binary.GetResultBinary());
+							t_assetbundle = AssetBundle.LoadFromMemory(this.load_item_bgm_binary.GetResultAssetBinary());
 							Fee.File.File.GetInstance().GetAssetBundleList().Regist(ASSETBUNDLE_ID_BGM,t_assetbundle);
 						}
 					}
@@ -508,11 +508,11 @@ namespace TestScript
 							//ロード中。
 							this.status.SetText("se : " + this.load_item_se_binary.GetResultProgressDown().ToString());
 						}else{
-							if(this.load_item_se_binary.GetResultType() == Fee.File.Item.ResultType.Binary){
+							if(this.load_item_se_binary.GetResultAssetType() == Fee.Asset.AssetType.Binary){
 								//成功。
 
 								//LoadFromMemory
-								AssetBundle t_assetbundle = AssetBundle.LoadFromMemory(this.load_item_se_binary.GetResultBinary());
+								AssetBundle t_assetbundle = AssetBundle.LoadFromMemory(this.load_item_se_binary.GetResultAssetBinary());
 
 								//Regist
 								Fee.File.File.GetInstance().GetAssetBundleList().Regist(ASSETBUNDLE_ID_SE,t_assetbundle);
