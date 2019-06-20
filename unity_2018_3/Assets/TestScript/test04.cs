@@ -102,9 +102,9 @@ namespace TestScript
 			LoadStreamingAssets_TextureFile,
 			LoadResources_TextureFile,
 
-			/** AssetFile
+			/** AnythingFile
 			*/
-			LoadResources_AssetFile,
+			LoadResources_AnythingFile,
 		}
 
 		/** status_text
@@ -143,7 +143,8 @@ namespace TestScript
 				Texture,
 				AssetBundle,
 				SoundPool,
-				Asset,
+
+				Anything,
 			}
 
 			/** constructor
@@ -206,40 +207,28 @@ namespace TestScript
 			*/
 			public string GetResultText()
 			{
-				if(this.item_file != null){
-					return this.item_file.GetResultText();
-				}
-				return null;
+				return this.item_file.GetResultAssetText();
 			}
 
 			/** GetResultTexture
 			*/
 			public Texture2D GetResultTexture()
 			{
-				if(this.item_file != null){
-					return this.item_file.GetResultTexture();
-				}
-				return null;
+				return this.item_file.GetResultAssetTexture();
 			}
 
-			/** GetResultAsset
+			/** GetResultAnything
 			*/
-			public UnityEngine.Object GetResultAsset()
+			public object GetResultAnything()
 			{
-				if(this.item_file != null){
-					return this.item_file.GetResultAsset();
-				}
-				return null;
+				return this.item_file.GetResultAssetAnything();
 			}
 
 			/** GetResultBinary
 			*/
 			public byte[] GetResultBinary()
 			{
-				if(this.item_file != null){
-					return this.item_file.GetResultBinary();
-				}
-				return null;
+				return this.item_file.GetResultAssetBinary();
 			}
 
 			/** GetResultType
@@ -257,21 +246,29 @@ namespace TestScript
 					case Fee.File.Item.ResultType.Error:
 						{
 						}return ResultType.Error;
-					case Fee.File.Item.ResultType.Binary:
+					case Fee.File.Item.ResultType.Asset:
 						{
-						}return ResultType.Binary;
-					case Fee.File.Item.ResultType.Text:
-						{
-						}return ResultType.Text;
-					case Fee.File.Item.ResultType.Texture:
-						{
-						}return ResultType.Texture;
+							switch(this.item_file.GetResultAssetType()){
+							case Fee.Asset.AssetType.None:
+								{
+								}return ResultType.None;
+							case Fee.Asset.AssetType.Binary:
+								{
+								}return ResultType.Binary;
+							case Fee.Asset.AssetType.Text:
+								{
+								}return ResultType.Text;
+							case Fee.Asset.AssetType.Texture:
+								{
+								}return ResultType.Texture;
+							case Fee.Asset.AssetType.Anything:
+								{
+								}return ResultType.Anything;
+							}
+						}break;
 					case Fee.File.Item.ResultType.AssetBundle:
 						{
 						}return ResultType.AssetBundle;
-					case Fee.File.Item.ResultType.Asset:
-						{
-						}return ResultType.Asset;
 					}
 				}
 
@@ -469,7 +466,7 @@ namespace TestScript
 				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadResources_TextureFile));
 				
 				//AssetFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadResources_AssetFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadResources_AnythingFile));
 
 			}
 		}
@@ -610,11 +607,11 @@ namespace TestScript
 
 					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesTextureFile,new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
 				}break;
-			case CallBackId.LoadResources_AssetFile:
+			case CallBackId.LoadResources_AnythingFile:
 				{
 					//ロードリソース。アセットファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesAssetFile,new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
+					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesAnythingFile,new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
 				}break;
 
 
@@ -682,9 +679,9 @@ namespace TestScript
 
 							this.status_text.SetText("結果:テクスチャー取得");
 						}break;
-					case loadItem.ResultType.Asset:
+					case loadItem.ResultType.Anything:
 						{
-							UnityEngine.Object t_asset = this.loaditem.GetResultAsset();
+							object t_asset = this.loaditem.GetResultAnything();
 							if(t_asset is Texture2D){
 								this.result_sprite.SetVisible(true);
 								this.result_sprite.SetTexture(t_asset as Texture2D);

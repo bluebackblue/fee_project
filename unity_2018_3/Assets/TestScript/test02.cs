@@ -568,14 +568,14 @@ namespace TestScript
 				if(this.load_item.IsBusy() == true){
 					//ロード中。
 				}else{
-					if(this.load_item.GetResultType() != Fee.File.Item.ResultType.Text){
+					if(this.load_item.GetResultAssetType() != Fee.Asset.AssetType.Text){
 						//ロード失敗。
 						this.SetStatus("Load : Faild",this.savedata);
 					}else{
 						//ロード成功。
 						SaveData t_savedata = null;
 
-						string t_jsonstring = this.load_item.GetResultText();
+						string t_jsonstring = this.load_item.GetResultAssetText();
 						if(t_jsonstring != null){
 							//文字列をＪＳＯＮ化。
 							Fee.JsonItem.JsonItem t_jsonitem = new Fee.JsonItem.JsonItem(t_jsonstring);

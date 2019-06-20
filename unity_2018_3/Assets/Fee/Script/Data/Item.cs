@@ -171,15 +171,6 @@ namespace Fee.Data
 			return this.result_binary;
 		}
 		*/
-
-		/** 結果。検証成功。設定。
-		*/
-		/*
-		public void SetResultVerifySuccess()
-		{
-			this.result_type = ResultType.VerifySuccess;
-		}
-		*/
 	}
 }
 

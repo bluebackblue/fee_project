@@ -24,11 +24,9 @@ namespace Fee.Data
 			*/
 			Start,
 
-			/** Do_Security
+			/** Do_Normal
 			*/
-			/*
-			Do_Security,
-			*/
+			Do_Normal,
 
 			/** 完了。
 			*/
@@ -43,31 +41,9 @@ namespace Fee.Data
 			*/
 			None,
 
-			#if(false)
-			/** 暗号化。パブリックキー。
+			/** 普通。
 			*/
-			EncryptPublicKey,
-
-			/** 複合化。プライベートキー。
-			*/
-			DecryptPrivateKey,
-
-			/** 証明書作成。プライベートキー。
-			*/
-			CreateSignaturePrivateKey,
-
-			/** 証明書検証。パブリックキー。
-			*/
-			VerifySignaturePublicKey,
-
-			/** 暗号化。パス。
-			*/
-			EncryptPass,
-
-			/** 複合化。パス。
-			*/
-			DecryptPass,
-			#endif
+			Normal,
 		};
 
 		/** mode
@@ -78,11 +54,9 @@ namespace Fee.Data
 		*/
 		private RequestType request_type;
 
-		/** request_binary
+		/** request_listitem
 		*/
-		/*
-		private byte[] request_binary;
-		*/
+		private ListItem request_listitem;
 
 		/** request_key
 		*/
@@ -122,10 +96,8 @@ namespace Fee.Data
 			//request_type
 			this.request_type = RequestType.None;
 
-			//request_binary
-			/*
-			this.request_binary = null;
-			*/
+			//request_listitem
+			this.request_listitem = null;
 
 			//request_key
 			/*
@@ -146,16 +118,13 @@ namespace Fee.Data
 			this.item = new Item();
 		}
 
-		/** リクエスト。暗号化。パブリックキー。
+		/** リクエスト。
 		*/
-		/*
-		public void RequestEncryptPublicKey(byte[] a_binary,string a_key)
+		public void RequestNormal(ListItem a_listitem)
 		{
-			this.request_type = RequestType.EncryptPublicKey;
-			this.request_binary = a_binary;
-			this.request_key = a_key;
+			this.request_type = RequestType.Normal;
+			this.request_listitem = a_listitem;
 		}
-		*/
 
 		/** アイテム。
 		*/
@@ -176,74 +145,43 @@ namespace Fee.Data
 				{
 					switch(this.request_type){
 
-					/*
-					case RequestType.EncryptPublicKey:
+					case RequestType.Normal:
 						{
-							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestEncryptPublicKey(this.request_binary,this.request_key) == true){
-								this.mode = Mode.Do_Security;
+							if(Fee.Data.Data.GetInstance().GetMainNormal().RequestNormal(this.request_listitem) == true){
+								this.mode = Mode.Do_Normal;
 							}
 						}break;
-					case RequestType.DecryptPrivateKey:
-						{
-							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestDecryptPrivateKey(this.request_binary,this.request_key) == true){
-								this.mode = Mode.Do_Security;
-							}
-						}break;
-					case RequestType.CreateSignaturePrivateKey:
-						{
-							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestCreateSignaturePrivateKey(this.request_binary,this.request_key) == true){
-								this.mode = Mode.Do_Security;
-							}
-						}break;
-					case RequestType.VerifySignaturePublicKey:
-						{
-							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestVerifySignaturePublicKey(this.request_binary,this.request_signature_binary,this.request_key) == true){
-								this.mode = Mode.Do_Security;
-							}
-						}break;
-					case RequestType.EncryptPass:
-						{
-							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestEncryptPass(this.request_binary,this.request_pass,this.request_salt) == true){
-								this.mode = Mode.Do_Security;
-							}
-						}break;
-					case RequestType.DecryptPass:
-						{
-							if(Fee.Crypt.Crypt.GetInstance().GetMainSecurity().RequestDecryptPass(this.request_binary,this.request_pass,this.request_salt) == true){
-								this.mode = Mode.Do_Security;
-							}
-						}break;
-					*/
-
 					}
 				}break;
 			case Mode.End:
 				{
 				}return true;
 
-				/*
-			case Mode.Do_Security:
+			case Mode.Do_Normal:
 				{
-					Main_Security t_main = Fee.Crypt.Crypt.GetInstance().GetMainSecurity();
+					Main_Normal t_main = Fee.Data.Data.GetInstance().GetMainNormal();
 
 					this.item.SetResultProgress(t_main.GetResultProgress());
 
-					if(t_main.GetResultType() != Main_Security.ResultType.None){
+					if(t_main.GetResultType() != Main_Normal.ResultType.None){
 						//結果。
 						bool t_success = false;
 						switch(t_main.GetResultType()){
-						case Main_Security.ResultType.Binary:
+
+							/*
+						case Main_Normal.ResultType.Binary:
 							{
 								if(t_main.GetResultBinary() != null){
 									this.item.SetResultBinary(t_main.GetResultBinary());
 									t_success = true;
 								}
 							}break;
-						case Main_Security.ResultType.VerifySuccess:
+						case Main_Normal.ResultType.VerifySuccess:
 							{
 								this.item.SetResultVerifySuccess();
 								t_success = true;
 							}break;
+							*/
 						}
 
 						if(t_success == false){
@@ -259,7 +197,6 @@ namespace Fee.Data
 						t_main.Cancel();
 					}
 				}break;
-				*/
 			}
 
 			return false;
