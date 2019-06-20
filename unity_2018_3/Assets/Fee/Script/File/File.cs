@@ -154,6 +154,8 @@ namespace Fee.File
 		*/
 		public enum LoadRequestType
 		{
+			None,
+
 			LoadLocalBinaryFile,
 			LoadLocalTextFile,
 			LoadLocalTextureFile,

@@ -58,30 +58,6 @@ namespace Fee.Data
 		*/
 		private ListItem request_listitem;
 
-		/** request_key
-		*/
-		/*
-		private string request_key;
-		*/
-
-		/** request_signature_binary
-		*/
-		/*
-		private byte[] request_signature_binary;
-		*/
-
-		/** request_pass
-		*/
-		/*
-		private string request_pass;
-		*/
-
-		/** request_salt
-		*/
-		/*
-		private string request_salt;
-		*/
-
 		/** item
 		*/
 		private Item item;
@@ -98,21 +74,6 @@ namespace Fee.Data
 
 			//request_listitem
 			this.request_listitem = null;
-
-			//request_key
-			/*
-			this.request_key = null;
-			*/
-
-			//request_pass
-			/*
-			this.request_pass = null;
-			*/
-
-			//request_salt
-			/*
-			this.request_salt = null;
-			*/
 
 			//item
 			this.item = new Item();
@@ -167,21 +128,13 @@ namespace Fee.Data
 						//結果。
 						bool t_success = false;
 						switch(t_main.GetResultType()){
-
-							/*
-						case Main_Normal.ResultType.Binary:
+						case Main_Normal.ResultType.Asset:
 							{
-								if(t_main.GetResultBinary() != null){
-									this.item.SetResultBinary(t_main.GetResultBinary());
+								if(t_main.GetResultAsset() != null){
+									this.item.SetResultAsset(t_main.GetResultAsset());
 									t_success = true;
 								}
 							}break;
-						case Main_Normal.ResultType.VerifySuccess:
-							{
-								this.item.SetResultVerifySuccess();
-								t_success = true;
-							}break;
-							*/
 						}
 
 						if(t_success == false){

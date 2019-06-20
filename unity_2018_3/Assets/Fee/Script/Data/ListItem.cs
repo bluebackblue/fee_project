@@ -4,7 +4,7 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief データ。データアイテム。
+ * @brief データ。リストアイテム。
 */
 
 
@@ -12,26 +12,13 @@
 */
 namespace Fee.Data
 {
-	/** PathType
-	*/
-	public enum PathType
-	{
-		/** Resources_Texture
-		*/
-		Resources_Texture,
-
-		/** Resources_Text
-		*/
-		Resources_Text,
-	}
-
 	/** ListItem
 	*/
 	public class ListItem
 	{
-		/** datatype
+		/** path_type
 		*/
-		public PathType datatype;
+		public PathType path_type;
 
 		/** path
 		*/
@@ -39,10 +26,10 @@ namespace Fee.Data
 
 		/** constructor
 		*/
-		public ListItem(PathType a_datatype,Fee.File.Path a_path)
+		public ListItem(PathType a_path_type,Fee.File.Path a_path)
 		{
-			//datatype
-			this.datatype = a_datatype;
+			//path_type
+			this.path_type = a_path_type;
 
 			//path
 			this.path = a_path;

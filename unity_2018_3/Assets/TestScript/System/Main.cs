@@ -139,53 +139,159 @@ namespace TestScript
 		*/
 		public void DeleteLibInstance()
 		{
+			//アセット。
+			{
+			}
+
 			//オーディオ。
-			Fee.Audio.Audio.DeleteInstance();
+			{
+				Fee.Audio.Audio.DeleteInstance();
+			}
 
 			//ブルーム。
-			Fee.Bloom.Bloom.DeleteInstance();
+			{
+				Fee.Bloom.Bloom.DeleteInstance();
+			}
 
 			//ブラー。
-			Fee.Blur.Blur.DeleteInstance();
+			{
+				Fee.Blur.Blur.DeleteInstance();
+			}
+
+			//暗号。
+			{
+				Fee.Crypt.Crypt.DeleteInstance();
+			}
+
+			//データ。
+			{
+				Fee.Data.Data.DeleteInstance();
+			}
+
+			//削除管理。
+			{
+			}
+
+			//深度。
+			{
+				Fee.Depth.Depth.DeleteInstance();
+			}
+
+			//ダイクストラ法。
+			{
+			}
+
+			//ディレクトリ。
+			{
+			}
+
+			//エディターツール。
+			{
+			}
 
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.DeleteInstance();
+			{
+				Fee.EventPlate.EventPlate.DeleteInstance();
+			}
+
+			//エクセル。
+			{
+			}
 
 			//フェード。
-			Fee.Fade.Fade.DeleteInstance();
+			{
+				Fee.Fade.Fade.DeleteInstance();
+			}
 
 			//ファイル。
-			Fee.File.File.DeleteInstance();
+			{
+				Fee.File.File.DeleteInstance();
+			}
 
-			//マスウ。
-			Fee.Input.Mouse.DeleteInstance();
+			//関数呼び出し。
+			{
+				Fee.Function.Function.SetMonoBehaviour(null);
+			}
 
-			//キー。
-			Fee.Input.Key.DeleteInstance();
+			//入力。
+			{
+				//マスウ。
+				Fee.Input.Mouse.DeleteInstance();
+	
+				//キー。
+				Fee.Input.Key.DeleteInstance();
+	
+				//パッド。
+				Fee.Input.Pad.DeleteInstance();
+			}
 
-			//パッド。
-			Fee.Input.Pad.DeleteInstance();
+			//インスタンス作成。
+			{
+			}
+
+			//ＪＳＯＮ。
+			{
+			}
+
+			//ＪＳＯＮシート。
+			{
+			}
+
+			//アセットバンドル作成。
+			{
+			}
+
+			//モデル。
+			{
+			}
 
 			//ネットワーク。
-			Fee.Network.Network.DeleteInstance();
+			{
+				Fee.Network.Network.DeleteInstance();
+			}
 
 			//パフォーマンスカウンター。
-			Fee.PerformanceCounter.PerformanceCounter.DeleteInstance();
+			{
+				Fee.PerformanceCounter.PerformanceCounter.DeleteInstance();
+			}
+
+			//プラットフォーム。
+			{
+			}
 
 			//２Ｄ描画。
-			Fee.Render2D.Render2D.DeleteInstance();
+			{
+				Fee.Render2D.Render2D.DeleteInstance();
+			}
+
+			//リスロー。
+			{
+			}
 
 			//シーン。
-			Fee.Scene.Scene.DeleteInstance();
+			{
+				Fee.Scene.Scene.DeleteInstance();
+			}
+
+			//サウンドプール。
+			{
+				Fee.SoundPool.SoundPool.DeleteInstance();
+			}
 
 			//タスク。
-			Fee.TaskW.TaskW.DeleteInstance();
+			{
+				Fee.TaskW.TaskW.DeleteInstance();
+			}
 
 			//ＵＩ。
-			Fee.Ui.Ui.DeleteInstance();
+			{
+				Fee.Ui.Ui.DeleteInstance();
+			}
 
 			//ＵＮＩＶＲＭ。
-			Fee.UniVrm.UniVrm.DeleteInstance();
+			{
+				Fee.UniVrm.UniVrm.DeleteInstance();
+			}
 		}
 
 		/** 更新。

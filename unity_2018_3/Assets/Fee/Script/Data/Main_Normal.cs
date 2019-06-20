@@ -4,7 +4,7 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief データ。普通。
+ * @brief データ。ノーマル。
 */
 
 
@@ -39,25 +39,9 @@ namespace Fee.Data
 			*/
 			Error,
 
-			/** セーブ完了。
+			/** アセット。
 			*/
-			SaveEnd,
-
-			/** バイナリー。
-			*/
-			Binary,
-
-			/** テキスト。
-			*/
-			Text,
-
-			/** テクスチャ。
-			*/
-			Texture,
-
-			/** アセットバンドル。
-			*/
-			AssetBundle,
+			Asset,
 		};
 
 		/** is_busy
@@ -92,23 +76,9 @@ namespace Fee.Data
 		*/
 		private ResultType result_type;
 
-		/** result_binary
+		/** result_asset
 		*/
-		/*
-		private byte[] result_binary;
-		*/
-
-		/** result_text
-		*/
-		/*
-		private string result_text;
-		*/
-
-		/** result_texture
-		*/
-		/*
-		private UnityEngine.Texture2D result_texture;
-		*/
+		private Fee.Asset.Asset result_asset;
 
 		/** constructor
 		*/
@@ -126,9 +96,7 @@ namespace Fee.Data
 			this.result_progress = 0.0f;
 			this.result_errorstring = null;
 			this.result_type = ResultType.None;
-			//this.result_binary = null;
-			//this.result_text = null;
-			//this.result_texture = null;
+			this.result_asset = null;
 		}
 
 		/** 削除。
@@ -173,32 +141,12 @@ namespace Fee.Data
 			return this.result_type;
 		}
 
-		/** GetResultBinary
+		/** GetResultAsset
 		*/
-		/*
-		public byte[] GetResultBinary()
+		public Fee.Asset.Asset GetResultAsset()
 		{
-			return this.result_binary;
+			return this.result_asset;
 		}
-		*/
-
-		/** GetResultText
-		*/
-		/*
-		public string GetResultText()
-		{
-			return this.result_text;
-		}
-		*/
-
-		/** GetResultTexture
-		*/
-		/*
-		public UnityEngine.Texture2D GetResultTexture()
-		{
-			return this.result_texture;
-		}
-		*/
 
 		/** [Fee.Data.OnCoroutine_CallBack]コルーチンからのコールバック。
 
@@ -229,9 +177,7 @@ namespace Fee.Data
 				this.result_progress = 0.0f;
 				this.result_errorstring = null;
 				this.result_type = ResultType.None;
-				//this.result_binary = null;
-				//this.result_text = null;
-				//this.result_texture = null;
+				this.result_asset = null;
 
 				//request
 				this.request_type = RequestType.Normal;
@@ -253,23 +199,17 @@ namespace Fee.Data
 			Coroutine_Normal t_coroutine = new Coroutine_Normal();
 			yield return t_coroutine.CoroutineMain(this,this.request_listitem);
 
-			/*
-			if(t_coroutine.result.binary_file != null){
-				this.result_progress_up = 1.0f;
-				this.result_progress_down = 1.0f;
-				this.result_binary = t_coroutine.result.binary_file;
-				this.result_type = ResultType.Binary;
+			if(t_coroutine.result.asset_file != null){
+				this.result_progress = 1.0f;
+				this.result_asset = t_coroutine.result.asset_file;
+				this.result_type = ResultType.Asset;
 				yield break;
 			}else{
-				this.result_progress_up = 1.0f;
-				this.result_progress_down = 1.0f;
+				this.result_progress = 1.0f;
 				this.result_errorstring = t_coroutine.result.errorstring;
 				this.result_type = ResultType.Error;
 				yield break;
 			}
-			*/
-
-			yield break;
 		}
 	}
 }
