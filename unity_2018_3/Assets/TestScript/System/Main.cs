@@ -132,6 +132,14 @@ namespace TestScript
 				this.text = new Fee.Render2D.Text2D(this.deleter,0);
 				this.text.SetRect(30,300,0,0);
 				this.text.SetText("---");
+
+				//TODO:
+				{
+					UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("test");
+					if(t_textasset != null){
+						this.text.SetText(t_textasset.text);
+					}
+				}
 			}
 		}
 

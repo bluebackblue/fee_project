@@ -105,6 +105,11 @@ namespace TestScript
 			/** AnythingFile
 			*/
 			LoadResources_AnythingFile,
+
+			/** Data
+			*/
+			LoadData,
+
 		}
 
 		/** status_text
@@ -119,9 +124,9 @@ namespace TestScript
 		*/
 		private Fee.Render2D.Sprite2D result_sprite;
 
-		/** loadItem
+		/** LoadItem
 		*/
-		class loadItem
+		class LoadItem
 		{
 			/** item_file
 			*/
@@ -130,6 +135,10 @@ namespace TestScript
 			/** item_soundpool
 			*/
 			private Fee.SoundPool.Item item_soundpool;
+
+			/** item_data
+			*/
+			private Fee.Data.Item item_data;
 
 			/** ResultType
 			*/
@@ -143,24 +152,32 @@ namespace TestScript
 				Texture,
 				AssetBundle,
 				SoundPool,
-
 				Anything,
 			}
 
 			/** constructor
 			*/
-			public loadItem(Fee.File.Item a_item)
+			public LoadItem(Fee.File.Item a_item)
 			{
 				this.item_file = a_item;
 				this.item_soundpool = null;
+				this.item_data = null;
 			}
 
 			/** constructor
 			*/
-			public loadItem(Fee.SoundPool.Item a_item)
+			public LoadItem(Fee.SoundPool.Item a_item)
 			{
 				this.item_file = null;
 				this.item_soundpool = a_item;
+				this.item_data = null;
+			}
+
+			public LoadItem(Fee.Data.Item a_item)
+			{
+				this.item_file = null;
+				this.item_soundpool = null;
+				this.item_data = a_item;
 			}
 
 			/** IsBusy
@@ -170,17 +187,29 @@ namespace TestScript
 				if(this.item_file != null){
 					return this.item_file.IsBusy();
 				}
-				return this.item_soundpool.IsBusy();
+				if(this.item_soundpool != null){
+					return this.item_soundpool.IsBusy();
+				}
+				if(this.item_data != null){
+					return this.item_data.IsBusy();
+				}
+				return false;
 			}
 
-			/** GetResultProgressDown
+			/** GetResultProgress
 			*/
-			public float GetResultProgressDown()
+			public float GetResultProgress()
 			{
 				if(this.item_file != null){
 					return this.item_file.GetResultProgressDown();
 				}
-				return this.item_soundpool.GetResultProgressDown();
+				if(this.item_soundpool != null){
+					return this.item_soundpool.GetResultProgressDown();
+				}
+				if(this.item_data != null){
+					return this.item_data.GetResultProgress();
+				}
+				return 0.0f;
 			}
 
 			/** GetResultErrorString
@@ -190,45 +219,65 @@ namespace TestScript
 				if(this.item_file != null){
 					return this.item_file.GetResultErrorString();
 				}
-				return this.item_soundpool.GetResultErrorString();
-			}
-
-			/** GetResultResponseHeader
-			*/
-			public System.Collections.Generic.Dictionary<string,string> GetResultResponseHeader()
-			{
-				if(this.item_file != null){
-					return this.item_file.GetResultResponseHeader();
+				if(this.item_soundpool != null){
+					return this.item_soundpool.GetResultErrorString();
 				}
-				return this.item_soundpool.GetResultResponseHeader();
+				if(this.item_data != null){
+					return this.item_data.GetResultErrorString();
+				}
+				return "";
 			}
 
 			/** GetResultText
 			*/
 			public string GetResultText()
 			{
-				return this.item_file.GetResultAssetText();
+				if(this.item_file != null){
+					return this.item_file.GetResultAssetText();
+				}
+				if(this.item_data != null){
+					return this.item_data.GetResultAssetText();
+				}
+				return null;
 			}
 
 			/** GetResultTexture
 			*/
 			public Texture2D GetResultTexture()
 			{
-				return this.item_file.GetResultAssetTexture();
+				if(this.item_file != null){
+					return this.item_file.GetResultAssetTexture();
+				}
+				if(this.item_data != null){
+					return this.item_data.GetResultAssetTexture();
+				}
+				return null;
 			}
 
 			/** GetResultAnything
 			*/
 			public object GetResultAnything()
 			{
-				return this.item_file.GetResultAssetAnything();
+				if(this.item_file != null){
+					return this.item_file.GetResultAssetAnything();
+				}
+				if(this.item_data != null){
+					return this.item_data.GetResultAssetAnything();
+				}
+				return null;
 			}
 
 			/** GetResultBinary
 			*/
 			public byte[] GetResultBinary()
 			{
-				return this.item_file.GetResultAssetBinary();
+				if(this.item_file != null){
+					return this.item_file.GetResultAssetBinary();
+				}
+				if(this.item_data != null){
+					return this.item_data.GetResultAssetBinary();
+				}
+				return null;
 			}
 
 			/** GetResultType
@@ -272,16 +321,49 @@ namespace TestScript
 					}
 				}
 
-				switch(this.item_soundpool.GetResultType()){
-				case Fee.SoundPool.Item.ResultType.None:
-					{
-					}return ResultType.None;
-				case Fee.SoundPool.Item.ResultType.Error:
-					{
-					}return ResultType.Error;
-				case Fee.SoundPool.Item.ResultType.SoundPool:
-					{
-					}return ResultType.SoundPool;
+				if(this.item_soundpool != null){
+					switch(this.item_soundpool.GetResultType()){
+					case Fee.SoundPool.Item.ResultType.None:
+						{
+						}return ResultType.None;
+					case Fee.SoundPool.Item.ResultType.Error:
+						{
+						}return ResultType.Error;
+					case Fee.SoundPool.Item.ResultType.SoundPool:
+						{
+						}return ResultType.SoundPool;
+					}
+				}
+
+				if(this.item_data != null){
+					switch(this.item_data.GetResultType()){
+					case Fee.Data.Item.ResultType.None:
+						{
+						}return ResultType.None;
+					case Fee.Data.Item.ResultType.Error:
+						{
+						}return ResultType.Error;
+					case Fee.Data.Item.ResultType.Asset:
+						{
+							switch(this.item_data.GetResultAssetType()){
+							case Fee.Asset.AssetType.None:
+								{
+								}return ResultType.None;
+							case Fee.Asset.AssetType.Binary:
+								{
+								}return ResultType.Binary;
+							case Fee.Asset.AssetType.Text:
+								{
+								}return ResultType.Text;
+							case Fee.Asset.AssetType.Texture:
+								{
+								}return ResultType.Texture;
+							case Fee.Asset.AssetType.Anything:
+								{
+								}return ResultType.Anything;
+							}
+						}break;
+					}
 				}
 
 				return ResultType.None;
@@ -357,9 +439,9 @@ namespace TestScript
 			}
 		}
 
-		/** loaditem
+		/** LoadItem
 		*/
-		private loadItem loaditem;
+		private LoadItem loaditem;
 
 		/** scroll
 		*/
@@ -385,6 +467,9 @@ namespace TestScript
 			//ファイル。インスタンス作成。
 			Fee.File.Config.LOG_ENABLE = true;
 			Fee.File.File.CreateInstance();
+
+			//データ。インスタンス作成。
+			Fee.Data.Data.CreateInstance();
 
 			//マウス。インスタンス作成。
 			Fee.Input.Mouse.CreateInstance();
@@ -468,6 +553,9 @@ namespace TestScript
 				//AssetFile
 				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadResources_AnythingFile));
 
+				//Data
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadData));
+
 			}
 		}
 
@@ -483,20 +571,20 @@ namespace TestScript
 					//ダウンロード。サウンドプール。
 
 					uint t_data_version = 1;
-					this.loaditem = new loadItem(Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(new Fee.File.Path(Data.Url.SOUNDPOOL_SE),null,t_data_version));
+					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(new Fee.File.Path(Data.Url.SOUNDPOOL_SE),null,t_data_version));
 				}break;
 			case CallBackId.LoadLocal_SoundPool:
 				{
 					//ロードローカル。サウンドプール。
 
-					this.loaditem = new loadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadLocalSoundPool(new Fee.File.Path(Data.Local.SOUNDPOOL_SE)));
+					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadLocalSoundPool(new Fee.File.Path(Data.Local.SOUNDPOOL_SE)));
 				}break;
 			case CallBackId.LoadStreamingAssets_SoundPool:
 				{
 					//ロードストリーミングアセット。サウンドプール。
 
 					uint t_data_version = 1;
-					this.loaditem = new loadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Data.StreamingAssets.SOUNDPOOL_SE),t_data_version));
+					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Data.StreamingAssets.SOUNDPOOL_SE),t_data_version));
 				}break;
 
 
@@ -506,31 +594,31 @@ namespace TestScript
 				{
 					//セーブローカル。テキストファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path(Data.Local.TEST04_TEXT),"qwerasdfzxcv"));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path(Data.Local.TEST04_TEXT),"qwerasdfzxcv"));
 				}break;
 			case CallBackId.DownLoad_TextFile:
 				{
 					//ダウンロード。テキストファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadTextFile,new Fee.File.Path(Data.Url.TEST04_TEXT)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadTextFile,new Fee.File.Path(Data.Url.TEST04_TEXT)));
 				}break;
 			case CallBackId.LoadLocal_TextFile:
 				{
 					//ロードローカル。テキストファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad( Fee.File.File.LoadRequestType.LoadLocalTextFile,new Fee.File.Path(Data.Local.TEST04_TEXT)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad( Fee.File.File.LoadRequestType.LoadLocalTextFile,new Fee.File.Path(Data.Local.TEST04_TEXT)));
 				}break;
 			case CallBackId.LoadStreamingAssets_TextFile:
 				{
 					//ロードストリーミングアセット。テキストファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsTextFile,new Fee.File.Path(Data.StreamingAssets.TEST04_TEXT)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsTextFile,new Fee.File.Path(Data.StreamingAssets.TEST04_TEXT)));
 				}break;
 			case CallBackId.LoadResources_TextFile:
 				{
 					//ロードリソース。テキストファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesTextFile,new Fee.File.Path(Data.Resources.TEST04_TEXT)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesTextFile,new Fee.File.Path(Data.Resources.TEST04_TEXT)));
 				}break;
 
 
@@ -541,25 +629,25 @@ namespace TestScript
 					//セーブローカル。バイナリファイル。
 
 					byte[] t_binary = new byte[16];
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestSaveLocalBinaryFile(new Fee.File.Path(Data.Local.TEST04_BINARY),t_binary));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveLocalBinaryFile(new Fee.File.Path(Data.Local.TEST04_BINARY),t_binary));
 				}break;
 			case CallBackId.DownLoad_BinaryFile:
 				{
 					//ダウンロード。バイナリファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadBinaryFile,new Fee.File.Path(Data.Url.TEST04_BINARY)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadBinaryFile,new Fee.File.Path(Data.Url.TEST04_BINARY)));
 				}break;
 			case CallBackId.LoadLocal_BinaryFile:
 				{
 					//ロードローカル。バイナリファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadLocalBinaryFile,new Fee.File.Path(Data.Local.TEST04_BINARY)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadLocalBinaryFile,new Fee.File.Path(Data.Local.TEST04_BINARY)));
 				}break;
 			case CallBackId.LoadStreamingAssets_BinaryFile:
 				{
 					//ロードストリーミングアセット。バイナリファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsBinaryFile,new Fee.File.Path(Data.StreamingAssets.TEST04_BINARY)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsBinaryFile,new Fee.File.Path(Data.StreamingAssets.TEST04_BINARY)));
 				}break;
 
 
@@ -581,39 +669,50 @@ namespace TestScript
 						t_texture.Apply();
 					}
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestSaveLocalTextureFile(new Fee.File.Path(Data.Local.TEST04_TEXTURE),t_texture));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveLocalTextureFile(new Fee.File.Path(Data.Local.TEST04_TEXTURE),t_texture));
 				}break;
 			case CallBackId.DownLoad_TextureFile:
 				{
 					//ダウンロード。テクスチャーファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadTextureFile,new Fee.File.Path(Data.Url.TEST04_TEXTURE)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadTextureFile,new Fee.File.Path(Data.Url.TEST04_TEXTURE)));
 				}break;
 			case CallBackId.LoadLocal_TextureFile:
 				{
 					//ロードローカル。テクスチャーファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadLocalTextureFile,new Fee.File.Path(Data.Local.TEST04_TEXTURE)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadLocalTextureFile,new Fee.File.Path(Data.Local.TEST04_TEXTURE)));
 				}break;
 			case CallBackId.LoadStreamingAssets_TextureFile:
 				{
 					//ロードストリーミングアセット。テクスチャーファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsTextureFile,new Fee.File.Path(Data.StreamingAssets.TEST04_TEXTURE)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsTextureFile,new Fee.File.Path(Data.StreamingAssets.TEST04_TEXTURE)));
 				}break;
 			case CallBackId.LoadResources_TextureFile:
 				{
 					//ロードリソース。テクスチャーファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesTextureFile,new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesTextureFile,new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
 				}break;
+
+
+
+
 			case CallBackId.LoadResources_AnythingFile:
 				{
 					//ロードリソース。アセットファイル。
 
-					this.loaditem = new loadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesAnythingFile,new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesAnythingFile,new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
 				}break;
 
+
+			case CallBackId.LoadData:
+				{
+					//ロードデータ。
+
+					this.loaditem = new LoadItem(Fee.Data.Data.GetInstance().RequestNormal("ui_button"));
+				}break;
 
 
 			}
@@ -625,6 +724,9 @@ namespace TestScript
 		{
 			//ファイル。
 			Fee.File.File.GetInstance().Main();
+
+			//データ。
+			Fee.Data.Data.GetInstance().Main();
 
 			//マウス。インスタンス作成。
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
@@ -645,41 +747,41 @@ namespace TestScript
 				if(this.loaditem.IsBusy() == true){
 					this.status_text.SetText("処理中");
 
-					this.progress_sprite.SetW((int)(300 * this.loaditem.GetResultProgressDown()));
+					this.progress_sprite.SetW((int)(300 * this.loaditem.GetResultProgress()));
 				}else{
 					switch(this.loaditem.GetResultType()){
-					case loadItem.ResultType.Error:
+					case LoadItem.ResultType.Error:
 						{
 							this.status_text.SetText("結果:エラー : \n" + this.loaditem.GetResultErrorString());
 						}break;
-					case loadItem.ResultType.None:
+					case LoadItem.ResultType.None:
 						{
 							this.status_text.SetText("結果:なし");
 						}break;
-					case loadItem.ResultType.SaveEnd:
+					case LoadItem.ResultType.SaveEnd:
 						{
 							this.status_text.SetText("結果:セーブ完了");
 						}break;
-					case loadItem.ResultType.SoundPool:
+					case LoadItem.ResultType.SoundPool:
 						{
 							this.status_text.SetText("結果:サウンドプール取得");
 						}break;
-					case loadItem.ResultType.Text:
+					case LoadItem.ResultType.Text:
 						{
 							this.status_text.SetText("結果:テキスト取得 : " + this.loaditem.GetResultText());
 						}break;
-					case loadItem.ResultType.Binary:
+					case LoadItem.ResultType.Binary:
 						{
 							this.status_text.SetText("結果:バイナリ取得 : size = " + this.loaditem.GetResultBinary().Length.ToString());
 						}break;
-					case loadItem.ResultType.Texture:
+					case LoadItem.ResultType.Texture:
 						{
 							this.result_sprite.SetVisible(true);
 							this.result_sprite.SetTexture(this.loaditem.GetResultTexture());
 
 							this.status_text.SetText("結果:テクスチャー取得");
 						}break;
-					case loadItem.ResultType.Anything:
+					case LoadItem.ResultType.Anything:
 						{
 							object t_asset = this.loaditem.GetResultAnything();
 							if(t_asset is Texture2D){

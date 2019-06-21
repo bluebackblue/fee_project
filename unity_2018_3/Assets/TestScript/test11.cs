@@ -17,11 +17,7 @@ namespace TestScript
 {
 	/** test11
 
-		オーディオクリップパックのアセットバンドル作成
-		サウンドプールパックの作成
-
-		オーディオクリップパックのアセットバンドルロード
-		サウンドプールパックのロード
+		オーディオ
 
 	*/
 	public class test11 : MainBase
@@ -40,17 +36,9 @@ namespace TestScript
 			);
 		}
 
-		/** DATA_VERSION
+		/** SOUNDPOOL_DATA_VERSION
 		*/
-		private const int DATA_VERSION = 5;
-
-		/** ASSETBUNDLE_ID_BGM
-		*/
-		private const long ASSETBUNDLE_ID_BGM = 0x00000001;
-
-		/** ASSETBUNDLE_ID_SE
-		*/
-		private const long ASSETBUNDLE_ID_SE = 0x00000002;
+		private const int SOUNDPOOL_DATA_VERSION = 5;
 
 		/** SE_ID
 		*/
@@ -60,9 +48,9 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** Mode
+		/** SoundPool_Mode
 		*/
-		private enum Mode
+		private enum SoundPool_Mode
 		{
 			/** 待ち。
 			*/
@@ -75,37 +63,13 @@ namespace TestScript
 			/** Now
 			*/
 			Now,
-
-			/** Fix
-			*/
-			Fix,
 		};
 
-		private Mode mode;
+		private SoundPool_Mode soundpool_mode;
 
-		/** soundpool_flag
+		/** soundpool_loaditem
 		*/
-		private bool soundpool_flag;
-
-		/** ロード。
-		*/
-		private Fee.File.Item load_item_se_binary;
-
-		/** ロード。
-		*/
-		private Fee.File.Item load_item_bgm_binary;
-
-		/** ロードサウンドプール。
-		*/
-		private Fee.SoundPool.Item load_item_se_soundpool;
-
-		/** オーディオクリップパック。
-		*/
-		private Fee.Audio.Pack_AudioClip pack_audioclip;
-
-		/** サウンドプールパック。
-		*/
-		private Fee.Audio.Pack_SoundPool pack_soundpool;
+		private Fee.SoundPool.Item soundpool_loaditem;
 
 		/** ステータス。
 		*/
@@ -193,28 +157,13 @@ namespace TestScript
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
-			//モード。
-			this.mode = Mode.Wait;
+			//サウンドプールモード。
+			this.soundpool_mode = SoundPool_Mode.Wait;
 
-			//soundpool_flag
-			this.soundpool_flag = false;
+			//soundpool_loaditem
+			this.soundpool_loaditem = null;
 
-			//ロード。
-			this.load_item_se_binary = null;
-
-			//ロード。
-			this.load_item_bgm_binary = null;
-
-			//ロードサウンドプール。
-			this.load_item_se_soundpool = null;
-
-			//パック。
-			this.pack_audioclip = null;
-
-			//パック。
-			this.pack_soundpool = null;
-
-			//ステータス。
+			///ステータス。
 			this.status = new Fee.Render2D.Text2D(this.deleter,0);
 			this.status.SetRect(100,50,Fee.Render2D.Config.VIRTUAL_W - 100,200);
 			this.status.SetText("-");
@@ -237,10 +186,10 @@ namespace TestScript
 			t_xx += 210;
 
 			//ボタン。
-			this.button_assetbundle = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_AssetBundle,-1);
+			this.button_assetbundle = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_AudioClip,-1);
 			this.button_assetbundle.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_assetbundle.SetRect(t_xx,130,170,30);
-			this.button_assetbundle.SetText("AssetBundleロード");
+			this.button_assetbundle.SetText("AudioClip SE");
 
 			t_xx += 210;
 
@@ -248,7 +197,7 @@ namespace TestScript
 			this.button_soundpool = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SoundPool,-1);
 			this.button_soundpool.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_soundpool.SetRect(t_xx,130,170,30);
-			this.button_soundpool.SetText("SoundPoolロード");
+			this.button_soundpool.SetText("SoundPool SE");
 
 			t_xx += 210;
 
@@ -335,19 +284,16 @@ namespace TestScript
 
 			//ＢＧＭのアンロード。
 			Fee.Audio.Audio.GetInstance().UnLoadBgm();
-
-			//アセットバンドルのアンロード。
-			Fee.File.File.GetInstance().GetAssetBundleList().UnloadAssetBundle(ASSETBUNDLE_ID_SE);
-			Fee.File.File.GetInstance().GetAssetBundleList().UnloadAssetBundle(ASSETBUNDLE_ID_BGM);
 		}
 
 		/** [Button_Base]コールバック。クリック。
 		*/
-		private void CallBack_Click_AssetBundle(int a_id)
+		private void CallBack_Click_AudioClip(int a_id)
 		{
-			if(this.mode == Mode.Wait){
-				this.soundpool_flag = false;
-				this.mode = Mode.Start;
+			GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.PREFAB_SE);
+			Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
+			if(t_pack_audioclip != null){
+				Fee.Audio.Audio.GetInstance().LoadSe(t_pack_audioclip,SE_ID);
 			}
 		}
 
@@ -355,9 +301,8 @@ namespace TestScript
 		*/
 		private void CallBack_Click_SoundPool(int a_id)
 		{
-			if(this.mode == Mode.Wait){
-				this.soundpool_flag = true;
-				this.mode = Mode.Start;
+			if(this.soundpool_mode == SoundPool_Mode.Wait){
+				this.soundpool_mode = SoundPool_Mode.Start;
 			}
 		}
 
@@ -365,21 +310,14 @@ namespace TestScript
 		*/
 		private void CallBack_Click_Bgm(int a_id)
 		{
-			if(this.load_item_bgm_binary == null){
+			GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.PREFAB_BGM);
 
-				//バイナリ。ＢＧＭ。
-
-				#if((UNITY_STANDALONE_WIN)||(UNITY_EDITOR_WIN))
-				Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.BGM_STANDALONEWINDOWS);
-				#elif(UNITY_WEBGL)
-				Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.BGM_WEBGL);
-				#elif(UNITY_ANDROID)
-				Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.BGM_ANDROID);
-				#else
-				Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.BGM_STANDALONEWINDOWS);
-				#endif
-
-				this.load_item_bgm_binary = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsBinaryFile,t_path);
+			if(t_prefab != null){
+				Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
+				if(t_pack_audioclip != null){
+					Fee.Audio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
+					Fee.Audio.Audio.GetInstance().PlayBgm(0);
+				}
 			}
 		}
 
@@ -402,161 +340,44 @@ namespace TestScript
 			//イベントプレート。
 			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
 
-			//ＢＧＭ。
-			if(this.load_item_bgm_binary != null){
-				if(this.load_item_bgm_binary.IsBusy() == true){
-					//ロード中。
-					this.status.SetText("bgm : " + this.load_item_bgm_binary.GetResultProgressDown().ToString());
-				}else{
-					AssetBundle t_assetbundle = null;
-
-					if(this.load_item_bgm_binary.GetResultAssetType() == Fee.Asset.AssetType.Binary){
-						//ロード成功。バイナリ。
-
-						if(Fee.File.File.GetInstance().GetAssetBundleList().GetAssetBundle(ASSETBUNDLE_ID_BGM) == null){
-							t_assetbundle = AssetBundle.LoadFromMemory(this.load_item_bgm_binary.GetResultAssetBinary());
-							Fee.File.File.GetInstance().GetAssetBundleList().Regist(ASSETBUNDLE_ID_BGM,t_assetbundle);
-						}
-					}
-
-					if(t_assetbundle != null){
-						GameObject t_prefab = t_assetbundle.LoadAsset<GameObject>("bgm");
-						if(t_prefab != null){
-							Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
-							if(t_pack_audioclip != null){
-								Fee.Audio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
-								Fee.Audio.Audio.GetInstance().PlayBgm(0);
-							}else{
-								//エラー。
-								GameObject t_object = Instantiate(t_prefab);
-								t_object.name = "load_bgm";
-							}
-						}
-
-						this.status.SetText("bgm : end");
-					}else{
-						this.status.SetText("bgm : error");
-					}
-
-					this.load_item_bgm_binary = null;
-				}
-			}
-
-			switch(this.mode){
-			case Mode.Wait:
+			switch(this.soundpool_mode){
+			case SoundPool_Mode.Wait:
 				{
 				}break;
-			case Mode.Start:
+			case SoundPool_Mode.Start:
 				{
-					if(this.soundpool_flag == true){
-
-						//サウンドプール。ＳＥ。
-
-						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SOUNDPOOL_SE);
-
-						this.load_item_se_soundpool = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(t_path,DATA_VERSION);
-
-					}else{
-
-						//バイナリ。ＳＥ。
-
-						#if((UNITY_STANDALONE_WIN)||(UNITY_EDITOR_WIN))
-						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SE_STANDALONEWINDOWS);
-						#elif(UNITY_WEBGL)
-						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SE_WEBGL);
-						#elif(UNITY_ANDROID)
-						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SE_ANDROID);
-						#else
-						Fee.File.Path t_path = new Fee.File.Path(Data.StreamingAssets.SE_STANDALONEWINDOWS);
-						#endif
-
-						this.load_item_se_binary = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsBinaryFile,t_path);
-					}
-
-					this.mode = Mode.Now;
+					this.soundpool_loaditem = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Data.StreamingAssets.SOUNDPOOL_SE),SOUNDPOOL_DATA_VERSION);
+					this.soundpool_mode = SoundPool_Mode.Now;
 				}break;
-			case Mode.Now:
+			case SoundPool_Mode.Now:
 				{
-					if(this.load_item_se_soundpool != null){
-						if(this.load_item_se_soundpool.IsBusy() == true){
+					if(this.soundpool_loaditem != null){
+						if(this.soundpool_loaditem.IsBusy() == true){
 							//ロード中。
-							this.status.SetText("se : " + this.load_item_se_soundpool.GetResultProgressDown().ToString());
+							this.status.SetText("soundpool : " + this.soundpool_loaditem.GetResultProgressDown().ToString());
 						}else{
-							if(this.load_item_se_soundpool.GetResultType() == Fee.SoundPool.Item.ResultType.SoundPool){
-								//ロード成功。サウンドプール。
-
-								this.pack_soundpool = this.load_item_se_soundpool.GetResultSoundPool();
-								if(this.pack_soundpool == null){
+							if(this.soundpool_loaditem.GetResultType() == Fee.SoundPool.Item.ResultType.SoundPool){
+								Fee.Audio.Pack_SoundPool t_pack_soundpool = this.soundpool_loaditem.GetResultSoundPool();
+								if(t_pack_soundpool == null){
 									//不正なサウンドプールパック。
-									this.status.SetText("Error : " + this.mode.ToString());
-									this.load_item_se_soundpool = null;
-									this.mode = Mode.Wait;
+									this.status.SetText("Error : " + this.soundpool_mode.ToString());
+									this.soundpool_loaditem = null;
+									this.soundpool_mode = SoundPool_Mode.Wait;
 								}else{
-									this.load_item_se_soundpool = null;
-									this.mode = Mode.Fix;
+									//成功。
+									Fee.Audio.Audio.GetInstance().LoadSe(t_pack_soundpool,SE_ID);
+									this.status.SetText("Success");
+									this.soundpool_loaditem = null;
+									this.soundpool_mode = SoundPool_Mode.Wait;
 								}
 							}else{
 								//ロード失敗。
-								this.status.SetText("Error : " + this.load_item_se_soundpool.GetResultErrorString());
-								this.load_item_se_soundpool = null;
+								this.status.SetText("Error : " + this.soundpool_loaditem.GetResultErrorString());
+								this.soundpool_loaditem = null;
+								this.soundpool_mode = SoundPool_Mode.Wait;
 							}
 						}
 					}
-
-					if(this.load_item_se_binary != null){
-						if(this.load_item_se_binary.IsBusy() == true){
-							//ロード中。
-							this.status.SetText("se : " + this.load_item_se_binary.GetResultProgressDown().ToString());
-						}else{
-							if(this.load_item_se_binary.GetResultAssetType() == Fee.Asset.AssetType.Binary){
-								//成功。
-
-								//LoadFromMemory
-								AssetBundle t_assetbundle = AssetBundle.LoadFromMemory(this.load_item_se_binary.GetResultAssetBinary());
-
-								//Regist
-								Fee.File.File.GetInstance().GetAssetBundleList().Regist(ASSETBUNDLE_ID_SE,t_assetbundle);
-
-								//Pack_AudioClip
-								if(t_assetbundle != null){
-									GameObject t_prefab = t_assetbundle.LoadAsset<GameObject>("se");
-									if(t_prefab != null){
-										this.pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
-									}
-								}
-
-								if(this.pack_audioclip == null){
-									//不正なオーディオクリップパック。
-									this.status.SetText("Error : " + this.mode.ToString());
-									this.load_item_se_binary = null;
-									this.mode = Mode.Wait;
-								}else{
-									this.load_item_se_binary = null;
-									this.mode = Mode.Fix;
-								}
-
-							}else{
-								//ロード失敗。
-								this.status.SetText("Error : " + this.load_item_se_binary.GetResultErrorString());
-								this.load_item_se_binary = null;
-								this.mode = Mode.Wait;
-							}
-						}
-					}
-				}break;
-			case Mode.Fix:
-				{
-					this.status.SetText("Success");
-
-					if(this.soundpool_flag == true){
-						Fee.Audio.Audio.GetInstance().LoadSe(this.pack_soundpool,SE_ID);
-					}else{
-						Fee.Audio.Audio.GetInstance().LoadSe(this.pack_audioclip,SE_ID);
-					}
-
-					this.pack_audioclip = null;
-					this.pack_soundpool = null;
-					this.mode = Mode.Wait;
 				}break;
 			}
 
@@ -567,7 +388,7 @@ namespace TestScript
 				}
 			}
 
-			this.status_2.SetText("soundpool = " + Fee.Audio.Audio.GetInstance().GetSoundPoolCount().ToString() + " assetbundle = " + Fee.File.File.GetInstance().GetAssetBundleCount().ToString());
+			this.status_2.SetText("soundpool = " + Fee.Audio.Audio.GetInstance().GetSoundPoolCount().ToString());
 		}
 
 		/** 削除前。
@@ -583,153 +404,6 @@ namespace TestScript
 		{
 			this.deleter.DeleteAll();
 		}
-
-		/** ファイルコピー。
-		*/
-		/*
-		#if(UNITY_EDITOR)
-		private static void CopyFile(string a_filename,string a_path_from,string a_path_to)
-		{
-			byte[] t_binary = null;
-
-			{
-				System.IO.FileInfo t_fileinfo = new System.IO.FileInfo(a_path_from + "/" + a_filename);
-				t_binary = new byte[t_fileinfo.Length];
-
-				System.IO.FileStream t_filestream_read = null;
-
-				try{
-					//open
-					t_filestream_read = t_fileinfo.OpenRead();
-
-					//read
-					if(t_filestream_read != null){
-						t_filestream_read.Read(t_binary,0,t_binary.Length);
-					}
-				}catch(System.Exception){
-					t_binary = null;
-
-					Debug.Assert(false);
-				}
-
-				//close
-				if(t_filestream_read != null){
-					t_filestream_read.Close();
-					t_filestream_read = null;
-				}
-			}
-
-			if(t_binary != null){
-				System.IO.FileInfo t_fileinfo = new System.IO.FileInfo(a_path_to + "/" + a_filename);
-				System.IO.FileStream t_filestream_write = null;
-
-				try{
-					//open
-					t_filestream_write = t_fileinfo.OpenWrite();
-
-					//write
-					if(t_filestream_write != null){
-						t_filestream_write.Write(t_binary,0,t_binary.Length);
-					}
-				}catch(System.Exception){
-					Debug.Assert(false);
-				}
-
-				//close
-				if(t_filestream_write != null){
-					t_filestream_write.Close();
-					t_filestream_write = null;
-				}
-			}else{
-				Debug.Assert(false);
-			}
-		}
-		#endif
-		*/
-
-		/** 作成。
-		*/
-		/*
-		#if(UNITY_EDITOR)
-		[UnityEditor.MenuItem("Fee/Test/Test11/MekeSoundPool")]
-		private static void MenuItem_MekeSoundPool()
-		{
-			string t_assetbundle_name = "se";
-
-			Fee.Audio.Pack_SoundPool t_pack_soundpool = new Fee.Audio.Pack_SoundPool();
-			GameObject t_prefab_se = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/AssetBundleData/" + t_assetbundle_name + ".prefab");
-			if(t_prefab_se != null){
-				Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab_se.GetComponent<Fee.Audio.Pack_AudioClip>();
-				if(t_pack_audioclip != null){
-					for(int ii=0;ii<t_pack_audioclip.audioclip_list.Count;ii++){
-
-						//volume
-						float t_audio_volume = 1.0f;
-						if(ii<t_pack_audioclip.volume_list.Count){
-							t_audio_volume = t_pack_audioclip.volume_list[ii];
-						}
-
-						//name
-						string t_asset_fullpath = "";
-						string t_audio_name = "";
-						if(t_pack_audioclip.audioclip_list[ii] != null){
-							string t_asset_path = UnityEditor.AssetDatabase.GetAssetPath(t_pack_audioclip.audioclip_list[ii]);
-							if(t_asset_path != null){
-								string t_name = System.IO.Path.GetFileName(t_asset_path);
-								if(t_name != null){
-									t_audio_name = t_name;
-								}
-								t_asset_fullpath = Application.dataPath + "/" + System.IO.Path.GetDirectoryName(t_asset_path).Substring(7);
-							}
-						}
-
-						//volume
-						t_pack_soundpool.name_list.Add(t_audio_name);
-
-						//name
-						t_pack_soundpool.volume_list.Add(t_audio_volume);
-
-						//Rawフォルダにコピー。
-						if(t_asset_fullpath != null){
-							CopyFile(t_audio_name,t_asset_fullpath,Application.dataPath + "/AssetBundle/Raw");
-						}
-					}
-				}
-
-				t_pack_soundpool.data_hash = t_pack_soundpool.GetHashCode();
-			}
-
-			//Rawフォルダに保存。
-			{
-				Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.ObjectToJsonItem(t_pack_soundpool);
-				string t_json_string = t_jsonitem.ConvertJsonString();
-
-				System.IO.FileInfo t_fileinfo = new System.IO.FileInfo(Application.dataPath + "/AssetBundle/Raw/" + t_assetbundle_name + ".txt");
-				System.IO.StreamWriter t_stream_writer = null;
-
-				try{
-					//open
-					t_stream_writer = t_fileinfo.CreateText();
-
-					//write
-					if(t_stream_writer != null){
-						t_stream_writer.Write(t_json_string);
-						t_stream_writer.Flush();
-					}
-				}catch(System.Exception){
-				}
-
-				//close
-				if(t_stream_writer != null){
-					t_stream_writer.Close();
-					t_stream_writer = null;
-				}
-			}
-
-			UnityEditor.AssetDatabase.Refresh();
-		}
-		#endif
-		*/
 	}
 }
 
