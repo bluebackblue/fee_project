@@ -16,6 +16,10 @@ using UnityEngine;
 namespace TestScript
 {
 	/** test12
+
+		エクセル
+		データ
+
 	*/
 	public class test12 : MainBase
 	{
@@ -29,6 +33,7 @@ namespace TestScript
 
 				@"
 				エクセル
+				データ
 				"
 			);
 		}
@@ -36,6 +41,19 @@ namespace TestScript
 		/** 削除管理。
 		*/
 		private Fee.Deleter.Deleter deleter;
+
+		/** Step
+		*/
+		private enum Step
+		{
+			Init,
+			LoadJson,
+			
+			LoadRequest,
+			LoadWait,
+			LoadEnd,
+		};
+		private Step step;
 
 		/** Start
 		*/
@@ -64,6 +82,12 @@ namespace TestScript
 			//Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
 
+			//データ。インスタンス作成。
+			Fee.Data.Data.CreateInstance();
+
+			//ファイル。インスタンス作成。
+			Fee.File.File.CreateInstance();
+
 			//フォント。
 			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
@@ -72,6 +96,9 @@ namespace TestScript
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
+
+			//step
+			this.step = Step.Init;
 
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
@@ -89,6 +116,46 @@ namespace TestScript
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
+
+			//データ。
+			Fee.Data.Data.GetInstance().Main();
+
+			//ファイル。
+			Fee.File.File.GetInstance().Main();
+
+
+
+			switch(this.step){
+			case Step.Init:
+				{
+					this.step = Step.LoadJson;
+				}break;
+			case Step.LoadJson:
+				{
+					UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Editor/Test12/editor_data");
+					if(t_textasset != null){
+						string t_text = t_textasset.text;
+						if(t_text != null){
+							System.Collections.Generic.Dictionary<string,Fee.Data.ListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.ListItem>>(t_text);
+							foreach(System.Collections.Generic.KeyValuePair<string,Fee.Data.ListItem> t_pair in t_data_list){
+								UnityEngine.Debug.Log(t_pair.Key + " : " + t_pair.Value.path.GetPath());
+							}
+						}
+					}
+
+					this.step = Step.LoadRequest;
+				}break;
+			case Step.LoadRequest:
+				{
+				}break;
+			case Step.LoadWait:
+				{
+				}break;
+			case Step.LoadEnd:
+				{
+				}break;
+			}
+
 		}
 
 		/** 削除前。
@@ -111,28 +178,6 @@ namespace TestScript
 		[UnityEditor.MenuItem("Fee/Test/Test12/ConvertFromExcel")]
 		private static void MenuItem_ConvertFromExcel()
 		{
-			/*
-			{
-				//object
-				UnityEditor.AssetBundleBuild[] t_object = new UnityEditor.AssetBundleBuild[1];
-				{
-					t_object[0].assetBundleName = "se.assetbundle";
-					t_object[0].assetBundleVariant = null;
-					t_object[0].assetNames = new string[1]{
-						"Assets/Data/ConvertFromExcel/excel_to_se_prefab.prefab"
-					};
-				}
-
-				//outputpath
-				string t_output_path = "Assets/Data/AssetBundle";
-
-				//option
-				UnityEditor.BuildAssetBundleOptions t_option = UnityEditor.BuildAssetBundleOptions.None;
-
-				UnityEditor.BuildPipeline.BuildAssetBundles(t_output_path,t_object,t_option,UnityEditor.BuildTarget.StandaloneWindows);
-			}
-			*/
-
 			//エクセルからＪＳＯＮシートを作成。
 			Fee.Excel.ExcelToJsonSheet t_excel_to_jsonsheet = new Fee.Excel.ExcelToJsonSheet();
 			if(t_excel_to_jsonsheet.Convert(Fee.File.Path.CreateAssetsPath(Data.Assets.EXCEL)) == true){

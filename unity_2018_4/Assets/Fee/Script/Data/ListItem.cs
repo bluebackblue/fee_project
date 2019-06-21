@@ -30,6 +30,20 @@ namespace Fee.Data
 
 		/** constructor
 		*/
+		public ListItem()
+		{
+			//path_type
+			this.path_type = PathType.None;
+
+			//path
+			this.path = null;
+
+			//packname
+			this.packname = null;
+		}
+
+		/** constructor
+		*/
 		public ListItem(PathType a_path_type,Fee.File.Path a_path,string a_packname)
 		{
 			//path_type

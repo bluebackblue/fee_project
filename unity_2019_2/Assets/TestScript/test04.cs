@@ -105,11 +105,6 @@ namespace TestScript
 			/** AnythingFile
 			*/
 			LoadResources_AnythingFile,
-
-			/** Data
-			*/
-			LoadData,
-
 		}
 
 		/** status_text
@@ -136,10 +131,6 @@ namespace TestScript
 			*/
 			private Fee.SoundPool.Item item_soundpool;
 
-			/** item_data
-			*/
-			private Fee.Data.Item item_data;
-
 			/** ResultType
 			*/
 			public enum ResultType
@@ -161,7 +152,6 @@ namespace TestScript
 			{
 				this.item_file = a_item;
 				this.item_soundpool = null;
-				this.item_data = null;
 			}
 
 			/** constructor
@@ -170,14 +160,12 @@ namespace TestScript
 			{
 				this.item_file = null;
 				this.item_soundpool = a_item;
-				this.item_data = null;
 			}
 
 			public LoadItem(Fee.Data.Item a_item)
 			{
 				this.item_file = null;
 				this.item_soundpool = null;
-				this.item_data = a_item;
 			}
 
 			/** IsBusy
@@ -189,9 +177,6 @@ namespace TestScript
 				}
 				if(this.item_soundpool != null){
 					return this.item_soundpool.IsBusy();
-				}
-				if(this.item_data != null){
-					return this.item_data.IsBusy();
 				}
 				return false;
 			}
@@ -206,9 +191,6 @@ namespace TestScript
 				if(this.item_soundpool != null){
 					return this.item_soundpool.GetResultProgressDown();
 				}
-				if(this.item_data != null){
-					return this.item_data.GetResultProgress();
-				}
 				return 0.0f;
 			}
 
@@ -222,9 +204,6 @@ namespace TestScript
 				if(this.item_soundpool != null){
 					return this.item_soundpool.GetResultErrorString();
 				}
-				if(this.item_data != null){
-					return this.item_data.GetResultErrorString();
-				}
 				return "";
 			}
 
@@ -234,9 +213,6 @@ namespace TestScript
 			{
 				if(this.item_file != null){
 					return this.item_file.GetResultAssetText();
-				}
-				if(this.item_data != null){
-					return this.item_data.GetResultAssetText();
 				}
 				return null;
 			}
@@ -248,9 +224,6 @@ namespace TestScript
 				if(this.item_file != null){
 					return this.item_file.GetResultAssetTexture();
 				}
-				if(this.item_data != null){
-					return this.item_data.GetResultAssetTexture();
-				}
 				return null;
 			}
 
@@ -261,9 +234,6 @@ namespace TestScript
 				if(this.item_file != null){
 					return this.item_file.GetResultAssetAnything();
 				}
-				if(this.item_data != null){
-					return this.item_data.GetResultAssetAnything();
-				}
 				return null;
 			}
 
@@ -273,9 +243,6 @@ namespace TestScript
 			{
 				if(this.item_file != null){
 					return this.item_file.GetResultAssetBinary();
-				}
-				if(this.item_data != null){
-					return this.item_data.GetResultAssetBinary();
 				}
 				return null;
 			}
@@ -332,37 +299,6 @@ namespace TestScript
 					case Fee.SoundPool.Item.ResultType.SoundPool:
 						{
 						}return ResultType.SoundPool;
-					}
-				}
-
-				if(this.item_data != null){
-					switch(this.item_data.GetResultType()){
-					case Fee.Data.Item.ResultType.None:
-						{
-						}return ResultType.None;
-					case Fee.Data.Item.ResultType.Error:
-						{
-						}return ResultType.Error;
-					case Fee.Data.Item.ResultType.Asset:
-						{
-							switch(this.item_data.GetResultAssetType()){
-							case Fee.Asset.AssetType.None:
-								{
-								}return ResultType.None;
-							case Fee.Asset.AssetType.Binary:
-								{
-								}return ResultType.Binary;
-							case Fee.Asset.AssetType.Text:
-								{
-								}return ResultType.Text;
-							case Fee.Asset.AssetType.Texture:
-								{
-								}return ResultType.Texture;
-							case Fee.Asset.AssetType.Anything:
-								{
-								}return ResultType.Anything;
-							}
-						}break;
 					}
 				}
 
@@ -468,9 +404,6 @@ namespace TestScript
 			Fee.File.Config.LOG_ENABLE = true;
 			Fee.File.File.CreateInstance();
 
-			//データ。インスタンス作成。
-			Fee.Data.Data.CreateInstance();
-
 			//マウス。インスタンス作成。
 			Fee.Input.Mouse.CreateInstance();
 
@@ -552,10 +485,6 @@ namespace TestScript
 				
 				//AssetFile
 				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadResources_AnythingFile));
-
-				//Data
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadData));
-
 			}
 		}
 
@@ -706,15 +635,6 @@ namespace TestScript
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesAnythingFile,new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
 				}break;
 
-
-			case CallBackId.LoadData:
-				{
-					//ロードデータ。
-
-					this.loaditem = new LoadItem(Fee.Data.Data.GetInstance().RequestNormal("ui_button"));
-				}break;
-
-
 			}
 		}
 
@@ -724,9 +644,6 @@ namespace TestScript
 		{
 			//ファイル。
 			Fee.File.File.GetInstance().Main();
-
-			//データ。
-			Fee.Data.Data.GetInstance().Main();
 
 			//マウス。インスタンス作成。
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
