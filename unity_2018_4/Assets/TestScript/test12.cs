@@ -55,6 +55,18 @@ namespace TestScript
 		};
 		private Step step;
 
+		/** text
+		*/
+		private Fee.Render2D.Text2D text;
+
+		/** sprite
+		*/
+		private Fee.Render2D.Sprite2D sprite;
+
+		/** item
+		*/
+		private Fee.Data.Item item;
+
 		/** Start
 		*/
 		private void Start()
@@ -102,6 +114,16 @@ namespace TestScript
 
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+
+			//text
+			this.text = new Fee.Render2D.Text2D(this.deleter,0);
+			this.text.SetRect(50,50,0,0);
+
+			//sprite
+			this.sprite = new Fee.Render2D.Sprite2D(this.deleter,0);
+			this.sprite.SetRect(50,100,100,100);
+			this.sprite.SetTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_MAX);
+			this.sprite.SetTexture(Texture2D.whiteTexture);
 		}
 
 		/** FixedUpdate
@@ -132,13 +154,18 @@ namespace TestScript
 				}break;
 			case Step.LoadJson:
 				{
+					#if(UNITY_EDITOR)
 					UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Editor/Test12/editor_data");
+					#else
+					UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Test12/release_data");
+					#endif
+
 					if(t_textasset != null){
 						string t_text = t_textasset.text;
 						if(t_text != null){
 							System.Collections.Generic.Dictionary<string,Fee.Data.ListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.ListItem>>(t_text);
 							foreach(System.Collections.Generic.KeyValuePair<string,Fee.Data.ListItem> t_pair in t_data_list){
-								UnityEngine.Debug.Log(t_pair.Key + " : " + t_pair.Value.path.GetPath());
+								Fee.Data.Data.GetInstance().RegisterResourcesItem(t_pair.Key,t_pair.Value.path_type,t_pair.Value.path);
 							}
 						}
 					}
@@ -147,15 +174,23 @@ namespace TestScript
 				}break;
 			case Step.LoadRequest:
 				{
+					this.item = Fee.Data.Data.GetInstance().RequestNormal("SKYIMAGE");
+					this.step = Step.LoadWait;
 				}break;
 			case Step.LoadWait:
 				{
+					if(this.item.IsBusy() == false){
+						if(this.item.GetResultAssetType() == Fee.Asset.AssetType.Texture){
+							this.sprite.SetTexture(this.item.GetResultAssetTexture());
+						}
+						this.item = null;
+						this.step = Step.LoadEnd;
+					}
 				}break;
 			case Step.LoadEnd:
 				{
 				}break;
 			}
-
 		}
 
 		/** 削除前。
