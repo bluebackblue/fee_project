@@ -47,6 +47,14 @@ namespace TestScript
 			*/
 			public const string PREFAB_CUBE = "Common/Prefab/cube";
 
+			/** PREFAB_BGM
+			*/
+			public const string PREFAB_BGM = "Common/Prefab/bgm";
+
+			/** PREFAB_SE
+			*/
+			public const string PREFAB_SE = "Common/Prefab/se";
+
 			/** KEY_PRIVATE
 			*/
 			public const string KEY_PRIVATE = "Common/Key/private_key";
@@ -85,15 +93,19 @@ namespace TestScript
 
 			/** BGM
 			*/
+			/*
 			public const string BGM_ANDROID = "Common/AssetBundle/Android/bgm";
 			public const string BGM_WEBGL = "Common/AssetBundle/WebGL/bgm";
 			public const string BGM_STANDALONEWINDOWS = "Common/AssetBundle/StandaloneWindows/bgm";
+			*/
 
 			/** SE
 			*/
+			/*
 			public const string SE_ANDROID = "Common/AssetBundle/Android/se";
 			public const string SE_WEBGL = "Common/AssetBundle/WebGL/se";
 			public const string SE_STANDALONEWINDOWS = "Common/AssetBundle/StandaloneWindows/se";
+			*/
 
 			/** TEST04_TEXT
 			*/

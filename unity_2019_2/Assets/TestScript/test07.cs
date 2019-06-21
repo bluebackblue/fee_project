@@ -120,6 +120,7 @@ namespace TestScript
 
 		/** 公開鍵秘密鍵作成。
 		*/
+		#if(UNITY_EDITOR)
 		[UnityEditor.MenuItem("Fee/Test/Test07/MakePublicKeyPrivateKey")]
 		private static void MenuItem_MakePublicKeyPrivateKey()
 		{
@@ -127,6 +128,7 @@ namespace TestScript
 			Fee.File.Path t_path_private = Fee.File.Path.CreateAssetsPath(Data.Resources.KEY_PRIVATE_ASSETSPATH);
 			Fee.EditorTool.Crypt.MakePublicKeyPrivateKey(t_path_public,t_path_private);
 		}
+		#endif
 
 		/** Start
 		*/
