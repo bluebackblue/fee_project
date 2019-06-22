@@ -1,1 +1,1 @@
-﻿{"skyimage":{"path":{"directorypath":"Common/Texture/","filename":"ui_button"},"path_type":2},"ui_button":{"path":{"directorypath":"Common/Texture/","filename":"ui_button"},"path_type":2},"se":{"path":{"directorypath":"Editor/Prefab/","filename":"se"},"path_type":1}}
+﻿{"SKYIMAGE":{"packname":"","path":"Common/Texture/skyimage.jpg","path_type":3},"UI_BUTTON":{"packname":"","path":"Common/Texture/ui_button","path_type":2},"SE":{"packname":"se.assetbundle","path":"Editor/Test12/se","path_type":1}}
