@@ -174,7 +174,7 @@ namespace TestScript
 				}break;
 			case Step.LoadRequest:
 				{
-					this.item = Fee.Data.Data.GetInstance().RequestNormal("SKYIMAGE");
+					this.item = Fee.Data.Data.GetInstance().RequestNormal("SKYIMAGE");//TODO:
 					this.step = Step.LoadWait;
 				}break;
 			case Step.LoadWait:

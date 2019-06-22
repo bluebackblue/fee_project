@@ -48,16 +48,18 @@ namespace TestScript
 		*/
 		private enum ClickId
 		{
+			Touch_InputSystem_Mouse,
+			Touch_InputManager_InputMouse,
 			Touch_InputSystem_TouchScreen,
 			Touch_InputManager_InputTouch,
-			Touch_InputManager_InputMouse,
 		}
 
 		/** touch
 		*/
+		private Fee.Ui.Button button_inputsystem_mouse_touch;
+		private Fee.Ui.Button button_inputmanager_inputmouse_touch;
 		private Fee.Ui.Button button_inputsystem_touchscreen_touch;
 		private Fee.Ui.Button button_inputmanager_inputtouch_touch;
-		private Fee.Ui.Button button_inputmanager_inputmouse_touch;
 
 		/** タッチ。
 		*/
@@ -210,6 +212,20 @@ namespace TestScript
 
 			//mouseposition
 			{
+				this.button_inputsystem_mouse_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputSystem_Mouse);
+				this.button_inputsystem_mouse_touch.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputsystem_mouse_touch.SetText("InputSystem.Mouse => Touch");
+				this.button_inputsystem_mouse_touch.SetFontSize(t_fontsize);
+
+				t_yy += t_h + t_space_h;
+
+				this.button_inputmanager_inputmouse_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputManager_InputMouse);
+				this.button_inputmanager_inputmouse_touch.SetRect(t_xx,t_yy,t_w,t_h);
+				this.button_inputmanager_inputmouse_touch.SetText("InputManager.InputMouse => Touch");
+				this.button_inputmanager_inputmouse_touch.SetFontSize(t_fontsize);
+
+				t_yy += t_h + t_space_h;
+
 				this.button_inputsystem_touchscreen_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputSystem_TouchScreen);
 				this.button_inputsystem_touchscreen_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_touchscreen_touch.SetText("InputSystem.TouchScreen => Touch");
@@ -221,13 +237,6 @@ namespace TestScript
 				this.button_inputmanager_inputtouch_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputtouch_touch.SetText("InputManager.InputTouch => Touch");
 				this.button_inputmanager_inputtouch_touch.SetFontSize(t_fontsize);
-
-				t_yy += t_h + t_space_h;
-
-				this.button_inputmanager_inputmouse_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputManager_InputMouse);
-				this.button_inputmanager_inputmouse_touch.SetRect(t_xx,t_yy,t_w,t_h);
-				this.button_inputmanager_inputmouse_touch.SetText("InputManager.InputMouse => Touch");
-				this.button_inputmanager_inputmouse_touch.SetFontSize(t_fontsize);
 			}
 
 			t_yy += t_h + t_separate_h;
@@ -241,6 +250,14 @@ namespace TestScript
 		{
 			switch((ClickId)a_id)
 			{
+			case ClickId.Touch_InputSystem_Mouse:
+				{
+					Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ^= true;
+				}break;
+			case ClickId.Touch_InputManager_InputMouse:
+				{
+					Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ^= true;
+				}break;
 			case ClickId.Touch_InputSystem_TouchScreen:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ^= true;
@@ -248,10 +265,6 @@ namespace TestScript
 			case ClickId.Touch_InputManager_InputTouch:
 				{
 					Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ^= true;
-				}break;
-			case ClickId.Touch_InputManager_InputMouse:
-				{
-					Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ^= true;
 				}break;
 			}
 
@@ -262,9 +275,10 @@ namespace TestScript
 		*/
 		public void UpdateButtonStatus()
 		{
+			this.button_inputsystem_mouse_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputmouse_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_touchscreen_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputtouch_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputmouse_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 		}
 
 		/** コールバック。

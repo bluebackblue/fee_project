@@ -513,7 +513,7 @@ namespace TestScript
 					//ロードストリーミングアセット。サウンドプール。
 
 					uint t_data_version = 1;
-					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Data.StreamingAssets.SOUNDPOOL_SE),t_data_version));
+					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Data.StreamingAssets.TEST04_SOUNDPOOL_SE),t_data_version));
 				}break;
 
 
@@ -529,7 +529,7 @@ namespace TestScript
 				{
 					//ダウンロード。テキストファイル。
 
-					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadTextFile,new Fee.File.Path(Data.Url.TEST04_TEXT)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadTextFile,new Fee.File.Path(Data.Url.TESTDATA_TEXT)));
 				}break;
 			case CallBackId.LoadLocal_TextFile:
 				{
@@ -564,7 +564,7 @@ namespace TestScript
 				{
 					//ダウンロード。バイナリファイル。
 
-					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadBinaryFile,new Fee.File.Path(Data.Url.TEST04_BINARY)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadBinaryFile,new Fee.File.Path(Data.Url.TESTDATA_BINARY)));
 				}break;
 			case CallBackId.LoadLocal_BinaryFile:
 				{
@@ -604,7 +604,7 @@ namespace TestScript
 				{
 					//ダウンロード。テクスチャーファイル。
 
-					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadTextureFile,new Fee.File.Path(Data.Url.TEST04_TEXTURE)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadTextureFile,new Fee.File.Path(Data.Url.TESTDATA_TEXTURE)));
 				}break;
 			case CallBackId.LoadLocal_TextureFile:
 				{

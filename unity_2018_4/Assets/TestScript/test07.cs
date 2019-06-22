@@ -124,8 +124,8 @@ namespace TestScript
 		[UnityEditor.MenuItem("Fee/Test/Test07/MakePublicKeyPrivateKey")]
 		private static void MenuItem_MakePublicKeyPrivateKey()
 		{
-			Fee.File.Path t_path_public = Fee.File.Path.CreateAssetsPath(Data.Resources.KEY_PUBLIC_ASSETSPATH);
-			Fee.File.Path t_path_private = Fee.File.Path.CreateAssetsPath(Data.Resources.KEY_PRIVATE_ASSETSPATH);
+			Fee.File.Path t_path_public = Fee.File.Path.CreateAssetsPath(Data.Resources.TEST07_KEY_PUBLIC_ASSETSPATH);
+			Fee.File.Path t_path_private = Fee.File.Path.CreateAssetsPath(Data.Resources.TEST07_KEY_PRIVATE_ASSETSPATH);
 			Fee.EditorTool.Crypt.MakePublicKeyPrivateKey(t_path_public,t_path_private);
 		}
 		#endif
@@ -224,7 +224,7 @@ namespace TestScript
 
 				if(a_id == 0){
 					//public
-					Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.KEY_PUBLIC).text);
+					Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.TEST07_KEY_PUBLIC).text);
 					this.public_key = null;
 					if(t_item_public != null){
 						if(t_item_public.IsAssociativeArray() == true){
@@ -235,7 +235,7 @@ namespace TestScript
 					}
 
 					//private
-					Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.KEY_PRIVATE).text);
+					Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.TEST07_KEY_PRIVATE).text);
 					this.private_key = null;
 					if(t_item_private != null){
 						if(t_item_private.IsAssociativeArray() == true){
@@ -254,7 +254,7 @@ namespace TestScript
 					this.step = Step.EncryptPass_Start;
 				}else if(a_id == 2){
 					//public
-					Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.KEY_PUBLIC).text);
+					Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.TEST07_KEY_PUBLIC).text);
 					this.public_key = null;
 					if(t_item_public != null){
 						if(t_item_public.IsAssociativeArray() == true){
@@ -265,7 +265,7 @@ namespace TestScript
 					}
 
 					//private
-					Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.KEY_PRIVATE).text);
+					Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.TEST07_KEY_PRIVATE).text);
 					this.private_key = null;
 					if(t_item_private != null){
 						if(t_item_private.IsAssociativeArray() == true){

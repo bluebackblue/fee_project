@@ -47,29 +47,7 @@ namespace TestScript
 			*/
 			public const string PREFAB_CUBE = "Common/Prefab/cube";
 
-			/** PREFAB_BGM
-			*/
-			public const string PREFAB_BGM = "Common/Prefab/bgm";
 
-			/** PREFAB_SE
-			*/
-			public const string PREFAB_SE = "Common/Prefab/se";
-
-			/** KEY_PRIVATE
-			*/
-			public const string KEY_PRIVATE = "Common/Key/private_key";
-
-			/** KEY_PUBLIC
-			*/
-			public const string KEY_PUBLIC = "Common/Key/public_key";
-
-			/** KEY_PRIVATE_ASSETSPATH
-			*/
-			public const string KEY_PRIVATE_ASSETSPATH = "Resources/Common/Key/private_key.json";
-
-			/** KEY_PUBLIC_ASSETSPATH
-			*/
-			public const string KEY_PUBLIC_ASSETSPATH = "Resources/Common/Key/public_key.json";
 
 
 
@@ -81,32 +59,36 @@ namespace TestScript
 			*/
 			public const string TEST04_TEXT = "Test04/text";
 
+			/** TEST07_KEY_PRIVATE
+			*/
+			public const string TEST07_KEY_PRIVATE = "Test07/private_key";
+
+			/** TEST07_KEY_PUBLIC
+			*/
+			public const string TEST07_KEY_PUBLIC = "Test07/public_key";
+
+			/** TEST07_KEY_PRIVATE_ASSETSPATH
+			*/
+			public const string TEST07_KEY_PRIVATE_ASSETSPATH = "Resources/Test07/private_key.json";
+
+			/** TEST07_KEY_PUBLIC_ASSETSPATH
+			*/
+			public const string TEST07_KEY_PUBLIC_ASSETSPATH = "Resources/Test07/public_key.json";
+
+			/** TEST11_PREFAB_BGM
+			*/
+			public const string TEST11_PREFAB_BGM = "Test11/bgm";
+
+			/** TEST11_PREFAB_SE
+			*/
+			public const string TEST11_PREFAB_SE = "Test11/se";
+
 		}
 
 		/** StreamingAssets
 		*/
 		public static class StreamingAssets
 		{
-			/** SOUNDPOOL_SE
-			*/
-			public const string SOUNDPOOL_SE = "Common/SoundPool/se.txt";
-
-			/** BGM
-			*/
-			/*
-			public const string BGM_ANDROID = "Common/AssetBundle/Android/bgm";
-			public const string BGM_WEBGL = "Common/AssetBundle/WebGL/bgm";
-			public const string BGM_STANDALONEWINDOWS = "Common/AssetBundle/StandaloneWindows/bgm";
-			*/
-
-			/** SE
-			*/
-			/*
-			public const string SE_ANDROID = "Common/AssetBundle/Android/se";
-			public const string SE_WEBGL = "Common/AssetBundle/WebGL/se";
-			public const string SE_STANDALONEWINDOWS = "Common/AssetBundle/StandaloneWindows/se";
-			*/
-
 			/** TEST04_TEXT
 			*/
 			public const string TEST04_TEXT = "Test04/text.txt";
@@ -118,6 +100,15 @@ namespace TestScript
 			/** TEST04_TEXTURE
 			*/
 			public const string TEST04_TEXTURE = "Test04/texture.png";
+
+			/** TEST04_SOUNDPOOL_SE
+			*/
+			public const string TEST04_SOUNDPOOL_SE = "Test04/SoundPool/se.txt";
+
+			/** TEST11_SOUNDPOOL_SE
+			*/
+			public const string TEST11_SOUNDPOOL_SE = "Test11/SoundPool/se.txt";
+
 		}
 
 		/** Url
@@ -131,17 +122,17 @@ namespace TestScript
 
 
 
-			/** TEST04_TEXT
+			/** TESTDATA_TEXT
 			*/
-			public const string TEST04_TEXT = "https://bbbproject.sakura.ne.jp/www/project_webgl/Test04/text.txt";
+			public const string TESTDATA_TEXT = "https://bbbproject.sakura.ne.jp/www/project_webgl/TestData/text.txt";
 
-			/** TEST04_BINARY
+			/** TESTDATA_BINARY
 			*/
-			public const string TEST04_BINARY = "https://bbbproject.sakura.ne.jp/www/project_webgl/Test04/binary";
+			public const string TESTDATA_BINARY = "https://bbbproject.sakura.ne.jp/www/project_webgl/TestData/binary";
 
-			/** TEST04_TEXTURE
+			/** TESTDATA_TEXTURE
 			*/
-			public const string TEST04_TEXTURE = "https://bbbproject.sakura.ne.jp/www/project_webgl/Test04/texture.png";
+			public const string TESTDATA_TEXTURE = "https://bbbproject.sakura.ne.jp/www/project_webgl/TestData/texture.png";
 		}
 
 		/** Local

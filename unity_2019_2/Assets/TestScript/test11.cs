@@ -290,7 +290,7 @@ namespace TestScript
 		*/
 		private void CallBack_Click_AudioClip(int a_id)
 		{
-			GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.PREFAB_SE);
+			GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.TEST11_PREFAB_SE);
 			Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
 			if(t_pack_audioclip != null){
 				Fee.Audio.Audio.GetInstance().LoadSe(t_pack_audioclip,SE_ID);
@@ -310,7 +310,7 @@ namespace TestScript
 		*/
 		private void CallBack_Click_Bgm(int a_id)
 		{
-			GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.PREFAB_BGM);
+			GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.TEST11_PREFAB_BGM);
 
 			if(t_prefab != null){
 				Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
@@ -346,7 +346,7 @@ namespace TestScript
 				}break;
 			case SoundPool_Mode.Start:
 				{
-					this.soundpool_loaditem = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Data.StreamingAssets.SOUNDPOOL_SE),SOUNDPOOL_DATA_VERSION);
+					this.soundpool_loaditem = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Data.StreamingAssets.TEST11_SOUNDPOOL_SE),SOUNDPOOL_DATA_VERSION);
 					this.soundpool_mode = SoundPool_Mode.Now;
 				}break;
 			case SoundPool_Mode.Now:
