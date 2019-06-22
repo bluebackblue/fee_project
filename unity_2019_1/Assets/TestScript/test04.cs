@@ -42,9 +42,6 @@ namespace TestScript
 			ロードストリーミングアセット
 			ロードリソース
 
-		アセット
-			ロードリソース
-
 	*/
 	public class test04 : MainBase
 	{
@@ -61,6 +58,7 @@ namespace TestScript
 				セーブローカル
 				ロードローカル
 				ロードストリーミングアセット
+				ロードリソース
 				"
 			);
 		}
@@ -101,10 +99,6 @@ namespace TestScript
 			LoadLocal_TextureFile,
 			LoadStreamingAssets_TextureFile,
 			LoadResources_TextureFile,
-
-			/** AnythingFile
-			*/
-			LoadResources_AnythingFile,
 		}
 
 		/** status_text
@@ -143,7 +137,6 @@ namespace TestScript
 				Texture,
 				AssetBundle,
 				SoundPool,
-				Anything,
 			}
 
 			/** constructor
@@ -227,16 +220,6 @@ namespace TestScript
 				return null;
 			}
 
-			/** GetResultAnything
-			*/
-			public object GetResultAnything()
-			{
-				if(this.item_file != null){
-					return this.item_file.GetResultAssetAnything();
-				}
-				return null;
-			}
-
 			/** GetResultBinary
 			*/
 			public byte[] GetResultBinary()
@@ -277,9 +260,6 @@ namespace TestScript
 							case Fee.Asset.AssetType.Texture:
 								{
 								}return ResultType.Texture;
-							case Fee.Asset.AssetType.Anything:
-								{
-								}return ResultType.Anything;
 							}
 						}break;
 					case Fee.File.Item.ResultType.AssetBundle:
@@ -482,9 +462,6 @@ namespace TestScript
 				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadLocal_TextureFile));
 				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadStreamingAssets_TextureFile));
 				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadResources_TextureFile));
-				
-				//AssetFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadResources_AnythingFile));
 			}
 		}
 
@@ -624,17 +601,6 @@ namespace TestScript
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesTextureFile,new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
 				}break;
-
-
-
-
-			case CallBackId.LoadResources_AnythingFile:
-				{
-					//ロードリソース。アセットファイル。
-
-					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadResourcesAnythingFile,new Fee.File.Path(Data.Resources.TEST04_TEXTURE)));
-				}break;
-
 			}
 		}
 
@@ -697,18 +663,6 @@ namespace TestScript
 							this.result_sprite.SetTexture(this.loaditem.GetResultTexture());
 
 							this.status_text.SetText("結果:テクスチャー取得");
-						}break;
-					case LoadItem.ResultType.Anything:
-						{
-							object t_asset = this.loaditem.GetResultAnything();
-							if(t_asset is Texture2D){
-								this.result_sprite.SetVisible(true);
-								this.result_sprite.SetTexture(t_asset as Texture2D);
-
-								this.status_text.SetText("結果:テクスチャー取得");
-							}else{
-								this.status_text.SetText("結果:不明アッセット取得");
-							}
 						}break;
 					}
 

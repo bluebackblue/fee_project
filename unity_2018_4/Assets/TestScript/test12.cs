@@ -42,18 +42,119 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** Step
+		/** ClickId
 		*/
-		private enum Step
+		private enum ClickId
 		{
-			Init,
-			LoadJson,
-			
-			LoadRequest,
-			LoadWait,
-			LoadEnd,
-		};
-		private Step step;
+			/** リソース。プレハブ。
+			*/
+			Resources_Prefab,
+
+			/** リソース。テクスチャー。
+			*/
+			Resources_Texture,
+
+			/** リソース。テキスト。
+			*/
+			Resources_Text,
+
+			/** ストリーミングアセット。テクスチャー。
+			*/
+			StreamingAssets_Texture,
+
+			/** ストリーミングアセット。テキスト。
+			*/
+			StreamingAssets_Text,
+
+			/** ストリーミングアセット。バイナリー。
+			*/
+			StreamingAssets_Binary,
+
+			/** ＵＲＬ。テクスチャー。
+			*/
+			Url_Texture,
+
+			/** ＵＲＬ。テキスト。
+			*/
+			Url_Text,
+
+			/** ＵＲＬ。バイナリー。
+			*/
+			Url_Binary,
+		}
+
+		/** リストアイテム。
+		*/
+		private class Scroll_Item : Fee.Ui.ScrollItem_Base
+		{
+			/** button
+			*/
+			public Fee.Ui.Button button;
+
+			/** GetItemLength
+			*/
+			public static int GetItemLength()
+			{
+				return 27;
+			}
+
+			/** constructor
+			*/
+			public Scroll_Item(Fee.Deleter.Deleter a_deleter,Fee.Ui.Button_Base.CallBack_Click a_callback_click,ClickId a_callback_click_id)
+			{
+				this.button = new Fee.Ui.Button(a_deleter,1,a_callback_click,(int)a_callback_click_id);
+				this.button.SetClip(true);
+				this.button.SetDragCancelFlag(true);
+				this.button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetText(a_callback_click_id.ToString());
+			}
+
+			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			*/
+			public override void SetY(int a_y)
+			{
+				this.button.SetY(a_y);
+			}
+
+			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			*/
+			public override void SetX(int a_x)
+			{
+				this.button.SetX(a_x);
+			}
+
+			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			*/
+			public override void SetWH(int a_w,int a_h)
+			{
+				this.button.SetWH(a_w,a_h);
+			}
+
+			/** [Fee.Ui.ScrollItem_Base]クリップ矩形。設定。
+			*/
+			public override void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
+			{
+				this.button.SetClipRect(ref a_rect);
+			}
+
+			/** [Fee.Ui.ScrollItem_Base]表示内。
+			*/
+			public override void OnViewIn()
+			{
+				this.button.SetVisible(true);
+			}
+
+			/** [Fee.Ui.ScrollItem_Base]表示外。
+			*/
+			public override void OnViewOut()
+			{
+				this.button.SetVisible(false);
+			}
+		}
+
+		/** scroll
+		*/
+		private Fee.Ui.Scroll<Scroll_Item> scroll;
 
 		/** text
 		*/
@@ -95,6 +196,7 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//データ。インスタンス作成。
+			Fee.Data.Config.LOG_ENABLE = true;
 			Fee.Data.Data.CreateInstance();
 
 			//ファイル。インスタンス作成。
@@ -109,21 +211,118 @@ namespace TestScript
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
-			//step
-			this.step = Step.Init;
-
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
+			//drawpriority
+			int t_layerindex = 0;
+			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
+
+			//scroll_item
+			{
+				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,t_drawpriority,Fee.Ui.ScrollType.Vertical,30);
+				this.scroll.SetRect(50,50,350,350);
+				
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Resources_Prefab));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Resources_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Resources_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.StreamingAssets_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.StreamingAssets_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.StreamingAssets_Binary));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Url_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Url_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Url_Binary));
+			}
+
+			//item
+			this.item = null;
+
 			//text
 			this.text = new Fee.Render2D.Text2D(this.deleter,0);
-			this.text.SetRect(50,50,0,0);
+			this.text.SetRect(50,380,0,0);
 
 			//sprite
 			this.sprite = new Fee.Render2D.Sprite2D(this.deleter,0);
-			this.sprite.SetRect(50,100,100,100);
+			this.sprite.SetRect(50,400,100,100);
 			this.sprite.SetTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			this.sprite.SetTexture(Texture2D.whiteTexture);
+			this.sprite.SetVisible(false);
+
+			{
+				#if(UNITY_EDITOR)
+				UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Editor/Test12/debug_data");
+				#else
+				UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Test12/release_data");
+				#endif
+
+				if(t_textasset != null){
+					string t_text = t_textasset.text;
+					if(t_text != null){
+						System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
+						foreach(System.Collections.Generic.KeyValuePair<string,Fee.Data.JsonListItem> t_pair in t_data_list){
+							Fee.Data.Data.GetInstance().RegisterResourcesItem(t_pair.Key,t_pair.Value.path_type,new Fee.File.Path(t_pair.Value.path));
+						}
+					}
+				}
+			}
+		}
+
+		/** [Button_Base]コールバック。クリック。
+		*/
+		public void CallBack_Click(int a_id)
+		{
+			if(this.item == null){
+				this.sprite.SetVisible(false);
+				this.text.SetText("");
+
+				switch((ClickId)a_id){
+				case ClickId.Resources_Prefab:
+					{
+						//リソース。プレハブ。
+						this.item = Fee.Data.Data.GetInstance().RequestNormal("RESOURCES_PREFAB");
+					}break;
+				case ClickId.Resources_Texture:
+					{
+						//リソース。テクスチャー。
+						this.item = Fee.Data.Data.GetInstance().RequestNormal("RESOURCES_TEXTURE");
+					}break;
+				case ClickId.Resources_Text:
+					{
+						//リソース。テキスト。
+						this.item = Fee.Data.Data.GetInstance().RequestNormal("RESOURCES_TEXT");
+					}break;
+				case ClickId.StreamingAssets_Texture:
+					{
+						//ストリーミングアセット。テクスチャー。
+						this.item = Fee.Data.Data.GetInstance().RequestNormal("STREAMINGASSETS_TEXTURE");
+					}break;
+				case ClickId.StreamingAssets_Text:
+					{
+						//ストリーミングアセット。テキスト。
+						this.item = Fee.Data.Data.GetInstance().RequestNormal("STREAMINGASSETS_TEXT");
+					}break;
+				case ClickId.StreamingAssets_Binary:
+					{
+						//ストリーミングアセット。バイナリー。
+						this.item = Fee.Data.Data.GetInstance().RequestNormal("STREAMINGASSETS_BINARY");
+					}break;
+				case ClickId.Url_Texture:
+					{
+						//ＵＲＬ。テクスチャー。
+						this.item = Fee.Data.Data.GetInstance().RequestNormal("URL_TEXTURE");
+					}break;
+				case ClickId.Url_Text:
+					{
+						//ＵＲＬ。テキスト。
+						this.item = Fee.Data.Data.GetInstance().RequestNormal("URL_TEXT");
+					}break;
+				case ClickId.Url_Binary:
+					{
+						//ＵＲＬ。バイナリー。
+						this.item = Fee.Data.Data.GetInstance().RequestNormal("URL_BINARY");
+					}break;
+				}
+			}
 		}
 
 		/** FixedUpdate
@@ -145,51 +344,43 @@ namespace TestScript
 			//ファイル。
 			Fee.File.File.GetInstance().Main();
 
+			if(this.item != null){
+				if(this.item.IsBusy() == true){
+					//処理中。
+				}else{
+					switch(this.item.GetResultAssetType()){
+					case Fee.Asset.AssetType.Binary:
+						{
+							UnityEngine.Debug.Log("Binary");
 
+							this.text.SetText("byte = " + this.item.GetResultAssetBinary().Length.ToString());
+						}break;
+					case Fee.Asset.AssetType.Prefab:
+						{
+							UnityEngine.Debug.Log("Prefab");
 
-			switch(this.step){
-			case Step.Init:
-				{
-					this.step = Step.LoadJson;
-				}break;
-			case Step.LoadJson:
-				{
-					#if(UNITY_EDITOR)
-					UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Editor/Test12/editor_data");
-					#else
-					UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Test12/release_data");
-					#endif
+							UnityEngine.GameObject t_prefab = this.item.GetResultAssetPrefab();
 
-					if(t_textasset != null){
-						string t_text = t_textasset.text;
-						if(t_text != null){
-							System.Collections.Generic.Dictionary<string,Fee.Data.ListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.ListItem>>(t_text);
-							foreach(System.Collections.Generic.KeyValuePair<string,Fee.Data.ListItem> t_pair in t_data_list){
-								Fee.Data.Data.GetInstance().RegisterResourcesItem(t_pair.Key,t_pair.Value.path_type,t_pair.Value.path);
-							}
-						}
-					}
+							this.text.SetText("prefab = " + t_prefab.name);
 
-					this.step = Step.LoadRequest;
-				}break;
-			case Step.LoadRequest:
-				{
-					this.item = Fee.Data.Data.GetInstance().RequestNormal("SKYIMAGE");//TODO:
-					this.step = Step.LoadWait;
-				}break;
-			case Step.LoadWait:
-				{
-					if(this.item.IsBusy() == false){
-						if(this.item.GetResultAssetType() == Fee.Asset.AssetType.Texture){
+						}break;
+					case Fee.Asset.AssetType.Text:
+						{
+							UnityEngine.Debug.Log("Text");
+
+							this.text.SetText(this.item.GetResultAssetText());
+						}break;
+					case Fee.Asset.AssetType.Texture:
+						{
+							UnityEngine.Debug.Log("Texture");
+
 							this.sprite.SetTexture(this.item.GetResultAssetTexture());
-						}
-						this.item = null;
-						this.step = Step.LoadEnd;
+							this.sprite.SetVisible(true);
+						}break;
 					}
-				}break;
-			case Step.LoadEnd:
-				{
-				}break;
+
+					this.item = null;
+				}
 			}
 		}
 
