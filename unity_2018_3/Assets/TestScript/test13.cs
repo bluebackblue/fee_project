@@ -276,10 +276,41 @@ namespace TestScript
 		*/
 		public void UpdateButtonStatus()
 		{
-			this.button_inputsystem_mouse_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputmouse_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_touchscreen_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputtouch_touch.SetTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_mouse_touch.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_mouse_touch.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_mouse_touch.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_mouse_touch.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_mouse_touch.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_mouse_touch.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_mouse_touch.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_mouse_touch.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+
+			this.button_inputmanager_inputmouse_touch.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputmouse_touch.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputmouse_touch.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputmouse_touch.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputmouse_touch.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputmanager_inputmouse_touch.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputmanager_inputmouse_touch.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputmanager_inputmouse_touch.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+
+			this.button_inputsystem_touchscreen_touch.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_touchscreen_touch.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_touchscreen_touch.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_touchscreen_touch.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputsystem_touchscreen_touch.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_touchscreen_touch.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_touchscreen_touch.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_touchscreen_touch.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+
+			this.button_inputmanager_inputtouch_touch.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputtouch_touch.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputtouch_touch.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputtouch_touch.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_inputmanager_inputtouch_touch.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputmanager_inputtouch_touch.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputmanager_inputtouch_touch.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputmanager_inputtouch_touch.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 		}
 
 		/** コールバック。

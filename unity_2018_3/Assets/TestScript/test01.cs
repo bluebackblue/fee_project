@@ -251,23 +251,45 @@ namespace TestScript
 				int t_yy = 10;
 
 				this.button_log = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,100);
-				this.button_log.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_log.SetRect(t_xx,t_yy,80,50);
 				this.button_log.SetText("Log");
+				this.button_log.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_log.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_log.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_log.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_log.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_log.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_log.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_log.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				t_xx += 100;
 
 				this.button_logerror = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,200);
-				this.button_logerror.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_logerror.SetRect(t_xx,t_yy,80,50);
 				this.button_logerror.SetText("LogError");
+				this.button_logerror.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_logerror.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_logerror.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_logerror.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_logerror.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_logerror.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_logerror.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_logerror.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				t_xx += 100;
 
 				this.button_assert = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,300);
-				this.button_assert.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_assert.SetRect(t_xx,t_yy,80,50);
 				this.button_assert.SetText("Assert");
+				this.button_assert.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_assert.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_assert.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_assert.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_assert.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_assert.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_assert.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_assert.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+
 			}
 		}
 

@@ -210,9 +210,16 @@ namespace TestScript
 
 				this.start_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_Start,0);
 				this.start_button.SetRect(t_x,t_y,t_w,t_h);
-				this.start_button.SetTexture(t_texture);
 				this.start_button.SetText("接続");
 				this.start_button.SetVisible(false);
+				this.start_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.start_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.start_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.start_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.start_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.start_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.start_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.start_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//修了ボタン。
@@ -222,13 +229,18 @@ namespace TestScript
 				int t_x = 100 + 110;
 				int t_y = 300;
 
-				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON);
-
 				this.end_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_End,0);
 				this.end_button.SetRect(t_x,t_y,t_w,t_h);
-				this.end_button.SetTexture(t_texture);
 				this.end_button.SetText("切断");
 				this.end_button.SetVisible(false);
+				this.end_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.end_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.end_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.end_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.end_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.end_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.end_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.end_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//mode

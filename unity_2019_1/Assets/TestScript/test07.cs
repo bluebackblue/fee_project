@@ -179,21 +179,42 @@ namespace TestScript
 
 			//button_key
 			this.button_key = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,0);
-			this.button_key.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_key.SetRect(100 + 200 * 0,100,150,50);
 			this.button_key.SetText("公開鍵");
+			this.button_key.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_key.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_key.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_key.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_key.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_key.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_key.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_key.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			//button_pass
 			this.button_pass = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,1);
-			this.button_pass.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_pass.SetRect(100 + 200 * 1,100,150,50);
 			this.button_pass.SetText("共通鍵");
+			this.button_pass.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_pass.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_pass.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_pass.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_pass.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_pass.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_pass.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_pass.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			//button_signature
 			this.button_signature = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,2);
-			this.button_signature.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_signature.SetRect(100 + 200 * 2,100,150,50);
 			this.button_signature.SetText("証明書");
+			this.button_signature.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_signature.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_signature.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_signature.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_signature.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_signature.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_signature.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_signature.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			//text
 			this.text = new Fee.Render2D.Text2D(this.deleter,0);

@@ -125,11 +125,18 @@ namespace TestScript
 				this.button.SetRect(0,0,20,20);
 				this.button.SetClipRect(0,0,0,0);
 				this.button.SetText("o");
-				this.button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetClip(true);
 				this.button.SetVisible(false);
 				this.button.SetTextureCornerSize(10);
 				this.button.SetDragCancelFlag(true);
+				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				//削除管理。
 				if(a_deleter != null){
@@ -308,104 +315,201 @@ namespace TestScript
 			//button_push
 			this.button_push = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,9000);
 			this.button_push.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_push.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_push.SetText("最後尾追加");
+			this.button_push.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_push.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_push.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_push.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_push.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_push.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_push.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_push.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
 			//button_pop
 			this.button_pop = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,9001);
 			this.button_pop.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_pop.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_pop.SetText("最後尾削除");
+			this.button_pop.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_pop.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_pop.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_pop.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_pop.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_pop.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_pop.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_pop.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+
 
 			t_y_index++;
 
 			//button_insert_top
 			this.button_insert_top = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,9002);
 			this.button_insert_top.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_insert_top.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_top.SetText("先頭追加");
+			this.button_insert_top.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_top.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_top.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_top.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_top.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_insert_top.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_insert_top.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_insert_top.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
 			//button_remove_top
 			this.button_remove_top = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,9003);
 			this.button_remove_top.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_remove_top.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_top.SetText("先頭削除");
+			this.button_remove_top.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_top.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_top.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_top.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_top.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_remove_top.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_remove_top.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_remove_top.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+
 
 			t_y_index++;
 
 			//button_insert_top_5
 			this.button_insert_top_5 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,9004);
 			this.button_insert_top_5.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_insert_top_5.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_top_5.SetText("挿入(５番目)");
+			this.button_insert_top_5.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_top_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_top_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_top_5.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_top_5.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_insert_top_5.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_insert_top_5.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_insert_top_5.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+
 
 			t_y_index++;
 
 			//button_remove_top_5
 			this.button_remove_top_5 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,9005);
 			this.button_remove_top_5.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_remove_top_5.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_top_5.SetText("削除(５番目)");
+			this.button_remove_top_5.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_top_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_top_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_top_5.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_top_5.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_remove_top_5.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_remove_top_5.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_remove_top_5.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+
 
 			t_y_index++;
 
 			//button_insert_last_5
 			this.button_insert_last_5 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,9006);
 			this.button_insert_last_5.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_insert_last_5.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_last_5.SetText("挿入(後５)");
+			this.button_insert_last_5.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_last_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_last_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_last_5.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_insert_last_5.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_insert_last_5.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_insert_last_5.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_insert_last_5.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+
 
 			t_y_index++;
 
 			//button_remove_last_5
 			this.button_remove_last_5 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,9007);
 			this.button_remove_last_5.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_remove_last_5.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_last_5.SetText("削除(後５)");
+			this.button_remove_last_5.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_last_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_last_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_last_5.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_remove_last_5.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_remove_last_5.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_remove_last_5.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_remove_last_5.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+
 
 			t_y_index++;
 
 			//button_up
 			this.button_up = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,1000);
 			this.button_up.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_up.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_up.SetText("前方に移動");
+			this.button_up.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_up.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_up.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_up.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_up.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_up.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_up.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_up.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
 			//button_down
 			this.button_down = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,1001);
 			this.button_down.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_down.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_down.SetText("後方に移動");
+			this.button_down.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_down.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_down.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_down.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_down.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_down.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_down.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_down.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
 			//button_sort
 			this.button_sort_a = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,2000);
 			this.button_sort_a.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_sort_a.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_sort_a.SetText("ソート");
+			this.button_sort_a.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_sort_a.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_sort_a.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_sort_a.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_sort_a.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_sort_a.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_sort_a.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_sort_a.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
 			//button_sort
 			this.button_sort_b = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,2001);
 			this.button_sort_b.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_sort_b.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_sort_b.SetText("ソート");
+			this.button_sort_b.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_sort_b.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_sort_b.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_sort_b.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_sort_b.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_sort_b.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_sort_b.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_sort_b.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
 			//button_swap
 			this.button_swap = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click,3000);
 			this.button_swap.SetRect(10,100 + 30 * t_y_index,100,30);
-			this.button_swap.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_swap.SetText("SWAP(20,25)");
+			this.button_swap.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_swap.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_swap.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_swap.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_swap.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_swap.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_swap.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_swap.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 		}
 
 		/** CallBack_ScrollItem_V

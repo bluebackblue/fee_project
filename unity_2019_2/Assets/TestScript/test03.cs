@@ -120,9 +120,16 @@ namespace TestScript
 
 				//close_button
 				this.close_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_Close,-1);
-				this.close_button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.close_button.SetText("x");
 				this.close_button.SetWH(this.window.GetTitleBarH(),this.window.GetTitleBarH());
+				this.close_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.close_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.close_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.close_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.close_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.close_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.close_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.close_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				//is_close
 				this.is_close = false;
@@ -254,8 +261,15 @@ namespace TestScript
 			//button
 			this.button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,-1);
 			this.button.SetRect(10,50,100,50);
-			this.button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button.SetText("表示");
+			this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			//view_flag
 			this.view_flag = true;

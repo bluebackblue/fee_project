@@ -123,10 +123,17 @@ namespace TestScript
 					int t_h = 40;
 
 					this.button[ii] = new Fee.Ui.Button(this.deleter,0,Click,ii);
-					this.button[ii].SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.button[ii].SetRect(t_x,t_y,t_w,t_h);
 					this.button[ii].SetText(this.scene_list[ii].view);
 					this.button[ii].SetChangeOnOverCallBack(ChangeOnOver,ii);
+					this.button[ii].SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.button[ii].SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.button[ii].SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.button[ii].SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.button[ii].SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.button[ii].SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.button[ii].SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.button[ii].SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 
 				//text

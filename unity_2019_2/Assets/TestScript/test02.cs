@@ -302,39 +302,88 @@ namespace TestScript
 			//ボタン。
 			{
 				this.button_save1 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Save,1);
-				this.button_save1.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_save1.SetRect(100 + 110 * 0,100,100,50);
 				this.button_save1.SetText("Save1");
+				this.button_save1.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_save1.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_save1.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_save1.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_save1.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_save1.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_save1.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_save1.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				this.button_save2 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Save,2);
-				this.button_save2.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_save2.SetRect(100 + 110 * 1,100,100,50);
 				this.button_save2.SetText("Save2");
+				this.button_save2.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_save2.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_save2.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_save2.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_save2.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_save2.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_save2.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_save2.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				this.button_load1 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Load,1);
-				this.button_load1.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_load1.SetRect(100 + 110 * 2,100,100,50);
 				this.button_load1.SetText("Load1");
+				this.button_load1.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_load1.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_load1.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_load1.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_load1.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_load1.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_load1.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_load1.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				this.button_load2 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Load,2);
-				this.button_load2.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_load2.SetRect(100 + 110 * 3,100,100,50);
 				this.button_load2.SetText("Load2");
+				this.button_load2.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_load2.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_load2.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_load2.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_load2.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_load2.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_load2.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_load2.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				this.button_random = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Random,-1);
-				this.button_random.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_random.SetRect(600 + 110*1,100 + 60 * 0,130,50);
 				this.button_random.SetText("Random");
+				this.button_random.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_random.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_random.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_random.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_random.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_random.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_random.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_random.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				this.button_speedtest_utf8json = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest_Utf8Json,-1);
-				this.button_speedtest_utf8json.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_speedtest_utf8json.SetRect(600 + 110*1,100 + 60 * 1,130,50);
 				this.button_speedtest_utf8json.SetText("Utf8Json Test");
+				this.button_speedtest_utf8json.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_speedtest_utf8json.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_speedtest_utf8json.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_speedtest_utf8json.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_speedtest_utf8json.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_speedtest_utf8json.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_speedtest_utf8json.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_speedtest_utf8json.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				this.button_speedtest_fee = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest_Fee,-1);
-				this.button_speedtest_fee.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_speedtest_fee.SetRect(600 + 110*1,100  + 60 * 2,130,50);
 				this.button_speedtest_fee.SetText("Fee Test");
+				this.button_speedtest_fee.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_speedtest_fee.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_speedtest_fee.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_speedtest_fee.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_speedtest_fee.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_speedtest_fee.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_speedtest_fee.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_speedtest_fee.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//ステータス。

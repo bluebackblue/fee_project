@@ -28,10 +28,17 @@ namespace TestScript
 		public void CreateReturnButton(Fee.Deleter.Deleter a_deleter,long a_drawpriority,string a_text)
 		{
 			this.return_button = new Fee.Ui.Button(a_deleter,a_drawpriority,Click,0);
-			this.return_button.SetTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.return_button.SetText(a_text);
 			this.return_button.SetRect(0,0,80,40);
 			this.return_button.SetFontSize(10);
+			this.return_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.return_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.return_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.return_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.return_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.return_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.return_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.return_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 		}
 
 		/** クリック。

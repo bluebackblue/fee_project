@@ -180,33 +180,61 @@ namespace TestScript
 
 			//ボタン。
 			this.button_unload = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Unload,-1);
-			this.button_unload.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_unload.SetRect(t_xx,130,170,30);
 			this.button_unload.SetText("アンロード");
+			this.button_unload.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_unload.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_unload.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_unload.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_unload.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_unload.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_unload.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_unload.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_xx += 210;
 
 			//ボタン。
 			this.button_assetbundle = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_AudioClip,-1);
-			this.button_assetbundle.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_assetbundle.SetRect(t_xx,130,170,30);
 			this.button_assetbundle.SetText("AudioClip SE");
+			this.button_assetbundle.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_assetbundle.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_assetbundle.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_assetbundle.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_assetbundle.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_assetbundle.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_assetbundle.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_assetbundle.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_xx += 210;
 
 			//ボタン。
 			this.button_soundpool = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SoundPool,-1);
-			this.button_soundpool.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_soundpool.SetRect(t_xx,130,170,30);
 			this.button_soundpool.SetText("SoundPool SE");
+			this.button_soundpool.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_soundpool.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_soundpool.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_soundpool.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_soundpool.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_soundpool.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_soundpool.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_soundpool.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_xx += 210;
 
 			//ボタン。
 			this.button_bgm = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Bgm,-1);
-			this.button_bgm.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_bgm.SetRect(t_xx,130,170,30);
 			this.button_bgm.SetText("ＢＧＭ");
+			this.button_bgm.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_bgm.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_bgm.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_bgm.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_bgm.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_bgm.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_bgm.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_bgm.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			int t_yy = 300;
 

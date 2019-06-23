@@ -157,11 +157,17 @@ namespace TestScript
 				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 				int t_y = 300;
 
-				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON);
 
 				this.button = new Fee.Ui.Button(this.deleter,t_drawpriority + 2,this.CallBack_Click,0);
 				this.button.SetRect(t_x,t_y,t_w,t_h);
-				this.button.SetTexture(t_texture);
+				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//checkbutton
@@ -171,11 +177,16 @@ namespace TestScript
 				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 				int t_y = 200;
 
-				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON);
-
 				this.checkbutton = new Fee.Ui.CheckButton(this.deleter,t_drawpriority + 2,this.CallBack_Change,0);
 				this.checkbutton.SetRect(t_x,t_y,t_w,t_h);
-				this.checkbutton.SetTexture(t_texture);
+				this.checkbutton.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
+				this.checkbutton.SetBgOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
+				this.checkbutton.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
+				this.checkbutton.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.checkbutton.SetBgOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.checkbutton.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.checkbutton.SetCheckTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
+				this.checkbutton.SetCheckTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
 			}
 
 			//inputfield

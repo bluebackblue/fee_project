@@ -105,8 +105,15 @@ namespace TestScript
 				this.button = new Fee.Ui.Button(a_deleter,1,a_callback_click,(int)a_callback_click_id);
 				this.button.SetClip(true);
 				this.button.SetDragCancelFlag(true);
-				this.button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetText(a_callback_click_id.ToString());
+				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形。設定。

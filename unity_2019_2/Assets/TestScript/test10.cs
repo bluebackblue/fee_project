@@ -189,9 +189,16 @@ namespace TestScript
 				//ブルーム。
 				{
 					this.bloom_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,0);
-					this.bloom_button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_button.SetRect(100,t_y,t_button_w,t_button_h);
 					this.bloom_button.SetText("Bloom : " + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
+					this.bloom_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.bloom_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.bloom_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.bloom_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 40;
 
@@ -242,9 +249,16 @@ namespace TestScript
 				//ブラー。
 				{
 					this.blur_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,1);
-					this.blur_button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.blur_button.SetRect(100,t_y,t_button_w,t_button_h);
 					this.blur_button.SetText("Blur : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
+					this.blur_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.blur_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.blur_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.blur_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.blur_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.blur_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.blur_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.blur_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 40;
 
@@ -273,9 +287,16 @@ namespace TestScript
 				//デプス。
 				{
 					this.depth_button = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Enable,2);
-					this.depth_button.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.depth_button.SetRect(100,t_y,t_button_w,t_button_h);
 					this.depth_button.SetText("Depth : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
+					this.depth_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.depth_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.depth_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.depth_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.depth_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.depth_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.depth_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.depth_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 40;
 
