@@ -83,6 +83,7 @@ namespace TestScript
 			{
 				//２Ｄ描画。
 				Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
+				Fee.Render2D.Config.ReCalcWH();
 				Fee.Render2D.Render2D.CreateInstance();
 
 				//ＵＩ。

@@ -90,6 +90,7 @@ namespace TestScript
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.CAMERADEPTH_START = 10.0f;
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
+			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//ブラー。インスタンス作成。
@@ -195,25 +196,45 @@ namespace TestScript
 					t_y += 40;
 
 					this.bloom_threshold_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,100);
-					this.bloom_threshold_slider.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.bloom_threshold_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_threshold_slider.SetRect(100,t_y,200,10);
 					this.bloom_threshold_slider.SetTextureCornerSize(3);
 					this.bloom_threshold_slider.SetButtonTextureCornerSize(3);
 					this.bloom_threshold_slider.SetButtonSize(20,25);
 					this.bloom_threshold_slider.SetValue(Fee.Bloom.Bloom.GetInstance().GetThreshold());
+					this.bloom_threshold_slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_threshold_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_threshold_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_threshold_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_threshold_slider.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.bloom_threshold_slider.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.bloom_threshold_slider.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.bloom_threshold_slider.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.bloom_threshold_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_threshold_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_threshold_slider.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.bloom_threshold_slider.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 30;
 
 					this.bloom_intensity_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,101);
-					this.bloom_intensity_slider.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.bloom_intensity_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_intensity_slider.SetRect(100,t_y,200,10);
 					this.bloom_intensity_slider.SetTextureCornerSize(3);
 					this.bloom_intensity_slider.SetButtonTextureCornerSize(3);
 					this.bloom_intensity_slider.SetButtonSize(20,25);
 					this.bloom_intensity_slider.SetValue(Fee.Bloom.Bloom.GetInstance().GetIntensity());
 					this.bloom_intensity_slider.SetValueScale(5.0f);
+					this.bloom_intensity_slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_intensity_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_intensity_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_intensity_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_intensity_slider.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.bloom_intensity_slider.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.bloom_intensity_slider.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.bloom_intensity_slider.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.bloom_intensity_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_intensity_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_intensity_slider.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.bloom_intensity_slider.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 
 				t_y += 60;
@@ -228,13 +249,23 @@ namespace TestScript
 					t_y += 40;
 
 					this.blur_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,200);
-					this.blur_rate_blend_slider.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.blur_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.blur_rate_blend_slider.SetRect(100,t_y,200,10);
 					this.blur_rate_blend_slider.SetTextureCornerSize(3);
 					this.blur_rate_blend_slider.SetButtonTextureCornerSize(3);
 					this.blur_rate_blend_slider.SetButtonSize(20,25);
 					this.blur_rate_blend_slider.SetValue(Fee.Blur.Blur.GetInstance().GetBlendRate());
+					this.blur_rate_blend_slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.blur_rate_blend_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.blur_rate_blend_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.blur_rate_blend_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.blur_rate_blend_slider.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.blur_rate_blend_slider.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.blur_rate_blend_slider.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.blur_rate_blend_slider.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.blur_rate_blend_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.blur_rate_blend_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.blur_rate_blend_slider.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.blur_rate_blend_slider.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 
 				t_y += 60;
@@ -249,13 +280,23 @@ namespace TestScript
 					t_y += 40;
 
 					this.depth_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Slider,300);
-					this.depth_rate_blend_slider.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.depth_rate_blend_slider.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.depth_rate_blend_slider.SetRect(100,t_y,200,10);
 					this.depth_rate_blend_slider.SetTextureCornerSize(3);
 					this.depth_rate_blend_slider.SetButtonTextureCornerSize(3);
 					this.depth_rate_blend_slider.SetButtonSize(20,25);
 					this.depth_rate_blend_slider.SetValue(Fee.Depth.Depth.GetInstance().GetBlendRate());
+					this.depth_rate_blend_slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.depth_rate_blend_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.depth_rate_blend_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.depth_rate_blend_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.depth_rate_blend_slider.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.depth_rate_blend_slider.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.depth_rate_blend_slider.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.depth_rate_blend_slider.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.depth_rate_blend_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.depth_rate_blend_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.depth_rate_blend_slider.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.depth_rate_blend_slider.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 			}
 		}

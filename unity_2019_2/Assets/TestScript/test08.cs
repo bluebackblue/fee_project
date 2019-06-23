@@ -197,6 +197,7 @@ namespace TestScript
 			Fee.TaskW.TaskW.CreateInstance();
 
 			//２Ｄ描画。インスタンス作成。
+			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//パフォーマンスカウンター。インスタンス作成。

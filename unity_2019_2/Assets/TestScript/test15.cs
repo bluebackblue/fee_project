@@ -87,6 +87,7 @@ namespace TestScript
 			Fee.Function.Function.SetMonoBehaviour(this);
 
 			//２Ｄ描画。インスタンス作成。
+			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//マウス。インスタンス作成。
@@ -197,9 +198,19 @@ namespace TestScript
 
 				this.slider = new Fee.Ui.Slider(this.deleter,t_drawpriority + 2,this.CallBack_Change,0);
 				this.slider.SetRect(t_x,t_y,t_w,t_h);
-				this.slider.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-				this.slider.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.slider.SetButtonSize(0,30);
+				this.slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+				this.slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+				this.slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+				this.slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+				this.slider.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.slider.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.slider.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.slider.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.slider.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.slider.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//is_clip

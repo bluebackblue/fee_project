@@ -130,6 +130,7 @@ namespace TestScript
 			Fee.Function.Function.SetMonoBehaviour(this);
 
 			//２Ｄ描画。インスタンス作成。
+			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//マウス。インスタンス作成。

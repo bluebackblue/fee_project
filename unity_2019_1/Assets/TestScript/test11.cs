@@ -133,6 +133,7 @@ namespace TestScript
 			Fee.Audio.Audio.CreateInstance();
 
 			//２Ｄ描画。インスタンス作成。
+			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//ＵＩ。インスタンス作成。
@@ -213,10 +214,20 @@ namespace TestScript
 			this.slider_master = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Master,0);
 			this.slider_master.SetRect(100,t_yy,400,40);
 			this.slider_master.SetValue(0.0f);
-			this.slider_master.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.slider_master.SetButtonSize(10,80);
 			this.slider_master.SetButtonTextureCornerSize(2);
-			this.slider_master.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_master.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_master.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_master.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_master.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_master.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_master.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.slider_master.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.slider_master.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.slider_master.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.slider_master.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.slider_master.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_master.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_yy += 60;
 
@@ -224,10 +235,20 @@ namespace TestScript
 			this.slider_bgm = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Bgm,0);
 			this.slider_bgm.SetRect(100,t_yy,400,40);
 			this.slider_bgm.SetValue(0.0f);
-			this.slider_bgm.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.slider_bgm.SetButtonSize(10,80);
 			this.slider_bgm.SetButtonTextureCornerSize(2);
-			this.slider_bgm.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_bgm.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_bgm.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_bgm.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_bgm.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_bgm.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_bgm.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.slider_bgm.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.slider_bgm.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.slider_bgm.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.slider_bgm.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.slider_bgm.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_bgm.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_yy += 60;
 
@@ -235,10 +256,20 @@ namespace TestScript
 			this.slider_se = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Se,0);
 			this.slider_se.SetRect(100,t_yy,400,40);
 			this.slider_se.SetValue(0.0f);
-			this.slider_se.SetButtonTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.slider_se.SetButtonSize(10,80);
 			this.slider_se.SetButtonTextureCornerSize(2);
-			this.slider_se.SetTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_se.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_se.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_se.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_se.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_se.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_se.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.slider_se.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.slider_se.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.slider_se.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.slider_se.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.slider_se.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_se.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			//値設定。
 			this.slider_master.SetValue(Fee.Audio.Audio.GetInstance().GetMasterVolume());

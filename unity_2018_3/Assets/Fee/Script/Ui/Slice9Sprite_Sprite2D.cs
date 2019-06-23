@@ -4,7 +4,7 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief ＵＩ。スライダー。
+ * @brief ＵＩ。スライス９スプライト。
 */
 
 
@@ -12,9 +12,9 @@
 */
 namespace Fee.Ui
 {
-	/** Slider_Bg_Sprite2D
+	/** Slice9Sprite_Sprite2D
 	*/
-	public class Slider_Bg_Sprite2D : Fee.Render2D.Sprite2D
+	public class Slice9Sprite_Sprite2D : Fee.Render2D.Sprite2D
 	{
 		/** is_clip
 		*/
@@ -28,13 +28,13 @@ namespace Fee.Ui
 		*/
 		private Fee.Render2D.Rect2D_R<int> clip_rect;
 
-		/** lock_flag
+		/** texture_rect2
 		*/
-		private bool lock_flag;
+		private Render2D.Rect2D_R<float> texture_rect2;
 
-		/** constructor。
+		/** constructor
 		*/
-		public Slider_Bg_Sprite2D(Fee.Deleter.Deleter a_deleter,long a_drawpriority)
+		public Slice9Sprite_Sprite2D(Fee.Deleter.Deleter a_deleter,long a_drawpriority)
 			:
 			base(a_deleter,a_drawpriority)
 		{
@@ -47,18 +47,26 @@ namespace Fee.Ui
 			//clip_rect
 			this.clip_rect.Set(0,0,0,0);
 
-			//lock_flag
-			this.lock_flag = false;
-
 			//マテリアル設定。
 			this.SetMaterialType(Fee.Render2D.Config.MaterialType.Slice9);
+			this.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 		}
 
-		/** ロックフラグ。設定。
+		/** SetTextureRect2
 		*/
-		public void SetLock(bool a_flag)
+		public void SetTextureRect2(ref Render2D.Rect2D_R<float> a_texture_rect)
 		{
-			this.lock_flag = a_flag;
+			this.texture_rect2 = a_texture_rect;
+		}
+
+		/** テクスチャ矩形。設定。
+		*/
+		public void SetTextureRect2(float a_texture_x,float a_texture_y,float a_texture_w,float a_texture_h)
+		{
+			this.texture_rect2.x = a_texture_x;
+			this.texture_rect2.y = a_texture_y;
+			this.texture_rect2.w = a_texture_w;
+			this.texture_rect2.h = a_texture_h;
 		}
 
 		/** コーナーサイズ。設定。
@@ -73,6 +81,13 @@ namespace Fee.Ui
 		public void SetClip(bool a_flag)
 		{
 			this.is_clip = a_flag;
+		}
+
+		/** クリップ。取得。
+		*/
+		public bool IsClip()
+		{
+			return this.is_clip;
 		}
 
 		/** クリップ矩形。設定。
@@ -188,12 +203,10 @@ namespace Fee.Ui
 			}
 
 			{
-				float t_texture_x = 0.0f;
-				float t_texture_y = 0.0f;
-
-				if(this.lock_flag == true){
-					t_texture_x = 0.5f;
-				}
+				float t_texture_x = this.texture_rect2.x / Render2D.Config.TEXTURE_W;
+				float t_texture_y = this.texture_rect2.y / Render2D.Config.TEXTURE_H;
+				float t_texture_w = this.texture_rect2.w / Render2D.Config.TEXTURE_W;
+				float t_texture_h = this.texture_rect2.h / Render2D.Config.TEXTURE_H;
 
 				if(a_material.GetFloat("texture_x") != t_texture_x){
 					a_material.SetFloat("texture_x",t_texture_x);
@@ -203,12 +216,12 @@ namespace Fee.Ui
 					a_material.SetFloat("texture_y",t_texture_y);
 					t_setpass = true;
 				}
-				if(a_material.GetFloat("texture_w") != 0.5f){
-					a_material.SetFloat("texture_w",0.5f);
+				if(a_material.GetFloat("texture_w") != t_texture_w){
+					a_material.SetFloat("texture_w",t_texture_w);
 					t_setpass = true;
 				}
-				if(a_material.GetFloat("texture_h") != 0.5f){
-					a_material.SetFloat("texture_h",0.5f);
+				if(a_material.GetFloat("texture_h") != t_texture_h){
+					a_material.SetFloat("texture_h",t_texture_h);
 					t_setpass = true;
 				}
 			}
