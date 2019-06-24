@@ -21,7 +21,7 @@ namespace TestScript
 		データ
 
 	*/
-	public class test12 : MainBase
+	public class test12 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test12.ButtonId>
 	{
 		/** CreateStatus
 		*/
@@ -42,9 +42,9 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** ClickId
+		/** ButtonId
 		*/
-		private enum ClickId
+		public enum ButtonId
 		{
 			/** リソース。プレハブ。
 			*/
@@ -100,12 +100,13 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Scroll_Item(Fee.Deleter.Deleter a_deleter,Fee.Ui.Button_Base.CallBack_Click a_callback_click,ClickId a_callback_click_id)
+			public Scroll_Item(Fee.Deleter.Deleter a_deleter,test12 a_this,ButtonId a_click_id)
 			{
-				this.button = new Fee.Ui.Button(a_deleter,1,a_callback_click,(int)a_callback_click_id);
+				this.button = new Fee.Ui.Button(a_deleter,1);
+				this.button.SetOnButtonClick(a_this,a_click_id);
 				this.button.SetClip(true);
 				this.button.SetDragCancelFlag(true);
-				this.button.SetText(a_callback_click_id.ToString());
+				this.button.SetText(a_click_id.ToString());
 				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -231,15 +232,15 @@ namespace TestScript
 				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,t_drawpriority,Fee.Ui.ScrollType.Vertical,30);
 				this.scroll.SetRect(50,50,350,350);
 				
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Resources_Prefab));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Resources_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Resources_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.StreamingAssets_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.StreamingAssets_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.StreamingAssets_Binary));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Url_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Url_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,ClickId.Url_Binary));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Resources_Prefab));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Resources_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Resources_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.StreamingAssets_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.StreamingAssets_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.StreamingAssets_Binary));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Url_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Url_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Url_Binary));
 			}
 
 			//item
@@ -275,56 +276,56 @@ namespace TestScript
 			}
 		}
 
-		/** [Button_Base]コールバック。クリック。
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		public void CallBack_Click(int a_id)
+		public void OnButtonClick(ButtonId a_id)
 		{
 			if(this.item == null){
 				this.sprite.SetVisible(false);
 				this.text.SetText("");
 
-				switch((ClickId)a_id){
-				case ClickId.Resources_Prefab:
+				switch(a_id){
+				case ButtonId.Resources_Prefab:
 					{
 						//リソース。プレハブ。
 						this.item = Fee.Data.Data.GetInstance().RequestNormal("RESOURCES_PREFAB");
 					}break;
-				case ClickId.Resources_Texture:
+				case ButtonId.Resources_Texture:
 					{
 						//リソース。テクスチャー。
 						this.item = Fee.Data.Data.GetInstance().RequestNormal("RESOURCES_TEXTURE");
 					}break;
-				case ClickId.Resources_Text:
+				case ButtonId.Resources_Text:
 					{
 						//リソース。テキスト。
 						this.item = Fee.Data.Data.GetInstance().RequestNormal("RESOURCES_TEXT");
 					}break;
-				case ClickId.StreamingAssets_Texture:
+				case ButtonId.StreamingAssets_Texture:
 					{
 						//ストリーミングアセット。テクスチャー。
 						this.item = Fee.Data.Data.GetInstance().RequestNormal("STREAMINGASSETS_TEXTURE");
 					}break;
-				case ClickId.StreamingAssets_Text:
+				case ButtonId.StreamingAssets_Text:
 					{
 						//ストリーミングアセット。テキスト。
 						this.item = Fee.Data.Data.GetInstance().RequestNormal("STREAMINGASSETS_TEXT");
 					}break;
-				case ClickId.StreamingAssets_Binary:
+				case ButtonId.StreamingAssets_Binary:
 					{
 						//ストリーミングアセット。バイナリー。
 						this.item = Fee.Data.Data.GetInstance().RequestNormal("STREAMINGASSETS_BINARY");
 					}break;
-				case ClickId.Url_Texture:
+				case ButtonId.Url_Texture:
 					{
 						//ＵＲＬ。テクスチャー。
 						this.item = Fee.Data.Data.GetInstance().RequestNormal("URL_TEXTURE");
 					}break;
-				case ClickId.Url_Text:
+				case ButtonId.Url_Text:
 					{
 						//ＵＲＬ。テキスト。
 						this.item = Fee.Data.Data.GetInstance().RequestNormal("URL_TEXT");
 					}break;
-				case ClickId.Url_Binary:
+				case ButtonId.Url_Binary:
 					{
 						//ＵＲＬ。バイナリー。
 						this.item = Fee.Data.Data.GetInstance().RequestNormal("URL_BINARY");

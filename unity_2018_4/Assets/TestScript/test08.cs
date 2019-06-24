@@ -43,7 +43,7 @@ namespace TestScript
 
 		/** リストアイテム。
 		*/
-		private class Scroll_Item : Fee.Ui.ScrollItem_Base
+		private class Scroll_Item : Fee.Ui.ScrollItem_Base , Fee.Ui.OnButtonClick_CallBackInterface<int>
 		{
 			/** button
 			*/
@@ -76,7 +76,8 @@ namespace TestScript
 			{
 				//button
 				if(a_callback != null){
-					this.button = new Fee.Ui.Button(a_deleter,1,this.CallBack_Click,-1);
+					this.button = new Fee.Ui.Button(a_deleter,1);
+					this.button.SetOnButtonClick(this,-1);
 					this.button.SetClip(true);
 					this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -106,27 +107,13 @@ namespace TestScript
 				this.callback_path = a_callback_path;
 			}
 
-			/** [Button_Base]コールバック。クリック。
+			/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 			*/
-			public void CallBack_Click(int a_id)
+			public void OnButtonClick(int a_id)
 			{
 				if(this.callback != null){
 					this.callback(this.callback_path);
 				}
-			}
-
-			/** [Fee.EventPlateOnOverCallBack_Base]イベントプレートに入場。
-			*/
-			/*
-			public void OnOverEnter(int a_value)
-			{ 
-			}
-			*/
-
-			/** [Fee.EventPlateOnOverCallBack_Base]イベントプレートから退場。
-			*/
-			public void OnOverLeave(int a_value)
-			{
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形。設定。

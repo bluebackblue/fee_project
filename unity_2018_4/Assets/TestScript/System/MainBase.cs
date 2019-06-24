@@ -11,6 +11,25 @@
 */
 namespace TestScript
 {
+	/** ReturnButton_CallBack
+	*/
+	public class ReturnButton_CallBack : Fee.Ui.OnButtonClick_CallBackInterface<MainBase>
+	{
+		/** constructor
+		*/
+		public ReturnButton_CallBack()
+		{
+		}
+
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
+		*/
+		public void OnButtonClick(MainBase a_main_base)
+		{
+			a_main_base.is_changescene = true;
+			a_main_base.StartCoroutine(a_main_base.ChangeScene());	
+		}
+	}
+
 	/** MainBase
 	*/
 	public class MainBase : UnityEngine.MonoBehaviour
@@ -27,7 +46,8 @@ namespace TestScript
 		*/
 		public void CreateReturnButton(Fee.Deleter.Deleter a_deleter,long a_drawpriority,string a_text)
 		{
-			this.return_button = new Fee.Ui.Button(a_deleter,a_drawpriority,Click,0);
+			this.return_button = new Fee.Ui.Button(a_deleter,a_drawpriority);
+			this.return_button.SetOnButtonClick(new ReturnButton_CallBack(),this);
 			this.return_button.SetText(a_text);
 			this.return_button.SetRect(0,0,80,40);
 			this.return_button.SetFontSize(10);
@@ -39,14 +59,6 @@ namespace TestScript
 			this.return_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.return_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
 			this.return_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
-		}
-
-		/** クリック。
-		*/
-		private void Click(int a_id)
-		{
-			this.is_changescene = true;
-			this.StartCoroutine(ChangeScene());	
 		}
 
 		/** 削除前。

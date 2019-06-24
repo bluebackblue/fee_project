@@ -43,7 +43,7 @@ namespace TestScript
 			ロードリソース
 
 	*/
-	public class test04 : MainBase
+	public class test04 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test04.ButtonId>
 	{
 		/** CreateStatus
 		*/
@@ -67,9 +67,9 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** CallBackId
+		/** ButtonId
 		*/
-		private enum CallBackId
+		public enum ButtonId
 		{
 			/** SoundPool
 			*/
@@ -303,12 +303,13 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Scroll_Item(Fee.Deleter.Deleter a_deleter,Fee.Ui.Button_Base.CallBack_Click a_callback_click,CallBackId a_callback_click_id)
+			public Scroll_Item(Fee.Deleter.Deleter a_deleter,test04 a_this,ButtonId a_button_id)
 			{
-				this.button = new Fee.Ui.Button(a_deleter,1,a_callback_click,(int)a_callback_click_id);
+				this.button = new Fee.Ui.Button(a_deleter,1);
+				this.button.SetOnButtonClick(a_this,a_button_id);
 				this.button.SetClip(true);
 				this.button.SetDragCancelFlag(true);
-				this.button.SetText(a_callback_click_id.ToString());
+				this.button.SetText(a_button_id.ToString());
 				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -447,53 +448,53 @@ namespace TestScript
 				this.scroll.SetRect(50,250,350,300);
 				
 				//SoundPool
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.DownLoad_SoundPool));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadLocal_SoundPool));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadStreamingAssets_SoundPool));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.DownLoad_SoundPool));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_SoundPool));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_SoundPool));
 
 				//TextFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.SaveLocal_TextFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.DownLoad_TextFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadLocal_TextFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadStreamingAssets_TextFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadResources_TextFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_TextFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.DownLoad_TextFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_TextFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_TextFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadResources_TextFile));
 
 				//BinaryFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.SaveLocal_BinaryFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.DownLoad_BinaryFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadLocal_BinaryFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadStreamingAssets_BinaryFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_BinaryFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.DownLoad_BinaryFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_BinaryFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_BinaryFile));
 
 				//TextureFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.SaveLocal_TextureFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.DownLoad_TextureFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadLocal_TextureFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadStreamingAssets_TextureFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.CallBack_Click,CallBackId.LoadResources_TextureFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_TextureFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.DownLoad_TextureFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_TextureFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_TextureFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadResources_TextureFile));
 			}
 		}
 
-		/** [Button_Base]コールバック。クリック。
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		private void CallBack_Click(int a_id)
+		public void OnButtonClick(ButtonId a_id)
 		{
 			this.result_sprite.SetVisible(false);
 
-			switch((CallBackId)a_id){
-			case CallBackId.DownLoad_SoundPool:
+			switch(a_id){
+			case ButtonId.DownLoad_SoundPool:
 				{
 					//ダウンロード。サウンドプール。
 
 					uint t_data_version = 1;
 					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestDownLoadSoundPool(new Fee.File.Path(Data.Url.SOUNDPOOL_SE),null,t_data_version));
 				}break;
-			case CallBackId.LoadLocal_SoundPool:
+			case ButtonId.LoadLocal_SoundPool:
 				{
 					//ロードローカル。サウンドプール。
 
 					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadLocalSoundPool(new Fee.File.Path(Data.Local.SOUNDPOOL_SE)));
 				}break;
-			case CallBackId.LoadStreamingAssets_SoundPool:
+			case ButtonId.LoadStreamingAssets_SoundPool:
 				{
 					//ロードストリーミングアセット。サウンドプール。
 
@@ -504,31 +505,31 @@ namespace TestScript
 
 
 
-			case CallBackId.SaveLocal_TextFile:
+			case ButtonId.SaveLocal_TextFile:
 				{
 					//セーブローカル。テキストファイル。
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path(Data.Local.TEST04_TEXT),"qwerasdfzxcv"));
 				}break;
-			case CallBackId.DownLoad_TextFile:
+			case ButtonId.DownLoad_TextFile:
 				{
 					//ダウンロード。テキストファイル。
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadTextFile,new Fee.File.Path(Data.Url.TESTDATA_TEXT)));
 				}break;
-			case CallBackId.LoadLocal_TextFile:
+			case ButtonId.LoadLocal_TextFile:
 				{
 					//ロードローカル。テキストファイル。
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad( Fee.File.File.LoadRequestType.LoadLocalTextFile,new Fee.File.Path(Data.Local.TEST04_TEXT)));
 				}break;
-			case CallBackId.LoadStreamingAssets_TextFile:
+			case ButtonId.LoadStreamingAssets_TextFile:
 				{
 					//ロードストリーミングアセット。テキストファイル。
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsTextFile,new Fee.File.Path(Data.StreamingAssets.TEST04_TEXT)));
 				}break;
-			case CallBackId.LoadResources_TextFile:
+			case ButtonId.LoadResources_TextFile:
 				{
 					//ロードリソース。テキストファイル。
 
@@ -538,26 +539,26 @@ namespace TestScript
 
 
 
-			case CallBackId.SaveLocal_BinaryFile:
+			case ButtonId.SaveLocal_BinaryFile:
 				{
 					//セーブローカル。バイナリファイル。
 
 					byte[] t_binary = new byte[16];
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveLocalBinaryFile(new Fee.File.Path(Data.Local.TEST04_BINARY),t_binary));
 				}break;
-			case CallBackId.DownLoad_BinaryFile:
+			case ButtonId.DownLoad_BinaryFile:
 				{
 					//ダウンロード。バイナリファイル。
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadBinaryFile,new Fee.File.Path(Data.Url.TESTDATA_BINARY)));
 				}break;
-			case CallBackId.LoadLocal_BinaryFile:
+			case ButtonId.LoadLocal_BinaryFile:
 				{
 					//ロードローカル。バイナリファイル。
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadLocalBinaryFile,new Fee.File.Path(Data.Local.TEST04_BINARY)));
 				}break;
-			case CallBackId.LoadStreamingAssets_BinaryFile:
+			case ButtonId.LoadStreamingAssets_BinaryFile:
 				{
 					//ロードストリーミングアセット。バイナリファイル。
 
@@ -567,7 +568,7 @@ namespace TestScript
 
 
 
-			case CallBackId.SaveLocal_TextureFile:
+			case ButtonId.SaveLocal_TextureFile:
 				{
 					//セーブローカル。テクスチャーファイル。
 
@@ -585,25 +586,25 @@ namespace TestScript
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveLocalTextureFile(new Fee.File.Path(Data.Local.TEST04_TEXTURE),t_texture));
 				}break;
-			case CallBackId.DownLoad_TextureFile:
+			case ButtonId.DownLoad_TextureFile:
 				{
 					//ダウンロード。テクスチャーファイル。
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.DownLoadTextureFile,new Fee.File.Path(Data.Url.TESTDATA_TEXTURE)));
 				}break;
-			case CallBackId.LoadLocal_TextureFile:
+			case ButtonId.LoadLocal_TextureFile:
 				{
 					//ロードローカル。テクスチャーファイル。
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadLocalTextureFile,new Fee.File.Path(Data.Local.TEST04_TEXTURE)));
 				}break;
-			case CallBackId.LoadStreamingAssets_TextureFile:
+			case ButtonId.LoadStreamingAssets_TextureFile:
 				{
 					//ロードストリーミングアセット。テクスチャーファイル。
 
 					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadStreamingAssetsTextureFile,new Fee.File.Path(Data.StreamingAssets.TEST04_TEXTURE)));
 				}break;
-			case CallBackId.LoadResources_TextureFile:
+			case ButtonId.LoadResources_TextureFile:
 				{
 					//ロードリソース。テクスチャーファイル。
 

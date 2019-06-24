@@ -20,7 +20,7 @@ namespace TestScript
 		タッチ
 
 	*/
-	public class test13 : MainBase
+	public class test13 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test13.ButtonId>
 	{
 		/** CreateStatus
 		*/
@@ -44,9 +44,9 @@ namespace TestScript
 		*/
 		private Fee.Render2D.Sprite2D bg;
 
-		/** ClickId
+		/** ButtonId
 		*/
-		private enum ClickId
+		public enum ButtonId
 		{
 			Touch_InputSystem_Mouse,
 			Touch_InputManager_InputMouse,
@@ -128,8 +128,8 @@ namespace TestScript
 				this.deleter.UnRegister(this.sprite);
 				this.deleter.UnRegister(this.text);
 
-				this.sprite.Delete();
-				this.text.Delete();
+				this.sprite.OnDelete();
+				this.text.OnDelete();
 
 				this.sprite = null;
 				this.text = null;
@@ -213,28 +213,32 @@ namespace TestScript
 
 			//mouseposition
 			{
-				this.button_inputsystem_mouse_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputSystem_Mouse);
+				this.button_inputsystem_mouse_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_mouse_touch.SetOnButtonClick(this,ButtonId.Touch_InputSystem_Mouse);
 				this.button_inputsystem_mouse_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_mouse_touch.SetText("InputSystem.Mouse => Touch");
 				this.button_inputsystem_mouse_touch.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_inputmouse_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputManager_InputMouse);
+				this.button_inputmanager_inputmouse_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_inputmouse_touch.SetOnButtonClick(this,ButtonId.Touch_InputManager_InputMouse);
 				this.button_inputmanager_inputmouse_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputmouse_touch.SetText("InputManager.InputMouse => Touch");
 				this.button_inputmanager_inputmouse_touch.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputsystem_touchscreen_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputSystem_TouchScreen);
+				this.button_inputsystem_touchscreen_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_touchscreen_touch.SetOnButtonClick(this,ButtonId.Touch_InputSystem_TouchScreen);
 				this.button_inputsystem_touchscreen_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_touchscreen_touch.SetText("InputSystem.TouchScreen => Touch");
 				this.button_inputsystem_touchscreen_touch.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_inputtouch_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Touch_InputManager_InputTouch);
+				this.button_inputmanager_inputtouch_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_inputtouch_touch.SetOnButtonClick(this,ButtonId.Touch_InputManager_InputTouch);
 				this.button_inputmanager_inputtouch_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputtouch_touch.SetText("InputManager.InputTouch => Touch");
 				this.button_inputmanager_inputtouch_touch.SetFontSize(t_fontsize);
@@ -245,25 +249,25 @@ namespace TestScript
 			this.UpdateButtonStatus();
 		}
 
-		/** [Button_Base]コールバック。クリック。
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		public void CallBack_Click(int a_id)
+		public void OnButtonClick(ButtonId a_id)
 		{
-			switch((ClickId)a_id)
+			switch(a_id)
 			{
-			case ClickId.Touch_InputSystem_Mouse:
+			case ButtonId.Touch_InputSystem_Mouse:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ^= true;
 				}break;
-			case ClickId.Touch_InputManager_InputMouse:
+			case ButtonId.Touch_InputManager_InputMouse:
 				{
 					Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ^= true;
 				}break;
-			case ClickId.Touch_InputSystem_TouchScreen:
+			case ButtonId.Touch_InputSystem_TouchScreen:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ^= true;
 				}break;
-			case ClickId.Touch_InputManager_InputTouch:
+			case ButtonId.Touch_InputManager_InputTouch:
 				{
 					Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ^= true;
 				}break;

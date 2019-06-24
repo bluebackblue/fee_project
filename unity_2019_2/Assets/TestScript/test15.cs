@@ -158,7 +158,7 @@ namespace TestScript
 				int t_y = 300;
 
 
-				this.button = new Fee.Ui.Button(this.deleter,t_drawpriority + 2,this.CallBack_Click,0);
+				this.button = new Fee.Ui.Button(this.deleter,t_drawpriority + 2);
 				this.button.SetRect(t_x,t_y,t_w,t_h);
 				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -177,7 +177,7 @@ namespace TestScript
 				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 				int t_y = 200;
 
-				this.checkbutton = new Fee.Ui.CheckButton(this.deleter,t_drawpriority + 2,this.CallBack_Change,0);
+				this.checkbutton = new Fee.Ui.CheckButton(this.deleter,t_drawpriority + 2);
 				this.checkbutton.SetRect(t_x,t_y,t_w,t_h);
 				this.checkbutton.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
 				this.checkbutton.SetBgOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
@@ -185,8 +185,10 @@ namespace TestScript
 				this.checkbutton.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.checkbutton.SetBgOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.checkbutton.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
-				this.checkbutton.SetCheckTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
-				this.checkbutton.SetCheckTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.checkbutton.SetCheckNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
+				this.checkbutton.SetCheckLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
+				this.checkbutton.SetCheckNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.checkbutton.SetCheckNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
 			}
 
 			//inputfield
@@ -207,7 +209,7 @@ namespace TestScript
 				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 				int t_y = 350;
 
-				this.slider = new Fee.Ui.Slider(this.deleter,t_drawpriority + 2,this.CallBack_Change,0);
+				this.slider = new Fee.Ui.Slider(this.deleter,t_drawpriority + 2);
 				this.slider.SetRect(t_x,t_y,t_w,t_h);
 				this.slider.SetButtonSize(0,30);
 				this.slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
@@ -282,27 +284,6 @@ namespace TestScript
 				this.inputfield.SetClipRect(ref t_cliprect);
 				this.slider.SetClipRect(ref t_cliprect);
 			}
-		}
-
-		/** [Button_Base]コールバック。クリック。
-		*/
-		private void CallBack_Click(int a_id)
-		{
-			Debug.Log("CallBack_Click : " + a_id.ToString());
-		}
-
-		/** [CheckButton_Base]コールバック。変更。
-		*/
-		private void CallBack_Change(int a_id,bool a_flag)
-		{
-			Debug.Log("CallBack_Click : " + a_id.ToString() + " : " + a_flag.ToString());
-		}
-
-		/** [Slider_Base]コールバック。変更。
-		*/
-		private void CallBack_Change(int a_id,float a_value)
-		{
-			Debug.Log("CallBack_Change : " + a_id.ToString() + " : " + a_value.ToString());
 		}
 
 		/** 削除前。

@@ -20,7 +20,7 @@ namespace TestScript
 		ウィンドウ
 
 	*/
-	public class test03 : MainBase
+	public class test03 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<int>
 	{
 		/** CreateStatus
 		*/
@@ -38,7 +38,7 @@ namespace TestScript
 
 		/** Window
 		*/
-		private class Window : Fee.Ui.OnWindowCallBack_Base
+		private class Window : Fee.Ui.OnWindow_CallBackInterface , Fee.Ui.OnButtonClick_CallBackInterface<int>
 		{
 			/** deleter
 			*/
@@ -119,7 +119,8 @@ namespace TestScript
 				this.title.SetText(a_label);
 
 				//close_button
-				this.close_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_Close,-1);
+				this.close_button = new Fee.Ui.Button(this.deleter,t_drawpriority);
+				this.close_button.SetOnButtonClick(this,-1);
 				this.close_button.SetText("x");
 				this.close_button.SetWH(this.window.GetTitleBarH(),this.window.GetTitleBarH());
 				this.close_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -145,9 +146,9 @@ namespace TestScript
 				this.deleter.DeleteAll();
 			}
 
-			/** [Fee.Ui.OnWindowCallBack_Base]レイヤーインデックス変更。
+			/** [Fee.Ui.OnWindow_CallBackInterface]レイヤーインデックス変更。
 			*/
-			public void OnChangeLayerIndex(int a_layerindex)
+			public void OnWindowChangeLayerIndex(int a_layerindex)
 			{
 				long t_drawpriority = a_layerindex * Fee.Render2D.Config.DRAWPRIORITY_STEP;
 
@@ -155,25 +156,25 @@ namespace TestScript
 				this.close_button.SetDrawPriority(t_drawpriority + this.window.GetTitleBarDrawPriorityOffset() + 1);
 			}
 
-			/** [Fee.Ui.OnWindowCallBack_Base]矩形変更。
+			/** [Fee.Ui.OnWindow_CallBackInterface]矩形変更。
 			*/
-			public void OnChangeRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
+			public void OnWindowChangeRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
 			{
 				this.title.SetXY(a_rect.x + this.window.GetTitleBarH() + 5,a_rect.y);
 				this.close_button.SetXY(a_rect.x,a_rect.y);
 			}
 
-			/** [Fee.Ui.OnWindowCallBack_Base]矩形変更。
+			/** [Fee.Ui.OnWindow_CallBackInterface]矩形変更。
 			*/
-			public void OnChangeXY(int a_x,int a_y)
+			public void OnWindowChangeXY(int a_x,int a_y)
 			{
 				this.title.SetXY(a_x + this.window.GetTitleBarH() + 5,a_y);
 				this.close_button.SetXY(a_x,a_y);
 			}
 
-			/** [Button_Base]コールバック。クリック。
+			/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 			*/
-			public void CallBack_Click_Close(int a_id)
+			public void OnButtonClick(int a_id)
 			{
 				this.is_close = true;
 			}
@@ -259,7 +260,8 @@ namespace TestScript
 			long t_drawpriority = 0;
 
 			//button
-			this.button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click,-1);
+			this.button = new Fee.Ui.Button(this.deleter,t_drawpriority);
+			this.button.SetOnButtonClick(this,-1);
 			this.button.SetRect(10,50,100,50);
 			this.button.SetText("表示");
 			this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -311,9 +313,9 @@ namespace TestScript
 			Fee.Ui.Ui.GetInstance().Main();
 		}
 
-		/** [Button_Base]コールバック。クリック。
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		public void CallBack_Click(int a_id)
+		public void OnButtonClick(int a_id)
 		{
 			if(this.view_flag == true){
 				this.view_flag = false;

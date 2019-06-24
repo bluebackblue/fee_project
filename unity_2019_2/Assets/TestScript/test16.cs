@@ -20,7 +20,7 @@ namespace TestScript
 		通信
 
 	*/
-	public class test16 : MainBase , Fee.Network.OnRemoteCallBack_Base
+	public class test16 : MainBase , Fee.Network.OnRemoteCallBack_Base , Fee.Ui.OnButtonClick_CallBackInterface<test16.ButtonId>
 	{
 		/** CreateStatus
 		*/
@@ -89,6 +89,14 @@ namespace TestScript
 		/** inputmode
 		*/
 		private InputMode inputmode;
+
+		/** ButtonId
+		*/
+		public enum ButtonId
+		{
+			Start,
+			End,
+		}
 
 		/** [Fee.Network.OnRemoteCallBack_Base]リモートコール。
 		*/
@@ -208,7 +216,8 @@ namespace TestScript
 
 				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON);
 
-				this.start_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_Start,0);
+				this.start_button = new Fee.Ui.Button(this.deleter,t_drawpriority);
+				this.start_button.SetOnButtonClick(this,ButtonId.Start);
 				this.start_button.SetRect(t_x,t_y,t_w,t_h);
 				this.start_button.SetText("接続");
 				this.start_button.SetVisible(false);
@@ -229,7 +238,8 @@ namespace TestScript
 				int t_x = 100 + 110;
 				int t_y = 300;
 
-				this.end_button = new Fee.Ui.Button(this.deleter,t_drawpriority,this.CallBack_Click_End,0);
+				this.end_button = new Fee.Ui.Button(this.deleter,t_drawpriority);
+				this.end_button.SetOnButtonClick(this,ButtonId.End);
 				this.end_button.SetRect(t_x,t_y,t_w,t_h);
 				this.end_button.SetText("切断");
 				this.end_button.SetVisible(false);
@@ -250,21 +260,25 @@ namespace TestScript
 			this.inputmode = InputMode.Position;
 		}
 
-		/** [Button_Base]コールバック。クリック。開始。
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		private void CallBack_Click_Start(int a_id)
+		public void OnButtonClick(ButtonId a_id)
 		{
-			if(this.mode == Mode.Wait){
-				this.mode = Mode.Start;
-			}
-		}
-
-		/** [Button_Base]コールバック。クリック。終了。
-		*/
-		private void CallBack_Click_End(int a_id)
-		{
-			if(this.mode == Mode.Do){
-				this.mode = Mode.DisConnect;
+			switch(a_id){
+			case ButtonId.Start:
+				{
+					//開始。
+					if(this.mode == Mode.Wait){
+						this.mode = Mode.Start;
+					}
+				}break;
+			case ButtonId.End:
+				{
+					//終了。
+					if(this.mode == Mode.Do){
+						this.mode = Mode.DisConnect;
+					}
+				}break;
 			}
 		}
 

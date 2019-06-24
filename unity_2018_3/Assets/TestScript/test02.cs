@@ -21,7 +21,7 @@ namespace TestScript
 		ＪＳＯＮをオブジェクトにコンバート
 
 	*/
-	public class test02 : MainBase
+	public class test02 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test02.ButtonId>
 	{
 		/** CreateStatus
 		*/
@@ -257,6 +257,19 @@ namespace TestScript
 		*/
 		private SaveData savedata = null;
 
+		/** ButtonId
+		*/
+		public enum ButtonId
+		{
+			Save1,
+			Save2,
+			Load1,
+			Load2,
+			Random,
+			Utf8JsonTest,
+			FeeTest
+		}
+
 		/** Start
 		*/
 		private void Start()
@@ -301,7 +314,8 @@ namespace TestScript
 
 			//ボタン。
 			{
-				this.button_save1 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Save,1);
+				this.button_save1 = new Fee.Ui.Button(this.deleter,0);
+				this.button_save1.SetOnButtonClick(this,ButtonId.Save1);
 				this.button_save1.SetRect(100 + 110 * 0,100,100,50);
 				this.button_save1.SetText("Save1");
 				this.button_save1.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -313,7 +327,8 @@ namespace TestScript
 				this.button_save1.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.button_save1.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_save2 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Save,2);
+				this.button_save2 = new Fee.Ui.Button(this.deleter,0);
+				this.button_save2.SetOnButtonClick(this,ButtonId.Save2);
 				this.button_save2.SetRect(100 + 110 * 1,100,100,50);
 				this.button_save2.SetText("Save2");
 				this.button_save2.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -325,7 +340,8 @@ namespace TestScript
 				this.button_save2.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.button_save2.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_load1 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Load,1);
+				this.button_load1 = new Fee.Ui.Button(this.deleter,0);
+				this.button_load1.SetOnButtonClick(this,ButtonId.Load1);
 				this.button_load1.SetRect(100 + 110 * 2,100,100,50);
 				this.button_load1.SetText("Load1");
 				this.button_load1.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -337,7 +353,8 @@ namespace TestScript
 				this.button_load1.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.button_load1.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_load2 = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Load,2);
+				this.button_load2 = new Fee.Ui.Button(this.deleter,0);
+				this.button_load2.SetOnButtonClick(this,ButtonId.Load2);
 				this.button_load2.SetRect(100 + 110 * 3,100,100,50);
 				this.button_load2.SetText("Load2");
 				this.button_load2.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -349,7 +366,8 @@ namespace TestScript
 				this.button_load2.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.button_load2.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_random = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Random,-1);
+				this.button_random = new Fee.Ui.Button(this.deleter,0);
+				this.button_random.SetOnButtonClick(this,ButtonId.Random);
 				this.button_random.SetRect(600 + 110*1,100 + 60 * 0,130,50);
 				this.button_random.SetText("Random");
 				this.button_random.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -361,7 +379,8 @@ namespace TestScript
 				this.button_random.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.button_random.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_speedtest_utf8json = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest_Utf8Json,-1);
+				this.button_speedtest_utf8json = new Fee.Ui.Button(this.deleter,0);
+				this.button_speedtest_utf8json.SetOnButtonClick(this,ButtonId.Utf8JsonTest);
 				this.button_speedtest_utf8json.SetRect(600 + 110*1,100 + 60 * 1,130,50);
 				this.button_speedtest_utf8json.SetText("Utf8Json Test");
 				this.button_speedtest_utf8json.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -373,7 +392,8 @@ namespace TestScript
 				this.button_speedtest_utf8json.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.button_speedtest_utf8json.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_speedtest_fee = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SpeedTest_Fee,-1);
+				this.button_speedtest_fee = new Fee.Ui.Button(this.deleter,0);
+				this.button_speedtest_fee.SetOnButtonClick(this,ButtonId.FeeTest);
 				this.button_speedtest_fee.SetRect(600 + 110*1,100  + 60 * 2,130,50);
 				this.button_speedtest_fee.SetText("Fee Test");
 				this.button_speedtest_fee.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -403,69 +423,124 @@ namespace TestScript
 			this.savedata = null;
 		}
 
-		/** [Button_Base]コールバック。クリック。
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		private void CallBack_Click_Save(int a_id)
+		public void OnButtonClick(ButtonId a_id)
 		{
-			if(this.savedata != null){
-				//オブジェクトをＪＳＯＮ化。
-				Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.ObjectToJsonItem(this.savedata);
+			switch(a_id){
+			case ButtonId.Save1:
+				{
+					//save1
 
-				//ＪＳＯＮを文字列化。
-				string t_jsonstring = t_jsonitem.ConvertJsonString();
+					if(this.savedata != null){
+						//オブジェクトをＪＳＯＮ化。
+						Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.ObjectToJsonItem(this.savedata);
 
-				//セーブローカル。リクエスト。。
-				this.save_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path("save_" + a_id.ToString() + ".json"),t_jsonstring);
-				if(this.save_item != null){
-					this.button_save1.SetLock(true);
-					this.button_save2.SetLock(true);
-					this.button_load1.SetLock(true);
-					this.button_load2.SetLock(true);
-					this.button_random.SetLock(true);
-				}
+						//ＪＳＯＮを文字列化。
+						string t_jsonstring = t_jsonitem.ConvertJsonString();
+
+						//セーブローカル。リクエスト。。
+						this.save_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path("save_1.json"),t_jsonstring);
+						if(this.save_item != null){
+							this.button_save1.SetLock(true);
+							this.button_save2.SetLock(true);
+							this.button_load1.SetLock(true);
+							this.button_load2.SetLock(true);
+							this.button_random.SetLock(true);
+						}
+					}
+
+				}break;
+			case ButtonId.Save2:
+				{
+					//save2
+
+					if(this.savedata != null){
+						//オブジェクトをＪＳＯＮ化。
+						Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.ObjectToJsonItem(this.savedata);
+
+						//ＪＳＯＮを文字列化。
+						string t_jsonstring = t_jsonitem.ConvertJsonString();
+
+						//セーブローカル。リクエスト。。
+						this.save_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path("save_2.json"),t_jsonstring);
+						if(this.save_item != null){
+							this.button_save1.SetLock(true);
+							this.button_save2.SetLock(true);
+							this.button_load1.SetLock(true);
+							this.button_load2.SetLock(true);
+							this.button_random.SetLock(true);
+						}
+					}
+				}break;
+			case ButtonId.Load1:
+				{
+					//load1
+
+					//ロードローカル。リクエスト。
+					this.load_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadLocalTextFile,new Fee.File.Path("save_1.json"));
+					if(this.load_item != null){
+						this.button_save1.SetLock(true);
+						this.button_save2.SetLock(true);
+						this.button_load1.SetLock(true);
+						this.button_load2.SetLock(true);
+						this.button_random.SetLock(true);
+					}
+				}break;
+			case ButtonId.Load2:
+				{
+					//load2
+
+					//ロードローカル。リクエスト。
+					this.load_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadLocalTextFile,new Fee.File.Path("save_2.json"));
+					if(this.load_item != null){
+						this.button_save1.SetLock(true);
+						this.button_save2.SetLock(true);
+						this.button_load1.SetLock(true);
+						this.button_load2.SetLock(true);
+						this.button_random.SetLock(true);
+					}
+				}break;
+			case ButtonId.Random:
+				{
+					//random
+
+					this.savedata = new SaveData();
+					this.savedata.ignore = Random.Range(0,9999);
+
+					this.savedata.maindata.a = Random.Range(0,9999);
+					this.savedata.maindata.sub = new SaveData.SubData();
+					this.savedata.maindata.sub.a = Random.Range(0,9999);
+					this.savedata.maindata.sub.subsub = new SaveData.SubSubData();
+					this.savedata.maindata.sub.subsub.a = Random.Range(0,9999);
+
+					this.savedata.data_dictionary = new System.Collections.Generic.Dictionary<string,SaveData.Item>();
+					this.savedata.data_dictionary.Add("a",new SaveData.Item(Random.Range(0,9999)));
+
+					this.savedata.data_list = new System.Collections.Generic.List<SaveData.Item>();
+					this.savedata.data_list.Add(new SaveData.Item(Random.Range(0,9999)));
+
+					this.SetStatus("Random",this.savedata);
+				}break;
+			case ButtonId.Utf8JsonTest:
+				{
+					//utf8json test
+
+					this.SpeedTest_Utf8Json();
+				}break;
+			case ButtonId.FeeTest:
+				{
+					//fee test
+
+					this.SpeedTest_Fee();
+				}break;
+
 			}
 		}
 
-		/** [Button_Base]コールバック。クリック。
+		/** SpeedTest_Utf8Json
 		*/
-		private void CallBack_Click_Load(int a_id)
-		{
-			//ロードローカル。リクエスト。
-			this.load_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadLocalTextFile,new Fee.File.Path("save_" + a_id.ToString() + ".json"));
-			if(this.load_item != null){
-				this.button_save1.SetLock(true);
-				this.button_save2.SetLock(true);
-				this.button_load1.SetLock(true);
-				this.button_load2.SetLock(true);
-				this.button_random.SetLock(true);
-			}
-		}
-
-		/** [Button_Base]コールバック。クリック。
-		*/
-		private void CallBack_Click_Random(int a_id)
-		{
-			this.savedata = new SaveData();
-			this.savedata.ignore = Random.Range(0,9999);
-
-			this.savedata.maindata.a = Random.Range(0,9999);
-			this.savedata.maindata.sub = new SaveData.SubData();
-			this.savedata.maindata.sub.a = Random.Range(0,9999);
-			this.savedata.maindata.sub.subsub = new SaveData.SubSubData();
-			this.savedata.maindata.sub.subsub.a = Random.Range(0,9999);
-
-			this.savedata.data_dictionary = new System.Collections.Generic.Dictionary<string,SaveData.Item>();
-			this.savedata.data_dictionary.Add("a",new SaveData.Item(Random.Range(0,9999)));
-
-			this.savedata.data_list = new System.Collections.Generic.List<SaveData.Item>();
-			this.savedata.data_list.Add(new SaveData.Item(Random.Range(0,9999)));
-
-			this.SetStatus("Random",this.savedata);
-		}
-
-		/** [Button_Base]コールバック。クリック。
-		*/
-		private void CallBack_Click_SpeedTest_Utf8Json(int a_id)
+		private void SpeedTest_Utf8Json()
 		{
 			#if(USE_DEF_FEE_UTF8JSON)
 			SpeedTest_Data t_data_from = new SpeedTest_Data(true);
@@ -514,9 +589,9 @@ namespace TestScript
 			this.status.SetText(t_log);
 		}
 
-		/** [Button_Base]コールバック。クリック。
+		/** SpeedTest_Fee
 		*/
-		private void CallBack_Click_SpeedTest_Fee(int a_id)
+		private void SpeedTest_Fee()
 		{
 			SpeedTest_Data t_data_from = new SpeedTest_Data(true);
 

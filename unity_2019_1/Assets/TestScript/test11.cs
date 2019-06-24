@@ -20,7 +20,7 @@ namespace TestScript
 		オーディオ
 
 	*/
-	public class test11 : MainBase
+	public class test11 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test11.ButtonId> , Fee.Ui.OnSliderChangeValue_CallBackInterface<test11.SliderId>
 	{
 		/** CreateStatus
 		*/
@@ -107,6 +107,36 @@ namespace TestScript
 		*/
 		private Fee.Ui.Slider slider_se;
 
+		/** ButtonId
+		*/
+		public enum ButtonId
+		{
+			/** Unload
+			*/
+			Unload,
+
+			/** AudioClip
+			*/
+			AudioClip,
+
+			/** SoundPool
+			*/
+			SoundPool,
+
+			/** Bgm
+			*/
+			Bgm
+		}
+
+		/** SliderId
+		*/
+		public enum SliderId
+		{
+			Master,
+			Bgm,
+			Se,
+		}
+
 		/** Start
 		*/
 		private void Start()
@@ -179,7 +209,8 @@ namespace TestScript
 			int t_xx = 0;
 
 			//ボタン。
-			this.button_unload = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Unload,-1);
+			this.button_unload = new Fee.Ui.Button(this.deleter,0);
+			this.button_unload.SetOnButtonClick(this,ButtonId.Unload);
 			this.button_unload.SetRect(t_xx,130,170,30);
 			this.button_unload.SetText("アンロード");
 			this.button_unload.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -194,7 +225,8 @@ namespace TestScript
 			t_xx += 210;
 
 			//ボタン。
-			this.button_assetbundle = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_AudioClip,-1);
+			this.button_assetbundle = new Fee.Ui.Button(this.deleter,0);
+			this.button_assetbundle.SetOnButtonClick(this,ButtonId.AudioClip);
 			this.button_assetbundle.SetRect(t_xx,130,170,30);
 			this.button_assetbundle.SetText("AudioClip SE");
 			this.button_assetbundle.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -209,7 +241,8 @@ namespace TestScript
 			t_xx += 210;
 
 			//ボタン。
-			this.button_soundpool = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_SoundPool,-1);
+			this.button_soundpool = new Fee.Ui.Button(this.deleter,0);
+			this.button_soundpool.SetOnButtonClick(this,ButtonId.SoundPool);
 			this.button_soundpool.SetRect(t_xx,130,170,30);
 			this.button_soundpool.SetText("SoundPool SE");
 			this.button_soundpool.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -224,7 +257,8 @@ namespace TestScript
 			t_xx += 210;
 
 			//ボタン。
-			this.button_bgm = new Fee.Ui.Button(this.deleter,0,this.CallBack_Click_Bgm,-1);
+			this.button_bgm = new Fee.Ui.Button(this.deleter,0);
+			this.button_bgm.SetOnButtonClick(this,ButtonId.Bgm);
 			this.button_bgm.SetRect(t_xx,130,170,30);
 			this.button_bgm.SetText("ＢＧＭ");
 			this.button_bgm.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -239,7 +273,8 @@ namespace TestScript
 			int t_yy = 300;
 
 			//スライダー。
-			this.slider_master = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Master,0);
+			this.slider_master = new Fee.Ui.Slider(this.deleter,0);
+			this.slider_master.SetOnSliderChangeValue(this,SliderId.Master);
 			this.slider_master.SetRect(100,t_yy,400,40);
 			this.slider_master.SetValue(0.0f);
 			this.slider_master.SetButtonSize(10,80);
@@ -260,7 +295,8 @@ namespace TestScript
 			t_yy += 60;
 
 			//スライダー。
-			this.slider_bgm = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Bgm,0);
+			this.slider_bgm = new Fee.Ui.Slider(this.deleter,0);
+			this.slider_bgm.SetOnSliderChangeValue(this,SliderId.Bgm);
 			this.slider_bgm.SetRect(100,t_yy,400,40);
 			this.slider_bgm.SetValue(0.0f);
 			this.slider_bgm.SetButtonSize(10,80);
@@ -281,7 +317,8 @@ namespace TestScript
 			t_yy += 60;
 
 			//スライダー。
-			this.slider_se = new Fee.Ui.Slider(this.deleter,0,this.CallBack_Change_Se,0);
+			this.slider_se = new Fee.Ui.Slider(this.deleter,0);
+			this.slider_se.SetOnSliderChangeValue(this,SliderId.Se);
 			this.slider_se.SetRect(100,t_yy,400,40);
 			this.slider_se.SetValue(0.0f);
 			this.slider_se.SetButtonSize(10,80);
@@ -305,78 +342,79 @@ namespace TestScript
 			this.slider_se.SetValue(Fee.Audio.Audio.GetInstance().GetSeVolume());
 		}
 
-		/** [Slider_Base]コールバック。変更。
+		/** [Fee.Ui.OnSliderChangeValue_CallBackInterface]値変更。
 		*/
-		private void CallBack_Change_Master(int a_id,float a_value)
+		public void OnSliderChangeValue(SliderId a_id,float a_value)
 		{
-			Fee.Audio.Audio.GetInstance().SetMasterVolume(a_value);
+			switch(a_id){
+			case SliderId.Master:
+				{
+					Fee.Audio.Audio.GetInstance().SetMasterVolume(a_value);
 
-			if(a_value == 0.0f){
-				this.slider_bgm.SetLock(true);
-				this.slider_se.SetLock(true);
-			}else{
-				this.slider_bgm.SetLock(false);
-				this.slider_se.SetLock(false);
+					if(a_value == 0.0f){
+						this.slider_bgm.SetLock(true);
+						this.slider_se.SetLock(true);
+					}else{
+						this.slider_bgm.SetLock(false);
+						this.slider_se.SetLock(false);
+					}
+				}break;
+			case SliderId.Bgm:
+				{
+					Fee.Audio.Audio.GetInstance().SetBgmVolume(a_value);
+				}break;
+			case SliderId.Se:
+				{
+					Fee.Audio.Audio.GetInstance().SetSeVolume(a_value);
+				}break;
 			}
 		}
 
-		/** [Slider_Base]コールバック。変更。
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		private void CallBack_Change_Bgm(int a_id,float a_value)
+		public void OnButtonClick(ButtonId a_id)
 		{
-			Fee.Audio.Audio.GetInstance().SetBgmVolume(a_value);
-		}
+			switch(a_id){
+			case ButtonId.Unload:
+				{
+					//アンロード。
 
-		/** [Slider_Base]コールバック。変更。
-		*/
-		private void CallBack_Change_Se(int a_id,float a_value)
-		{
-			Fee.Audio.Audio.GetInstance().SetSeVolume(a_value);
-		}
+					Fee.Audio.Audio.GetInstance().UnLoadSe(SE_ID);
+					Fee.Audio.Audio.GetInstance().UnLoadBgm();
+				}break;
+			case ButtonId.AudioClip:
+				{
+					//オーディオクリップ。
 
-		/** [Button_Base]コールバック。クリック。
-		*/
-		private void CallBack_Click_Unload(int a_id)
-		{
-			//ＳＥのアンロード。
-			Fee.Audio.Audio.GetInstance().UnLoadSe(SE_ID);
+					GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.TEST11_PREFAB_SE);
+					Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
+					if(t_pack_audioclip != null){
+						Fee.Audio.Audio.GetInstance().LoadSe(t_pack_audioclip,SE_ID);
+					}
+				}break;
+			case ButtonId.SoundPool:
+				{
+					//サウンドプール。
 
-			//ＢＧＭのアンロード。
-			Fee.Audio.Audio.GetInstance().UnLoadBgm();
-		}
+					if(this.soundpool_mode == SoundPool_Mode.Wait){
+						this.soundpool_mode = SoundPool_Mode.Start;
+					}
+				}break;
+			case ButtonId.Bgm:
+				{
+					//ＢＧＭ。
 
-		/** [Button_Base]コールバック。クリック。
-		*/
-		private void CallBack_Click_AudioClip(int a_id)
-		{
-			GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.TEST11_PREFAB_SE);
-			Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
-			if(t_pack_audioclip != null){
-				Fee.Audio.Audio.GetInstance().LoadSe(t_pack_audioclip,SE_ID);
-			}
-		}
+					GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.TEST11_PREFAB_BGM);
 
-		/** [Button_Base]コールバック。クリック。
-		*/
-		private void CallBack_Click_SoundPool(int a_id)
-		{
-			if(this.soundpool_mode == SoundPool_Mode.Wait){
-				this.soundpool_mode = SoundPool_Mode.Start;
-			}
-		}
+					if(t_prefab != null){
+						Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
+						if(t_pack_audioclip != null){
+							Fee.Audio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
+							Fee.Audio.Audio.GetInstance().PlayBgm(0);
+						}
+					}
 
-		/** [Button_Base]コールバック。クリック。
-		*/
-		private void CallBack_Click_Bgm(int a_id)
-		{
-			GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.TEST11_PREFAB_BGM);
-
-			if(t_prefab != null){
-				Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
-				if(t_pack_audioclip != null){
-					Fee.Audio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
-					Fee.Audio.Audio.GetInstance().PlayBgm(0);
-				}
+				}break;
 			}
 		}
 

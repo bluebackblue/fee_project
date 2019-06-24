@@ -22,7 +22,7 @@ namespace TestScript
 		マウス		
 
 	*/
-	public class test05 : MainBase
+	public class test05 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test05.ButtonId>
 	{
 		/** CreateStatus
 		*/
@@ -48,11 +48,11 @@ namespace TestScript
 		*/
 		private Fee.Render2D.Sprite2D bg;
 
-		/** ClickId
+		/** ButtonId
 		*/
-		private enum ClickId
+		public enum ButtonId
 		{
-			Fex,
+			Fix,
 
 			MousePosition_InputSystem_Mouse,
 			MousePosition_InputSystem_Pointer,
@@ -239,7 +239,8 @@ namespace TestScript
 
 			//button_fix
 			{
-				this.button_fix = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Fex);
+				this.button_fix = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_fix.SetOnButtonClick(this,ButtonId.Fix);
 				this.button_fix.SetRect(100,1,100,40);
 				this.button_fix.SetText("確定");
 				this.button_fix.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -262,21 +263,24 @@ namespace TestScript
 
 			//mouseposition
 			{
-				this.button_inputsystem_mouse_mouseposition = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MousePosition_InputSystem_Mouse);
+				this.button_inputsystem_mouse_mouseposition = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_mouse_mouseposition.SetOnButtonClick(this,ButtonId.MousePosition_InputSystem_Mouse);
 				this.button_inputsystem_mouse_mouseposition.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_mouse_mouseposition.SetText("InputSystem.Mouse => MousePosition");
 				this.button_inputsystem_mouse_mouseposition.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputsystem_pointer_mouseposition = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MousePosition_InputSystem_Pointer);
+				this.button_inputsystem_pointer_mouseposition = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_pointer_mouseposition.SetOnButtonClick(this,ButtonId.MousePosition_InputSystem_Pointer);
 				this.button_inputsystem_pointer_mouseposition.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_pointer_mouseposition.SetText("InputSystem.Pointer => MousePosition");
 				this.button_inputsystem_pointer_mouseposition.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_inputmouse_mouseposition = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MousePosition_InputManager_InputMouse);
+				this.button_inputmanager_inputmouse_mouseposition = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_inputmouse_mouseposition.SetOnButtonClick(this,ButtonId.MousePosition_InputManager_InputMouse);
 				this.button_inputmanager_inputmouse_mouseposition.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputmouse_mouseposition.SetText("InputManager.InputMouse => MousePosition");
 				this.button_inputmanager_inputmouse_mouseposition.SetFontSize(t_fontsize);
@@ -286,21 +290,24 @@ namespace TestScript
 
 			//mousebutton
 			{
-				this.button_inputsystem_mouse_mousebutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MouseButton_InputSystem_Mouse);
+				this.button_inputsystem_mouse_mousebutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_mouse_mousebutton.SetOnButtonClick(this,ButtonId.MouseButton_InputSystem_Mouse);
 				this.button_inputsystem_mouse_mousebutton.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_mouse_mousebutton.SetText("InputSystem.Mouse => MouseButton");
 				this.button_inputsystem_mouse_mousebutton.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputsystem_pointer_mousebutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MouseButton_InputSystem_Pointer);
+				this.button_inputsystem_pointer_mousebutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_pointer_mousebutton.SetOnButtonClick(this,ButtonId.MouseButton_InputSystem_Pointer);
 				this.button_inputsystem_pointer_mousebutton.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_pointer_mousebutton.SetText("InputSystem.Pointer => MouseButton");
 				this.button_inputsystem_pointer_mousebutton.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_inputmouse_mousebutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MouseButton_InputManager_MouseButton);
+				this.button_inputmanager_inputmouse_mousebutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_inputmouse_mousebutton.SetOnButtonClick(this,ButtonId.MouseButton_InputManager_MouseButton);
 				this.button_inputmanager_inputmouse_mousebutton.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputmouse_mousebutton.SetText("InputManager.InputMouse => MouseButton");
 				this.button_inputmanager_inputmouse_mousebutton.SetFontSize(t_fontsize);
@@ -310,14 +317,16 @@ namespace TestScript
 
 			//mousewheel
 			{
-				this.button_inputsystem_mouse_mousewheel = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MouseWheel_InputSystem_Mouse);
+				this.button_inputsystem_mouse_mousewheel = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_mouse_mousewheel.SetOnButtonClick(this,ButtonId.MouseWheel_InputSystem_Mouse);
 				this.button_inputsystem_mouse_mousewheel.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_mouse_mousewheel.SetText("InputSystem.Mouse => MouseWheel");
 				this.button_inputsystem_mouse_mousewheel.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_inputname_mousewheel = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.MouseWheel_InputManager_InputName);
+				this.button_inputmanager_inputname_mousewheel = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_inputname_mousewheel.SetOnButtonClick(this,ButtonId.MouseWheel_InputManager_InputName);
 				this.button_inputmanager_inputname_mousewheel.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputname_mousewheel.SetText("InputManager.InputName => MouseWheel");
 				this.button_inputmanager_inputname_mousewheel.SetFontSize(t_fontsize);
@@ -327,14 +336,16 @@ namespace TestScript
 
 			//key
 			{
-				this.button_inputsystem_keyboard_key = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Key_InputSystem_KeyBoard);
+				this.button_inputsystem_keyboard_key = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_keyboard_key.SetOnButtonClick(this,ButtonId.Key_InputSystem_KeyBoard);
 				this.button_inputsystem_keyboard_key.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_keyboard_key.SetText("InputSystem.KeyBoard => Key");
 				this.button_inputsystem_keyboard_key.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_getkey_key = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.Key_InputManager_GetKey);
+				this.button_inputmanager_getkey_key = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_getkey_key.SetOnButtonClick(this,ButtonId.Key_InputManager_GetKey);
 				this.button_inputmanager_getkey_key.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_getkey_key.SetText("InputManager.GetKey => Key");
 				this.button_inputmanager_getkey_key.SetFontSize(t_fontsize);
@@ -344,14 +355,16 @@ namespace TestScript
 
 			//PadDigitalButton
 			{
-				this.button_inputsystem_gamepad_paddigitalbutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadDigitalButton_InputSystem_GamePad);
+				this.button_inputsystem_gamepad_paddigitalbutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_gamepad_paddigitalbutton.SetOnButtonClick(this,ButtonId.PadDigitalButton_InputSystem_GamePad);
 				this.button_inputsystem_gamepad_paddigitalbutton.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_gamepad_paddigitalbutton.SetText("InputSystem.GamePad => PadDigitalButton");
 				this.button_inputsystem_gamepad_paddigitalbutton.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_inputname_paddigitalbutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadDigitalButton_InputManager_InputName);
+				this.button_inputmanager_inputname_paddigitalbutton = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_inputname_paddigitalbutton.SetOnButtonClick(this,ButtonId.PadDigitalButton_InputManager_InputName);
 				this.button_inputmanager_inputname_paddigitalbutton.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputname_paddigitalbutton.SetText("InputManager.InputName => PadDigitalButton");
 				this.button_inputmanager_inputname_paddigitalbutton.SetFontSize(t_fontsize);
@@ -361,14 +374,16 @@ namespace TestScript
 
 			//PadStick
 			{
-				this.button_inputsystem_gamepad_padstick = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadStick_InputSystem_GamePad);
+				this.button_inputsystem_gamepad_padstick = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_gamepad_padstick.SetOnButtonClick(this,ButtonId.PadStick_InputSystem_GamePad);
 				this.button_inputsystem_gamepad_padstick.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_gamepad_padstick.SetText("InputSystem.GamePad => PadStick");
 				this.button_inputsystem_gamepad_padstick.SetFontSize(t_fontsize);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_inputname_padstick = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadStick_InputManager_InputName);
+				this.button_inputmanager_inputname_padstick = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_inputname_padstick.SetOnButtonClick(this,ButtonId.PadStick_InputManager_InputName);
 				this.button_inputmanager_inputname_padstick.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputname_padstick.SetText("InputManager.InputName => PadStick");
 				this.button_inputmanager_inputname_padstick.SetFontSize(t_fontsize);
@@ -378,7 +393,8 @@ namespace TestScript
 
 			//PadTrigger
 			{
-				this.button_inputsystem_gamepad_padtrigger = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadTrigger_InputSystem_GamePad);
+				this.button_inputsystem_gamepad_padtrigger = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_gamepad_padtrigger.SetOnButtonClick(this,ButtonId.PadTrigger_InputSystem_GamePad);
 				this.button_inputsystem_gamepad_padtrigger.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_gamepad_padtrigger.SetText("InputSystem.GamePad => PadTrigger");
 				this.button_inputsystem_gamepad_padtrigger.SetFontSize(t_fontsize);
@@ -386,7 +402,8 @@ namespace TestScript
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_inputname_padtrigger = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadTrigger_InputManager_InputName);
+				this.button_inputmanager_inputname_padtrigger = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_inputname_padtrigger.SetOnButtonClick(this,ButtonId.PadTrigger_InputManager_InputName);
 				this.button_inputmanager_inputname_padtrigger.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputname_padtrigger.SetText("InputManager.InputName => PadTrigger");
 				this.button_inputmanager_inputname_padtrigger.SetFontSize(t_fontsize);
@@ -397,7 +414,8 @@ namespace TestScript
 
 			//PadMotor
 			{
-				this.button_inputsystem_gamepad_padmotor = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,(int)ClickId.PadMorotr_InputSystem_GamePad);
+				this.button_inputsystem_gamepad_padmotor = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_gamepad_padmotor.SetOnButtonClick(this,ButtonId.PadMorotr_InputSystem_GamePad);
 				this.button_inputsystem_gamepad_padmotor.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_gamepad_padmotor.SetText("InputSystem.GamePad => PadMotor");
 				this.button_inputsystem_gamepad_padmotor.SetFontSize(t_fontsize);
@@ -439,88 +457,88 @@ namespace TestScript
 			Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON = this.backup_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON;
 		}
 
-		/** [Button_Base]コールバック。クリック。
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		public void CallBack_Click(int a_id)
+		public void OnButtonClick(ButtonId a_id)
 		{
-			switch((ClickId)a_id)
+			switch(a_id)
 			{
-			case ClickId.Fex:
+			case ButtonId.Fix:
 				{
 					this.SaveFlag();
 					this.backup_rollbackcount = 0;
 				}break;
-			case ClickId.MousePosition_InputSystem_Mouse:
+			case ButtonId.MousePosition_InputSystem_Mouse:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ^= true;
 					this.backup_rollbackcount = 60 * 15;
 				}break;
-			case ClickId.MousePosition_InputSystem_Pointer:
+			case ButtonId.MousePosition_InputSystem_Pointer:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ^= true;
 					this.backup_rollbackcount = 60 * 15;
 				}break;
-			case ClickId.MousePosition_InputManager_InputMouse:
+			case ButtonId.MousePosition_InputManager_InputMouse:
 				{
 					Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ^= true;
 					this.backup_rollbackcount = 60 * 15;
 				}break;
-			case ClickId.MouseButton_InputSystem_Mouse:
+			case ButtonId.MouseButton_InputSystem_Mouse:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ^= true;
 					this.backup_rollbackcount = 60 * 15;
 				}break;
-			case ClickId.MouseButton_InputSystem_Pointer:
+			case ButtonId.MouseButton_InputSystem_Pointer:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ^= true;
 					this.backup_rollbackcount = 60 * 15;
 				}break;
-			case ClickId.MouseButton_InputManager_MouseButton:
+			case ButtonId.MouseButton_InputManager_MouseButton:
 				{
 					Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ^= true;
 					this.backup_rollbackcount = 60 * 15;
 				}break;
-			case ClickId.MouseWheel_InputSystem_Mouse:
+			case ButtonId.MouseWheel_InputSystem_Mouse:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ^= true;
 				}break;
-			case ClickId.MouseWheel_InputManager_InputName:
+			case ButtonId.MouseWheel_InputManager_InputName:
 				{
 					Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ^= true;
 				}break;
-			case ClickId.Key_InputSystem_KeyBoard:
+			case ButtonId.Key_InputSystem_KeyBoard:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ^= true;
 				}break;
-			case ClickId.Key_InputManager_GetKey:
+			case ButtonId.Key_InputManager_GetKey:
 				{
 					Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ^= true;
 				}break;
-			case ClickId.PadDigitalButton_InputSystem_GamePad:
+			case ButtonId.PadDigitalButton_InputSystem_GamePad:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ^= true;
 				}break;
-			case ClickId.PadDigitalButton_InputManager_InputName:
+			case ButtonId.PadDigitalButton_InputManager_InputName:
 				{
 					Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ^= true;
 				}break;
-			case ClickId.PadStick_InputSystem_GamePad:
+			case ButtonId.PadStick_InputSystem_GamePad:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ^= true;
 				}break;
-			case ClickId.PadStick_InputManager_InputName:
+			case ButtonId.PadStick_InputManager_InputName:
 				{
 					Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ^= true;
 				}break;
-			case ClickId.PadTrigger_InputSystem_GamePad:
+			case ButtonId.PadTrigger_InputSystem_GamePad:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ^= true;
 				}break;
-			case ClickId.PadTrigger_InputManager_InputName:
+			case ButtonId.PadTrigger_InputManager_InputName:
 				{
 					Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ^= true;
 				}break;
-			case ClickId.PadMorotr_InputSystem_GamePad:
+			case ButtonId.PadMorotr_InputSystem_GamePad:
 				{
 					Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ^= true;
 				}break;

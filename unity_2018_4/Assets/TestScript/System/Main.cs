@@ -13,7 +13,7 @@ namespace TestScript
 {
 	/** Main
 	*/
-	public class Main : UnityEngine.MonoBehaviour
+	public class Main : UnityEngine.MonoBehaviour , Fee.Ui.OnButtonChangeOverFlag_CallBackInterface<int> , Fee.Ui.OnButtonClick_CallBackInterface<int>
 	{
 		/** scene_list
 		*/
@@ -122,10 +122,11 @@ namespace TestScript
 					int t_w = 80;
 					int t_h = 40;
 
-					this.button[ii] = new Fee.Ui.Button(this.deleter,0,Click,ii);
+					this.button[ii] = new Fee.Ui.Button(this.deleter,0);
+					this.button[ii].SetOnButtonClick(this,ii);
+					this.button[ii].SetOnButtonChangeOverFlag(this,ii);
 					this.button[ii].SetRect(t_x,t_y,t_w,t_h);
 					this.button[ii].SetText(this.scene_list[ii].view);
-					this.button[ii].SetChangeOnOverCallBack(ChangeOnOver,ii);
 					this.button[ii].SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.button[ii].SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.button[ii].SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -324,16 +325,16 @@ namespace TestScript
 			Fee.Ui.Ui.GetInstance().Main();
 		}
 
-		/** クリック。
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		public void Click(int a_id)
+		public void OnButtonClick(int a_id)
 		{
 			UnityEngine.SceneManagement.SceneManager.LoadScene(this.scene_list[a_id].scenename);
 		}
 
-		/** オンオーバー変更。
+		/** [Fee.Ui.OnButtonChangeOverFlag_CallBackInterface]クリック。
 		*/
-		public void ChangeOnOver(int a_id,bool a_is_onover)
+		public void OnButtonChangeOverFlag(int a_id,bool a_is_onover)
 		{
 			this.text.SetText(this.scene_list[a_id].detailtext);
 		}

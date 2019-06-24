@@ -23,7 +23,7 @@ namespace TestScript
 		パス
 
 	*/
-	public class test01 : MainBase
+	public class test01 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test01.ButtonId>
 	{
 		/** CreateStatus
 		*/
@@ -68,6 +68,15 @@ namespace TestScript
 		private Fee.Ui.Button button_log;
 		private Fee.Ui.Button button_logerror;
 		private Fee.Ui.Button button_assert;
+
+		/** ButtonId
+		*/
+		public enum ButtonId
+		{
+			Log,
+			LogError,
+			Assert,
+		}
 
 		/** Start
 		*/
@@ -250,7 +259,8 @@ namespace TestScript
 				int t_xx = 150;
 				int t_yy = 10;
 
-				this.button_log = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,100);
+				this.button_log = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_log.SetOnButtonClick(this,ButtonId.Log);
 				this.button_log.SetRect(t_xx,t_yy,80,50);
 				this.button_log.SetText("Log");
 				this.button_log.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -264,7 +274,8 @@ namespace TestScript
 
 				t_xx += 100;
 
-				this.button_logerror = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,200);
+				this.button_logerror = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_logerror.SetOnButtonClick(this,ButtonId.LogError);
 				this.button_logerror.SetRect(t_xx,t_yy,80,50);
 				this.button_logerror.SetText("LogError");
 				this.button_logerror.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -278,7 +289,8 @@ namespace TestScript
 
 				t_xx += 100;
 
-				this.button_assert = new Fee.Ui.Button(this.deleter,t_drawpriority + 1,this.CallBack_Click,300);
+				this.button_assert = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_assert.SetOnButtonClick(this,ButtonId.Assert);
 				this.button_assert.SetRect(t_xx,t_yy,80,50);
 				this.button_assert.SetText("Assert");
 				this.button_assert.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -293,20 +305,20 @@ namespace TestScript
 			}
 		}
 
-		/** [Button_Base]コールバック。クリック。
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		private void CallBack_Click(int a_id)
+		public void OnButtonClick(ButtonId a_id)
 		{
 			switch(a_id){
-			case 100:
+			case ButtonId.Log:
 				{
 					Fee.Render2D.Tool.Log("CallBack_Click","Log");
 				}break;
-			case 200:
+			case ButtonId.LogError:
 				{
 					Fee.Render2D.Tool.LogError("CallBack_Click","LogError");
 				}break;
-			case 300:
+			case ButtonId.Assert:
 				{
 					Fee.Render2D.Tool.Assert(false);
 				}break;
