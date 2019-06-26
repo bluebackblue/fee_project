@@ -8,13 +8,13 @@
 */
 
 
-/** Fee.AssetBundle
+/** Fee.AssetBundleList
 */
-namespace Fee.AssetBundle
+namespace Fee.AssetBundleList
 {
 	/** Main_File
 	*/
-	public class Main_File : Fee.AssetBundle.OnAssetBundleCoroutine_CallBackInterface
+	public class Main_File : Fee.AssetBundleList.OnAssetBundleCoroutine_CallBackInterface
 	{
 		/**  リクエストタイプ。
 		*/
