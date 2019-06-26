@@ -451,7 +451,7 @@ namespace TestScript
 					if(this.soundpool_loaditem != null){
 						if(this.soundpool_loaditem.IsBusy() == true){
 							//ロード中。
-							this.status.SetText("soundpool : " + this.soundpool_loaditem.GetResultProgressDown().ToString());
+							this.status.SetText("soundpool : " + this.soundpool_loaditem.GetResultProgress().ToString());
 						}else{
 							if(this.soundpool_loaditem.GetResultType() == Fee.SoundPool.Item.ResultType.SoundPool){
 								Fee.Audio.Pack_SoundPool t_pack_soundpool = this.soundpool_loaditem.GetResultSoundPool();

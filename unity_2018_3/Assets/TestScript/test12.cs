@@ -288,47 +288,47 @@ namespace TestScript
 				case ButtonId.Resources_Prefab:
 					{
 						//リソース。プレハブ。
-						this.item = Fee.Data.Data.GetInstance().RequestNormal("RESOURCES_PREFAB");
+						this.item = Fee.Data.Data.GetInstance().RequestFile("RESOURCES_PREFAB");
 					}break;
 				case ButtonId.Resources_Texture:
 					{
 						//リソース。テクスチャー。
-						this.item = Fee.Data.Data.GetInstance().RequestNormal("RESOURCES_TEXTURE");
+						this.item = Fee.Data.Data.GetInstance().RequestFile("RESOURCES_TEXTURE");
 					}break;
 				case ButtonId.Resources_Text:
 					{
 						//リソース。テキスト。
-						this.item = Fee.Data.Data.GetInstance().RequestNormal("RESOURCES_TEXT");
+						this.item = Fee.Data.Data.GetInstance().RequestFile("RESOURCES_TEXT");
 					}break;
 				case ButtonId.StreamingAssets_Texture:
 					{
 						//ストリーミングアセット。テクスチャー。
-						this.item = Fee.Data.Data.GetInstance().RequestNormal("STREAMINGASSETS_TEXTURE");
+						this.item = Fee.Data.Data.GetInstance().RequestFile("STREAMINGASSETS_TEXTURE");
 					}break;
 				case ButtonId.StreamingAssets_Text:
 					{
 						//ストリーミングアセット。テキスト。
-						this.item = Fee.Data.Data.GetInstance().RequestNormal("STREAMINGASSETS_TEXT");
+						this.item = Fee.Data.Data.GetInstance().RequestFile("STREAMINGASSETS_TEXT");
 					}break;
 				case ButtonId.StreamingAssets_Binary:
 					{
 						//ストリーミングアセット。バイナリー。
-						this.item = Fee.Data.Data.GetInstance().RequestNormal("STREAMINGASSETS_BINARY");
+						this.item = Fee.Data.Data.GetInstance().RequestFile("STREAMINGASSETS_BINARY");
 					}break;
 				case ButtonId.Url_Texture:
 					{
 						//ＵＲＬ。テクスチャー。
-						this.item = Fee.Data.Data.GetInstance().RequestNormal("URL_TEXTURE");
+						this.item = Fee.Data.Data.GetInstance().RequestFile("URL_TEXTURE");
 					}break;
 				case ButtonId.Url_Text:
 					{
 						//ＵＲＬ。テキスト。
-						this.item = Fee.Data.Data.GetInstance().RequestNormal("URL_TEXT");
+						this.item = Fee.Data.Data.GetInstance().RequestFile("URL_TEXT");
 					}break;
 				case ButtonId.Url_Binary:
 					{
 						//ＵＲＬ。バイナリー。
-						this.item = Fee.Data.Data.GetInstance().RequestNormal("URL_BINARY");
+						this.item = Fee.Data.Data.GetInstance().RequestFile("URL_BINARY");
 					}break;
 				}
 			}
