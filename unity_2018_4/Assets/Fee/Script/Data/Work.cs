@@ -24,9 +24,9 @@ namespace Fee.Data
 			*/
 			Start,
 
-			/** Do_Normal
+			/** Do_File
 			*/
-			Do_Normal,
+			Do_File,
 
 			/** 完了。
 			*/
@@ -41,9 +41,9 @@ namespace Fee.Data
 			*/
 			None,
 
-			/** 普通。
+			/** ファイル。
 			*/
-			Normal,
+			File,
 		};
 
 		/** mode
@@ -81,9 +81,9 @@ namespace Fee.Data
 
 		/** リクエスト。
 		*/
-		public void RequestNormal(ListItem a_listitem)
+		public void RequestFile(ListItem a_listitem)
 		{
-			this.request_type = RequestType.Normal;
+			this.request_type = RequestType.File;
 			this.request_listitem = a_listitem;
 		}
 
@@ -106,10 +106,10 @@ namespace Fee.Data
 				{
 					switch(this.request_type){
 
-					case RequestType.Normal:
+					case RequestType.File:
 						{
-							if(Fee.Data.Data.GetInstance().GetMainNormal().RequestNormal(this.request_listitem) == true){
-								this.mode = Mode.Do_Normal;
+							if(Fee.Data.Data.GetInstance().GetMainFile().RequestFile(this.request_listitem) == true){
+								this.mode = Mode.Do_File;
 							}
 						}break;
 					}
@@ -117,18 +117,17 @@ namespace Fee.Data
 			case Mode.End:
 				{
 				}return true;
-
-			case Mode.Do_Normal:
+			case Mode.Do_File:
 				{
-					Main_Normal t_main = Fee.Data.Data.GetInstance().GetMainNormal();
+					Main_File t_main = Fee.Data.Data.GetInstance().GetMainFile();
 
 					this.item.SetResultProgress(t_main.GetResultProgress());
 
-					if(t_main.GetResultType() != Main_Normal.ResultType.None){
+					if(t_main.GetResultType() != Main_File.ResultType.None){
 						//結果。
 						bool t_success = false;
 						switch(t_main.GetResultType()){
-						case Main_Normal.ResultType.Asset:
+						case Main_File.ResultType.Asset:
 							{
 								if(t_main.GetResultAsset() != null){
 									this.item.SetResultAsset(t_main.GetResultAsset());

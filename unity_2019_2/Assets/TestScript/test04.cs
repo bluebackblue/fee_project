@@ -179,10 +179,10 @@ namespace TestScript
 			public float GetResultProgress()
 			{
 				if(this.item_file != null){
-					return this.item_file.GetResultProgressDown();
+					return this.item_file.GetResultProgress();
 				}
 				if(this.item_soundpool != null){
-					return this.item_soundpool.GetResultProgressDown();
+					return this.item_soundpool.GetResultProgress();
 				}
 				return 0.0f;
 			}

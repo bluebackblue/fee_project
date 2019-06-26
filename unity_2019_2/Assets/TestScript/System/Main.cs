@@ -160,6 +160,11 @@ namespace TestScript
 			{
 			}
 
+			//アセットバンドル。
+			{
+				Fee.AssetBundle.AssetBundle.DeleteInstance();
+			}
+
 			//オーディオ。
 			{
 				Fee.Audio.Audio.DeleteInstance();
