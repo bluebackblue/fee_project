@@ -50,7 +50,7 @@ namespace TestScript
 			*/
 			Resources_Prefab,
 
-			/** リソース。テクスチャー。
+			/** リソース。テクスチャ。
 			*/
 			Resources_Texture,
 
@@ -58,7 +58,7 @@ namespace TestScript
 			*/
 			Resources_Text,
 
-			/** ストリーミングアセット。テクスチャー。
+			/** ストリーミングアセット。テクスチャ。
 			*/
 			StreamingAssets_Texture,
 
@@ -66,11 +66,11 @@ namespace TestScript
 			*/
 			StreamingAssets_Text,
 
-			/** ストリーミングアセット。バイナリー。
+			/** ストリーミングアセット。バイナリ。
 			*/
 			StreamingAssets_Binary,
 
-			/** ＵＲＬ。テクスチャー。
+			/** ＵＲＬ。テクスチャ。
 			*/
 			Url_Texture,
 
@@ -78,7 +78,7 @@ namespace TestScript
 			*/
 			Url_Text,
 
-			/** ＵＲＬ。バイナリー。
+			/** ＵＲＬ。バイナリ。
 			*/
 			Url_Binary,
 		}
@@ -292,7 +292,7 @@ namespace TestScript
 					}break;
 				case ButtonId.Resources_Texture:
 					{
-						//リソース。テクスチャー。
+						//リソース。テクスチャ。
 						this.item = Fee.Data.Data.GetInstance().RequestFile("RESOURCES_TEXTURE");
 					}break;
 				case ButtonId.Resources_Text:
@@ -302,7 +302,7 @@ namespace TestScript
 					}break;
 				case ButtonId.StreamingAssets_Texture:
 					{
-						//ストリーミングアセット。テクスチャー。
+						//ストリーミングアセット。テクスチャ。
 						this.item = Fee.Data.Data.GetInstance().RequestFile("STREAMINGASSETS_TEXTURE");
 					}break;
 				case ButtonId.StreamingAssets_Text:
@@ -312,12 +312,12 @@ namespace TestScript
 					}break;
 				case ButtonId.StreamingAssets_Binary:
 					{
-						//ストリーミングアセット。バイナリー。
+						//ストリーミングアセット。バイナリ。
 						this.item = Fee.Data.Data.GetInstance().RequestFile("STREAMINGASSETS_BINARY");
 					}break;
 				case ButtonId.Url_Texture:
 					{
-						//ＵＲＬ。テクスチャー。
+						//ＵＲＬ。テクスチャ。
 						this.item = Fee.Data.Data.GetInstance().RequestFile("URL_TEXTURE");
 					}break;
 				case ButtonId.Url_Text:
@@ -327,7 +327,7 @@ namespace TestScript
 					}break;
 				case ButtonId.Url_Binary:
 					{
-						//ＵＲＬ。バイナリー。
+						//ＵＲＬ。バイナリ。
 						this.item = Fee.Data.Data.GetInstance().RequestFile("URL_BINARY");
 					}break;
 				}

@@ -167,7 +167,7 @@ namespace TestScript
 					}
 
 					//パスの登録。
-					Fee.AssetBundleList.AssetBundleList.GetInstance().AddPath("test.assetbundle", Fee.AssetBundleList.AssetBundleList.PathType.AssetsPath,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
+					Fee.AssetBundleList.AssetBundleList.GetInstance().AddPath("test.assetbundle", Fee.AssetBundleList.PathType.AssetsAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
 
 					this.step = Step.Binary_Start;
 				}break;

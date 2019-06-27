@@ -12,15 +12,15 @@
 */
 namespace Fee.File
 {
-	/** ダウンロード。テクスチャーファイル。
+	/** ロードＵＲＬ。テクスチャファイル。
 	*/
-	public class Coroutine_DownLoadTextureFile
+	public class Coroutine_LoadUrlTextureFile
 	{
 		/** ResultType
 		*/
 		public class ResultType
 		{
-			/** テクスチャーファイル。
+			/** テクスチャファイル。
 			*/
 			public UnityEngine.Texture2D texture_file;
 
@@ -73,11 +73,11 @@ namespace Fee.File
 				if(t_webrequest != null){
 					t_webrequest_async = t_webrequest.SendWebRequest();
 					if(t_webrequest_async == null){
-						this.result.errorstring = "Coroutine_DownLoadTextureFile : webrequest_async == null";
+						this.result.errorstring = "Coroutine_LoadUrlTextureFile : webrequest_async == null";
 						yield break;
 					}
 				}else{
-					this.result.errorstring = "Coroutine_DownLoadTextureFile : webrequest == null";
+					this.result.errorstring = "Coroutine_LoadUrlTextureFile : webrequest == null";
 					yield break;
 				}
 
@@ -85,7 +85,7 @@ namespace Fee.File
 					//エラーチェック。
 					if((t_webrequest.isNetworkError == true)||(t_webrequest.isHttpError == true)){
 						//エラー終了。
-						this.result.errorstring = "Coroutine_DownLoadTextureFile : " + t_webrequest.error;
+						this.result.errorstring = "Coroutine_LoadUrlTextureFile : " + t_webrequest.error;
 						yield break;
 					}else if((t_webrequest.isDone == true)&&(t_webrequest.isNetworkError == false)&&(t_webrequest.isHttpError == false)){
 						//正常終了。
@@ -117,7 +117,7 @@ namespace Fee.File
 					t_result_texture = Fee.File.BinaryToTexture2D.Convert(t_webrequest.downloadHandler.data);
 
 				}catch(System.Exception t_exception){
-					this.result.errorstring = "Coroutine_DownLoadTextureFile : " + t_exception.Message;
+					this.result.errorstring = "Coroutine_LoadUrlTextureFile : " + t_exception.Message;
 					yield break;
 				}
 
@@ -128,7 +128,7 @@ namespace Fee.File
 				}
 
 				//失敗。
-				this.result.errorstring = "Coroutine_DownLoadTextureFile : null";
+				this.result.errorstring = "Coroutine_LoadUrlTextureFile : null";
 				yield break;
 			}
 		}
