@@ -167,7 +167,11 @@ namespace TestScript
 					}
 
 					//パスの登録。
-					Fee.AssetBundleList.AssetBundleList.GetInstance().AddPath("test.assetbundle", Fee.AssetBundleList.PathType.AssetsAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
+					#if(false)
+					Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsDummyAssetBundle,new Fee.File.Path("Editor/AssetBundle/Dummy/Dummy.json"));
+					#else
+					Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
+					#endif
 
 					this.step = Step.Binary_Start;
 				}break;
@@ -175,8 +179,7 @@ namespace TestScript
 				{
 					this.text.SetText("Binary_Start");
 
-					//ロードリクエスト。
-					Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoad("test.assetbundle");
+					Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathAssetBundleItem("test.assetbundle");
 
 					this.step = Step.Binary_Wait;
 				}break;

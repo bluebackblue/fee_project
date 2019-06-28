@@ -262,9 +262,6 @@ namespace TestScript
 								}return ResultType.Texture;
 							}
 						}break;
-					case Fee.File.Item.ResultType.AssetBundle:
-						{
-						}return ResultType.AssetBundle;
 					}
 				}
 

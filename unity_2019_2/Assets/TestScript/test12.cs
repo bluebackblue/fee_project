@@ -269,7 +269,7 @@ namespace TestScript
 					if(t_text != null){
 						System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
 						foreach(System.Collections.Generic.KeyValuePair<string,Fee.Data.JsonListItem> t_pair in t_data_list){
-							Fee.Data.Data.GetInstance().RegisterResourcesItem(t_pair.Key,t_pair.Value.path_type,new Fee.File.Path(t_pair.Value.path),null);
+							Fee.Data.Data.GetInstance().RegisterResourcesItem(t_pair.Key,t_pair.Value.path_type,new Fee.File.Path(t_pair.Value.path),t_pair.Value.assetbundle_name);
 						}
 					}
 				}
