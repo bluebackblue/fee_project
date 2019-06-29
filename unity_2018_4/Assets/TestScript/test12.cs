@@ -257,10 +257,13 @@ namespace TestScript
 			this.sprite.SetTexture(Texture2D.whiteTexture);
 			this.sprite.SetVisible(false);
 
+			//データリスト。
 			{
 				#if(UNITY_EDITOR)
+				//リソース強制使用。
 				UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Editor/Test12/debug_data");
 				#else
+				//アセットバンドル使用。
 				UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Test12/release_data");
 				#endif
 
@@ -268,9 +271,7 @@ namespace TestScript
 					string t_text = t_textasset.text;
 					if(t_text != null){
 						System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
-						foreach(System.Collections.Generic.KeyValuePair<string,Fee.Data.JsonListItem> t_pair in t_data_list){
-							Fee.Data.Data.GetInstance().RegisterResourcesItem(t_pair.Key,t_pair.Value.path_type,new Fee.File.Path(t_pair.Value.path),t_pair.Value.assetbundle_name);
-						}
+						Fee.Data.Data.GetInstance().RegisterDataList(t_data_list);
 					}
 				}
 			}
@@ -288,47 +289,47 @@ namespace TestScript
 				case ButtonId.Resources_Prefab:
 					{
 						//リソース。プレハブ。
-						this.item = Fee.Data.Data.GetInstance().RequestFile("RESOURCES_PREFAB");
+						this.item = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_PREFAB");
 					}break;
 				case ButtonId.Resources_Texture:
 					{
 						//リソース。テクスチャ。
-						this.item = Fee.Data.Data.GetInstance().RequestFile("RESOURCES_TEXTURE");
+						this.item = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_TEXTURE");
 					}break;
 				case ButtonId.Resources_Text:
 					{
 						//リソース。テキスト。
-						this.item = Fee.Data.Data.GetInstance().RequestFile("RESOURCES_TEXT");
+						this.item = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_TEXT");
 					}break;
 				case ButtonId.StreamingAssets_Texture:
 					{
 						//ストリーミングアセット。テクスチャ。
-						this.item = Fee.Data.Data.GetInstance().RequestFile("STREAMINGASSETS_TEXTURE");
+						this.item = Fee.Data.Data.GetInstance().RequestLoad("STREAMINGASSETS_TEXTURE");
 					}break;
 				case ButtonId.StreamingAssets_Text:
 					{
 						//ストリーミングアセット。テキスト。
-						this.item = Fee.Data.Data.GetInstance().RequestFile("STREAMINGASSETS_TEXT");
+						this.item = Fee.Data.Data.GetInstance().RequestLoad("STREAMINGASSETS_TEXT");
 					}break;
 				case ButtonId.StreamingAssets_Binary:
 					{
 						//ストリーミングアセット。バイナリ。
-						this.item = Fee.Data.Data.GetInstance().RequestFile("STREAMINGASSETS_BINARY");
+						this.item = Fee.Data.Data.GetInstance().RequestLoad("STREAMINGASSETS_BINARY");
 					}break;
 				case ButtonId.Url_Texture:
 					{
 						//ＵＲＬ。テクスチャ。
-						this.item = Fee.Data.Data.GetInstance().RequestFile("URL_TEXTURE");
+						this.item = Fee.Data.Data.GetInstance().RequestLoad("URL_TEXTURE");
 					}break;
 				case ButtonId.Url_Text:
 					{
 						//ＵＲＬ。テキスト。
-						this.item = Fee.Data.Data.GetInstance().RequestFile("URL_TEXT");
+						this.item = Fee.Data.Data.GetInstance().RequestLoad("URL_TEXT");
 					}break;
 				case ButtonId.Url_Binary:
 					{
 						//ＵＲＬ。バイナリ。
-						this.item = Fee.Data.Data.GetInstance().RequestFile("URL_BINARY");
+						this.item = Fee.Data.Data.GetInstance().RequestLoad("URL_BINARY");
 					}break;
 				}
 			}

@@ -46,13 +46,21 @@ namespace TestScript
 		{
 			Init,
 
-			Binary_Start,
-			Binary_Wait,
-			Binary_End,
+			LoadAssetBundle_Start,
+			LoadAssetBundle_Wait,
+			LoadAssetBundle_End,
 
-			Data_Start,
-			Data_Wait,
-			Data_End,
+			Load_Text_Start,
+			Load_Text_Wait,
+			Load_Text_End,
+
+			Load_Prefab_Start,
+			Load_Prefab_Wait,
+			Load_Prefab_End,
+
+			Load_Texture_Start,
+			Load_Texture_Wait,
+			Load_Texture_End,
 
 			Fix,
 		}
@@ -61,6 +69,14 @@ namespace TestScript
 		/** text
 		*/
 		private Fee.Render2D.Text2D text;
+
+		/** sprite
+		*/
+		private Fee.Render2D.Sprite2D sprite;
+
+		/** assetbundlelist_item
+		*/
+		private Fee.AssetBundleList.Item assetbundlelist_item;
 
 		/** data_item
 		*/
@@ -120,7 +136,15 @@ namespace TestScript
 
 			//text
 			this.text = new Fee.Render2D.Text2D(this.deleter,0);
-			this.text.SetRect(100,100,0,0);
+			this.text.SetRect(50,100,0,0);
+
+			//sprite
+			this.sprite = new Fee.Render2D.Sprite2D(this.deleter,0);
+			this.sprite.SetRect(50,150,100,100);
+			this.sprite.SetTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_MAX);
+
+			//assetbundlelist_item
+			this.assetbundlelist_item = null;
 
 			//data_item
 			this.data_item = null;
@@ -153,72 +177,153 @@ namespace TestScript
 				{
 					this.text.SetText("Init");
 					
+					//データリスト。
 					{
 						UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Test14/data");
 						if(t_textasset != null){
 							string t_text = t_textasset.text;
 							if(t_text != null){
 								System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
-								foreach(System.Collections.Generic.KeyValuePair<string,Fee.Data.JsonListItem> t_pair in t_data_list){
-									Fee.Data.Data.GetInstance().RegisterResourcesItem(t_pair.Key,t_pair.Value.path_type,new Fee.File.Path(t_pair.Value.path),t_pair.Value.assetbundle_name);
-								}
+								Fee.Data.Data.GetInstance().RegisterDataList(t_data_list);
 							}
 						}
 					}
 
 					//パスの登録。
-					#if(false)
-					Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsDummyAssetBundle,new Fee.File.Path("Editor/AssetBundle/Dummy/Dummy.json"));
-					#else
-					Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
-					#endif
+					{
+						#if(false)
+						//ダミーアセットバンドル。
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsDummyAssetBundle,new Fee.File.Path("Editor/AssetBundle/Dummy/Dummy.json"));
+						#else
+						//アセットバンドル。
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
+						#endif
+					}
 
-					this.step = Step.Binary_Start;
+					this.step = Step.LoadAssetBundle_Start;
 				}break;
-			case Step.Binary_Start:
+			case Step.LoadAssetBundle_Start:
 				{
-					this.text.SetText("Binary_Start");
+					//アセットバンドルロード。
 
-					Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathAssetBundleItem("test.assetbundle");
-
-					this.step = Step.Binary_Wait;
+					this.assetbundlelist_item = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathAssetBundleItem("test.assetbundle");
+					this.step = Step.LoadAssetBundle_Wait;
 				}break;
-			case Step.Binary_Wait:
+			case Step.LoadAssetBundle_Wait:
 				{
-					if(Fee.AssetBundleList.AssetBundleList.GetInstance().IsBusy() == false){
-						this.step = Step.Binary_End;
+					//アセットバンドルロード。
+
+					if(this.assetbundlelist_item.IsBusy() == false){
+						this.step = Step.LoadAssetBundle_End;
 					}else{
-						this.text.SetText("Binary_Wait");
+						this.text.SetText("LoadAssetBundle_Wait : " + this.assetbundlelist_item.GetResultProgress().ToString());
 					}
 				}break;
-			case Step.Binary_End:
+			case Step.LoadAssetBundle_End:
 				{
-					this.text.SetText("Binary_End");
+					//アセットバンドルロード。
 
-					this.step = Step.Data_Start;
+					this.step = Step.Load_Text_Start;
 				}break;
-			case Step.Data_Start:
+			case Step.Load_Text_Start:
 				{
-					this.text.SetText("Data_Start");
+					//ロード。テキスト。
 
-					this.data_item = Fee.Data.Data.GetInstance().RequestFile("RESOURCES_TEXT");
-
-					this.step = Step.Data_Wait;
+					this.data_item = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_TEXT");
+					this.step = Step.Load_Text_Wait;
 				}break;
-			case Step.Data_Wait:
+			case Step.Load_Text_Wait:
 				{
-					this.text.SetText("Data_Wait");
+					//ロード。テキスト。
 
 					if(this.data_item.IsBusy() == false){
-						this.step = Step.Data_End;
+						this.step = Step.Load_Text_End;
+					}else{
+						this.text.SetText("Load_Text_Wait : "  + this.data_item.GetResultProgress().ToString());
 					}
 				}break;
-			case Step.Data_End:
+			case Step.Load_Text_End:
 				{
+					//ロード。テキスト。
+
 					if(this.data_item.GetResultAssetType() == Fee.Asset.AssetType.Text){
-						this.text.SetText("Data_End : " + this.data_item.GetResultAssetText());
+						this.text.SetText("Load_Text_End : " + this.data_item.GetResultAssetText());
 					}else{
-						this.text.SetText("Data_End");
+						this.text.SetText("Load_Text_End : Error");
+					}
+
+					this.step = Step.Load_Prefab_Start;
+				}break;
+			case Step.Load_Prefab_Start:
+				{
+					//ロード。プレハブ。
+
+					this.data_item = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_PREFAB");
+					this.step = Step.Load_Prefab_Wait;
+				}break;
+			case Step.Load_Prefab_Wait:
+				{
+					//ロード。プレハブ。
+
+					if(this.data_item.IsBusy() == false){
+						this.step = Step.Load_Prefab_End;
+					}else{
+						this.text.SetText("Load_Prefab_Wait : "  + this.data_item.GetResultProgress().ToString());
+					}
+				}break;
+			case Step.Load_Prefab_End:
+				{
+					//ロード。プレハブ。
+
+					if(this.data_item.GetResultAssetType() == Fee.Asset.AssetType.Prefab){
+						UnityEngine.GameObject t_prefab = this.data_item.GetResultAssetPrefab();
+
+						string t_component_name = "";
+						{
+							UnityEngine.Component[] t_component_list = t_prefab.GetComponents(typeof(UnityEngine.MonoBehaviour));
+							if(t_component_list != null){
+								if(t_component_list.Length > 0){
+									if(t_component_list[0] != null){
+										t_component_name = t_component_list[0].GetType().ToString();
+									}
+								}
+							}
+						}
+
+						this.text.SetText("Load_Prefab_End : " + t_component_name);
+					}else{
+						this.text.SetText("Load_Prefab_End : Error");
+					}
+
+					this.step = Step.Load_Texture_Start;
+				}break;
+			case Step.Load_Texture_Start:
+				{
+					//ロード。テクスチャ。
+
+					this.data_item = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_TEXTURE");
+					this.step = Step.Load_Texture_Wait;
+				}break;
+			case Step.Load_Texture_Wait:
+				{
+					//ロード。テクスチャ。
+
+					if(this.data_item.IsBusy() == false){
+						this.step = Step.Load_Texture_End;
+					}else{
+						this.text.SetText("Load_Texture_Wait : "  + this.data_item.GetResultProgress().ToString());
+					}
+				}break;
+			case Step.Load_Texture_End:
+				{
+					//ロード。テクスチャ。
+
+					if(this.data_item.GetResultAssetType() == Fee.Asset.AssetType.Texture){
+						this.sprite.SetTexture(this.data_item.GetResultAssetTexture());
+
+						this.text.SetText("Load_TextureEnd");
+					}else{
+						this.text.SetText("Load_Texture_End : Error");
 					}
 
 					this.step = Step.Fix;
