@@ -191,9 +191,9 @@ namespace TestScript
 
 					//パスの登録。
 					{
-						#if(false)
+						#if(true)
 						//ダミーアセットバンドル。
-						Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsDummyAssetBundle,new Fee.File.Path("Editor/AssetBundle/Dummy/Dummy.json"));
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsDummyAssetBundle,new Fee.File.Path("Editor/AssetBundle/Dummy/test.assetbundle.json"));
 						#else
 						//アセットバンドル。
 						Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
