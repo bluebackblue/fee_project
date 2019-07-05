@@ -190,6 +190,7 @@ namespace TestScript
 					}
 
 					//パスの登録。
+					#if(UNITY_EDITOR)
 					{
 						#if(true)
 						//ダミーアセットバンドル。
@@ -199,6 +200,7 @@ namespace TestScript
 						Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
 						#endif
 					}
+					#endif
 
 					this.step = Step.LoadAssetBundle_Start;
 				}break;
