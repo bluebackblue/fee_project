@@ -243,6 +243,7 @@ namespace TestScript
 				this.button_fix.SetOnButtonClick(this,ButtonId.Fix);
 				this.button_fix.SetRect(100,1,100,40);
 				this.button_fix.SetText("確定");
+				this.button_fix.SetTextureCornerSize(10);
 				this.button_fix.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_fix.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_fix.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -268,6 +269,7 @@ namespace TestScript
 				this.button_inputsystem_mouse_mouseposition.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_mouse_mouseposition.SetText("InputSystem.Mouse => MousePosition");
 				this.button_inputsystem_mouse_mouseposition.SetFontSize(t_fontsize);
+				this.button_inputsystem_mouse_mouseposition.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -276,6 +278,7 @@ namespace TestScript
 				this.button_inputsystem_pointer_mouseposition.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_pointer_mouseposition.SetText("InputSystem.Pointer => MousePosition");
 				this.button_inputsystem_pointer_mouseposition.SetFontSize(t_fontsize);
+				this.button_inputsystem_pointer_mouseposition.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -284,6 +287,7 @@ namespace TestScript
 				this.button_inputmanager_inputmouse_mouseposition.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputmouse_mouseposition.SetText("InputManager.InputMouse => MousePosition");
 				this.button_inputmanager_inputmouse_mouseposition.SetFontSize(t_fontsize);
+				this.button_inputmanager_inputmouse_mouseposition.SetTextureCornerSize(10);
 			}
 
 			t_yy += t_h + t_separate_h;
@@ -295,6 +299,7 @@ namespace TestScript
 				this.button_inputsystem_mouse_mousebutton.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_mouse_mousebutton.SetText("InputSystem.Mouse => MouseButton");
 				this.button_inputsystem_mouse_mousebutton.SetFontSize(t_fontsize);
+				this.button_inputsystem_mouse_mousebutton.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -303,6 +308,7 @@ namespace TestScript
 				this.button_inputsystem_pointer_mousebutton.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_pointer_mousebutton.SetText("InputSystem.Pointer => MouseButton");
 				this.button_inputsystem_pointer_mousebutton.SetFontSize(t_fontsize);
+				this.button_inputsystem_pointer_mousebutton.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -311,6 +317,7 @@ namespace TestScript
 				this.button_inputmanager_inputmouse_mousebutton.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputmouse_mousebutton.SetText("InputManager.InputMouse => MouseButton");
 				this.button_inputmanager_inputmouse_mousebutton.SetFontSize(t_fontsize);
+				this.button_inputmanager_inputmouse_mousebutton.SetTextureCornerSize(10);
 			}
 
 			t_yy += t_h + t_separate_h;
@@ -322,6 +329,7 @@ namespace TestScript
 				this.button_inputsystem_mouse_mousewheel.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_mouse_mousewheel.SetText("InputSystem.Mouse => MouseWheel");
 				this.button_inputsystem_mouse_mousewheel.SetFontSize(t_fontsize);
+				this.button_inputsystem_mouse_mousewheel.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -330,6 +338,7 @@ namespace TestScript
 				this.button_inputmanager_inputname_mousewheel.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputname_mousewheel.SetText("InputManager.InputName => MouseWheel");
 				this.button_inputmanager_inputname_mousewheel.SetFontSize(t_fontsize);
+				this.button_inputmanager_inputname_mousewheel.SetTextureCornerSize(10);
 			}
 
 			t_yy += t_h + t_separate_h;
@@ -341,6 +350,7 @@ namespace TestScript
 				this.button_inputsystem_keyboard_key.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_keyboard_key.SetText("InputSystem.KeyBoard => Key");
 				this.button_inputsystem_keyboard_key.SetFontSize(t_fontsize);
+				this.button_inputsystem_keyboard_key.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -349,6 +359,7 @@ namespace TestScript
 				this.button_inputmanager_getkey_key.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_getkey_key.SetText("InputManager.GetKey => Key");
 				this.button_inputmanager_getkey_key.SetFontSize(t_fontsize);
+				this.button_inputmanager_getkey_key.SetTextureCornerSize(10);
 			}
 
 			t_yy += t_h + t_separate_h;
@@ -360,6 +371,7 @@ namespace TestScript
 				this.button_inputsystem_gamepad_paddigitalbutton.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_gamepad_paddigitalbutton.SetText("InputSystem.GamePad => PadDigitalButton");
 				this.button_inputsystem_gamepad_paddigitalbutton.SetFontSize(t_fontsize);
+				this.button_inputsystem_gamepad_paddigitalbutton.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -368,6 +380,7 @@ namespace TestScript
 				this.button_inputmanager_inputname_paddigitalbutton.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputname_paddigitalbutton.SetText("InputManager.InputName => PadDigitalButton");
 				this.button_inputmanager_inputname_paddigitalbutton.SetFontSize(t_fontsize);
+				this.button_inputmanager_inputname_paddigitalbutton.SetTextureCornerSize(10);
 			}
 
 			t_yy += t_h + t_separate_h;
@@ -379,6 +392,7 @@ namespace TestScript
 				this.button_inputsystem_gamepad_padstick.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_gamepad_padstick.SetText("InputSystem.GamePad => PadStick");
 				this.button_inputsystem_gamepad_padstick.SetFontSize(t_fontsize);
+				this.button_inputsystem_gamepad_padstick.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -387,6 +401,7 @@ namespace TestScript
 				this.button_inputmanager_inputname_padstick.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputname_padstick.SetText("InputManager.InputName => PadStick");
 				this.button_inputmanager_inputname_padstick.SetFontSize(t_fontsize);
+				this.button_inputmanager_inputname_padstick.SetTextureCornerSize(10);
 			}
 
 			t_yy += t_h + t_separate_h;
@@ -398,7 +413,7 @@ namespace TestScript
 				this.button_inputsystem_gamepad_padtrigger.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_gamepad_padtrigger.SetText("InputSystem.GamePad => PadTrigger");
 				this.button_inputsystem_gamepad_padtrigger.SetFontSize(t_fontsize);
-
+				this.button_inputsystem_gamepad_padtrigger.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -407,7 +422,7 @@ namespace TestScript
 				this.button_inputmanager_inputname_padtrigger.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputname_padtrigger.SetText("InputManager.InputName => PadTrigger");
 				this.button_inputmanager_inputname_padtrigger.SetFontSize(t_fontsize);
-
+				this.button_inputmanager_inputname_padtrigger.SetTextureCornerSize(10);
 			}
 
 			t_yy += t_h + t_separate_h;
@@ -419,6 +434,7 @@ namespace TestScript
 				this.button_inputsystem_gamepad_padmotor.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_gamepad_padmotor.SetText("InputSystem.GamePad => PadMotor");
 				this.button_inputsystem_gamepad_padmotor.SetFontSize(t_fontsize);
+				this.button_inputsystem_gamepad_padmotor.SetTextureCornerSize(10);
 			}
 
 			this.UpdateButtonStatus();

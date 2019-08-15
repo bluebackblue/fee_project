@@ -318,6 +318,7 @@ namespace TestScript
 				this.button_save1.SetOnButtonClick(this,ButtonId.Save1);
 				this.button_save1.SetRect(100 + 110 * 0,100,100,50);
 				this.button_save1.SetText("Save1");
+				this.button_save1.SetTextureCornerSize(10);
 				this.button_save1.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_save1.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_save1.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -331,6 +332,7 @@ namespace TestScript
 				this.button_save2.SetOnButtonClick(this,ButtonId.Save2);
 				this.button_save2.SetRect(100 + 110 * 1,100,100,50);
 				this.button_save2.SetText("Save2");
+				this.button_save2.SetTextureCornerSize(10);
 				this.button_save2.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_save2.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_save2.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -344,6 +346,7 @@ namespace TestScript
 				this.button_load1.SetOnButtonClick(this,ButtonId.Load1);
 				this.button_load1.SetRect(100 + 110 * 2,100,100,50);
 				this.button_load1.SetText("Load1");
+				this.button_load1.SetTextureCornerSize(10);
 				this.button_load1.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_load1.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_load1.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -357,6 +360,7 @@ namespace TestScript
 				this.button_load2.SetOnButtonClick(this,ButtonId.Load2);
 				this.button_load2.SetRect(100 + 110 * 3,100,100,50);
 				this.button_load2.SetText("Load2");
+				this.button_load2.SetTextureCornerSize(10);
 				this.button_load2.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_load2.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_load2.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -370,6 +374,7 @@ namespace TestScript
 				this.button_random.SetOnButtonClick(this,ButtonId.Random);
 				this.button_random.SetRect(600 + 110*1,100 + 60 * 0,130,50);
 				this.button_random.SetText("Random");
+				this.button_random.SetTextureCornerSize(10);
 				this.button_random.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_random.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_random.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -383,6 +388,7 @@ namespace TestScript
 				this.button_speedtest_utf8json.SetOnButtonClick(this,ButtonId.Utf8JsonTest);
 				this.button_speedtest_utf8json.SetRect(600 + 110*1,100 + 60 * 1,130,50);
 				this.button_speedtest_utf8json.SetText("Utf8Json Test");
+				this.button_speedtest_utf8json.SetTextureCornerSize(10);
 				this.button_speedtest_utf8json.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_speedtest_utf8json.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_speedtest_utf8json.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -396,6 +402,7 @@ namespace TestScript
 				this.button_speedtest_fee.SetOnButtonClick(this,ButtonId.FeeTest);
 				this.button_speedtest_fee.SetRect(600 + 110*1,100  + 60 * 2,130,50);
 				this.button_speedtest_fee.SetText("Fee Test");
+				this.button_speedtest_fee.SetTextureCornerSize(10);
 				this.button_speedtest_fee.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_speedtest_fee.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_speedtest_fee.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));

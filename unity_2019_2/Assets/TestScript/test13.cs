@@ -218,6 +218,7 @@ namespace TestScript
 				this.button_inputsystem_mouse_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_mouse_touch.SetText("InputSystem.Mouse => Touch");
 				this.button_inputsystem_mouse_touch.SetFontSize(t_fontsize);
+				this.button_inputsystem_mouse_touch.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -226,6 +227,7 @@ namespace TestScript
 				this.button_inputmanager_inputmouse_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputmouse_touch.SetText("InputManager.InputMouse => Touch");
 				this.button_inputmanager_inputmouse_touch.SetFontSize(t_fontsize);
+				this.button_inputmanager_inputmouse_touch.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -234,6 +236,7 @@ namespace TestScript
 				this.button_inputsystem_touchscreen_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_touchscreen_touch.SetText("InputSystem.TouchScreen => Touch");
 				this.button_inputsystem_touchscreen_touch.SetFontSize(t_fontsize);
+				this.button_inputsystem_touchscreen_touch.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
@@ -242,6 +245,7 @@ namespace TestScript
 				this.button_inputmanager_inputtouch_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputtouch_touch.SetText("InputManager.InputTouch => Touch");
 				this.button_inputmanager_inputtouch_touch.SetFontSize(t_fontsize);
+				this.button_inputmanager_inputtouch_touch.SetTextureCornerSize(10);
 			}
 
 			t_yy += t_h + t_separate_h;

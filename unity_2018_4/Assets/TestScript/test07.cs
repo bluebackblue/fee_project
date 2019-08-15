@@ -199,6 +199,7 @@ namespace TestScript
 			this.button_key.SetOnButtonClick(this,ButtonId.Key);
 			this.button_key.SetRect(100 + 200 * 0,100,150,50);
 			this.button_key.SetText("公開鍵");
+			this.button_key.SetTextureCornerSize(10);
 			this.button_key.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_key.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_key.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -213,6 +214,7 @@ namespace TestScript
 			this.button_pass.SetOnButtonClick(this,ButtonId.Pass);
 			this.button_pass.SetRect(100 + 200 * 1,100,150,50);
 			this.button_pass.SetText("共通鍵");
+			this.button_pass.SetTextureCornerSize(10);
 			this.button_pass.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_pass.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_pass.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -227,6 +229,7 @@ namespace TestScript
 			this.button_signature.SetOnButtonClick(this,ButtonId.Signature);
 			this.button_signature.SetRect(100 + 200 * 2,100,150,50);
 			this.button_signature.SetText("証明書");
+			this.button_signature.SetTextureCornerSize(10);
 			this.button_signature.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_signature.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_signature.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));

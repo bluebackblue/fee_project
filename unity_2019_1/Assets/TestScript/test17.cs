@@ -56,6 +56,10 @@ namespace TestScript
 			*/
 			private int create_id;
 
+			/** scroll_type
+			*/
+			private Fee.Ui.ScrollType scroll_type;
+
 			/** コールバック。
 			*/
 			private CallBack_ScrollItem callback;
@@ -88,13 +92,16 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public ScrollItem(Fee.Deleter.Deleter a_deleter,int a_create_id,CallBack_ScrollItem a_callback)
+			public ScrollItem(Fee.Deleter.Deleter a_deleter,int a_create_id,CallBack_ScrollItem a_callback,Fee.Ui.ScrollType a_scroll_type)
 			{
 				//deleter
 				this.deleter = new Fee.Deleter.Deleter();
 
 				//create_id
 				this.create_id = a_create_id;
+
+				//scroll_type
+				this.scroll_type = a_scroll_type;
 
 				//callback
 				this.callback = a_callback;
@@ -104,7 +111,6 @@ namespace TestScript
 
 				//sprite
 				this.sprite = new Fee.Ui.ClipSprite(this.deleter,t_drawpriority);
-				this.sprite.SetRect(0,0,ScrollItem.GetW(),ScrollItem.GetH());
 				this.sprite.SetTexture(Texture2D.whiteTexture);
 				this.sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetClipRect(0,0,0,0);
@@ -158,7 +164,13 @@ namespace TestScript
 			{
 				this.sprite.SetX(a_x);
 				this.text.SetX(a_x);
-				this.button.SetX(a_x + ScrollItem.GetW() - this.button.GetW() - 5);
+
+				if(this.scroll_type == Fee.Ui.ScrollType.Vertical){
+					//縦。
+					this.button.SetX(a_x + ScrollItem.GetW() - this.button.GetW() - 15);
+				}else{
+					this.button.SetX(a_x + ScrollItem.GetW() - this.button.GetW() - 5);
+				}
 			}
 
 			/** [ScrollItem_Base]矩形。設定。
@@ -174,6 +186,11 @@ namespace TestScript
 			*/
 			public override void SetWH(int a_w,int a_h)
 			{
+				if(this.scroll_type == Fee.Ui.ScrollType.Vertical){
+					this.sprite.SetWH(a_w - 10,a_h);
+				}else{
+					this.sprite.SetWH(a_w,a_h - 10);
+				}
 			}
 
 			/** [ScrollItem_Base]クリップ矩形。設定。
@@ -317,12 +334,12 @@ namespace TestScript
 
 			//v_scrollview
 			this.v_scrollview = new Fee.Ui.Scroll<ScrollItem>(this.deleter,0,Fee.Ui.ScrollType.Vertical,ScrollItem.GetH());
-			this.v_scrollview.SetRect(200,100,200,400);
+			this.v_scrollview.SetRect(200,100,100,400);
 			this.v_scrollview_create_id = 0;
 
 			//h_scrollview
 			this.h_scrollview = new Fee.Ui.Scroll<ScrollItem>(this.deleter,0,Fee.Ui.ScrollType.Horizontal,ScrollItem.GetW());
-			this.h_scrollview.SetRect(450,100,400,200);
+			this.h_scrollview.SetRect(450,100,400,40);
 			this.h_scrollview_create_id = 0;
 
 			//status_text
@@ -337,6 +354,7 @@ namespace TestScript
 			this.button_push.SetOnButtonClick(this,ButtonId.AddLast);
 			this.button_push.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_push.SetText("最後尾追加");
+			this.button_push.SetTextureCornerSize(10);
 			this.button_push.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_push.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_push.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -353,6 +371,7 @@ namespace TestScript
 			this.button_pop.SetOnButtonClick(this,ButtonId.RemoveLast);
 			this.button_pop.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_pop.SetText("最後尾削除");
+			this.button_pop.SetTextureCornerSize(10);
 			this.button_pop.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_pop.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_pop.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -370,6 +389,7 @@ namespace TestScript
 			this.button_insert_top.SetOnButtonClick(this,ButtonId.AddFirst);
 			this.button_insert_top.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_insert_top.SetText("先頭追加");
+			this.button_insert_top.SetTextureCornerSize(10);
 			this.button_insert_top.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_top.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_top.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -386,6 +406,7 @@ namespace TestScript
 			this.button_remove_top.SetOnButtonClick(this,ButtonId.RemoveFirst);
 			this.button_remove_top.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_remove_top.SetText("先頭削除");
+			this.button_remove_top.SetTextureCornerSize(10);
 			this.button_remove_top.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_top.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_top.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -403,6 +424,7 @@ namespace TestScript
 			this.button_insert_top_5.SetOnButtonClick(this,ButtonId.Insert5);
 			this.button_insert_top_5.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_insert_top_5.SetText("挿入(５番目)");
+			this.button_insert_top_5.SetTextureCornerSize(10);
 			this.button_insert_top_5.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_top_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_top_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -420,6 +442,7 @@ namespace TestScript
 			this.button_remove_top_5.SetOnButtonClick(this,ButtonId.Remove5);
 			this.button_remove_top_5.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_remove_top_5.SetText("削除(５番目)");
+			this.button_remove_top_5.SetTextureCornerSize(10);
 			this.button_remove_top_5.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_top_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_top_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -437,6 +460,7 @@ namespace TestScript
 			this.button_insert_last_5.SetOnButtonClick(this,ButtonId.InsertLast5);
 			this.button_insert_last_5.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_insert_last_5.SetText("挿入(後５)");
+			this.button_insert_last_5.SetTextureCornerSize(10);
 			this.button_insert_last_5.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_last_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_last_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -454,6 +478,7 @@ namespace TestScript
 			this.button_remove_last_5.SetOnButtonClick(this,ButtonId.RemoveLast5);
 			this.button_remove_last_5.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_remove_last_5.SetText("削除(後５)");
+			this.button_remove_last_5.SetTextureCornerSize(10);
 			this.button_remove_last_5.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_last_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_last_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -471,6 +496,7 @@ namespace TestScript
 			this.button_up.SetOnButtonClick(this,ButtonId.MoveToFirst);
 			this.button_up.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_up.SetText("前方に移動");
+			this.button_up.SetTextureCornerSize(10);
 			this.button_up.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_up.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_up.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -487,6 +513,7 @@ namespace TestScript
 			this.button_down.SetOnButtonClick(this,ButtonId.MoveToLast);
 			this.button_down.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_down.SetText("後方に移動");
+			this.button_down.SetTextureCornerSize(10);
 			this.button_down.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_down.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_down.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -503,6 +530,7 @@ namespace TestScript
 			this.button_sort_a.SetOnButtonClick(this,ButtonId.SortA);
 			this.button_sort_a.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_sort_a.SetText("ソート");
+			this.button_sort_a.SetTextureCornerSize(10);
 			this.button_sort_a.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_sort_a.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_sort_a.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -519,6 +547,7 @@ namespace TestScript
 			this.button_sort_b.SetOnButtonClick(this,ButtonId.SortB);
 			this.button_sort_b.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_sort_b.SetText("ソート");
+			this.button_sort_b.SetTextureCornerSize(10);
 			this.button_sort_b.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_sort_b.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_sort_b.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -535,6 +564,7 @@ namespace TestScript
 			this.button_swap.SetOnButtonClick(this,ButtonId.Swap);
 			this.button_swap.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_swap.SetText("SWAP(20,25)");
+			this.button_swap.SetTextureCornerSize(10);
 			this.button_swap.SetNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_swap.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_swap.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -608,11 +638,11 @@ namespace TestScript
 
 					{
 						this.v_scrollview_create_id++;
-						this.v_scrollview.PushItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V));
+						this.v_scrollview.PushItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.ScrollType.Vertical));
 					}
 					{
 						this.h_scrollview_create_id++;
-						this.h_scrollview.PushItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H));
+						this.h_scrollview.PushItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.ScrollType.Horizontal));
 					}
 				}break;
 			case ButtonId.RemoveLast:
@@ -643,12 +673,12 @@ namespace TestScript
 					{
 						int t_index = 0;
 						this.v_scrollview_create_id++;
-						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V),t_index);
+						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.ScrollType.Vertical),t_index);
 					}
 					{
 						int t_index = 0;
 						this.h_scrollview_create_id++;
-						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H),t_index);
+						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.ScrollType.Horizontal),t_index);
 					}
 				}break;
 			case ButtonId.RemoveFirst:
@@ -681,12 +711,12 @@ namespace TestScript
 					{
 						int t_index = 4;
 						this.v_scrollview_create_id++;
-						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V),t_index);
+						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.ScrollType.Vertical),t_index);
 					}
 					{
 						int t_index = 4;
 						this.h_scrollview_create_id++;
-						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H),t_index);
+						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.ScrollType.Horizontal),t_index);
 					}
 				}break;
 			case ButtonId.Remove5:
@@ -719,12 +749,12 @@ namespace TestScript
 					{
 						int t_index = this.v_scrollview.GetListCount() - 5;
 						this.v_scrollview_create_id++;
-						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V),t_index);
+						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.ScrollType.Vertical),t_index);
 					}
 					{
 						int t_index = this.h_scrollview.GetListCount() - 5;
 						this.h_scrollview_create_id++;
-						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H),t_index);
+						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.ScrollType.Horizontal),t_index);
 					}
 				}break;
 			case ButtonId.RemoveLast5:

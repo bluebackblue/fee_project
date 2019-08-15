@@ -122,6 +122,7 @@ namespace TestScript
 				this.close_button = new Fee.Ui.Button(this.deleter,t_drawpriority);
 				this.close_button.SetOnButtonClick(this,-1);
 				this.close_button.SetText("x");
+				this.close_button.SetTextureCornerSize(10);
 				this.close_button.SetWH(this.window.GetTitleBarH(),this.window.GetTitleBarH());
 				this.close_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.close_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -264,6 +265,7 @@ namespace TestScript
 			this.button.SetOnButtonClick(this,-1);
 			this.button.SetRect(10,50,100,50);
 			this.button.SetText("表示");
+			this.button.SetTextureCornerSize(10);
 			this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));

@@ -126,6 +126,7 @@ namespace TestScript
 					this.button[ii].SetOnButtonClick(this,ii);
 					this.button[ii].SetOnButtonChangeOverFlag(this,ii);
 					this.button[ii].SetRect(t_x,t_y,t_w,t_h);
+					this.button[ii].SetTextureCornerSize(10);
 					this.button[ii].SetText(this.scene_list[ii].view);
 					this.button[ii].SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.button[ii].SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));

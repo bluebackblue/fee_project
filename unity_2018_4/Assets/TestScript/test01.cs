@@ -263,6 +263,7 @@ namespace TestScript
 				this.button_log.SetOnButtonClick(this,ButtonId.Log);
 				this.button_log.SetRect(t_xx,t_yy,80,50);
 				this.button_log.SetText("Log");
+				this.button_log.SetTextureCornerSize(10);
 				this.button_log.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_log.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_log.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -278,6 +279,7 @@ namespace TestScript
 				this.button_logerror.SetOnButtonClick(this,ButtonId.LogError);
 				this.button_logerror.SetRect(t_xx,t_yy,80,50);
 				this.button_logerror.SetText("LogError");
+				this.button_logerror.SetTextureCornerSize(10);
 				this.button_logerror.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_logerror.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_logerror.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -293,6 +295,7 @@ namespace TestScript
 				this.button_assert.SetOnButtonClick(this,ButtonId.Assert);
 				this.button_assert.SetRect(t_xx,t_yy,80,50);
 				this.button_assert.SetText("Assert");
+				this.button_assert.SetTextureCornerSize(10);
 				this.button_assert.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_assert.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_assert.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));

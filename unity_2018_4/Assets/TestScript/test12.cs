@@ -107,6 +107,7 @@ namespace TestScript
 				this.button.SetClip(true);
 				this.button.SetDragCancelFlag(true);
 				this.button.SetText(a_click_id.ToString());
+				this.button.SetTextureCornerSize(10);
 				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));

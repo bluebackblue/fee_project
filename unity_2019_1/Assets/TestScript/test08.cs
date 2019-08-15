@@ -79,6 +79,7 @@ namespace TestScript
 					this.button = new Fee.Ui.Button(a_deleter,1);
 					this.button.SetOnButtonClick(this,-1);
 					this.button.SetClip(true);
+					this.button.SetTextureCornerSize(10);
 					this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -141,7 +142,7 @@ namespace TestScript
 			public override void SetWH(int a_w,int a_h)
 			{
 				if(this.button != null){
-					this.button.SetWH(550,a_h);
+					this.button.SetWH(a_w - 10,a_h);
 				}
 			}
 

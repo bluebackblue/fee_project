@@ -210,6 +210,7 @@ namespace TestScript
 					this.bloom_button = new Fee.Ui.Button(this.deleter,0);
 					this.bloom_button.SetOnButtonClick(this,ButtonId.Bloom);
 					this.bloom_button.SetRect(100,t_y,t_button_w,t_button_h);
+					this.bloom_button.SetTextureCornerSize(10);
 					this.bloom_button.SetText("Bloom : " + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
 					this.bloom_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -273,6 +274,7 @@ namespace TestScript
 					this.blur_button = new Fee.Ui.Button(this.deleter,0);
 					this.blur_button.SetOnButtonClick(this,ButtonId.Blur);
 					this.blur_button.SetRect(100,t_y,t_button_w,t_button_h);
+					this.blur_button.SetTextureCornerSize(10);
 					this.blur_button.SetText("Blur : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
 					this.blur_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.blur_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -313,6 +315,7 @@ namespace TestScript
 					this.depth_button = new Fee.Ui.Button(this.deleter,0);
 					this.depth_button.SetOnButtonClick(this,ButtonId.Depth);
 					this.depth_button.SetRect(100,t_y,t_button_w,t_button_h);
+					this.depth_button.SetTextureCornerSize(10);
 					this.depth_button.SetText("Depth : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
 					this.depth_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.depth_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));

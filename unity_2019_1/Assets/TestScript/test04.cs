@@ -307,6 +307,7 @@ namespace TestScript
 				this.button.SetClip(true);
 				this.button.SetDragCancelFlag(true);
 				this.button.SetText(a_button_id.ToString());
+				this.button.SetTextureCornerSize(10);
 				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -335,7 +336,7 @@ namespace TestScript
 			*/
 			public override void SetWH(int a_w,int a_h)
 			{
-				this.button.SetWH(a_w,a_h);
+				this.button.SetWH(a_w - 5,a_h);
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]クリップ矩形。設定。

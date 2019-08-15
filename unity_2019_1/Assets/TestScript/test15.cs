@@ -160,6 +160,7 @@ namespace TestScript
 
 				this.button = new Fee.Ui.Button(this.deleter,t_drawpriority + 2);
 				this.button.SetRect(t_x,t_y,t_w,t_h);
+				this.button.SetTextureCornerSize(10);
 				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
@@ -212,6 +213,7 @@ namespace TestScript
 				this.slider = new Fee.Ui.Slider(this.deleter,t_drawpriority + 2);
 				this.slider.SetRect(t_x,t_y,t_w,t_h);
 				this.slider.SetButtonSize(0,30);
+				this.slider.SetTextureCornerSize(10);
 				this.slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 				this.slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 				this.slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
