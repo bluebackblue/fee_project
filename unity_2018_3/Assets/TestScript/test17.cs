@@ -58,7 +58,7 @@ namespace TestScript
 
 			/** scroll_type
 			*/
-			private Fee.Ui.ScrollType scroll_type;
+			private Fee.Ui.Scroll_Type scroll_type;
 
 			/** コールバック。
 			*/
@@ -92,7 +92,7 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public ScrollItem(Fee.Deleter.Deleter a_deleter,int a_create_id,CallBack_ScrollItem a_callback,Fee.Ui.ScrollType a_scroll_type)
+			public ScrollItem(Fee.Deleter.Deleter a_deleter,int a_create_id,CallBack_ScrollItem a_callback,Fee.Ui.Scroll_Type a_scroll_type)
 			{
 				//deleter
 				this.deleter = new Fee.Deleter.Deleter();
@@ -112,7 +112,7 @@ namespace TestScript
 				//sprite
 				this.sprite = new Fee.Ui.ClipSprite(this.deleter,t_drawpriority);
 				this.sprite.SetTexture(Texture2D.whiteTexture);
-				this.sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetClipRect(0,0,0,0);
 				this.sprite.SetColor(Random.value,Random.value,Random.value,1.0f);
 				this.sprite.SetClip(true);
@@ -140,10 +140,10 @@ namespace TestScript
 				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				//削除管理。
 				if(a_deleter != null){
@@ -165,7 +165,7 @@ namespace TestScript
 				this.sprite.SetX(a_x);
 				this.text.SetX(a_x);
 
-				if(this.scroll_type == Fee.Ui.ScrollType.Vertical){
+				if(this.scroll_type == Fee.Ui.Scroll_Type.Vertical){
 					//縦。
 					this.button.SetX(a_x + ScrollItem.GetW() - this.button.GetW() - 15);
 				}else{
@@ -186,7 +186,7 @@ namespace TestScript
 			*/
 			public override void SetWH(int a_w,int a_h)
 			{
-				if(this.scroll_type == Fee.Ui.ScrollType.Vertical){
+				if(this.scroll_type == Fee.Ui.Scroll_Type.Vertical){
 					this.sprite.SetWH(a_w - 10,a_h);
 				}else{
 					this.sprite.SetWH(a_w,a_h - 10);
@@ -195,11 +195,11 @@ namespace TestScript
 
 			/** [ScrollItem_Base]クリップ矩形。設定。
 			*/
-			public override void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
+			public override void SetClipRect(in Fee.Geometry.Rect2D_R<int> a_rect)
 			{
-				this.sprite.SetClipRect(ref a_rect);
-				this.text.SetClipRect(ref a_rect);
-				this.button.SetClipRect(ref a_rect);
+				this.sprite.SetClipRect(in a_rect);
+				this.text.SetClipRect(in a_rect);
+				this.button.SetClipRect(in a_rect);
 			}
 
 			/** [ScrollItem_Base]表示内。
@@ -333,12 +333,12 @@ namespace TestScript
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//v_scrollview
-			this.v_scrollview = new Fee.Ui.Scroll<ScrollItem>(this.deleter,0,Fee.Ui.ScrollType.Vertical,ScrollItem.GetH());
+			this.v_scrollview = new Fee.Ui.Scroll<ScrollItem>(this.deleter,0,Fee.Ui.Scroll_Type.Vertical,ScrollItem.GetH());
 			this.v_scrollview.SetRect(200,100,100,400);
 			this.v_scrollview_create_id = 0;
 
 			//h_scrollview
-			this.h_scrollview = new Fee.Ui.Scroll<ScrollItem>(this.deleter,0,Fee.Ui.ScrollType.Horizontal,ScrollItem.GetW());
+			this.h_scrollview = new Fee.Ui.Scroll<ScrollItem>(this.deleter,0,Fee.Ui.Scroll_Type.Horizontal,ScrollItem.GetW());
 			this.h_scrollview.SetRect(450,100,400,40);
 			this.h_scrollview_create_id = 0;
 
@@ -359,10 +359,10 @@ namespace TestScript
 			this.button_push.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_push.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_push.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_push.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_push.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_push.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_push.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_push.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_push.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_push.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_push.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
@@ -376,10 +376,10 @@ namespace TestScript
 			this.button_pop.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_pop.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_pop.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_pop.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_pop.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_pop.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_pop.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_pop.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_pop.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_pop.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_pop.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 
 			t_y_index++;
@@ -394,10 +394,10 @@ namespace TestScript
 			this.button_insert_top.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_top.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_top.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_insert_top.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_insert_top.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_insert_top.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_insert_top.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_insert_top.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_insert_top.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_insert_top.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_insert_top.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
@@ -411,10 +411,10 @@ namespace TestScript
 			this.button_remove_top.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_top.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_top.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_remove_top.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_remove_top.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_remove_top.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_remove_top.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_remove_top.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_remove_top.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_remove_top.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_remove_top.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 
 			t_y_index++;
@@ -429,10 +429,10 @@ namespace TestScript
 			this.button_insert_top_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_top_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_top_5.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_insert_top_5.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_insert_top_5.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_insert_top_5.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_insert_top_5.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_insert_top_5.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_insert_top_5.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_insert_top_5.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_insert_top_5.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 
 			t_y_index++;
@@ -447,10 +447,10 @@ namespace TestScript
 			this.button_remove_top_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_top_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_top_5.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_remove_top_5.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_remove_top_5.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_remove_top_5.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_remove_top_5.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_remove_top_5.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_remove_top_5.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_remove_top_5.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_remove_top_5.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 
 			t_y_index++;
@@ -465,10 +465,10 @@ namespace TestScript
 			this.button_insert_last_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_last_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_insert_last_5.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_insert_last_5.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_insert_last_5.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_insert_last_5.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_insert_last_5.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_insert_last_5.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_insert_last_5.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_insert_last_5.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_insert_last_5.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 
 			t_y_index++;
@@ -483,10 +483,10 @@ namespace TestScript
 			this.button_remove_last_5.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_last_5.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_remove_last_5.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_remove_last_5.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_remove_last_5.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_remove_last_5.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_remove_last_5.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_remove_last_5.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_remove_last_5.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_remove_last_5.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_remove_last_5.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 
 			t_y_index++;
@@ -501,10 +501,10 @@ namespace TestScript
 			this.button_up.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_up.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_up.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_up.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_up.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_up.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_up.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_up.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_up.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_up.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_up.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
@@ -518,10 +518,10 @@ namespace TestScript
 			this.button_down.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_down.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_down.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_down.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_down.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_down.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_down.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_down.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_down.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_down.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_down.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
@@ -535,10 +535,10 @@ namespace TestScript
 			this.button_sort_a.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_sort_a.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_sort_a.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_sort_a.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_sort_a.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_sort_a.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_sort_a.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_sort_a.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_sort_a.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_sort_a.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_sort_a.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
@@ -552,10 +552,10 @@ namespace TestScript
 			this.button_sort_b.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_sort_b.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_sort_b.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_sort_b.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_sort_b.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_sort_b.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_sort_b.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_sort_b.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_sort_b.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_sort_b.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_sort_b.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_y_index++;
 
@@ -569,10 +569,10 @@ namespace TestScript
 			this.button_swap.SetOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_swap.SetDownTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_swap.SetLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_swap.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_swap.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_swap.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_swap.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_swap.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_swap.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_swap.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_swap.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 		}
 
 		/** CallBack_ScrollItem_V
@@ -638,11 +638,11 @@ namespace TestScript
 
 					{
 						this.v_scrollview_create_id++;
-						this.v_scrollview.PushItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.ScrollType.Vertical));
+						this.v_scrollview.PushItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical));
 					}
 					{
 						this.h_scrollview_create_id++;
-						this.h_scrollview.PushItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.ScrollType.Horizontal));
+						this.h_scrollview.PushItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal));
 					}
 				}break;
 			case ButtonId.RemoveLast:
@@ -673,12 +673,12 @@ namespace TestScript
 					{
 						int t_index = 0;
 						this.v_scrollview_create_id++;
-						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.ScrollType.Vertical),t_index);
+						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical),t_index);
 					}
 					{
 						int t_index = 0;
 						this.h_scrollview_create_id++;
-						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.ScrollType.Horizontal),t_index);
+						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal),t_index);
 					}
 				}break;
 			case ButtonId.RemoveFirst:
@@ -711,12 +711,12 @@ namespace TestScript
 					{
 						int t_index = 4;
 						this.v_scrollview_create_id++;
-						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.ScrollType.Vertical),t_index);
+						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical),t_index);
 					}
 					{
 						int t_index = 4;
 						this.h_scrollview_create_id++;
-						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.ScrollType.Horizontal),t_index);
+						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal),t_index);
 					}
 				}break;
 			case ButtonId.Remove5:
@@ -749,12 +749,12 @@ namespace TestScript
 					{
 						int t_index = this.v_scrollview.GetListCount() - 5;
 						this.v_scrollview_create_id++;
-						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.ScrollType.Vertical),t_index);
+						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical),t_index);
 					}
 					{
 						int t_index = this.h_scrollview.GetListCount() - 5;
 						this.h_scrollview_create_id++;
-						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.ScrollType.Horizontal),t_index);
+						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal),t_index);
 					}
 				}break;
 			case ButtonId.RemoveLast5:
@@ -797,7 +797,7 @@ namespace TestScript
 			Fee.Input.Pad.GetInstance().Main(true);
 
 			//イベントテンプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();

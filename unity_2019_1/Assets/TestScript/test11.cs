@@ -217,10 +217,10 @@ namespace TestScript
 			this.button_unload.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_unload.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_unload.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_unload.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_unload.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_unload.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_unload.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_unload.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_unload.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_unload.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_unload.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_xx += 210;
 
@@ -233,10 +233,10 @@ namespace TestScript
 			this.button_assetbundle.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_assetbundle.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_assetbundle.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_assetbundle.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_assetbundle.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_assetbundle.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_assetbundle.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_assetbundle.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_assetbundle.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_assetbundle.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_assetbundle.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_xx += 210;
 
@@ -249,10 +249,10 @@ namespace TestScript
 			this.button_soundpool.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_soundpool.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_soundpool.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_soundpool.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_soundpool.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_soundpool.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_soundpool.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_soundpool.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_soundpool.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_soundpool.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_soundpool.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_xx += 210;
 
@@ -265,10 +265,10 @@ namespace TestScript
 			this.button_bgm.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_bgm.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_bgm.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_bgm.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_bgm.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_bgm.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_bgm.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_bgm.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_bgm.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_bgm.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_bgm.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			int t_yy = 300;
 
@@ -283,14 +283,14 @@ namespace TestScript
 			this.slider_master.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 			this.slider_master.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 			this.slider_master.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_master.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.slider_master.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.slider_master.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.slider_master.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.slider_master.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_master.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.slider_master.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.slider_master.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			this.slider_master.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.slider_master.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.slider_master.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.slider_master.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.slider_master.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_master.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_yy += 60;
 
@@ -305,14 +305,14 @@ namespace TestScript
 			this.slider_bgm.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 			this.slider_bgm.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 			this.slider_bgm.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_bgm.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.slider_bgm.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.slider_bgm.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.slider_bgm.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.slider_bgm.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_bgm.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.slider_bgm.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.slider_bgm.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			this.slider_bgm.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.slider_bgm.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.slider_bgm.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.slider_bgm.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.slider_bgm.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_bgm.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			t_yy += 60;
 
@@ -327,14 +327,14 @@ namespace TestScript
 			this.slider_se.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 			this.slider_se.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 			this.slider_se.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_se.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.slider_se.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.slider_se.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.slider_se.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.slider_se.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_se.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.slider_se.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.slider_se.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			this.slider_se.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.slider_se.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.slider_se.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.slider_se.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.slider_se.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.slider_se.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			//値設定。
 			this.slider_master.SetValue(Fee.Audio.Audio.GetInstance().GetMasterVolume());
@@ -435,7 +435,7 @@ namespace TestScript
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			switch(this.soundpool_mode){
 			case SoundPool_Mode.Wait:
@@ -479,7 +479,7 @@ namespace TestScript
 			}
 
 			//再生。
-			if(Fee.Input.Mouse.GetInstance().InRectCheck(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX)){
+			if(Fee.Geometry.Range.IsRectIn(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX,in Fee.Input.Mouse.GetInstance().cursor.pos) == true){
 				if(Fee.Input.Mouse.GetInstance().left.down == true){
 					Fee.Audio.Audio.GetInstance().PlaySe(SE_ID,0);
 				}

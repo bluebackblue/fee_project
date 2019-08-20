@@ -208,16 +208,16 @@ namespace TestScript
 			int t_layerindex = 0;
 			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 			this.bg = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
-			this.bg.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+			this.bg.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.bg.SetTexture(Texture2D.whiteTexture);
-			this.bg.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
+			this.bg.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
 			this.bg.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 			this.bg.SetColor(0.0f,0.0f,0.0f,1.0f);
 
 
 			//マウス。
 			this.mouse_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority + 1);
-			this.mouse_sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+			this.mouse_sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.mouse_sprite.SetTexture(Texture2D.whiteTexture);
 			this.mouse_sprite.SetRect(0,0,10,10);
 			this.mouse_sprite.SetColor(1.0f,1.0f,1.0f,1.0f);
@@ -248,10 +248,10 @@ namespace TestScript
 				this.button_fix.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_fix.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_fix.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_fix.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_fix.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_fix.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_fix.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.button_fix.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_fix.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_fix.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_fix.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			int t_xx = 10;
@@ -571,154 +571,154 @@ namespace TestScript
 			this.button_inputsystem_mouse_mouseposition.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_mouse_mouseposition.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_mouse_mouseposition.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_mouse_mouseposition.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_mouse_mouseposition.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_mouse_mouseposition.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_mouse_mouseposition.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputsystem_mouse_mouseposition.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_mouse_mouseposition.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_mouse_mouseposition.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_mouse_mouseposition.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputsystem_pointer_mouseposition.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_pointer_mouseposition.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_pointer_mouseposition.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_pointer_mouseposition.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_pointer_mouseposition.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_pointer_mouseposition.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_pointer_mouseposition.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_pointer_mouseposition.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputsystem_pointer_mouseposition.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_pointer_mouseposition.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_pointer_mouseposition.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_pointer_mouseposition.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputmanager_inputmouse_mouseposition.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputmouse_mouseposition.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputmouse_mouseposition.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputmouse_mouseposition.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputmouse_mouseposition.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputmanager_inputmouse_mouseposition.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputmanager_inputmouse_mouseposition.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputmanager_inputmouse_mouseposition.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputmanager_inputmouse_mouseposition.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputmanager_inputmouse_mouseposition.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputmanager_inputmouse_mouseposition.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputmanager_inputmouse_mouseposition.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputsystem_mouse_mousebutton.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_mouse_mousebutton.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_mouse_mousebutton.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_mouse_mousebutton.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_mouse_mousebutton.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_mouse_mousebutton.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_mouse_mousebutton.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_mouse_mousebutton.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputsystem_mouse_mousebutton.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_mouse_mousebutton.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_mouse_mousebutton.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_mouse_mousebutton.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputsystem_pointer_mousebutton.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_pointer_mousebutton.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_pointer_mousebutton.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_pointer_mousebutton.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_pointer_mousebutton.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_pointer_mousebutton.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_pointer_mousebutton.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_pointer_mousebutton.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputsystem_pointer_mousebutton.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_pointer_mousebutton.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_pointer_mousebutton.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_pointer_mousebutton.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputmanager_inputmouse_mousebutton.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputmouse_mousebutton.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputmouse_mousebutton.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputmouse_mousebutton.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputmouse_mousebutton.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputmanager_inputmouse_mousebutton.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputmanager_inputmouse_mousebutton.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputmanager_inputmouse_mousebutton.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputmanager_inputmouse_mousebutton.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputmanager_inputmouse_mousebutton.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputmanager_inputmouse_mousebutton.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputmanager_inputmouse_mousebutton.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputsystem_mouse_mousewheel.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_mouse_mousewheel.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_mouse_mousewheel.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_mouse_mousewheel.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_mouse_mousewheel.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_mouse_mousewheel.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_mouse_mousewheel.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_mouse_mousewheel.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputsystem_mouse_mousewheel.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_mouse_mousewheel.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_mouse_mousewheel.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_mouse_mousewheel.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputmanager_inputname_mousewheel.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_mousewheel.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_mousewheel.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_mousewheel.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputname_mousewheel.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputmanager_inputname_mousewheel.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputmanager_inputname_mousewheel.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputmanager_inputname_mousewheel.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputmanager_inputname_mousewheel.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputmanager_inputname_mousewheel.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputmanager_inputname_mousewheel.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputmanager_inputname_mousewheel.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputsystem_keyboard_key.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_keyboard_key.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_keyboard_key.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_keyboard_key.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_keyboard_key.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_keyboard_key.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_keyboard_key.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_keyboard_key.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputsystem_keyboard_key.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_keyboard_key.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_keyboard_key.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_keyboard_key.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputmanager_getkey_key.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_getkey_key.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_getkey_key.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_getkey_key.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_getkey_key.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputmanager_getkey_key.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputmanager_getkey_key.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputmanager_getkey_key.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputmanager_getkey_key.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputmanager_getkey_key.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputmanager_getkey_key.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputmanager_getkey_key.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputsystem_gamepad_paddigitalbutton.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_paddigitalbutton.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_paddigitalbutton.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_paddigitalbutton.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_gamepad_paddigitalbutton.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_gamepad_paddigitalbutton.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_gamepad_paddigitalbutton.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_gamepad_paddigitalbutton.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputsystem_gamepad_paddigitalbutton.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_gamepad_paddigitalbutton.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_gamepad_paddigitalbutton.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_gamepad_paddigitalbutton.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputmanager_inputname_paddigitalbutton.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_paddigitalbutton.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_paddigitalbutton.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_paddigitalbutton.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputname_paddigitalbutton.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputmanager_inputname_paddigitalbutton.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputmanager_inputname_paddigitalbutton.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputmanager_inputname_paddigitalbutton.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputmanager_inputname_paddigitalbutton.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputmanager_inputname_paddigitalbutton.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputmanager_inputname_paddigitalbutton.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputmanager_inputname_paddigitalbutton.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputsystem_gamepad_padstick.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_padstick.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_padstick.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_padstick.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_gamepad_padstick.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_gamepad_padstick.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_gamepad_padstick.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_gamepad_padstick.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputsystem_gamepad_padstick.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_gamepad_padstick.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_gamepad_padstick.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_gamepad_padstick.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputmanager_inputname_padstick.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_padstick.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_padstick.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_padstick.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputname_padstick.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputmanager_inputname_padstick.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputmanager_inputname_padstick.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputmanager_inputname_padstick.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputmanager_inputname_padstick.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputmanager_inputname_padstick.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputmanager_inputname_padstick.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputmanager_inputname_padstick.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputsystem_gamepad_padtrigger.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_padtrigger.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_padtrigger.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_padtrigger.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_gamepad_padtrigger.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_gamepad_padtrigger.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_gamepad_padtrigger.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_gamepad_padtrigger.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputsystem_gamepad_padtrigger.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_gamepad_padtrigger.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_gamepad_padtrigger.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_gamepad_padtrigger.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputmanager_inputname_padtrigger.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_padtrigger.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_padtrigger.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputmanager_inputname_padtrigger.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputmanager_inputname_padtrigger.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputmanager_inputname_padtrigger.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputmanager_inputname_padtrigger.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputmanager_inputname_padtrigger.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputmanager_inputname_padtrigger.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputmanager_inputname_padtrigger.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputmanager_inputname_padtrigger.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputmanager_inputname_padtrigger.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputsystem_gamepad_padmotor.SetNormalTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_padmotor.SetOnTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_padmotor.SetDownTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
 			this.button_inputsystem_gamepad_padmotor.SetLockTexture(Resources.Load<Texture2D>(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? Data.Resources.UI_TEXTURE_BUTTON_ACTIVE : Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_inputsystem_gamepad_padmotor.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_gamepad_padmotor.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_gamepad_padmotor.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_gamepad_padmotor.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button_inputsystem_gamepad_padmotor.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button_inputsystem_gamepad_padmotor.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button_inputsystem_gamepad_padmotor.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button_inputsystem_gamepad_padmotor.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 		}
 
 		/** FixedUpdate
@@ -732,7 +732,7 @@ namespace TestScript
 			Fee.Input.Key.GetInstance().Main(true);
 
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
@@ -769,13 +769,13 @@ namespace TestScript
 				t_text += "right  = " + Fee.Input.Mouse.GetInstance().right.on.ToString() + "\n";
 				t_text += "middle = " + Fee.Input.Mouse.GetInstance().middle.on.ToString() + "\n";
 
-				t_text += "x = " + Fee.Input.Mouse.GetInstance().pos.x.ToString() + "\n";
-				t_text += "y = " + Fee.Input.Mouse.GetInstance().pos.y.ToString() + "\n";
-				t_text += "m = " + Fee.Input.Mouse.GetInstance().mouse_wheel.y.ToString() + "\n";
+				t_text += "x = " + Fee.Input.Mouse.GetInstance().cursor.pos.x.ToString() + "\n";
+				t_text += "y = " + Fee.Input.Mouse.GetInstance().cursor.pos.y.ToString() + "\n";
+				t_text += "m = " + Fee.Input.Mouse.GetInstance().mouse_wheel.pos.y.ToString() + "\n";
 
 				this.mouse_text.SetText(t_text);
 
-				this.mouse_sprite.SetXY(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+				this.mouse_sprite.SetXY(Fee.Input.Mouse.GetInstance().cursor.pos.x,Fee.Input.Mouse.GetInstance().cursor.pos.y);
 			}
 
 			//キー。

@@ -225,10 +225,10 @@ namespace TestScript
 				this.start_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.start_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.start_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.start_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.start_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.start_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.start_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.start_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.start_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.start_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.start_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//修了ボタン。
@@ -247,10 +247,10 @@ namespace TestScript
 				this.end_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.end_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.end_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.end_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.end_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.end_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.end_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.end_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.end_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.end_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.end_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//mode
@@ -293,7 +293,7 @@ namespace TestScript
 			Fee.Input.Key.GetInstance().Main(true);
 
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
@@ -359,8 +359,8 @@ namespace TestScript
 							switch(this.inputmode){
 							case InputMode.Position:
 								{
-									float t_x = ((float)Fee.Input.Mouse.GetInstance().pos.x - Fee.Render2D.Render2D.VIRTUAL_W / 2) / 100;
-									float t_y = ((float)Fee.Input.Mouse.GetInstance().pos.y - Fee.Render2D.Render2D.VIRTUAL_H / 2) / 100;
+									float t_x = ((float)Fee.Input.Mouse.GetInstance().cursor.pos.x - Fee.Render2D.Render2D.VIRTUAL_W / 2) / 100;
+									float t_y = ((float)Fee.Input.Mouse.GetInstance().cursor.pos.y - Fee.Render2D.Render2D.VIRTUAL_H / 2) / 100;
 
 									if(t_myplayer != null){
 										t_myplayer.SetPosition(t_x,t_y,0.0f);
@@ -368,7 +368,7 @@ namespace TestScript
 								}break;
 							case InputMode.Rotate:
 								{
-									float t_angle = Fee.Input.Mouse.GetInstance().pos.x;
+									float t_angle = Fee.Input.Mouse.GetInstance().cursor.pos.x;
 
 									Quaternion t_q = Quaternion.AngleAxis(t_angle,new Vector3(0.0f,1.0f,0.0f));
 
@@ -378,8 +378,8 @@ namespace TestScript
 								}break;
 							case InputMode.Scale:
 								{
-									float t_x = 1.0f + (float)Fee.Input.Mouse.GetInstance().pos.x / Fee.Render2D.Render2D.VIRTUAL_W;
-									float t_y = 1.0f + (float)Fee.Input.Mouse.GetInstance().pos.y / Fee.Render2D.Render2D.VIRTUAL_H;
+									float t_x = 1.0f + (float)Fee.Input.Mouse.GetInstance().cursor.pos.x / Fee.Render2D.Render2D.VIRTUAL_W;
+									float t_y = 1.0f + (float)Fee.Input.Mouse.GetInstance().cursor.pos.y / Fee.Render2D.Render2D.VIRTUAL_H;
 
 									if(t_myplayer != null){
 										t_myplayer.SetScale(t_x,t_y,1.0f);

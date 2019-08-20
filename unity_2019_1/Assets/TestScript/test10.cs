@@ -194,7 +194,7 @@ namespace TestScript
 				int t_layerindex = 0;
 				long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 				this.sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
-				this.sprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetRect(t_x,t_y,t_w,t_h);
 				this.sprite.SetTexture(Resources.Load<Texture2D>(Data.Resources.TEXTURE_SKYIMAGE));
 			}
@@ -216,10 +216,10 @@ namespace TestScript
 					this.bloom_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.bloom_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.bloom_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.bloom_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.bloom_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.bloom_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.bloom_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.bloom_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.bloom_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 40;
 
@@ -234,14 +234,14 @@ namespace TestScript
 					this.bloom_threshold_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 					this.bloom_threshold_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 					this.bloom_threshold_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.bloom_threshold_slider.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.bloom_threshold_slider.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.bloom_threshold_slider.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.bloom_threshold_slider.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.bloom_threshold_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.bloom_threshold_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.bloom_threshold_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.bloom_threshold_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 					this.bloom_threshold_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_threshold_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.bloom_threshold_slider.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.bloom_threshold_slider.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.bloom_threshold_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.bloom_threshold_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 30;
 
@@ -257,14 +257,14 @@ namespace TestScript
 					this.bloom_intensity_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 					this.bloom_intensity_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 					this.bloom_intensity_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.bloom_intensity_slider.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.bloom_intensity_slider.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.bloom_intensity_slider.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.bloom_intensity_slider.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.bloom_intensity_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.bloom_intensity_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.bloom_intensity_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.bloom_intensity_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 					this.bloom_intensity_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.bloom_intensity_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.bloom_intensity_slider.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.bloom_intensity_slider.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.bloom_intensity_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.bloom_intensity_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 
 				t_y += 60;
@@ -280,10 +280,10 @@ namespace TestScript
 					this.blur_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.blur_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.blur_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.blur_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.blur_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.blur_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.blur_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.blur_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.blur_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.blur_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.blur_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 40;
 
@@ -298,14 +298,14 @@ namespace TestScript
 					this.blur_rate_blend_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 					this.blur_rate_blend_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 					this.blur_rate_blend_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.blur_rate_blend_slider.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.blur_rate_blend_slider.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.blur_rate_blend_slider.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.blur_rate_blend_slider.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.blur_rate_blend_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.blur_rate_blend_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.blur_rate_blend_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.blur_rate_blend_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 					this.blur_rate_blend_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.blur_rate_blend_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.blur_rate_blend_slider.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.blur_rate_blend_slider.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.blur_rate_blend_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.blur_rate_blend_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 
 				t_y += 60;
@@ -321,10 +321,10 @@ namespace TestScript
 					this.depth_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.depth_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.depth_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.depth_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.depth_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.depth_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.depth_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.depth_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.depth_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.depth_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.depth_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 40;
 
@@ -339,14 +339,14 @@ namespace TestScript
 					this.depth_rate_blend_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 					this.depth_rate_blend_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 					this.depth_rate_blend_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.depth_rate_blend_slider.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.depth_rate_blend_slider.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.depth_rate_blend_slider.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.depth_rate_blend_slider.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.depth_rate_blend_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.depth_rate_blend_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.depth_rate_blend_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.depth_rate_blend_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 					this.depth_rate_blend_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.depth_rate_blend_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.depth_rate_blend_slider.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.depth_rate_blend_slider.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.depth_rate_blend_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.depth_rate_blend_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 			}
 		}
@@ -359,7 +359,7 @@ namespace TestScript
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();

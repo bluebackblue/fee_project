@@ -37,10 +37,10 @@ namespace TestScript
 			this.return_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.return_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.return_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.return_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.return_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.return_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.return_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.return_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.return_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.return_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.return_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。

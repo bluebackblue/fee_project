@@ -312,10 +312,10 @@ namespace TestScript
 				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
@@ -341,9 +341,9 @@ namespace TestScript
 
 			/** [Fee.Ui.ScrollItem_Base]クリップ矩形。設定。
 			*/
-			public override void SetClipRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
+			public override void SetClipRect(in Fee.Geometry.Rect2D_R<int> a_rect)
 			{
-				this.button.SetClipRect(ref a_rect);
+				this.button.SetClipRect(in a_rect);
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]表示内。
@@ -430,7 +430,7 @@ namespace TestScript
 			//result_sprite
 			this.result_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
 			this.result_sprite.SetRect(400,30,64,64);
-			this.result_sprite.SetTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_MAX);
+			this.result_sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 
 			//progress_sprite
 			this.progress_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
@@ -442,7 +442,7 @@ namespace TestScript
 
 			//scroll_item
 			{
-				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,t_drawpriority,Fee.Ui.ScrollType.Vertical,30);
+				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,t_drawpriority,Fee.Ui.Scroll_Type.Vertical,30);
 				this.scroll.SetRect(50,250,350,300);
 				
 				//SoundPool
@@ -622,7 +622,7 @@ namespace TestScript
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。インスタンス作成。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			//ＵＩ。インスタンス作成。
 			Fee.Ui.Ui.GetInstance().Main();

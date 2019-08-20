@@ -128,9 +128,9 @@ namespace TestScript
 				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.TEXTURE_SKYIMAGE);
 
 				this.clipsprite = new Fee.Ui.ClipSprite(this.deleter,t_drawpriority + 1);
-				this.clipsprite.SetRect(ref Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
+				this.clipsprite.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
 				this.clipsprite.SetTexture(Texture2D.whiteTexture);
-				this.clipsprite.SetTextureRect(ref Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+				this.clipsprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.clipsprite.SetColor(0.7f,0.7f,0.7f,1.0f);
 				this.clipsprite.SetTexture(t_texture);
 			}
@@ -165,10 +165,10 @@ namespace TestScript
 				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//checkbutton
@@ -183,13 +183,13 @@ namespace TestScript
 				this.checkbutton.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
 				this.checkbutton.SetBgOnTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
 				this.checkbutton.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
-				this.checkbutton.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.checkbutton.SetBgOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.checkbutton.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.checkbutton.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.checkbutton.SetBgOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.checkbutton.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				this.checkbutton.SetCheckNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
 				this.checkbutton.SetCheckLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
-				this.checkbutton.SetCheckNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.checkbutton.SetCheckNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 			}
 
 			//inputfield
@@ -218,14 +218,14 @@ namespace TestScript
 				this.slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 				this.slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
 				this.slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-				this.slider.SetBgNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.slider.SetBgLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.slider.SetValueNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.slider.SetValueLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				this.slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.slider.SetButtonNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.slider.SetButtonLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//is_clip
@@ -250,7 +250,7 @@ namespace TestScript
 			Fee.Input.Key.GetInstance().Main(true);
 
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
@@ -271,20 +271,20 @@ namespace TestScript
 			}
 
 			if(this.update_clip_rect == true){
-				Fee.Render2D.Rect2D_R<int> t_cliprect;
+				Fee.Geometry.Rect2D_R<int> t_cliprect;
 				{
 					t_cliprect.w = 200;
 					t_cliprect.h = 200;
-					t_cliprect.x = Fee.Input.Mouse.GetInstance().pos.x - t_cliprect.w / 2;
-					t_cliprect.y = Fee.Input.Mouse.GetInstance().pos.y - t_cliprect.h / 2;
+					t_cliprect.x = Fee.Input.Mouse.GetInstance().cursor.pos.x - t_cliprect.w / 2;
+					t_cliprect.y = Fee.Input.Mouse.GetInstance().cursor.pos.y - t_cliprect.h / 2;
 				}
 
-				this.clipsprite.SetClipRect(ref t_cliprect);
-				this.text.SetClipRect(ref t_cliprect);
-				this.button.SetClipRect(ref t_cliprect);
-				this.checkbutton.SetClipRect(ref t_cliprect);
-				this.inputfield.SetClipRect(ref t_cliprect);
-				this.slider.SetClipRect(ref t_cliprect);
+				this.clipsprite.SetClipRect(in t_cliprect);
+				this.text.SetClipRect(in t_cliprect);
+				this.button.SetClipRect(in t_cliprect);
+				this.checkbutton.SetClipRect(in t_cliprect);
+				this.inputfield.SetClipRect(in t_cliprect);
+				this.slider.SetClipRect(in t_cliprect);
 			}
 		}
 

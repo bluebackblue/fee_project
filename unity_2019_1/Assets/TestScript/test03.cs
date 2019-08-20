@@ -65,7 +65,7 @@ namespace TestScript
 			public Window(string a_label,int a_index)
 			{
 				//新規作成の場合に設定する矩形。
-				Fee.Render2D.Rect2D_R<int> t_new_rect = new Fee.Render2D.Rect2D_R<int>(100 + a_index * 30,100 + a_index * 30,300,300);
+				Fee.Geometry.Rect2D_R<int> t_new_rect = new Fee.Geometry.Rect2D_R<int>(100 + a_index * 30,100 + a_index * 30,300,300);
 
 				//deleter
 				this.deleter = new Fee.Deleter.Deleter();
@@ -73,39 +73,39 @@ namespace TestScript
 				//window
 				{
 					this.window = new Fee.Ui.Window(this.deleter,this);
-					this.window.RegisterWindowResume(a_label,ref t_new_rect);
+					this.window.RegisterWindowResume(a_label,in t_new_rect);
 
 					Color t_color = new Color(0.0f,0.0f,0.0f,0.5f);
 					switch(a_index){
 					case 0:
 						{
-							this.window.SetBgColor(ref t_color);
+							this.window.SetBgColor(in t_color);
 						}break;
 					case 1:
 						{
 							t_color.r = 0.5f;
-							this.window.SetBgColor(ref t_color);
+							this.window.SetBgColor(in t_color);
 						}break;
 					case 2:
 						{
 							t_color.g = 0.5f;
-							this.window.SetBgColor(ref t_color);
+							this.window.SetBgColor(in t_color);
 						}break;
 					case 3:
 						{
 							t_color.b = 0.5f;
-							this.window.SetBgColor(ref t_color);
+							this.window.SetBgColor(in t_color);
 						}break;
 					case 4:
 						{
 							t_color.a = 0.5f;
-							this.window.SetBgColor(ref t_color);
+							this.window.SetBgColor(in t_color);
 							this.window.SetBgMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 						}break;
 					default:
 						{
 							t_color.r = 1.0f;
-							this.window.SetBgColor(ref t_color);
+							this.window.SetBgColor(in t_color);
 						}break;
 					}
 				}
@@ -128,10 +128,10 @@ namespace TestScript
 				this.close_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.close_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.close_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.close_button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.close_button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.close_button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.close_button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.close_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.close_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.close_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.close_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				//is_close
 				this.is_close = false;
@@ -159,7 +159,7 @@ namespace TestScript
 
 			/** [Fee.Ui.OnWindow_CallBackInterface]矩形変更。
 			*/
-			public void OnWindowChangeRect(ref Fee.Render2D.Rect2D_R<int> a_rect)
+			public void OnWindowChangeRect(in Fee.Geometry.Rect2D_R<int> a_rect)
 			{
 				this.title.SetXY(a_rect.x + this.window.GetTitleBarH() + 5,a_rect.y);
 				this.close_button.SetXY(a_rect.x,a_rect.y);
@@ -270,10 +270,10 @@ namespace TestScript
 			this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+			this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+			this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+			this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			//view_flag
 			this.view_flag = true;
@@ -309,7 +309,7 @@ namespace TestScript
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();

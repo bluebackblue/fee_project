@@ -141,7 +141,7 @@ namespace TestScript
 			//sprite
 			this.sprite = new Fee.Render2D.Sprite2D(this.deleter,0);
 			this.sprite.SetRect(50,150,100,100);
-			this.sprite.SetTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_MAX);
+			this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 
 			//assetbundlelist_item
 			this.assetbundlelist_item = null;
@@ -158,7 +158,7 @@ namespace TestScript
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();

@@ -132,10 +132,10 @@ namespace TestScript
 					this.button[ii].SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.button[ii].SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 					this.button[ii].SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button[ii].SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.button[ii].SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.button[ii].SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.button[ii].SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+					this.button[ii].SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+					this.button[ii].SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+					this.button[ii].SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+					this.button[ii].SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 
 				//text
@@ -325,7 +325,7 @@ namespace TestScript
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();

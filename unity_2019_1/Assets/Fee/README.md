@@ -10,10 +10,10 @@ MIT License
 * https://github.com/bluebackblue/fee_core/releases/
 
 ## sample project
-* Unity 2018.3.12f1 [ https://github.com/bluebackblue/fee_project/tree/master/unity_2018_3_12f1 ]
-* Unity 2018.4.0f1 [ https://github.com/bluebackblue/fee_project/tree/master/unity_2018_4_0f1 ]
-* Unity 2019.1.0f2 [ https://github.com/bluebackblue/fee_project/tree/master/unity_2019_1_0f2 ]
-* Unity 2019.2.0a11 [ https://github.com/bluebackblue/fee_project/tree/master/unity_2019_2_0a11 ]
+* Unity 2018.3.12f1 [ https://github.com/bluebackblue/fee_project/tree/master/unity_2018_3 ]
+* Unity 2018.4.0f1 [ https://github.com/bluebackblue/fee_project/tree/master/unity_2018_4 ]
+* Unity 2019.1.0f2 [ https://github.com/bluebackblue/fee_project/tree/master/unity_2019_1 ]
+* Unity 2019.2.0a11 [ https://github.com/bluebackblue/fee_project/tree/master/unity_2019_2 ]
 
 ## contact
 https://discord.gg/JH3B4SR
@@ -24,10 +24,13 @@ https://discord.gg/JH3B4SR
 * license [使用ライセンス]
 * Resources [マテリアル、シェーダ、等]
 * Script
+* _ Asset [アセット汎用表現]
+* _ AssetBundleList [アセットバンドル管理]
 * _ Audio [AudioClip再生、SoundPool再生、ＢＧＭクロスフェード]
 * _ Bloom [ブルーム]
 * _ Blur [ブラー]
 * _ Crypt [暗号]
+* _ Data [データロード]
 * _ Deleter [インスタンス削除管理]
 * _ Depth [深度]
 * _ Dijkstra [ルート探査]
@@ -36,7 +39,7 @@ https://discord.gg/JH3B4SR
 * _ EventPlate [イベント]
 * _ Excel [エクセル]
 * _ Fade [フェード]
-* _ File [ローカルセーブロード、アセットバンドルダウンロード、サウンドプールダウンロード]
+* _ File [セーブ、ロード、ダウンロード、アップロード]
 * _ Function [関数呼び出し]
 * _ Input [InputManager、InputSystem]
 * _ Instantiate [インスタンス作成]
@@ -54,6 +57,7 @@ https://discord.gg/JH3B4SR
 * _ TaskW [タスク]
 * _ Ui [ボタン、クリップスプライト、ウィンドウ、スライダー、縦スクロール、横スクロール、チェックボタン]
 * _ UniVrm [UniVrmの操作]
+* _ Unity5 [Unity5サポート]
 
 ## デファイン
 
@@ -134,7 +138,4 @@ https://discord.gg/JH3B4SR
 このリポジトリにExcelDataReaderは含まれていません。以下から取得してください。
 * https://github.com/bluebackblue/fee_core/tree/master/license/exceldatareader
 * https://github.com/ExcelDataReader/ExcelDataReader/
-
-
-
 

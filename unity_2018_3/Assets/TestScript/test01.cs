@@ -268,10 +268,10 @@ namespace TestScript
 				this.button_log.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_log.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_log.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_log.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_log.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_log.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_log.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.button_log.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_log.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_log.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_log.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				t_xx += 100;
 
@@ -284,10 +284,10 @@ namespace TestScript
 				this.button_logerror.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_logerror.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_logerror.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_logerror.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_logerror.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_logerror.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_logerror.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.button_logerror.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_logerror.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_logerror.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_logerror.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				t_xx += 100;
 
@@ -300,10 +300,10 @@ namespace TestScript
 				this.button_assert.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_assert.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 				this.button_assert.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_assert.SetNormalTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_assert.SetOnTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_assert.SetDownTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_assert.SetLockTextureRect(ref Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.button_assert.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button_assert.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button_assert.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button_assert.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			}
 		}
@@ -336,7 +336,7 @@ namespace TestScript
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(Fee.Input.Mouse.GetInstance().pos.x,Fee.Input.Mouse.GetInstance().pos.y);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
