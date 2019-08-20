@@ -197,7 +197,7 @@ namespace TestScript
 
 			//キー。
 			this.touch_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
-			this.touch_text.SetRect(750,50,300,0);
+			this.touch_text.SetRect(400,10,300,0);
 			this.touch_text.SetFontSize(17);
 			
 			//touchview_list
@@ -347,6 +347,9 @@ namespace TestScript
 
 			//タッチ。
 			Fee.Input.Touch.UpdateTouchList(this.touchview_list);
+
+			//タッチ数。
+			this.touch_text.SetText(Fee.Input.Touch.GetInstance().device_item_list_count.ToString());
 		}
 
 		/** 削除前。
