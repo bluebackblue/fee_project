@@ -143,7 +143,7 @@ namespace TestScript
 				this.text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority + 1);
 				this.text.SetRect(t_x,t_y,0,0);
 				this.text.SetText("ESC ENTER");
-				this.text.SetCenter(true,true);
+				this.text.SetAlignmentType(Fee.Render2D.Text2D_HorizontalAlignmentType.Center,Fee.Render2D.Text2D_VerticalAlignmentType.Middle);
 				this.text.SetColor(1.0f,0.0f,0.0f,1.0f);
 				this.text.SetFontSize(27);
 				this.text.SetShadow(true);
@@ -190,6 +190,7 @@ namespace TestScript
 				this.checkbutton.SetCheckLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_CHECKBUTTON));
 				this.checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.checkbutton.SetText("チェック");
 			}
 
 			//inputfield
