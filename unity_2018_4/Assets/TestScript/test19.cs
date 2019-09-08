@@ -223,7 +223,7 @@ namespace TestScript
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//パーセプトロン。
-			this.perceptron = new Fee.Perceptron.Perceptron(2,2,1);
+			this.perceptron = new Fee.Perceptron.Perceptron(2,3,1);
 
 			//backpropagation
 			{
@@ -306,8 +306,8 @@ namespace TestScript
 		*/
 		public void OnButtonClick(ButtonID a_id)
 		{
-			//論理演算。学習。
-			for(int t_loop=0;t_loop<50000;t_loop++){
+			//XOR。
+			for(int t_loop=0;t_loop<100000;t_loop++){
 				switch(UnityEngine.Random.Range(0,4)){
 				case 0:
 					{
@@ -335,7 +335,10 @@ namespace TestScript
 					}break;
 				}
 
+				//計算。
 				this.perceptron.ForwardCalculation();
+
+				//学習。
 				this.perceptron.BackPropagation();
 			}
 
