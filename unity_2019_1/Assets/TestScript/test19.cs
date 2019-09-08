@@ -46,29 +46,59 @@ namespace TestScript
 
 		/** Item
 		*/
-		private class Item
+		private class Item : Fee.EventPlate.OnEventPlateOver_CallBackInterface<Fee.Perceptron.Node>
 		{
 			/** sprite
 			*/
+			Fee.Render2D.Sprite2D sprite_bg;
 			Fee.Render2D.Sprite2D sprite;
+
+			/** eventplate
+			*/
+			Fee.EventPlate.Item eventplate;
 
 			/** node
 			*/
 			Fee.Perceptron.Node node;
 
+			/** text
+			*/
+			Fee.Render2D.Text2D text;
+
 			/** constructor
 			*/
 			public Item(Fee.Deleter.Deleter a_deleter,int a_x,int a_y,Fee.Perceptron.Node a_node)
 			{
-				//sprite
 				{
 					int t_x = 100 + 50 * a_x;
 					int t_y = 100 + 50 * a_y;
-					this.sprite = new Fee.Render2D.Sprite2D(a_deleter,1);
+					int t_size = 30;
+
+					//sprite_bg
+					this.sprite_bg = new Fee.Render2D.Sprite2D(a_deleter,1);
+					this.sprite_bg.SetTexture(UnityEngine.Texture2D.whiteTexture);
+					this.sprite_bg.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+					this.sprite_bg.SetRect(t_x,t_y,t_size,t_size);
+					this.sprite_bg.SetColor(1.0f,1.0f,1.0f,1.0f);
+
+					//sprite
+					this.sprite = new Fee.Render2D.Sprite2D(a_deleter,2);
 					this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 					this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
-					this.sprite.SetRect(t_x,t_y,30,30);
+					this.sprite.SetRect(t_x + 2,t_y + 2,t_size - 4,t_size - 4);
 					this.sprite.SetColor(1.0f,1.0f,1.0f,1.0f);
+
+					//eventplate
+					this.eventplate = new Fee.EventPlate.Item(a_deleter,Fee.EventPlate.EventType.Button,1);
+					this.eventplate.SetRect(t_x,t_y,t_size,t_size);
+					this.eventplate.SetOnEventPlateOver<Fee.Perceptron.Node>(this,a_node);
+
+					//text
+					this.text = new Fee.Render2D.Text2D(a_deleter,1);
+					this.text.SetText("");
+					this.text.SetVisible(false);
+					this.text.SetRect(t_x + 20,t_y - 20,0,0);
+					this.text.SetColor(1.0f,0.2f,0.2f,1.0f);
 				}
 
 				//node
@@ -81,6 +111,21 @@ namespace TestScript
 			{
 				float t_color = this.node.value;
 				this.sprite.SetColor(t_color,t_color,t_color,1.0f);
+			}
+
+			/** [Fee.Ui.OnEventPlateOver_CallBackInterface]イベントプレートに入場。
+			*/
+			public void OnEventPlateEnter(Fee.Perceptron.Node a_id)
+			{
+				this.text.SetVisible(true);
+				this.text.SetText(a_id.value.ToString());
+			}
+
+			/** [Fee.Ui.OnEventPlateOver_CallBackInterface]イベントプレートから退場。
+			*/
+			public void OnEventPlateLeave(Fee.Perceptron.Node a_id)
+			{
+				this.text.SetVisible(false);
 			}
 		}
 
@@ -135,6 +180,7 @@ namespace TestScript
 			//パーセプトロン。
 			this.perceptron = new Fee.Perceptron.Perceptron(5,4,5);
 
+			//表示。
 			this.list = new List<Item>();
 			for(int xx=0;xx<this.perceptron.layer_list.Count;xx++){
 				for(int yy=0;yy<this.perceptron.layer_list[xx].node_list.Count;yy++){
@@ -156,10 +202,10 @@ namespace TestScript
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
 
-			//順方向計算。
+			//パーセプトロン。順方向計算。
 			this.perceptron.ForwardCalculation();
 
-			//更新。
+			//表示更新。
 			for(int ii=0;ii<this.list.Count;ii++){
 				this.list[ii].Update();
 			}
