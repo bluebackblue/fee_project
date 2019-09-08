@@ -20,6 +20,10 @@ namespace Fee.Perceptron
 		*/
 		public System.Collections.Generic.List<Layer> layer_list;
 
+		/** layer_teacher
+		*/
+		public Layer layer_teacher;
+
 		/** constructor
 		*/
 		public Perceptron(int a_in_count,int a_middle_count,int a_out_out)
@@ -37,6 +41,9 @@ namespace Fee.Perceptron
 
 			//出力層。
 			this.layer_list.Add(new Layer(a_out_out));
+
+			//教師層。
+			this.layer_teacher = new Layer(a_out_out);
 
 			//接続。
 			{
