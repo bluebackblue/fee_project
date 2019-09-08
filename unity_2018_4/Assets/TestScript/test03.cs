@@ -257,6 +257,9 @@ namespace TestScript
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
+			//戻るボタン作成。
+			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+
 			//drawpriority
 			long t_drawpriority = 0;
 
@@ -283,9 +286,6 @@ namespace TestScript
 			for(int ii=0;ii<this.window_list.Length;ii++){
 				this.window_list[ii] = new Window("window" + ii.ToString(),ii);
 			}
-
-			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 		}
 
 		/** FixedUpdate

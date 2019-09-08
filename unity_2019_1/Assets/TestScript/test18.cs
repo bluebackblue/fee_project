@@ -16,6 +16,9 @@ using UnityEngine;
 namespace TestScript
 {
 	/** test18
+
+		視錐台カリング
+
 	*/
 	public class test18 : MainBase
 	{
@@ -89,21 +92,22 @@ namespace TestScript
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
+			//戻るボタン作成。
+			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+
 			//frustum_culling
 			this.frustum_culling = new Fee.Geometry.FrustumCulling();
 
 			//main_camera
 			this.main_camera = GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>();
 			this.main_camera.depth = Fee.Render2D.Render2D.GetInstance().GetCameraAfterDepth(Fee.Render2D.Config.MAX_LAYER);
+			this.main_camera.clearFlags = CameraClearFlags.Nothing;
 
 			//キューブ。
 			{
 				GameObject t_prefab = Resources.Load<GameObject>(Data.Resources.PREFAB_CUBE);
 				this.cube = GameObject.Instantiate(t_prefab,Vector3.zero,Quaternion.identity);
 			}
-
-			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 		}
 
 		/** FixedUpdate

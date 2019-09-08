@@ -209,9 +209,6 @@ namespace TestScript
 			//ＵＩ。インスタンス作成。
 			Fee.Ui.Ui.CreateInstance();
 
-			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
-
 			//フォント。
 			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
 			if(t_font != null){
@@ -220,6 +217,9 @@ namespace TestScript
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
+
+			//戻るボタン作成。
+			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//status_text
 			this.status_text = new Fee.Render2D.Text2D(this.deleter,0);

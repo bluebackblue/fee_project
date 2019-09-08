@@ -412,7 +412,7 @@ namespace TestScript
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
 
-			//deleter
+			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
