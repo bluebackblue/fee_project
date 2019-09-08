@@ -277,6 +277,11 @@ namespace TestScript
 			//パーセプトロン。順方向計算。
 			this.perceptron.ForwardCalculation();
 
+			//パーセプトロン。バックプロパゲート。
+			if(this.backpropagation_flag == true){
+				this.perceptron.BackPropagate();
+			}
+
 			//表示更新。
 			for(int ii=0;ii<this.list.Count;ii++){
 				this.list[ii].Update();
