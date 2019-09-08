@@ -24,6 +24,10 @@ namespace Fee.Perceptron
 		*/
 		public bool is_bias;
 
+		/** 誤差値。
+		*/
+		public float eee_value;
+
 		/** 自分が接続元のリスト。
 		*/
 		public System.Collections.Generic.List<Link> link_list_from;
@@ -41,6 +45,9 @@ namespace Fee.Perceptron
 
 			//is_bias
 			this.is_bias = false;
+
+			//eee_value
+			this.eee_value = 0.0f;
 
 			//link_list_from
 			this.link_list_from = new System.Collections.Generic.List<Link>();
