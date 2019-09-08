@@ -111,6 +111,22 @@ namespace TestScript
 			{
 				float t_color = this.node.value;
 				this.sprite.SetColor(t_color,t_color,t_color,1.0f);
+
+				if(this.node.is_bias == true){
+					this.sprite_bg.SetColor(0.0f,1.0f,0.0f,1.0f);
+				}else{
+					this.sprite_bg.SetColor(1.0f,1.0f,1.0f,1.0f);
+				}
+
+				if(this.eventplate.IsOnOver() == true){
+					if(Fee.Input.Mouse.GetInstance().left.down == true){
+						if(this.node.value == 0.0f){
+							this.node.value = 1.0f;
+						}else{
+							this.node.value = 0.0f;
+						}
+					}
+				}
 			}
 
 			/** [Fee.Ui.OnEventPlateOver_CallBackInterface]イベントプレートに入場。

@@ -36,7 +36,7 @@ namespace Fee.Perceptron
 			this.layer_list.Add(new Layer(a_middle_count + t_bias_node_count));
 
 			//出力層。
-			this.layer_list.Add(new Layer(a_out_out + t_bias_node_count));
+			this.layer_list.Add(new Layer(a_out_out));
 
 			//接続。
 			{
@@ -70,10 +70,11 @@ namespace Fee.Perceptron
 
 			//バイアスノードの設定。
 			{
-				for(int t_layer_index=0;t_layer_index<this.layer_list.Count;t_layer_index++){
+				for(int t_layer_index=0;t_layer_index<(this.layer_list.Count - 1);t_layer_index++){
 					int t_count = this.layer_list[t_layer_index].node_list.Count;
 					Node t_node = this.layer_list[t_layer_index].node_list[t_count-1];
 					t_node.value = 1.0f;
+					t_node.is_bias = true;
 				}
 			}
 		}
