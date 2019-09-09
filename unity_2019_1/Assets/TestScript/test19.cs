@@ -223,7 +223,7 @@ namespace TestScript
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//パーセプトロン。
-			this.perceptron = new Fee.Perceptron.Perceptron(2,2,1);
+			this.perceptron = new Fee.Perceptron.Perceptron(2,2,0,1);
 
 			//backpropagation
 			{
