@@ -31,6 +31,10 @@ namespace TestScript
 		*/
 		private Fee.Render2D.Text2D text;
 
+		/** loadscene_request
+		*/
+		private string loadscene_request;
+
 		/** アプリ起動時。
 		*/
 		[UnityEngine.RuntimeInitializeOnLoadMethod]
@@ -151,6 +155,9 @@ namespace TestScript
 					}
 				}
 			}
+
+			//loadscene_request
+			this.loadscene_request = null;
 		}
 
 		/** ライブラリ停止。
@@ -161,7 +168,7 @@ namespace TestScript
 			{
 			}
 
-			//アセットバンドルリスト。
+			//アセットバンドル。
 			{
 				Fee.AssetBundleList.AssetBundleList.DeleteInstance();
 			}
@@ -238,7 +245,7 @@ namespace TestScript
 
 			//入力。
 			{
-				//マスウ。
+				//マウス。
 				Fee.Input.Mouse.DeleteInstance();
 	
 				//キー。
@@ -282,6 +289,10 @@ namespace TestScript
 			{
 			}
 
+			//プレイヤーループシステム。
+			{
+			}
+
 			//２Ｄ描画。
 			{
 				Fee.Render2D.Render2D.DeleteInstance();
@@ -321,6 +332,9 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_Before();
+
 			//マウス。
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
@@ -329,13 +343,41 @@ namespace TestScript
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
+
+			///ロードシーン。
+			if(this.loadscene_request != null){
+				this.deleter.DeleteAll();
+			}
+
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_After();
+
+			//ロードシーン。
+			if(this.loadscene_request != null){
+
+				//ライブラリ停止。
+				this.DeleteLibInstance();
+
+				//ロードシーン。
+				UnityEngine.SceneManagement.SceneManager.LoadScene(this.loadscene_request);
+			}
+		}
+
+		/** 更新。
+		*/
+		private void Update()
+		{
+			//２Ｄ描画。
+			if(Fee.Render2D.Render2D.IsCreateInstance() == true){
+				Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
+			}
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
 		public void OnButtonClick(int a_id)
 		{
-			UnityEngine.SceneManagement.SceneManager.LoadScene(this.scene_list[a_id].scenename);
+			this.loadscene_request = this.scene_list[a_id].scenename;
 		}
 
 		/** [Fee.Ui.OnButtonChangeOverFlag_CallBackInterface]クリック。
@@ -345,24 +387,7 @@ namespace TestScript
 			this.text.SetText(this.scene_list[a_id].detailtext);
 		}
 
-		/** シーン遷移。
-		*/
-		private void OnDestroy()
-		{
-			this.deleter.DeleteAll();
-
-			//ライブラリ停止。
-			this.DeleteLibInstance();
-		}
-
-		/** シーン名。
-		*/
-		public void CallFromHTML(string a_scene_name)
-		{
-			UnityEngine.SceneManagement.SceneManager.LoadScene(a_scene_name);
-		}
-
-		/** シーンリスト初期化。
+		/** [メニュー]シーンリスト初期化。
 		*/
 		#if(UNITY_EDITOR)
 		[UnityEditor.MenuItem("Fee/Test/Initialize/EditSceneList")]
@@ -387,7 +412,7 @@ namespace TestScript
 		}
 		#endif
 
-		/** パッケージ。作成。
+		/** [メニュー]パッケージ。作成。
 		*/
 		#if(UNITY_EDITOR)
 		[UnityEditor.MenuItem("Fee/Test/BuildThirdPartyPackage")]

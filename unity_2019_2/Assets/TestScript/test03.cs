@@ -232,6 +232,7 @@ namespace TestScript
 			Fee.Function.Function.SetMonoBehaviour(this);
 
 			//２Ｄ描画。インスタンス作成。
+			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 			Fee.Render2D.Config.LOG_ENABLE = true;
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
@@ -292,6 +293,9 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_Before();
+
 			//window_list
 			if(this.window_list != null){
 				for(int ii=0;ii<this.window_list.Length;ii++){
@@ -313,6 +317,17 @@ namespace TestScript
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
+
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_After();
+		}
+
+		/** Update
+		*/
+		private void Update()
+		{
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
