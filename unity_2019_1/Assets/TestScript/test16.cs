@@ -370,10 +370,10 @@ namespace TestScript
 								{
 									float t_angle = Fee.Input.Mouse.GetInstance().cursor.pos.x;
 
-									Quaternion t_q = Quaternion.AngleAxis(t_angle,new Vector3(0.0f,1.0f,0.0f));
+									Quaternion t_quaternion = Quaternion.AngleAxis(t_angle,new Vector3(0.0f,1.0f,0.0f));
 
 									if(t_myplayer != null){
-										t_myplayer.SetQuaternion(ref t_q);
+										t_myplayer.SetQuaternion(in t_quaternion);
 									}
 								}break;
 							case InputMode.Scale:

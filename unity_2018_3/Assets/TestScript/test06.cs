@@ -192,6 +192,7 @@ namespace TestScript
 		private void Start()
 		{
 			//２Ｄ描画。インスタンス作成。
+			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
@@ -243,6 +244,9 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_Before();
+
 			//パフォーマンスカウンター。インスタンス作成。
 			Fee.PerformanceCounter.Config.LOG_ENABLE = true;
 			Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
@@ -262,6 +266,17 @@ namespace TestScript
 
 			//シーン。
 			Fee.Scene.Scene.GetInstance().Main();
+
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_After();
+		}
+
+		/** Update
+		*/
+		private void Update()
+		{
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
 		}
 
 		/** 削除前。

@@ -138,6 +138,7 @@ namespace TestScript
 			Fee.Function.Function.SetMonoBehaviour(this);
 
 			//２Ｄ描画。インスタンス作成。
+			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
@@ -286,6 +287,9 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_Before();
+
 			//マウス。
 			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
@@ -370,10 +374,10 @@ namespace TestScript
 								{
 									float t_angle = Fee.Input.Mouse.GetInstance().cursor.pos.x;
 
-									Quaternion t_q = Quaternion.AngleAxis(t_angle,new Vector3(0.0f,1.0f,0.0f));
+									Quaternion t_quaternion = Quaternion.AngleAxis(t_angle,new Vector3(0.0f,1.0f,0.0f));
 
 									if(t_myplayer != null){
-										t_myplayer.SetQuaternion(ref t_q);
+										t_myplayer.SetQuaternion(in t_quaternion);
 									}
 								}break;
 							case InputMode.Scale:
@@ -477,6 +481,17 @@ namespace TestScript
 					//シーン変更可能。
 				}break;
 			}
+
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_After();
+		}
+
+		/** Update
+		*/
+		private void Update()
+		{
+			//２Ｄ描画。
+			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
 		}
 
 		/** 削除前。
