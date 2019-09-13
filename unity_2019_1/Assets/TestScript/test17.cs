@@ -147,7 +147,7 @@ namespace TestScript
 
 				//削除管理。
 				if(a_deleter != null){
-					a_deleter.Register(this);
+					a_deleter.Regist(this);
 				}
 			}
 
@@ -653,7 +653,7 @@ namespace TestScript
 					{
 						ScrollItem t_item = this.v_scrollview.PopItem();
 						if(t_item != null){
-							this.deleter.UnRegister(t_item);
+							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
 							t_item = null;
 						}
@@ -661,7 +661,7 @@ namespace TestScript
 					{
 						ScrollItem t_item = this.h_scrollview.PopItem();
 						if(t_item != null){
-							this.deleter.UnRegister(t_item);
+							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
 							t_item = null;
 						}
@@ -690,7 +690,7 @@ namespace TestScript
 						int t_index = 0;
 						ScrollItem t_item = this.v_scrollview.RemoveItem(t_index);
 						if(t_item != null){
-							this.deleter.UnRegister(t_item);
+							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
 							t_item = null;
 						}
@@ -699,7 +699,7 @@ namespace TestScript
 						int t_index = 0;
 						ScrollItem t_item = this.h_scrollview.RemoveItem(t_index);
 						if(t_item != null){
-							this.deleter.UnRegister(t_item);
+							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
 							t_item = null;
 						}
@@ -728,7 +728,7 @@ namespace TestScript
 						int t_index = 4;
 						ScrollItem t_item = this.v_scrollview.RemoveItem(t_index);
 						if(t_item != null){
-							this.deleter.UnRegister(t_item);
+							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
 							t_item = null;
 						}
@@ -737,7 +737,7 @@ namespace TestScript
 						int t_index = 4;
 						ScrollItem t_item = this.h_scrollview.RemoveItem(t_index);
 						if(t_item != null){
-							this.deleter.UnRegister(t_item);
+							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
 							t_item = null;
 						}
@@ -766,7 +766,7 @@ namespace TestScript
 						int t_index = this.v_scrollview.GetListCount() - 6;
 						ScrollItem t_item = this.v_scrollview.RemoveItem(t_index);
 						if(t_item != null){
-							this.deleter.UnRegister(t_item);
+							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
 							t_item = null;
 						}
@@ -775,7 +775,7 @@ namespace TestScript
 						int t_index = this.h_scrollview.GetListCount() - 6;
 						ScrollItem t_item = this.h_scrollview.RemoveItem(t_index);
 						if(t_item != null){
-							this.deleter.UnRegister(t_item);
+							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
 							t_item = null;
 						}

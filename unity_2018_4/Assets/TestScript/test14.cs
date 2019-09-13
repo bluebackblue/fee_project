@@ -188,23 +188,25 @@ namespace TestScript
 							string t_text = t_textasset.text;
 							if(t_text != null){
 								System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
-								Fee.Data.Data.GetInstance().RegisterDataList(t_data_list);
+								Fee.Data.Data.GetInstance().RegistDataList(t_data_list);
 							}
 						}
 					}
 
-					//パスの登録。
-					#if(UNITY_EDITOR)
+					//アセットバンドルリスト。
 					{
-						#if(true)
-						//ダミーアセットバンドル。
-						Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsDummyAssetBundle,new Fee.File.Path("Editor/AssetBundle/Dummy/test.assetbundle.json"));
-						#else
-						//アセットバンドル。
-						Fee.AssetBundleList.AssetBundleList.GetInstance().RegisterPath("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
+						#if(UNITY_EDITOR)
+						{
+							#if(true)
+							//ダミーアセットバンドル。
+							Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsDummyAssetBundle,new Fee.File.Path("Editor/AssetBundle/Dummy/test.assetbundle.json"));
+							#else
+							//アセットバンドル。
+							Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
+							#endif
+						}
 						#endif
 					}
-					#endif
 
 					this.step = Step.LoadAssetBundle_Start;
 				}break;
@@ -212,7 +214,9 @@ namespace TestScript
 				{
 					//アセットバンドルロード。
 
-					this.assetbundlelist_item = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathAssetBundleItem("test.assetbundle");
+					//アセットバンドルリストに登録したアセットバンドル、ダミーアセットバンドルがロードされる。
+
+					this.assetbundlelist_item = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemPackItem("test.assetbundle");
 					this.step = Step.LoadAssetBundle_Wait;
 				}break;
 			case Step.LoadAssetBundle_Wait:
@@ -235,6 +239,9 @@ namespace TestScript
 				{
 					//ロード。テキスト。
 
+					//データリストに登録した、パス、アセットバンドルからロードされる。
+					//アセットバンドルの場合、事前にアセットバンドルリストにロードしておく必要がある。
+
 					this.data_item = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_TEXT");
 					this.step = Step.Load_Text_Wait;
 				}break;
@@ -255,7 +262,7 @@ namespace TestScript
 					if(this.data_item.GetResultAssetType() == Fee.Asset.AssetType.Text){
 						this.text.SetText("Load_Text_End : " + this.data_item.GetResultAssetText());
 					}else{
-						this.text.SetText("Load_Text_End : Error");
+						this.text.SetText("Load_Text_End : Error : " + this.data_item.GetResultErrorString());
 					}
 
 					this.step = Step.Load_Prefab_Start;
@@ -298,7 +305,7 @@ namespace TestScript
 
 						this.text.SetText("Load_Prefab_End : " + t_component_name);
 					}else{
-						this.text.SetText("Load_Prefab_End : Error");
+						this.text.SetText("Load_Prefab_End : Error : " + this.data_item.GetResultErrorString());
 					}
 
 					this.step = Step.Load_Texture_Start;
@@ -329,7 +336,7 @@ namespace TestScript
 
 						this.text.SetText("Load_TextureEnd");
 					}else{
-						this.text.SetText("Load_Texture_End : Error");
+						this.text.SetText("Load_Texture_End : Error : " + this.data_item.GetResultErrorString());
 					}
 
 					this.step = Step.Fix;

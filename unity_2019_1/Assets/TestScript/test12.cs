@@ -273,7 +273,7 @@ namespace TestScript
 					string t_text = t_textasset.text;
 					if(t_text != null){
 						System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
-						Fee.Data.Data.GetInstance().RegisterDataList(t_data_list);
+						Fee.Data.Data.GetInstance().RegistDataList(t_data_list);
 					}
 				}
 			}

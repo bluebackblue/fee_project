@@ -73,7 +73,7 @@ namespace TestScript
 				//window
 				{
 					this.window = new Fee.Ui.Window(this.deleter,this);
-					this.window.RegisterWindowResume(a_label,in t_new_rect);
+					this.window.RegistWindowResume(a_label,in t_new_rect);
 
 					Color t_color = new Color(0.0f,0.0f,0.0f,0.5f);
 					switch(a_index){
