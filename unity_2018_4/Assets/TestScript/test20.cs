@@ -20,7 +20,7 @@ namespace TestScript
 		タスク
 
 	*/
-	public class test20 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test20.ButtonID>
+	public class test20 : MainBase
 	{
 		/** CreateStatus
 		*/
@@ -40,20 +40,104 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** button
+		/** Item
 		*/
-		private Fee.Ui.Button[] button;
-		private Fee.TaskW.Task<int>[] task;
-		private Fee.TaskW.CancelToken[]  canceltoken;
-
-		/** ButtonID
-		*/
-		public enum ButtonID
+		private class Item : Fee.Ui.OnButtonClick_CallBackInterface<int>
 		{
-			StartA,
-			StartB,
-			StartC,
-		}
+			public Fee.TaskW.Task<int> task;
+			public Fee.TaskW.CancelToken canceltoken;
+			public Fee.Ui.Button button;
+			public Fee.Render2D.Text2D text;
+			public int resultvalue;
+
+			/** constructor
+			*/
+			public Item(int a_index,Fee.Deleter.Deleter a_deleter)
+			{
+				//task
+				this.task = null;
+
+				//canceltoken
+				this.canceltoken = new Fee.TaskW.CancelToken();
+
+				int t_x = 100;
+				int t_y = 100 + a_index * 100;
+				int t_w = 100;
+				int t_h = 60;
+
+				//button
+				this.button = new Fee.Ui.Button(a_deleter,1);
+				this.button.SetOnButtonClick(this,0);
+				this.button.SetTextureCornerSize(10);
+				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.button.SetText("開始");
+				this.button.SetRect(t_x,t_y,t_w,t_h);
+
+				//text
+				this.text = new Fee.Render2D.Text2D(a_deleter,1);
+				this.text.SetRect(t_x + 100,t_y,0,0);
+				this.text.SetText("");
+			}
+
+			/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
+			*/
+			public void OnButtonClick(int a_id)
+			{
+				//終了。
+				if(this.task != null){
+					//キャンセルを通知。
+					this.canceltoken.Cancel();
+					this.task.Wait();
+					this.task.Dispose();
+					this.task = null;
+				}
+
+				//キャンセルのリセット。
+				this.canceltoken.Reset();
+
+				//開始。
+				this.task = new Fee.TaskW.Task<int>(() => {
+						
+					for(int ii=0;ii<100;ii++){
+
+						//Sleep
+						System.Threading.Thread.Sleep(1);
+
+						//キャンセル。
+						if(this.canceltoken.IsCancellationRequested() == true){
+							this.canceltoken.ThrowIfCancellationRequested();
+							return -1;
+						}
+
+						//resultvalue
+						this.resultvalue++;
+					}
+
+					return 0;
+				});
+			}
+
+			/** Dispose
+			*/
+			public void Dispose()
+			{
+				if(this.task != null){
+					this.canceltoken.Cancel();
+					this.task.Wait();
+					this.task.Dispose();
+					this.task = null;
+				}
+			}
+		};
+
+		private Item[] list;
 
 		/** Start
 		*/
@@ -99,85 +183,9 @@ namespace TestScript
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
-			{
-				this.button = new Fee.Ui.Button[3];
-				this.task = new Fee.TaskW.Task<int>[3];
-				this.canceltoken = new Fee.TaskW.CancelToken[3];
-
-				for(int ii=0;ii<this.button.Length;ii++){
-					int t_x = 100;
-					int t_y = 100 + ii * 100;
-					int t_w = 100;
-					int t_h = 60;
-
-					//button
-					this.button[ii] = new Fee.Ui.Button(this.deleter,1);
-					this.button[ii].SetOnButtonClick(this,ButtonID.StartA + ii);
-					this.button[ii].SetTextureCornerSize(10);
-					this.button[ii].SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button[ii].SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button[ii].SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button[ii].SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button[ii].SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.button[ii].SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.button[ii].SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.button[ii].SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-					this.button[ii].SetText("開始");
-					this.button[ii].SetRect(t_x,t_y,t_w,t_h);
-
-					//task
-					this.task[ii] = null;
-
-					//canceltoken
-					this.canceltoken[ii] = new Fee.TaskW.CancelToken();
-				}
-			}
-		}
-
-		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
-		*/
-		public void OnButtonClick(ButtonID a_id)
-		{
-			switch(a_id){
-			case ButtonID.StartA:
-			case ButtonID.StartB:
-			case ButtonID.StartC:
-				{
-					int t_index = a_id - ButtonID.StartA;
-
-					//終了。
-					if(this.task[t_index] != null){
-						//キャンセルを通知。
-						this.canceltoken[t_index].Cancel();
-						this.task[t_index].Wait();
-						this.task[t_index].Dispose();
-						this.task[t_index] = null;
-					}
-
-					//キャンセルのリセット。
-					this.canceltoken[t_index].Reset();
-
-					//開始。
-					this.task[t_index] = new Fee.TaskW.Task<int>(() => {
-						
-						for(int ii=0;ii<100;ii++){
-
-							//Sleep
-							System.Threading.Thread.Sleep(1000);
-
-							//ログ表示。
-							UnityEngine.Debug.Log(t_index.ToString());
-
-							//キャンセル。
-							if(this.canceltoken[t_index].IsCancellationRequested() == true){
-								this.canceltoken[t_index].ThrowIfCancellationRequested();
-								return t_index;
-							}
-						}
-
-						return t_index;
-					});
-				}break;
+			this.list = new Item[3];
+			for(int ii=0;ii<this.list.Length;ii++){
+				this.list[ii] = new Item(ii,this.deleter);
 			}
 		}
 
@@ -189,7 +197,7 @@ namespace TestScript
 			Fee.Render2D.Render2D.GetInstance().Main_Before();
 
 			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
+			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。
 			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
@@ -216,22 +224,20 @@ namespace TestScript
 			return true;
 		}
 
-		/** OnDestroy
+		/** 削除。
 		*/
-		private void OnDestroy()
+		public override void Destroy()
 		{
-			for(int ii=0;ii<this.task.Length;ii++){
-				//終了。
-				if(this.task[ii] != null){
-					//キャンセルを通知。
-					this.canceltoken[ii].Cancel();
-					this.task[ii].Wait();
-					this.task[ii].Dispose();
-					this.task[ii] = null;
-				}
+			//list
+			for(int ii=0;ii<this.list.Length;ii++){
+				this.list[ii].Dispose();
 			}
 
+			//削除。
 			this.deleter.DeleteAll();
+
+			//ライブラリ停止。
+			DeleteLibInstance.DeleteAll();
 		}
 	}
 }

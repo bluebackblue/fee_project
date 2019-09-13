@@ -359,7 +359,7 @@ namespace TestScript
 			Fee.Render2D.Render2D.GetInstance().Main_Before();
 
 			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
+			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。
 			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
@@ -386,20 +386,6 @@ namespace TestScript
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
-		}
-
-		/** 削除前。
-		*/
-		public override bool PreDestroy(bool a_first)
-		{
-			return true;
-		}
-
-		/** OnDestroy
-		*/
-		private void OnDestroy()
-		{
-			this.deleter.DeleteAll();
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
@@ -463,6 +449,24 @@ namespace TestScript
 				}break;
 
 			}
+		}
+
+		/** 削除前。
+		*/
+		public override bool PreDestroy(bool a_first)
+		{
+			return true;
+		}
+
+		/** 削除。
+		*/
+		public override void Destroy()
+		{
+			//削除。
+			this.deleter.DeleteAll();
+
+			//ライブラリ停止。
+			DeleteLibInstance.DeleteAll();
 		}
 	}
 }

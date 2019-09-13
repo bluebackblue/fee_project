@@ -187,6 +187,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** bg
+		*/
+		private Fee.Render2D.Sprite2D bg;
+
 		/** Start
 		*/
 		private void Start()
@@ -236,6 +240,13 @@ namespace TestScript
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
+			//bg
+			this.bg = new Fee.Render2D.Sprite2D(this.deleter,0);
+			this.bg.SetTexture(UnityEngine.Texture2D.whiteTexture);
+			this.bg.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+			this.bg.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
+			this.bg.SetColor(0.0f,1.0f,1.0f,1.0f);
+
 			//シーンＡ。
 			Fee.Scene.Scene.GetInstance().SetNextScene(new SceneA());
 		}
@@ -252,11 +263,10 @@ namespace TestScript
 			Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 			//フェード。
-			Fee.Fade.Fade.GetInstance().Main_PreDraw();
 			Fee.Fade.Fade.GetInstance().Main();
 
 			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
+			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。
 			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
@@ -286,11 +296,15 @@ namespace TestScript
 			return true;
 		}
 
-		/** OnDestroy
+		/** 削除。
 		*/
-		private void OnDestroy()
+		public override void Destroy()
 		{
+			//削除。
 			this.deleter.DeleteAll();
+
+			//ライブラリ停止。
+			DeleteLibInstance.DeleteAll();
 		}
 	}
 }
