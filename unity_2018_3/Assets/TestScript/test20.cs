@@ -81,7 +81,7 @@ namespace TestScript
 				this.button.SetRect(t_x,t_y,t_w,t_h);
 
 				//text
-				this.text = new Fee.Render2D.Text2D(a_deleter,1);
+				this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(a_deleter,1);
 				this.text.SetRect(t_x + 100,t_y,0,0);
 				this.text.SetText("");
 			}

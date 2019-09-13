@@ -249,7 +249,7 @@ namespace TestScript
 			this.item = null;
 
 			//text
-			this.text = new Fee.Render2D.Text2D(this.deleter,0);
+			this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
 			this.text.SetRect(50,380,0,0);
 
 			//sprite

@@ -119,7 +119,7 @@ namespace TestScript
 				this.sprite.SetVisible(false);
 
 				//text
-				this.text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+				this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
 				this.text.SetRect(0,0,0,0);
 				this.text.SetClipRect(0,0,0,0);
 				this.text.SetText(this.create_id.ToString());
@@ -344,7 +344,7 @@ namespace TestScript
 			this.h_scrollview_create_id = 0;
 
 			//status_text
-			this.status_text = new Fee.Render2D.Text2D(this.deleter,0);
+			this.status_text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
 			this.status_text.SetText("");
 			this.status_text.SetRect(200,10,0,0);
 

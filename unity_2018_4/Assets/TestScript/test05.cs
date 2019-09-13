@@ -224,17 +224,17 @@ namespace TestScript
 			this.mouse_sprite.SetColor(1.0f,1.0f,1.0f,1.0f);
 
 			//キー。
-			this.key_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+			this.key_text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
 			this.key_text.SetRect(400,10,300,0);
 			this.key_text.SetFontSize(16);
 
 			//パッド。
-			this.pad_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+			this.pad_text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
 			this.pad_text.SetRect(570,10,300,0);
 			this.pad_text.SetFontSize(16);
 
 			//マウス。
-			this.mouse_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+			this.mouse_text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
 			this.mouse_text.SetRect(750,10,300,0);
 			this.mouse_text.SetFontSize(16);
 

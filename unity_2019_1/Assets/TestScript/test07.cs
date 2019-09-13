@@ -241,7 +241,7 @@ namespace TestScript
 			this.button_signature.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			//text
-			this.text = new Fee.Render2D.Text2D(this.deleter,0);
+			this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
 			this.text.SetRect(100,50,0,0);
 			this.text.SetText("---");
 

@@ -146,7 +146,7 @@ namespace TestScript
 					int t_x = 600;
 					int t_y = 10;
 		
-					this.inputfield = new Fee.Render2D.InputField2D(this.deleter,t_drawpriority);
+					this.inputfield = Fee.Render2D.Render2D.GetInstance().InputField2D_PoolNew(this.deleter,t_drawpriority);
 					this.inputfield.SetRect(t_x,t_y,t_w,t_h);
 					this.inputfield.SetText("defaultテキスト");
 					this.inputfield.SetMultiLine(true);
@@ -159,7 +159,7 @@ namespace TestScript
 					int t_x = 600 + 150;
 					int t_y = 10;
 
-					this.text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+					this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
 					this.text.SetRect(t_x,t_y,0,0);
 					this.text.SetText("abcあいうえおxyz");
 					this.text.SetColor(0.0f,0.0f,0.0f,1.0f);
@@ -250,7 +250,7 @@ namespace TestScript
 					#endif
 				}
 
-				this.status = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+				this.status = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
 				this.status.SetRect(10,100,0,0);
 				this.status.SetFontSize(15);
 				this.status.SetText(t_text);

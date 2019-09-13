@@ -424,7 +424,7 @@ namespace TestScript
 			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 
 			//status
-			this.status_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+			this.status_text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
 			this.status_text.SetRect(50,60,0,0);
 			this.status_text.SetFontSize(13);
 

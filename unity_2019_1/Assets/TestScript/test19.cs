@@ -106,7 +106,7 @@ namespace TestScript
 					this.eventplate.SetOnEventPlateOver<Fee.Perceptron.Node>(this,a_node);
 
 					//text
-					this.text = new Fee.Render2D.Text2D(a_deleter,1);
+					this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(a_deleter,1);
 					this.text.SetText("");
 					this.text.SetVisible(false);
 					this.text.SetRect(t_x + 20,t_y - 20,0,0);

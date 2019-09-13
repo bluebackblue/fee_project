@@ -118,7 +118,7 @@ namespace TestScript
 				}
 
 				//text
-				this.text = new Fee.Render2D.Text2D(this.deleter,0);
+				this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
 				this.text.SetRect(30,300,0,0);
 				this.text.SetText("---");
 

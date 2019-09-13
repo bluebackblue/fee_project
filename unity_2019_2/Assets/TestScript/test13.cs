@@ -97,7 +97,7 @@ namespace TestScript
 					this.sprite.SetRect(this.touch_phase.value_x-t_size/2,this.touch_phase.value_y-t_size/2,t_size,t_size);
 				}
 
-				this.text = new Fee.Render2D.Text2D(this.deleter,1);
+				this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,1);
 				{
 					this.text.SetRect(this.touch_phase.value_x,this.touch_phase.value_y,0,0);
 				}
@@ -197,7 +197,7 @@ namespace TestScript
 			this.bg.SetColor(0.0f,0.0f,0.0f,1.0f);
 
 			//キー。
-			this.touch_text = new Fee.Render2D.Text2D(this.deleter,t_drawpriority);
+			this.touch_text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
 			this.touch_text.SetRect(400,10,300,0);
 			this.touch_text.SetFontSize(17);
 			

@@ -93,7 +93,7 @@ namespace TestScript
 				}
 
 				//text
-				this.text = new Fee.Render2D.Text2D(a_deleter,2);
+				this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(a_deleter,2);
 				this.text.SetRect(0,0,0,0);
 				this.text.SetText(a_name);
 				this.text.SetClip(true);
@@ -228,7 +228,7 @@ namespace TestScript
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
-			this.text = new Fee.Render2D.Text2D(this.deleter,0);
+			this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
 			this.text.SetRect(100,100,0,0);
 			
 			this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,0,Fee.Ui.Scroll_Type.Vertical,Scroll_Item.GetItemLength());
