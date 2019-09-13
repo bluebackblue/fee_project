@@ -125,8 +125,8 @@ namespace TestScript
 			*/
 			public void OnRemove()
 			{
-				this.deleter.UnRegister(this.sprite);
-				this.deleter.UnRegister(this.text);
+				this.deleter.UnRegist(this.sprite);
+				this.deleter.UnRegist(this.text);
 
 				this.sprite.OnDelete();
 				this.text.OnDelete();
