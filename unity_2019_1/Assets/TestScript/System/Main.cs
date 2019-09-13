@@ -35,6 +35,10 @@ namespace TestScript
 		*/
 		private string loadscene_request;
 
+		/** lib
+		*/
+		private bool lib;
+
 		/** アプリ起動時。
 		*/
 		[UnityEngine.RuntimeInitializeOnLoadMethod]
@@ -60,6 +64,8 @@ namespace TestScript
 
 			//インスタンス作成。
 			{
+				this.lib = true;
+
 				//２Ｄ描画。
 				Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 				Fee.Render2D.Config.ReCalcWH();
@@ -139,31 +145,34 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_Before();
+			if(this.lib == true){
+				//２Ｄ描画。
+				Fee.Render2D.Render2D.GetInstance().Main_Before();
 
-			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
+				//マウス。
+				Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
 
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
+				//イベントプレート。
+				Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
 
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
+				//ＵＩ。
+				Fee.Ui.Ui.GetInstance().Main();
 
-			///ロードシーン。
-			if(this.loadscene_request != null){
-				this.deleter.DeleteAll();
+				///ロードシーン。
+				if(this.loadscene_request != null){
+					this.deleter.DeleteAll();
+				}
+
+				//２Ｄ描画。
+				Fee.Render2D.Render2D.GetInstance().Main_After();
 			}
-
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_After();
 
 			//ロードシーン。
 			if(this.loadscene_request != null){
 
 				//ライブラリ停止。
 				DeleteLibInstance.DeleteAll();
+				this.lib = false;
 
 				//ロードシーン。
 				UnityEngine.SceneManagement.SceneManager.LoadScene(this.loadscene_request);
@@ -174,9 +183,11 @@ namespace TestScript
 		*/
 		private void Update()
 		{
-			//２Ｄ描画。
-			if(Fee.Render2D.Render2D.IsCreateInstance() == true){
-				Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
+			if(this.lib == true){
+				//２Ｄ描画。
+				if(Fee.Render2D.Render2D.IsCreateInstance() == true){
+					Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
+				}
 			}
 		}
 
