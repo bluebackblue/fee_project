@@ -71,6 +71,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TestScene/test21.unity
     guid: 81868c2fc8835eb41879dbccc14bcb72
+  - enabled: 1
+    path: Assets/TestScene/test22.unity
+    guid: 791fd42c9fc270d43bd984b957b60c68
+  - enabled: 1
+    path: Assets/TestScene/test23.unity
+    guid: 13a0e1874ffa97b4ca7d74b4797420aa
+  - enabled: 1
+    path: Assets/TestScene/test24.unity
+    guid: 32f31e5bab3a4f8428ff4ca77610048a
+  - enabled: 1
+    path: Assets/TestScene/test25.unity
+    guid: 297619b83ac39074785a2d099137d744
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 5a0e2bb7cc4882b41bcb94bf553aaba2,
       type: 2}
