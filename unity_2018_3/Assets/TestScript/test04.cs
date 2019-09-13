@@ -623,7 +623,7 @@ namespace TestScript
 			Fee.File.File.GetInstance().Main();
 
 			//マウス。インスタンス作成。
-			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
+			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
 
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
@@ -700,11 +700,15 @@ namespace TestScript
 			return true;
 		}
 
-		/** OnDestroy
+		/** 削除。
 		*/
-		private void OnDestroy()
+		public override void Destroy()
 		{
+			//削除。
 			this.deleter.DeleteAll();
+
+			//ライブラリ停止。
+			DeleteLibInstance.DeleteAll();
 		}
 	}
 }

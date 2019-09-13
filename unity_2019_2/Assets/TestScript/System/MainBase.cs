@@ -21,7 +21,31 @@ namespace TestScript
 
 		/** 戻るボタン。
 		*/
-		Fee.Ui.Button return_button = null;
+		public Fee.Ui.Button return_button = null;
+
+		/** is_focus
+		*/
+		public bool is_focus;
+
+		/** アプリ終了時。
+		*/
+		void OnApplicationQuit()
+		{
+		}
+
+		/** アプリフォーカス変更時。
+		*/
+		void OnApplicationFocus(bool a_flag)
+		{
+			this.is_focus = a_flag;
+		}
+
+		/** constructor
+		*/
+		public MainBase()
+		{
+			this.is_focus = true;
+		}
 
 		/** 戻るボタン作成。
 		*/
@@ -58,6 +82,12 @@ namespace TestScript
 			return true;
 		}
 
+		/** 削除。
+		*/
+		public virtual void Destroy()
+		{
+		}
+
 		/** シーン切り替え。チェック。
 		*/
 		public bool IsChangeScene()
@@ -69,36 +99,43 @@ namespace TestScript
 		*/
 		public System.Collections.IEnumerator ChangeScene()
 		{
-			bool t_first = true;
-
-			while(this.PreDestroy(t_first) == false){
-				t_first = false;
-				yield return null;
+			//PreDestroyを呼び出す。
+			{
+				bool t_first = true;
+				while(this.PreDestroy(t_first) == false){
+					t_first = false;
+					yield return null;
+				}
 			}
 
 			bool t_ok = false;
 			while(t_ok == false){
 				t_ok = true;
 
+				//ファイル操作が終わるまで待つ。
 				if(Fee.File.File.IsCreateInstance() == true){
 					if(Fee.File.File.GetInstance().IsBusy() == true){
 						t_ok = false;
 					}
 				}
 
+				//通信が終わるまで待つ。
 				if(Fee.Network.Network.IsCreateInstance() == true){
 					if(Fee.Network.Network.GetInstance().IsBusy() == true){
 						t_ok = false;
 					}
 				}
 
-				if(t_ok == false){
-					yield return null;
-				}
+				yield return null;
 			}
 
+			//削除。
+			this.Destroy();
+
+			//テストを削除。
 			UnityEngine.GameObject.Destroy(this.gameObject);
 
+			//シーンをロード。
 			UnityEngine.SceneManagement.SceneManager.LoadScene("main");
 
 			yield break;

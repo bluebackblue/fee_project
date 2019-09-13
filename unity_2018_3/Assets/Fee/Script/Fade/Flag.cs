@@ -12,9 +12,9 @@
 */
 namespace Fee.Fade
 {
-	/** MonoBehaviour_Flag
+	/** Flag
 	*/
-	public class MonoBehaviour_Flag : UnityEngine.MonoBehaviour
+	public struct Flag
 	{
 		/** フラグ。
 		*/
@@ -35,26 +35,6 @@ namespace Fee.Fade
 		/** 速度。
 		*/
 		public float anime_speed;
-
-		/** constructor
-		*/
-		public MonoBehaviour_Flag()
-		{
-			//フラグ。
-			this.anime_now = false;
-
-			//現在の色。
-			this.anime_color = Config.DEFAULT_ANIME_COLOR;
-
-			//目的の色。
-			this.anime_color_to = Config.DEFAULT_ANIME_COLOR;
-
-			//変更チェック。
-			this.anime_color_to_old = Config.DEFAULT_ANIME_COLOR;
-
-			//速度。
-			this.anime_speed = Config.DEFAULT_ANIME_SPEED;
-		}
 
 		/** 初期化。
 		*/

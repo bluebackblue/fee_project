@@ -56,32 +56,7 @@ namespace TestScript
 		void Start()
 		{
 			//シーン列挙。
-			this.scene_list = new TestStatus[]{
-				test01.CreateStatus(),
-				test02.CreateStatus(),
-				test03.CreateStatus(),
-				test04.CreateStatus(),
-				test05.CreateStatus(),
-				test06.CreateStatus(),
-				test07.CreateStatus(),
-				test08.CreateStatus(),
-				test09.CreateStatus(),
-				test10.CreateStatus(),
-				test11.CreateStatus(),
-				test12.CreateStatus(),
-				test13.CreateStatus(),
-				test14.CreateStatus(),
-				test15.CreateStatus(),
-				test16.CreateStatus(),
-				test17.CreateStatus(),
-				test18.CreateStatus(),
-				test19.CreateStatus(),
-				test20.CreateStatus(),
-				test21.CreateStatus(),
-			};
-
-			//ライブラリ停止。
-			this.DeleteLibInstance();
+			this.scene_list = SceneList.CreateStatusList();
 
 			//インスタンス作成。
 			{
@@ -160,174 +135,6 @@ namespace TestScript
 			this.loadscene_request = null;
 		}
 
-		/** ライブラリ停止。
-		*/
-		public void DeleteLibInstance()
-		{
-			//アセット。
-			{
-			}
-
-			//アセットバンドル。
-			{
-				Fee.AssetBundleList.AssetBundleList.DeleteInstance();
-			}
-
-			//オーディオ。
-			{
-				Fee.Audio.Audio.DeleteInstance();
-			}
-
-			//ブルーム。
-			{
-				Fee.Bloom.Bloom.DeleteInstance();
-			}
-
-			//ブラー。
-			{
-				Fee.Blur.Blur.DeleteInstance();
-			}
-
-			//暗号。
-			{
-				Fee.Crypt.Crypt.DeleteInstance();
-			}
-
-			//データ。
-			{
-				Fee.Data.Data.DeleteInstance();
-			}
-
-			//削除管理。
-			{
-			}
-
-			//深度。
-			{
-				Fee.Depth.Depth.DeleteInstance();
-			}
-
-			//ダイクストラ法。
-			{
-			}
-
-			//ディレクトリ。
-			{
-			}
-
-			//エディターツール。
-			{
-			}
-
-			//イベントプレート。
-			{
-				Fee.EventPlate.EventPlate.DeleteInstance();
-			}
-
-			//エクセル。
-			{
-			}
-
-			//フェード。
-			{
-				Fee.Fade.Fade.DeleteInstance();
-			}
-
-			//ファイル。
-			{
-				Fee.File.File.DeleteInstance();
-			}
-
-			//関数呼び出し。
-			{
-				Fee.Function.Function.SetMonoBehaviour(null);
-			}
-
-			//入力。
-			{
-				//マウス。
-				Fee.Input.Mouse.DeleteInstance();
-	
-				//キー。
-				Fee.Input.Key.DeleteInstance();
-	
-				//パッド。
-				Fee.Input.Pad.DeleteInstance();
-			}
-
-			//インスタンス作成。
-			{
-			}
-
-			//ＪＳＯＮ。
-			{
-			}
-
-			//ＪＳＯＮシート。
-			{
-			}
-
-			//アセットバンドル作成。
-			{
-			}
-
-			//モデル。
-			{
-			}
-
-			//ネットワーク。
-			{
-				Fee.Network.Network.DeleteInstance();
-			}
-
-			//パフォーマンスカウンター。
-			{
-				Fee.PerformanceCounter.PerformanceCounter.DeleteInstance();
-			}
-
-			//プラットフォーム。
-			{
-			}
-
-			//プレイヤーループシステム。
-			{
-			}
-
-			//２Ｄ描画。
-			{
-				Fee.Render2D.Render2D.DeleteInstance();
-			}
-
-			//リスロー。
-			{
-			}
-
-			//シーン。
-			{
-				Fee.Scene.Scene.DeleteInstance();
-			}
-
-			//サウンドプール。
-			{
-				Fee.SoundPool.SoundPool.DeleteInstance();
-			}
-
-			//タスク。
-			{
-				Fee.TaskW.TaskW.DeleteInstance();
-			}
-
-			//ＵＩ。
-			{
-				Fee.Ui.Ui.DeleteInstance();
-			}
-
-			//ＵＮＩＶＲＭ。
-			{
-				Fee.UniVrm.UniVrm.DeleteInstance();
-			}
-		}
-
 		/** 更新。
 		*/
 		private void FixedUpdate()
@@ -356,7 +163,7 @@ namespace TestScript
 			if(this.loadscene_request != null){
 
 				//ライブラリ停止。
-				this.DeleteLibInstance();
+				DeleteLibInstance.DeleteAll();
 
 				//ロードシーン。
 				UnityEngine.SceneManagement.SceneManager.LoadScene(this.loadscene_request);
@@ -386,67 +193,6 @@ namespace TestScript
 		{
 			this.text.SetText(this.scene_list[a_id].detailtext);
 		}
-
-		/** [メニュー]シーンリスト初期化。
-		*/
-		#if(UNITY_EDITOR)
-		[UnityEditor.MenuItem("Fee/Test/Initialize/EditSceneList")]
-		private static void MenuItem_EditSceneList()
-		{
-			System.Collections.Generic.List<UnityEditor.EditorBuildSettingsScene> t_scene_list = new System.Collections.Generic.List<UnityEditor.EditorBuildSettingsScene>();
-
-			System.Collections.Generic.List<string> t_file_list = Fee.EditorTool.Utility.GetFileNameList("TestScene/");
-
-			//main.unity
-			t_scene_list.Add(new UnityEditor.EditorBuildSettingsScene("Assets/TestScene/main.unity",true));
-
-			//testxx.unity
-			for(int ii=0;ii<t_file_list.Count;ii++){
-				if(t_file_list[ii] == "main.unity"){
-				}else if(t_file_list[ii].EndsWith(".unity") == true){
-					t_scene_list.Add(new UnityEditor.EditorBuildSettingsScene("Assets/TestScene/" + t_file_list[ii],true));
-				}
-			}
-
-			UnityEditor.EditorBuildSettings.scenes = t_scene_list.ToArray();
-		}
-		#endif
-
-		/** [メニュー]パッケージ。作成。
-		*/
-		#if(UNITY_EDITOR)
-		[UnityEditor.MenuItem("Fee/Test/BuildThirdPartyPackage")]
-		private static void MenuItem_BuildThirdPartyPackage()
-		{
-			BuildThirdPartyPackage();
-		}
-		#endif
-
-		/** パッケージ。作成。
-		*/
-		#if(UNITY_EDITOR)
-		private static void BuildThirdPartyPackage()
-		{
-			//サブディレクトリの再帰探査。
-			UnityEditor.ExportPackageOptions t_options = UnityEditor.ExportPackageOptions.Recurse;
-
-			//非同期実行。
-			t_options |= UnityEditor.ExportPackageOptions.Interactive;
-
-			//出力。
-			System.Collections.Generic.List<string> t_directoryname_list = Fee.EditorTool.Utility.GetDirectoryNameList("ThirdParty/");
-			for(int ii=0;ii<t_directoryname_list.Count;ii++){
-				string t_filename = t_directoryname_list[ii] + ".unitypackage";
-				string t_path = "Assets/ThirdParty/" + t_directoryname_list[ii];
-
-				if(Fee.EditorTool.Utility.IsExistFile(new Fee.File.Path(t_filename)) == false){
-					UnityEditor.AssetDatabase.ExportPackage(t_path,t_filename,t_options);
-				}else{
-					UnityEngine.Debug.Log("Exist : " + t_filename);
-				}
-			}
-		}
-		#endif
 	}
 }
 
