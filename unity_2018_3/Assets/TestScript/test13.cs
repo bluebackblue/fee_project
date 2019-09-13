@@ -87,7 +87,7 @@ namespace TestScript
 				this.deleter = a_deleter;
 				this.touch_phase = a_touch_phase;
 
-				this.sprite = new Fee.Render2D.Sprite2D(this.deleter,1);
+				this.sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,1);
 				{
 					int t_size = 100;
 
@@ -189,7 +189,7 @@ namespace TestScript
 			//背景。
 			int t_layerindex = 0;
 			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
-			this.bg = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
+			this.bg = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,t_drawpriority);
 			this.bg.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.bg.SetTexture(Texture2D.whiteTexture);
 			this.bg.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);

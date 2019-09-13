@@ -208,7 +208,7 @@ namespace TestScript
 			//背景。
 			int t_layerindex = 0;
 			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
-			this.bg = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
+			this.bg = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,t_drawpriority);
 			this.bg.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.bg.SetTexture(Texture2D.whiteTexture);
 			this.bg.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
@@ -217,7 +217,7 @@ namespace TestScript
 
 
 			//マウス。
-			this.mouse_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority + 1);
+			this.mouse_sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,t_drawpriority + 1);
 			this.mouse_sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 			this.mouse_sprite.SetTexture(Texture2D.whiteTexture);
 			this.mouse_sprite.SetRect(0,0,10,10);

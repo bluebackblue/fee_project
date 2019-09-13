@@ -48,9 +48,9 @@ namespace TestScript
 		*/
 		private bool update_clip_rect;
 
-		/** clipsprite
+		/** sprite
 		*/
-		private Fee.Ui.ClipSprite clipsprite;
+		private Fee.Ui.Sprite2D_Clip sprite;
 
 		/** text
 		*/
@@ -124,16 +124,16 @@ namespace TestScript
 			int t_layerindex = 0;
 			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 
-			//clipsprite
+			//sprite
 			{
 				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.TEXTURE_SKYIMAGE);
 
-				this.clipsprite = new Fee.Ui.ClipSprite(this.deleter,t_drawpriority + 1);
-				this.clipsprite.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
-				this.clipsprite.SetTexture(Texture2D.whiteTexture);
-				this.clipsprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
-				this.clipsprite.SetColor(0.7f,0.7f,0.7f,1.0f);
-				this.clipsprite.SetTexture(t_texture);
+				this.sprite = new Fee.Ui.Sprite2D_Clip(this.deleter,t_drawpriority + 1);
+				this.sprite.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
+				this.sprite.SetTexture(Texture2D.whiteTexture);
+				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+				this.sprite.SetColor(0.7f,0.7f,0.7f,1.0f);
+				this.sprite.SetTexture(t_texture);
 			}
 
 			//text
@@ -233,7 +233,7 @@ namespace TestScript
 
 			//is_clip
 			{
-				this.clipsprite.SetClip(this.is_clip);
+				this.sprite.SetClip(this.is_clip);
 				this.text.SetClip(this.is_clip);
 				this.button.SetClip(this.is_clip);
 				this.checkbutton.SetClip(this.is_clip);
@@ -264,7 +264,7 @@ namespace TestScript
 			if(Fee.Input.Key.GetInstance().enter.down == true){
 				this.is_clip = !this.is_clip;
 
-				this.clipsprite.SetClip(this.is_clip);
+				this.sprite.SetClip(this.is_clip);
 				this.text.SetClip(this.is_clip);
 				this.button.SetClip(this.is_clip);
 				this.checkbutton.SetClip(this.is_clip);
@@ -285,7 +285,7 @@ namespace TestScript
 					t_cliprect.y = Fee.Input.Mouse.GetInstance().cursor.pos.y - t_cliprect.h / 2;
 				}
 
-				this.clipsprite.SetClipRect(in t_cliprect);
+				this.sprite.SetClipRect(in t_cliprect);
 				this.text.SetClipRect(in t_cliprect);
 				this.button.SetClipRect(in t_cliprect);
 				this.checkbutton.SetClipRect(in t_cliprect);

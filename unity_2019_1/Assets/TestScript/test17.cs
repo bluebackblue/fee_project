@@ -66,7 +66,7 @@ namespace TestScript
 
 			/** sprite
 			*/
-			private Fee.Ui.ClipSprite sprite;
+			private Fee.Ui.Sprite2D_Clip sprite;
 
 			/** text
 			*/
@@ -110,7 +110,7 @@ namespace TestScript
 				long t_drawpriority = 1;
 
 				//sprite
-				this.sprite = new Fee.Ui.ClipSprite(this.deleter,t_drawpriority);
+				this.sprite = new Fee.Ui.Sprite2D_Clip(this.deleter,t_drawpriority);
 				this.sprite.SetTexture(Texture2D.whiteTexture);
 				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetClipRect(0,0,0,0);

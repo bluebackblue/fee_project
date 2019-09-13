@@ -140,7 +140,7 @@ namespace TestScript
 			this.text.SetRect(50,100,0,0);
 
 			//sprite
-			this.sprite = new Fee.Render2D.Sprite2D(this.deleter,0);
+			this.sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,0);
 			this.sprite.SetRect(50,150,100,100);
 			this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 

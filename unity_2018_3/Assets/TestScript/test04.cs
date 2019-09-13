@@ -429,12 +429,12 @@ namespace TestScript
 			this.status_text.SetFontSize(13);
 
 			//result_sprite
-			this.result_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
+			this.result_sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,t_drawpriority);
 			this.result_sprite.SetRect(400,30,64,64);
 			this.result_sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 
 			//progress_sprite
-			this.progress_sprite = new Fee.Render2D.Sprite2D(this.deleter,t_drawpriority);
+			this.progress_sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,t_drawpriority);
 			this.progress_sprite.SetTexture(Texture2D.whiteTexture);
 			this.progress_sprite.SetRect(50,90,300,10);
 
