@@ -99,7 +99,7 @@ namespace TestScript
 		*/
 		public System.Collections.IEnumerator ChangeScene()
 		{
-			//PreDestroyを呼び出す。
+			//テストクラスのPreDestroyを呼び出す。
 			{
 				bool t_first = true;
 				while(this.PreDestroy(t_first) == false){
@@ -129,11 +129,11 @@ namespace TestScript
 				yield return null;
 			}
 
-			//削除。
+			//テストクラスのDestroyを呼び出す。
 			this.Destroy();
 
-			//テストを削除。
-			UnityEngine.GameObject.Destroy(this.gameObject);
+			//テストクラスを削除。
+			UnityEngine.GameObject.DestroyImmediate(this.gameObject);
 
 			//シーンをロード。
 			UnityEngine.SceneManagement.SceneManager.LoadScene("main");

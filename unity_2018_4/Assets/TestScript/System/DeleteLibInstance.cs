@@ -4,7 +4,7 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief データ。
+ * @brief ライブラリインスタンス削除。
 */
 
 
@@ -16,7 +16,7 @@ namespace TestScript
 	*/
 	public class DeleteLibInstance
 	{
-		/** ライブラリ停止。
+		/** 全部削除。
 		*/
 		public static void DeleteAll()
 		{
