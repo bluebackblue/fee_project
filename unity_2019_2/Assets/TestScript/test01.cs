@@ -69,6 +69,10 @@ namespace TestScript
 		private Fee.Ui.Button button_logerror;
 		private Fee.Ui.Button button_assert;
 
+		/** ライン。
+		*/
+		private Fee.Ui.Line line;
+
 		/** ButtonId
 		*/
 		public enum ButtonId
@@ -305,7 +309,10 @@ namespace TestScript
 				this.button_assert.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_assert.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.button_assert.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
+			}
 
+			{
+				this.line = new Fee.Ui.Line(this.deleter,t_drawpriority + 1);
 			}
 		}
 
@@ -344,6 +351,12 @@ namespace TestScript
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
+
+			{
+				this.line.SetRect(new Fee.Geometry.Rect2D_A<int>(Fee.Render2D.Config.VIRTUAL_W / 2,Fee.Render2D.Config.VIRTUAL_H / 2,Fee.Input.Mouse.GetInstance().cursor.pos.x,Fee.Input.Mouse.GetInstance().cursor.pos.y));
+			}
+
+
 
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_After();

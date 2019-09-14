@@ -47,7 +47,7 @@ namespace TestScript
 		/** backpropagation_button
 		*/
 		private Fee.Ui.Button backpropagation_button;
-		//private bool backpropagation_flag;
+		private bool backpropagation_flag;
 
 		/** ButtonID
 		*/
@@ -77,14 +77,24 @@ namespace TestScript
 			*/
 			Fee.Render2D.Text2D text;
 
+			/** line
+			*/
+			Fee.Ui.Line[] line;
+
 			/** constructor
 			*/
-			public Item(Fee.Deleter.Deleter a_deleter,int a_x,int a_y,Fee.Perceptron.Node a_node)
+			public Item(Fee.Deleter.Deleter a_deleter,int a_layer_index,int a_node_index,Fee.Perceptron.Node a_node)
 			{
+				int t_size = 30;
+				int t_offset_x = 100;
+				int t_offset_y = 100;
+				int t_alignment_x = 100;
+				int t_alignment_y = 60;
+
 				{
-					int t_x = 100 + 50 * a_x;
-					int t_y = 100 + 50 * a_y;
-					int t_size = 30;
+					int t_x = t_offset_x + t_alignment_x * a_layer_index;
+					int t_y = t_offset_y + t_alignment_y * a_node_index;
+					
 
 					//sprite_bg
 					this.sprite_bg = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(a_deleter,1);
@@ -111,6 +121,16 @@ namespace TestScript
 					this.text.SetVisible(false);
 					this.text.SetRect(t_x + 20,t_y - 20,0,0);
 					this.text.SetColor(1.0f,0.2f,0.2f,1.0f);
+
+					//line
+					this.line = new Fee.Ui.Line[a_node.link_list.Count];
+					for(int ii=0;ii<a_node.link_list.Count;ii++){
+						this.line[ii] = new Fee.Ui.Line(a_deleter,3);
+						this.line[ii].SetSize(2);
+						int t_x_to = t_offset_x + t_alignment_x * a_node.link_list[ii].node_to.layer_parent.layer_index;
+						int t_y_to = t_offset_y + t_alignment_y * a_node.link_list[ii].node_to.node_index;
+						this.line[ii].SetRect(new Fee.Geometry.Rect2D_A<int>(t_x + t_size / 2,t_y + t_size / 2,t_x_to + t_size / 2,t_y_to + t_size / 2));
+					}
 				}
 
 				//node
@@ -123,6 +143,17 @@ namespace TestScript
 			{
 				float t_color = this.node.value;
 				this.sprite.SetColor(t_color,t_color,t_color,1.0f);
+
+				for(int ii=0;ii<this.node.link_list.Count;ii++){
+					int t_size = (int)UnityEngine.Mathf.Abs(this.node.link_list[ii].weight);
+					this.line[ii].SetSize(t_size);
+
+					if(this.node.link_list[ii].weight > 0.0f){
+						this.line[ii].SetColor(1.0f,0.0f,0.0f,1.0f);
+					}else{
+						this.line[ii].SetColor(0.0f,0.0f,1.0f,1.0f);
+					}
+				}
 
 				if(this.node.is_bias == true){
 					this.sprite_bg.SetColor(0.0f,1.0f,0.0f,1.0f);
@@ -143,7 +174,7 @@ namespace TestScript
 					this.text.SetVisible(true);
 
 					//stringbuilder
-					System.Text.StringBuilder t_stringbuilder =  new System.Text.StringBuilder();
+					System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder(64);
 
 					t_stringbuilder.Append("value : " + this.node.value.ToString() + "\n");
 					t_stringbuilder.Append("error : " + this.node.error.ToString() + "\n");
@@ -223,7 +254,7 @@ namespace TestScript
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//パーセプトロン。
-			this.perceptron = new Fee.Perceptron.Perceptron(2,2,0,1);
+			this.perceptron = new Fee.Perceptron.Perceptron(4,4,0,2);
 
 			//backpropagation
 			{
@@ -250,24 +281,29 @@ namespace TestScript
 				this.backpropagation_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				//backpropagation_flag
-				//this.backpropagation_flag = false;
+				this.backpropagation_flag = false;
 			}
 
 			//表示。
 			this.list = new List<Item>();
 			
 			//計算レイヤー。
-			for(int xx=0;xx<this.perceptron.layer_list.Count;xx++){
-				for(int yy=0;yy<this.perceptron.layer_list[xx].node_list.Count;yy++){
-					Fee.Perceptron.Node t_node = this.perceptron.layer_list[xx].node_list[yy];
+			for(int t_layerindex=0;t_layerindex<this.perceptron.layer_list.Count;t_layerindex++){
+				for(int t_node_index=0;t_node_index<this.perceptron.layer_list[t_layerindex].node_list.Count;t_node_index++){
+					Fee.Perceptron.Node t_node = this.perceptron.layer_list[t_layerindex].node_list[t_node_index];
 
 					//乱数初期化。
 					for(int ll=0;ll<t_node.link_list.Count;ll++){
-						t_node.link_list[ll].weight = UnityEngine.Random.Range(-1.0f,1.0f);
+						if(t_node.link_list[ll].node_to.is_bias == true){
+							//接続先がバイアス。
+							t_node.link_list[ll].weight = 0.0f;
+						}else{
+							t_node.link_list[ll].weight = UnityEngine.Random.Range(-1.0f,1.0f);
+						}
 					}
 
 					//表示アイテム。
-					this.list.Add(new Item(this.deleter,xx,yy,t_node));
+					this.list.Add(new Item(this.deleter,t_layerindex,t_node_index,t_node));
 				}
 			}
 
@@ -296,8 +332,58 @@ namespace TestScript
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
 
-			//パーセプトロン。順方向計算。
-			this.perceptron.ForwardCalculation();
+			if(this.backpropagation_flag == true){
+
+				//パーセプトロン。学習。
+				for(int t_loop=0;t_loop<50;t_loop++){
+					float t_in_1 = 0.0f;
+					float t_in_2 = 0.0f;
+					float t_teacher = 0.0f;
+
+					switch(UnityEngine.Random.Range(0,4)){
+					case 0:
+						{
+							t_in_1 = 0.0f;
+							t_in_2 = 0.0f;
+							t_teacher = 0.0f;
+						}break;
+					case 1:
+						{
+							t_in_1 = 0.0f;
+							t_in_2 = 1.0f;
+							t_teacher = 1.0f;
+						}break;
+					case 2:
+						{
+							t_in_1 = 1.0f;
+							t_in_2 = 0.0f;
+							t_teacher = 1.0f;
+						}break;
+					case 3:
+						{
+							t_in_1 = 1.0f;
+							t_in_2 = 1.0f;
+							t_teacher = 0.0f;
+						}break;
+					}
+
+					this.perceptron.layer_list[0].node_list[0].value = t_in_1;
+					this.perceptron.layer_list[0].node_list[1].value = t_in_1;
+					this.perceptron.layer_list[0].node_list[2].value = t_in_2;
+					this.perceptron.layer_list[0].node_list[3].value = t_in_2;
+					this.perceptron.layer_teacher.node_list[0].value = t_teacher;
+					this.perceptron.layer_teacher.node_list[1].value = t_teacher;
+
+					//計算。
+					this.perceptron.ForwardCalculation();
+
+					//学習。
+					this.perceptron.BackPropagation();
+				}
+			}else{
+				//パーセプトロン。順方向計算。
+				this.perceptron.ForwardCalculation();
+			}
 
 			//表示更新。
 			for(int ii=0;ii<this.list.Count;ii++){
@@ -320,45 +406,19 @@ namespace TestScript
 		*/
 		public void OnButtonClick(ButtonID a_id)
 		{
-			//XOR。
-			for(int t_loop=0;t_loop<100000;t_loop++){
-				switch(UnityEngine.Random.Range(0,4)){
-				case 0:
-					{
-						this.perceptron.layer_list[0].node_list[0].value = 0.0f;
-						this.perceptron.layer_list[0].node_list[1].value = 0.0f;
-						this.perceptron.layer_teacher.node_list[0].value = 0.0f;
-					}break;
-				case 1:
-					{
-						this.perceptron.layer_list[0].node_list[0].value = 0.0f;
-						this.perceptron.layer_list[0].node_list[1].value = 1.0f;
-						this.perceptron.layer_teacher.node_list[0].value = 1.0f;
-					}break;
-				case 2:
-					{
-						this.perceptron.layer_list[0].node_list[0].value = 1.0f;
-						this.perceptron.layer_list[0].node_list[1].value = 0.0f;
-						this.perceptron.layer_teacher.node_list[0].value = 1.0f;
-					}break;
-				case 3:
-					{
-						this.perceptron.layer_list[0].node_list[0].value = 1.0f;
-						this.perceptron.layer_list[0].node_list[1].value = 1.0f;
-						this.perceptron.layer_teacher.node_list[0].value = 0.0f;
-					}break;
-				}
+			this.backpropagation_flag ^= true;
 
-				//計算。
-				this.perceptron.ForwardCalculation();
-
-				//学習。
-				this.perceptron.BackPropagation();
+			if(this.backpropagation_flag == true){
+				this.backpropagation_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON_ACTIVE));
+				this.backpropagation_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON_ACTIVE));
+				this.backpropagation_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON_ACTIVE));
+				this.backpropagation_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON_ACTIVE));
+			}else{
+				this.backpropagation_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.backpropagation_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.backpropagation_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.backpropagation_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
 			}
-
-			this.perceptron.layer_list[0].node_list[0].value = 1.0f;
-			this.perceptron.layer_list[0].node_list[1].value = 1.0f;
-			this.perceptron.layer_teacher.node_list[0].value = 0.0f;
 		}
 
 		/** 削除前。
