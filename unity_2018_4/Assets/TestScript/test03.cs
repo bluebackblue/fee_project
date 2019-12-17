@@ -114,7 +114,7 @@ namespace TestScript
 				long t_drawpriority = 0;
 
 				//title
-				this.title = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
+				this.title = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
 				this.title.SetRect(0,0,0,0);
 				this.title.SetText(a_label);
 

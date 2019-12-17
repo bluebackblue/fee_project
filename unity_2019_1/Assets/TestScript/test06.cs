@@ -241,7 +241,7 @@ namespace TestScript
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//bg
-			this.bg = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,0);
+			this.bg = Fee.Render2D.Sprite2D.Create(this.deleter,0);
 			this.bg.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.bg.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			this.bg.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);

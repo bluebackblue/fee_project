@@ -134,7 +134,7 @@ namespace TestScript
 
 			{
 				//スプライト。
-				this.sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,t_drawpriority);
+				this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
 				this.sprite.SetTexture(Texture2D.whiteTexture);
 				this.sprite.SetTextureRect(0,0,Fee.Render2D.Render2D.TEXTURE_W,Fee.Render2D.Render2D.TEXTURE_H);
 				this.sprite.SetRect(0,0,Fee.Render2D.Render2D.VIRTUAL_W,Fee.Render2D.Render2D.VIRTUAL_H);
@@ -150,7 +150,7 @@ namespace TestScript
 					int t_x = 600;
 					int t_y = 10;
 		
-					this.inputfield = Fee.Render2D.Render2D.GetInstance().InputField2D_PoolNew(this.deleter,t_drawpriority);
+					this.inputfield = Fee.Render2D.InputField2D.Create(this.deleter,t_drawpriority);
 					this.inputfield.SetRect(t_x,t_y,t_w,t_h);
 					this.inputfield.SetText("defaultテキスト");
 					this.inputfield.SetMultiLine(true);
@@ -163,7 +163,7 @@ namespace TestScript
 					int t_x = 600 + 150;
 					int t_y = 10;
 
-					this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
+					this.text = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
 					this.text.SetRect(t_x,t_y,0,0);
 					this.text.SetText("abcあいうえおxyz");
 					this.text.SetColor(0.0f,0.0f,0.0f,1.0f);
@@ -254,7 +254,7 @@ namespace TestScript
 					#endif
 				}
 
-				this.status = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
+				this.status = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
 				this.status.SetRect(10,100,0,0);
 				this.status.SetFontSize(15);
 				this.status.SetText(t_text);

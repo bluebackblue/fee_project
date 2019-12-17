@@ -346,6 +346,13 @@ namespace TestScript
 				this.button.SetClipRect(in a_rect);
 			}
 
+			/** [Fee.Ui.ScrollItem_Base]描画プライオリティ。設定。
+			*/
+			public override void SetDrawPriority(long a_drawpriority)
+			{
+				this.button.SetDrawPriority(a_drawpriority + 1);
+			}
+
 			/** [Fee.Ui.ScrollItem_Base]表示内。
 			*/
 			public override void OnViewIn()
@@ -424,17 +431,17 @@ namespace TestScript
 			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 
 			//status
-			this.status_text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
+			this.status_text = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
 			this.status_text.SetRect(50,60,0,0);
 			this.status_text.SetFontSize(13);
 
 			//result_sprite
-			this.result_sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,t_drawpriority);
+			this.result_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
 			this.result_sprite.SetRect(400,30,64,64);
 			this.result_sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 
 			//progress_sprite
-			this.progress_sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,t_drawpriority);
+			this.progress_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
 			this.progress_sprite.SetTexture(Texture2D.whiteTexture);
 			this.progress_sprite.SetRect(50,90,300,10);
 

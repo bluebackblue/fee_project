@@ -416,7 +416,7 @@ namespace TestScript
 
 			//ステータス。
 			{
-				this.status = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
+				this.status = Fee.Render2D.Text2D.Create(this.deleter,0);
 				this.status.SetRect(100,200,0,0);
 				this.status.SetText("");
 			}

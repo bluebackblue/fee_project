@@ -180,7 +180,7 @@ namespace TestScript
 				int t_x = 100;
 				int t_y = 100;
 
-				this.status_text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
+				this.status_text = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
 				this.status_text.SetRect(t_x,t_y,0,0);
 				this.status_text.SetText("");
 			}
@@ -192,7 +192,7 @@ namespace TestScript
 
 				this.player_text = new Fee.Render2D.Text2D[8];
 				for(int ii=0;ii<player_text.Length;ii++){
-					this.player_text[ii] = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
+					this.player_text[ii] = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
 					this.player_text[ii].SetRect(t_x,t_y + 35*ii,0,0);
 				}
 			}

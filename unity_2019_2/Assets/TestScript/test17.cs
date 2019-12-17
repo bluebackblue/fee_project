@@ -119,7 +119,7 @@ namespace TestScript
 				this.sprite.SetVisible(false);
 
 				//text
-				this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority);
+				this.text = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
 				this.text.SetRect(0,0,0,0);
 				this.text.SetClipRect(0,0,0,0);
 				this.text.SetText(this.create_id.ToString());
@@ -200,6 +200,15 @@ namespace TestScript
 				this.sprite.SetClipRect(in a_rect);
 				this.text.SetClipRect(in a_rect);
 				this.button.SetClipRect(in a_rect);
+			}
+
+			/** [Fee.Ui.ScrollItem_Base]描画プライオリティ。設定。
+			*/
+			public override void SetDrawPriority(long a_drawpriority)
+			{
+				this.sprite.SetDrawPriority(a_drawpriority + 1);
+				this.text.SetDrawPriority(a_drawpriority + 1);
+				this.button.SetDrawPriority(a_drawpriority + 1);
 			}
 
 			/** [ScrollItem_Base]表示内。
@@ -344,7 +353,7 @@ namespace TestScript
 			this.h_scrollview_create_id = 0;
 
 			//status_text
-			this.status_text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
+			this.status_text = Fee.Render2D.Text2D.Create(this.deleter,0);
 			this.status_text.SetText("");
 			this.status_text.SetRect(200,10,0,0);
 

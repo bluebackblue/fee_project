@@ -223,7 +223,7 @@ namespace TestScript
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//status_text
-			this.status_text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
+			this.status_text = Fee.Render2D.Text2D.Create(this.deleter,0);
 			this.status_text.SetRect(70,50,0,0);
 
 			//マップ。
@@ -243,7 +243,7 @@ namespace TestScript
 			//cursor
 			this.cursor_x = 0;
 			this.cursor_y = 0;
-			this.cursor_sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,10);
+			this.cursor_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,10);
 			this.cursor_sprite.SetRect(0,0,0,0);
 			this.cursor_sprite.SetColor(0.5f,0.5f,0.5f,0.5f);
 			this.cursor_sprite.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
@@ -257,7 +257,7 @@ namespace TestScript
 				int t_tip_y = ii / this.map_w;
 
 				//スプライト。
-				this.sprite_map[ii] = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,0);
+				this.sprite_map[ii] = Fee.Render2D.Sprite2D.Create(this.deleter,0);
 				this.sprite_map[ii].SetRect(this.map_x + t_tip_x * this.map_tip_w,this.map_y + t_tip_y * this.map_tip_h,this.map_tip_w-1,this.map_tip_h-1);
 
 				//ダイクストラ法、ノード作成。

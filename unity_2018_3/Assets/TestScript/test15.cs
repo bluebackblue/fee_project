@@ -141,7 +141,7 @@ namespace TestScript
 				int t_x = Fee.Render2D.Render2D.VIRTUAL_W / 2;
 				int t_y = 100;
 
-				this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,t_drawpriority + 1);
+				this.text = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority + 1);
 				this.text.SetRect(t_x,t_y,0,0);
 				this.text.SetText("ESC ENTER");
 				this.text.SetAlignmentType(Fee.Render2D.Text2D_HorizontalAlignmentType.Center,Fee.Render2D.Text2D_VerticalAlignmentType.Middle);
@@ -201,7 +201,7 @@ namespace TestScript
 				int t_x = 100;
 				int t_y = 100;
 
-				this.inputfield = Fee.Render2D.Render2D.GetInstance().InputField2D_PoolNew(this.deleter,t_drawpriority + 2);
+				this.inputfield = Fee.Render2D.InputField2D.Create(this.deleter,t_drawpriority + 2);
 				this.inputfield.SetRect(t_x,t_y,t_w,t_h);
 				this.inputfield.SetTextColor(1.0f,0.0f,0.0f,1.0f);
 			}

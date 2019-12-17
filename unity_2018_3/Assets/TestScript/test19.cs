@@ -97,14 +97,14 @@ namespace TestScript
 					
 
 					//sprite_bg
-					this.sprite_bg = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(a_deleter,1);
+					this.sprite_bg = Fee.Render2D.Sprite2D.Create(a_deleter,1);
 					this.sprite_bg.SetTexture(UnityEngine.Texture2D.whiteTexture);
 					this.sprite_bg.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 					this.sprite_bg.SetRect(t_x,t_y,t_size,t_size);
 					this.sprite_bg.SetColor(1.0f,1.0f,1.0f,1.0f);
 
 					//sprite
-					this.sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(a_deleter,2);
+					this.sprite = Fee.Render2D.Sprite2D.Create(a_deleter,2);
 					this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 					this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 					this.sprite.SetRect(t_x + 2,t_y + 2,t_size - 4,t_size - 4);
@@ -116,7 +116,7 @@ namespace TestScript
 					this.eventplate.SetOnEventPlateOver<Fee.Perceptron.Node>(this,a_node);
 
 					//text
-					this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(a_deleter,1);
+					this.text = Fee.Render2D.Text2D.Create(a_deleter,1);
 					this.text.SetText("");
 					this.text.SetVisible(false);
 					this.text.SetRect(t_x + 20,t_y - 20,0,0);

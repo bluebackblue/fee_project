@@ -196,13 +196,13 @@ namespace TestScript
 			this.soundpool_loaditem = null;
 
 			///ステータス。
-			this.status = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
+			this.status = Fee.Render2D.Text2D.Create(this.deleter,0);
 			this.status.SetRect(100,50,Fee.Render2D.Config.VIRTUAL_W - 100,200);
 			this.status.SetText("-");
 			this.status.SetFontSize(13);
 
 			//ステータス。
-			this.status_2 = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
+			this.status_2 = Fee.Render2D.Text2D.Create(this.deleter,0);
 			this.status_2.SetRect(100,100,0,0);
 			this.status_2.SetText("-");
 			this.status.SetFontSize(13);

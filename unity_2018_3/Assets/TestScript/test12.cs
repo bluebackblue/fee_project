@@ -146,6 +146,13 @@ namespace TestScript
 				this.button.SetClipRect(in a_rect);
 			}
 
+			/** [Fee.Ui.ScrollItem_Base]描画プライオリティ。設定。
+			*/
+			public override void SetDrawPriority(long a_drawpriority)
+			{
+				this.button.SetDrawPriority(a_drawpriority + 1);
+			}
+
 			/** [Fee.Ui.ScrollItem_Base]表示内。
 			*/
 			public override void OnViewIn()
@@ -249,11 +256,11 @@ namespace TestScript
 			this.item = null;
 
 			//text
-			this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
+			this.text = Fee.Render2D.Text2D.Create(this.deleter,0);
 			this.text.SetRect(50,380,0,0);
 
 			//sprite
-			this.sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,0);
+			this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,0);
 			this.sprite.SetRect(50,400,100,100);
 			this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			this.sprite.SetTexture(Texture2D.whiteTexture);

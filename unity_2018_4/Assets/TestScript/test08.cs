@@ -93,7 +93,7 @@ namespace TestScript
 				}
 
 				//text
-				this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(a_deleter,2);
+				this.text = Fee.Render2D.Text2D.Create(a_deleter,2);
 				this.text.SetRect(0,0,0,0);
 				this.text.SetText(a_name);
 				this.text.SetClip(true);
@@ -153,6 +153,16 @@ namespace TestScript
 				this.text.SetClipRect(in a_rect);
 				if(this.button != null){
 					this.button.SetClipRect(in a_rect);
+				}
+			}
+
+			/** [Fee.Ui.ScrollItem_Base]描画プライオリティ。設定。
+			*/
+			public override void SetDrawPriority(long a_drawpriority)
+			{
+				this.text.SetDrawPriority(a_drawpriority + 1);
+				if(this.button != null){
+					this.button.SetDrawPriority(a_drawpriority + 1);
 				}
 			}
 
@@ -228,7 +238,7 @@ namespace TestScript
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
-			this.text = Fee.Render2D.Render2D.GetInstance().Text2D_PoolNew(this.deleter,0);
+			this.text = Fee.Render2D.Text2D.Create(this.deleter,0);
 			this.text.SetRect(100,100,0,0);
 			
 			this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,0,Fee.Ui.Scroll_Type.Vertical,Scroll_Item.GetItemLength());

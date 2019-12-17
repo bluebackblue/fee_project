@@ -193,7 +193,7 @@ namespace TestScript
 
 				int t_layerindex = 0;
 				long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
-				this.sprite = Fee.Render2D.Render2D.GetInstance().Sprite2D_PoolNew(this.deleter,t_drawpriority);
+				this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
 				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetRect(t_x,t_y,t_w,t_h);
 				this.sprite.SetTexture(Resources.Load<Texture2D>(Data.Resources.TEXTURE_SKYIMAGE));
