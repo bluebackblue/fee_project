@@ -36,7 +36,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OpenFileDialog.cs" />
+    <Compile Include="OpenFileDialog_SystemWindowsForms.cs" />
+    <Compile Include="OpenFileDialog_Comdlg32.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

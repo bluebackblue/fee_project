@@ -12,9 +12,9 @@
 */
 namespace FeeCsDll
 {
-	/** OpenFileDialog
+	/** OpenFileDialog_SystemWindowsForms
 	*/
-    public class OpenFileDialog
+    public class OpenFileDialog_SystemWindowsForms
     {
 		/** Open
 		*/
@@ -23,15 +23,10 @@ namespace FeeCsDll
 			string t_filename = "";
 
 			try{
+				using(System.Windows.Forms.OpenFileDialog t_dialog = new System.Windows.Forms.OpenFileDialog()){
 
-				/*using(*/System.Windows.Forms.OpenFileDialog t_dialog = new System.Windows.Forms.OpenFileDialog()/*)*/;{
-
-					t_dialog.Reset();
-
-					//t_dialog.Filter = "テキストファイル (*.txt)|*.txt|すべてのファイル (*.*)|*.*" ;
-					t_dialog.AutoUpgradeEnabled = true;
+					t_dialog.Filter = "すべてのファイル (*.*)|*.*" ;
 					t_dialog.Title = "ファイルを開く";
-					t_dialog.ValidateNames = true;
 
 					System.Windows.Forms.DialogResult t_result = t_dialog.ShowDialog();
 
@@ -44,12 +39,9 @@ namespace FeeCsDll
 						{
 						}break;
 					}
-
-					t_dialog.Dispose();
 				}
-
-			}catch(System.Exception e){
-				t_filename = e.Message;
+			}catch(System.Exception /*t_exception*/){
+				t_filename = "";
 			}
 
 			return t_filename;
