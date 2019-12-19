@@ -17,7 +17,7 @@ namespace TestScript
 {
 	/** test21
 	*/
-	public class test21 : MainBase
+	public class test21 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<int>
 	{
 		/** CreateStatus
 		*/
@@ -28,7 +28,7 @@ namespace TestScript
 				"test21",
 
 				@"
-				---
+				オープンファイルダイアログ
 				"
 			);
 		}
@@ -37,10 +37,21 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** button
+		*/
+		private Fee.Ui.Button button;
+
+		/** text
+		*/
+		private Fee.Render2D.Text2D text;
+
 		/** Start
 		*/
 		private void Start()
 		{
+			//プラットフォーム。インスタンス作成。
+			Fee.Platform.Platform.CreateInstance();
+
 			//タスク。インスタンス作成。
 			Fee.TaskW.TaskW.CreateInstance();
 
@@ -80,6 +91,45 @@ namespace TestScript
 
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+
+			//button
+			{
+				int t_x = 50;
+				int t_y = 200;
+				int t_w = 90;
+				int t_h = 60;
+
+				//button
+				this.button = new Fee.Ui.Button(this.deleter,1);
+				this.button.SetOnButtonClick(this,0);
+				this.button.SetTextureCornerSize(10);
+				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.button.SetText("開始");
+				this.button.SetRect(t_x,t_y,t_w,t_h);
+			}
+
+			//text
+			{
+				int t_x = 50 + 150;
+				int t_y = 200 + 20;
+
+				this.text = Fee.Render2D.Text2D.Create(this.deleter,1);
+				this.text.SetXY(t_x,t_y);
+			}
+		}
+
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
+		*/
+		public void OnButtonClick(int a_id)
+		{
+			Fee.Platform.Platform.GetInstance().OpenFileDialog();
 		}
 
 		/** FixedUpdate
@@ -97,6 +147,16 @@ namespace TestScript
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
+
+			{
+				string t_filename = Fee.Platform.Platform.GetInstance().GetOpenFileDialogResult();
+				if(t_filename == null){
+					t_filename = "null";
+				}else if(t_filename == ""){
+					t_filename = "space";
+				}
+				this.text.SetText(t_filename);
+			}
 
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_After();
