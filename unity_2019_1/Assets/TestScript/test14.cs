@@ -199,10 +199,10 @@ namespace TestScript
 						{
 							#if(true)
 							//ダミーアセットバンドル。
-							Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsDummyAssetBundle,new Fee.File.Path("Editor/AssetBundle/Dummy/test.assetbundle.json"));
+							Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsPathDummyAssetBundle,new Fee.File.Path("Editor/AssetBundle/Dummy/test.assetbundle.json"));
 							#else
 							//アセットバンドル。
-							Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathList_PathType.AssetsAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
+							Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsPathAssetBundle,new Fee.File.Path("Editor/AssetBundle/StandaloneWindows/test.assetbundle"));
 							#endif
 						}
 						#endif
