@@ -195,6 +195,9 @@ namespace TestScript
 		*/
 		private void Start()
 		{
+			//プラットフォーム。インスタンス作成。
+			Fee.Platform.Platform.CreateInstance();
+
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 			Fee.Render2D.Config.ReCalcWH();

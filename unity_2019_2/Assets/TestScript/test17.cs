@@ -300,6 +300,9 @@ namespace TestScript
 		*/
 		private void Start()
 		{
+			//プラットフォーム。インスタンス作成。
+			Fee.Platform.Platform.CreateInstance();
+
 			//タスク。インスタンス作成。
 			Fee.TaskW.TaskW.CreateInstance();
 
