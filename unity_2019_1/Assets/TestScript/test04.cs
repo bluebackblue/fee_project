@@ -495,7 +495,7 @@ namespace TestScript
 					//ロードＵＲＬ。サウンドプール。
 
 					uint t_data_version = 1;
-					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadUrlSoundPool(new Fee.File.Path(Data.Url.SOUNDPOOL_SE),null,t_data_version));
+					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadUrlSoundPool(new Fee.File.Path(Data.Url.SOUNDPOOL_SE),null,null,t_data_version));
 				}break;
 			case ButtonId.LoadLocal_SoundPool:
 				{
