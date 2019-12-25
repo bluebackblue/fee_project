@@ -14,6 +14,7 @@ namespace FeeCsDll
 {
 	/** OpenFileDialog_SystemWindowsForms
 	*/
+	#if(false)
     public class OpenFileDialog_SystemWindowsForms
     {
 		/** Open
@@ -47,5 +48,6 @@ namespace FeeCsDll
 			return t_filename;
 		}
     }
+	#endif
 }
 
