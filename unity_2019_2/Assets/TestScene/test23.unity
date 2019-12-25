@@ -207,10 +207,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 515144280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d73d71a8c006f764ba7d06ed1f9df38b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cc494614a4ab2046ba23d722a995ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   is_changescene: 0
+  is_focus: 1
 --- !u!4 &515144282
 Transform:
   m_ObjectHideFlags: 0
