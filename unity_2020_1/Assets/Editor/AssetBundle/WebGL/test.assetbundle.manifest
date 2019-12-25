@@ -1,0 +1,30 @@
+ManifestFileVersion: 0
+CRC: 2408984461
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3d4f94a005314ab697b776c91c775251
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3d595d63c3f178a07a092201ec885a17
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7a635aedd4eff57419b5a85c412530bb, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Editor/Resources/Editor/Test12/text.txt
+- Assets/Editor/Resources/Editor/Test12/se.prefab
+- Assets/Editor/Resources/Editor/Test12/texture.png
+Dependencies: []
