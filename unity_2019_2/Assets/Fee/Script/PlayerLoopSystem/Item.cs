@@ -14,7 +14,7 @@ namespace Fee.PlayerLoopSystem
 {
 	/** UnityEngine_PlayerLoopSystem
 	*/
-	#if((UNITY_2018_3)||(UNITY_2018_4))
+	#if((UNITY_2018)||(UNITY_2019))
 		using UnityEngine_PlayerLoopSystem = UnityEngine.Experimental.LowLevel;
 	#else
 		using UnityEngine_PlayerLoopSystem = UnityEngine.LowLevel;
