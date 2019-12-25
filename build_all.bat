@@ -27,28 +27,31 @@ MKDIR %OUTPUT_PATH%
 @REM ---------------------------------------
 @REM 2019_2
 @REM ---------------------------------------
-SET PRIJECT_PATH=%HOME%unity_2019_2\
-SET UNITY_EXE="C:\Program Files\Unity\Hub\Editor\2019.2.17f1\Editor\Unity.exe"
-
-@REM ---------------------------------------
-@REM WebGL
-@REM ---------------------------------------
-%UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_WebGL ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\WebGL .\result\\WebGL_2019_2\
-@REM ---------------------------------------
+SET VERSION_A=2019
+SET VERSION_B=2
+SET VERSION_C=17f1
+SET PRIJECT_PATH=%HOME%unity_%VERSION_A%_2\
+SET UNITY_EXE="C:\Program Files\Unity\Hub\Editor\%VERSION_A%.%VERSION_B%.VERSION_C\Editor\Unity.exe"
 
 @REM ---------------------------------------
 @REM StandaloneWindows
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_StandAloneWindows ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\Exe .\result\Exe_2019_2\
+XCOPY /y /e output\Exe .\result\Exe_%VERSION_A%_VERSION_B\
+@REM ---------------------------------------
+
+@REM ---------------------------------------
+@REM WebGL
+@REM ---------------------------------------
+%UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_WebGL ---outputpath %OUTPUT_PATH%
+XCOPY /y /e output\WebGL .\result\\WebGL_%VERSION_A%_VERSION_B\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
 @REM Android
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_Android ---outputpath %OUTPUT_PATH%
-COPY /y output\Fee.apk .\result\unity_2019_2.apk
+COPY /y output\Fee.apk .\result\unity_%VERSION_A%_VERSION_B.apk
 @REM ---------------------------------------
 
 
@@ -63,28 +66,31 @@ MKDIR %OUTPUT_PATH%
 @REM ---------------------------------------
 @REM 2020_1
 @REM ---------------------------------------
-SET PRIJECT_PATH=%HOME%unity_2020_1\
-SET UNITY_EXE="C:\Program Files\Unity\Hub\Editor\2020.1.0a17\Editor\Unity.exe"
-
-@REM ---------------------------------------
-@REM WebGL
-@REM ---------------------------------------
-%UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_WebGL ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\WebGL .\result\WebGL_2020_1\
-@REM ---------------------------------------
+SET VERSION_A=2020
+SET VERSION_B=1
+SET VERSION_C=0a17
+SET PRIJECT_PATH=%HOME%unity_%VERSION_A%_1\
+SET UNITY_EXE="C:\Program Files\Unity\Hub\Editor\%VERSION_A%.VERSION_B.VERSION_C\Editor\Unity.exe"
 
 @REM ---------------------------------------
 @REM StandaloneWindows
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_StandAloneWindows ---outputpath %OUTPUT_PATH%
-XCOPY /y /e output\Exe .\result\Exe_2020_1\
+XCOPY /y /e output\Exe .\result\Exe_%VERSION_A%_VERSION_B\
+@REM ---------------------------------------
+
+@REM ---------------------------------------
+@REM WebGL
+@REM ---------------------------------------
+%UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_WebGL ---outputpath %OUTPUT_PATH%
+XCOPY /y /e output\WebGL .\result\\WebGL_%VERSION_A%_VERSION_B\
 @REM ---------------------------------------
 
 @REM ---------------------------------------
 @REM Android
 @REM ---------------------------------------
 %UNITY_EXE% -quit -batchmode -logFile .\build.log -projectPath %PRIJECT_PATH% -executeMethod Fee.EditorTool.Build.Build_Android ---outputpath %OUTPUT_PATH%
-COPY /y output\Fee.apk .\result\unity_2020_1.apk
+COPY /y output\Fee.apk .\result\unity_%VERSION_A%_VERSION_B.apk
 @REM ---------------------------------------
 
 
