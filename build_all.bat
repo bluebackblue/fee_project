@@ -31,7 +31,7 @@ SET VERSION_A=2019
 SET VERSION_B=2
 SET VERSION_C=17f1
 SET PRIJECT_PATH=%HOME%unity_%VERSION_A%_2\
-SET UNITY_EXE="C:\Program Files\Unity\Hub\Editor\%VERSION_A%.%VERSION_B%.VERSION_C\Editor\Unity.exe"
+SET UNITY_EXE="C:\Program Files\Unity\Hub\Editor\%VERSION_A%.%VERSION_B%.%VERSION_C%\Editor\Unity.exe"
 
 @REM ---------------------------------------
 @REM StandaloneWindows
@@ -55,6 +55,7 @@ COPY /y output\Fee.apk .\result\unity_%VERSION_A%_VERSION_B.apk
 @REM ---------------------------------------
 
 
+@PAUSE
 
 
 @REM ---------------------------------------
@@ -70,7 +71,7 @@ SET VERSION_A=2020
 SET VERSION_B=1
 SET VERSION_C=0a17
 SET PRIJECT_PATH=%HOME%unity_%VERSION_A%_1\
-SET UNITY_EXE="C:\Program Files\Unity\Hub\Editor\%VERSION_A%.VERSION_B.VERSION_C\Editor\Unity.exe"
+SET UNITY_EXE="C:\Program Files\Unity\Hub\Editor\%VERSION_A%.VERSION_B.%VERSION_C%\Editor\Unity.exe"
 
 @REM ---------------------------------------
 @REM StandaloneWindows
