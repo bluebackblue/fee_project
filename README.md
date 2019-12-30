@@ -3,13 +3,13 @@ Fee Sample Project
 
 ## License
 MIT License
-https://github.com/bluebackblue/fee_project/blob/master/LICENSE.txt
+* https://github.com/bluebackblue/fee_project/blob/master/LICENSE.txt
 
 ## Core
-https://github.com/bluebackblue/fee_core
+* https://github.com/bluebackblue/fee_core
 
 ## Contact
-https://discord.gg/JH3B4SR
+* https://discord.gg/JH3B4SR
 
 ## Folder Structure
 フォルダ構造
