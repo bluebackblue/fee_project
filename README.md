@@ -15,7 +15,7 @@ https://discord.gg/JH3B4SR
 フォルダ構造
 * fee_project 「チェックアウト : https://github.com/bluebackblue/fee_project.git 」
 * _ fee_csdll : 「fee_csdll.dll作成用プロジェクト」
-* _ License : 使用ライセンス
+* _ License : [使用ライセンス]
 * _ unity_2019_2
 * ___ Assets
 * _____ Fee [ https://github.com/bluebackblue/fee/releases ]
