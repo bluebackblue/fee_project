@@ -201,13 +201,6 @@ namespace TestScript
 					#endif
 				}
 				{
-					#if(USE_DEF_FEE_NPOI)
-					t_text += "USE_DEF_FEE_NPOI = TRUE\n";
-					#else
-					t_text += "USE_DEF_FEE_NPOI = FALSE\n";
-					#endif
-				}
-				{
 					#if(USE_DEF_FEE_EXCELDATAREADER)
 					t_text += "USE_DEF_FEE_EXCELDATAREADER = TRUE\n";
 					#else
