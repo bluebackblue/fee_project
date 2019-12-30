@@ -179,26 +179,14 @@ namespace TestScript
 
 		/** SpeedTest_Data
 		*/
-		#if(USE_DEF_FEE_UTF8JSON)
-		public class SpeedTest_Data
-		#else
 		private class SpeedTest_Data
-		#endif
 		{
 			/** array
 			*/
-			#if(USE_DEF_FEE_UTF8JSON)
-			public SpeedTest_ArrayItem[] array;
-			#else
 			private SpeedTest_ArrayItem[] array;
-			#endif
 
-			#if(USE_DEF_FEE_UTF8JSON)
-			private int ignoremember;
-			#else
 			[Fee.JsonItem.Ignore]
 			public int ignoremember;		
-			#endif
 
 			/** constructor
 			*/
@@ -238,7 +226,6 @@ namespace TestScript
 		private Fee.Ui.Button button_load2;
 		private Fee.Ui.Button button_random;
 
-		private Fee.Ui.Button button_speedtest_utf8json;
 		private Fee.Ui.Button button_speedtest_fee;
 
 		/** ステータス。
@@ -266,7 +253,6 @@ namespace TestScript
 			Load1,
 			Load2,
 			Random,
-			Utf8JsonTest,
 			FeeTest
 		}
 
@@ -387,20 +373,6 @@ namespace TestScript
 				this.button_random.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_random.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.button_random.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-
-				this.button_speedtest_utf8json = new Fee.Ui.Button(this.deleter,0);
-				this.button_speedtest_utf8json.SetOnButtonClick(this,ButtonId.Utf8JsonTest);
-				this.button_speedtest_utf8json.SetRect(600 + 110*1,100 + 60 * 1,130,50);
-				this.button_speedtest_utf8json.SetText("Utf8Json Test");
-				this.button_speedtest_utf8json.SetTextureCornerSize(10);
-				this.button_speedtest_utf8json.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_speedtest_utf8json.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_speedtest_utf8json.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_speedtest_utf8json.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_speedtest_utf8json.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_speedtest_utf8json.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_speedtest_utf8json.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_speedtest_utf8json.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				this.button_speedtest_fee = new Fee.Ui.Button(this.deleter,0);
 				this.button_speedtest_fee.SetOnButtonClick(this,ButtonId.FeeTest);
@@ -533,12 +505,6 @@ namespace TestScript
 
 					this.SetStatus("Random",this.savedata);
 				}break;
-			case ButtonId.Utf8JsonTest:
-				{
-					//utf8json test
-
-					this.SpeedTest_Utf8Json();
-				}break;
 			case ButtonId.FeeTest:
 				{
 					//fee test
@@ -547,57 +513,6 @@ namespace TestScript
 				}break;
 
 			}
-		}
-
-		/** SpeedTest_Utf8Json
-		*/
-		private void SpeedTest_Utf8Json()
-		{
-			#if(USE_DEF_FEE_UTF8JSON)
-			SpeedTest_Data t_data_from = new SpeedTest_Data(true);
-			string t_jsonstring_utf8json = "";
-			#endif
-
-			string t_log = "";
-
-			//Utf8Json使用。
-			#if(USE_DEF_FEE_UTF8JSON)
-			try{
-				float t_start = UnityEngine.Time.realtimeSinceStartup;
-				{
-					t_jsonstring_utf8json = Fee.JsonItem.Convert.ObjectToJsonString_Utf8Json(t_data_from);
-				}
-				float t_end = UnityEngine.Time.realtimeSinceStartup;
-
-				t_log += "Utf8Json : ToJsonString : Time = " + (t_end - t_start).ToString() + " : Size = " + t_jsonstring_utf8json.Length.ToString() + "\n";
-			}catch(System.Exception t_exception){
-				t_log += "Utf8Json : ToJsonString : ----------------- \n";
-				Debug.LogError(t_exception);
-			}
-			#endif
-
-			t_log += "\n";
-
-			//Utf8Json使用。
-			#if(USE_DEF_FEE_UTF8JSON)
-			try{
-				int t_value = 0;
-
-				float t_start = UnityEngine.Time.realtimeSinceStartup;
-				{
-					SpeedTest_Data t_data_utf8json = Fee.JsonItem.Convert.JsonStringToObject_Utf8Json<SpeedTest_Data>(t_jsonstring_utf8json);
-					t_value = t_data_utf8json.GetItem(0).list[0].dictionary["0"].value_int;
-				}
-				float t_end = UnityEngine.Time.realtimeSinceStartup;
-
-				t_log += "Utf8Json : JsonStringToObject : Time = " + (t_end - t_start).ToString() + " : Value = " + t_value.ToString() + "\n";
-			}catch(System.Exception t_exception){
-				t_log += "Utf8Json : JsonStringToObject : ----------------- \n";
-				Debug.LogError(t_exception);
-			}
-			#endif
-
-			this.status.SetText(t_log);
 		}
 
 		/** SpeedTest_Fee

@@ -194,13 +194,6 @@ namespace TestScript
 					#endif
 				}
 				{
-					#if(USE_DEF_FEE_UTF8JSON)
-					t_text += "USE_DEF_FEE_UTF8JSON = TRUE\n";
-					#else
-					t_text += "USE_DEF_FEE_UTF8JSON = FALSE\n";
-					#endif
-				}
-				{
 					#if(USE_DEF_FEE_EXCELDATAREADER)
 					t_text += "USE_DEF_FEE_EXCELDATAREADER = TRUE\n";
 					#else
