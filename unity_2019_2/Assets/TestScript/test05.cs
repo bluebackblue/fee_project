@@ -54,6 +54,9 @@ namespace TestScript
 		{
 			Fix,
 
+			PadIndex,
+			PadType,
+
 			MousePosition_InputSystem_Mouse,
 			MousePosition_InputSystem_Pointer,
 			MousePosition_InputManager_InputMouse,
@@ -83,6 +86,16 @@ namespace TestScript
 		/** button_fix
 		*/
 		private Fee.Ui.Button button_fix;
+		
+		/** pad_type
+		*/
+		private Fee.Ui.Button pad_type_button;
+		private Fee.Input.Pad_InputManagerItemName.PadType pad_type;
+
+		/** pad_index
+		*/
+		private Fee.Ui.Button pad_index_button;
+		private int pad_index;
 
 		/** mouseposition
 		*/
@@ -256,6 +269,53 @@ namespace TestScript
 				this.button_fix.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_fix.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.button_fix.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
+			}
+
+			//pad_type
+			{
+				this.pad_type = Fee.Input.Pad_InputManagerItemName.PadType.Type_X;
+
+				this.pad_type_button = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.pad_type_button.SetOnButtonClick(this,ButtonId.PadType);
+				this.pad_type_button.SetRect(210,1,50,40);
+				this.pad_type_button.SetText(this.pad_type.ToString());
+				this.pad_type_button.SetTextureCornerSize(10);
+				this.pad_type_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.pad_type_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.pad_type_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.pad_type_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.pad_type_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.pad_type_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.pad_type_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.pad_type_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
+			}
+
+			//pad_index
+			{
+				this.pad_index = 0;
+
+				this.pad_index_button = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.pad_index_button.SetOnButtonClick(this,ButtonId.PadIndex);
+				this.pad_index_button.SetRect(260,1,50,40);
+				this.pad_index_button.SetText(this.pad_index.ToString());
+				this.pad_index_button.SetTextureCornerSize(10);
+				this.pad_index_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.pad_index_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.pad_index_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.pad_index_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.pad_index_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
+				this.pad_index_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
+				this.pad_index_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				this.pad_index_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
+			}
+
+			for(int ii=0;ii<Fee.Input.Pad.GetInstance().pad_status.Length;ii++){
+				if(ii == this.pad_index){
+					//Fee.Input.Pad.GetInstance().pad_status[ii].enable = true;
+				}else{
+					//Fee.Input.Pad.GetInstance().pad_status[ii].enable = false;
+				}
+				Fee.Input.Pad.GetInstance().pad_status[ii].pad_type = this.pad_type;
 			}
 
 			int t_xx = 10;
@@ -483,6 +543,34 @@ namespace TestScript
 		{
 			switch(a_id)
 			{
+			case ButtonId.PadType:
+				{
+					this.pad_type = (Fee.Input.Pad_InputManagerItemName.PadType)(((int)this.pad_type + 1) % (int)Fee.Input.Pad_InputManagerItemName.PadType.Max);
+					this.pad_type_button.SetText(this.pad_type.ToString());
+
+					for(int ii=0;ii<Fee.Input.Pad.GetInstance().pad_status.Length;ii++){
+						if(ii == this.pad_index){
+							//Fee.Input.Pad.GetInstance().pad_status[ii].enable = true;
+						}else{
+							//Fee.Input.Pad.GetInstance().pad_status[ii].enable = false;
+						}
+						Fee.Input.Pad.GetInstance().pad_status[ii].pad_type = this.pad_type;
+					}
+				}break;
+			case ButtonId.PadIndex:
+				{
+					this.pad_index = (this.pad_index + 1) % (Fee.Input.Pad.GetInstance().pad_status.Length);
+					this.pad_index_button.SetText(this.pad_index.ToString());
+
+					for(int ii=0;ii<Fee.Input.Pad.GetInstance().pad_status.Length;ii++){
+						if(ii == this.pad_index){
+							//Fee.Input.Pad.GetInstance().pad_status[ii].enable = true;
+						}else{
+							//Fee.Input.Pad.GetInstance().pad_status[ii].enable = false;
+						}
+						Fee.Input.Pad.GetInstance().pad_status[ii].pad_type = this.pad_type;
+					}
+				}break;
 			case ButtonId.Fix:
 				{
 					this.SaveFlag();
@@ -748,9 +836,9 @@ namespace TestScript
 			Fee.Input.Pad.GetInstance().Main(true);
 
 			//モーター。
-			{
-				Fee.Input.Pad.GetInstance().moter_low.Request(Fee.Input.Pad.GetInstance().l_trigger_2.value);
-				Fee.Input.Pad.GetInstance().moter_high.Request(Fee.Input.Pad.GetInstance().r_trigger_2.value);
+			for(int ii=0;ii<Fee.Input.Pad.GetInstance().pad_status.Length;ii++){
+				Fee.Input.Pad.GetInstance().pad_status[ii].moter_low.Request(Fee.Input.Pad.GetInstance().pad_status[ii].l_trigger_2.value);
+				Fee.Input.Pad.GetInstance().pad_status[ii].moter_high.Request(Fee.Input.Pad.GetInstance().pad_status[ii].r_trigger_2.value);
 			}
 
 			if(this.backup_rollbackcount > 0){
@@ -824,34 +912,34 @@ namespace TestScript
 			{
 				string t_text = "pad\n";
 
-				t_text += "left        = " + Fee.Input.Pad.GetInstance().left.on.ToString() + "\n";
-				t_text += "right       = " + Fee.Input.Pad.GetInstance().right.on.ToString() + "\n";
-				t_text += "up          = " + Fee.Input.Pad.GetInstance().up.on.ToString() + "\n";
-				t_text += "down        = " + Fee.Input.Pad.GetInstance().down.on.ToString() + "\n";
+				t_text += "left        = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].left.on.ToString() + "\n";
+				t_text += "right       = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].right.on.ToString() + "\n";
+				t_text += "up          = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].up.on.ToString() + "\n";
+				t_text += "down        = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].down.on.ToString() + "\n";
 
-				t_text += "enter       = " + Fee.Input.Pad.GetInstance().enter.on.ToString() + "\n";
-				t_text += "escape      = " + Fee.Input.Pad.GetInstance().escape.on.ToString() + "\n";
-				t_text += "sub1        = " + Fee.Input.Pad.GetInstance().sub1.on.ToString() + "\n";
-				t_text += "sub2        = " + Fee.Input.Pad.GetInstance().sub2.on.ToString() + "\n";
+				t_text += "enter       = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].enter.on.ToString() + "\n";
+				t_text += "escape      = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].escape.on.ToString() + "\n";
+				t_text += "sub1        = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].sub1.on.ToString() + "\n";
+				t_text += "sub2        = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].sub2.on.ToString() + "\n";
 
-				t_text += "left_menu   = " + Fee.Input.Pad.GetInstance().left_menu.on.ToString() + "\n";
-				t_text += "right_menu  = " + Fee.Input.Pad.GetInstance().right_menu.on.ToString() + "\n";
+				t_text += "left_menu   = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].left_menu.on.ToString() + "\n";
+				t_text += "right_menu  = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].right_menu.on.ToString() + "\n";
 
-				t_text += "l_trigger_1 = " + Fee.Input.Pad.GetInstance().l_trigger_1.on.ToString() + "\n";
-				t_text += "r_trigger_1 = " + Fee.Input.Pad.GetInstance().r_trigger_1.on.ToString() + "\n";
-				t_text += "l_trigger_2 = " + Fee.Input.Pad.GetInstance().l_trigger_2.on.ToString() + "\n";
-				t_text += "r_trigger_2 = " + Fee.Input.Pad.GetInstance().r_trigger_2.on.ToString() + "\n";
+				t_text += "l_trigger_1 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_trigger_1.on.ToString() + "\n";
+				t_text += "r_trigger_1 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_trigger_1.on.ToString() + "\n";
+				t_text += "l_trigger_2 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_trigger_2.on.ToString() + "\n";
+				t_text += "r_trigger_2 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_trigger_2.on.ToString() + "\n";
 
-				t_text += "l_trigger_2 = " + Fee.Input.Pad.GetInstance().l_trigger_2.value.ToString() + "\n";
-				t_text += "r_trigger_2 = " + Fee.Input.Pad.GetInstance().r_trigger_2.value.ToString() + "\n";
+				t_text += "l_trigger_2 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_trigger_2.value.ToString() + "\n";
+				t_text += "r_trigger_2 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_trigger_2.value.ToString() + "\n";
 
-				t_text += "l_stick_x   = " + Fee.Input.Pad.GetInstance().l_stick.x.ToString() + "\n";
-				t_text += "l_stick_y   = " + Fee.Input.Pad.GetInstance().l_stick.y.ToString() + "\n";
-				t_text += "r_stick_x   = " + Fee.Input.Pad.GetInstance().r_stick.x.ToString() + "\n";
-				t_text += "r_stick_y   = " + Fee.Input.Pad.GetInstance().r_stick.y.ToString() + "\n";
+				t_text += "l_stick_x   = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_stick.x.ToString() + "\n";
+				t_text += "l_stick_y   = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_stick.y.ToString() + "\n";
+				t_text += "r_stick_x   = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_stick.x.ToString() + "\n";
+				t_text += "r_stick_y   = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_stick.y.ToString() + "\n";
 
-				t_text += "l_stick_button = " + Fee.Input.Pad.GetInstance().l_stick_button.on.ToString() + "\n";
-				t_text += "r_stick_button = " + Fee.Input.Pad.GetInstance().r_stick_button.on.ToString() + "\n";
+				t_text += "l_stick_button = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_stick_button.on.ToString() + "\n";
+				t_text += "r_stick_button = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_stick_button.on.ToString() + "\n";
 
 				this.pad_text.SetText(t_text);
 			}
