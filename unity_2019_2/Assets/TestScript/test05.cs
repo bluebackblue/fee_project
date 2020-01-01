@@ -868,6 +868,8 @@ namespace TestScript
 				t_text += "y = " + Fee.Input.Mouse.GetInstance().cursor.pos.y.ToString() + "\n";
 				t_text += "m = " + Fee.Input.Mouse.GetInstance().mouse_wheel.pos.y.ToString() + "\n";
 
+				t_text += "name = " + Fee.Input.Mouse.GetInstance().cursor.devicename.ToLower() + "\n";
+
 				this.mouse_text.SetText(t_text);
 
 				this.mouse_sprite.SetXY(Fee.Input.Mouse.GetInstance().cursor.pos.x,Fee.Input.Mouse.GetInstance().cursor.pos.y);
@@ -910,7 +912,7 @@ namespace TestScript
 
 			//パッド。
 			{
-				string t_text = "pad\n";
+				string t_text = "pad : " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].devicename + "\n";
 
 				t_text += "left        = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].left.on.ToString() + "\n";
 				t_text += "right       = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].right.on.ToString() + "\n";
