@@ -9,5 +9,5 @@ CD %HOME%
 @REM %ANDROID_ADB% devices
 @PAUSE
 
-%ANDROID_ADB% install %1
+%ANDROID_ADB% install -r %1
 @PAUSE
