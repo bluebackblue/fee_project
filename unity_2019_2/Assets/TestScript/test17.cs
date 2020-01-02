@@ -110,7 +110,7 @@ namespace TestScript
 				long t_drawpriority = 1;
 
 				//sprite
-				this.sprite = new Fee.Ui.Sprite2D_Clip(this.deleter,t_drawpriority);
+				this.sprite = Fee.Ui.Sprite2D_Clip.Create(this.deleter,t_drawpriority);
 				this.sprite.SetTexture(Texture2D.whiteTexture);
 				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetClipRect(0,0,0,0);
@@ -208,7 +208,7 @@ namespace TestScript
 			{
 				this.sprite.SetDrawPriority(a_drawpriority + 1);
 				this.text.SetDrawPriority(a_drawpriority + 1);
-				this.button.SetDrawPriority(a_drawpriority + 1);
+				this.button.SetDrawPriority(a_drawpriority + 2);
 			}
 
 			/** [ScrollItem_Base]表示内。

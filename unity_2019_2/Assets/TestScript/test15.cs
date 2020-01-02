@@ -131,7 +131,7 @@ namespace TestScript
 			{
 				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.TEXTURE_SKYIMAGE);
 
-				this.sprite = new Fee.Ui.Sprite2D_Clip(this.deleter,t_drawpriority + 1);
+				this.sprite = Fee.Ui.Sprite2D_Clip.Create(this.deleter,t_drawpriority + 1);
 				this.sprite.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
 				this.sprite.SetTexture(Texture2D.whiteTexture);
 				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
