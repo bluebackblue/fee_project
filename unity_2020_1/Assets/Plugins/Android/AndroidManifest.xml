@@ -11,10 +11,7 @@
       <meta-data android:name="android.notch_support" android:value="true" />
     </activity>
 
-    <activity android:name="fee.platform.Android_OpenFileDialogActivity"
-    android:label="Android_OpenFileDialogActivity"
-    android:configChanges="keyboard|keyboardHidden|orientation">
-    </activity>
+    <activity android:name="fee.platform.Android_OpenFileDialogActivity" android:label="Android_OpenFileDialogActivity"></activity>
 
     <meta-data android:name="unity.splash-mode" android:value="0" />
     <meta-data android:name="unity.splash-enable" android:value="True" />
