@@ -110,7 +110,7 @@ namespace TestScript
 				long t_drawpriority = 1;
 
 				//sprite
-				this.sprite = new Fee.Ui.Sprite2D_Clip(this.deleter,t_drawpriority);
+				this.sprite = Fee.Ui.Sprite2D_Clip.Create(this.deleter,t_drawpriority);
 				this.sprite.SetTexture(Texture2D.whiteTexture);
 				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetClipRect(0,0,0,0);
@@ -158,60 +158,60 @@ namespace TestScript
 				this.deleter.DeleteAll();
 			}
 
-			/** [ScrollItem_Base]矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void SetX(int a_x)
+			public override void OnChangeParentRectX(int a_parent_x)
 			{
-				this.sprite.SetX(a_x);
-				this.text.SetX(a_x);
+				this.sprite.SetX(a_parent_x);
+				this.text.SetX(a_parent_x);
 
 				if(this.scroll_type == Fee.Ui.Scroll_Type.Vertical){
 					//縦。
-					this.button.SetX(a_x + ScrollItem.GetW() - this.button.GetW() - 15);
+					this.button.SetX(a_parent_x + ScrollItem.GetW() - this.button.GetW() - 15);
 				}else{
-					this.button.SetX(a_x + ScrollItem.GetW() - this.button.GetW() - 5);
+					this.button.SetX(a_parent_x + ScrollItem.GetW() - this.button.GetW() - 5);
 				}
 			}
 
-			/** [ScrollItem_Base]矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void SetY(int a_y)
+			public override void OnChangeParentRectY(int a_parent_y)
 			{
-				this.sprite.SetY(a_y);
-				this.text.SetY(a_y);
-				this.button.SetY(a_y + 5);
+				this.sprite.SetY(a_parent_y);
+				this.text.SetY(a_parent_y);
+				this.button.SetY(a_parent_y + 5);
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void SetWH(int a_w,int a_h)
+			public override void OnChangeParentRectWH(int a_parent_w,int a_parent_h)
 			{
 				if(this.scroll_type == Fee.Ui.Scroll_Type.Vertical){
-					this.sprite.SetWH(a_w - 10,a_h);
+					this.sprite.SetWH(a_parent_w - 10,a_parent_h);
 				}else{
-					this.sprite.SetWH(a_w,a_h - 10);
+					this.sprite.SetWH(a_parent_w,a_parent_h - 10);
 				}
 			}
 
-			/** [ScrollItem_Base]クリップ矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]クリップ矩形変更。
 			*/
-			public override void SetClipRect(in Fee.Geometry.Rect2D_R<int> a_rect)
+			public override void OnChangeParentClipRect(in Fee.Geometry.Rect2D_R<int> a_rect)
 			{
 				this.sprite.SetClipRect(in a_rect);
 				this.text.SetClipRect(in a_rect);
 				this.button.SetClipRect(in a_rect);
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]描画プライオリティ。設定。
+			/** [Fee.Ui.ScrollItem_Base]描画プライオリティ変更。
 			*/
-			public override void SetDrawPriority(long a_drawpriority)
+			public override void OnChangeParentDrawPriority(long a_drawpriority)
 			{
 				this.sprite.SetDrawPriority(a_drawpriority + 1);
 				this.text.SetDrawPriority(a_drawpriority + 1);
-				this.button.SetDrawPriority(a_drawpriority + 1);
+				this.button.SetDrawPriority(a_drawpriority + 2);
 			}
 
-			/** [ScrollItem_Base]表示内。
+			/** [Fee.Ui.ScrollItem_Base]表示内。
 			*/
 			public override  void OnViewIn()
 			{
@@ -220,7 +220,7 @@ namespace TestScript
 				this.button.SetVisible(true);
 			}
 
-			/** [ScrollItem_Base]表示外。
+			/** [Fee.Ui.ScrollItem_Base]表示外。
 			*/
 			public override void OnViewOut()
 			{

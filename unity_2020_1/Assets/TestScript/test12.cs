@@ -118,39 +118,39 @@ namespace TestScript
 				this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void SetY(int a_y)
+			public override void OnChangeParentRectX(int a_parent_x)
 			{
-				this.button.SetY(a_y);
+				this.button.SetX(a_parent_x);
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void SetX(int a_x)
+			public override void OnChangeParentRectY(int a_parent_y)
 			{
-				this.button.SetX(a_x);
+				this.button.SetY(a_parent_y);
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void SetWH(int a_w,int a_h)
+			public override void OnChangeParentRectWH(int a_parent_w,int a_parent_h)
 			{
-				this.button.SetWH(a_w,a_h);
+				this.button.SetWH(a_parent_w,a_parent_h);
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]クリップ矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]クリップ矩形変更。
 			*/
-			public override void SetClipRect(in Fee.Geometry.Rect2D_R<int> a_rect)
+			public override void OnChangeParentClipRect(in Fee.Geometry.Rect2D_R<int> a_parent_rect)
 			{
-				this.button.SetClipRect(in a_rect);
+				this.button.SetClipRect(in a_parent_rect);
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]描画プライオリティ。設定。
+			/** [Fee.Ui.ScrollItem_Base]描画プライオリティ変更。
 			*/
-			public override void SetDrawPriority(long a_drawpriority)
+			public override void OnChangeParentDrawPriority(long a_parent_drawpriority)
 			{
-				this.button.SetDrawPriority(a_drawpriority + 1);
+				this.button.SetDrawPriority(a_parent_drawpriority + 1);
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]表示内。

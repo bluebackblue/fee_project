@@ -117,52 +117,52 @@ namespace TestScript
 				}
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void SetY(int a_y)
+			public override void OnChangeParentRectX(int a_parent_x)
 			{
-				this.text.SetY(a_y + 10);
+				this.text.SetX(20 + a_parent_x);
 				if(this.button != null){
-					this.button.SetY(a_y);
+					this.button.SetX(a_parent_x);
 				}
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void SetX(int a_x)
+			public override void OnChangeParentRectY(int a_parent_y)
 			{
-				this.text.SetX(20 + a_x);
+				this.text.SetY(a_parent_y + 10);
 				if(this.button != null){
-					this.button.SetX(a_x);
+					this.button.SetY(a_parent_y);
 				}
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void SetWH(int a_w,int a_h)
+			public override void OnChangeParentRectWH(int a_parent_w,int a_parent_h)
 			{
 				if(this.button != null){
-					this.button.SetWH(a_w - 10,a_h);
+					this.button.SetWH(a_parent_w - 10,a_parent_h);
 				}
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]クリップ矩形。設定。
+			/** [Fee.Ui.ScrollItem_Base]クリップ矩形変更。
 			*/
-			public override void SetClipRect(in Fee.Geometry.Rect2D_R<int> a_rect)
+			public override void OnChangeParentClipRect(in Fee.Geometry.Rect2D_R<int> a_parent_rect)
 			{
-				this.text.SetClipRect(in a_rect);
+				this.text.SetClipRect(in a_parent_rect);
 				if(this.button != null){
-					this.button.SetClipRect(in a_rect);
+					this.button.SetClipRect(in a_parent_rect);
 				}
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]描画プライオリティ。設定。
+			/** [Fee.Ui.ScrollItem_Base]描画プライオリティ変更。
 			*/
-			public override void SetDrawPriority(long a_drawpriority)
+			public override void OnChangeParentDrawPriority(long a_parent_drawpriority)
 			{
-				this.text.SetDrawPriority(a_drawpriority + 1);
+				this.text.SetDrawPriority(a_parent_drawpriority + 1);
 				if(this.button != null){
-					this.button.SetDrawPriority(a_drawpriority + 1);
+					this.button.SetDrawPriority(a_parent_drawpriority + 1);
 				}
 			}
 
