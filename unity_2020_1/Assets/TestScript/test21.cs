@@ -66,7 +66,7 @@ namespace TestScript
 		private void Start()
 		{
 			//プラットフォーム。インスタンス作成。
-			Fee.Pattern.Config.LOG_ENABLE = true;
+			Fee.Platform.Config.LOG_ENABLE = true;
 			Fee.Platform.Platform.CreateInstance();
 
 			//タスク。インスタンス作成。
@@ -195,6 +195,8 @@ namespace TestScript
 				}
 				this.text.SetText(t_full_path);
 
+				byte[] t_data_binary = null;
+
 				if(this.file_item == null){
 					if(this.filepath != t_full_path){
 						this.filepath = t_full_path;
@@ -202,19 +204,9 @@ namespace TestScript
 
 							#if((!UNITY_EDITOR)&&(UNITY_ANDROID))
 							{
-								byte[] t_binary = Fee.Platform.Platform.GetInstance().GetOpenFileDialogResultBInary();
-
-								if(t_binary == null){
-									this.filesize_text.SetText("null");
-								}else{
-									this.filesize_text.SetText(t_binary.Length.ToString());
-								}
-
-								if(t_binary != null){
-									UnityEngine.Texture2D t_texture = Fee.File.BinaryToTexture2D.Convert(t_binary);
-									if(t_texture != null){
-										this.sprite.SetTexture(t_texture);
-									}
+								t_data_binary = Fee.Platform.Platform.GetInstance().LoadContentFile(new Fee.File.Path(this.filepath));
+								if(t_data_binary == null){
+									this.filesize_text.SetText("LoadContentFile == null");
 								}
 							}
 							#else
@@ -226,22 +218,22 @@ namespace TestScript
 					}
 				}else{
 					if(this.file_item.GetResultType() != Fee.File.Item.ResultType.None){
+						t_data_binary = this.file_item.GetResultAssetBinary();
 
-						byte[] t_binary = this.file_item.GetResultAssetBinary();
+						if(t_data_binary == null){
+							this.filesize_text.SetText("GetResultAssetBinary == null");
+						}
+
 						this.file_item = null;
+					}
+				}
 
-						if(t_binary == null){
-							this.filesize_text.SetText("null");
-						}else{
-							this.filesize_text.SetText(t_binary.Length.ToString());
-						}
+				if(t_data_binary != null){
+					this.filesize_text.SetText(t_data_binary.Length.ToString());
 
-						if(t_binary != null){
-							UnityEngine.Texture2D t_texture = Fee.File.BinaryToTexture2D.Convert(t_binary);
-							if(t_texture != null){
-								this.sprite.SetTexture(t_texture);
-							}
-						}
+					UnityEngine.Texture2D t_texture = Fee.File.BinaryToTexture2D.Convert(t_data_binary);
+					if(t_texture != null){
+						this.sprite.SetTexture(t_texture);
 					}
 				}
 			}
