@@ -115,6 +115,7 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//ファイル。インスタンス作成。
+			Fee.File.Config.LOG_ENABLE = true;
 			Fee.File.File.CreateInstance();
 
 			//データ。インスタンス作成。
