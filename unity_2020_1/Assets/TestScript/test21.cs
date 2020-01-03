@@ -45,11 +45,28 @@ namespace TestScript
 		*/
 		private Fee.Render2D.Text2D text;
 
+		/** sprite
+		*/
+		private Fee.Render2D.Sprite2D sprite;
+
+		/** filepath
+		*/
+		private string filepath;
+
+		/** filesize_text
+		*/
+		private Fee.Render2D.Text2D filesize_text;
+
+		/** file_item
+		*/
+		private Fee.File.Item file_item;
+
 		/** Start
 		*/
 		private void Start()
 		{
 			//プラットフォーム。インスタンス作成。
+			Fee.Pattern.Config.LOG_ENABLE = true;
 			Fee.Platform.Platform.CreateInstance();
 
 			//タスク。インスタンス作成。
@@ -80,8 +97,11 @@ namespace TestScript
 			Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
 
+			//ファイル。インスタンス作成。
+			Fee.File.File.CreateInstance();
+
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
+			UnityEngine.Font t_font = UnityEngine.Resources.Load<UnityEngine.Font>(Data.Resources.FONT);
 			if(t_font != null){
 				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
 			}
@@ -123,12 +143,30 @@ namespace TestScript
 				this.text = Fee.Render2D.Text2D.Create(this.deleter,1);
 				this.text.SetXY(t_x,t_y);
 			}
+
+			//filesize_text
+			{
+				this.filesize_text = Fee.Render2D.Text2D.Create(this.deleter,1);
+				this.filesize_text.SetXY(50,300);
+			}
+
+			//sprite
+			{
+				this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,1);
+				this.sprite.SetRect(50,350,100,100);
+				this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
+				this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+			}
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
 		public void OnButtonClick(int a_id)
 		{
+			this.text.SetText("");
+			this.filesize_text.SetText("");
+			this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
+
 			Fee.Platform.Platform.GetInstance().OpenFileDialog();
 		}
 
@@ -149,13 +187,63 @@ namespace TestScript
 			Fee.Ui.Ui.GetInstance().Main();
 
 			{
-				string t_filename = Fee.Platform.Platform.GetInstance().GetOpenFileDialogResult();
-				if(t_filename == null){
-					t_filename = "null";
-				}else if(t_filename == ""){
-					t_filename = "space";
+				string t_full_path = Fee.Platform.Platform.GetInstance().GetOpenFileDialogResult();
+				if(t_full_path == null){
+					t_full_path = "null";
+				}else if(t_full_path == ""){
+					t_full_path = "space";
 				}
-				this.text.SetText(t_filename);
+				this.text.SetText(t_full_path);
+
+				if(this.file_item == null){
+					if(this.filepath != t_full_path){
+						this.filepath = t_full_path;
+						if((this.filepath != "null")&&(this.filepath != "space")){
+
+							#if((!UNITY_EDITOR)&&(UNITY_ANDROID))
+							{
+								byte[] t_binary = Fee.Platform.Platform.GetInstance().GetOpenFileDialogResultBInary();
+
+								if(t_binary == null){
+									this.filesize_text.SetText("null");
+								}else{
+									this.filesize_text.SetText(t_binary.Length.ToString());
+								}
+
+								if(t_binary != null){
+									UnityEngine.Texture2D t_texture = Fee.File.BinaryToTexture2D.Convert(t_binary);
+									if(t_texture != null){
+										this.sprite.SetTexture(t_texture);
+									}
+								}
+							}
+							#else
+							{
+								this.file_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadFullPathBinaryFile,new Fee.File.Path(t_full_path));
+							}
+							#endif
+						}
+					}
+				}else{
+					if(this.file_item.GetResultType() != Fee.File.Item.ResultType.None){
+
+						byte[] t_binary = this.file_item.GetResultAssetBinary();
+						this.file_item = null;
+
+						if(t_binary == null){
+							this.filesize_text.SetText("null");
+						}else{
+							this.filesize_text.SetText(t_binary.Length.ToString());
+						}
+
+						if(t_binary != null){
+							UnityEngine.Texture2D t_texture = Fee.File.BinaryToTexture2D.Convert(t_binary);
+							if(t_texture != null){
+								this.sprite.SetTexture(t_texture);
+							}
+						}
+					}
+				}
 			}
 
 			//２Ｄ描画。
@@ -168,6 +256,9 @@ namespace TestScript
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
+
+			//ファイル。
+			Fee.File.File.GetInstance().Main();
 		}
 
 		/** 削除前。
