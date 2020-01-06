@@ -73,7 +73,7 @@ namespace Fee.JsonSheet
 
 										UnityEngine.AudioClip t_audio_clip = null;
 										try{
-											t_audio_clip = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.AudioClip>("Assets/" + t_sheet[jj].audio_assetspath);
+											t_audio_clip = Fee.EditorTool.Utility.LoadAsset<UnityEngine.AudioClip>(new File.Path(t_sheet[jj].audio_assetspath));
 											if(t_audio_clip == null){
 												Tool.Log("Convert_AudioSheet","Not Found : " + t_sheet[jj].audio_assetspath);
 												Tool.Assert(false);
@@ -97,27 +97,13 @@ namespace Fee.JsonSheet
 					{
 						UnityEngine.GameObject t_prefab = new UnityEngine.GameObject();
 
-						Fee.Audio.Pack_AudioClip t_pack = t_prefab.AddComponent<Fee.Audio.Pack_AudioClip>();
+						Fee.Audio.Pack_AudioClip_MonoBehaviour t_pack = t_prefab.AddComponent<Fee.Audio.Pack_AudioClip_MonoBehaviour>();
 						for(int ii=0;ii<t_list.Count;ii++){
 							t_pack.audioclip_list.Add(t_list[ii].Item1);
 							t_pack.volume_list.Add(t_list[ii].Item2);
 						}
 
-						try{
-							bool t_ret = false;
-
-							#if(UNITY_5)
-							if(UnityEditor.PrefabUtility.CreatePrefab("Assets/" + a_assets_path.GetPath(),t_prefab) != null){
-								t_ret = true;
-							}
-							#else
-							UnityEditor.PrefabUtility.SaveAsPrefabAsset(t_prefab,"Assets/" + a_assets_path.GetPath(),out t_ret);
-							#endif
-
-							Tool.Assert(t_ret);
-						}catch(System.Exception t_exception){
-							Tool.DebugReThrow(t_exception);
-						}
+						Fee.EditorTool.Utility.SavePrefab(t_prefab,a_assets_path);
 
 						UnityEngine.GameObject.DestroyImmediate(t_prefab);
 					}

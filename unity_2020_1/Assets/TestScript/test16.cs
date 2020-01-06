@@ -104,7 +104,7 @@ namespace TestScript
 		{
 			Debug.Log("OnRemoteCallInt : " + a_playerlist_index.ToString() + " : " + a_key.ToString() + " : " + a_value.ToString());
 
-			Fee.Network.Player t_player = Fee.Network.Network.GetInstance().GetPlayer(a_playerlist_index);
+			Fee.Network.Player_MonoBehaviour t_player = Fee.Network.Network.GetInstance().GetPlayer(a_playerlist_index);
 			if(t_player != null){
 				if(a_value == 0){
 					//白。
@@ -339,8 +339,8 @@ namespace TestScript
 				}break;
 			case Mode.Do:
 				{
-					List<Fee.Network.Player> t_list = Fee.Network.Network.GetInstance().GetPlayerList();
-					Fee.Network.Player t_myplayer = Fee.Network.Network.GetInstance().GetMyPlayer();
+					List<Fee.Network.Player_MonoBehaviour> t_list = Fee.Network.Network.GetInstance().GetPlayerList();
+					Fee.Network.Player_MonoBehaviour t_myplayer = Fee.Network.Network.GetInstance().GetMyPlayer();
 
 					this.status_text.SetText("Mode.Do : " + t_list.Count.ToString());
 
@@ -412,13 +412,13 @@ namespace TestScript
 						if(Fee.Input.Key.GetInstance().sub1.down == true){
 							//全部赤。
 
-							List<Fee.Network.Player> t_player_list = Fee.Network.Network.GetInstance().GetPlayerList();
+							List<Fee.Network.Player_MonoBehaviour> t_player_list = Fee.Network.Network.GetInstance().GetPlayerList();
 							for(int ii=0;ii<t_player_list.Count;ii++){
 								t_player_list[ii].RemoteCallInt(888,1);
 							}
 						}else if(Fee.Input.Key.GetInstance().sub2.down == true){
 							//全部白。
-							List<Fee.Network.Player> t_player_list = Fee.Network.Network.GetInstance().GetPlayerList();
+							List<Fee.Network.Player_MonoBehaviour> t_player_list = Fee.Network.Network.GetInstance().GetPlayerList();
 							for(int ii=0;ii<t_player_list.Count;ii++){
 								t_player_list[ii].RemoteCallInt(888,0);
 							}

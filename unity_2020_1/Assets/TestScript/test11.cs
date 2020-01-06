@@ -391,7 +391,7 @@ namespace TestScript
 					//オーディオクリップ。
 
 					GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.TEST11_PREFAB_SE);
-					Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
+					Fee.Audio.Pack_AudioClip_MonoBehaviour t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip_MonoBehaviour>();
 					if(t_pack_audioclip != null){
 						Fee.Audio.Audio.GetInstance().LoadSe(t_pack_audioclip,SE_ID);
 					}
@@ -411,7 +411,7 @@ namespace TestScript
 					GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.TEST11_PREFAB_BGM);
 
 					if(t_prefab != null){
-						Fee.Audio.Pack_AudioClip t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip>();
+						Fee.Audio.Pack_AudioClip_MonoBehaviour t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip_MonoBehaviour>();
 						if(t_pack_audioclip != null){
 							Fee.Audio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
 							Fee.Audio.Audio.GetInstance().PlayBgm(0);
