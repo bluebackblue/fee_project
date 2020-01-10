@@ -45,6 +45,10 @@ namespace TestScript
 		*/
 		private Fee.Render2D.Sprite2D video_sprite;
 
+		/** video_player
+		*/
+		private UnityEngine.Video.VideoPlayer video_player;
+
 		/** Start
 		*/
 		private void Start()
@@ -111,16 +115,16 @@ namespace TestScript
 				t_render_texture.Create();
 
 				//ビデオプレイヤー。
-				UnityEngine.GameObject t_gameobject = new GameObject("player");
+				UnityEngine.GameObject t_gameobject = new GameObject("videoplayer");
 				t_gameobject.AddComponent<UnityEngine.Video.VideoPlayer>();
-				UnityEngine.Video.VideoPlayer t_video_player = t_gameobject.GetComponent<UnityEngine.Video.VideoPlayer>();
-				t_video_player.renderMode = UnityEngine.Video.VideoRenderMode.RenderTexture;
-				t_video_player.isLooping = true;
-				t_video_player.playOnAwake = false;
-				t_video_player.waitForFirstFrame = true;
-				t_video_player.skipOnDrop = true;
-				t_video_player.clip = t_video_clip;
-				t_video_player.targetTexture = t_render_texture;
+				this.video_player = t_gameobject.GetComponent<UnityEngine.Video.VideoPlayer>();
+				this.video_player.renderMode = UnityEngine.Video.VideoRenderMode.RenderTexture;
+				this.video_player.isLooping = true;
+				this.video_player.playOnAwake = false;
+				this.video_player.waitForFirstFrame = true;
+				this.video_player.skipOnDrop = true;
+				this.video_player.clip = t_video_clip;
+				this.video_player.targetTexture = t_render_texture;
 
 				//表示先。
 				this.video_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,1);
@@ -146,6 +150,12 @@ namespace TestScript
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
+
+			if(Fee.Input.Mouse.GetInstance().left.down == true){
+				this.video_player.Play();
+			}else if(Fee.Input.Mouse.GetInstance().right.down == true){
+				this.video_player.Pause();
+			}
 
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_After();

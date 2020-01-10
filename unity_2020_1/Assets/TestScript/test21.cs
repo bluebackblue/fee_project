@@ -53,10 +53,6 @@ namespace TestScript
 		*/
 		private string filepath;
 
-		/** filesize_text
-		*/
-		private Fee.Render2D.Text2D filesize_text;
-
 		/** file_item
 		*/
 		private Fee.File.Item file_item;
@@ -144,12 +140,6 @@ namespace TestScript
 				this.text.SetXY(t_x,t_y);
 			}
 
-			//filesize_text
-			{
-				this.filesize_text = Fee.Render2D.Text2D.Create(this.deleter,1);
-				this.filesize_text.SetXY(50,300);
-			}
-
 			//sprite
 			{
 				this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,1);
@@ -157,6 +147,12 @@ namespace TestScript
 				this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 				this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			}
+
+			//filepath
+			this.filepath = null;
+
+			//file_item
+			this.file_item = null;
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
@@ -164,7 +160,6 @@ namespace TestScript
 		public void OnButtonClick(int a_id)
 		{
 			this.text.SetText("");
-			this.filesize_text.SetText("");
 			this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 
 			Fee.Platform.Platform.GetInstance().OpenFileDialog();
@@ -195,45 +190,30 @@ namespace TestScript
 				}
 				this.text.SetText(t_full_path);
 
-				byte[] t_data_binary = null;
-
 				if(this.file_item == null){
+					//開始。
+
 					if(this.filepath != t_full_path){
 						this.filepath = t_full_path;
 						if((this.filepath != "null")&&(this.filepath != "space")){
-
-							#if((!UNITY_EDITOR)&&(UNITY_ANDROID))
-							{
-								t_data_binary = Fee.Platform.Platform.GetInstance().LoadContentFile(new Fee.File.Path(this.filepath));
-								if(t_data_binary == null){
-									this.filesize_text.SetText("LoadContentFile == null");
-								}
-							}
-							#else
-							{
-								this.file_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadFullPathBinaryFile,new Fee.File.Path(t_full_path));
-							}
-							#endif
+							this.file_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadFullPathTextureFile,new Fee.File.Path(this.filepath));
 						}
 					}
 				}else{
-					if(this.file_item.GetResultType() != Fee.File.Item.ResultType.None){
-						t_data_binary = this.file_item.GetResultAssetBinary();
+					//バイナリ取得。
 
-						if(t_data_binary == null){
-							this.filesize_text.SetText("GetResultAssetBinary == null");
+					if(this.file_item != null){
+						if(this.file_item.GetResultType() != Fee.File.Item.ResultType.None){
+							UnityEngine.Texture2D t_texture = this.file_item.GetResultAssetTexture();
+
+							if(t_texture == null){
+								this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
+							}else{
+								this.sprite.SetTexture(t_texture);
+							}
+
+							this.file_item = null;
 						}
-
-						this.file_item = null;
-					}
-				}
-
-				if(t_data_binary != null){
-					this.filesize_text.SetText(t_data_binary.Length.ToString());
-
-					UnityEngine.Texture2D t_texture = Fee.File.BinaryToTexture2D.Convert(t_data_binary);
-					if(t_texture != null){
-						this.sprite.SetTexture(t_texture);
 					}
 				}
 			}

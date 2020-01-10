@@ -49,10 +49,6 @@ namespace TestScript
 		*/
 		private Fee.Render2D.Sprite2D sprite;
 
-		/** filesize_text
-		*/
-		private Fee.Render2D.Text2D filesize_text;
-
 		/** filepath
 		*/
 		private string filepath;
@@ -60,7 +56,6 @@ namespace TestScript
 		/** file_item
 		*/
 		private Fee.File.Item file_item;
-		private bool file_item_android;
 
 		/** Start
 		*/
@@ -145,12 +140,6 @@ namespace TestScript
 				this.text.SetXY(t_x,t_y);
 			}
 
-			//filesize_text
-			{
-				this.filesize_text = Fee.Render2D.Text2D.Create(this.deleter,1);
-				this.filesize_text.SetXY(50,300);
-			}
-
 			//sprite
 			{
 				this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,1);
@@ -164,7 +153,6 @@ namespace TestScript
 
 			//file_item
 			this.file_item = null;
-			this.file_item_android = false;
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
@@ -172,7 +160,6 @@ namespace TestScript
 		public void OnButtonClick(int a_id)
 		{
 			this.text.SetText("");
-			this.filesize_text.SetText("");
 			this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 
 			Fee.Platform.Platform.GetInstance().OpenFileDialog();
@@ -203,28 +190,13 @@ namespace TestScript
 				}
 				this.text.SetText(t_full_path);
 
-				byte[] t_data_binary = null;
-
-				if((this.file_item == null)&&(this.file_item_android == false)){
+				if(this.file_item == null){
 					//開始。
 
 					if(this.filepath != t_full_path){
 						this.filepath = t_full_path;
 						if((this.filepath != "null")&&(this.filepath != "space")){
-
-							#if((!UNITY_EDITOR)&&(UNITY_ANDROID)) || true //TODO
-							{
-								this.file_item_android = Fee.Platform.Platform.GetInstance().LoadContentFile_Start(new Fee.File.Path(this.filepath));
-
-								if(this.file_item_android == false){
-									this.filesize_text.SetText("LoadContentFile_Start == false");
-								}
-							}
-							#else
-							{
-								this.file_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadFullPathBinaryFile,new Fee.File.Path(t_full_path));
-							}
-							#endif
+							this.file_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadFullPathTextureFile,new Fee.File.Path(this.filepath));
 						}
 					}
 				}else{
@@ -232,46 +204,16 @@ namespace TestScript
 
 					if(this.file_item != null){
 						if(this.file_item.GetResultType() != Fee.File.Item.ResultType.None){
-							t_data_binary = this.file_item.GetResultAssetBinary();
+							UnityEngine.Texture2D t_texture = this.file_item.GetResultAssetTexture();
 
-							if(t_data_binary == null){
-								this.filesize_text.SetText("GetResultAssetBinary == null");
+							if(t_texture == null){
+								this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
+							}else{
+								this.sprite.SetTexture(t_texture);
 							}
 
 							this.file_item = null;
 						}
-					}else if(this.file_item_android == true){
-						#if((!UNITY_EDITOR)&&(UNITY_ANDROID)) || true //TODO
-
-						if(Fee.Platform.Platform.GetInstance().LoadContentFile_IsComplate() == true){
-
-							t_data_binary = Fee.Platform.Platform.GetInstance().LoadContentFile_GetResult();
-							if(t_data_binary != null){
-
-								Fee.Platform.Platform.GetInstance().LoadContentFile_End();
-								this.file_item_android = false;
-
-							}else{
-
-								this.filesize_text.SetText("complate == true : binary == null");
-
-							}
-						}else{
-
-							this.filesize_text.SetText("complate == false");
-
-						}
-
-						#endif
-					}
-				}
-
-				if(t_data_binary != null){
-					this.filesize_text.SetText("size = " + t_data_binary.Length.ToString());
-
-					UnityEngine.Texture2D t_texture = Fee.File.BinaryToTexture2D.Convert(t_data_binary);
-					if(t_texture != null){
-						this.sprite.SetTexture(t_texture);
 					}
 				}
 			}
