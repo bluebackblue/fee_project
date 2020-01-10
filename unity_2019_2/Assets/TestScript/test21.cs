@@ -49,17 +49,18 @@ namespace TestScript
 		*/
 		private Fee.Render2D.Sprite2D sprite;
 
-		/** filepath
-		*/
-		private string filepath;
-
 		/** filesize_text
 		*/
 		private Fee.Render2D.Text2D filesize_text;
 
+		/** filepath
+		*/
+		private string filepath;
+
 		/** file_item
 		*/
 		private Fee.File.Item file_item;
+		private bool file_item_android;
 
 		/** Start
 		*/
@@ -157,6 +158,13 @@ namespace TestScript
 				this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 				this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			}
+
+			//filepath
+			this.filepath = null;
+
+			//file_item
+			this.file_item = null;
+			this.file_item_android = false;
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
@@ -197,16 +205,19 @@ namespace TestScript
 
 				byte[] t_data_binary = null;
 
-				if(this.file_item == null){
+				if((this.file_item == null)&&(this.file_item_android == false)){
+					//開始。
+
 					if(this.filepath != t_full_path){
 						this.filepath = t_full_path;
 						if((this.filepath != "null")&&(this.filepath != "space")){
 
-							#if((!UNITY_EDITOR)&&(UNITY_ANDROID))
+							#if((!UNITY_EDITOR)&&(UNITY_ANDROID)) || true //TODO
 							{
-								t_data_binary = Fee.Platform.Platform.GetInstance().LoadContentFile(new Fee.File.Path(this.filepath));
-								if(t_data_binary == null){
-									this.filesize_text.SetText("LoadContentFile == null");
+								this.file_item_android = Fee.Platform.Platform.GetInstance().LoadContentFile_Start(new Fee.File.Path(this.filepath));
+
+								if(this.file_item_android == false){
+									this.filesize_text.SetText("LoadContentFile_Start == false");
 								}
 							}
 							#else
@@ -217,19 +228,46 @@ namespace TestScript
 						}
 					}
 				}else{
-					if(this.file_item.GetResultType() != Fee.File.Item.ResultType.None){
-						t_data_binary = this.file_item.GetResultAssetBinary();
+					//バイナリ取得。
 
-						if(t_data_binary == null){
-							this.filesize_text.SetText("GetResultAssetBinary == null");
+					if(this.file_item != null){
+						if(this.file_item.GetResultType() != Fee.File.Item.ResultType.None){
+							t_data_binary = this.file_item.GetResultAssetBinary();
+
+							if(t_data_binary == null){
+								this.filesize_text.SetText("GetResultAssetBinary == null");
+							}
+
+							this.file_item = null;
+						}
+					}else if(this.file_item_android == true){
+						#if((!UNITY_EDITOR)&&(UNITY_ANDROID)) || true //TODO
+
+						if(Fee.Platform.Platform.GetInstance().LoadContentFile_IsComplate() == true){
+
+							t_data_binary = Fee.Platform.Platform.GetInstance().LoadContentFile_GetResult();
+							if(t_data_binary != null){
+
+								Fee.Platform.Platform.GetInstance().LoadContentFile_End();
+								this.file_item_android = false;
+
+							}else{
+
+								this.filesize_text.SetText("complate == true : binary == null");
+
+							}
+						}else{
+
+							this.filesize_text.SetText("complate == false");
+
 						}
 
-						this.file_item = null;
+						#endif
 					}
 				}
 
 				if(t_data_binary != null){
-					this.filesize_text.SetText(t_data_binary.Length.ToString());
+					this.filesize_text.SetText("size = " + t_data_binary.Length.ToString());
 
 					UnityEngine.Texture2D t_texture = Fee.File.BinaryToTexture2D.Convert(t_data_binary);
 					if(t_texture != null){

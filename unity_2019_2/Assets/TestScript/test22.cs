@@ -37,6 +37,14 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** bg
+		*/
+		private Fee.Render2D.Sprite2D bg_sprite;
+
+		/** video_sprite
+		*/
+		private Fee.Render2D.Sprite2D video_sprite;
+
 		/** Start
 		*/
 		private void Start()
@@ -83,6 +91,44 @@ namespace TestScript
 
 			//戻るボタン作成。
 			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+
+			//bg
+			{
+				this.bg_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,0);
+				this.bg_sprite.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
+				this.bg_sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				this.bg_sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
+				this.bg_sprite.SetColor(1.0f,0.0f,0.0f,1.0f);
+			}
+			
+			{
+				//ビデオリクップ。
+				UnityEngine.Video.VideoClip t_video_clip = UnityEngine.Resources.Load<UnityEngine.Video.VideoClip>("Test22/video");
+
+				//レンダーテクスチャ。
+				UnityEngine.RenderTexture t_render_texture;
+				t_render_texture = new RenderTexture(Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H,0,UnityEngine.RenderTextureFormat.RGB565,UnityEngine.RenderTextureReadWrite.Default);
+				t_render_texture.Create();
+
+				//ビデオプレイヤー。
+				UnityEngine.GameObject t_gameobject = new GameObject("player");
+				t_gameobject.AddComponent<UnityEngine.Video.VideoPlayer>();
+				UnityEngine.Video.VideoPlayer t_video_player = t_gameobject.GetComponent<UnityEngine.Video.VideoPlayer>();
+				t_video_player.renderMode = UnityEngine.Video.VideoRenderMode.RenderTexture;
+				t_video_player.isLooping = true;
+				t_video_player.playOnAwake = false;
+				t_video_player.waitForFirstFrame = true;
+				t_video_player.skipOnDrop = true;
+				t_video_player.clip = t_video_clip;
+				t_video_player.targetTexture = t_render_texture;
+
+				//表示先。
+				this.video_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,1);
+				this.video_sprite.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
+				this.video_sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				this.video_sprite.SetTexture(t_render_texture);
+				this.video_sprite.SetColor(1.0f,1.0f,1.0f,1.0f);
+			}
 		}
 
 		/** FixedUpdate
