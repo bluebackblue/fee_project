@@ -162,7 +162,13 @@ namespace TestScript
 			this.text.SetText("");
 			this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 
-			Fee.Platform.Platform.GetInstance().OpenFileDialog();
+			//title
+			string t_title = "Open File";
+
+			//extension
+			string t_extension = Fee.Platform.Platform.GetInstance().CreateOpenFileDialogExtension(new string[]{"jpg","png","bmp"});
+			
+			Fee.Platform.Platform.GetInstance().OpenFileDialog(t_title,t_extension);
 		}
 
 		/** FixedUpdate

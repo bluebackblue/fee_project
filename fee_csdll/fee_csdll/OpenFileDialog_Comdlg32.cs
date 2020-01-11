@@ -97,19 +97,19 @@ namespace FeeCsDll
 	{
 		/** Open
 		*/
-		public static string Open()
+		public static string Open(string a_title,string a_extension)
 		{
 			string t_filename = "";
 
 			try{
 				Impl.OpenFileNameClass t_dialog = new Impl.OpenFileNameClass();
 
-				t_dialog.filter = "すべてのファイル\0*.*\0\0";
-				t_dialog.file = new string('\0', 4096);
+				t_dialog.filter = a_extension;
+				t_dialog.file = new string('\0',4096);
 				t_dialog.maxFile = t_dialog.file.Length;
-				t_dialog.fileTitle = new string('\0', 256);
+				t_dialog.fileTitle = new string('\0',256);
 				t_dialog.maxFileTitle = t_dialog.fileTitle.Length;
-				t_dialog.title = "ファイルを開く";
+				t_dialog.title = a_title;
 				t_dialog.flags = Impl.OpenFileNameClass.OFN_EXPLORER | Impl.OpenFileNameClass.OFN_FILEMUSTEXIST | Impl.OpenFileNameClass.OFN_PATHMUSTEXIST | Impl.OpenFileNameClass.OFN_NOCHANGEDIR;
 
 				if(Impl.OpenFileNameClass.GetOpenFileName(t_dialog) == true){

@@ -106,9 +106,6 @@ namespace TestScript
 			}
 			
 			{
-				//ビデオリクップ。
-				UnityEngine.Video.VideoClip t_video_clip = UnityEngine.Resources.Load<UnityEngine.Video.VideoClip>("Test22/video");
-
 				//レンダーテクスチャ。
 				UnityEngine.RenderTexture t_render_texture;
 				t_render_texture = new RenderTexture(Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H,0,UnityEngine.RenderTextureFormat.RGB565,UnityEngine.RenderTextureReadWrite.Default);
@@ -123,8 +120,9 @@ namespace TestScript
 				this.video_player.playOnAwake = false;
 				this.video_player.waitForFirstFrame = true;
 				this.video_player.skipOnDrop = true;
-				this.video_player.clip = t_video_clip;
 				this.video_player.targetTexture = t_render_texture;
+				this.video_player.source = UnityEngine.Video.VideoSource.Url;
+				this.video_player.url = Fee.File.Path.CreateStreamingAssetsPath(new Fee.File.Path("Test22/video.mp4")).GetPath();
 
 				//表示先。
 				this.video_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,1);
@@ -153,8 +151,12 @@ namespace TestScript
 
 			if(Fee.Input.Mouse.GetInstance().left.down == true){
 				this.video_player.Play();
+
+				UnityEngine.Debug.Log("Play");
 			}else if(Fee.Input.Mouse.GetInstance().right.down == true){
 				this.video_player.Pause();
+
+				UnityEngine.Debug.Log("Pause");
 			}
 
 			//２Ｄ描画。
