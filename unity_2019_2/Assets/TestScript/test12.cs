@@ -42,6 +42,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** ButtonId
 		*/
 		public enum ButtonId
@@ -100,7 +104,7 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Scroll_Item(Fee.Deleter.Deleter a_deleter,test12 a_this,ButtonId a_click_id)
+			public Scroll_Item(Fee.Deleter.Deleter a_deleter,UnityEngine.Texture2D a_texture,test12 a_this,ButtonId a_click_id)
 			{
 				this.button = new Fee.Ui.Button(a_deleter,1);
 				this.button.SetOnButtonClick(a_this,a_click_id);
@@ -108,10 +112,10 @@ namespace TestScript
 				this.button.SetDragCancelFlag(true);
 				this.button.SetText(a_click_id.ToString());
 				this.button.SetTextureCornerSize(10);
-				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetNormalTexture(a_texture);
+				this.button.SetOnTexture(a_texture);
+				this.button.SetDownTexture(a_texture);
+				this.button.SetLockTexture(a_texture);
 				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -220,20 +224,30 @@ namespace TestScript
 			Fee.Data.Config.LOG_ENABLE = true;
 			Fee.Data.Data.CreateInstance();
 
+			//アセットバンドルリスト。インスタンス作成。
+			Fee.AssetBundleList.AssetBundleList.CreateInstance();
+
 			//ファイル。インスタンス作成。
 			Fee.File.File.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//drawpriority
 			int t_layerindex = 0;
@@ -244,15 +258,15 @@ namespace TestScript
 				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,t_drawpriority,Fee.Ui.Scroll_Type.Vertical,30);
 				this.scroll.SetRect(50,50,350,350);
 				
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Resources_Prefab));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Resources_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Resources_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.StreamingAssets_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.StreamingAssets_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.StreamingAssets_Binary));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Url_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Url_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.Url_Binary));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Prefab));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Binary));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Binary));
 			}
 
 			//item
@@ -271,12 +285,15 @@ namespace TestScript
 
 			//データリスト。
 			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextAssetList");
+				Fee.Instantiate.TextAssetList t_textasset_list = new Fee.Instantiate.TextAssetList(t_prefab.GetComponent<Fee.Instantiate.TextAssetList_MonoBehaviour>());
+
 				#if(UNITY_EDITOR)
-				//リソース強制使用。
-				UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Editor/Test12/debug_data");
+				//アセットバンドルを使用しない。
+				UnityEngine.TextAsset t_textasset = t_textasset_list.GetTextAsset("TEST12_DATA_DEBUG");
 				#else
-				//アセットバンドル使用。
-				UnityEngine.TextAsset t_textasset = UnityEngine.Resources.Load<UnityEngine.TextAsset>("Test12/release_data");
+				//アセットバンドルを使用する。
+				UnityEngine.TextAsset t_textasset = t_textasset_list.GetTextAsset("TEST12_DATA_RELEASE");
 				#endif
 
 				if(t_textasset != null){
@@ -286,6 +303,30 @@ namespace TestScript
 						Fee.Data.Data.GetInstance().RegistDataList(t_data_list);
 					}
 				}
+			}
+
+			//アセットバンドルリスト。
+			{
+				#if(UNITY_EDITOR)
+				{
+					#if(UNITY_EDITOR) && false
+					{
+						//ダミーアセットバンドル。
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsPathDummyAssetBundle,new Fee.File.Path("Editor/data/create_from_excel_dummyassetbundle_test.assetbundle.json"));
+					}
+					#else
+					{
+						//ストリーミングアセット。
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.StreamingAssetsAssetBundle,new Fee.File.Path("AssetBundle_StandaloneWindows/test"));
+					}
+					#endif
+				}
+				#else
+				{
+					//ストリーミングアセット。
+					Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.StreamingAssetsAssetBundle,new Fee.File.Path("AssetBundle_StandaloneWindows/test"));
+				}
+				#endif
 			}
 		}
 
@@ -366,6 +407,9 @@ namespace TestScript
 			//データ。
 			Fee.Data.Data.GetInstance().Main();
 
+			//アセットバンドルリスト。
+			Fee.AssetBundleList.AssetBundleList.CreateInstance();
+
 			//ファイル。
 			Fee.File.File.GetInstance().Main();
 
@@ -419,30 +463,6 @@ namespace TestScript
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
 		}
-
-		/** シーンリスト初期化。
-		*/
-		#if(UNITY_EDITOR)
-		[UnityEditor.MenuItem("Fee/Test/Test12/ConvertFromExcel")]
-		private static void MenuItem_ConvertFromExcel()
-		{
-			//エクセルからＪＳＯＮシートを作成。
-			Fee.Excel.ExcelToJsonSheet t_excel_to_jsonsheet = new Fee.Excel.ExcelToJsonSheet();
-			if(t_excel_to_jsonsheet.Convert(Fee.File.Path.CreateAssetsPath(Data.Assets.EXCEL)) == true){
-				Fee.JsonItem.JsonItem t_jsonsheet = t_excel_to_jsonsheet.GetJsonSheet();
-				if(t_jsonsheet != null){
-					//コンバート。
-					if(Fee.JsonSheet.JsonSheet.ConvertFromJsonSheet(t_jsonsheet) == false){
-						UnityEngine.Debug.LogError("faild");
-					}
-				}else{
-					UnityEngine.Debug.LogError("faild");
-				}
-			}else{
-				UnityEngine.Debug.LogError("faild");
-			}
-		}
-		#endif
 
 		/** 削除前。
 		*/

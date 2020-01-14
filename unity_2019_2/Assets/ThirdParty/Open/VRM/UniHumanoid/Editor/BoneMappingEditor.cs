@@ -9,7 +9,7 @@ using UnityEngine;
 namespace UniHumanoid
 {
     [CustomEditor(typeof(BoneMapping))]
-    public class BoneMappingEditor : Editor
+    public class BoneMappingEditor : UnityEditor.Editor
     {
         BoneMapping m_target;
 

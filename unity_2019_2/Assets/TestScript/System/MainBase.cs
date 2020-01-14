@@ -49,7 +49,7 @@ namespace TestScript
 
 		/** 戻るボタン作成。
 		*/
-		public void CreateReturnButton(Fee.Deleter.Deleter a_deleter,long a_drawpriority,string a_text)
+		public void CreateReturnButton(Fee.Deleter.Deleter a_deleter,UnityEngine.Texture2D a_texture,long a_drawpriority,string a_text)
 		{
 			this.return_button = new Fee.Ui.Button(a_deleter,a_drawpriority);
 			this.return_button.SetOnButtonClick(this,this);
@@ -57,10 +57,10 @@ namespace TestScript
 			this.return_button.SetRect(0,0,80,40);
 			this.return_button.SetFontSize(10);
 			this.return_button.SetTextureCornerSize(10);
-			this.return_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.return_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.return_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.return_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.return_button.SetNormalTexture(a_texture);
+			this.return_button.SetOnTexture(a_texture);
+			this.return_button.SetDownTexture(a_texture);
+			this.return_button.SetLockTexture(a_texture);
 			this.return_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.return_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.return_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);

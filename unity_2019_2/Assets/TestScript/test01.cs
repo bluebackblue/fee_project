@@ -47,6 +47,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** スプライト。
 		*/
 		private Fee.Render2D.Sprite2D sprite;
@@ -118,16 +122,23 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//レイヤインデックス。
 			int t_layerindex = 0;
@@ -258,10 +269,10 @@ namespace TestScript
 				this.button_log.SetRect(t_xx,t_yy,80,50);
 				this.button_log.SetText("Log");
 				this.button_log.SetTextureCornerSize(10);
-				this.button_log.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_log.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_log.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_log.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_log.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_log.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_log.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_log.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.button_log.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button_log.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_log.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -274,10 +285,10 @@ namespace TestScript
 				this.button_logerror.SetRect(t_xx,t_yy,80,50);
 				this.button_logerror.SetText("LogError");
 				this.button_logerror.SetTextureCornerSize(10);
-				this.button_logerror.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_logerror.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_logerror.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_logerror.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_logerror.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_logerror.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_logerror.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_logerror.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.button_logerror.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button_logerror.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_logerror.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -290,10 +301,10 @@ namespace TestScript
 				this.button_assert.SetRect(t_xx,t_yy,80,50);
 				this.button_assert.SetText("Assert");
 				this.button_assert.SetTextureCornerSize(10);
-				this.button_assert.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_assert.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_assert.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_assert.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_assert.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_assert.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_assert.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_assert.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.button_assert.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button_assert.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_assert.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -344,8 +355,6 @@ namespace TestScript
 			{
 				this.line.SetRect(new Fee.Geometry.Rect2D_A<int>(Fee.Render2D.Config.VIRTUAL_W / 2,Fee.Render2D.Config.VIRTUAL_H / 2,Fee.Input.Mouse.GetInstance().cursor.pos.x,Fee.Input.Mouse.GetInstance().cursor.pos.y));
 			}
-
-
 
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_After();

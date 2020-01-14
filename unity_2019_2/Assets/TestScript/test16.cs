@@ -40,6 +40,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** ステータス。
 		*/
 		private Fee.Render2D.Text2D status_text;
@@ -163,16 +167,30 @@ namespace TestScript
 			Fee.Network.Network.GetInstance().SetRecvCallBack(this);
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
+			}
+
+			//プレハブリスト。
+			Fee.Instantiate.PrefabList t_prefablist;
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("PrefabList");
+				t_prefablist = new Fee.Instantiate.PrefabList(t_prefab.GetComponent<Fee.Instantiate.PrefabList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//layerindex
 			int t_layerindex = 0;
@@ -202,11 +220,9 @@ namespace TestScript
 
 			//player_list
 			{
-				GameObject t_prefab = Resources.Load<GameObject>(Data.Resources.PREFAB_CUBE);
-
 				this.player_list = new GameObject[8];
 				for(int ii=0;ii<this.player_list.Length;ii++){
-					this.player_list[ii] = GameObject.Instantiate(t_prefab);
+					this.player_list[ii] = GameObject.Instantiate(t_prefablist.GetGetPrefab("TEST16_CUBE"));
 					this.player_list[ii].SetActive(false);
 				}
 			}
@@ -218,17 +234,15 @@ namespace TestScript
 				int t_x = 100;
 				int t_y = 300;
 
-				Texture2D t_texture = Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON);
-
 				this.start_button = new Fee.Ui.Button(this.deleter,t_drawpriority);
 				this.start_button.SetOnButtonClick(this,ButtonId.Start);
 				this.start_button.SetRect(t_x,t_y,t_w,t_h);
 				this.start_button.SetText("接続");
 				this.start_button.SetVisible(false);
-				this.start_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.start_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.start_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.start_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.start_button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.start_button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.start_button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.start_button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.start_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.start_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.start_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -247,10 +261,10 @@ namespace TestScript
 				this.end_button.SetRect(t_x,t_y,t_w,t_h);
 				this.end_button.SetText("切断");
 				this.end_button.SetVisible(false);
-				this.end_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.end_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.end_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.end_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.end_button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.end_button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.end_button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.end_button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.end_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.end_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.end_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);

@@ -40,6 +40,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** パーセプトロン。
 		*/
 		private Fee.Perceptron.Perceptron perceptron;
@@ -245,16 +249,23 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//パーセプトロン。
 			this.perceptron = new Fee.Perceptron.Perceptron(4,4,0,2);
@@ -274,10 +285,10 @@ namespace TestScript
 				this.backpropagation_button.SetText("BackPropagation");
 				this.backpropagation_button.SetTextureCornerSize(10);
 				this.backpropagation_button.SetFontSize(13);
-				this.backpropagation_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.backpropagation_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.backpropagation_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.backpropagation_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.backpropagation_button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.backpropagation_button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.backpropagation_button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.backpropagation_button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.backpropagation_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.backpropagation_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.backpropagation_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -412,15 +423,15 @@ namespace TestScript
 			this.backpropagation_flag ^= true;
 
 			if(this.backpropagation_flag == true){
-				this.backpropagation_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON_ACTIVE));
-				this.backpropagation_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON_ACTIVE));
-				this.backpropagation_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON_ACTIVE));
-				this.backpropagation_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON_ACTIVE));
+				this.backpropagation_button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON_ACTIVE"));
+				this.backpropagation_button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON_ACTIVE"));
+				this.backpropagation_button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON_ACTIVE"));
+				this.backpropagation_button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON_ACTIVE"));
 			}else{
-				this.backpropagation_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.backpropagation_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.backpropagation_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.backpropagation_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.backpropagation_button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.backpropagation_button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.backpropagation_button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.backpropagation_button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			}
 		}
 

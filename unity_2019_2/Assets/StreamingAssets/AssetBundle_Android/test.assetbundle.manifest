@@ -1,0 +1,30 @@
+ManifestFileVersion: 0
+CRC: 2400523796
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 345f3b0557f5e773b7ed133645345faa
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 4783a5997207c69014d62b07983c9d7a
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Editor/Resources/Test12/text.txt
+- Assets/Editor/Resources/Test12/cube.prefab
+- Assets/Editor/Resources/Test12/texture.png
+Dependencies: []

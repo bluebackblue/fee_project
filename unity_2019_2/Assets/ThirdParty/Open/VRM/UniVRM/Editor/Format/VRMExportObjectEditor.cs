@@ -6,7 +6,7 @@ using UnityEngine;
 namespace VRM
 {
     [CustomEditor(typeof(VRMExportObject))]
-    public class VRMExportObjectEditor : Editor
+    public class VRMExportObjectEditor : UnityEditor.Editor
     {
         SerializedProperty m_settings;
         VRMExportObject m_target;

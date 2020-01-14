@@ -48,6 +48,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** SoundPool_Mode
 		*/
 		private enum SoundPool_Mode
@@ -181,16 +185,23 @@ namespace TestScript
 			Fee.EventPlate.EventPlate.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//サウンドプールモード。
 			this.soundpool_mode = SoundPool_Mode.Wait;
@@ -217,10 +228,10 @@ namespace TestScript
 			this.button_unload.SetOnButtonClick(this,ButtonId.Unload);
 			this.button_unload.SetRect(t_xx,130,170,30);
 			this.button_unload.SetText("アンロード");
-			this.button_unload.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_unload.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_unload.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_unload.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_unload.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_unload.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_unload.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_unload.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.button_unload.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_unload.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_unload.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -233,10 +244,10 @@ namespace TestScript
 			this.button_assetbundle.SetOnButtonClick(this,ButtonId.AudioClip);
 			this.button_assetbundle.SetRect(t_xx,130,170,30);
 			this.button_assetbundle.SetText("AudioClip SE");
-			this.button_assetbundle.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_assetbundle.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_assetbundle.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_assetbundle.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_assetbundle.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_assetbundle.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_assetbundle.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_assetbundle.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.button_assetbundle.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_assetbundle.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_assetbundle.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -249,10 +260,10 @@ namespace TestScript
 			this.button_soundpool.SetOnButtonClick(this,ButtonId.SoundPool);
 			this.button_soundpool.SetRect(t_xx,130,170,30);
 			this.button_soundpool.SetText("SoundPool SE");
-			this.button_soundpool.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_soundpool.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_soundpool.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_soundpool.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_soundpool.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_soundpool.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_soundpool.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_soundpool.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.button_soundpool.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_soundpool.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_soundpool.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -265,10 +276,10 @@ namespace TestScript
 			this.button_bgm.SetOnButtonClick(this,ButtonId.Bgm);
 			this.button_bgm.SetRect(t_xx,130,170,30);
 			this.button_bgm.SetText("ＢＧＭ");
-			this.button_bgm.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_bgm.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_bgm.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_bgm.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_bgm.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_bgm.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_bgm.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_bgm.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.button_bgm.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_bgm.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_bgm.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -283,16 +294,17 @@ namespace TestScript
 			this.slider_master.SetValue(0.0f);
 			this.slider_master.SetButtonSize(10,80);
 			this.slider_master.SetButtonTextureCornerSize(2);
-			this.slider_master.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_master.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_master.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_master.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_master.SetTextureCornerSize(10);
+			this.slider_master.SetBgNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+			this.slider_master.SetBgLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
+			this.slider_master.SetValueNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+			this.slider_master.SetValueLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
 			this.slider_master.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.slider_master.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.slider_master.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 			this.slider_master.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-			this.slider_master.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.slider_master.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.slider_master.SetButtonNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.slider_master.SetButtonLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.slider_master.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.slider_master.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
@@ -305,16 +317,17 @@ namespace TestScript
 			this.slider_bgm.SetValue(0.0f);
 			this.slider_bgm.SetButtonSize(10,80);
 			this.slider_bgm.SetButtonTextureCornerSize(2);
-			this.slider_bgm.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_bgm.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_bgm.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_bgm.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_bgm.SetTextureCornerSize(10);
+			this.slider_bgm.SetBgNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+			this.slider_bgm.SetBgLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
+			this.slider_bgm.SetValueNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+			this.slider_bgm.SetValueLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
 			this.slider_bgm.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.slider_bgm.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.slider_bgm.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 			this.slider_bgm.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-			this.slider_bgm.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.slider_bgm.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.slider_bgm.SetButtonNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.slider_bgm.SetButtonLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.slider_bgm.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.slider_bgm.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
@@ -327,16 +340,17 @@ namespace TestScript
 			this.slider_se.SetValue(0.0f);
 			this.slider_se.SetButtonSize(10,80);
 			this.slider_se.SetButtonTextureCornerSize(2);
-			this.slider_se.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_se.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_se.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-			this.slider_se.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+			this.slider_se.SetTextureCornerSize(10);
+			this.slider_se.SetBgNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+			this.slider_se.SetBgLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
+			this.slider_se.SetValueNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+			this.slider_se.SetValueLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
 			this.slider_se.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.slider_se.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.slider_se.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 			this.slider_se.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-			this.slider_se.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.slider_se.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.slider_se.SetButtonNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.slider_se.SetButtonLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.slider_se.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.slider_se.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
@@ -390,10 +404,37 @@ namespace TestScript
 				{
 					//オーディオクリップ。
 
-					GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.TEST11_PREFAB_SE);
-					Fee.Audio.Pack_AudioClip_MonoBehaviour t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip_MonoBehaviour>();
-					if(t_pack_audioclip != null){
-						Fee.Audio.Audio.GetInstance().LoadSe(t_pack_audioclip,SE_ID);
+					GameObject t_prefab = UnityEngine.Resources.Load<GameObject>("PrefabList");
+					Fee.Instantiate.PrefabList t_prefablist = new Fee.Instantiate.PrefabList(t_prefab.GetComponent<Fee.Instantiate.PrefabList_MonoBehaviour>());
+					Fee.Instantiate.AudioClipList_MonoBehaviour t_audioclip_list = t_prefablist.GetGetPrefab("TEST11_SE").GetComponent<Fee.Instantiate.AudioClipList_MonoBehaviour>();
+					Fee.Instantiate.AudioVolumeList_MonoBehaviour t_audiovolume_list = t_prefablist.GetGetPrefab("TEST11_SE").GetComponent<Fee.Instantiate.AudioVolumeList_MonoBehaviour>();
+
+					if(t_audioclip_list != null){
+
+						//ボリュームリスト。作成。
+						System.Collections.Generic.Dictionary<string,float> t_volume_list = new Dictionary<string, float>();
+						if(t_audiovolume_list != null){
+							for(int ii=0;ii<t_audiovolume_list.tag_list.Length;ii++){
+								t_volume_list.Add(t_audiovolume_list.tag_list[ii],t_audiovolume_list.audiovolume_list[ii]);
+							}
+						}
+
+						//パック作成。
+						Fee.Audio.Pack_AudioClip t_pack = new Fee.Audio.Pack_AudioClip();
+						for(int ii=0;ii<t_audioclip_list.tag_list.Length;ii++){
+							UnityEngine.AudioClip t_audioclip = t_audioclip_list.audioclip_list[ii];
+
+							float t_volume;
+							if(t_volume_list.TryGetValue(t_audioclip_list.tag_list[ii],out t_volume) == false){
+								t_volume = 1.0f;
+							}
+
+							t_pack.audioclip_list.Add(t_audioclip);
+							t_pack.volume_list.Add(t_volume);
+						}
+
+						//ロード。
+						Fee.Audio.Audio.GetInstance().LoadSe(new Fee.Audio.Bank(t_pack),SE_ID);
 					}
 				}break;
 			case ButtonId.SoundPool:
@@ -408,16 +449,41 @@ namespace TestScript
 				{
 					//ＢＧＭ。
 
-					GameObject t_prefab = UnityEngine.Resources.Load<GameObject>(Data.Resources.TEST11_PREFAB_BGM);
+					GameObject t_prefab = UnityEngine.Resources.Load<GameObject>("PrefabList");
+					Fee.Instantiate.PrefabList t_prefablist = new Fee.Instantiate.PrefabList(t_prefab.GetComponent<Fee.Instantiate.PrefabList_MonoBehaviour>());
+					Fee.Instantiate.AudioClipList_MonoBehaviour t_audioclip_list = t_prefablist.GetGetPrefab("TEST11_BGM").GetComponent<Fee.Instantiate.AudioClipList_MonoBehaviour>();
+					Fee.Instantiate.AudioVolumeList_MonoBehaviour t_audiovolume_list = t_prefablist.GetGetPrefab("TEST11_BGM").GetComponent<Fee.Instantiate.AudioVolumeList_MonoBehaviour>();
 
-					if(t_prefab != null){
-						Fee.Audio.Pack_AudioClip_MonoBehaviour t_pack_audioclip = t_prefab.GetComponent<Fee.Audio.Pack_AudioClip_MonoBehaviour>();
-						if(t_pack_audioclip != null){
-							Fee.Audio.Audio.GetInstance().LoadBgm(t_pack_audioclip);
-							Fee.Audio.Audio.GetInstance().PlayBgm(0);
+					if(t_audioclip_list != null){
+
+						//ボリュームリスト。作成。
+						System.Collections.Generic.Dictionary<string,float> t_volume_list = new Dictionary<string, float>();
+						if(t_audiovolume_list != null){
+							for(int ii=0;ii<t_audiovolume_list.tag_list.Length;ii++){
+								t_volume_list.Add(t_audiovolume_list.tag_list[ii],t_audiovolume_list.audiovolume_list[ii]);
+							}
 						}
-					}
 
+						//パック作成。
+						Fee.Audio.Pack_AudioClip t_pack = new Fee.Audio.Pack_AudioClip();
+						for(int ii=0;ii<t_audioclip_list.tag_list.Length;ii++){
+							UnityEngine.AudioClip t_audioclip = t_audioclip_list.audioclip_list[ii];
+
+							float t_volume;
+							if(t_volume_list.TryGetValue(t_audioclip_list.tag_list[ii],out t_volume) == false){
+								t_volume = 1.0f;
+							}
+
+							t_pack.audioclip_list.Add(t_audioclip);
+							t_pack.volume_list.Add(t_volume);
+						}
+
+						//ロード。
+						Fee.Audio.Audio.GetInstance().LoadBgm(new Fee.Audio.Bank(t_pack));
+
+						//再生。
+						Fee.Audio.Audio.GetInstance().PlayBgm(0);
+					}
 				}break;
 			}
 		}
@@ -469,7 +535,7 @@ namespace TestScript
 									this.soundpool_mode = SoundPool_Mode.Wait;
 								}else{
 									//成功。
-									Fee.Audio.Audio.GetInstance().LoadSe(t_pack_soundpool,SE_ID);
+									Fee.Audio.Audio.GetInstance().LoadSe(new Fee.Audio.Bank(t_pack_soundpool),SE_ID);
 									this.status.SetText("Success");
 									this.soundpool_loaditem = null;
 									this.soundpool_mode = SoundPool_Mode.Wait;

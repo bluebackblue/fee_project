@@ -8,7 +8,7 @@ using System.Linq;
 namespace VRM
 {
     [CustomEditor(typeof(VRMLookAtHead))]
-    public class VRMLookAtHeadEditor : Editor
+    public class VRMLookAtHeadEditor : UnityEditor.Editor
     {
         VRMLookAtHead m_target;
         PreviewRenderUtility m_previewRenderUtility;

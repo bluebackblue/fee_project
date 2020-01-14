@@ -7,7 +7,7 @@ using System.Linq;
 namespace VRM
 {
     [CustomEditor(typeof(VRMBlendShapeProxy))]
-    public class VRMBlendShapeProxyEditor : Editor
+    public class VRMBlendShapeProxyEditor : UnityEditor.Editor
     {
         VRMBlendShapeProxy m_target;
         SkinnedMeshRenderer[] m_renderers;
