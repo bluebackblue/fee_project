@@ -40,6 +40,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** Item
 		*/
 		private class Item : Fee.Ui.OnButtonClick_CallBackInterface<Item.ButtonID>
@@ -83,7 +87,7 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Item(int a_index,Fee.Deleter.Deleter a_deleter)
+			public Item(int a_index,UnityEngine.Texture2D a_texture,Fee.Deleter.Deleter a_deleter)
 			{
 				//task
 				this.task = null;
@@ -101,10 +105,10 @@ namespace TestScript
 					this.button_start = new Fee.Ui.Button(a_deleter,1);
 					this.button_start.SetOnButtonClick(this,ButtonID.Start);
 					this.button_start.SetTextureCornerSize(10);
-					this.button_start.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button_start.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button_start.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button_start.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.button_start.SetNormalTexture(a_texture);
+					this.button_start.SetOnTexture(a_texture);
+					this.button_start.SetDownTexture(a_texture);
+					this.button_start.SetLockTexture(a_texture);
 					this.button_start.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.button_start.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 					this.button_start.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -123,10 +127,10 @@ namespace TestScript
 					this.button_end = new Fee.Ui.Button(a_deleter,1);
 					this.button_end.SetOnButtonClick(this,ButtonID.End);
 					this.button_end.SetTextureCornerSize(10);
-					this.button_end.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button_end.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button_end.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.button_end.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.button_end.SetNormalTexture(a_texture);
+					this.button_end.SetOnTexture(a_texture);
+					this.button_end.SetDownTexture(a_texture);
+					this.button_end.SetLockTexture(a_texture);
 					this.button_end.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.button_end.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 					this.button_end.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -254,20 +258,27 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			this.list = new Item[3];
 			for(int ii=0;ii<this.list.Length;ii++){
-				this.list[ii] = new Item(ii,this.deleter);
+				this.list[ii] = new Item(ii,this.texturelist.GetTexture("UI_BUTTON"),this.deleter);
 			}
 		}
 

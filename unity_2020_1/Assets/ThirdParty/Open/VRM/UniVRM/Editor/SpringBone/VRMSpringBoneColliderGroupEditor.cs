@@ -6,7 +6,7 @@ using UnityEngine;
 namespace VRM
 {
     [CustomEditor(typeof(VRMSpringBoneColliderGroup))]
-    public class VRMSpringBoneColliderGroupEditor : Editor
+    public class VRMSpringBoneColliderGroupEditor : UnityEditor.Editor
     {
         VRMSpringBoneColliderGroup m_target;
 

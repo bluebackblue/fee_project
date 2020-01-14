@@ -66,6 +66,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** step
 		*/
 		private Step step;
@@ -135,18 +139,6 @@ namespace TestScript
 			Signature,
 		}
 
-		/** 公開鍵秘密鍵作成。
-		*/
-		#if(UNITY_EDITOR)
-		[UnityEditor.MenuItem("Fee/Test/Test07/MakePublicKeyPrivateKey")]
-		private static void MenuItem_MakePublicKeyPrivateKey()
-		{
-			Fee.File.Path t_path_public = Fee.File.Path.CreateAssetsPath(Data.Resources.TEST07_KEY_PUBLIC_ASSETSPATH);
-			Fee.File.Path t_path_private = Fee.File.Path.CreateAssetsPath(Data.Resources.TEST07_KEY_PRIVATE_ASSETSPATH);
-			Fee.EditorTool.Crypt.MakePublicKeyPrivateKey(t_path_public,t_path_private);
-		}
-		#endif
-
 		/** Start
 		*/
 		private void Start()
@@ -184,16 +176,23 @@ namespace TestScript
 			Fee.Crypt.Crypt.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//step
 			this.step = Step.None;
@@ -204,10 +203,10 @@ namespace TestScript
 			this.button_key.SetRect(100 + 200 * 0,100,150,50);
 			this.button_key.SetText("公開鍵");
 			this.button_key.SetTextureCornerSize(10);
-			this.button_key.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_key.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_key.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_key.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_key.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_key.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_key.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_key.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.button_key.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_key.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_key.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -219,10 +218,10 @@ namespace TestScript
 			this.button_pass.SetRect(100 + 200 * 1,100,150,50);
 			this.button_pass.SetText("共通鍵");
 			this.button_pass.SetTextureCornerSize(10);
-			this.button_pass.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_pass.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_pass.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_pass.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_pass.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_pass.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_pass.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_pass.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.button_pass.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_pass.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_pass.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -234,10 +233,10 @@ namespace TestScript
 			this.button_signature.SetRect(100 + 200 * 2,100,150,50);
 			this.button_signature.SetText("証明書");
 			this.button_signature.SetTextureCornerSize(10);
-			this.button_signature.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_signature.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_signature.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button_signature.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button_signature.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_signature.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_signature.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_signature.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.button_signature.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_signature.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_signature.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -274,8 +273,15 @@ namespace TestScript
 				switch(a_id){
 				case ButtonId.Key:
 					{
+						//テキストアセットリスト。
+						Fee.Instantiate.TextAssetList t_textassetlist;
+						{
+							UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextAssetList");
+							t_textassetlist = new Fee.Instantiate.TextAssetList(t_prefab.GetComponent<Fee.Instantiate.TextAssetList_MonoBehaviour>());
+						}
+
 						//public
-						Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.TEST07_KEY_PUBLIC).text);
+						Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(t_textassetlist.GetTextAsset("TEST07_PUBLIC_KEY").text);
 						this.public_key = null;
 						if(t_item_public != null){
 							if(t_item_public.IsAssociativeArray() == true){
@@ -286,7 +292,7 @@ namespace TestScript
 						}
 
 						//private
-						Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.TEST07_KEY_PRIVATE).text);
+						Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(t_textassetlist.GetTextAsset("TEST07_PRIVATE_KEY").text);
 						this.private_key = null;
 						if(t_item_private != null){
 							if(t_item_private.IsAssociativeArray() == true){
@@ -307,8 +313,15 @@ namespace TestScript
 					}break;
 				case ButtonId.Signature:
 					{
+						//テキストアセットリスト。
+						Fee.Instantiate.TextAssetList t_textassetlist;
+						{
+							UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextAssetList");
+							t_textassetlist = new Fee.Instantiate.TextAssetList(t_prefab.GetComponent<Fee.Instantiate.TextAssetList_MonoBehaviour>());
+						}
+
 						//public
-						Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.TEST07_KEY_PUBLIC).text);
+						Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(t_textassetlist.GetTextAsset("TEST07_PUBLIC_KEY").text);
 						this.public_key = null;
 						if(t_item_public != null){
 							if(t_item_public.IsAssociativeArray() == true){
@@ -319,7 +332,7 @@ namespace TestScript
 						}
 
 						//private
-						Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(Resources.Load<TextAsset>(Data.Resources.TEST07_KEY_PRIVATE).text);
+						Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(t_textassetlist.GetTextAsset("TEST07_PRIVATE_KEY").text);
 						this.private_key = null;
 						if(t_item_private != null){
 							if(t_item_private.IsAssociativeArray() == true){

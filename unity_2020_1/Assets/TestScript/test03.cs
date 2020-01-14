@@ -62,7 +62,7 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Window(string a_label,int a_index)
+			public Window(string a_label,int a_index,UnityEngine.Texture2D a_texture)
 			{
 				//新規作成の場合に設定する矩形。
 				Fee.Geometry.Rect2D_R<int> t_new_rect = new Fee.Geometry.Rect2D_R<int>(100 + a_index * 30,100 + a_index * 30,300,300);
@@ -124,10 +124,10 @@ namespace TestScript
 				this.close_button.SetText("x");
 				this.close_button.SetTextureCornerSize(10);
 				this.close_button.SetWH(this.window.GetTitleBarH(),this.window.GetTitleBarH());
-				this.close_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.close_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.close_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.close_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.close_button.SetNormalTexture(a_texture);
+				this.close_button.SetOnTexture(a_texture);
+				this.close_button.SetDownTexture(a_texture);
+				this.close_button.SetLockTexture(a_texture);
 				this.close_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.close_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.close_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -205,6 +205,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** button
 		*/
 		private Fee.Ui.Button button;
@@ -253,16 +257,23 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//drawpriority
 			long t_drawpriority = 0;
@@ -273,10 +284,10 @@ namespace TestScript
 			this.button.SetRect(10,50,100,50);
 			this.button.SetText("表示");
 			this.button.SetTextureCornerSize(10);
-			this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-			this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+			this.button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 			this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -288,7 +299,7 @@ namespace TestScript
 			//window_list
 			this.window_list = new Window[5];
 			for(int ii=0;ii<this.window_list.Length;ii++){
-				this.window_list[ii] = new Window("window" + ii.ToString(),ii);
+				this.window_list[ii] = new Window("window" + ii.ToString(),ii,this.texturelist.GetTexture("UI_BUTTON"));
 			}
 		}
 
@@ -350,7 +361,7 @@ namespace TestScript
 
 				for(int ii=0;ii<this.window_list.Length;ii++){
 					if(this.window_list[ii] == null){
-						this.window_list[ii] = new Window("window" + ii.ToString(),ii);
+						this.window_list[ii] = new Window("window" + ii.ToString(),ii,this.texturelist.GetTexture("UI_BUTTON"));
 					}
 				}
 			}

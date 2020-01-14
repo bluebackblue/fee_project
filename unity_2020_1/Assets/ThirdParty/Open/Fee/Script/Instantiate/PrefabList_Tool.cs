@@ -1,7 +1,10 @@
 ﻿
 
 /**
- * @brief プレハブリスト。
+ * Copyright (c) blueback
+ * Released under the MIT License
+ * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
+ * @brief インスタンス作成。プレハブリスト。
 */
 
 
@@ -12,7 +15,7 @@ namespace Fee.Instantiate
 	/** PrefabList_Tool
 	*/
 	#if(UNITY_EDITOR)
-	public class PrefabList_Tool : UnityEngine.MonoBehaviour
+	public class PrefabList_Tool
 	{
 		/** ResourceItem
 		*/
@@ -41,18 +44,36 @@ namespace Fee.Instantiate
 			}
 		}
 
-		/** Create
-
-			全部登録する。
-
+		/** 作成。
 		*/
-		public static void Create(Fee.File.Path a_output_assets_path,ResourceItem[] a_resource_list)
+		public static UnityEngine.GameObject Create(Fee.File.Path a_output_assets_path,ResourceItem[] a_resource_list)
 		{
 			UnityEngine.GameObject t_prefab = new UnityEngine.GameObject();
 			t_prefab.name = "prefab_temp";
 			try{
+				//追加。
+				Add(t_prefab,a_resource_list);
+
+				//新規作成。
+				Fee.EditorTool.Utility.SavePrefab(t_prefab,a_output_assets_path);
+			}catch(System.Exception t_exception){
+				UnityEngine.Debug.LogError(t_exception.Message);
+			}
+			UnityEngine.GameObject.DestroyImmediate(t_prefab);
+
+			//ロード。
+			UnityEngine.GameObject t_gameobject = Fee.EditorTool.Utility.LoadAsset<UnityEngine.GameObject>(a_output_assets_path);
+			Tool.Assert(t_gameobject != null);
+			return t_gameobject;
+		}
+
+		/** 追加。
+		*/
+		public static UnityEngine.GameObject Add(UnityEngine.GameObject a_prefab,ResourceItem[] a_resource_list)
+		{
+			try{
 				//prefab_list
-				PrefabList_MonoBehaviour t_prefab_list = t_prefab.AddComponent<PrefabList_MonoBehaviour>();
+				PrefabList_MonoBehaviour t_prefab_list = a_prefab.AddComponent<PrefabList_MonoBehaviour>();
 
 				t_prefab_list.tag_list = new string[a_resource_list.Length];
 				t_prefab_list.prefab_list = new UnityEngine.GameObject[a_resource_list.Length];
@@ -60,13 +81,11 @@ namespace Fee.Instantiate
 					t_prefab_list.tag_list[ii] = a_resource_list[ii].tag;
 					t_prefab_list.prefab_list[ii] = Fee.EditorTool.Utility.LoadAsset<UnityEngine.GameObject>(a_resource_list[ii].path); 
 				}
-
-				//SavePrefab
-				Fee.EditorTool.Utility.SavePrefab(t_prefab,a_output_assets_path);
 			}catch(System.Exception t_exception){
 				UnityEngine.Debug.LogError(t_exception.Message);
 			}
-			UnityEngine.GameObject.DestroyImmediate(t_prefab);
+
+			return a_prefab;
 		}
 	}
 	#endif

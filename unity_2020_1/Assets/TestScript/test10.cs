@@ -44,6 +44,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** sprite
 		*/
 		private Fee.Render2D.Sprite2D sprite;
@@ -136,16 +140,30 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
+			}
+
+			//プレハブリスト。
+			Fee.Instantiate.PrefabList t_prefablist;
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("PrefabList");
+				t_prefablist = new Fee.Instantiate.PrefabList(t_prefab.GetComponent<Fee.Instantiate.PrefabList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//深度。カメラに設定。
 			{
@@ -175,13 +193,12 @@ namespace TestScript
 
 			//キューブ。
 			{
-				GameObject t_prefab = Resources.Load<GameObject>(Data.Resources.PREFAB_CUBE);
 				this.cube = new GameObject[2];
 				for(int ii=0;ii<this.cube.Length;ii++){
 					if(ii == 0){
-						this.cube[ii] = GameObject.Instantiate(t_prefab,new Vector3(1 + 1,0,10),Quaternion.identity);
+						this.cube[ii] = GameObject.Instantiate(t_prefablist.GetGetPrefab("TEST10_CUBE"),new Vector3(1 + 1,0,10),Quaternion.identity);
 					}else{
-						this.cube[ii] = GameObject.Instantiate(t_prefab,new Vector3(1 + 4,0,10),Quaternion.identity);
+						this.cube[ii] = GameObject.Instantiate(t_prefablist.GetGetPrefab("TEST10_CUBE"),new Vector3(1 + 4,0,10),Quaternion.identity);
 					}
 					this.cube[ii].transform.localScale = new Vector3(2,2,2);
 				}
@@ -199,7 +216,7 @@ namespace TestScript
 				this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
 				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetRect(t_x,t_y,t_w,t_h);
-				this.sprite.SetTexture(Resources.Load<Texture2D>(Data.Resources.TEXTURE_SKYIMAGE));
+				this.sprite.SetTexture(this.texturelist.GetTexture("TEST10_TEXTURE"));
 			}
 
 			{
@@ -215,10 +232,10 @@ namespace TestScript
 					this.bloom_button.SetRect(100,t_y,t_button_w,t_button_h);
 					this.bloom_button.SetTextureCornerSize(10);
 					this.bloom_button.SetText("Bloom : " + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
-					this.bloom_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.bloom_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.bloom_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.bloom_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.bloom_button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.bloom_button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.bloom_button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 					this.bloom_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.bloom_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 					this.bloom_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -233,16 +250,16 @@ namespace TestScript
 					this.bloom_threshold_slider.SetButtonTextureCornerSize(3);
 					this.bloom_threshold_slider.SetButtonSize(20,25);
 					this.bloom_threshold_slider.SetValue(Fee.Bloom.Bloom.GetInstance().GetThreshold());
-					this.bloom_threshold_slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.bloom_threshold_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.bloom_threshold_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.bloom_threshold_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_threshold_slider.SetBgNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.bloom_threshold_slider.SetBgLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.bloom_threshold_slider.SetValueNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.bloom_threshold_slider.SetValueLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
 					this.bloom_threshold_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.bloom_threshold_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 					this.bloom_threshold_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 					this.bloom_threshold_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-					this.bloom_threshold_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.bloom_threshold_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_threshold_slider.SetButtonNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.bloom_threshold_slider.SetButtonLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 					this.bloom_threshold_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.bloom_threshold_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
@@ -256,16 +273,16 @@ namespace TestScript
 					this.bloom_intensity_slider.SetButtonSize(20,25);
 					this.bloom_intensity_slider.SetValue(Fee.Bloom.Bloom.GetInstance().GetIntensity());
 					this.bloom_intensity_slider.SetValueScale(5.0f);
-					this.bloom_intensity_slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.bloom_intensity_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.bloom_intensity_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.bloom_intensity_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.bloom_intensity_slider.SetBgNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.bloom_intensity_slider.SetBgLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.bloom_intensity_slider.SetValueNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.bloom_intensity_slider.SetValueLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
 					this.bloom_intensity_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.bloom_intensity_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 					this.bloom_intensity_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 					this.bloom_intensity_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-					this.bloom_intensity_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.bloom_intensity_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.bloom_intensity_slider.SetButtonNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.bloom_intensity_slider.SetButtonLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 					this.bloom_intensity_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.bloom_intensity_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
@@ -279,10 +296,10 @@ namespace TestScript
 					this.blur_button.SetRect(100,t_y,t_button_w,t_button_h);
 					this.blur_button.SetTextureCornerSize(10);
 					this.blur_button.SetText("Blur : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
-					this.blur_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.blur_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.blur_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.blur_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.blur_button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.blur_button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.blur_button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.blur_button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 					this.blur_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.blur_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 					this.blur_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -297,16 +314,16 @@ namespace TestScript
 					this.blur_rate_blend_slider.SetButtonTextureCornerSize(3);
 					this.blur_rate_blend_slider.SetButtonSize(20,25);
 					this.blur_rate_blend_slider.SetValue(Fee.Blur.Blur.GetInstance().GetBlendRate());
-					this.blur_rate_blend_slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.blur_rate_blend_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.blur_rate_blend_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.blur_rate_blend_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.blur_rate_blend_slider.SetBgNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.blur_rate_blend_slider.SetBgLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.blur_rate_blend_slider.SetValueNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.blur_rate_blend_slider.SetValueLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
 					this.blur_rate_blend_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.blur_rate_blend_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 					this.blur_rate_blend_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 					this.blur_rate_blend_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-					this.blur_rate_blend_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.blur_rate_blend_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.blur_rate_blend_slider.SetButtonNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.blur_rate_blend_slider.SetButtonLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 					this.blur_rate_blend_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.blur_rate_blend_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
@@ -320,10 +337,10 @@ namespace TestScript
 					this.depth_button.SetRect(100,t_y,t_button_w,t_button_h);
 					this.depth_button.SetTextureCornerSize(10);
 					this.depth_button.SetText("Depth : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
-					this.depth_button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.depth_button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.depth_button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.depth_button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.depth_button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.depth_button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.depth_button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.depth_button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 					this.depth_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.depth_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 					this.depth_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -338,16 +355,16 @@ namespace TestScript
 					this.depth_rate_blend_slider.SetButtonTextureCornerSize(3);
 					this.depth_rate_blend_slider.SetButtonSize(20,25);
 					this.depth_rate_blend_slider.SetValue(Fee.Depth.Depth.GetInstance().GetBlendRate());
-					this.depth_rate_blend_slider.SetBgNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.depth_rate_blend_slider.SetBgLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.depth_rate_blend_slider.SetValueNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
-					this.depth_rate_blend_slider.SetValueLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_SLIDER));
+					this.depth_rate_blend_slider.SetBgNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.depth_rate_blend_slider.SetBgLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.depth_rate_blend_slider.SetValueNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
+					this.depth_rate_blend_slider.SetValueLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
 					this.depth_rate_blend_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.depth_rate_blend_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 					this.depth_rate_blend_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 					this.depth_rate_blend_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-					this.depth_rate_blend_slider.SetButtonNormalTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-					this.depth_rate_blend_slider.SetButtonLockTexture(Resources.Load<Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+					this.depth_rate_blend_slider.SetButtonNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+					this.depth_rate_blend_slider.SetButtonLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 					this.depth_rate_blend_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 					this.depth_rate_blend_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}

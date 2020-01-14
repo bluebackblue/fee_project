@@ -17,11 +17,6 @@ namespace TestScript
 {
 	/** test04
 
-		サウンドプール
-			ロードＵＲＬ
-			ロードローカル
-			ロードストリーミングアセット
-
 		テキスト
 			セーブローカル
 			ロードＵＲＬ
@@ -67,16 +62,14 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** ButtonId
 		*/
 		public enum ButtonId
 		{
-			/** SoundPool
-			*/
-			LoadUrl_SoundPool,
-			LoadLocal_SoundPool,
-			LoadStreamingAssets_SoundPool,
-
 			/** TextFile
 			*/
 			SaveLocal_TextFile,
@@ -121,10 +114,6 @@ namespace TestScript
 			*/
 			private Fee.File.Item item_file;
 
-			/** item_soundpool
-			*/
-			private Fee.SoundPool.Item item_soundpool;
-
 			/** ResultType
 			*/
 			public enum ResultType
@@ -136,7 +125,6 @@ namespace TestScript
 				Text,
 				Texture,
 				AssetBundle,
-				SoundPool,
 			}
 
 			/** constructor
@@ -144,21 +132,11 @@ namespace TestScript
 			public LoadItem(Fee.File.Item a_item)
 			{
 				this.item_file = a_item;
-				this.item_soundpool = null;
-			}
-
-			/** constructor
-			*/
-			public LoadItem(Fee.SoundPool.Item a_item)
-			{
-				this.item_file = null;
-				this.item_soundpool = a_item;
 			}
 
 			public LoadItem(Fee.Data.Item a_item)
 			{
 				this.item_file = null;
-				this.item_soundpool = null;
 			}
 
 			/** IsBusy
@@ -167,9 +145,6 @@ namespace TestScript
 			{
 				if(this.item_file != null){
 					return this.item_file.IsBusy();
-				}
-				if(this.item_soundpool != null){
-					return this.item_soundpool.IsBusy();
 				}
 				return false;
 			}
@@ -181,9 +156,6 @@ namespace TestScript
 				if(this.item_file != null){
 					return this.item_file.GetResultProgress();
 				}
-				if(this.item_soundpool != null){
-					return this.item_soundpool.GetResultProgress();
-				}
 				return 0.0f;
 			}
 
@@ -193,9 +165,6 @@ namespace TestScript
 			{
 				if(this.item_file != null){
 					return this.item_file.GetResultErrorString();
-				}
-				if(this.item_soundpool != null){
-					return this.item_soundpool.GetResultErrorString();
 				}
 				return "";
 			}
@@ -265,20 +234,6 @@ namespace TestScript
 					}
 				}
 
-				if(this.item_soundpool != null){
-					switch(this.item_soundpool.GetResultType()){
-					case Fee.SoundPool.Item.ResultType.None:
-						{
-						}return ResultType.None;
-					case Fee.SoundPool.Item.ResultType.Error:
-						{
-						}return ResultType.Error;
-					case Fee.SoundPool.Item.ResultType.SoundPool:
-						{
-						}return ResultType.SoundPool;
-					}
-				}
-
 				return ResultType.None;
 			}
 		}
@@ -300,7 +255,7 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Scroll_Item(Fee.Deleter.Deleter a_deleter,test04 a_this,ButtonId a_button_id)
+			public Scroll_Item(Fee.Deleter.Deleter a_deleter,test04 a_this,ButtonId a_button_id,UnityEngine.Texture2D a_texture)
 			{
 				this.button = new Fee.Ui.Button(a_deleter,1);
 				this.button.SetOnButtonClick(a_this,a_button_id);
@@ -308,10 +263,10 @@ namespace TestScript
 				this.button.SetDragCancelFlag(true);
 				this.button.SetText(a_button_id.ToString());
 				this.button.SetTextureCornerSize(10);
-				this.button.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button.SetNormalTexture(a_texture);
+				this.button.SetOnTexture(a_texture);
+				this.button.SetDownTexture(a_texture);
+				this.button.SetLockTexture(a_texture);
 				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -411,23 +366,24 @@ namespace TestScript
 			//ＵＩ。インスタンス作成。
 			Fee.Ui.Ui.CreateInstance();
 
-			//サウンドプール。インスタンス作成。
-			Fee.SoundPool.Config.LOG_ENABLE = true;
-			Fee.SoundPool.Config.USE_LOADURL_SOUNDPOOL_CACHE = false;
-			Fee.SoundPool.Config.USE_LOADSTREAMINGASSETS_SOUNDPOOL_CACHE = false;
-			Fee.SoundPool.SoundPool.CreateInstance();
-	
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//drawpriority
 			int t_layerindex = 0;
@@ -456,30 +412,25 @@ namespace TestScript
 				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,t_drawpriority,Fee.Ui.Scroll_Type.Vertical,30);
 				this.scroll.SetRect(50,250,350,300);
 				
-				//SoundPool
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadUrl_SoundPool));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_SoundPool));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_SoundPool));
-
 				//TextFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_TextFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadUrl_TextFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_TextFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_TextFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadResources_TextFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_TextFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadUrl_TextFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_TextFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_TextFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadResources_TextFile,this.texturelist.GetTexture("UI_BUTTON")));
 
 				//BinaryFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_BinaryFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadUrl_BinaryFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_BinaryFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_BinaryFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_BinaryFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadUrl_BinaryFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_BinaryFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_BinaryFile,this.texturelist.GetTexture("UI_BUTTON")));
 
 				//TextureFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_TextureFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadUrl_TextureFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_TextureFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_TextureFile));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadResources_TextureFile));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_TextureFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadUrl_TextureFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_TextureFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_TextureFile,this.texturelist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadResources_TextureFile,this.texturelist.GetTexture("UI_BUTTON")));
 			}
 		}
 
@@ -490,26 +441,6 @@ namespace TestScript
 			this.result_sprite.SetVisible(false);
 
 			switch(a_id){
-			case ButtonId.LoadUrl_SoundPool:
-				{
-					//ロードＵＲＬ。サウンドプール。
-
-					uint t_data_version = 1;
-					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadUrlSoundPool(new Fee.File.Path(Data.Url.SOUNDPOOL_SE),null,null,t_data_version));
-				}break;
-			case ButtonId.LoadLocal_SoundPool:
-				{
-					//ロードローカル。サウンドプール。
-
-					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadLocalSoundPool(new Fee.File.Path(Data.Local.SOUNDPOOL_SE)));
-				}break;
-			case ButtonId.LoadStreamingAssets_SoundPool:
-				{
-					//ロードストリーミングアセット。サウンドプール。
-
-					uint t_data_version = 1;
-					this.loaditem = new LoadItem(Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Data.StreamingAssets.TEST04_SOUNDPOOL_SE),t_data_version));
-				}break;
 
 
 
@@ -518,13 +449,13 @@ namespace TestScript
 				{
 					//セーブローカル。テキストファイル。
 
-					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path(Data.Local.TEST04_TEXT),"qwerasdfzxcv"));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveTextFile(Fee.File.File.SaveRequestType.SaveLocalTextFile,new Fee.File.Path(Data.Local.TEST04_TEXT),"qwerasdfzxcv"));
 				}break;
 			case ButtonId.LoadUrl_TextFile:
 				{
 					//ロードＵＲＬ。テキストファイル。
 
-					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadUrlTextFile,new Fee.File.Path(Data.Url.TESTDATA_TEXT)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadUrlTextFile,new Fee.File.Path(Data.Url.TEST04_TEXT)));
 				}break;
 			case ButtonId.LoadLocal_TextFile:
 				{
@@ -553,13 +484,13 @@ namespace TestScript
 					//セーブローカル。バイナリファイル。
 
 					byte[] t_binary = new byte[16];
-					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveLocalBinaryFile(new Fee.File.Path(Data.Local.TEST04_BINARY),t_binary));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveBinaryFile(Fee.File.File.SaveRequestType.SaveLocalBinaryFile,new Fee.File.Path(Data.Local.TEST04_BINARY),t_binary));
 				}break;
 			case ButtonId.LoadUrl_BinaryFile:
 				{
 					//ロードＵＲＬ。バイナリファイル。
 
-					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadUrlBinaryFile,new Fee.File.Path(Data.Url.TESTDATA_BINARY)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadUrlBinaryFile,new Fee.File.Path(Data.Url.TEST04_BINARY)));
 				}break;
 			case ButtonId.LoadLocal_BinaryFile:
 				{
@@ -593,13 +524,13 @@ namespace TestScript
 						t_texture.Apply();
 					}
 
-					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveLocalTextureFile(new Fee.File.Path(Data.Local.TEST04_TEXTURE),t_texture));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestSaveTextureFile(Fee.File.File.SaveRequestType.SaveLocalTextureFile,new Fee.File.Path(Data.Local.TEST04_TEXTURE),t_texture));
 				}break;
 			case ButtonId.LoadUrl_TextureFile:
 				{
 					//ロードＵＲＬ。テクスチャファイル。
 
-					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadUrlTextureFile,new Fee.File.Path(Data.Url.TESTDATA_TEXTURE)));
+					this.loaditem = new LoadItem(Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadUrlTextureFile,new Fee.File.Path(Data.Url.TEST04_TEXTURE)));
 				}break;
 			case ButtonId.LoadLocal_TextureFile:
 				{
@@ -641,9 +572,6 @@ namespace TestScript
 			//ＵＩ。インスタンス作成。
 			Fee.Ui.Ui.GetInstance().Main();
 
-			//サウンドプール。インスタンス作成。
-			Fee.SoundPool.SoundPool.GetInstance().Main();
-
 			//ドラッグ更新。
 			this.scroll.DragScrollUpdate();
 
@@ -665,10 +593,6 @@ namespace TestScript
 					case LoadItem.ResultType.SaveEnd:
 						{
 							this.status_text.SetText("結果:セーブ完了");
-						}break;
-					case LoadItem.ResultType.SoundPool:
-						{
-							this.status_text.SetText("結果:サウンドプール取得");
 						}break;
 					case LoadItem.ResultType.Text:
 						{

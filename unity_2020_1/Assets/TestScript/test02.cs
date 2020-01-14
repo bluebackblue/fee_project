@@ -218,6 +218,10 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
+		/** texturelist
+		*/
+		private Fee.Instantiate.TextureList texturelist;
+
 		/** ボタン。
 		*/
 		private Fee.Ui.Button button_save1;
@@ -291,16 +295,23 @@ namespace TestScript
 			Fee.File.File.CreateInstance();
 
 			//フォント。
-			Font t_font = Resources.Load<Font>(Data.Resources.FONT);
-			if(t_font != null){
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_font);
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
+				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
+				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+			}
+
+			//テクスチャーリスト。
+			{
+				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
+				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
 			}
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//ボタン。
 			{
@@ -309,10 +320,10 @@ namespace TestScript
 				this.button_save1.SetRect(100 + 110 * 0,100,100,50);
 				this.button_save1.SetText("Save1");
 				this.button_save1.SetTextureCornerSize(10);
-				this.button_save1.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_save1.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_save1.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_save1.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_save1.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_save1.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_save1.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_save1.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.button_save1.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button_save1.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_save1.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -323,10 +334,10 @@ namespace TestScript
 				this.button_save2.SetRect(100 + 110 * 1,100,100,50);
 				this.button_save2.SetText("Save2");
 				this.button_save2.SetTextureCornerSize(10);
-				this.button_save2.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_save2.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_save2.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_save2.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_save2.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_save2.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_save2.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_save2.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.button_save2.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button_save2.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_save2.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -337,10 +348,10 @@ namespace TestScript
 				this.button_load1.SetRect(100 + 110 * 2,100,100,50);
 				this.button_load1.SetText("Load1");
 				this.button_load1.SetTextureCornerSize(10);
-				this.button_load1.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_load1.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_load1.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_load1.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_load1.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_load1.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_load1.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_load1.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.button_load1.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button_load1.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_load1.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -351,10 +362,10 @@ namespace TestScript
 				this.button_load2.SetRect(100 + 110 * 3,100,100,50);
 				this.button_load2.SetText("Load2");
 				this.button_load2.SetTextureCornerSize(10);
-				this.button_load2.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_load2.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_load2.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_load2.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_load2.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_load2.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_load2.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_load2.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.button_load2.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button_load2.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_load2.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -365,10 +376,10 @@ namespace TestScript
 				this.button_random.SetRect(600 + 110*1,100 + 60 * 0,130,50);
 				this.button_random.SetText("Random");
 				this.button_random.SetTextureCornerSize(10);
-				this.button_random.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_random.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_random.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_random.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_random.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_random.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_random.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_random.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.button_random.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button_random.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_random.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -379,10 +390,10 @@ namespace TestScript
 				this.button_speedtest_fee.SetRect(600 + 110*1,100  + 60 * 2,130,50);
 				this.button_speedtest_fee.SetText("Fee Test");
 				this.button_speedtest_fee.SetTextureCornerSize(10);
-				this.button_speedtest_fee.SetNormalTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_speedtest_fee.SetOnTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_speedtest_fee.SetDownTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
-				this.button_speedtest_fee.SetLockTexture(UnityEngine.Resources.Load<UnityEngine.Texture2D>(Data.Resources.UI_TEXTURE_BUTTON));
+				this.button_speedtest_fee.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_speedtest_fee.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_speedtest_fee.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button_speedtest_fee.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
 				this.button_speedtest_fee.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button_speedtest_fee.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button_speedtest_fee.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -423,7 +434,7 @@ namespace TestScript
 						string t_jsonstring = t_jsonitem.ConvertJsonString();
 
 						//セーブローカル。リクエスト。。
-						this.save_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path("save_1.json"),t_jsonstring);
+						this.save_item = Fee.File.File.GetInstance().RequestSaveTextFile(Fee.File.File.SaveRequestType.SaveLocalTextFile,new Fee.File.Path("save_1.json"),t_jsonstring);
 						if(this.save_item != null){
 							this.button_save1.SetLock(true);
 							this.button_save2.SetLock(true);
@@ -446,7 +457,7 @@ namespace TestScript
 						string t_jsonstring = t_jsonitem.ConvertJsonString();
 
 						//セーブローカル。リクエスト。。
-						this.save_item = Fee.File.File.GetInstance().RequestSaveLocalTextFile(new Fee.File.Path("save_2.json"),t_jsonstring);
+						this.save_item = Fee.File.File.GetInstance().RequestSaveTextFile(Fee.File.File.SaveRequestType.SaveLocalTextFile,new Fee.File.Path("save_2.json"),t_jsonstring);
 						if(this.save_item != null){
 							this.button_save1.SetLock(true);
 							this.button_save2.SetLock(true);
