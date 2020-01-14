@@ -205,9 +205,9 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** texturelist
+		/** prefablist
 		*/
-		private Fee.Instantiate.TextureList texturelist;
+		private Common.PrefabList prefablist;
 
 		/** button
 		*/
@@ -256,24 +256,21 @@ namespace TestScript
 			Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
 
-			//フォント。
+			//プレハブリスト。
 			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
-				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+				this.prefablist = new Common.PrefabList();
+				this.prefablist.LoadFontList();
+				this.prefablist.LoadTextureList();
 			}
 
-			//テクスチャーリスト。
-			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
-				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
-			}
+			//フォント。
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//drawpriority
 			long t_drawpriority = 0;
@@ -284,10 +281,10 @@ namespace TestScript
 			this.button.SetRect(10,50,100,50);
 			this.button.SetText("表示");
 			this.button.SetTextureCornerSize(10);
-			this.button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -299,7 +296,7 @@ namespace TestScript
 			//window_list
 			this.window_list = new Window[5];
 			for(int ii=0;ii<this.window_list.Length;ii++){
-				this.window_list[ii] = new Window("window" + ii.ToString(),ii,this.texturelist.GetTexture("UI_BUTTON"));
+				this.window_list[ii] = new Window("window" + ii.ToString(),ii,this.prefablist.GetTexture("UI_BUTTON"));
 			}
 		}
 
@@ -361,7 +358,7 @@ namespace TestScript
 
 				for(int ii=0;ii<this.window_list.Length;ii++){
 					if(this.window_list[ii] == null){
-						this.window_list[ii] = new Window("window" + ii.ToString(),ii,this.texturelist.GetTexture("UI_BUTTON"));
+						this.window_list[ii] = new Window("window" + ii.ToString(),ii,this.prefablist.GetTexture("UI_BUTTON"));
 					}
 				}
 			}

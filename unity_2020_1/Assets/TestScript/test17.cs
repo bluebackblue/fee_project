@@ -40,9 +40,9 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** texturelist
+		/** prefablist
 		*/
-		private Fee.Instantiate.TextureList texturelist;
+		private Common.PrefabList prefablist;
 
 		/** ScrollItem
 		*/
@@ -337,24 +337,21 @@ namespace TestScript
 			//ＵＩ。インスタンス作成。
 			Fee.Ui.Ui.CreateInstance();
 
-			//フォント。
+			//プレハブリスト。
 			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
-				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+				this.prefablist = new Common.PrefabList();
+				this.prefablist.LoadFontList();
+				this.prefablist.LoadTextureList();
 			}
 
-			//テクスチャーリスト。
-			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
-				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
-			}
+			//フォント。
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//v_scrollview
 			this.v_scrollview = new Fee.Ui.Scroll<ScrollItem>(this.deleter,0,Fee.Ui.Scroll_Type.Vertical,ScrollItem.GetH());
@@ -379,10 +376,10 @@ namespace TestScript
 			this.button_push.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_push.SetText("最後尾追加");
 			this.button_push.SetTextureCornerSize(10);
-			this.button_push.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_push.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_push.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_push.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_push.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_push.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_push.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_push.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_push.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_push.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_push.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -396,10 +393,10 @@ namespace TestScript
 			this.button_pop.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_pop.SetText("最後尾削除");
 			this.button_pop.SetTextureCornerSize(10);
-			this.button_pop.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_pop.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_pop.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_pop.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_pop.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_pop.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_pop.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_pop.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_pop.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_pop.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_pop.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -414,10 +411,10 @@ namespace TestScript
 			this.button_insert_top.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_insert_top.SetText("先頭追加");
 			this.button_insert_top.SetTextureCornerSize(10);
-			this.button_insert_top.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_insert_top.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_insert_top.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_insert_top.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_insert_top.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_insert_top.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_insert_top.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_insert_top.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_insert_top.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_insert_top.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_insert_top.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -431,10 +428,10 @@ namespace TestScript
 			this.button_remove_top.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_remove_top.SetText("先頭削除");
 			this.button_remove_top.SetTextureCornerSize(10);
-			this.button_remove_top.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_remove_top.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_remove_top.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_remove_top.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_remove_top.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_remove_top.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_remove_top.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_remove_top.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_remove_top.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_remove_top.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_remove_top.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -449,10 +446,10 @@ namespace TestScript
 			this.button_insert_top_5.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_insert_top_5.SetText("挿入(５番目)");
 			this.button_insert_top_5.SetTextureCornerSize(10);
-			this.button_insert_top_5.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_insert_top_5.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_insert_top_5.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_insert_top_5.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_insert_top_5.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_insert_top_5.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_insert_top_5.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_insert_top_5.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_insert_top_5.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_insert_top_5.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_insert_top_5.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -467,10 +464,10 @@ namespace TestScript
 			this.button_remove_top_5.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_remove_top_5.SetText("削除(５番目)");
 			this.button_remove_top_5.SetTextureCornerSize(10);
-			this.button_remove_top_5.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_remove_top_5.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_remove_top_5.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_remove_top_5.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_remove_top_5.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_remove_top_5.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_remove_top_5.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_remove_top_5.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_remove_top_5.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_remove_top_5.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_remove_top_5.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -485,10 +482,10 @@ namespace TestScript
 			this.button_insert_last_5.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_insert_last_5.SetText("挿入(後５)");
 			this.button_insert_last_5.SetTextureCornerSize(10);
-			this.button_insert_last_5.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_insert_last_5.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_insert_last_5.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_insert_last_5.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_insert_last_5.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_insert_last_5.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_insert_last_5.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_insert_last_5.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_insert_last_5.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_insert_last_5.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_insert_last_5.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -503,10 +500,10 @@ namespace TestScript
 			this.button_remove_last_5.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_remove_last_5.SetText("削除(後５)");
 			this.button_remove_last_5.SetTextureCornerSize(10);
-			this.button_remove_last_5.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_remove_last_5.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_remove_last_5.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_remove_last_5.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_remove_last_5.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_remove_last_5.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_remove_last_5.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_remove_last_5.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_remove_last_5.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_remove_last_5.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_remove_last_5.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -521,10 +518,10 @@ namespace TestScript
 			this.button_up.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_up.SetText("前方に移動");
 			this.button_up.SetTextureCornerSize(10);
-			this.button_up.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_up.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_up.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_up.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_up.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_up.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_up.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_up.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_up.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_up.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_up.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -538,10 +535,10 @@ namespace TestScript
 			this.button_down.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_down.SetText("後方に移動");
 			this.button_down.SetTextureCornerSize(10);
-			this.button_down.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_down.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_down.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_down.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_down.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_down.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_down.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_down.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_down.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_down.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_down.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -555,10 +552,10 @@ namespace TestScript
 			this.button_sort_a.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_sort_a.SetText("ソート");
 			this.button_sort_a.SetTextureCornerSize(10);
-			this.button_sort_a.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_sort_a.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_sort_a.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_sort_a.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_sort_a.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_sort_a.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_sort_a.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_sort_a.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_sort_a.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_sort_a.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_sort_a.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -572,10 +569,10 @@ namespace TestScript
 			this.button_sort_b.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_sort_b.SetText("ソート");
 			this.button_sort_b.SetTextureCornerSize(10);
-			this.button_sort_b.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_sort_b.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_sort_b.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_sort_b.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_sort_b.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_sort_b.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_sort_b.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_sort_b.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_sort_b.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_sort_b.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_sort_b.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -589,10 +586,10 @@ namespace TestScript
 			this.button_swap.SetRect(10,100 + 30 * t_y_index,100,30);
 			this.button_swap.SetText("SWAP(20,25)");
 			this.button_swap.SetTextureCornerSize(10);
-			this.button_swap.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_swap.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_swap.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_swap.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_swap.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_swap.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_swap.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_swap.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_swap.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_swap.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_swap.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -662,11 +659,11 @@ namespace TestScript
 
 					{
 						this.v_scrollview_create_id++;
-						this.v_scrollview.PushItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,this.texturelist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical));
+						this.v_scrollview.PushItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,this.prefablist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical));
 					}
 					{
 						this.h_scrollview_create_id++;
-						this.h_scrollview.PushItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,this.texturelist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal));
+						this.h_scrollview.PushItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,this.prefablist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal));
 					}
 				}break;
 			case ButtonId.RemoveLast:
@@ -697,12 +694,12 @@ namespace TestScript
 					{
 						int t_index = 0;
 						this.v_scrollview_create_id++;
-						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,this.texturelist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical),t_index);
+						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,this.prefablist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical),t_index);
 					}
 					{
 						int t_index = 0;
 						this.h_scrollview_create_id++;
-						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,this.texturelist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal),t_index);
+						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,this.prefablist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal),t_index);
 					}
 				}break;
 			case ButtonId.RemoveFirst:
@@ -735,12 +732,12 @@ namespace TestScript
 					{
 						int t_index = 4;
 						this.v_scrollview_create_id++;
-						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,this.texturelist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical),t_index);
+						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,this.prefablist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical),t_index);
 					}
 					{
 						int t_index = 4;
 						this.h_scrollview_create_id++;
-						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,this.texturelist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal),t_index);
+						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,this.prefablist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal),t_index);
 					}
 				}break;
 			case ButtonId.Remove5:
@@ -773,12 +770,12 @@ namespace TestScript
 					{
 						int t_index = this.v_scrollview.GetListCount() - 5;
 						this.v_scrollview_create_id++;
-						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,this.texturelist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical),t_index);
+						this.v_scrollview.AddItem(new ScrollItem(this.deleter,this.v_scrollview_create_id,this.prefablist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_V,Fee.Ui.Scroll_Type.Vertical),t_index);
 					}
 					{
 						int t_index = this.h_scrollview.GetListCount() - 5;
 						this.h_scrollview_create_id++;
-						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,this.texturelist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal),t_index);
+						this.h_scrollview.AddItem(new ScrollItem(this.deleter,this.h_scrollview_create_id,this.prefablist.GetTexture("UI_BUTTON"),CallBack_ScrollItem_H,Fee.Ui.Scroll_Type.Horizontal),t_index);
 					}
 				}break;
 			case ButtonId.RemoveLast5:

@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8710002016527697210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5915310360990757798}
+  - component: {fileID: 4194595302000040029}
+  m_Layer: 0
+  m_Name: create_from_excel_texture
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5915310360990757798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710002016527697210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4194595302000040029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710002016527697210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347f0fd64e60f28419797b7031ef469c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag_list:
+  - UI_BUTTON
+  - UI_BUTTON_ACTIVE
+  - UI_CHECKBUTTON
+  - UI_SLIDER
+  - TEST10_TEXTURE
+  - TEST15_TEXTURE
+  texture_list:
+  - {fileID: 2800000, guid: 949b7f62a52077145b70bf0dc7323a83, type: 3}
+  - {fileID: 2800000, guid: 593e772bcd81d1049a59b14770c0845e, type: 3}
+  - {fileID: 2800000, guid: 167a3326ebf4f9b42a83b63fd19ea6ae, type: 3}
+  - {fileID: 2800000, guid: 090070dfc8f7d044085619a334b54986, type: 3}
+  - {fileID: 2800000, guid: 226f46c8000d89245a1ab2cd2b418cc7, type: 3}
+  - {fileID: 2800000, guid: 226f46c8000d89245a1ab2cd2b418cc7, type: 3}

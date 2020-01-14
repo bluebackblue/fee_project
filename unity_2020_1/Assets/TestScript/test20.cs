@@ -40,9 +40,9 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** texturelist
+		/** prefablist
 		*/
-		private Fee.Instantiate.TextureList texturelist;
+		private Common.PrefabList prefablist;
 
 		/** Item
 		*/
@@ -257,28 +257,25 @@ namespace TestScript
 			Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
 
-			//フォント。
+			//プレハブリスト。
 			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
-				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+				this.prefablist = new Common.PrefabList();
+				this.prefablist.LoadFontList();
+				this.prefablist.LoadTextureList();
 			}
 
-			//テクスチャーリスト。
-			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
-				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
-			}
+			//フォント。
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			this.list = new Item[3];
 			for(int ii=0;ii<this.list.Length;ii++){
-				this.list[ii] = new Item(ii,this.texturelist.GetTexture("UI_BUTTON"),this.deleter);
+				this.list[ii] = new Item(ii,this.prefablist.GetTexture("UI_BUTTON"),this.deleter);
 			}
 		}
 

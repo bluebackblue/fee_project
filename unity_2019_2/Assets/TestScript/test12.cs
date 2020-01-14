@@ -42,14 +42,59 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** texturelist
+		/** prefablist
 		*/
-		private Fee.Instantiate.TextureList texturelist;
+		private Common.PrefabList prefablist;
 
 		/** ButtonId
 		*/
 		public enum ButtonId
 		{
+			/** アセットバンドルを使用しない。
+			*/
+			Load_Data_Debug,
+
+			/** アセットバンドルを使用する。
+			*/
+			Load_Data_Release,
+
+
+
+
+			/** ロード。ダミーアセットバンドル。
+			*/
+			Load_DummyAssetBundle,
+
+			/** ロード。ストリーミングアセットセットバンドル。
+			*/
+			Load_StreamingAssetsAssetBundle,
+
+			/** ロード。ＵＲＬアセットバンドル。
+			*/
+			Load_UrlAssetBundle,
+
+			/** アンロード。アセットバンドル。
+			*/
+			UnLoad_AssetBundle,
+
+
+
+
+			/** リソース。プレハブ。
+			*/
+			AssetBundle_Prefab,
+
+			/** リソース。テクスチャ。
+			*/
+			AssetBundle_Texture,
+
+			/** リソース。テキスト。
+			*/
+			AssetBundle_Text,
+
+
+
+
 			/** リソース。プレハブ。
 			*/
 			Resources_Prefab,
@@ -61,6 +106,9 @@ namespace TestScript
 			/** リソース。テキスト。
 			*/
 			Resources_Text,
+
+
+
 
 			/** ストリーミングアセット。テクスチャ。
 			*/
@@ -186,7 +234,11 @@ namespace TestScript
 
 		/** item
 		*/
-		private Fee.Data.Item item;
+		private Fee.Data.Item item_file;
+
+		/** item_assetbundle
+		*/
+		private Fee.AssetBundleList.Item item_assetbundlelist;
 
 		/** Start
 		*/
@@ -230,24 +282,22 @@ namespace TestScript
 			//ファイル。インスタンス作成。
 			Fee.File.File.CreateInstance();
 
-			//フォント。
+			//プレハブリスト。
 			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
-				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+				this.prefablist = new Common.PrefabList();
+				this.prefablist.LoadFontList();
+				this.prefablist.LoadTextureList();
+				this.prefablist.LoadTextAssetList();
 			}
 
-			//テクスチャーリスト。
-			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
-				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
-			}
+			//フォント。
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//drawpriority
 			int t_layerindex = 0;
@@ -257,24 +307,37 @@ namespace TestScript
 			{
 				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,t_drawpriority,Fee.Ui.Scroll_Type.Vertical,30);
 				this.scroll.SetRect(50,50,350,350);
+				this.scroll.SetBarDrawPriorityOffset(100);
 				
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Prefab));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Binary));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Binary));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Load_Data_Debug));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Load_Data_Release));
+
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Load_DummyAssetBundle));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Load_StreamingAssetsAssetBundle));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Load_UrlAssetBundle));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.UnLoad_AssetBundle));
+
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.AssetBundle_Prefab));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.AssetBundle_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.AssetBundle_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Prefab));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Binary));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Text));
+				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Binary));
 			}
 
 			//item
-			this.item = null;
+			this.item_file = null;
+			this.item_assetbundlelist = null;
 
 			//text
 			this.text = Fee.Render2D.Text2D.Create(this.deleter,0);
-			this.text.SetRect(50,380,0,0);
+			this.text.SetRect(50,420,0,0);
 
 			//sprite
 			this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,0);
@@ -283,106 +346,142 @@ namespace TestScript
 			this.sprite.SetTexture(Texture2D.whiteTexture);
 			this.sprite.SetVisible(false);
 
-			//データリスト。
-			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextAssetList");
-				Fee.Instantiate.TextAssetList t_textasset_list = new Fee.Instantiate.TextAssetList(t_prefab.GetComponent<Fee.Instantiate.TextAssetList_MonoBehaviour>());
-
-				#if(UNITY_EDITOR)
-				//アセットバンドルを使用しない。
-				UnityEngine.TextAsset t_textasset = t_textasset_list.GetTextAsset("TEST12_DATA_DEBUG");
-				#else
-				//アセットバンドルを使用する。
-				UnityEngine.TextAsset t_textasset = t_textasset_list.GetTextAsset("TEST12_DATA_RELEASE");
-				#endif
-
-				if(t_textasset != null){
-					string t_text = t_textasset.text;
-					if(t_text != null){
-						System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
-						Fee.Data.Data.GetInstance().RegistDataList(t_data_list);
-					}
-				}
-			}
-
-			//アセットバンドルリスト。
-			{
-				#if(UNITY_EDITOR)
-				{
-					#if(UNITY_EDITOR) && false
-					{
-						//ダミーアセットバンドル。
-						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsPathDummyAssetBundle,new Fee.File.Path("Editor/data/create_from_excel_dummyassetbundle_test.assetbundle.json"));
-					}
-					#else
-					{
-						//ストリーミングアセット。
-						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.StreamingAssetsAssetBundle,new Fee.File.Path("AssetBundle_StandaloneWindows/test"));
-					}
-					#endif
-				}
-				#else
-				{
-					//ストリーミングアセット。
-					Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.StreamingAssetsAssetBundle,new Fee.File.Path("AssetBundle_StandaloneWindows/test"));
-				}
-				#endif
-			}
+			Fee.File.File.GetInstance().RegistPublicKey("blueback","^https\\:\\/\\/blueback\\.ddns\\.net\\:8081\\/.*$",this.prefablist.GetTextAsset("SSLPUBLICKEY").text);
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
 		public void OnButtonClick(ButtonId a_id)
 		{
-			if(this.item == null){
+			if((this.item_file == null)&&(this.item_assetbundlelist == null)){
 				this.sprite.SetVisible(false);
 				this.text.SetText("");
 
 				switch(a_id){
+				case ButtonId.Load_Data_Debug:
+					{
+						Fee.Data.Data.GetInstance().ClearDataList();
+
+						//アセットバンドルを使用しない。
+						UnityEngine.TextAsset t_textasset = this.prefablist.GetTextAsset("TEST12_DATA_DEBUG");
+
+						if(t_textasset != null){
+							string t_text = t_textasset.text;
+							if(t_text != null){
+								System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
+								Fee.Data.Data.GetInstance().RegistDataList(t_data_list);
+							}
+						}
+					}break;
+				case ButtonId.Load_Data_Release:
+					{
+						Fee.Data.Data.GetInstance().ClearDataList();
+
+						//アセットバンドルを使用する。
+						UnityEngine.TextAsset t_textasset = this.prefablist.GetTextAsset("TEST12_DATA_RELEASE");
+
+						if(t_textasset != null){
+							string t_text = t_textasset.text;
+							if(t_text != null){
+								System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
+								Fee.Data.Data.GetInstance().RegistDataList(t_data_list);
+							}
+						}
+					}break;
+
+
+
+
+				case ButtonId.Load_DummyAssetBundle:
+					{
+						Fee.AssetBundleList.AssetBundleList.GetInstance().UnRegistPathItem("test.assetbundle");
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsPathDummyAssetBundle,new Fee.File.Path("Editor/data/create_from_excel_dummyassetbundle_test.assetbundle.json"));
+
+						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemAssetBundleItem("test.assetbundle");
+					}break;
+				case ButtonId.Load_StreamingAssetsAssetBundle:
+					{
+						//アセットバンドルのパスを設定。
+						Fee.AssetBundleList.AssetBundleList.GetInstance().UnRegistPathItem("test.assetbundle");
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.StreamingAssetsAssetBundle,new Fee.File.Path("AssetBundle_StandaloneWindows/test.assetbundle"));
+
+						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemAssetBundleItem("test.assetbundle");
+					}break;
+				case ButtonId.Load_UrlAssetBundle:
+					{
+						//アセットバンドルのパスを設定。
+						Fee.AssetBundleList.AssetBundleList.GetInstance().UnRegistPathItem("test.assetbundle");
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.UrlAssetBundle,new Fee.File.Path("https://blueback.ddns.net:8081/project_fee/StreamingAssets/AssetBundle_StandaloneWindows/test.assetbundle"));
+
+						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemAssetBundleItem("test.assetbundle");
+					}break;
+				case ButtonId.UnLoad_AssetBundle:
+					{
+						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestUnLoadAssetBundleItem("test.assetbundle");
+					}break;
+
+
+
+
+				case ButtonId.AssetBundle_Prefab:
+					{
+						//アセットバンドル。プレハブ。
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("ASSETBUNDLE_PREFAB");
+					}break;
+				case ButtonId.AssetBundle_Texture:
+					{
+						//アセットバンドル。テクスチャ。
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("ASSETBUNDLE_TEXTURE");
+					}break;
+				case ButtonId.AssetBundle_Text:
+					{
+						//アセットバンドル。テキスト。
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("ASSETBUNDLE_TEXT");
+					}break;
 				case ButtonId.Resources_Prefab:
 					{
 						//リソース。プレハブ。
-						this.item = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_PREFAB");
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_PREFAB");
 					}break;
 				case ButtonId.Resources_Texture:
 					{
 						//リソース。テクスチャ。
-						this.item = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_TEXTURE");
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_TEXTURE");
 					}break;
 				case ButtonId.Resources_Text:
 					{
 						//リソース。テキスト。
-						this.item = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_TEXT");
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("RESOURCES_TEXT");
 					}break;
 				case ButtonId.StreamingAssets_Texture:
 					{
 						//ストリーミングアセット。テクスチャ。
-						this.item = Fee.Data.Data.GetInstance().RequestLoad("STREAMINGASSETS_TEXTURE");
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("STREAMINGASSETS_TEXTURE");
 					}break;
 				case ButtonId.StreamingAssets_Text:
 					{
 						//ストリーミングアセット。テキスト。
-						this.item = Fee.Data.Data.GetInstance().RequestLoad("STREAMINGASSETS_TEXT");
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("STREAMINGASSETS_TEXT");
 					}break;
 				case ButtonId.StreamingAssets_Binary:
 					{
 						//ストリーミングアセット。バイナリ。
-						this.item = Fee.Data.Data.GetInstance().RequestLoad("STREAMINGASSETS_BINARY");
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("STREAMINGASSETS_BINARY");
 					}break;
 				case ButtonId.Url_Texture:
 					{
 						//ＵＲＬ。テクスチャ。
-						this.item = Fee.Data.Data.GetInstance().RequestLoad("URL_TEXTURE");
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("URL_TEXTURE");
 					}break;
 				case ButtonId.Url_Text:
 					{
 						//ＵＲＬ。テキスト。
-						this.item = Fee.Data.Data.GetInstance().RequestLoad("URL_TEXT");
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("URL_TEXT");
 					}break;
 				case ButtonId.Url_Binary:
 					{
 						//ＵＲＬ。バイナリ。
-						this.item = Fee.Data.Data.GetInstance().RequestLoad("URL_BINARY");
+						this.item_file = Fee.Data.Data.GetInstance().RequestLoad("URL_BINARY");
 					}break;
 				}
 			}
@@ -408,47 +507,85 @@ namespace TestScript
 			Fee.Data.Data.GetInstance().Main();
 
 			//アセットバンドルリスト。
-			Fee.AssetBundleList.AssetBundleList.CreateInstance();
+			Fee.AssetBundleList.AssetBundleList.GetInstance().Main();
 
 			//ファイル。
 			Fee.File.File.GetInstance().Main();
 
-			if(this.item != null){
-				if(this.item.IsBusy() == true){
+			//scroll
+			this.scroll.DragScrollUpdate();
+
+			if(this.item_file != null){
+				if(this.item_file.IsBusy() == true){
 					//処理中。
 				}else{
-					switch(this.item.GetResultAssetType()){
-					case Fee.Asset.AssetType.Binary:
-						{
-							UnityEngine.Debug.Log("Binary");
+					if(this.item_file.GetResultType() == Fee.Data.Item.ResultType.Error){
+						//エラー。
 
-							this.text.SetText("byte = " + this.item.GetResultAssetBinary().Length.ToString());
-						}break;
-					case Fee.Asset.AssetType.Prefab:
-						{
-							UnityEngine.Debug.Log("Prefab");
+						this.text.SetText(this.item_file.GetResultErrorString());
+					}else{
+						switch(this.item_file.GetResultAssetType()){
+						case Fee.Asset.AssetType.Binary:
+							{
+								UnityEngine.Debug.Log("Binary");
 
-							UnityEngine.GameObject t_prefab = this.item.GetResultAssetPrefab();
+								this.text.SetText("byte = " + this.item_file.GetResultAssetBinary().Length.ToString());
+							}break;
+						case Fee.Asset.AssetType.Prefab:
+							{
+								UnityEngine.Debug.Log("Prefab");
 
-							this.text.SetText("prefab = " + t_prefab.name);
+								UnityEngine.GameObject t_prefab = this.item_file.GetResultAssetPrefab();
 
-						}break;
-					case Fee.Asset.AssetType.Text:
-						{
-							UnityEngine.Debug.Log("Text");
+								this.text.SetText("prefab = " + t_prefab.name);
 
-							this.text.SetText(this.item.GetResultAssetText());
-						}break;
-					case Fee.Asset.AssetType.Texture:
-						{
-							UnityEngine.Debug.Log("Texture");
+							}break;
+						case Fee.Asset.AssetType.Text:
+							{
+								UnityEngine.Debug.Log("Text");
 
-							this.sprite.SetTexture(this.item.GetResultAssetTexture());
-							this.sprite.SetVisible(true);
-						}break;
+								this.text.SetText(this.item_file.GetResultAssetText());
+							}break;
+						case Fee.Asset.AssetType.Texture:
+							{
+								UnityEngine.Debug.Log("Texture");
+
+								this.sprite.SetTexture(this.item_file.GetResultAssetTexture());
+								this.sprite.SetVisible(true);
+							}break;
+						}
 					}
 
-					this.item = null;
+					this.item_file = null;
+				}
+			}
+
+			if(this.item_assetbundlelist != null){
+				if(this.item_assetbundlelist.IsBusy() == true){
+					//処理中。
+				}else{
+					if(this.item_assetbundlelist.GetResultType() == Fee.AssetBundleList.Item.ResultType.Error){
+						//エラー。
+
+						this.text.SetText(this.item_assetbundlelist.GetResultErrorString());
+					}else{
+						switch(this.item_assetbundlelist.GetResultType()){
+						case Fee.AssetBundleList.Item.ResultType.LoadAssetBundleItem:
+							{
+								if(this.item_assetbundlelist.GetResultAssetBundleItem().assetbundle_dummy != null){
+									this.text.SetText("load dummy assetbundle");
+								}else if(this.item_assetbundlelist.GetResultAssetBundleItem().assetbundle_raw != null){
+									this.text.SetText("load asetbundle");
+								}
+							}break;
+						case Fee.AssetBundleList.Item.ResultType.UnLoadAssetBundleItem:
+							{
+								this.text.SetText("unload assetbundle");
+							}break;
+						}
+					}
+
+					this.item_assetbundlelist = null;
 				}
 			}
 

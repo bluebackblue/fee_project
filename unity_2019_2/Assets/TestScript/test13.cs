@@ -40,9 +40,9 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** texturelist
+		/** prefablist
 		*/
-		private Fee.Instantiate.TextureList texturelist;
+		private Common.PrefabList prefablist;
 
 		/** 背景。
 		*/
@@ -181,24 +181,21 @@ namespace TestScript
 			Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
 
-			//フォント。
+			//プレハブリスト。
 			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
-				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+				this.prefablist = new Common.PrefabList();
+				this.prefablist.LoadFontList();
+				this.prefablist.LoadTextureList();
 			}
 
-			//テクスチャーリスト。
-			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
-				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
-			}
+			//フォント。
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//背景。
 			int t_layerindex = 0;
@@ -299,37 +296,37 @@ namespace TestScript
 		*/
 		public void UpdateButtonStatus()
 		{
-			this.button_inputsystem_mouse_touch.SetNormalTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_touch.SetOnTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_touch.SetDownTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_touch.SetLockTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputsystem_mouse_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputsystem_mouse_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputsystem_mouse_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputsystem_mouse_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputsystem_mouse_touch.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_inputsystem_mouse_touch.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_inputsystem_mouse_touch.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 			this.button_inputsystem_mouse_touch.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-			this.button_inputmanager_inputmouse_touch.SetNormalTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_touch.SetOnTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_touch.SetDownTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_touch.SetLockTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputmanager_inputmouse_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputmanager_inputmouse_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputmanager_inputmouse_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputmanager_inputmouse_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputmanager_inputmouse_touch.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_inputmanager_inputmouse_touch.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_inputmanager_inputmouse_touch.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 			this.button_inputmanager_inputmouse_touch.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-			this.button_inputsystem_touchscreen_touch.SetNormalTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_touchscreen_touch.SetOnTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_touchscreen_touch.SetDownTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_touchscreen_touch.SetLockTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputsystem_touchscreen_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputsystem_touchscreen_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputsystem_touchscreen_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputsystem_touchscreen_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputsystem_touchscreen_touch.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_inputsystem_touchscreen_touch.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_inputsystem_touchscreen_touch.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 			this.button_inputsystem_touchscreen_touch.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-			this.button_inputmanager_inputtouch_touch.SetNormalTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputtouch_touch.SetOnTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputtouch_touch.SetDownTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputtouch_touch.SetLockTexture(this.texturelist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputmanager_inputtouch_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputmanager_inputtouch_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputmanager_inputtouch_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.button_inputmanager_inputtouch_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputmanager_inputtouch_touch.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_inputmanager_inputtouch_touch.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_inputmanager_inputtouch_touch.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);

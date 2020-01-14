@@ -41,9 +41,9 @@ namespace TestScript
 		private Fee.Deleter.Deleter deleter;
 		private Fee.Deleter.Deleter deleter_scrollitem;
 
-		/** texturelist
+		/** prefablist
 		*/
-		private Fee.Instantiate.TextureList texturelist;
+		private Common.PrefabList prefablist;
 
 		/** リストアイテム。
 		*/
@@ -232,25 +232,22 @@ namespace TestScript
 			Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
 
-			//フォント。
+			//プレハブリスト。
 			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
-				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+				this.prefablist = new Common.PrefabList();
+				this.prefablist.LoadFontList();
+				this.prefablist.LoadTextureList();
 			}
 
-			//テクスチャーリスト。
-			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
-				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
-			}
+			//フォント。
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 			this.deleter_scrollitem = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			this.text = Fee.Render2D.Text2D.Create(this.deleter,0);
 			this.text.SetRect(100,100,0,0);
@@ -279,20 +276,20 @@ namespace TestScript
 			this.deleter_scrollitem.DeleteAll();
 
 			if(this.prev_list.Count > 0){
-				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,"..",this.texturelist.GetTexture("UI_BUTTON"),this.CallBackType_Select,".."),this.scroll.GetListCount());
+				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,"..",this.prefablist.GetTexture("UI_BUTTON"),this.CallBackType_Select,".."),this.scroll.GetListCount());
 			}
 
 			//directory
 			List<Fee.Directory.Item> t_directory_list = t_item_root.GetDirectoryList();
 			for(int ii=0;ii<t_directory_list.Count;ii++){
 				string t_path = t_item_root.GetRoot().GetFullPath() + t_directory_list[ii].GetName();
-				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,t_directory_list[ii].GetName(),this.texturelist.GetTexture("UI_BUTTON"),this.CallBackType_Select,t_path),this.scroll.GetListCount());
+				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,t_directory_list[ii].GetName(),this.prefablist.GetTexture("UI_BUTTON"),this.CallBackType_Select,t_path),this.scroll.GetListCount());
 			}
 
 			//file
 			List<Fee.Directory.Item> t_file_list = t_item_root.GetFileList();
 			for(int ii=0;ii<t_file_list.Count;ii++){
-				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,t_file_list[ii].GetName(),this.texturelist.GetTexture("UI_BUTTON"),null,null),this.scroll.GetListCount());
+				this.scroll.AddItem(new Scroll_Item(this.deleter_scrollitem,t_file_list[ii].GetName(),this.prefablist.GetTexture("UI_BUTTON"),null,null),this.scroll.GetListCount());
 			}
 		}
 

@@ -40,9 +40,9 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** texturelist
+		/** prefablist
 		*/
-		private Fee.Instantiate.TextureList texturelist;
+		private Common.PrefabList prefablist;
 
 		/** is_clip
 		*/
@@ -110,24 +110,21 @@ namespace TestScript
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
 
-			//フォント。
+			//プレハブリスト。
 			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
-				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+				this.prefablist = new Common.PrefabList();
+				this.prefablist.LoadFontList();
+				this.prefablist.LoadTextureList();
 			}
 
-			//テクスチャーリスト。
-			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
-				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
-			}
+			//フォント。
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//is_clip
 			this.is_clip = true;
@@ -145,7 +142,7 @@ namespace TestScript
 				this.sprite.SetTexture(Texture2D.whiteTexture);
 				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetColor(0.7f,0.7f,0.7f,1.0f);
-				this.sprite.SetTexture(this.texturelist.GetTexture("TEST15_TEXTURE"));
+				this.sprite.SetTexture(this.prefablist.GetTexture("TEST15_TEXTURE"));
 			}
 
 			//text
@@ -174,10 +171,10 @@ namespace TestScript
 				this.button = new Fee.Ui.Button(this.deleter,t_drawpriority + 2);
 				this.button.SetRect(t_x,t_y,t_w,t_h);
 				this.button.SetTextureCornerSize(10);
-				this.button.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-				this.button.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-				this.button.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-				this.button.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+				this.button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+				this.button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+				this.button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -193,14 +190,14 @@ namespace TestScript
 
 				this.checkbutton = new Fee.Ui.CheckButton(this.deleter,t_drawpriority + 2);
 				this.checkbutton.SetRect(t_x,t_y,t_w,t_h);
-				this.checkbutton.SetBgNormalTexture(this.texturelist.GetTexture("UI_CHECKBUTTON"));
-				this.checkbutton.SetBgOnTexture(this.texturelist.GetTexture("UI_CHECKBUTTON"));
-				this.checkbutton.SetBgLockTexture(this.texturelist.GetTexture("UI_CHECKBUTTON"));
+				this.checkbutton.SetBgNormalTexture(this.prefablist.GetTexture("UI_CHECKBUTTON"));
+				this.checkbutton.SetBgOnTexture(this.prefablist.GetTexture("UI_CHECKBUTTON"));
+				this.checkbutton.SetBgLockTexture(this.prefablist.GetTexture("UI_CHECKBUTTON"));
 				this.checkbutton.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.checkbutton.SetBgOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.checkbutton.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-				this.checkbutton.SetCheckNormalTexture(this.texturelist.GetTexture("UI_CHECKBUTTON"));
-				this.checkbutton.SetCheckLockTexture(this.texturelist.GetTexture("UI_CHECKBUTTON"));
+				this.checkbutton.SetCheckNormalTexture(this.prefablist.GetTexture("UI_CHECKBUTTON"));
+				this.checkbutton.SetCheckLockTexture(this.prefablist.GetTexture("UI_CHECKBUTTON"));
 				this.checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.checkbutton.SetText("チェック");
@@ -231,16 +228,16 @@ namespace TestScript
 				this.slider.SetButtonSize(10,40);
 				this.slider.SetButtonTextureCornerSize(2);
 				this.slider.SetTextureCornerSize(10);
-				this.slider.SetBgNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
-				this.slider.SetBgLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
-				this.slider.SetValueNormalTexture(this.texturelist.GetTexture("UI_SLIDER"));
-				this.slider.SetValueLockTexture(this.texturelist.GetTexture("UI_SLIDER"));
+				this.slider.SetBgNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
+				this.slider.SetBgLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
+				this.slider.SetValueNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
+				this.slider.SetValueLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
 				this.slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 				this.slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-				this.slider.SetButtonNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-				this.slider.SetButtonLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+				this.slider.SetButtonNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+				this.slider.SetButtonLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 				this.slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 				this.slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}

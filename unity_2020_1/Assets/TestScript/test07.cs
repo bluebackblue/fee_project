@@ -66,9 +66,9 @@ namespace TestScript
 		*/
 		private Fee.Deleter.Deleter deleter;
 
-		/** texturelist
+		/** prefablist
 		*/
-		private Fee.Instantiate.TextureList texturelist;
+		private Common.PrefabList prefablist;
 
 		/** step
 		*/
@@ -175,24 +175,21 @@ namespace TestScript
 			Fee.Crypt.Config.LOG_ENABLE = true;
 			Fee.Crypt.Crypt.CreateInstance();
 
-			//フォント。
+			//プレハブリスト。
 			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("FontList");
-				Fee.Instantiate.FontList t_fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
-				Fee.Render2D.Render2D.GetInstance().SetDefaultFont(t_fontlist.GetFont("FONT"));
+				this.prefablist = new Common.PrefabList();
+				this.prefablist.LoadFontList();
+				this.prefablist.LoadTextureList();
 			}
 
-			//テクスチャーリスト。
-			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("TextureList");
-				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
-			}
+			//フォント。
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.texturelist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//step
 			this.step = Step.None;
@@ -203,10 +200,10 @@ namespace TestScript
 			this.button_key.SetRect(100 + 200 * 0,100,150,50);
 			this.button_key.SetText("公開鍵");
 			this.button_key.SetTextureCornerSize(10);
-			this.button_key.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_key.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_key.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_key.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_key.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_key.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_key.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_key.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_key.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_key.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_key.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -218,10 +215,10 @@ namespace TestScript
 			this.button_pass.SetRect(100 + 200 * 1,100,150,50);
 			this.button_pass.SetText("共通鍵");
 			this.button_pass.SetTextureCornerSize(10);
-			this.button_pass.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_pass.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_pass.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_pass.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_pass.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_pass.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_pass.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_pass.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_pass.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_pass.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_pass.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
@@ -233,10 +230,10 @@ namespace TestScript
 			this.button_signature.SetRect(100 + 200 * 2,100,150,50);
 			this.button_signature.SetText("証明書");
 			this.button_signature.SetTextureCornerSize(10);
-			this.button_signature.SetNormalTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_signature.SetOnTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_signature.SetDownTexture(this.texturelist.GetTexture("UI_BUTTON"));
-			this.button_signature.SetLockTexture(this.texturelist.GetTexture("UI_BUTTON"));
+			this.button_signature.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_signature.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_signature.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
+			this.button_signature.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
 			this.button_signature.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
 			this.button_signature.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
 			this.button_signature.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);

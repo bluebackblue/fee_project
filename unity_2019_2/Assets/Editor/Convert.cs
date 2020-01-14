@@ -19,6 +19,16 @@ namespace Editor
 			);
 		}
 
+		/** 鍵の作成。
+		*/
+		[UnityEditor.MenuItem("Fee/Test/Convert/CreatePublicKey")]
+		private static void MenuItem_Convert_CreatePublicKey()
+		{
+			Fee.File.CustomCertificateHandler t_certificate = new Fee.File.CustomCertificateHandler("");
+			Fee.EditorTool.Utility.WebRequest("https://blueback.ddns.net:8081/",t_certificate);
+			Fee.EditorTool.Utility.WriteTextFile(Fee.File.Path.CreateAssetsPath("Editor/data/ssl_publickey.txt"),t_certificate.GetReceivePublicKey(),true);
+		}
+
 		/** エクセルをコンバート。
 		*/
 		#if(UNITY_EDITOR)
@@ -59,26 +69,18 @@ namespace Editor
 				Fee.Instantiate.FontList_Tool.Create(new Fee.File.Path("Resources/FontList.prefab"),t_font_list);
 			}
 
-			//テクスチャーリスト。TODO:エクセルからの作成。
-			{
-				Fee.Instantiate.TextureList_Tool.ResourceItem[] t_texture_list = new Fee.Instantiate.TextureList_Tool.ResourceItem[]{
-					new Fee.Instantiate.TextureList_Tool.ResourceItem("UI_BUTTON",				new Fee.File.Path("Editor/data/ui_button.png")),
-					new Fee.Instantiate.TextureList_Tool.ResourceItem("UI_BUTTON_ACTIVE",		new Fee.File.Path("Editor/data/ui_button_active.png")),
-					new Fee.Instantiate.TextureList_Tool.ResourceItem("UI_CHECKBUTTON",			new Fee.File.Path("Editor/data/ui_checkbutton.png")),
-					new Fee.Instantiate.TextureList_Tool.ResourceItem("UI_SLIDER",				new Fee.File.Path("Editor/data/ui_slider.png")),
-
-					//ブルーム。
-					new Fee.Instantiate.TextureList_Tool.ResourceItem("TEST10_TEXTURE",			new Fee.File.Path("Editor/data/skyimage.jpg")),
-
-					//クリップ。
-					new Fee.Instantiate.TextureList_Tool.ResourceItem("TEST15_TEXTURE",			new Fee.File.Path("Editor/data/skyimage.jpg")),
-				};
-				Fee.Instantiate.TextureList_Tool.Create(new Fee.File.Path("Resources/TextureList.prefab"),t_texture_list);
-			}
-
 			//プレハブリスト。TODO:エクセルからの作成。
 			{
 				Fee.Instantiate.PrefabList_Tool.ResourceItem[] t_prefab_list = new Fee.Instantiate.PrefabList_Tool.ResourceItem[]{
+
+					//テクスチャーリスト。
+					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEXTURELIST",				new Fee.File.Path("Editor/data/create_from_excel_texture.prefab")),
+
+					//テキストアセットリスト。
+					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEXTASSETLIST",			new Fee.File.Path("Resources/TextAssetList.prefab")),					//TODO
+
+					//フォントリスト。
+					new Fee.Instantiate.PrefabList_Tool.ResourceItem("FONTLIST",				new Fee.File.Path("Resources/FontList.prefab")),						//TODO
 
 					//ＢＧＭ。
 					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEST11_BGM",				new Fee.File.Path("Editor/data/create_from_excel_bgm.prefab")),	
@@ -102,10 +104,11 @@ namespace Editor
 			{
 				Fee.Instantiate.TextAssetList_Tool.ResourceItem[] t_textasset_list = new Fee.Instantiate.TextAssetList_Tool.ResourceItem[]{
 
+					new Fee.Instantiate.TextAssetList_Tool.ResourceItem("SSLPUBLICKEY",			new Fee.File.Path("Editor/data/ssl_publickey.txt")),
+					
 					new Fee.Instantiate.TextAssetList_Tool.ResourceItem("TEST07_PUBLIC_KEY",	new Fee.File.Path("Editor/data/public_key.json")),				
 					new Fee.Instantiate.TextAssetList_Tool.ResourceItem("TEST07_PRIVATE_KEY",	new Fee.File.Path("Editor/data/private_key.json")),
 					
-
 					new Fee.Instantiate.TextAssetList_Tool.ResourceItem("TEST12_DATA_DEBUG",	new Fee.File.Path("Editor/data/create_from_excel_data_debug.json")),				
 					new Fee.Instantiate.TextAssetList_Tool.ResourceItem("TEST12_DATA_RELEASE",	new Fee.File.Path("Editor/data/create_from_excel_data_release.json")),
 				};

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5032896354388640930}
   - component: {fileID: 1262505238685592548}
-  - component: {fileID: -7468193115056787314}
   m_Layer: 0
   m_Name: create_from_excel_se
   m_TagString: Untagged
@@ -54,25 +53,3 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 72aab59b08caec04ea662e44529a68c8, type: 3}
   - {fileID: 8300000, guid: 72aab59b08caec04ea662e44529a68c8, type: 3}
   - {fileID: 8300000, guid: 72aab59b08caec04ea662e44529a68c8, type: 3}
---- !u!114 &-7468193115056787314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3850805147799932481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43a7ce6d096489a41ad19a18ebf1a430, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tag_list:
-  - SE01
-  - SE02
-  - SE03
-  - SE04
-  audiovolume_list:
-  - 1
-  - 0.8
-  - 0.6
-  - 0.4
