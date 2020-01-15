@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5826416528110642600}
   - component: {fileID: 6756390204106964556}
-  - component: {fileID: -8194357283663722452}
+  - component: {fileID: 8937267633945843823}
   m_Layer: 0
   m_Name: create_from_excel_bgm
   m_TagString: Untagged
@@ -48,7 +48,7 @@ MonoBehaviour:
   - BGM01
   audioclip_list:
   - {fileID: 8300000, guid: 24557e744dc0ffd45ac8f1dc1c0c5b53, type: 3}
---- !u!114 &-8194357283663722452
+--- !u!114 &8937267633945843823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

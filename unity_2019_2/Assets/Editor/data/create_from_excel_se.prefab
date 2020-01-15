@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5032896354388640930}
   - component: {fileID: 1262505238685592548}
-  - component: {fileID: 3130875607075803008}
+  - component: {fileID: -6839484310621824212}
   m_Layer: 0
   m_Name: create_from_excel_se
   m_TagString: Untagged
@@ -54,7 +54,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 72aab59b08caec04ea662e44529a68c8, type: 3}
   - {fileID: 8300000, guid: 72aab59b08caec04ea662e44529a68c8, type: 3}
   - {fileID: 8300000, guid: 72aab59b08caec04ea662e44529a68c8, type: 3}
---- !u!114 &3130875607075803008
+--- !u!114 &-6839484310621824212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
