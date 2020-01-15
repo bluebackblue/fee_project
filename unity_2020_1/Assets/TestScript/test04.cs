@@ -371,6 +371,7 @@ namespace TestScript
 				this.prefablist = new Common.PrefabList();
 				this.prefablist.LoadFontList();
 				this.prefablist.LoadTextureList();
+				this.prefablist.LoadTextAssetList();
 			}
 
 			//フォント。
@@ -429,6 +430,9 @@ namespace TestScript
 				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_TextureFile,this.prefablist.GetTexture("UI_BUTTON")));
 				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadResources_TextureFile,this.prefablist.GetTexture("UI_BUTTON")));
 			}
+
+			//パブリックキー。
+			Fee.File.File.GetInstance().RegistPublicKey("blueback","^https\\:\\/\\/blueback\\.ddns\\.net\\:8081\\/.*$",this.prefablist.GetTextAsset("SSLPUBLICKEY").text);
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。

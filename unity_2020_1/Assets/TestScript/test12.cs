@@ -19,6 +19,7 @@ namespace TestScript
 
 		エクセル
 		データ
+		アセットバンドル
 
 	*/
 	public class test12 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test12.ButtonId>
@@ -34,6 +35,7 @@ namespace TestScript
 				@"
 				エクセル
 				データ
+				アセットバンドル
 				"
 			);
 		}
@@ -346,6 +348,7 @@ namespace TestScript
 			this.sprite.SetTexture(Texture2D.whiteTexture);
 			this.sprite.SetVisible(false);
 
+			//パブリックキー。
 			Fee.File.File.GetInstance().RegistPublicKey("blueback","^https\\:\\/\\/blueback\\.ddns\\.net\\:8081\\/.*$",this.prefablist.GetTextAsset("SSLPUBLICKEY").text);
 		}
 

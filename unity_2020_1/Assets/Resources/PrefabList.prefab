@@ -54,8 +54,8 @@ MonoBehaviour:
   - TEST18_CUBE
   prefab_list:
   - {fileID: 8710002016527697210, guid: e7a17145bbf0c6746b0bc1dd2a70d270, type: 3}
-  - {fileID: 7066868934384388978, guid: c159c4f8efab5134cadfd6711dfd06e3, type: 3}
-  - {fileID: 1472584236933848433, guid: d6e6ce1adfe89aa47831d3cd3e1935ac, type: 3}
+  - {fileID: 4457688116002242624, guid: c12309a68f708a149bda088374044979, type: 3}
+  - {fileID: 799532582392996024, guid: 2a0b6ae1758c8c3468e1f0696a00f0dd, type: 3}
   - {fileID: 2977859788716536011, guid: 77630e0b5b856434a8f0b6d418faa971, type: 3}
   - {fileID: 3850805147799932481, guid: b785e11bab988b64d8ee4bae301c20de, type: 3}
   - {fileID: 1023134246023269692, guid: 8eaf3c4d346e7b34986619eefbd72b7e, type: 3}

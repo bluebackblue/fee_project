@@ -50,7 +50,7 @@ namespace Fee.JsonSheet
 			public float audio_volume;
 		}
 
-		/** オーディオコマンド。
+		/** コマンド。
 		*/
 		public const string AUDIOCOMMAND_ITEM = "<item>";
 

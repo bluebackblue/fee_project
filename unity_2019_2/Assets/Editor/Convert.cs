@@ -77,10 +77,10 @@ namespace Editor
 					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEXTURELIST",				new Fee.File.Path("Editor/data/create_from_excel_texture.prefab")),
 
 					//テキストアセットリスト。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEXTASSETLIST",			new Fee.File.Path("Resources/TextAssetList.prefab")),					//TODO
+					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEXTASSETLIST",			new Fee.File.Path("Editor/data/create_from_excel_textasset.prefab")),
 
 					//フォントリスト。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("FONTLIST",				new Fee.File.Path("Resources/FontList.prefab")),						//TODO
+					new Fee.Instantiate.PrefabList_Tool.ResourceItem("FONTLIST",				new Fee.File.Path("Editor/data/create_from_excel_font.prefab")),
 
 					//ＢＧＭ。
 					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEST11_BGM",				new Fee.File.Path("Editor/data/create_from_excel_bgm.prefab")),	
@@ -98,21 +98,6 @@ namespace Editor
 					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEST18_CUBE",				new Fee.File.Path("Editor/data/cube.prefab")),
 				};
 				Fee.Instantiate.PrefabList_Tool.Create(new Fee.File.Path("Resources/PrefabList.prefab"),t_prefab_list);
-			}
-
-			//テキストアセットリスト。TODO:エクセルからの作成。
-			{
-				Fee.Instantiate.TextAssetList_Tool.ResourceItem[] t_textasset_list = new Fee.Instantiate.TextAssetList_Tool.ResourceItem[]{
-
-					new Fee.Instantiate.TextAssetList_Tool.ResourceItem("SSLPUBLICKEY",			new Fee.File.Path("Editor/data/ssl_publickey.txt")),
-					
-					new Fee.Instantiate.TextAssetList_Tool.ResourceItem("TEST07_PUBLIC_KEY",	new Fee.File.Path("Editor/data/public_key.json")),				
-					new Fee.Instantiate.TextAssetList_Tool.ResourceItem("TEST07_PRIVATE_KEY",	new Fee.File.Path("Editor/data/private_key.json")),
-					
-					new Fee.Instantiate.TextAssetList_Tool.ResourceItem("TEST12_DATA_DEBUG",	new Fee.File.Path("Editor/data/create_from_excel_data_debug.json")),				
-					new Fee.Instantiate.TextAssetList_Tool.ResourceItem("TEST12_DATA_RELEASE",	new Fee.File.Path("Editor/data/create_from_excel_data_release.json")),
-				};
-				Fee.Instantiate.TextAssetList_Tool.Create(new Fee.File.Path("Resources/TextAssetList.prefab"),t_textasset_list);
 			}
 		}
 		#endif
