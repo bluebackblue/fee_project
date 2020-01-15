@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2400523796
+CRC: 2527016422
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 345f3b0557f5e773b7ed133645345faa
+    Hash: 7c0dd90a1a4fc2ada8b3ac01ed0745b4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4783a5997207c69014d62b07983c9d7a
@@ -24,7 +24,7 @@ ClassTypes:
 - Class: 49
   Script: {instanceID: 0}
 Assets:
-- Assets/Editor/Resources/Test12/text.txt
-- Assets/Editor/Resources/Test12/cube.prefab
-- Assets/Editor/Resources/Test12/texture.png
+- Assets/Editor/Resources/Test12/assetbundle_text.txt
+- Assets/Editor/Resources/Test12/assetbundle_cube.prefab
+- Assets/Editor/Resources/Test12/assetbundle_texture.png
 Dependencies: []

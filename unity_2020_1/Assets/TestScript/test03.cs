@@ -62,7 +62,7 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Window(string a_label,int a_index,UnityEngine.Texture2D a_texture)
+			public Window(Common.PrefabList a_prefablist,string a_label,int a_index)
 			{
 				//新規作成の場合に設定する矩形。
 				Fee.Geometry.Rect2D_R<int> t_new_rect = new Fee.Geometry.Rect2D_R<int>(100 + a_index * 30,100 + a_index * 30,300,300);
@@ -72,7 +72,7 @@ namespace TestScript
 
 				//window
 				{
-					this.window = new Fee.Ui.Window(this.deleter,this);
+					this.window = Fee.Ui.Window.Create(this.deleter,this);
 					this.window.RegistWindowResume(a_label,in t_new_rect);
 
 					Color t_color = new Color(0.0f,0.0f,0.0f,0.5f);
@@ -114,24 +114,15 @@ namespace TestScript
 				long t_drawpriority = 0;
 
 				//title
-				this.title = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
+				this.title = a_prefablist.CreateText(this.deleter,t_drawpriority);
 				this.title.SetRect(0,0,0,0);
 				this.title.SetText(a_label);
 
 				//close_button
-				this.close_button = new Fee.Ui.Button(this.deleter,t_drawpriority);
+				this.close_button = a_prefablist.CreateButton(this.deleter,t_drawpriority);
 				this.close_button.SetOnButtonClick(this,-1);
 				this.close_button.SetText("x");
-				this.close_button.SetTextureCornerSize(10);
 				this.close_button.SetWH(this.window.GetTitleBarH(),this.window.GetTitleBarH());
-				this.close_button.SetNormalTexture(a_texture);
-				this.close_button.SetOnTexture(a_texture);
-				this.close_button.SetDownTexture(a_texture);
-				this.close_button.SetLockTexture(a_texture);
-				this.close_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.close_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.close_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.close_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				//is_close
 				this.is_close = false;
@@ -270,25 +261,16 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//drawpriority
 			long t_drawpriority = 0;
 
 			//button
-			this.button = new Fee.Ui.Button(this.deleter,t_drawpriority);
+			this.button = this.prefablist.CreateButton(this.deleter,t_drawpriority);
 			this.button.SetOnButtonClick(this,-1);
 			this.button.SetRect(10,50,100,50);
 			this.button.SetText("表示");
-			this.button.SetTextureCornerSize(10);
-			this.button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-			this.button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-			this.button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-			this.button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-			this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			//view_flag
 			this.view_flag = true;
@@ -296,7 +278,7 @@ namespace TestScript
 			//window_list
 			this.window_list = new Window[5];
 			for(int ii=0;ii<this.window_list.Length;ii++){
-				this.window_list[ii] = new Window("window" + ii.ToString(),ii,this.prefablist.GetTexture("UI_BUTTON"));
+				this.window_list[ii] = new Window(this.prefablist,"window" + ii.ToString(),ii);
 			}
 		}
 
@@ -358,7 +340,7 @@ namespace TestScript
 
 				for(int ii=0;ii<this.window_list.Length;ii++){
 					if(this.window_list[ii] == null){
-						this.window_list[ii] = new Window("window" + ii.ToString(),ii,this.prefablist.GetTexture("UI_BUTTON"));
+						this.window_list[ii] = new Window(this.prefablist,"window" + ii.ToString(),ii);
 					}
 				}
 			}

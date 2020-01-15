@@ -160,7 +160,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//深度。カメラに設定。
 			{
@@ -224,146 +224,63 @@ namespace TestScript
 
 				//ブルーム。
 				{
-					this.bloom_button = new Fee.Ui.Button(this.deleter,0);
+					this.bloom_button = this.prefablist.CreateButton(this.deleter,0);
 					this.bloom_button.SetOnButtonClick(this,ButtonId.Bloom);
 					this.bloom_button.SetRect(100,t_y,t_button_w,t_button_h);
-					this.bloom_button.SetTextureCornerSize(10);
 					this.bloom_button.SetText("Bloom : " + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
-					this.bloom_button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.bloom_button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.bloom_button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.bloom_button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.bloom_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.bloom_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.bloom_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.bloom_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 40;
 
-					this.bloom_threshold_slider = new Fee.Ui.Slider(this.deleter,0);
+					this.bloom_threshold_slider = this.prefablist.CreateSlider(this.deleter,0);
 					this.bloom_threshold_slider.SetOnSliderChangeValue(this,SliderId.Threshold);
 					this.bloom_threshold_slider.SetRect(100,t_y,200,10);
-					this.bloom_threshold_slider.SetTextureCornerSize(3);
-					this.bloom_threshold_slider.SetButtonTextureCornerSize(3);
 					this.bloom_threshold_slider.SetButtonSize(20,25);
 					this.bloom_threshold_slider.SetValue(Fee.Bloom.Bloom.GetInstance().GetThreshold());
-					this.bloom_threshold_slider.SetBgNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.bloom_threshold_slider.SetBgLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.bloom_threshold_slider.SetValueNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.bloom_threshold_slider.SetValueLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.bloom_threshold_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.bloom_threshold_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.bloom_threshold_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.bloom_threshold_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-					this.bloom_threshold_slider.SetButtonNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.bloom_threshold_slider.SetButtonLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.bloom_threshold_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.bloom_threshold_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 30;
 
-					this.bloom_intensity_slider = new Fee.Ui.Slider(this.deleter,0);
+					this.bloom_intensity_slider = this.prefablist.CreateSlider(this.deleter,0);
 					this.bloom_intensity_slider.SetOnSliderChangeValue(this,SliderId.Intensity);
 					this.bloom_intensity_slider.SetRect(100,t_y,200,10);
-					this.bloom_intensity_slider.SetTextureCornerSize(3);
-					this.bloom_intensity_slider.SetButtonTextureCornerSize(3);
 					this.bloom_intensity_slider.SetButtonSize(20,25);
 					this.bloom_intensity_slider.SetValue(Fee.Bloom.Bloom.GetInstance().GetIntensity());
 					this.bloom_intensity_slider.SetValueScale(5.0f);
-					this.bloom_intensity_slider.SetBgNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.bloom_intensity_slider.SetBgLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.bloom_intensity_slider.SetValueNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.bloom_intensity_slider.SetValueLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.bloom_intensity_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.bloom_intensity_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.bloom_intensity_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.bloom_intensity_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-					this.bloom_intensity_slider.SetButtonNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.bloom_intensity_slider.SetButtonLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.bloom_intensity_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.bloom_intensity_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 
 				t_y += 60;
 
 				//ブラー。
 				{
-					this.blur_button = new Fee.Ui.Button(this.deleter,0);
+					this.blur_button = this.prefablist.CreateButton(this.deleter,0);
 					this.blur_button.SetOnButtonClick(this,ButtonId.Blur);
 					this.blur_button.SetRect(100,t_y,t_button_w,t_button_h);
-					this.blur_button.SetTextureCornerSize(10);
 					this.blur_button.SetText("Blur : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
-					this.blur_button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.blur_button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.blur_button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.blur_button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.blur_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.blur_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.blur_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.blur_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 40;
 
-					this.blur_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0);
+					this.blur_rate_blend_slider = this.prefablist.CreateSlider(this.deleter,0);
 					this.blur_rate_blend_slider.SetOnSliderChangeValue(this,SliderId.BlurBlendrate);
 					this.blur_rate_blend_slider.SetRect(100,t_y,200,10);
-					this.blur_rate_blend_slider.SetTextureCornerSize(3);
-					this.blur_rate_blend_slider.SetButtonTextureCornerSize(3);
 					this.blur_rate_blend_slider.SetButtonSize(20,25);
 					this.blur_rate_blend_slider.SetValue(Fee.Blur.Blur.GetInstance().GetBlendRate());
-					this.blur_rate_blend_slider.SetBgNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.blur_rate_blend_slider.SetBgLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.blur_rate_blend_slider.SetValueNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.blur_rate_blend_slider.SetValueLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.blur_rate_blend_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.blur_rate_blend_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.blur_rate_blend_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.blur_rate_blend_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-					this.blur_rate_blend_slider.SetButtonNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.blur_rate_blend_slider.SetButtonLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.blur_rate_blend_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.blur_rate_blend_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 
 				t_y += 60;
 
 				//デプス。
 				{
-					this.depth_button = new Fee.Ui.Button(this.deleter,0);
+					this.depth_button = this.prefablist.CreateButton(this.deleter,0);
 					this.depth_button.SetOnButtonClick(this,ButtonId.Depth);
 					this.depth_button.SetRect(100,t_y,t_button_w,t_button_h);
-					this.depth_button.SetTextureCornerSize(10);
 					this.depth_button.SetText("Depth : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
-					this.depth_button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.depth_button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.depth_button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.depth_button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.depth_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.depth_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.depth_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.depth_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 					t_y += 40;
 
-					this.depth_rate_blend_slider = new Fee.Ui.Slider(this.deleter,0);
+					this.depth_rate_blend_slider = this.prefablist.CreateSlider(this.deleter,0);
 					this.depth_rate_blend_slider.SetOnSliderChangeValue(this,SliderId.DepthBlendrate);
 					this.depth_rate_blend_slider.SetRect(100,t_y,200,10);
-					this.depth_rate_blend_slider.SetTextureCornerSize(3);
-					this.depth_rate_blend_slider.SetButtonTextureCornerSize(3);
 					this.depth_rate_blend_slider.SetButtonSize(20,25);
 					this.depth_rate_blend_slider.SetValue(Fee.Depth.Depth.GetInstance().GetBlendRate());
-					this.depth_rate_blend_slider.SetBgNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.depth_rate_blend_slider.SetBgLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.depth_rate_blend_slider.SetValueNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.depth_rate_blend_slider.SetValueLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
-					this.depth_rate_blend_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.depth_rate_blend_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.depth_rate_blend_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.depth_rate_blend_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-					this.depth_rate_blend_slider.SetButtonNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.depth_rate_blend_slider.SetButtonLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-					this.depth_rate_blend_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.depth_rate_blend_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				}
 			}
 		}

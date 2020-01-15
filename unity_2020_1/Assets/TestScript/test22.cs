@@ -109,7 +109,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//bg
 			{
@@ -152,13 +152,13 @@ namespace TestScript
 			this.movie_sprite_3.SetColor(1.0f,1.0f,1.0f,1.0f);
 
 
-			this.movie_text_1 = Fee.Render2D.Text2D.Create(this.deleter,1);
+			this.movie_text_1 = this.prefablist.CreateText(this.deleter,1);
 			this.movie_text_1.SetRect(this.movie_sprite_1.GetX(),this.movie_sprite_1.GetY() - 30,0,0);
 
-			this.movie_text_2 = Fee.Render2D.Text2D.Create(this.deleter,1);
+			this.movie_text_2 = this.prefablist.CreateText(this.deleter,1);
 			this.movie_text_2.SetRect(this.movie_sprite_2.GetX(),this.movie_sprite_2.GetY() - 30,0,0);
 
-			this.movie_text_3 = Fee.Render2D.Text2D.Create(this.deleter,1);
+			this.movie_text_3 = this.prefablist.CreateText(this.deleter,1);
 			this.movie_text_3.SetRect(this.movie_sprite_3.GetX(),this.movie_sprite_3.GetY() - 30,0,0);
 		}
 

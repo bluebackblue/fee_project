@@ -16,6 +16,13 @@ namespace TestScript
 	*/
 	namespace Data
 	{
+		public static class Assets
+		{
+			/** TEST12_ASSETBUNDLE
+			*/
+			public const string TEST12_ASSETBUNDLE = "Editor/data/create_from_excel_dummyassetbundle_test.assetbundle.json";
+		}
+
 		/** Resources
 		*/
 		public static class Resources
@@ -52,6 +59,16 @@ namespace TestScript
 			/** TEST11_SOUNDPOOL_SE
 			*/
 			public const string TEST11_SOUNDPOOL_SE = "Test11/SoundPool/se.txt";
+
+			/** TEST12_ASSETBUNDLE
+			*/
+			#if(UNITY_WEBGL)
+			public const string TEST12_ASSETBUNDLE = "AssetBundle_WebGL/test.assetbundle";
+			#elif(UNITY_ANDROID)
+			public const string TEST12_ASSETBUNDLE = "AssetBundle_Android/test.assetbundle";
+			#else
+			public const string TEST12_ASSETBUNDLE = "AssetBundle_StandaloneWindows/test.assetbundle";
+			#endif
 		}
 
 		/** Url
@@ -69,6 +86,16 @@ namespace TestScript
 			/** TEST04_TEXTURE
 			*/
 			public const string TEST04_TEXTURE = "https://blueback.ddns.net:8081/project_fee/StreamingAssets/Test04/texture.png";
+
+			/** TEST12_ASSETBUNDLE
+			*/
+			#if(UNITY_WEBGL)
+			public const string TEST12_ASSETBUNDLE = "https://blueback.ddns.net:8081/project_fee/StreamingAssets/AssetBundle_WebGL/test.assetbundle";
+			#elif(UNITY_ANDROID)
+			public const string TEST12_ASSETBUNDLE = "https://blueback.ddns.net:8081/project_fee/StreamingAssets/AssetBundle_Android/test.assetbundle";
+			#else
+			public const string TEST12_ASSETBUNDLE = "https://blueback.ddns.net:8081/project_fee/StreamingAssets/AssetBundle_StandaloneWindows/test.assetbundle";
+			#endif
 		}
 
 		/** Local

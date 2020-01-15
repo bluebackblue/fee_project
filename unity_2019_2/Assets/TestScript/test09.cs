@@ -231,10 +231,10 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//status_text
-			this.status_text = Fee.Render2D.Text2D.Create(this.deleter,0);
+			this.status_text = this.prefablist.CreateText(this.deleter,0);
 			this.status_text.SetRect(70,50,0,0);
 
 			//マップ。

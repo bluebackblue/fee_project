@@ -124,7 +124,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//is_clip
 			this.is_clip = true;
@@ -137,10 +137,8 @@ namespace TestScript
 
 			//sprite
 			{
-				this.sprite = Fee.Ui.Sprite2D_Clip.Create(this.deleter,t_drawpriority + 1);
-				this.sprite.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
+				this.sprite = this.prefablist.CreateClipSprite(this.deleter,t_drawpriority + 1);
 				this.sprite.SetTexture(Texture2D.whiteTexture);
-				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetColor(0.7f,0.7f,0.7f,1.0f);
 				this.sprite.SetTexture(this.prefablist.GetTexture("TEST15_TEXTURE"));
 			}
@@ -150,7 +148,7 @@ namespace TestScript
 				int t_x = Fee.Render2D.Render2D.VIRTUAL_W / 2;
 				int t_y = 100;
 
-				this.text = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority + 1);
+				this.text = this.prefablist.CreateText(this.deleter,t_drawpriority + 1);
 				this.text.SetRect(t_x,t_y,0,0);
 				this.text.SetText("ESC ENTER");
 				this.text.SetAlignmentType(Fee.Render2D.Text2D_HorizontalAlignmentType.Center,Fee.Render2D.Text2D_VerticalAlignmentType.Middle);
@@ -167,18 +165,9 @@ namespace TestScript
 				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 				int t_y = 300;
 
-
-				this.button = new Fee.Ui.Button(this.deleter,t_drawpriority + 2);
+				this.button = this.prefablist.CreateButton(this.deleter,t_drawpriority + 2);
 				this.button.SetRect(t_x,t_y,t_w,t_h);
-				this.button.SetTextureCornerSize(10);
-				this.button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
+				this.button.SetText("TEXT");
 			}
 
 			//checkbutton
@@ -188,18 +177,8 @@ namespace TestScript
 				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 				int t_y = 200;
 
-				this.checkbutton = new Fee.Ui.CheckButton(this.deleter,t_drawpriority + 2);
+				this.checkbutton = this.prefablist.CreateCheckButton(this.deleter,t_drawpriority + 2);
 				this.checkbutton.SetRect(t_x,t_y,t_w,t_h);
-				this.checkbutton.SetBgNormalTexture(this.prefablist.GetTexture("UI_CHECKBUTTON"));
-				this.checkbutton.SetBgOnTexture(this.prefablist.GetTexture("UI_CHECKBUTTON"));
-				this.checkbutton.SetBgLockTexture(this.prefablist.GetTexture("UI_CHECKBUTTON"));
-				this.checkbutton.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.checkbutton.SetBgOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.checkbutton.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-				this.checkbutton.SetCheckNormalTexture(this.prefablist.GetTexture("UI_CHECKBUTTON"));
-				this.checkbutton.SetCheckLockTexture(this.prefablist.GetTexture("UI_CHECKBUTTON"));
-				this.checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
 				this.checkbutton.SetText("チェック");
 			}
 
@@ -210,7 +189,7 @@ namespace TestScript
 				int t_x = 100;
 				int t_y = 100;
 
-				this.inputfield = Fee.Render2D.InputField2D.Create(this.deleter,t_drawpriority + 2);
+				this.inputfield = this.prefablist.CreateInputField(this.deleter,t_drawpriority + 2);
 				this.inputfield.SetRect(t_x,t_y,t_w,t_h);
 				this.inputfield.SetTextColor(1.0f,0.0f,0.0f,1.0f);
 			}
@@ -222,24 +201,10 @@ namespace TestScript
 				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
 				int t_y = 350;
 
-				this.slider = new Fee.Ui.Slider(this.deleter,t_drawpriority + 2);
+				this.slider = this.prefablist.CreateSlider(this.deleter,t_drawpriority + 2);
 				this.slider.SetRect(t_x,t_y,t_w,t_h);
 				this.slider.SetValue(0.0f);
 				this.slider.SetButtonSize(10,40);
-				this.slider.SetButtonTextureCornerSize(2);
-				this.slider.SetTextureCornerSize(10);
-				this.slider.SetBgNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
-				this.slider.SetBgLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
-				this.slider.SetValueNormalTexture(this.prefablist.GetTexture("UI_SLIDER"));
-				this.slider.SetValueLockTexture(this.prefablist.GetTexture("UI_SLIDER"));
-				this.slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-				this.slider.SetButtonNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.slider.SetButtonLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//is_clip

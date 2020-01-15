@@ -83,11 +83,11 @@ namespace TestScript
 
 			/** line
 			*/
-			Fee.Ui.Line[] line;
+			Fee.Ui.Line2D[] line;
 
 			/** constructor
 			*/
-			public Item(Fee.Deleter.Deleter a_deleter,int a_layer_index,int a_node_index,Fee.Perceptron.Node a_node)
+			public Item(Common.PrefabList a_prefablist,Fee.Deleter.Deleter a_deleter,int a_layer_index,int a_node_index,Fee.Perceptron.Node a_node)
 			{
 				int t_size = 30;
 				int t_offset_x = 100;
@@ -120,16 +120,16 @@ namespace TestScript
 					this.eventplate.SetOnEventPlateOver<Fee.Perceptron.Node>(this,a_node);
 
 					//text
-					this.text = Fee.Render2D.Text2D.Create(a_deleter,1);
+					this.text = a_prefablist.CreateText(a_deleter,1);
 					this.text.SetText("");
 					this.text.SetVisible(false);
 					this.text.SetRect(t_x + 20,t_y - 20,0,0);
 					this.text.SetColor(1.0f,0.2f,0.2f,1.0f);
 
 					//line
-					this.line = new Fee.Ui.Line[a_node.link_list.Count];
+					this.line = new Fee.Ui.Line2D[a_node.link_list.Count];
 					for(int ii=0;ii<a_node.link_list.Count;ii++){
-						this.line[ii] = new Fee.Ui.Line(a_deleter,3);
+						this.line[ii] = Fee.Ui.Line2D.Create(a_deleter,3);
 						this.line[ii].SetSize(2);
 						int t_x_to = t_offset_x + t_alignment_x * a_node.link_list[ii].node_to.layer_parent.layer_index;
 						int t_y_to = t_offset_y + t_alignment_y * a_node.link_list[ii].node_to.node_index;
@@ -262,7 +262,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//パーセプトロン。
 			this.perceptron = new Fee.Perceptron.Perceptron(4,4,0,2);
@@ -275,21 +275,10 @@ namespace TestScript
 				int t_h = 30;
 
 				//backpropagation_button
-				this.backpropagation_button = new Fee.Ui.Button(this.deleter,1);
-				this.backpropagation_button = new Fee.Ui.Button(this.deleter,0);
+				this.backpropagation_button = this.prefablist.CreateButton(this.deleter,0);
 				this.backpropagation_button.SetOnButtonClick(this,ButtonID.BackPropagation);
 				this.backpropagation_button.SetRect(t_x,t_y,t_w,t_h);
 				this.backpropagation_button.SetText("BackPropagation");
-				this.backpropagation_button.SetTextureCornerSize(10);
-				this.backpropagation_button.SetFontSize(13);
-				this.backpropagation_button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.backpropagation_button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.backpropagation_button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.backpropagation_button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.backpropagation_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.backpropagation_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.backpropagation_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.backpropagation_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				//backpropagation_flag
 				this.backpropagation_flag = false;
@@ -314,7 +303,7 @@ namespace TestScript
 					}
 
 					//表示アイテム。
-					this.list.Add(new Item(this.deleter,t_layerindex,t_node_index,t_node));
+					this.list.Add(new Item(this.prefablist,this.deleter,t_layerindex,t_node_index,t_node));
 				}
 			}
 
@@ -322,7 +311,7 @@ namespace TestScript
 			{
 				int xx = this.perceptron.layer_list.Count + 1;
 				for(int yy=0;yy<this.perceptron.layer_teacher.node_list.Count;yy++){
-					this.list.Add(new Item(this.deleter,xx,yy,this.perceptron.layer_teacher.node_list[yy]));
+					this.list.Add(new Item(this.prefablist,this.deleter,xx,yy,this.perceptron.layer_teacher.node_list[yy]));
 				}
 			}
 		}

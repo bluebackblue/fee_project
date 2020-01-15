@@ -75,7 +75,7 @@ namespace TestScript
 
 		/** ライン。
 		*/
-		private Fee.Ui.Line line;
+		private Fee.Ui.Line2D line;
 
 		/** ButtonId
 		*/
@@ -135,7 +135,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//レイヤインデックス。
 			int t_layerindex = 0;
@@ -161,7 +161,7 @@ namespace TestScript
 					int t_x = 600;
 					int t_y = 10;
 		
-					this.inputfield = Fee.Render2D.InputField2D.Create(this.deleter,t_drawpriority);
+					this.inputfield = this.prefablist.CreateInputField(this.deleter,t_drawpriority);
 					this.inputfield.SetRect(t_x,t_y,t_w,t_h);
 					this.inputfield.SetText("defaultテキスト");
 					this.inputfield.SetMultiLine(true);
@@ -174,7 +174,7 @@ namespace TestScript
 					int t_x = 600 + 150;
 					int t_y = 10;
 
-					this.text = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
+					this.text = this.prefablist.CreateText(this.deleter,t_drawpriority);
 					this.text.SetRect(t_x,t_y,0,0);
 					this.text.SetText("abcあいうえおxyz");
 					this.text.SetColor(0.0f,0.0f,0.0f,1.0f);
@@ -251,7 +251,7 @@ namespace TestScript
 					#endif
 				}
 
-				this.status = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
+				this.status = this.prefablist.CreateText(this.deleter,t_drawpriority);
 				this.status.SetRect(10,100,0,0);
 				this.status.SetFontSize(15);
 				this.status.SetText(t_text);
@@ -261,55 +261,31 @@ namespace TestScript
 				int t_xx = 150;
 				int t_yy = 10;
 
-				this.button_log = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				//ログボタン。
+				this.button_log = this.prefablist.CreateButton(this.deleter,t_drawpriority + 1);
 				this.button_log.SetOnButtonClick(this,ButtonId.Log);
 				this.button_log.SetRect(t_xx,t_yy,80,50);
 				this.button_log.SetText("Log");
-				this.button_log.SetTextureCornerSize(10);
-				this.button_log.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_log.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_log.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_log.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_log.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_log.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_log.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_log.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				t_xx += 100;
 
-				this.button_logerror = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				//ログエラーボタン。
+				this.button_logerror = this.prefablist.CreateButton(this.deleter,t_drawpriority + 1);
 				this.button_logerror.SetOnButtonClick(this,ButtonId.LogError);
 				this.button_logerror.SetRect(t_xx,t_yy,80,50);
 				this.button_logerror.SetText("LogError");
-				this.button_logerror.SetTextureCornerSize(10);
-				this.button_logerror.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_logerror.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_logerror.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_logerror.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_logerror.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_logerror.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_logerror.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_logerror.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 				t_xx += 100;
 
-				this.button_assert = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				//アサートボタン。
+				this.button_assert = this.prefablist.CreateButton(this.deleter,t_drawpriority + 1);
 				this.button_assert.SetOnButtonClick(this,ButtonId.Assert);
 				this.button_assert.SetRect(t_xx,t_yy,80,50);
 				this.button_assert.SetText("Assert");
-				this.button_assert.SetTextureCornerSize(10);
-				this.button_assert.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_assert.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_assert.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_assert.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_assert.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_assert.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_assert.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_assert.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			{
-				this.line = new Fee.Ui.Line(this.deleter,t_drawpriority + 1);
+				this.line = Fee.Ui.Line2D.Create(this.deleter,t_drawpriority + 1);
 			}
 		}
 

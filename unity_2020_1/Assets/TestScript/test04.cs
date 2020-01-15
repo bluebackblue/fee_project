@@ -255,22 +255,13 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Scroll_Item(Fee.Deleter.Deleter a_deleter,test04 a_this,ButtonId a_button_id,UnityEngine.Texture2D a_texture)
+			public Scroll_Item(Common.PrefabList a_prefablist,Fee.Deleter.Deleter a_deleter,test04 a_this,ButtonId a_button_id)
 			{
-				this.button = new Fee.Ui.Button(a_deleter,1);
+				this.button = a_prefablist.CreateButton(a_deleter,1);
 				this.button.SetOnButtonClick(a_this,a_button_id);
 				this.button.SetClip(true);
 				this.button.SetDragCancelFlag(true);
 				this.button.SetText(a_button_id.ToString());
-				this.button.SetTextureCornerSize(10);
-				this.button.SetNormalTexture(a_texture);
-				this.button.SetOnTexture(a_texture);
-				this.button.SetDownTexture(a_texture);
-				this.button.SetLockTexture(a_texture);
-				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形変更。
@@ -381,14 +372,14 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//drawpriority
 			int t_layerindex = 0;
 			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 
 			//status
-			this.status_text = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
+			this.status_text = this.prefablist.CreateText(this.deleter,t_drawpriority);
 			this.status_text.SetRect(50,60,0,0);
 			this.status_text.SetFontSize(13);
 
@@ -407,28 +398,28 @@ namespace TestScript
 
 			//scroll_item
 			{
-				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,t_drawpriority,Fee.Ui.Scroll_Type.Vertical,30);
+				this.scroll = Fee.Ui.Scroll<Scroll_Item>.Create(this.deleter,t_drawpriority,Fee.Ui.Scroll_Type.Vertical,30);
 				this.scroll.SetRect(50,250,350,300);
 				
 				//TextFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_TextFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadUrl_TextFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_TextFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_TextFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadResources_TextFile,this.prefablist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.SaveLocal_TextFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadUrl_TextFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadLocal_TextFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadStreamingAssets_TextFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadResources_TextFile));
 
 				//BinaryFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_BinaryFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadUrl_BinaryFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_BinaryFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_BinaryFile,this.prefablist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.SaveLocal_BinaryFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadUrl_BinaryFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadLocal_BinaryFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadStreamingAssets_BinaryFile));
 
 				//TextureFile
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.SaveLocal_TextureFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadUrl_TextureFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadLocal_TextureFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadStreamingAssets_TextureFile,this.prefablist.GetTexture("UI_BUTTON")));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this,ButtonId.LoadResources_TextureFile,this.prefablist.GetTexture("UI_BUTTON")));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.SaveLocal_TextureFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadUrl_TextureFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadLocal_TextureFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadStreamingAssets_TextureFile));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.LoadResources_TextureFile));
 			}
 
 			//パブリックキー。

@@ -49,22 +49,15 @@ namespace TestScript
 
 		/** 戻るボタン作成。
 		*/
-		public void CreateReturnButton(Fee.Deleter.Deleter a_deleter,UnityEngine.Texture2D a_texture,long a_drawpriority,string a_text)
+		public void CreateReturnButton(Common.PrefabList a_prefablist,Fee.Deleter.Deleter a_deleter,long a_drawpriority,string a_text)
 		{
-			this.return_button = new Fee.Ui.Button(a_deleter,a_drawpriority);
-			this.return_button.SetOnButtonClick(this,this);
-			this.return_button.SetText(a_text);
-			this.return_button.SetRect(0,0,80,40);
-			this.return_button.SetFontSize(10);
-			this.return_button.SetTextureCornerSize(10);
-			this.return_button.SetNormalTexture(a_texture);
-			this.return_button.SetOnTexture(a_texture);
-			this.return_button.SetDownTexture(a_texture);
-			this.return_button.SetLockTexture(a_texture);
-			this.return_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.return_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.return_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.return_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
+			this.return_button = a_prefablist.CreateButton(a_deleter,a_drawpriority);
+			{
+				this.return_button.SetOnButtonClick(this,this);
+				this.return_button.SetText(a_text);
+				this.return_button.SetRect(0,0,80,40);
+				this.return_button.SetFontSize(10);
+			}
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。

@@ -85,7 +85,7 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public TouchView(int a_id,Fee.Deleter.Deleter a_deleter,Fee.Input.Touch_Phase a_touch_phase)
+			public TouchView(Common.PrefabList a_prefablist,Fee.Deleter.Deleter a_deleter,int a_id,Fee.Input.Touch_Phase a_touch_phase)
 			{
 				this.id = a_id;
 				this.deleter = a_deleter;
@@ -101,7 +101,7 @@ namespace TestScript
 					this.sprite.SetRect(this.touch_phase.value_x-t_size/2,this.touch_phase.value_y-t_size/2,t_size,t_size);
 				}
 
-				this.text = Fee.Render2D.Text2D.Create(this.deleter,1);
+				this.text = a_prefablist.CreateText(this.deleter,1);
 				{
 					this.text.SetRect(this.touch_phase.value_x,this.touch_phase.value_y,0,0);
 				}
@@ -195,7 +195,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//背景。
 			int t_layerindex = 0;
@@ -208,7 +208,7 @@ namespace TestScript
 			this.bg.SetColor(0.0f,0.0f,0.0f,1.0f);
 
 			//キー。
-			this.touch_text = Fee.Render2D.Text2D.Create(this.deleter,t_drawpriority);
+			this.touch_text = this.prefablist.CreateText(this.deleter,t_drawpriority);
 			this.touch_text.SetRect(400,10,300,0);
 			this.touch_text.SetFontSize(17);
 			
@@ -225,39 +225,35 @@ namespace TestScript
 
 			//mouseposition
 			{
-				this.button_inputsystem_mouse_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_mouse_touch = this.prefablist.CreateButton(this.deleter,t_drawpriority + 1);
 				this.button_inputsystem_mouse_touch.SetOnButtonClick(this,ButtonId.Touch_InputSystem_Mouse);
 				this.button_inputsystem_mouse_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_mouse_touch.SetText("InputSystem.Mouse => Touch");
 				this.button_inputsystem_mouse_touch.SetFontSize(t_fontsize);
-				this.button_inputsystem_mouse_touch.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_inputmouse_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_inputmouse_touch = this.prefablist.CreateButton(this.deleter,t_drawpriority + 1);
 				this.button_inputmanager_inputmouse_touch.SetOnButtonClick(this,ButtonId.Touch_InputManager_InputMouse);
 				this.button_inputmanager_inputmouse_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputmouse_touch.SetText("InputManager.InputMouse => Touch");
 				this.button_inputmanager_inputmouse_touch.SetFontSize(t_fontsize);
-				this.button_inputmanager_inputmouse_touch.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputsystem_touchscreen_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputsystem_touchscreen_touch = this.prefablist.CreateButton(this.deleter,t_drawpriority + 1);
 				this.button_inputsystem_touchscreen_touch.SetOnButtonClick(this,ButtonId.Touch_InputSystem_TouchScreen);
 				this.button_inputsystem_touchscreen_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputsystem_touchscreen_touch.SetText("InputSystem.TouchScreen => Touch");
 				this.button_inputsystem_touchscreen_touch.SetFontSize(t_fontsize);
-				this.button_inputsystem_touchscreen_touch.SetTextureCornerSize(10);
 
 				t_yy += t_h + t_space_h;
 
-				this.button_inputmanager_inputtouch_touch = new Fee.Ui.Button(this.deleter,t_drawpriority + 1);
+				this.button_inputmanager_inputtouch_touch = this.prefablist.CreateButton(this.deleter,t_drawpriority + 1);
 				this.button_inputmanager_inputtouch_touch.SetOnButtonClick(this,ButtonId.Touch_InputManager_InputTouch);
 				this.button_inputmanager_inputtouch_touch.SetRect(t_xx,t_yy,t_w,t_h);
 				this.button_inputmanager_inputtouch_touch.SetText("InputManager.InputTouch => Touch");
 				this.button_inputmanager_inputtouch_touch.SetFontSize(t_fontsize);
-				this.button_inputmanager_inputtouch_touch.SetTextureCornerSize(10);
 			}
 
 			t_yy += t_h + t_separate_h;
@@ -300,37 +296,21 @@ namespace TestScript
 			this.button_inputsystem_mouse_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputsystem_mouse_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputsystem_mouse_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_touch.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_mouse_touch.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_mouse_touch.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_mouse_touch.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputmanager_inputmouse_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputmanager_inputmouse_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputmanager_inputmouse_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputmanager_inputmouse_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_touch.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputmanager_inputmouse_touch.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputmanager_inputmouse_touch.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputmanager_inputmouse_touch.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputsystem_touchscreen_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputsystem_touchscreen_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputsystem_touchscreen_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputsystem_touchscreen_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_touchscreen_touch.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputsystem_touchscreen_touch.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputsystem_touchscreen_touch.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputsystem_touchscreen_touch.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
 			this.button_inputmanager_inputtouch_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputmanager_inputtouch_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputmanager_inputtouch_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
 			this.button_inputmanager_inputtouch_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputtouch_touch.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-			this.button_inputmanager_inputtouch_touch.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-			this.button_inputmanager_inputtouch_touch.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-			this.button_inputmanager_inputtouch_touch.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 		}
 
 		/** コールバック。
@@ -338,7 +318,7 @@ namespace TestScript
 		public void CallBack_OnTouch(Fee.Input.Touch_Phase a_touch_phase)
 		{
 			this.touchview_id++;
-			this.touchview_list.Add(new TouchView(this.touchview_id,this.deleter,a_touch_phase),a_touch_phase);
+			this.touchview_list.Add(new TouchView(this.prefablist,this.deleter,this.touchview_id,a_touch_phase),a_touch_phase);
 		}
 
 		/** FixedUpdate

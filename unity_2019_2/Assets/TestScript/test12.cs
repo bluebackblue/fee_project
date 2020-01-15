@@ -154,22 +154,13 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Scroll_Item(Fee.Deleter.Deleter a_deleter,UnityEngine.Texture2D a_texture,test12 a_this,ButtonId a_click_id)
+			public Scroll_Item(Common.PrefabList a_prefablist,Fee.Deleter.Deleter a_deleter,test12 a_this,ButtonId a_click_id)
 			{
-				this.button = new Fee.Ui.Button(a_deleter,1);
+				this.button = a_prefablist.CreateButton(a_deleter,1);
 				this.button.SetOnButtonClick(a_this,a_click_id);
 				this.button.SetClip(true);
 				this.button.SetDragCancelFlag(true);
 				this.button.SetText(a_click_id.ToString());
-				this.button.SetTextureCornerSize(10);
-				this.button.SetNormalTexture(a_texture);
-				this.button.SetOnTexture(a_texture);
-				this.button.SetDownTexture(a_texture);
-				this.button.SetLockTexture(a_texture);
-				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形変更。
@@ -279,6 +270,7 @@ namespace TestScript
 			Fee.Data.Data.CreateInstance();
 
 			//アセットバンドルリスト。インスタンス作成。
+			Fee.AssetBundleList.Config.LOG_ENABLE = true;
 			Fee.AssetBundleList.AssetBundleList.CreateInstance();
 
 			//ファイル。インスタンス作成。
@@ -299,7 +291,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//drawpriority
 			int t_layerindex = 0;
@@ -307,30 +299,30 @@ namespace TestScript
 
 			//scroll_item
 			{
-				this.scroll = new Fee.Ui.Scroll<Scroll_Item>(this.deleter,t_drawpriority,Fee.Ui.Scroll_Type.Vertical,30);
+				this.scroll = Fee.Ui.Scroll<Scroll_Item>.Create(this.deleter,t_drawpriority,Fee.Ui.Scroll_Type.Vertical,30);
 				this.scroll.SetRect(50,50,350,350);
 				this.scroll.SetBarDrawPriorityOffset(100);
 				
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Load_Data_Debug));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Load_Data_Release));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Load_Data_Debug));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Load_Data_Release));
 
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Load_DummyAssetBundle));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Load_StreamingAssetsAssetBundle));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Load_UrlAssetBundle));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.UnLoad_AssetBundle));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Load_DummyAssetBundle));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Load_StreamingAssetsAssetBundle));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Load_UrlAssetBundle));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.UnLoad_AssetBundle));
 
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.AssetBundle_Prefab));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.AssetBundle_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.AssetBundle_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Prefab));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Resources_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.StreamingAssets_Binary));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Texture));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Text));
-				this.scroll.PushItem(new Scroll_Item(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),this,ButtonId.Url_Binary));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.AssetBundle_Prefab));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.AssetBundle_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.AssetBundle_Text));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Resources_Prefab));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Resources_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Resources_Text));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.StreamingAssets_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.StreamingAssets_Text));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.StreamingAssets_Binary));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Url_Texture));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Url_Text));
+				this.scroll.PushItem(new Scroll_Item(this.prefablist,this.deleter,this,ButtonId.Url_Binary));
 			}
 
 			//item
@@ -338,7 +330,7 @@ namespace TestScript
 			this.item_assetbundlelist = null;
 
 			//text
-			this.text = Fee.Render2D.Text2D.Create(this.deleter,0);
+			this.text = this.prefablist.CreateText(this.deleter,0);
 			this.text.SetRect(50,420,0,0);
 
 			//sprite
@@ -363,9 +355,10 @@ namespace TestScript
 				switch(a_id){
 				case ButtonId.Load_Data_Debug:
 					{
-						Fee.Data.Data.GetInstance().ClearDataList();
+						//アセットバンドルを使用しないデータリスト。
 
-						//アセットバンドルを使用しない。
+						Fee.Data.Data.GetInstance().ClearDataList();
+						
 						UnityEngine.TextAsset t_textasset = this.prefablist.GetTextAsset("TEST12_DATA_DEBUG");
 
 						if(t_textasset != null){
@@ -378,9 +371,10 @@ namespace TestScript
 					}break;
 				case ButtonId.Load_Data_Release:
 					{
-						Fee.Data.Data.GetInstance().ClearDataList();
+						//アセットバンドルを使用するデータリスト。
 
-						//アセットバンドルを使用する。
+						Fee.Data.Data.GetInstance().ClearDataList();
+						
 						UnityEngine.TextAsset t_textasset = this.prefablist.GetTextAsset("TEST12_DATA_RELEASE");
 
 						if(t_textasset != null){
@@ -391,30 +385,36 @@ namespace TestScript
 							}
 						}
 					}break;
-
-
-
-
 				case ButtonId.Load_DummyAssetBundle:
 					{
-						Fee.AssetBundleList.AssetBundleList.GetInstance().UnRegistPathItem("test.assetbundle");
-						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsPathDummyAssetBundle,new Fee.File.Path("Editor/data/create_from_excel_dummyassetbundle_test.assetbundle.json"));
+						//ダミーアセットバンドル。
 
-						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemAssetBundleItem("test.assetbundle");
+						#if(UNITY_EDITOR)
+						{
+							Fee.AssetBundleList.AssetBundleList.GetInstance().UnRegistPathItem("test.assetbundle");
+							Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsPathDummyAssetBundle,new Fee.File.Path(Data.Assets.TEST12_ASSETBUNDLE));
+
+							this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemAssetBundleItem("test.assetbundle");
+						}
+						#endif
 					}break;
 				case ButtonId.Load_StreamingAssetsAssetBundle:
 					{
+						//ストリーミングアセットにあるアセットバンドル。
+
 						//アセットバンドルのパスを設定。
 						Fee.AssetBundleList.AssetBundleList.GetInstance().UnRegistPathItem("test.assetbundle");
-						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.StreamingAssetsAssetBundle,new Fee.File.Path("AssetBundle_StandaloneWindows/test.assetbundle"));
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.StreamingAssetsAssetBundle,new Fee.File.Path(Data.StreamingAssets.TEST12_ASSETBUNDLE));
 
 						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemAssetBundleItem("test.assetbundle");
 					}break;
 				case ButtonId.Load_UrlAssetBundle:
 					{
+						//ＵＲＬにあるアセットバンドル。
+
 						//アセットバンドルのパスを設定。
 						Fee.AssetBundleList.AssetBundleList.GetInstance().UnRegistPathItem("test.assetbundle");
-						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.UrlAssetBundle,new Fee.File.Path("https://blueback.ddns.net:8081/project_fee/StreamingAssets/AssetBundle_StandaloneWindows/test.assetbundle"));
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.UrlAssetBundle,new Fee.File.Path(Data.Url.TEST12_ASSETBUNDLE));
 
 						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemAssetBundleItem("test.assetbundle");
 					}break;
@@ -422,10 +422,6 @@ namespace TestScript
 					{
 						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestUnLoadAssetBundleItem("test.assetbundle");
 					}break;
-
-
-
-
 				case ButtonId.AssetBundle_Prefab:
 					{
 						//アセットバンドル。プレハブ。

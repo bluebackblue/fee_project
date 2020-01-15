@@ -262,24 +262,15 @@ namespace TestScript
 				int t_w = 80;
 				int t_h = 40;
 
-				this.button[ii] = new Fee.Ui.Button(this.deleter,0);
+				this.button[ii] = this.prefablist.CreateButton(this.deleter,0);
 				this.button[ii].SetOnButtonClick(this,ii);
 				this.button[ii].SetOnButtonChangeOverFlag(this,ii);
 				this.button[ii].SetRect(t_x,t_y,t_w,t_h);
-				this.button[ii].SetTextureCornerSize(10);
 				this.button[ii].SetText(this.scene_list[ii].view);
-				this.button[ii].SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button[ii].SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button[ii].SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button[ii].SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button[ii].SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button[ii].SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button[ii].SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button[ii].SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//text
-			this.text = Fee.Render2D.Text2D.Create(this.deleter,0);
+			this.text = this.prefablist.CreateText(this.deleter,0);
 			this.text.SetRect(30,300,0,0);
 			this.text.SetText("---");
 

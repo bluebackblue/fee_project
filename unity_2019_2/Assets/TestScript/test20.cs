@@ -87,7 +87,7 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Item(int a_index,UnityEngine.Texture2D a_texture,Fee.Deleter.Deleter a_deleter)
+			public Item(Common.PrefabList a_prefablist,Fee.Deleter.Deleter a_deleter,int a_index)
 			{
 				//task
 				this.task = null;
@@ -102,17 +102,8 @@ namespace TestScript
 					int t_h = 60;
 
 					//button_start
-					this.button_start = new Fee.Ui.Button(a_deleter,1);
+					this.button_start = a_prefablist.CreateButton(a_deleter,1);
 					this.button_start.SetOnButtonClick(this,ButtonID.Start);
-					this.button_start.SetTextureCornerSize(10);
-					this.button_start.SetNormalTexture(a_texture);
-					this.button_start.SetOnTexture(a_texture);
-					this.button_start.SetDownTexture(a_texture);
-					this.button_start.SetLockTexture(a_texture);
-					this.button_start.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.button_start.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.button_start.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.button_start.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 					this.button_start.SetText("開始");
 					this.button_start.SetRect(t_x,t_y,t_w,t_h);
 				}
@@ -124,17 +115,8 @@ namespace TestScript
 					int t_h = 60;
 
 					//button_end
-					this.button_end = new Fee.Ui.Button(a_deleter,1);
+					this.button_end = a_prefablist.CreateButton(a_deleter,1);
 					this.button_end.SetOnButtonClick(this,ButtonID.End);
-					this.button_end.SetTextureCornerSize(10);
-					this.button_end.SetNormalTexture(a_texture);
-					this.button_end.SetOnTexture(a_texture);
-					this.button_end.SetDownTexture(a_texture);
-					this.button_end.SetLockTexture(a_texture);
-					this.button_end.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-					this.button_end.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-					this.button_end.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-					this.button_end.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 					this.button_end.SetText("停止");
 					this.button_end.SetRect(t_x,t_y,t_w,t_h);
 				}
@@ -144,7 +126,7 @@ namespace TestScript
 					int t_y = 100 + a_index * 100 + 20;
 
 					//text
-					this.text = Fee.Render2D.Text2D.Create(a_deleter,1);
+					this.text = a_prefablist.CreateText(a_deleter,1);
 					this.text.SetRect(t_x,t_y,0,0);
 					this.text.SetText("");
 				}
@@ -180,7 +162,7 @@ namespace TestScript
 							for(int ii=0;ii<100;ii++){
 
 								//Sleep
-								System.Threading.Thread.Sleep(200);
+								Fee.TaskW.Task.Sleep(200);
 
 								//キャンセル。
 								if(this.canceltoken.IsCancellationRequested() == true){
@@ -271,11 +253,11 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			this.list = new Item[3];
 			for(int ii=0;ii<this.list.Length;ii++){
-				this.list[ii] = new Item(ii,this.prefablist.GetTexture("UI_BUTTON"),this.deleter);
+				this.list[ii] = new Item(this.prefablist,this.deleter,ii);
 			}
 		}
 

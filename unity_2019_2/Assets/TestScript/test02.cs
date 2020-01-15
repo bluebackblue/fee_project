@@ -309,98 +309,44 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//ボタン。
 			{
-				this.button_save1 = new Fee.Ui.Button(this.deleter,0);
+				this.button_save1 = this.prefablist.CreateButton(this.deleter,0);
 				this.button_save1.SetOnButtonClick(this,ButtonId.Save1);
 				this.button_save1.SetRect(100 + 110 * 0,100,100,50);
 				this.button_save1.SetText("Save1");
-				this.button_save1.SetTextureCornerSize(10);
-				this.button_save1.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_save1.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_save1.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_save1.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_save1.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_save1.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_save1.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_save1.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_save2 = new Fee.Ui.Button(this.deleter,0);
+				this.button_save2 = this.prefablist.CreateButton(this.deleter,0);
 				this.button_save2.SetOnButtonClick(this,ButtonId.Save2);
 				this.button_save2.SetRect(100 + 110 * 1,100,100,50);
 				this.button_save2.SetText("Save2");
-				this.button_save2.SetTextureCornerSize(10);
-				this.button_save2.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_save2.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_save2.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_save2.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_save2.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_save2.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_save2.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_save2.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_load1 = new Fee.Ui.Button(this.deleter,0);
+				this.button_load1 = this.prefablist.CreateButton(this.deleter,0);
 				this.button_load1.SetOnButtonClick(this,ButtonId.Load1);
 				this.button_load1.SetRect(100 + 110 * 2,100,100,50);
 				this.button_load1.SetText("Load1");
-				this.button_load1.SetTextureCornerSize(10);
-				this.button_load1.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_load1.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_load1.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_load1.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_load1.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_load1.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_load1.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_load1.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_load2 = new Fee.Ui.Button(this.deleter,0);
+				this.button_load2 = this.prefablist.CreateButton(this.deleter,0);
 				this.button_load2.SetOnButtonClick(this,ButtonId.Load2);
 				this.button_load2.SetRect(100 + 110 * 3,100,100,50);
 				this.button_load2.SetText("Load2");
-				this.button_load2.SetTextureCornerSize(10);
-				this.button_load2.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_load2.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_load2.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_load2.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_load2.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_load2.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_load2.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_load2.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_random = new Fee.Ui.Button(this.deleter,0);
+				this.button_random = this.prefablist.CreateButton(this.deleter,0);
 				this.button_random.SetOnButtonClick(this,ButtonId.Random);
 				this.button_random.SetRect(600 + 110*1,100 + 60 * 0,130,50);
 				this.button_random.SetText("Random");
-				this.button_random.SetTextureCornerSize(10);
-				this.button_random.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_random.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_random.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_random.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_random.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_random.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_random.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_random.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 
-				this.button_speedtest_fee = new Fee.Ui.Button(this.deleter,0);
+				this.button_speedtest_fee = this.prefablist.CreateButton(this.deleter,0);
 				this.button_speedtest_fee.SetOnButtonClick(this,ButtonId.FeeTest);
 				this.button_speedtest_fee.SetRect(600 + 110*1,100  + 60 * 2,130,50);
 				this.button_speedtest_fee.SetText("Fee Test");
-				this.button_speedtest_fee.SetTextureCornerSize(10);
-				this.button_speedtest_fee.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_speedtest_fee.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_speedtest_fee.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_speedtest_fee.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button_speedtest_fee.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button_speedtest_fee.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button_speedtest_fee.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button_speedtest_fee.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 			}
 
 			//ステータス。
 			{
-				this.status = Fee.Render2D.Text2D.Create(this.deleter,0);
+				this.status = this.prefablist.CreateText(this.deleter,0);
 				this.status.SetRect(100,200,0,0);
 				this.status.SetText("");
 			}

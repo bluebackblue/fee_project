@@ -114,7 +114,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.deleter,this.prefablist.GetTexture("UI_BUTTON"),(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//button
 			{
@@ -124,17 +124,8 @@ namespace TestScript
 				int t_h = 60;
 
 				//button
-				this.button = new Fee.Ui.Button(this.deleter,1);
+				this.button = this.prefablist.CreateButton(this.deleter,1);
 				this.button.SetOnButtonClick(this,0);
-				this.button.SetTextureCornerSize(10);
-				this.button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				this.button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				this.button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				this.button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
 				this.button.SetText("開始");
 				this.button.SetRect(t_x,t_y,t_w,t_h);
 			}
@@ -144,7 +135,7 @@ namespace TestScript
 				int t_x = 50 + 150;
 				int t_y = 200 + 20;
 
-				this.text = Fee.Render2D.Text2D.Create(this.deleter,1);
+				this.text = this.prefablist.CreateText(this.deleter,1);
 				this.text.SetXY(t_x,t_y);
 			}
 
