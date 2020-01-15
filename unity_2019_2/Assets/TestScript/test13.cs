@@ -292,25 +292,10 @@ namespace TestScript
 		*/
 		public void UpdateButtonStatus()
 		{
-			this.button_inputsystem_mouse_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputmanager_inputmouse_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputsystem_touchscreen_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_touchscreen_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_touchscreen_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_touchscreen_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputmanager_inputtouch_touch.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputtouch_touch.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputtouch_touch.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputtouch_touch.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.prefablist.SetButtonActive(this.button_inputsystem_mouse_touch,			Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_TOUCH);
+			this.prefablist.SetButtonActive(this.button_inputmanager_inputmouse_touch,		Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_TOUCH);
+			this.prefablist.SetButtonActive(this.button_inputsystem_touchscreen_touch,		Fee.Input.Config.USE_INPUTSYSTEM_TOUCHSCREEN_TOUCH);
+			this.prefablist.SetButtonActive(this.button_inputmanager_inputtouch_touch,		Fee.Input.Config.USE_INPUTMANAGER_INPUTTOUCH_TOUCH);
 		}
 
 		/** コールバック。

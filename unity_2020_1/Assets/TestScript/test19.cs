@@ -409,15 +409,9 @@ namespace TestScript
 			this.backpropagation_flag ^= true;
 
 			if(this.backpropagation_flag == true){
-				this.backpropagation_button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON_ACTIVE"));
-				this.backpropagation_button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON_ACTIVE"));
-				this.backpropagation_button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON_ACTIVE"));
-				this.backpropagation_button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON_ACTIVE"));
+				this.prefablist.SetButtonActive(this.backpropagation_button,true);
 			}else{
-				this.backpropagation_button.SetNormalTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.backpropagation_button.SetOnTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.backpropagation_button.SetDownTexture(this.prefablist.GetTexture("UI_BUTTON"));
-				this.backpropagation_button.SetLockTexture(this.prefablist.GetTexture("UI_BUTTON"));
+				this.prefablist.SetButtonActive(this.backpropagation_button,false);
 			}
 		}
 

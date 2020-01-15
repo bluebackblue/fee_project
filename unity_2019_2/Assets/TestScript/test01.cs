@@ -77,6 +77,10 @@ namespace TestScript
 		*/
 		private Fee.Ui.Line2D line;
 
+		/** スプライト。
+		*/
+		private Fee.Render2D.Sprite2D start;
+
 		/** ButtonId
 		*/
 		public enum ButtonId
@@ -285,7 +289,16 @@ namespace TestScript
 			}
 
 			{
+				//line
 				this.line = Fee.Ui.Line2D.Create(this.deleter,t_drawpriority + 1);
+				this.line.SetSize(30);
+
+				//start
+				this.start = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority + 2);
+				this.start.SetTexture(UnityEngine.Texture2D.whiteTexture);
+				this.start.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
+				this.start.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				this.start.SetColor(1.0f,0.0f,0.0f,1.0f);
 			}
 		}
 
@@ -326,7 +339,11 @@ namespace TestScript
 			Fee.Ui.Ui.GetInstance().Main();
 
 			{
-				this.line.SetRect(new Fee.Geometry.Rect2D_A<int>(Fee.Render2D.Config.VIRTUAL_W / 2,Fee.Render2D.Config.VIRTUAL_H / 2,Fee.Input.Mouse.GetInstance().cursor.pos.x,Fee.Input.Mouse.GetInstance().cursor.pos.y));
+				int t_start_x = Fee.Render2D.Config.VIRTUAL_W / 2;
+				int t_start_y = Fee.Render2D.Config.VIRTUAL_H / 2;
+
+				this.line.SetRect(new Fee.Geometry.Rect2D_A<int>(t_start_x,t_start_y,Fee.Input.Mouse.GetInstance().cursor.pos.x,Fee.Input.Mouse.GetInstance().cursor.pos.y));
+				this.start.SetRect(t_start_x - 2,t_start_y - 2,4,4);
 			}
 
 			//２Ｄ描画。

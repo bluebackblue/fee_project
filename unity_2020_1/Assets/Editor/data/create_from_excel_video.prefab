@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9140050789131523256
+--- !u!1 &6451984792617915406
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6180187828286389144}
-  - component: {fileID: 4033878646784521810}
+  - component: {fileID: 7851549486021126586}
+  - component: {fileID: 818724933053108860}
   m_Layer: 0
-  m_Name: FontList
+  m_Name: create_from_excel_video
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6180187828286389144
+--- !u!4 &7851549486021126586
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9140050789131523256}
+  m_GameObject: {fileID: 6451984792617915406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,19 +31,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4033878646784521810
+--- !u!114 &818724933053108860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9140050789131523256}
+  m_GameObject: {fileID: 6451984792617915406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da2a1beced9d0429dbdbba81ea52d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e5ac1b592f44894998cd5ab61e68bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tag_list:
-  - FONT
-  font_list:
-  - {fileID: 12800000, guid: a55c8ee9902e2ec49ad6da21d05c4c3d, type: 3}
+  - VIDEO_01
+  videoclip_list:
+  - {fileID: 32900000, guid: 16990f394a6c6e44e8ad59ab9502c51d, type: 3}

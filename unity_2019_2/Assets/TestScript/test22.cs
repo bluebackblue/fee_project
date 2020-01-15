@@ -100,6 +100,7 @@ namespace TestScript
 				this.prefablist = new Common.PrefabList();
 				this.prefablist.LoadFontList();
 				this.prefablist.LoadTextureList();
+				this.prefablist.LoadVideoClipList();
 			}
 
 			//フォント。
@@ -119,15 +120,17 @@ namespace TestScript
 				this.bg_sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 				this.bg_sprite.SetColor(0.2f,0.0f,0.0f,1.0f);
 			}
-			
+
+			Fee.File.Path t_path = Fee.File.Path.CreateStreamingAssetsPath("Test22/movie.mp4");
+
 			//movie_texture
-			this.movie_item_1 = Fee.Movie.MovieItem.Create(this.deleter,Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H,Fee.File.Path.CreateStreamingAssetsPath(new Fee.File.Path("Test22/video.mp4")));
+			this.movie_item_1 = Fee.Movie.MovieItem.Create(this.deleter,Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H,t_path);
 			this.movie_item_1.SetLoop(false);
 
-			this.movie_item_2 = Fee.Movie.MovieItem.Create(this.deleter,Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H,Fee.File.Path.CreateStreamingAssetsPath(new Fee.File.Path("Test22/video.mp4")));
+			this.movie_item_2 = Fee.Movie.MovieItem.Create(this.deleter,Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H,t_path);
 			this.movie_item_2.SetLoop(false);
 
-			this.movie_item_3 = Fee.Movie.MovieItem.Create(this.deleter,Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H,Fee.File.Path.CreateStreamingAssetsPath(new Fee.File.Path("Test22/video.mp4")));
+			this.movie_item_3 = Fee.Movie.MovieItem.Create(this.deleter,Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H,t_path);
 			this.movie_item_3.SetLoop(false);
 
 			//表示先。

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5826416528110642600}
   - component: {fileID: 6756390204106964556}
-  - component: {fileID: -7359870420833499451}
   m_Layer: 0
   m_Name: create_from_excel_bgm
   m_TagString: Untagged
@@ -48,19 +47,3 @@ MonoBehaviour:
   - BGM01
   audioclip_list:
   - {fileID: 8300000, guid: 24557e744dc0ffd45ac8f1dc1c0c5b53, type: 3}
---- !u!114 &-7359870420833499451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2977859788716536011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43a7ce6d096489a41ad19a18ebf1a430, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tag_list:
-  - BGM01
-  audiovolume_list:
-  - 1

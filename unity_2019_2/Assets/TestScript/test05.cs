@@ -623,90 +623,24 @@ namespace TestScript
 		*/
 		public void UpdateButtonStatus()
 		{
-			this.button_inputsystem_mouse_mouseposition.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_mouseposition.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_mouseposition.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_mouseposition.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputsystem_pointer_mouseposition.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_pointer_mouseposition.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_pointer_mouseposition.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_pointer_mouseposition.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputmanager_inputmouse_mouseposition.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_mouseposition.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_mouseposition.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_mouseposition.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputsystem_mouse_mousebutton.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_mousebutton.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_mousebutton.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_mousebutton.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputsystem_pointer_mousebutton.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_pointer_mousebutton.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_pointer_mousebutton.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_pointer_mousebutton.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputmanager_inputmouse_mousebutton.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_mousebutton.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_mousebutton.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputmouse_mousebutton.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputsystem_mouse_mousewheel.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_mousewheel.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_mousewheel.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_mouse_mousewheel.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputmanager_inputname_mousewheel.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_mousewheel.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_mousewheel.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_mousewheel.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputsystem_keyboard_key.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_keyboard_key.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_keyboard_key.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_keyboard_key.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputmanager_getkey_key.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_getkey_key.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_getkey_key.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_getkey_key.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputsystem_gamepad_paddigitalbutton.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_paddigitalbutton.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_paddigitalbutton.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_paddigitalbutton.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputmanager_inputname_paddigitalbutton.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_paddigitalbutton.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_paddigitalbutton.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_paddigitalbutton.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputsystem_gamepad_padstick.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_padstick.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_padstick.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_padstick.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputmanager_inputname_padstick.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_padstick.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_padstick.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_padstick.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputsystem_gamepad_padtrigger.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_padtrigger.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_padtrigger.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_padtrigger.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputmanager_inputname_padtrigger.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_padtrigger.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_padtrigger.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputmanager_inputname_padtrigger.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-
-			this.button_inputsystem_gamepad_padmotor.SetNormalTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_padmotor.SetOnTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_padmotor.SetDownTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
-			this.button_inputsystem_gamepad_padmotor.SetLockTexture(this.prefablist.GetTexture(Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR ? "UI_BUTTON_ACTIVE" : "UI_BUTTON"));
+			this.prefablist.SetButtonActive(this.button_inputsystem_mouse_mouseposition,			Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION);
+			this.prefablist.SetButtonActive(this.button_inputsystem_mouse_mouseposition,			Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEPOSITION);
+			this.prefablist.SetButtonActive(this.button_inputsystem_pointer_mouseposition,			Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEPOSITION);
+			this.prefablist.SetButtonActive(this.button_inputmanager_inputmouse_mouseposition,		Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEPOSITION);
+			this.prefablist.SetButtonActive(this.button_inputsystem_mouse_mousebutton,				Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEBUTTON);
+			this.prefablist.SetButtonActive(this.button_inputsystem_pointer_mousebutton,			Fee.Input.Config.USE_INPUTSYSTEM_POINTER_MOUSEBUTTON);
+			this.prefablist.SetButtonActive(this.button_inputmanager_inputmouse_mousebutton,		Fee.Input.Config.USE_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON);
+			this.prefablist.SetButtonActive(this.button_inputsystem_mouse_mousewheel,				Fee.Input.Config.USE_INPUTSYSTEM_MOUSE_MOUSEWHEEL);
+			this.prefablist.SetButtonActive(this.button_inputmanager_inputname_mousewheel,			Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_MOUSEWHEEL);
+			this.prefablist.SetButtonActive(this.button_inputsystem_keyboard_key,					Fee.Input.Config.USE_INPUTSYSTEM_KEYBOARD_KEY);
+			this.prefablist.SetButtonActive(this.button_inputmanager_getkey_key,					Fee.Input.Config.USE_INPUTMANAGER_GETKEY_KEY);
+			this.prefablist.SetButtonActive(this.button_inputsystem_gamepad_paddigitalbutton,		Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADDIGITALBUTTON);
+			this.prefablist.SetButtonActive(this.button_inputmanager_inputname_paddigitalbutton,	Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADDIGITALBUTTON);
+			this.prefablist.SetButtonActive(this.button_inputsystem_gamepad_padstick,				Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADSTICK);
+			this.prefablist.SetButtonActive(this.button_inputmanager_inputname_padstick,			Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADSTICK);
+			this.prefablist.SetButtonActive(this.button_inputsystem_gamepad_padtrigger,				Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADTRIGGER);
+			this.prefablist.SetButtonActive(this.button_inputmanager_inputname_padtrigger,			Fee.Input.Config.USE_INPUTMANAGER_INPUTNAME_PADTRIGGER);
+			this.prefablist.SetButtonActive(this.button_inputsystem_gamepad_padmotor,				Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR);
 		}
 
 		/** FixedUpdate

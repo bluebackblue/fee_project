@@ -31,6 +31,10 @@ namespace TestScript.Common
 		*/
 		public Fee.Instantiate.FontList fontlist;
 
+		/** videolist
+		*/
+		public Fee.Instantiate.VideoClipList videolist;
+
 		/** constructor
 		*/
 		public PrefabList()
@@ -71,6 +75,16 @@ namespace TestScript.Common
 			}
 		}
 
+		/** ビデオクリップリスト。ロード。
+		*/
+		public void LoadVideoClipList()
+		{
+			UnityEngine.GameObject t_prefab = this.prefablist.GetPrefab("VIDEOLIST");
+			if(t_prefab != null){
+				this.videolist = new Fee.Instantiate.VideoClipList(t_prefab.GetComponent<Fee.Instantiate.VideoClipList_MonoBehaviour>());
+			}
+		}
+
 		/** テクスチャー。取得。
 		*/
 		public UnityEngine.Texture2D GetTexture(string a_tag)
@@ -97,6 +111,13 @@ namespace TestScript.Common
 		public UnityEngine.Font GetFont(string a_tag)
 		{
 			return this.fontlist.GetFont(a_tag);
+		}
+
+		/** ビデオリクップ。取得。
+		*/
+		public UnityEngine.Video.VideoClip GetVideoClip(string a_tag)
+		{
+			return this.videolist.GetVideoClip(a_tag);
 		}
 
 		/** ボタン。アクティブ設定。

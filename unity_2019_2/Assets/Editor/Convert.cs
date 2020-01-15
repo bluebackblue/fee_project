@@ -59,19 +59,12 @@ namespace Editor
 		[UnityEditor.MenuItem("Fee/Test/Convert/CreatePrefab")]
 		private static void MenuItem_Convert_CreatePrefab()
 		{
-			//フォントリスト。TODO:エクセルからの作成。
-			{
-				Fee.Instantiate.FontList_Tool.ResourceItem[] t_font_list = new Fee.Instantiate.FontList_Tool.ResourceItem[]{
-
-					//font
-					new Fee.Instantiate.FontList_Tool.ResourceItem("FONT",						new Fee.File.Path("ThirdParty/Open/M+ FONTS/Font/mplus-1p-medium.ttf")),
-				};
-				Fee.Instantiate.FontList_Tool.Create(new Fee.File.Path("Resources/FontList.prefab"),t_font_list);
-			}
-
-			//プレハブリスト。TODO:エクセルからの作成。
+			//プレハブリスト。
 			{
 				Fee.Instantiate.PrefabList_Tool.ResourceItem[] t_prefab_list = new Fee.Instantiate.PrefabList_Tool.ResourceItem[]{
+
+					//ビデオリクップリスト。
+					new Fee.Instantiate.PrefabList_Tool.ResourceItem("VIDEOLIST",				new Fee.File.Path("Editor/data/create_from_excel_video.prefab")),
 
 					//テクスチャーリスト。
 					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEXTURELIST",				new Fee.File.Path("Editor/data/create_from_excel_texture.prefab")),
