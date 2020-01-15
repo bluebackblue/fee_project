@@ -64,7 +64,7 @@ namespace Editor
 				Fee.Instantiate.PrefabList_Tool.ResourceItem[] t_prefab_list = new Fee.Instantiate.PrefabList_Tool.ResourceItem[]{
 
 					//ビデオリクップリスト。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("VIDEOLIST",				new Fee.File.Path("Editor/data/create_from_excel_video.prefab")),
+					//new Fee.Instantiate.PrefabList_Tool.ResourceItem("VIDEOLIST",				new Fee.File.Path("Editor/data/create_from_excel_video.prefab")),
 
 					//テクスチャーリスト。
 					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEXTURELIST",				new Fee.File.Path("Editor/data/create_from_excel_texture.prefab")),

@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag_list:
-  - VIDEOLIST
   - TEXTURELIST
   - TEXTASSETLIST
   - FONTLIST
@@ -54,12 +53,11 @@ MonoBehaviour:
   - TEST16_CUBE
   - TEST18_CUBE
   prefab_list:
-  - {fileID: 6451984792617915406, guid: 8d0a03e594296ff499ea13259c4de7ca, type: 3}
-  - {fileID: 8710002016527697210, guid: e7a17145bbf0c6746b0bc1dd2a70d270, type: 3}
-  - {fileID: 4457688116002242624, guid: c12309a68f708a149bda088374044979, type: 3}
-  - {fileID: 143466471448271941, guid: 2a0b6ae1758c8c3468e1f0696a00f0dd, type: 3}
-  - {fileID: 2977859788716536011, guid: 77630e0b5b856434a8f0b6d418faa971, type: 3}
-  - {fileID: 3850805147799932481, guid: b785e11bab988b64d8ee4bae301c20de, type: 3}
+  - {fileID: 6197593066217931759, guid: e7a17145bbf0c6746b0bc1dd2a70d270, type: 3}
+  - {fileID: 7864254315092422645, guid: c12309a68f708a149bda088374044979, type: 3}
+  - {fileID: 8244288577754698275, guid: 2a0b6ae1758c8c3468e1f0696a00f0dd, type: 3}
+  - {fileID: 3754956408457392588, guid: 77630e0b5b856434a8f0b6d418faa971, type: 3}
+  - {fileID: 7802589408053973358, guid: b785e11bab988b64d8ee4bae301c20de, type: 3}
   - {fileID: 1023134246023269692, guid: 8eaf3c4d346e7b34986619eefbd72b7e, type: 3}
   - {fileID: 1023134246023269692, guid: 8eaf3c4d346e7b34986619eefbd72b7e, type: 3}
   - {fileID: 1023134246023269692, guid: 8eaf3c4d346e7b34986619eefbd72b7e, type: 3}
