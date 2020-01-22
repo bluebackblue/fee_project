@@ -12,9 +12,9 @@
 */
 namespace Fee.JsonItem
 {
-	/** ObjectToJson_Work
+	/** ObjectToJson_WorkPool_Item
 	*/
-	public class ObjectToJson_Work
+	public class ObjectToJson_WorkPool_Item
 	{
 		/** ModeAddIndexArray
 
@@ -96,7 +96,8 @@ namespace Fee.JsonItem
 		private System.Reflection.FieldInfo from_fieldinfo;
 		private System.Object from_parent_object;
 		private System.Object from_object;
-		private ObjectOption from_objectoption;
+		private System.Type from_type;
+		private ObjectToJson_WorkPool_Item.ObjectOption from_objectoption;
 
 		/** コンバート先。ＪＳＯＮ。
 		*/
@@ -109,7 +110,7 @@ namespace Fee.JsonItem
 			IndexArray。追加。
 
 		*/
-		public ObjectToJson_Work(ModeAddIndexArray a_mode,int a_nest,JsonItem a_to_jsonitem,System.Object a_from_listitem_object,ObjectOption a_from_objectoption)
+		public ObjectToJson_WorkPool_Item(ModeAddIndexArray a_mode,int a_nest,JsonItem a_to_jsonitem,System.Object a_from_listitem_object,System.Type a_from_listitem_type,ObjectToJson_WorkPool_Item.ObjectOption a_from_objectoption)
 		{
 			//mode
 			this.mode = (int)a_mode;
@@ -121,6 +122,7 @@ namespace Fee.JsonItem
 			this.from_fieldinfo = null;
 			this.from_parent_object = null;
 			this.from_object = a_from_listitem_object;
+			this.from_type = a_from_listitem_type;
 			this.from_objectoption = a_from_objectoption;
 
 			//コンバート先。ＪＳＯＮ。
@@ -134,7 +136,7 @@ namespace Fee.JsonItem
 			IndexArray。設定。
 
 		*/
-		public ObjectToJson_Work(ModeSetIndexArray a_mode,int a_nest,JsonItem a_to_jsonitem,int a_to_index,System.Object a_from_listitem_object,ObjectOption a_from_objectoption)
+		public ObjectToJson_WorkPool_Item(ModeSetIndexArray a_mode,int a_nest,JsonItem a_to_jsonitem,int a_to_index,System.Object a_from_listitem_object,System.Type a_from_listitem_type,ObjectOption a_from_objectoption)
 		{
 			//mode
 			this.mode = (int)a_mode;
@@ -146,6 +148,7 @@ namespace Fee.JsonItem
 			this.from_fieldinfo = null;
 			this.from_parent_object = null;
 			this.from_object = a_from_listitem_object;
+			this.from_type = a_from_listitem_type;
 			this.from_objectoption = a_from_objectoption;
 
 			//コンバート先。ＪＳＯＮ。
@@ -159,7 +162,7 @@ namespace Fee.JsonItem
 			AssociativeArray。追加。
 
 		*/
-		public ObjectToJson_Work(ModeAddAssociativeArray a_mode,int a_nest,JsonItem a_to_jsonitem,string a_to_key_string,System.Object a_from_listitem_object,ObjectOption a_from_objectoption)
+		public ObjectToJson_WorkPool_Item(ModeAddAssociativeArray a_mode,int a_nest,JsonItem a_to_jsonitem,string a_to_key_string,System.Object a_from_listitem_object,System.Type a_from_listitem_type,ObjectOption a_from_objectoption)
 		{
 			//mode
 			this.mode = (int)a_mode;
@@ -171,6 +174,7 @@ namespace Fee.JsonItem
 			this.from_fieldinfo = null;
 			this.from_parent_object = null;
 			this.from_object = a_from_listitem_object;
+			this.from_type = a_from_listitem_type;
 			this.from_objectoption = a_from_objectoption;
 
 			//コンバート先。ＪＳＯＮ。
@@ -184,7 +188,7 @@ namespace Fee.JsonItem
 			FieldInfo。
 
 		*/
-		public ObjectToJson_Work(ModeFieldInfo a_mode,int a_nest,JsonItem a_to_jsonitem,System.Reflection.FieldInfo a_from_fieldinfo,System.Object a_from_parent_object)
+		public ObjectToJson_WorkPool_Item(ModeFieldInfo a_mode,int a_nest,JsonItem a_to_jsonitem,System.Reflection.FieldInfo a_from_fieldinfo,System.Object a_from_parent_object)
 		{
 			//モード。
 			this.mode = (int)a_mode;
@@ -196,6 +200,7 @@ namespace Fee.JsonItem
 			this.from_fieldinfo = a_from_fieldinfo;
 			this.from_parent_object = a_from_parent_object;
 			this.from_object = null;
+			this.from_type = null;
 			this.from_objectoption = null;
 
 			//コンバート先。ＪＳＯＮ。
@@ -206,7 +211,7 @@ namespace Fee.JsonItem
 
 		/** 実行。
 		*/
-		public void Do(System.Collections.Generic.List<ObjectToJson_Work> a_work_pool)
+		public void Do(ObjectToJson_WorkPool a_work_pool)
 		{
 			switch(this.mode){
 			case (int)ModeAddIndexArray.Start:
@@ -216,7 +221,7 @@ namespace Fee.JsonItem
 					JsonItem t_jsonitem_listitem = null;
 
 					if(this.nest < Config.CONVERTNEST_MAX){
-						t_jsonitem_listitem = ObjectToJson_SystemObject.Convert(this.from_object,this.from_objectoption,this.nest + 1,a_work_pool);
+						t_jsonitem_listitem = ObjectToJson.Convert(this.from_object,this.from_type,this.from_objectoption,this.nest + 1,a_work_pool);
 					}else{
 						Tool.Assert(false);
 					}
@@ -230,7 +235,7 @@ namespace Fee.JsonItem
 					JsonItem t_jsonitem_listitem = null;
 
 					if(this.nest < Config.CONVERTNEST_MAX){
-						t_jsonitem_listitem = ObjectToJson_SystemObject.Convert(this.from_object,this.from_objectoption,this.nest + 1,a_work_pool);
+						t_jsonitem_listitem = ObjectToJson.Convert(this.from_object,this.from_type,this.from_objectoption,this.nest + 1,a_work_pool);
 					}else{
 						Tool.Assert(false);
 					}
@@ -244,7 +249,7 @@ namespace Fee.JsonItem
 					JsonItem t_jsonitem_member = null;
 
 					if(this.nest < Config.CONVERTNEST_MAX){
-						t_jsonitem_member = ObjectToJson_SystemObject.Convert(this.from_object,this.from_objectoption,this.nest + 1,a_work_pool);
+						t_jsonitem_member = ObjectToJson.Convert(this.from_object,this.from_type,this.from_objectoption,this.nest + 1,a_work_pool);
 					}else{
 						Tool.Assert(false);
 					}
@@ -256,11 +261,11 @@ namespace Fee.JsonItem
 					//FieldInfo。
 
 					//オプション設定。
-					ObjectToJson_Work.ObjectOption t_objectoption = null;
+					ObjectToJson_WorkPool_Item.ObjectOption t_objectoption = null;
 
 					//ＥＮＵＭの文字列化。
 					if(this.from_fieldinfo.IsDefined(typeof(Fee.JsonItem.EnumString),false) == true){
-						t_objectoption = new ObjectToJson_Work.ObjectOption();
+						t_objectoption = new ObjectToJson_WorkPool_Item.ObjectOption();
 						t_objectoption.attribute_enumstring = true;
 					}
 
@@ -270,7 +275,7 @@ namespace Fee.JsonItem
 						JsonItem t_jsonitem_member = null;
 
 						if(this.nest < Config.CONVERTNEST_MAX){
-							t_jsonitem_member = ObjectToJson_SystemObject.Convert(t_raw,t_objectoption,this.nest + 1,a_work_pool);
+							t_jsonitem_member = ObjectToJson.Convert(t_raw,t_raw.GetType(),t_objectoption,this.nest + 1,a_work_pool);
 						}else{
 							Tool.Assert(false);
 						}
