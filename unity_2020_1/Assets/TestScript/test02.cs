@@ -375,7 +375,7 @@ namespace TestScript
 						Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.ObjectToJsonItem(this.savedata);
 
 						//ＪＳＯＮを文字列化。
-						string t_jsonstring = t_jsonitem.ConvertJsonString();
+						string t_jsonstring = t_jsonitem.ConvertToJsonString();
 
 						//セーブローカル。リクエスト。。
 						this.save_item = Fee.File.File.GetInstance().RequestSaveTextFile(Fee.File.File.SaveRequestType.SaveLocalTextFile,new Fee.File.Path("save_1.json"),t_jsonstring);
@@ -398,7 +398,7 @@ namespace TestScript
 						Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.ObjectToJsonItem(this.savedata);
 
 						//ＪＳＯＮを文字列化。
-						string t_jsonstring = t_jsonitem.ConvertJsonString();
+						string t_jsonstring = t_jsonitem.ConvertToJsonString();
 
 						//セーブローカル。リクエスト。。
 						this.save_item = Fee.File.File.GetInstance().RequestSaveTextFile(Fee.File.File.SaveRequestType.SaveLocalTextFile,new Fee.File.Path("save_2.json"),t_jsonstring);
@@ -503,7 +503,7 @@ namespace TestScript
 				float t_start = UnityEngine.Time.realtimeSinceStartup;
 				{
 					Fee.JsonItem.JsonItem t_jsonitem = Fee.JsonItem.Convert.JsonStringToJsonItem(t_jsonstring_fee);
-					t_value = t_jsonitem.GetItem("array").GetItem(0).GetItem("list").GetItem(0).GetItem("dictionary").GetItem("0").GetItem("value_int").GetInt();
+					t_value = t_jsonitem.GetItem("array").GetItem(0).GetItem("list").GetItem(0).GetItem("dictionary").GetItem("0").GetItem("value_int").CastToInt32();
 				}
 				float t_end = UnityEngine.Time.realtimeSinceStartup;
 
