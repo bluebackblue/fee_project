@@ -151,6 +151,10 @@ namespace TestScript
 
 			//マウス。インスタンス作成。
 			Fee.Input.Mouse.CreateInstance();
+			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Enter);
+			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Esc);
+			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Z);
+			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.X);
 
 			//キ。インスタンス作成。
 			Fee.Input.Key.CreateInstance();
@@ -384,27 +388,27 @@ namespace TestScript
 						}
 
 						//■送信。
-						if(Fee.Input.Key.GetInstance().enter.down == true){
+						if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Enter).digital.down == true){
 							if(t_myplayer != null){
 								//自分赤。
 								t_myplayer.RemoteCallInt(999,1);
 								t_myplayer.RemoteCallString(777,"red");
 							}
-						}else if(Fee.Input.Key.GetInstance().escape.down == true){
+						}else if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Esc).digital.down == true){
 							if(t_myplayer != null){
 								//自分白。
 								t_myplayer.RemoteCallInt(999,0);
 							}
 						}
 
-						if(Fee.Input.Key.GetInstance().sub1.down == true){
+						if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Z).digital.down == true){
 							//全部赤。
 
 							List<Fee.Network.Player_MonoBehaviour> t_player_list = Fee.Network.Network.GetInstance().GetPlayerList();
 							for(int ii=0;ii<t_player_list.Count;ii++){
 								t_player_list[ii].RemoteCallInt(888,1);
 							}
-						}else if(Fee.Input.Key.GetInstance().sub2.down == true){
+						}else if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.X).digital.down == true){
 							//全部白。
 							List<Fee.Network.Player_MonoBehaviour> t_player_list = Fee.Network.Network.GetInstance().GetPlayerList();
 							for(int ii=0;ii<t_player_list.Count;ii++){

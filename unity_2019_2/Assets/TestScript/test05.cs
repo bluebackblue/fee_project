@@ -201,6 +201,10 @@ namespace TestScript
 
 			//キー。インスタンス作成。
 			Fee.Input.Key.CreateInstance();
+			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Up);
+			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Down);
+			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Left);
+			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Right);
 
 			//パッド。インスタンス作成。
 			Fee.Input.Pad.CreateInstance();
@@ -276,7 +280,7 @@ namespace TestScript
 
 				this.pad_type_button = this.prefablist.CreateButton(this.deleter,t_drawpriority + 1);
 				this.pad_type_button.SetOnButtonClick(this,ButtonId.PadType);
-				this.pad_type_button.SetRect(210,1,50,40);
+				this.pad_type_button.SetRect(210,1,80,40);
 				this.pad_type_button.SetText(this.pad_type.ToString());
 			}
 
@@ -286,7 +290,7 @@ namespace TestScript
 
 				this.pad_index_button = this.prefablist.CreateButton(this.deleter,t_drawpriority + 1);
 				this.pad_index_button.SetOnButtonClick(this,ButtonId.PadIndex);
-				this.pad_index_button.SetRect(260,1,50,40);
+				this.pad_index_button.SetRect(290,1,50,40);
 				this.pad_index_button.SetText(this.pad_index.ToString());
 			}
 
@@ -709,33 +713,10 @@ namespace TestScript
 			{
 				string t_text = "key\n";
 
-				t_text += "left        = " + Fee.Input.Key.GetInstance().left.on.ToString() + "\n";
-				t_text += "right       = " + Fee.Input.Key.GetInstance().right.on.ToString() + "\n";
-				t_text += "up          = " + Fee.Input.Key.GetInstance().up.on.ToString() + "\n";
-				t_text += "down        = " + Fee.Input.Key.GetInstance().down.on.ToString() + "\n";
-
-				t_text += "enter       = " + Fee.Input.Key.GetInstance().enter.on.ToString() + "\n";
-				t_text += "escape      = " + Fee.Input.Key.GetInstance().escape.on.ToString() + "\n";
-				t_text += "sub1        = " + Fee.Input.Key.GetInstance().sub1.on.ToString() + "\n";
-				t_text += "sub2        = " + Fee.Input.Key.GetInstance().sub2.on.ToString() + "\n";
-
-				t_text += "left_menu   = " + Fee.Input.Key.GetInstance().left_menu.on.ToString() + "\n";
-				t_text += "right_menu  = " + Fee.Input.Key.GetInstance().right_menu.on.ToString() + "\n";
-
-				t_text += "l_trigger_1 = " + Fee.Input.Key.GetInstance().l_trigger_1.on.ToString() + "\n";
-				t_text += "r_trigger_1 = " + Fee.Input.Key.GetInstance().r_trigger_1.on.ToString() + "\n";
-				t_text += "l_trigger_2 = " + Fee.Input.Key.GetInstance().l_trigger_2.on.ToString() + "\n";
-				t_text += "r_trigger_2 = " + Fee.Input.Key.GetInstance().r_trigger_2.on.ToString() + "\n";
-
-				t_text += "l_left      = " + Fee.Input.Key.GetInstance().l_left.on.ToString() + "\n";
-				t_text += "l_right     = " + Fee.Input.Key.GetInstance().l_right.on.ToString() + "\n";
-				t_text += "l_up        = " + Fee.Input.Key.GetInstance().l_up.on.ToString() + "\n";
-				t_text += "l_down      = " + Fee.Input.Key.GetInstance().l_down.on.ToString() + "\n";
-
-				t_text += "r_left      = " + Fee.Input.Key.GetInstance().r_left.on.ToString() + "\n";
-				t_text += "r_right     = " + Fee.Input.Key.GetInstance().r_right.on.ToString() + "\n";
-				t_text += "r_up        = " + Fee.Input.Key.GetInstance().r_up.on.ToString() + "\n";
-				t_text += "r_down      = " + Fee.Input.Key.GetInstance().r_down.on.ToString() + "\n";
+				t_text += "left        = " + Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Left).digital.on.ToString() + "\n";
+				t_text += "right       = " + Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Right).digital.on.ToString() + "\n";
+				t_text += "up          = " + Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Up).digital.on.ToString() + "\n";
+				t_text += "down        = " + Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Down).digital.on.ToString() + "\n";
 
 				this.key_text.SetText(t_text);
 			}

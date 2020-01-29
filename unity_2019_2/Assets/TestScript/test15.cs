@@ -103,6 +103,8 @@ namespace TestScript
 
 			//キ。インスタンス作成。
 			Fee.Input.Key.CreateInstance();
+			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Enter);
+			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Esc);
 
 			//ＵＩ。インスタンス作成。
 			Fee.Ui.Ui.CreateInstance();
@@ -237,7 +239,7 @@ namespace TestScript
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
 
-			if(Fee.Input.Key.GetInstance().enter.down == true){
+			if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Enter).digital.down == true){
 				this.is_clip = !this.is_clip;
 
 				this.sprite.SetClip(this.is_clip);
@@ -248,7 +250,7 @@ namespace TestScript
 				this.slider.SetClip(this.is_clip);
 			}
 
-			if(Fee.Input.Key.GetInstance().escape.down == true){
+			if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Esc).digital.down == true){
 				this.update_clip_rect = !this.update_clip_rect;
 			}
 
