@@ -1,4 +1,4 @@
-﻿
+
 
 /**
 */
@@ -19,14 +19,14 @@ namespace Editor
 			);
 		}
 
-		/** 鍵の作成。
+		/** 証明書の作成。
 		*/
 		[UnityEditor.MenuItem("Fee/Test/Convert/CreatePublicKey")]
 		private static void MenuItem_Convert_CreatePublicKey()
 		{
 			Fee.File.CustomCertificateHandler t_certificate = new Fee.File.CustomCertificateHandler("");
 			Fee.EditorTool.Utility.WebRequest("https://blueback.ddns.net:8081/",t_certificate);
-			Fee.EditorTool.Utility.WriteTextFile(Fee.File.Path.CreateAssetsPath("Editor/data/ssl_publickey.txt"),t_certificate.GetReceivePublicKey(),true);
+			Fee.EditorTool.Utility.WriteTextFile(Fee.File.Path.CreateAssetsPath("Editor/data/ssl_publickey.txt"),t_certificate.GetReceiveCertificateString(),true);
 		}
 
 		/** エクセルをコンバート。

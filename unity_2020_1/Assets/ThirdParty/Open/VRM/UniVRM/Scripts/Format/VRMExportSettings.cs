@@ -31,7 +31,7 @@ namespace VRM
 
         public bool PoseFreeze = true;
 
-        public bool UseExperimentalExporter = true;
+        public bool UseExperimentalExporter = false;
 
         public bool ReduceBlendshapeSize = false;
 
@@ -72,6 +72,11 @@ namespace VRM
             if (string.IsNullOrEmpty(Author))
             {
                 yield return "Require Author. ";
+            }
+
+            if(ReduceBlendshapeSize && Source.GetComponent<VRMBlendShapeProxy>() == null)
+            {
+                yield return "ReduceBlendshapeSize is need VRMBlendShapeProxy, you need to convert to VRM once.";
             }
         }
 
@@ -230,7 +235,7 @@ namespace VRM
 
         public static bool IsPrefab(GameObject go)
         {
-            return go.scene.name == null;
+            return !go.scene.IsValid();
         }
 
 #if UNITY_EDITOR
@@ -390,14 +395,7 @@ namespace VRM
                 File.WriteAllBytes(path, bytes);
                 Debug.LogFormat("Export elapsed {0}", sw.Elapsed);
             }
-            if (IsPrefab(Source))
-            {
-#if UNITY_2018_3_OR_NEWER
-                PrefabUtility.RevertPrefabInstance(Source, InteractionMode.AutomatedAction);
-#else
-                PrefabUtility.RevertPrefabInstance(target);
-#endif
-            }
+
 
             if (path.StartsWithUnityAssetPath())
             {

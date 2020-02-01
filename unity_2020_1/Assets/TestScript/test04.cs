@@ -423,7 +423,7 @@ namespace TestScript
 			}
 
 			//パブリックキー。
-			Fee.File.File.GetInstance().RegistPublicKey("blueback","^https\\:\\/\\/blueback\\.ddns\\.net\\:8081\\/.*$",this.prefablist.GetTextAsset("SSLPUBLICKEY").text);
+			Fee.File.File.GetInstance().RegistCertificate("blueback","^https\\:\\/\\/blueback\\.ddns\\.net\\:8081\\/.*$",this.prefablist.GetTextAsset("SSLPUBLICKEY").text);
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。

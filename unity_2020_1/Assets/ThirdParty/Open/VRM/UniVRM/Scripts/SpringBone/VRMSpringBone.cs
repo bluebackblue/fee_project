@@ -3,8 +3,6 @@ using System.Linq;
 using UnityEngine;
 using UniGLTF;
 
-//blueback:https://github.com/dwango/UniVRM/blob/master/LICENSE.txt
-//blueback:VRMSpringBone.cs
 //blueback:warning CS0649:
 #pragma warning disable 0649
 

@@ -341,7 +341,7 @@ namespace TestScript
 			this.sprite.SetVisible(false);
 
 			//パブリックキー。
-			Fee.File.File.GetInstance().RegistPublicKey("blueback","^https\\:\\/\\/blueback\\.ddns\\.net\\:8081\\/.*$",this.prefablist.GetTextAsset("SSLPUBLICKEY").text);
+			Fee.File.File.GetInstance().RegistCertificate("blueback","^https\\:\\/\\/blueback\\.ddns\\.net\\:8081\\/.*$",this.prefablist.GetTextAsset("SSLPUBLICKEY").text);
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
@@ -357,15 +357,14 @@ namespace TestScript
 					{
 						//アセットバンドルを使用しないデータリスト。
 
-						Fee.Data.Data.GetInstance().ClearDataList();
+						Fee.Data.Data.GetInstance().ClearData();
 						
 						UnityEngine.TextAsset t_textasset = this.prefablist.GetTextAsset("TEST12_DATA_DEBUG");
 
 						if(t_textasset != null){
 							string t_text = t_textasset.text;
 							if(t_text != null){
-								System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
-								Fee.Data.Data.GetInstance().RegistDataList(t_data_list);
+								Fee.Data.Data.GetInstance().RegistDataJson(t_text);
 							}
 						}
 					}break;
@@ -373,15 +372,14 @@ namespace TestScript
 					{
 						//アセットバンドルを使用するデータリスト。
 
-						Fee.Data.Data.GetInstance().ClearDataList();
+						Fee.Data.Data.GetInstance().ClearData();
 						
 						UnityEngine.TextAsset t_textasset = this.prefablist.GetTextAsset("TEST12_DATA_RELEASE");
 
 						if(t_textasset != null){
 							string t_text = t_textasset.text;
 							if(t_text != null){
-								System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem> t_data_list = Fee.JsonItem.Convert.JsonStringToObject<System.Collections.Generic.Dictionary<string,Fee.Data.JsonListItem>>(t_text);
-								Fee.Data.Data.GetInstance().RegistDataList(t_data_list);
+								Fee.Data.Data.GetInstance().RegistDataJson(t_text);
 							}
 						}
 					}break;
