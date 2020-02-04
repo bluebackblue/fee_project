@@ -99,8 +99,11 @@ namespace Fee.JsonSheet
 							t_audiovolume_list[ii] = new Instantiate.AudioVolumeList_Tool.ResourceItem(t_tag_list[ii],t_volume_list[ii]);
 						}
 
-						UnityEngine.GameObject t_prefab = Fee.Instantiate.AudioClipList_Tool.Create(a_assets_path,t_audioclip_list);
+						UnityEngine.GameObject t_prefab = new UnityEngine.GameObject("prefab_temp");
+						Fee.Instantiate.AudioClipList_Tool.Add(t_prefab,t_audioclip_list);
 						Fee.Instantiate.AudioVolumeList_Tool.Add(t_prefab,t_audiovolume_list);
+						Fee.EditorTool.Utility.SavePrefab(t_prefab,a_assets_path);
+						UnityEngine.GameObject.DestroyImmediate(t_prefab);
 					}
 				}else{
 					Tool.Assert(false);

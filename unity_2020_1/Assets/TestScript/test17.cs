@@ -46,7 +46,7 @@ namespace TestScript
 
 		/** ScrollItem
 		*/
-		public class ScrollItem : Fee.Ui.ScrollItem_Base , Fee.Deleter.OnDelete_CallBackInterface , Fee.Ui.OnButtonClick_CallBackInterface<int>
+		public class ScrollItem : Fee.Ui.ScrollItem_Base  , Fee.Ui.OnButtonClick_CallBackInterface<int> /*, Fee.Deleter.OnDelete_CallBackInterface*/
 		{
 			/** CallBack
 			*/
@@ -147,33 +147,33 @@ namespace TestScript
 
 			/** [Fee.Deleter.OnDelete_CallBackInterface]削除。
 			*/
-			public void OnDelete()
+			public override void OnDelete()
 			{
 				this.deleter.DeleteAll();
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void OnChangeParentRectX(int a_parent_x)
+			public override void OnChangeRectX(int a_x)
 			{
-				this.sprite.SetX(a_parent_x);
-				this.text.SetX(a_parent_x);
+				this.sprite.SetX(a_x);
+				this.text.SetX(a_x);
 
 				if(this.scroll_type == Fee.Ui.Scroll_Type.Vertical){
 					//縦。
-					this.button.SetX(a_parent_x + ScrollItem.GetW() - this.button.GetW() - 15);
+					this.button.SetX(a_x + ScrollItem.GetW() - this.button.GetW() - 15);
 				}else{
-					this.button.SetX(a_parent_x + ScrollItem.GetW() - this.button.GetW() - 5);
+					this.button.SetX(a_x + ScrollItem.GetW() - this.button.GetW() - 5);
 				}
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void OnChangeParentRectY(int a_parent_y)
+			public override void OnChangeRectY(int a_y)
 			{
-				this.sprite.SetY(a_parent_y);
-				this.text.SetY(a_parent_y);
-				this.button.SetY(a_parent_y + 5);
+				this.sprite.SetY(a_y);
+				this.text.SetY(a_y);
+				this.button.SetY(a_y + 5);
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形変更。
@@ -538,7 +538,7 @@ namespace TestScript
 					//最後尾削除。
 
 					{
-						ScrollItem t_item = this.v_scrollview.PopItem();
+						ScrollItem t_item = this.v_scrollview.PopItem(false);
 						if(t_item != null){
 							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
@@ -546,7 +546,7 @@ namespace TestScript
 						}
 					}
 					{
-						ScrollItem t_item = this.h_scrollview.PopItem();
+						ScrollItem t_item = this.h_scrollview.PopItem(false);
 						if(t_item != null){
 							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
@@ -575,7 +575,7 @@ namespace TestScript
 
 					{
 						int t_index = 0;
-						ScrollItem t_item = this.v_scrollview.RemoveItem(t_index);
+						ScrollItem t_item = this.v_scrollview.RemoveItem(t_index,false);
 						if(t_item != null){
 							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
@@ -584,7 +584,7 @@ namespace TestScript
 					}
 					{
 						int t_index = 0;
-						ScrollItem t_item = this.h_scrollview.RemoveItem(t_index);
+						ScrollItem t_item = this.h_scrollview.RemoveItem(t_index,false);
 						if(t_item != null){
 							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
@@ -613,7 +613,7 @@ namespace TestScript
 
 					{
 						int t_index = 4;
-						ScrollItem t_item = this.v_scrollview.RemoveItem(t_index);
+						ScrollItem t_item = this.v_scrollview.RemoveItem(t_index,false);
 						if(t_item != null){
 							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
@@ -622,7 +622,7 @@ namespace TestScript
 					}
 					{
 						int t_index = 4;
-						ScrollItem t_item = this.h_scrollview.RemoveItem(t_index);
+						ScrollItem t_item = this.h_scrollview.RemoveItem(t_index,false);
 						if(t_item != null){
 							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
@@ -651,7 +651,7 @@ namespace TestScript
 
 					{
 						int t_index = this.v_scrollview.GetListCount() - 6;
-						ScrollItem t_item = this.v_scrollview.RemoveItem(t_index);
+						ScrollItem t_item = this.v_scrollview.RemoveItem(t_index,false);
 						if(t_item != null){
 							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
@@ -660,7 +660,7 @@ namespace TestScript
 					}
 					{
 						int t_index = this.h_scrollview.GetListCount() - 6;
-						ScrollItem t_item = this.h_scrollview.RemoveItem(t_index);
+						ScrollItem t_item = this.h_scrollview.RemoveItem(t_index,false);
 						if(t_item != null){
 							this.deleter.UnRegist(t_item);
 							t_item.OnDelete();
@@ -694,8 +694,8 @@ namespace TestScript
 			Fee.Ui.Ui.GetInstance().Main();
 
 			//ドラッグスクロールアップデート。
-			this.v_scrollview.DragScrollUpdate();
-			this.h_scrollview.DragScrollUpdate();
+			this.v_scrollview.DragScrollUpdate(0.98f);
+			this.h_scrollview.DragScrollUpdate(0.98f);
 
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_After();

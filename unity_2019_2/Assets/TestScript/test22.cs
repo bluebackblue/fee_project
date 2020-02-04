@@ -121,7 +121,7 @@ namespace TestScript
 				this.bg_sprite.SetColor(0.2f,0.0f,0.0f,1.0f);
 			}
 
-			Fee.File.Path t_path = Fee.File.Path.CreateStreamingAssetsPath("Test22/video.mp4");
+			Fee.File.Path t_path = Fee.File.Path.CreateStreamingAssetsPath("Test22/video.mp4",Fee.File.Path.SEPARATOR);
 
 			//video_texture
 			this.video_item_1 = Fee.Video.Item.Create(this.deleter,Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H,t_path);

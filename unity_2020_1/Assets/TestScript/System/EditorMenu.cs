@@ -83,7 +83,7 @@ namespace TestScript
 			//スクリプト自動生成。
 			t_script =  SCRIPT_START + t_script +  SCRIPT_END;
 
-			Fee.EditorTool.Utility.WriteTextFile(Fee.File.Path.CreateAssetsPath("TestScript/System/SceneList.cs"),t_script,true);
+			Fee.EditorTool.Utility.WriteTextFile(Fee.File.Path.CreateAssetsPath("TestScript/System/SceneList.cs",Fee.File.Path.SEPARATOR),t_script,true);
 		}
 		#endif
 	}

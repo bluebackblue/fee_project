@@ -14,8 +14,8 @@ namespace Editor
 		private static void MenuItem_Convert_CreatePublicKeyPrivateKey()
 		{
 			Fee.EditorTool.Crypt.CreatePublicKeyPrivateKey(
-				Fee.File.Path.CreateAssetsPath("Editor/data/public_key.json"),
-				Fee.File.Path.CreateAssetsPath("Editor/data/private_key.json")
+				Fee.File.Path.CreateAssetsPath("Editor/data/public_key.json",Fee.File.Path.SEPARATOR),
+				Fee.File.Path.CreateAssetsPath("Editor/data/private_key.json",Fee.File.Path.SEPARATOR)
 			);
 		}
 
@@ -25,8 +25,8 @@ namespace Editor
 		private static void MenuItem_Convert_CreatePublicKey()
 		{
 			Fee.File.CustomCertificateHandler t_certificate = new Fee.File.CustomCertificateHandler("");
-			Fee.EditorTool.Utility.WebRequest("https://blueback.ddns.net:8081/",t_certificate);
-			Fee.EditorTool.Utility.WriteTextFile(Fee.File.Path.CreateAssetsPath("Editor/data/ssl_publickey.txt"),t_certificate.GetReceiveCertificateString(),true);
+			Fee.EditorTool.Utility.CreateWebRequest(new Fee.File.Path("https://blueback.ddns.net:8081/"),t_certificate);
+			Fee.EditorTool.Utility.WriteTextFile(Fee.File.Path.CreateAssetsPath("Editor/data/ssl_publickey.txt",Fee.File.Path.SEPARATOR),t_certificate.GetReceiveCertificateString(),true);
 		}
 
 		/** エクセルをコンバート。
@@ -37,11 +37,12 @@ namespace Editor
 		{
 			//エクセルからＪＳＯＮシートを作成。
 			Fee.Excel.ExcelToJsonSheet t_excel_to_jsonsheet = new Fee.Excel.ExcelToJsonSheet();
-			if(t_excel_to_jsonsheet.Convert(Fee.File.Path.CreateAssetsPath("Editor/data/excel.xlsx")) == true){
+			if(t_excel_to_jsonsheet.Convert(Fee.File.Path.CreateAssetsPath("Editor/data/excel.xlsx",Fee.File.Path.SEPARATOR)) == true){
 				Fee.JsonItem.JsonItem t_jsonsheet = t_excel_to_jsonsheet.GetJsonSheet();
 				if(t_jsonsheet != null){
 					//コンバート。
-					if(Fee.JsonSheet.JsonSheet.ConvertFromJsonSheet(t_jsonsheet) == false){
+					Fee.JsonSheet.ConvertParam t_convertparam = new Fee.JsonSheet.ConvertParam();
+					if(Fee.JsonSheet.JsonSheet.ConvertFromJsonSheet(t_jsonsheet,t_convertparam) == false){
 						UnityEngine.Debug.LogError("faild");
 					}
 				}else{

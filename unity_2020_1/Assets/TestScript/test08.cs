@@ -103,6 +103,12 @@ namespace TestScript
 				this.callback_path = a_callback_path;
 			}
 
+			/** [Fee.Deleter.OnDelete_CallBackInterface]削除。
+			*/
+			public override void OnDelete()
+			{
+			}
+
 			/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 			*/
 			public void OnButtonClick(int a_id)
@@ -114,21 +120,21 @@ namespace TestScript
 
 			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void OnChangeParentRectX(int a_parent_x)
+			public override void OnChangeRectX(int a_x)
 			{
-				this.text.SetX(20 + a_parent_x);
+				this.text.SetX(20 + a_x);
 				if(this.button != null){
-					this.button.SetX(a_parent_x);
+					this.button.SetX(a_x);
 				}
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void OnChangeParentRectY(int a_parent_y)
+			public override void OnChangeRectY(int a_y)
 			{
-				this.text.SetY(a_parent_y + 10);
+				this.text.SetY(a_y + 10);
 				if(this.button != null){
-					this.button.SetY(a_parent_y);
+					this.button.SetY(a_y);
 				}
 			}
 
@@ -263,7 +269,7 @@ namespace TestScript
 			this.text.SetText(t_item_root.GetRoot().GetFullPath());
 		
 			//removeall
-			this.scroll.RemoveAllItem();
+			this.scroll.RemoveAllItem(false);
 			this.deleter_scrollitem.DeleteAll();
 
 			if(this.prev_list.Count > 0){
@@ -318,7 +324,7 @@ namespace TestScript
 			Fee.Ui.Ui.GetInstance().Main();
 
 			//ドラッグスクロールアップデート。
-			this.scroll.DragScrollUpdate();
+			this.scroll.DragScrollUpdate(0.98f);
 
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_After();

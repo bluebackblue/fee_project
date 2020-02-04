@@ -163,18 +163,24 @@ namespace TestScript
 				this.button.SetText(a_click_id.ToString());
 			}
 
-			/** [Fee.Ui.ScrollItem_Base]矩形変更。
+			/** [Fee.Deleter.OnDelete_CallBackInterface]削除。
 			*/
-			public override void OnChangeParentRectX(int a_parent_x)
+			public override void OnDelete()
 			{
-				this.button.SetX(a_parent_x);
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形変更。
 			*/
-			public override void OnChangeParentRectY(int a_parent_y)
+			public override void OnChangeRectX(int a_x)
 			{
-				this.button.SetY(a_parent_y);
+				this.button.SetX(a_x);
+			}
+
+			/** [Fee.Ui.ScrollItem_Base]矩形変更。
+			*/
+			public override void OnChangeRectY(int a_y)
+			{
+				this.button.SetY(a_y);
 			}
 
 			/** [Fee.Ui.ScrollItem_Base]矩形変更。
@@ -510,7 +516,7 @@ namespace TestScript
 			Fee.File.File.GetInstance().Main();
 
 			//scroll
-			this.scroll.DragScrollUpdate();
+			this.scroll.DragScrollUpdate(0.98f);
 
 			if(this.item_file != null){
 				if(this.item_file.IsBusy() == true){
