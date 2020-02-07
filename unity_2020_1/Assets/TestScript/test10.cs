@@ -140,21 +140,10 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//プレハブリスト。
-			{
-				this.prefablist = new Common.PrefabList();
-				this.prefablist.LoadFontList();
-				this.prefablist.LoadTextureList();
-			}
+			this.prefablist = new Common.PrefabList();
 
 			//フォント。
-			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
-
-			//プレハブリスト。
-			Fee.Instantiate.PrefabList t_prefablist;
-			{
-				UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("PrefabList");
-				t_prefablist = new Fee.Instantiate.PrefabList(t_prefab.GetComponent<Fee.Instantiate.PrefabList_MonoBehaviour>());
-			}
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont(Common.FontType.Font));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
@@ -193,9 +182,9 @@ namespace TestScript
 				this.cube = new GameObject[2];
 				for(int ii=0;ii<this.cube.Length;ii++){
 					if(ii == 0){
-						this.cube[ii] = GameObject.Instantiate(t_prefablist.GetPrefab("TEST10_CUBE"),new Vector3(1 + 1,0,10),Quaternion.identity);
+						this.cube[ii] = GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test10_Cube),new Vector3(1 + 1,0,10),Quaternion.identity);
 					}else{
-						this.cube[ii] = GameObject.Instantiate(t_prefablist.GetPrefab("TEST10_CUBE"),new Vector3(1 + 4,0,10),Quaternion.identity);
+						this.cube[ii] = GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test10_Cube),new Vector3(1 + 4,0,10),Quaternion.identity);
 					}
 					this.cube[ii].transform.localScale = new Vector3(2,2,2);
 				}
@@ -213,7 +202,7 @@ namespace TestScript
 				this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
 				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
 				this.sprite.SetRect(t_x,t_y,t_w,t_h);
-				this.sprite.SetTexture(this.prefablist.GetTexture("TEST10_TEXTURE"));
+				this.sprite.SetTexture(this.prefablist.GetTexture(Common.TextureType.Test10_Texture));
 			}
 
 			{

@@ -185,14 +185,10 @@ namespace TestScript
 			Fee.EventPlate.EventPlate.CreateInstance();
 
 			//プレハブリスト。
-			{
-				this.prefablist = new Common.PrefabList();
-				this.prefablist.LoadFontList();
-				this.prefablist.LoadTextureList();
-			}
+			this.prefablist = new Common.PrefabList();
 
 			//フォント。
-			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont(Common.FontType.Font));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
@@ -327,37 +323,10 @@ namespace TestScript
 				{
 					//オーディオクリップ。
 
-					GameObject t_prefab = UnityEngine.Resources.Load<GameObject>("PrefabList");
-					Fee.Instantiate.PrefabList t_prefablist = new Fee.Instantiate.PrefabList(t_prefab.GetComponent<Fee.Instantiate.PrefabList_MonoBehaviour>());
-					Fee.Instantiate.AudioClipList_MonoBehaviour t_audioclip_list = t_prefablist.GetPrefab("TEST11_SE").GetComponent<Fee.Instantiate.AudioClipList_MonoBehaviour>();
-					Fee.Instantiate.AudioVolumeList_MonoBehaviour t_audiovolume_list = t_prefablist.GetPrefab("TEST11_SE").GetComponent<Fee.Instantiate.AudioVolumeList_MonoBehaviour>();
-
-					if(t_audioclip_list != null){
-
-						//ボリュームリスト。作成。
-						System.Collections.Generic.Dictionary<string,float> t_volume_list = new Dictionary<string, float>();
-						if(t_audiovolume_list != null){
-							for(int ii=0;ii<t_audiovolume_list.tag_list.Length;ii++){
-								t_volume_list.Add(t_audiovolume_list.tag_list[ii],t_audiovolume_list.audiovolume_list[ii]);
-							}
-						}
-
-						//パック作成。
-						Fee.Audio.Pack_AudioClip t_pack = new Fee.Audio.Pack_AudioClip();
-						for(int ii=0;ii<t_audioclip_list.tag_list.Length;ii++){
-							UnityEngine.AudioClip t_audioclip = t_audioclip_list.audioclip_list[ii];
-
-							float t_volume;
-							if(t_volume_list.TryGetValue(t_audioclip_list.tag_list[ii],out t_volume) == false){
-								t_volume = 1.0f;
-							}
-
-							t_pack.audioclip_list.Add(t_audioclip);
-							t_pack.volume_list.Add(t_volume);
-						}
-
-						//ロード。
-						Fee.Audio.Audio.GetInstance().LoadSe(new Fee.Audio.Bank(t_pack),SE_ID);
+					//ロード。
+					Fee.Audio.Bank t_bank = this.prefablist.GetSeBank();
+					if(t_bank != null){
+						Fee.Audio.Audio.GetInstance().LoadSe(t_bank,SE_ID);
 					}
 				}break;
 			case ButtonId.SoundPool:
@@ -372,37 +341,11 @@ namespace TestScript
 				{
 					//ＢＧＭ。
 
-					GameObject t_prefab = UnityEngine.Resources.Load<GameObject>("PrefabList");
-					Fee.Instantiate.PrefabList t_prefablist = new Fee.Instantiate.PrefabList(t_prefab.GetComponent<Fee.Instantiate.PrefabList_MonoBehaviour>());
-					Fee.Instantiate.AudioClipList_MonoBehaviour t_audioclip_list = t_prefablist.GetPrefab("TEST11_BGM").GetComponent<Fee.Instantiate.AudioClipList_MonoBehaviour>();
-					Fee.Instantiate.AudioVolumeList_MonoBehaviour t_audiovolume_list = t_prefablist.GetPrefab("TEST11_BGM").GetComponent<Fee.Instantiate.AudioVolumeList_MonoBehaviour>();
-
-					if(t_audioclip_list != null){
-
-						//ボリュームリスト。作成。
-						System.Collections.Generic.Dictionary<string,float> t_volume_list = new Dictionary<string, float>();
-						if(t_audiovolume_list != null){
-							for(int ii=0;ii<t_audiovolume_list.tag_list.Length;ii++){
-								t_volume_list.Add(t_audiovolume_list.tag_list[ii],t_audiovolume_list.audiovolume_list[ii]);
-							}
-						}
-
-						//パック作成。
-						Fee.Audio.Pack_AudioClip t_pack = new Fee.Audio.Pack_AudioClip();
-						for(int ii=0;ii<t_audioclip_list.tag_list.Length;ii++){
-							UnityEngine.AudioClip t_audioclip = t_audioclip_list.audioclip_list[ii];
-
-							float t_volume;
-							if(t_volume_list.TryGetValue(t_audioclip_list.tag_list[ii],out t_volume) == false){
-								t_volume = 1.0f;
-							}
-
-							t_pack.audioclip_list.Add(t_audioclip);
-							t_pack.volume_list.Add(t_volume);
-						}
-
+					//ロード。
+					Fee.Audio.Bank t_bank = this.prefablist.GetBgmBank();
+					if(t_bank != null){
 						//ロード。
-						Fee.Audio.Audio.GetInstance().LoadBgm(new Fee.Audio.Bank(t_pack));
+						Fee.Audio.Audio.GetInstance().LoadBgm(t_bank);
 
 						//再生。
 						Fee.Audio.Audio.GetInstance().PlayBgm(0);
@@ -439,7 +382,7 @@ namespace TestScript
 				}break;
 			case SoundPool_Mode.Start:
 				{
-					this.soundpool_loaditem = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Data.StreamingAssets.TEST11_SOUNDPOOL_SE),SOUNDPOOL_DATA_VERSION);
+					this.soundpool_loaditem = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Common.Data.StreamingAssets.TEST11_SOUNDPOOL_SE),SOUNDPOOL_DATA_VERSION);
 					this.soundpool_mode = SoundPool_Mode.Now;
 				}break;
 			case SoundPool_Mode.Now:

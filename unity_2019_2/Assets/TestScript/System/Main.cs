@@ -78,10 +78,7 @@ namespace TestScript
 		{
 			this.step = Step.Init;
 			this.step_time = 0;
-
 			this.prefablist = new Common.PrefabList();
-			this.prefablist.LoadTextureList();
-			this.prefablist.LoadFontList();
 		}
 
 		/** 更新。
@@ -235,7 +232,7 @@ namespace TestScript
 			Fee.Input.Mouse.CreateInstance();
 
 			//フォント。
-			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont(Common.FontType.Font));
 		}
 
 		/** 初期化。

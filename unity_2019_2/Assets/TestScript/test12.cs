@@ -239,6 +239,11 @@ namespace TestScript
 		*/
 		private Fee.AssetBundleList.Item item_assetbundlelist;
 
+		/** info
+		*/
+		private Fee.Render2D.Text2D info_deta_text;
+		private Fee.Render2D.Text2D info_assetbundle_text;
+
 		/** Start
 		*/
 		private void Start()
@@ -285,13 +290,10 @@ namespace TestScript
 			//プレハブリスト。
 			{
 				this.prefablist = new Common.PrefabList();
-				this.prefablist.LoadFontList();
-				this.prefablist.LoadTextureList();
-				this.prefablist.LoadTextAssetList();
 			}
 
 			//フォント。
-			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont(Common.FontType.Font));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
@@ -346,8 +348,16 @@ namespace TestScript
 			this.sprite.SetTexture(Texture2D.whiteTexture);
 			this.sprite.SetVisible(false);
 
+			this.info_deta_text = Fee.Render2D.Text2D.Create(this.deleter,0);
+			this.info_deta_text.SetRect(500,50,430,100);
+			this.info_deta_text.SetText("Data : NONE");
+
+			this.info_assetbundle_text = Fee.Render2D.Text2D.Create(this.deleter,0);
+			this.info_assetbundle_text.SetRect(500,150,430,100);
+			this.info_assetbundle_text.SetText("AssetBundle : NONE");
+
 			//パブリックキー。
-			Fee.File.File.GetInstance().RegistCertificate("blueback","^https\\:\\/\\/blueback\\.ddns\\.net\\:8081\\/.*$",this.prefablist.GetTextAsset("SSLPUBLICKEY").text);
+			Fee.File.File.GetInstance().RegistCertificate("blueback","^https\\:\\/\\/blueback\\.ddns\\.net\\:8081\\/.*$",this.prefablist.GetTextAsset(Common.TextAssetType.Ssl_PublicKey).text);
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
@@ -364,13 +374,15 @@ namespace TestScript
 						//アセットバンドルを使用しないデータリスト。
 
 						Fee.Data.Data.GetInstance().ClearData();
+						this.info_deta_text.SetText("Data : NONE");
 						
-						UnityEngine.TextAsset t_textasset = this.prefablist.GetTextAsset("TEST12_DATA_DEBUG");
+						UnityEngine.TextAsset t_textasset = this.prefablist.GetDataJson(false);
 
 						if(t_textasset != null){
 							string t_text = t_textasset.text;
 							if(t_text != null){
 								Fee.Data.Data.GetInstance().RegistDataJson(t_text);
+								this.info_deta_text.SetText("Data : Load_Data_Debug : アセットバンドルの元素材を直接参照する");
 							}
 						}
 					}break;
@@ -379,13 +391,15 @@ namespace TestScript
 						//アセットバンドルを使用するデータリスト。
 
 						Fee.Data.Data.GetInstance().ClearData();
+						this.info_deta_text.SetText("Data : NONE");
 						
-						UnityEngine.TextAsset t_textasset = this.prefablist.GetTextAsset("TEST12_DATA_RELEASE");
+						UnityEngine.TextAsset t_textasset = this.prefablist.GetDataJson(true);
 
 						if(t_textasset != null){
 							string t_text = t_textasset.text;
 							if(t_text != null){
 								Fee.Data.Data.GetInstance().RegistDataJson(t_text);
+								this.info_deta_text.SetText("Data : Load_Data_Release : アセットバンドルを参照する");
 							}
 						}
 					}break;
@@ -396,9 +410,11 @@ namespace TestScript
 						#if(UNITY_EDITOR)
 						{
 							Fee.AssetBundleList.AssetBundleList.GetInstance().UnRegistPathItem("test.assetbundle");
-							Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsPathDummyAssetBundle,new Fee.File.Path(Data.Assets.TEST12_ASSETBUNDLE));
+							Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.AssetsPathDummyAssetBundle,new Fee.File.Path(Common.Data.Assets.TEST12_ASSETBUNDLE));
 
 							this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemAssetBundleItem("test.assetbundle");
+
+							this.info_assetbundle_text.SetText("AssetBundle : Load_DummyAssetBundle : アセットバンドルの元素材を参照する");
 						}
 						#endif
 					}break;
@@ -408,9 +424,11 @@ namespace TestScript
 
 						//アセットバンドルのパスを設定。
 						Fee.AssetBundleList.AssetBundleList.GetInstance().UnRegistPathItem("test.assetbundle");
-						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.StreamingAssetsAssetBundle,new Fee.File.Path(Data.StreamingAssets.TEST12_ASSETBUNDLE));
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.StreamingAssetsAssetBundle,new Fee.File.Path(Common.Data.StreamingAssets.TEST12_ASSETBUNDLE));
 
 						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemAssetBundleItem("test.assetbundle");
+
+						this.info_assetbundle_text.SetText("AssetBundle : Load_StreamingAssetsAssetBundle : StreamingAssetsパス指定のアセットバンドルを使用する");
 					}break;
 				case ButtonId.Load_UrlAssetBundle:
 					{
@@ -418,13 +436,17 @@ namespace TestScript
 
 						//アセットバンドルのパスを設定。
 						Fee.AssetBundleList.AssetBundleList.GetInstance().UnRegistPathItem("test.assetbundle");
-						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.UrlAssetBundle,new Fee.File.Path(Data.Url.TEST12_ASSETBUNDLE));
+						Fee.AssetBundleList.AssetBundleList.GetInstance().RegistPathItem("test.assetbundle",Fee.AssetBundleList.AssetBundlePathType.UrlAssetBundle,new Fee.File.Path(Common.Data.Url.TEST12_ASSETBUNDLE));
 
 						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestLoadPathItemAssetBundleItem("test.assetbundle");
+
+						this.info_assetbundle_text.SetText("AssetBundle : Load_UrlAssetBundle : ＵＲＩパス指定のアセットバンドルを使用する");
 					}break;
 				case ButtonId.UnLoad_AssetBundle:
 					{
 						this.item_assetbundlelist = Fee.AssetBundleList.AssetBundleList.GetInstance().RequestUnLoadAssetBundleItem("test.assetbundle");
+
+						this.info_assetbundle_text.SetText("AssetBundle : NONE");
 					}break;
 				case ButtonId.AssetBundle_Prefab:
 					{
@@ -525,7 +547,7 @@ namespace TestScript
 					if(this.item_file.GetResultType() == Fee.Data.Item.ResultType.Error){
 						//エラー。
 
-						this.text.SetText(this.item_file.GetResultErrorString());
+						this.text.SetText("ERROR : " + this.item_file.GetResultErrorString());
 					}else{
 						switch(this.item_file.GetResultAssetType()){
 						case Fee.Asset.AssetType.Binary:
@@ -570,7 +592,9 @@ namespace TestScript
 					if(this.item_assetbundlelist.GetResultType() == Fee.AssetBundleList.Item.ResultType.Error){
 						//エラー。
 
-						this.text.SetText(this.item_assetbundlelist.GetResultErrorString());
+						this.text.SetText("ERROR" + this.item_assetbundlelist.GetResultErrorString());
+
+						this.info_assetbundle_text.SetText("AssetBundle : ロードエラー");
 					}else{
 						switch(this.item_assetbundlelist.GetResultType()){
 						case Fee.AssetBundleList.Item.ResultType.LoadAssetBundleItem:
@@ -579,6 +603,8 @@ namespace TestScript
 									this.text.SetText("load dummy assetbundle");
 								}else if(this.item_assetbundlelist.GetResultAssetBundleItem().assetbundle_raw != null){
 									this.text.SetText("load asetbundle");
+								}else{
+									this.info_assetbundle_text.SetText("AssetBundle : ロードエラー");
 								}
 							}break;
 						case Fee.AssetBundleList.Item.ResultType.UnLoadAssetBundleItem:

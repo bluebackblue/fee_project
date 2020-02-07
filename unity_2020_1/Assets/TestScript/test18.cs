@@ -92,14 +92,10 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//プレハブリスト。
-			{
-				this.prefablist = new Common.PrefabList();
-				this.prefablist.LoadFontList();
-				this.prefablist.LoadTextureList();
-			}
+			this.prefablist = new Common.PrefabList();
 
 			//フォント。
-			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont(Common.FontType.Font));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
@@ -117,7 +113,7 @@ namespace TestScript
 
 			//キューブ。
 			{
-				this.cube = GameObject.Instantiate(this.prefablist.GetPrefab("TEST18_CUBE"),Vector3.zero,Quaternion.identity);
+				this.cube = GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test18_Cube),Vector3.zero,Quaternion.identity);
 			}
 		}
 

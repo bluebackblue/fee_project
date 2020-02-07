@@ -176,15 +176,10 @@ namespace TestScript
 			Fee.Crypt.Crypt.CreateInstance();
 
 			//プレハブリスト。
-			{
-				this.prefablist = new Common.PrefabList();
-				this.prefablist.LoadFontList();
-				this.prefablist.LoadTextureList();
-				this.prefablist.LoadTextAssetList();
-			}
+			this.prefablist = new Common.PrefabList();
 
 			//フォント。
-			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont(Common.FontType.Font));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
@@ -245,7 +240,7 @@ namespace TestScript
 				case ButtonId.Key:
 					{
 						//public
-						Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(this.prefablist.GetTextAsset("TEST07_PUBLIC_KEY").text);
+						Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(this.prefablist.GetTextAsset(Common.TextAssetType.Test07_PublicKey).text);
 						this.public_key = null;
 						if(t_item_public != null){
 							if(t_item_public.IsAssociativeArray() == true){
@@ -256,7 +251,7 @@ namespace TestScript
 						}
 
 						//private
-						Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(this.prefablist.GetTextAsset("TEST07_PRIVATE_KEY").text);
+						Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(this.prefablist.GetTextAsset(Common.TextAssetType.Test07_PrivateKey).text);
 						this.private_key = null;
 						if(t_item_private != null){
 							if(t_item_private.IsAssociativeArray() == true){
@@ -278,7 +273,7 @@ namespace TestScript
 				case ButtonId.Signature:
 					{
 						//public
-						Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(this.prefablist.GetTextAsset("TEST07_PUBLIC_KEY").text);
+						Fee.JsonItem.JsonItem t_item_public = new Fee.JsonItem.JsonItem(this.prefablist.GetTextAsset(Common.TextAssetType.Test07_PublicKey).text);
 						this.public_key = null;
 						if(t_item_public != null){
 							if(t_item_public.IsAssociativeArray() == true){
@@ -289,7 +284,7 @@ namespace TestScript
 						}
 
 						//private
-						Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(this.prefablist.GetTextAsset("TEST07_PRIVATE_KEY").text);
+						Fee.JsonItem.JsonItem t_item_private = new Fee.JsonItem.JsonItem(this.prefablist.GetTextAsset(Common.TextAssetType.Test07_PrivateKey).text);
 						this.private_key = null;
 						if(t_item_private != null){
 							if(t_item_private.IsAssociativeArray() == true){

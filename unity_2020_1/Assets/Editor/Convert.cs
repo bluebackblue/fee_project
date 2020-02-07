@@ -1,4 +1,4 @@
-﻿
+
 
 /**
 */
@@ -8,40 +8,127 @@ namespace Editor
 	*/
 	public class Convert
 	{
+		//スクリプト自動生成。
+		private const string SCRIPT_START = @"
+
+/** TestScript
+*/
+namespace TestScript
+{
+	/** 自動生成。
+	*/
+	public class SceneList
+	{
+		/** CreateStatusList
+		*/
+		public static TestStatus[] CreateStatusList()
+		{
+			return new TestStatus[]{
+";
+
+		//スクリプト自動生成。
+		private const string SCRIPT_END = @"			};
+		}
+	}
+}
+
+";
+
+		//スクリプト自動生成。
+		private const string SCRIPT_ITEM = @"				<name>.CreateStatus(),
+";
+
+
+		/** シーンリスト再作成。
+		*/
+		#if(UNITY_EDITOR)
+		[UnityEditor.MenuItem("TestScript/Tool/ReMakeEditSceneList")]
+		private static void MenuItem_EditSceneList()
+		{
+			//フォルダ内のファイルを列挙。
+			System.Collections.Generic.List<string> t_file_list = Fee.EditorTool.Utility.CreateFileNameList(new Fee.File.Path("TestScene/"));
+
+			//シーン追加。
+			System.Collections.Generic.List<UnityEditor.EditorBuildSettingsScene> t_scene_list = new System.Collections.Generic.List<UnityEditor.EditorBuildSettingsScene>();
+
+			//スクリプト自動生成。
+			string t_script = "";
+
+			//シーン追加。
+			t_scene_list.Add(new UnityEditor.EditorBuildSettingsScene("Assets/TestScene/main.unity",true));
+
+			for(int ii=0;ii<t_file_list.Count;ii++){
+				if(t_file_list[ii] == "main.unity"){
+				}else if(t_file_list[ii].EndsWith(".unity") == true){
+					//シーン追加。
+					t_scene_list.Add(new UnityEditor.EditorBuildSettingsScene("Assets/TestScene/" + t_file_list[ii],true));
+
+					//スクリプト自動生成。
+					t_script += SCRIPT_ITEM.Replace("<name>",t_file_list[ii].Substring(0,t_file_list[ii].Length - 6));
+				}
+			}
+
+			//シーン追加。
+			UnityEditor.EditorBuildSettings.scenes = t_scene_list.ToArray();
+
+			//スクリプト自動生成。
+			t_script =  SCRIPT_START + t_script +  SCRIPT_END;
+
+			Fee.EditorTool.Utility.WriteTextFile(new Fee.File.Path("TestScript/System/SceneList.cs"),t_script,true);
+		}
+		#endif
+
 		/** 鍵の作成。
 		*/
-		[UnityEditor.MenuItem("Fee/Test/Convert/CreatePublicKeyPrivateKey")]
+		[UnityEditor.MenuItem("TestScript/Tool/CreatePublicKeyPrivateKey")]
 		private static void MenuItem_Convert_CreatePublicKeyPrivateKey()
 		{
 			Fee.EditorTool.Crypt.CreatePublicKeyPrivateKey(
-				Fee.File.Path.CreateAssetsPath("Editor/data/public_key.json",Fee.File.Path.SEPARATOR),
-				Fee.File.Path.CreateAssetsPath("Editor/data/private_key.json",Fee.File.Path.SEPARATOR)
+				new Fee.File.Path("Editor/data/public_key.json"),
+				new Fee.File.Path("Editor/data/private_key.json")
 			);
 		}
 
 		/** 証明書の作成。
 		*/
-		[UnityEditor.MenuItem("Fee/Test/Convert/CreatePublicKey")]
+		[UnityEditor.MenuItem("TestScript/Tool/CreateCertificate")]
 		private static void MenuItem_Convert_CreatePublicKey()
 		{
 			Fee.File.CustomCertificateHandler t_certificate = new Fee.File.CustomCertificateHandler("");
 			Fee.EditorTool.Utility.CreateWebRequest(new Fee.File.Path("https://blueback.ddns.net:8081/"),t_certificate);
-			Fee.EditorTool.Utility.WriteTextFile(Fee.File.Path.CreateAssetsPath("Editor/data/ssl_publickey.txt",Fee.File.Path.SEPARATOR),t_certificate.GetReceiveCertificateString(),true);
+			Fee.EditorTool.Utility.WriteTextFile(new Fee.File.Path("Editor/data/ssl_publickey.txt"),t_certificate.GetReceiveCertificateString(),true);
+		}
+
+		/** アニメーションをリストアップ。
+		*/
+		[UnityEditor.MenuItem("TestScript/Tool/ListUpAnimation")]
+		private static void MenuItem_Listup_Animation()
+		{
+			System.Collections.Generic.List<Fee.Instantiate.AnimationClipList_Tool.FindItem> t_list = new System.Collections.Generic.List<Fee.Instantiate.AnimationClipList_Tool.FindItem>();
+			Fee.Instantiate.AnimationClipList_Tool.ListUpAnimationClip(new Fee.File.Path(""),t_list);
+
+			foreach(Fee.Instantiate.AnimationClipList_Tool.FindItem t_item in t_list){
+				UnityEngine.Debug.Log(t_item.animationclip.name + " : " + t_item.path.GetPath());
+			}
 		}
 
 		/** エクセルをコンバート。
 		*/
-		#if(UNITY_EDITOR)
-		[UnityEditor.MenuItem("Fee/Test/Convert/ConvertFromExcel")]
+		[UnityEditor.MenuItem("TestScript/Convert/ConvertFromExcel")]
 		private static void MenuItem_Convert_ConvertFromExcel()
 		{
+			Fee.JsonSheet.ConvertParam t_convertparam = new Fee.JsonSheet.ConvertParam();
+			{
+				t_convertparam.Reset();
+				t_convertparam.create_dummy_assetbundle = true;
+			}
+
 			//エクセルからＪＳＯＮシートを作成。
 			Fee.Excel.ExcelToJsonSheet t_excel_to_jsonsheet = new Fee.Excel.ExcelToJsonSheet();
-			if(t_excel_to_jsonsheet.Convert(Fee.File.Path.CreateAssetsPath("Editor/data/excel.xlsx",Fee.File.Path.SEPARATOR)) == true){
+			if(t_excel_to_jsonsheet.Convert(new Fee.File.Path("Editor/data/excel.xlsx")) == true){
 				Fee.JsonItem.JsonItem t_jsonsheet = t_excel_to_jsonsheet.GetJsonSheet();
 				if(t_jsonsheet != null){
 					//コンバート。
-					Fee.JsonSheet.ConvertParam t_convertparam = new Fee.JsonSheet.ConvertParam();
 					if(Fee.JsonSheet.JsonSheet.ConvertFromJsonSheet(t_jsonsheet,t_convertparam) == false){
 						UnityEngine.Debug.LogError("faild");
 					}
@@ -52,49 +139,35 @@ namespace Editor
 				UnityEngine.Debug.LogError("faild");
 			}
 		}
-		#endif
 
-		/** プレハブ作成。
+		/** エクセルをコンバート。
 		*/
-		#if(UNITY_EDITOR)
-		[UnityEditor.MenuItem("Fee/Test/Convert/CreatePrefab")]
-		private static void MenuItem_Convert_CreatePrefab()
+		[UnityEditor.MenuItem("TestScript/Convert/ConvertFromExcel_CreateAssetBundle")]
+		private static void MenuItem_Convert_ConvertFromExcel_Create_AssetBundle()
 		{
-			//プレハブリスト。
+			Fee.JsonSheet.ConvertParam t_convertparam = new Fee.JsonSheet.ConvertParam();
 			{
-				Fee.Instantiate.PrefabList_Tool.ResourceItem[] t_prefab_list = new Fee.Instantiate.PrefabList_Tool.ResourceItem[]{
+				t_convertparam.Reset();
+				t_convertparam.create_assetbundle = true;
+				t_convertparam.create_dummy_assetbundle = true;
+			}
 
-					//ビデオリクップリスト。
-					//new Fee.Instantiate.PrefabList_Tool.ResourceItem("VIDEOLIST",				new Fee.File.Path("Editor/data/create_from_excel_video.prefab")),
-
-					//テクスチャーリスト。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEXTURELIST",				new Fee.File.Path("Editor/data/create_from_excel_texture.prefab")),
-
-					//テキストアセットリスト。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEXTASSETLIST",			new Fee.File.Path("Editor/data/create_from_excel_textasset.prefab")),
-
-					//フォントリスト。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("FONTLIST",				new Fee.File.Path("Editor/data/create_from_excel_font.prefab")),
-
-					//ＢＧＭ。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEST11_BGM",				new Fee.File.Path("Editor/data/create_from_excel_bgm.prefab")),	
-					
-					//ＳＥ。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEST11_SE",				new Fee.File.Path("Editor/data/create_from_excel_se.prefab")),				
-
-					//デプス。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEST10_CUBE",				new Fee.File.Path("Editor/data/cube.prefab")),				
-
-					//通信。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEST16_CUBE",				new Fee.File.Path("Editor/data/cube.prefab")),		
-
-					//視錐台カリング。
-					new Fee.Instantiate.PrefabList_Tool.ResourceItem("TEST18_CUBE",				new Fee.File.Path("Editor/data/cube.prefab")),
-				};
-				Fee.Instantiate.PrefabList_Tool.Create(new Fee.File.Path("Resources/PrefabList.prefab"),t_prefab_list);
+			//エクセルからＪＳＯＮシートを作成。
+			Fee.Excel.ExcelToJsonSheet t_excel_to_jsonsheet = new Fee.Excel.ExcelToJsonSheet();
+			if(t_excel_to_jsonsheet.Convert(new Fee.File.Path("Editor/data/excel.xlsx")) == true){
+				Fee.JsonItem.JsonItem t_jsonsheet = t_excel_to_jsonsheet.GetJsonSheet();
+				if(t_jsonsheet != null){
+					//コンバート。
+					if(Fee.JsonSheet.JsonSheet.ConvertFromJsonSheet(t_jsonsheet,t_convertparam) == false){
+						UnityEngine.Debug.LogError("faild");
+					}
+				}else{
+					UnityEngine.Debug.LogError("faild");
+				}
+			}else{
+				UnityEngine.Debug.LogError("faild");
 			}
 		}
-		#endif
 	}
 }
 

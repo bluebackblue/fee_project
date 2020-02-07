@@ -1,4 +1,4 @@
-﻿
+
 /**
  * Copyright (c) blueback
  * Released under the MIT License
@@ -15,109 +15,168 @@ namespace TestScript.Common
 	*/
 	public class PrefabList
 	{
-		/** prefablist
+		/** prefab_list
 		*/
-		public Fee.Instantiate.PrefabList prefablist;
+		private Fee.Instantiate.PrefabList_MonoBehaviour prefab_list;
 
-		/** texturelist
+		/** texture_list
 		*/
-		public Fee.Instantiate.TextureList texturelist;
+		private Fee.Instantiate.TextureList_MonoBehaviour texture_list;
 
-		/** textassetlist
+		/** textasset_list
 		*/
-		public Fee.Instantiate.TextAssetList textassetlist;
+		private Fee.Instantiate.TextAssetList_MonoBehaviour textasset_list;
 
-		/** fontlist
+		/** font_list
 		*/
-		public Fee.Instantiate.FontList fontlist;
-
-		/** videolist
-		*/
-		public Fee.Instantiate.VideoClipList videolist;
+		private Fee.Instantiate.FontList_MonoBehaviour font_list;
 
 		/** constructor
 		*/
 		public PrefabList()
 		{
-			UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("PrefabList");
+			UnityEngine.GameObject t_prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("create_from_excel_prefab");
 			if(t_prefab != null){
-				this.prefablist = new Fee.Instantiate.PrefabList(t_prefab.GetComponent<Fee.Instantiate.PrefabList_MonoBehaviour>());
-			}
-		}
+				this.prefab_list = t_prefab.GetComponent<Fee.Instantiate.PrefabList_MonoBehaviour>();
+				if(this.prefab_list != null){
 
-		/** テクスチャーリスト。ロード。
-		*/
-		public void LoadTextureList()
-		{
-			UnityEngine.GameObject t_prefab = this.prefablist.GetPrefab("TEXTURELIST");
-			if(t_prefab != null){
-				this.texturelist = new Fee.Instantiate.TextureList(t_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>());
-			}
-		}
+					//TextureList
+					UnityEngine.GameObject t_texture_prefab = this.prefab_list.prefab_list[(int)PrefabType.TextureList];
+					if(t_texture_prefab != null){
+						this.texture_list = t_texture_prefab.GetComponent<Fee.Instantiate.TextureList_MonoBehaviour>();
+					}
 
-		/** テキストアセットリスト。ロード。
-		*/
-		public void LoadTextAssetList()
-		{
-			UnityEngine.GameObject t_prefab = this.prefablist.GetPrefab("TEXTASSETLIST");
-			if(t_prefab != null){
-				this.textassetlist = new Fee.Instantiate.TextAssetList(t_prefab.GetComponent<Fee.Instantiate.TextAssetList_MonoBehaviour>());
-			}
-		}
+					//TextAssetList
+					UnityEngine.GameObject t_textasset_prefab = this.prefab_list.prefab_list[(int)PrefabType.TextAssetList];
+					if(t_textasset_prefab != null){
+						this.textasset_list = t_textasset_prefab.GetComponent<Fee.Instantiate.TextAssetList_MonoBehaviour>();
+					}
 
-		/** フォントリスト。ロード。
-		*/
-		public void LoadFontList()
-		{
-			UnityEngine.GameObject t_prefab = this.prefablist.GetPrefab("FONTLIST");
-			if(t_prefab != null){
-				this.fontlist = new Fee.Instantiate.FontList(t_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>());
-			}
-		}
-
-		/** ビデオクリップリスト。ロード。
-		*/
-		public void LoadVideoClipList()
-		{
-			UnityEngine.GameObject t_prefab = this.prefablist.GetPrefab("VIDEOLIST");
-			if(t_prefab != null){
-				this.videolist = new Fee.Instantiate.VideoClipList(t_prefab.GetComponent<Fee.Instantiate.VideoClipList_MonoBehaviour>());
+					//FontList
+					UnityEngine.GameObject t_font_prefab = this.prefab_list.prefab_list[(int)PrefabType.FontList];
+					if(t_font_prefab != null){
+						this.font_list = t_font_prefab.GetComponent<Fee.Instantiate.FontList_MonoBehaviour>();
+					}
+				}
 			}
 		}
 
 		/** テクスチャー。取得。
 		*/
-		public UnityEngine.Texture2D GetTexture(string a_tag)
+		public UnityEngine.Texture2D GetTexture(TextureType a_type)
 		{
-			return this.texturelist.GetTexture(a_tag);
+			return this.texture_list.texture_list[(int)a_type];
 		}
 
 		/** プレハブ。取得。
 		*/
-		public UnityEngine.GameObject GetPrefab(string a_tag)
+		public UnityEngine.GameObject GetPrefab(PrefabType a_type)
 		{
-			return this.prefablist.GetPrefab(a_tag);
+			return this.prefab_list.prefab_list[(int)a_type];
 		}
 
 		/** テキストアセット。取得。
 		*/
-		public UnityEngine.TextAsset GetTextAsset(string a_tag)
+		public UnityEngine.TextAsset GetTextAsset(TextAssetType a_type)
 		{
-			return this.textassetlist.GetTextAsset(a_tag);
+			return this.textasset_list.textasset_list[(int)a_type];
 		}
 
 		/** フォント。取得。
 		*/
-		public UnityEngine.Font GetFont(string a_tag)
+		public UnityEngine.Font GetFont(FontType a_type)
 		{
-			return this.fontlist.GetFont(a_tag);
+			return this.font_list.font_list[(int)a_type];
 		}
 
-		/** ビデオリクップ。取得。
+
+		/** データ。
 		*/
-		public UnityEngine.Video.VideoClip GetVideoClip(string a_tag)
+		public UnityEngine.TextAsset GetDataJson(bool a_is_release)
 		{
-			return this.videolist.GetVideoClip(a_tag);
+			if(a_is_release == true){
+				return UnityEngine.Resources.Load<UnityEngine.TextAsset>("create_from_excel_data_release");
+			}else{
+				return UnityEngine.Resources.Load<UnityEngine.TextAsset>("create_from_excel_data_debug");
+			}
+		}
+
+		/** GetTest11SeBank
+		*/
+		public Fee.Audio.Bank GetSeBank()
+		{
+			UnityEngine.GameObject t_prefab = this.GetPrefab(PrefabType.Se);
+			Fee.Instantiate.AudioClipList_MonoBehaviour t_audioclip_list = t_prefab.GetComponent<Fee.Instantiate.AudioClipList_MonoBehaviour>();
+			Fee.Instantiate.AudioVolumeList_MonoBehaviour t_audiovolume_list = t_prefab.GetComponent<Fee.Instantiate.AudioVolumeList_MonoBehaviour>();
+
+			if(t_audioclip_list != null){
+
+				//ボリュームリスト。作成。
+				System.Collections.Generic.Dictionary<string,float> t_volume_list = new System.Collections.Generic.Dictionary<string, float>();
+				if(t_audiovolume_list != null){
+					for(int ii=0;ii<t_audiovolume_list.tag_list.Length;ii++){
+						t_volume_list.Add(t_audiovolume_list.tag_list[ii],t_audiovolume_list.audiovolume_list[ii]);
+					}
+				}
+
+				//パック作成。
+				Fee.Audio.Pack_AudioClip t_pack = new Fee.Audio.Pack_AudioClip();
+
+				for(int ii=0;ii<t_audioclip_list.tag_list.Length;ii++){
+					UnityEngine.AudioClip t_audioclip = t_audioclip_list.audioclip_list[ii];
+
+					float t_volume;
+					if(t_volume_list.TryGetValue(t_audioclip_list.tag_list[ii],out t_volume) == false){
+						t_volume = 1.0f;
+					}
+
+					t_pack.audioclip_list.Add(t_audioclip);
+					t_pack.volume_list.Add(t_volume);
+				}
+
+				return new Fee.Audio.Bank(t_pack);
+			}
+
+			return null;
+		}
+
+		/** GetTest11SeBank
+		*/
+		public Fee.Audio.Bank GetBgmBank()
+		{
+			UnityEngine.GameObject t_prefab = this.GetPrefab(PrefabType.Bgm);
+			Fee.Instantiate.AudioClipList_MonoBehaviour t_audioclip_list = t_prefab.GetComponent<Fee.Instantiate.AudioClipList_MonoBehaviour>();
+			Fee.Instantiate.AudioVolumeList_MonoBehaviour t_audiovolume_list = t_prefab.GetComponent<Fee.Instantiate.AudioVolumeList_MonoBehaviour>();
+
+			if(t_audioclip_list != null){
+
+				//ボリュームリスト。作成。
+				System.Collections.Generic.Dictionary<string,float> t_volume_list = new System.Collections.Generic.Dictionary<string, float>();
+				if(t_audiovolume_list != null){
+					for(int ii=0;ii<t_audiovolume_list.tag_list.Length;ii++){
+						t_volume_list.Add(t_audiovolume_list.tag_list[ii],t_audiovolume_list.audiovolume_list[ii]);
+					}
+				}
+
+				//パック作成。
+				Fee.Audio.Pack_AudioClip t_pack = new Fee.Audio.Pack_AudioClip();
+
+				for(int ii=0;ii<t_audioclip_list.tag_list.Length;ii++){
+					UnityEngine.AudioClip t_audioclip = t_audioclip_list.audioclip_list[ii];
+
+					float t_volume;
+					if(t_volume_list.TryGetValue(t_audioclip_list.tag_list[ii],out t_volume) == false){
+						t_volume = 1.0f;
+					}
+
+					t_pack.audioclip_list.Add(t_audioclip);
+					t_pack.volume_list.Add(t_volume);
+				}
+
+				return new Fee.Audio.Bank(t_pack);
+			}
+
+			return null;
 		}
 
 		/** ボタン。アクティブ設定。
@@ -125,15 +184,15 @@ namespace TestScript.Common
 		public void SetButtonActive(Fee.Ui.Button a_button,bool a_flag)
 		{
 			if(a_flag == true){
-				a_button.SetNormalTexture(this.GetTexture("UI_BUTTON_ACTIVE"));
-				a_button.SetOnTexture(this.GetTexture("UI_BUTTON_ACTIVE"));
-				a_button.SetDownTexture(this.GetTexture("UI_BUTTON_ACTIVE"));
-				a_button.SetLockTexture(this.GetTexture("UI_BUTTON_ACTIVE"));
+				a_button.SetNormalTexture(this.GetTexture(TextureType.Ui_Button_Active_Normal));
+				a_button.SetOnTexture(this.GetTexture(TextureType.Ui_Button_Active_On));
+				a_button.SetDownTexture(this.GetTexture(TextureType.Ui_Button_Active_Down));
+				a_button.SetLockTexture(this.GetTexture(TextureType.Ui_Button_Active_Lock));
 			}else{
-				a_button.SetNormalTexture(this.GetTexture("UI_BUTTON"));
-				a_button.SetOnTexture(this.GetTexture("UI_BUTTON"));
-				a_button.SetDownTexture(this.GetTexture("UI_BUTTON"));
-				a_button.SetLockTexture(this.GetTexture("UI_BUTTON"));
+				a_button.SetNormalTexture(this.GetTexture(TextureType.Ui_Button_Normal));
+				a_button.SetOnTexture(this.GetTexture(TextureType.Ui_Button_On));
+				a_button.SetDownTexture(this.GetTexture(TextureType.Ui_Button_Down));
+				a_button.SetLockTexture(this.GetTexture(TextureType.Ui_Button_Lock));
 			}
 		}
 
@@ -145,14 +204,14 @@ namespace TestScript.Common
 			{
 				t_button.SetTextureCornerSize(10);
 
-				t_button.SetNormalTexture(this.GetTexture("UI_BUTTON"));
-				t_button.SetOnTexture(this.GetTexture("UI_BUTTON"));
-				t_button.SetDownTexture(this.GetTexture("UI_BUTTON"));
-				t_button.SetLockTexture(this.GetTexture("UI_BUTTON"));
-				t_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				t_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				t_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				t_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
+				t_button.SetNormalTexture(this.GetTexture(TextureType.Ui_Button_Normal));
+				t_button.SetOnTexture(this.GetTexture(TextureType.Ui_Button_On));
+				t_button.SetDownTexture(this.GetTexture(TextureType.Ui_Button_Down));
+				t_button.SetLockTexture(this.GetTexture(TextureType.Ui_Button_Normal));
+				t_button.SetNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_button.SetOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_button.SetDownTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_button.SetLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			}
 
 			return t_button;
@@ -167,18 +226,18 @@ namespace TestScript.Common
 				t_slider.SetButtonTextureCornerSize(2);
 				t_slider.SetTextureCornerSize(10);
 
-				t_slider.SetBgNormalTexture(this.GetTexture("UI_SLIDER"));
-				t_slider.SetBgLockTexture(this.GetTexture("UI_SLIDER"));
-				t_slider.SetValueNormalTexture(this.GetTexture("UI_SLIDER"));
-				t_slider.SetValueLockTexture(this.GetTexture("UI_SLIDER"));
-				t_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				t_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				t_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				t_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-				t_slider.SetButtonNormalTexture(this.GetTexture("UI_BUTTON"));
-				t_slider.SetButtonLockTexture(this.GetTexture("UI_BUTTON"));
-				t_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				t_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
+				t_slider.SetBgNormalTexture(this.GetTexture(TextureType.Ui_Slider_Bg_Normal));
+				t_slider.SetBgLockTexture(this.GetTexture(TextureType.Ui_Slider_Bg_Lock));
+				t_slider.SetValueNormalTexture(this.GetTexture(TextureType.Ui_Slider_Value_Normal));
+				t_slider.SetValueLockTexture(this.GetTexture(TextureType.Ui_Slider_Value_Lock));
+				t_slider.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_slider.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_slider.SetValueNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_slider.SetValueLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_slider.SetButtonNormalTexture(this.GetTexture(TextureType.Ui_Button_Normal));
+				t_slider.SetButtonLockTexture(this.GetTexture(TextureType.Ui_Button_Lock));
+				t_slider.SetButtonNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_slider.SetButtonLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			}
 
 			return t_slider;
@@ -212,16 +271,16 @@ namespace TestScript.Common
 		{
 			Fee.Ui.CheckButton t_checkbutton = Fee.Ui.CheckButton.Create(a_deleter,a_drawpriority);
 			{
-				t_checkbutton.SetBgNormalTexture(this.GetTexture("UI_CHECKBUTTON"));
-				t_checkbutton.SetBgOnTexture(this.GetTexture("UI_CHECKBUTTON"));
-				t_checkbutton.SetBgLockTexture(this.GetTexture("UI_CHECKBUTTON"));
-				t_checkbutton.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LU);
-				t_checkbutton.SetBgOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RU);
-				t_checkbutton.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_RD);
-				t_checkbutton.SetCheckNormalTexture(this.GetTexture("UI_CHECKBUTTON"));
-				t_checkbutton.SetCheckLockTexture(this.GetTexture("UI_CHECKBUTTON"));
-				t_checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
-				t_checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_LD);
+				t_checkbutton.SetBgNormalTexture(this.GetTexture(TextureType.Ui_CheckButton_Normal));
+				t_checkbutton.SetBgOnTexture(this.GetTexture(TextureType.Ui_CheckButton_On));
+				t_checkbutton.SetBgLockTexture(this.GetTexture(TextureType.Ui_CheckButton_Lock));
+				t_checkbutton.SetBgNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_checkbutton.SetBgOnTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_checkbutton.SetBgLockTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_checkbutton.SetCheckNormalTexture(this.GetTexture(TextureType.Ui_CheckButton_Check_Normal));
+				t_checkbutton.SetCheckLockTexture(this.GetTexture(TextureType.Ui_CheckButton_Check_Lock));
+				t_checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_checkbutton.SetCheckNormalTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			}
 			return t_checkbutton;
 		}

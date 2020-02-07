@@ -171,14 +171,10 @@ namespace TestScript
 			Fee.Network.Network.GetInstance().SetRecvCallBack(this);
 
 			//プレハブリスト。
-			{
-				this.prefablist = new Common.PrefabList();
-				this.prefablist.LoadFontList();
-				this.prefablist.LoadTextureList();
-			}
+			this.prefablist = new Common.PrefabList();
 
 			//フォント。
-			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont("FONT"));
+			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont(Common.FontType.Font));
 
 			//削除管理。
 			this.deleter = new Fee.Deleter.Deleter();
@@ -216,7 +212,7 @@ namespace TestScript
 			{
 				this.player_list = new GameObject[8];
 				for(int ii=0;ii<this.player_list.Length;ii++){
-					this.player_list[ii] = GameObject.Instantiate(this.prefablist.GetPrefab("TEST16_CUBE"));
+					this.player_list[ii] = GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test16_Cube));
 					this.player_list[ii].SetActive(false);
 				}
 			}
