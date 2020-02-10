@@ -20,7 +20,7 @@ namespace TestScript
 		通信
 
 	*/
-	public class test16 : MainBase , Fee.Network.OnRemoteCallBack_Base , Fee.Ui.OnButtonClick_CallBackInterface<test16.ButtonId>
+	public class test16 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test16.ButtonId>
 	{
 		/** CreateStatus
 		*/
@@ -66,6 +66,7 @@ namespace TestScript
 
 		/** Mode
 		*/
+		/*
 		private enum Mode
 		{
 			Init,
@@ -76,23 +77,30 @@ namespace TestScript
 			DisConnectNow,
 			ChangeScene,
 		};
+		*/
 
 		/** mode
 		*/
+		/*
 		private Mode mode;
+		*/
 
 		/** InputMode
 		*/
+		/*
 		private enum InputMode
 		{
 			Position,
 			Rotate,
 			Scale,
 		};
+		*/
 
 		/** inputmode
 		*/
+		/*
 		private InputMode inputmode;
+		*/
 
 		/** ButtonId
 		*/
@@ -102,8 +110,10 @@ namespace TestScript
 			End,
 		}
 
+		//TODO:
 		/** [Fee.Network.OnRemoteCallBack_Base]リモートコール。
 		*/
+		#if(false)
 		public void OnRemoteCallInt(int a_playerlist_index,int a_key,int a_value)
 		{
 			Debug.Log("OnRemoteCallInt : " + a_playerlist_index.ToString() + " : " + a_key.ToString() + " : " + a_value.ToString());
@@ -119,13 +129,17 @@ namespace TestScript
 				}
 			}
 		}
+		#endif
 
+		//TODO:
 		/** [Fee.Network.OnRemoteCallBack_Base]リモートコール。
 		*/
+		#if(false)
 		public void OnRemoteCallString(int a_playerlist_index,int a_key,string a_value)
 		{
 			Debug.Log("OnRemoteCallString : " + a_playerlist_index.ToString() + " : " + a_key.ToString() + " : " + a_value);
 		}
+		#endif
 
 		/** Start
 		*/
@@ -165,10 +179,13 @@ namespace TestScript
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
 
+			//TODO:
 			//ネットワーク。インスタンス作成。
+			/*
 			Fee.Network.Config.LOG_ENABLE = true;
 			Fee.Network.Network.CreateInstance();
 			Fee.Network.Network.GetInstance().SetRecvCallBack(this);
+			*/
 
 			//プレハブリスト。
 			this.prefablist = new Common.PrefabList();
@@ -246,16 +263,21 @@ namespace TestScript
 			}
 
 			//mode
+			/*
 			this.mode = Mode.Init;
+			*/
 
 			//inputmode
+			/*
 			this.inputmode = InputMode.Position;
+			*/
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
 		public void OnButtonClick(ButtonId a_id)
 		{
+			/*
 			switch(a_id){
 			case ButtonId.Start:
 				{
@@ -272,6 +294,7 @@ namespace TestScript
 					}
 				}break;
 			}
+			*/
 		}
 
 		/** FixedUpdate
@@ -296,6 +319,7 @@ namespace TestScript
 			//ネットワーク。
 			Fee.Network.Network.GetInstance().Main();
 
+			#if(false)
 			switch(this.mode){
 			case Mode.Init:
 				{
@@ -472,6 +496,7 @@ namespace TestScript
 					//シーン変更可能。
 				}break;
 			}
+			#endif
 
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_After();
@@ -489,10 +514,15 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			//TODO:
+			/*
 			if(this.mode == Mode.ChangeScene){
 				return true;
 			}
 			return false;
+			*/
+
+			return true;
 		}
 
 		/** 削除。
