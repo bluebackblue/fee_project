@@ -20,7 +20,7 @@ namespace TestScript
 		通信
 
 	*/
-	public class test16 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test16.ButtonId>
+	public class test16 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<test16.FocusID>
 	{
 		/** CreateStatus
 		*/
@@ -36,6 +36,16 @@ namespace TestScript
 			);
 		}
 
+		/** FocusID
+		*/
+		public enum FocusID
+		{
+			NetworkMaster,
+			NetworkLobby,
+			NetworkRoom,
+			NetworkPlayer,
+		}
+
 		/** 削除管理。
 		*/
 		private Fee.Deleter.Deleter deleter;
@@ -44,102 +54,25 @@ namespace TestScript
 		*/
 		private Common.PrefabList prefablist;
 
-		/** ステータス。
+		/** network_master
 		*/
-		private Fee.Render2D.Text2D status_text;
+		private Fee.Ui.Button network_master_button;
+		private Fee.Render2D.Text2D network_master_text;
 
-		/** player_text
+		/** network_lobby
 		*/
-		private Fee.Render2D.Text2D[] player_text;
+		private Fee.Ui.Button network_lobby_button;
+		private Fee.Render2D.Text2D network_lobby_text;
 
-		/** player_list
+		/** network_room
 		*/
-		private GameObject[] player_list;
+		private Fee.Ui.Button network_room_button;
+		private Fee.Render2D.Text2D network_room_text;
 
-		/** 開始ボタン。
+		/** network_player
 		*/
-		private Fee.Ui.Button start_button;
-
-		/** 修了ボタン。
-		*/
-		private Fee.Ui.Button end_button;
-
-		/** Mode
-		*/
-		/*
-		private enum Mode
-		{
-			Init,
-			Wait,
-			Start,
-			Do,
-			DisConnect,
-			DisConnectNow,
-			ChangeScene,
-		};
-		*/
-
-		/** mode
-		*/
-		/*
-		private Mode mode;
-		*/
-
-		/** InputMode
-		*/
-		/*
-		private enum InputMode
-		{
-			Position,
-			Rotate,
-			Scale,
-		};
-		*/
-
-		/** inputmode
-		*/
-		/*
-		private InputMode inputmode;
-		*/
-
-		/** ButtonId
-		*/
-		public enum ButtonId
-		{
-			Start,
-			End,
-		}
-
-		//TODO:
-		/** [Fee.Network.OnRemoteCallBack_Base]リモートコール。
-		*/
-		#if(false)
-		public void OnRemoteCallInt(int a_playerlist_index,int a_key,int a_value)
-		{
-			Debug.Log("OnRemoteCallInt : " + a_playerlist_index.ToString() + " : " + a_key.ToString() + " : " + a_value.ToString());
-
-			Fee.Network.Player_MonoBehaviour t_player = Fee.Network.Network.GetInstance().GetPlayer(a_playerlist_index);
-			if(t_player != null){
-				if(a_value == 0){
-					//白。
-					this.player_list[a_playerlist_index].GetComponent<MeshRenderer>().material.color = Color.white;
-				}else{
-					//赤。
-					this.player_list[a_playerlist_index].GetComponent<MeshRenderer>().material.color = Color.red;
-				}
-			}
-		}
-		#endif
-
-		//TODO:
-		/** [Fee.Network.OnRemoteCallBack_Base]リモートコール。
-		*/
-		#if(false)
-		public void OnRemoteCallString(int a_playerlist_index,int a_key,string a_value)
-		{
-			Debug.Log("OnRemoteCallString : " + a_playerlist_index.ToString() + " : " + a_key.ToString() + " : " + a_value);
-		}
-		#endif
+		private Fee.Ui.Button network_player_button;
+		private Fee.Render2D.Text2D network_player_text;
 
 		/** Start
 		*/
@@ -165,13 +98,13 @@ namespace TestScript
 
 			//マウス。インスタンス作成。
 			Fee.Input.Mouse.CreateInstance();
+
+			//キ。インスタンス作成。
+			Fee.Input.Key.CreateInstance();
 			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Enter);
 			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Esc);
 			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Z);
 			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.X);
-
-			//キ。インスタンス作成。
-			Fee.Input.Key.CreateInstance();
 
 			//ＵＩ。インスタンス作成。
 			Fee.Ui.Ui.CreateInstance();
@@ -179,13 +112,9 @@ namespace TestScript
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
 
-			//TODO:
 			//ネットワーク。インスタンス作成。
-			/*
 			Fee.Network.Config.LOG_ENABLE = true;
 			Fee.Network.Network.CreateInstance();
-			Fee.Network.Network.GetInstance().SetRecvCallBack(this);
-			*/
 
 			//プレハブリスト。
 			this.prefablist = new Common.PrefabList();
@@ -203,98 +132,103 @@ namespace TestScript
 			int t_layerindex = 0;
 			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
 
-			//ステータス。
+			//network_master
 			{
-				int t_x = 100;
-				int t_y = 100;
-
-				this.status_text = this.prefablist.CreateText(this.deleter,t_drawpriority);
-				this.status_text.SetRect(t_x,t_y,0,0);
-				this.status_text.SetText("");
+				this.network_master_button = this.prefablist.CreateButton(this.deleter,0);
+				this.network_master_button.SetOnButtonClick(this,FocusID.NetworkMaster);
+				this.network_master_button.SetRect(100,30 + 60 * 0,100,50);
+				this.network_master_button.SetText("Master");
+					
+				this.network_master_text = this.prefablist.CreateText(this.deleter,0);
+				this.network_master_text.SetRect(300 + 140 * 0,50,0,0);
 			}
 
-			//player_text
+			//network_lobby
 			{
-				int t_x = 100;
-				int t_y = 130;
+				this.network_lobby_button = this.prefablist.CreateButton(this.deleter,0);
+				this.network_lobby_button.SetOnButtonClick(this,FocusID.NetworkLobby);
+				this.network_lobby_button.SetRect(100,30 + 60 * 1,100,50);
+				this.network_lobby_button.SetText("Lobby");
 
-				this.player_text = new Fee.Render2D.Text2D[8];
-				for(int ii=0;ii<player_text.Length;ii++){
-					this.player_text[ii] = this.prefablist.CreateText(this.deleter,t_drawpriority);
-					this.player_text[ii].SetRect(t_x,t_y + 35*ii,0,0);
-				}
+				this.network_lobby_text = this.prefablist.CreateText(this.deleter,0);
+				this.network_lobby_text.SetRect(300 + 140 * 1,50,0,0);
 			}
 
-			//player_list
+			//network_room
 			{
-				this.player_list = new GameObject[8];
-				for(int ii=0;ii<this.player_list.Length;ii++){
-					this.player_list[ii] = GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test16_Cube));
-					this.player_list[ii].SetActive(false);
-				}
+				this.network_room_button = this.prefablist.CreateButton(this.deleter,0);
+				this.network_room_button.SetOnButtonClick(this,FocusID.NetworkRoom);
+				this.network_room_button.SetRect(100,30 + 60 * 2,100,50);
+				this.network_room_button.SetText("Room");
+
+				this.network_room_text = this.prefablist.CreateText(this.deleter,0);
+				this.network_room_text.SetRect(300 + 140 * 2,50,0,0);
 			}
 
-			//開始ボタン。
+			//network_player
 			{
-				int t_w = 100;
-				int t_h = 30;
-				int t_x = 100;
-				int t_y = 300;
+				this.network_player_button = this.prefablist.CreateButton(this.deleter,0);
+				this.network_player_button.SetOnButtonClick(this,FocusID.NetworkPlayer);
+				this.network_player_button.SetRect(100,30 + 60 * 3,100,50);
+				this.network_player_button.SetText("Player");
 
-				this.start_button = this.prefablist.CreateButton(this.deleter,t_drawpriority);
-				this.start_button.SetOnButtonClick(this,ButtonId.Start);
-				this.start_button.SetRect(t_x,t_y,t_w,t_h);
-				this.start_button.SetText("接続");
-				this.start_button.SetVisible(false);
+				this.network_player_text = this.prefablist.CreateText(this.deleter,0);
+				this.network_player_text.SetRect(300 + 140 * 3,50,0,0);
 			}
-
-			//修了ボタン。
-			{
-				int t_w = 100;
-				int t_h = 30;
-				int t_x = 100 + 110;
-				int t_y = 300;
-
-				this.end_button = this.prefablist.CreateButton(this.deleter,t_drawpriority);
-				this.end_button.SetOnButtonClick(this,ButtonId.End);
-				this.end_button.SetRect(t_x,t_y,t_w,t_h);
-				this.end_button.SetText("切断");
-				this.end_button.SetVisible(false);
-			}
-
-			//mode
-			/*
-			this.mode = Mode.Init;
-			*/
-
-			//inputmode
-			/*
-			this.inputmode = InputMode.Position;
-			*/
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
 		*/
-		public void OnButtonClick(ButtonId a_id)
+		public void OnButtonClick(FocusID a_id)
 		{
-			/*
 			switch(a_id){
-			case ButtonId.Start:
+			case FocusID.NetworkMaster:
 				{
-					//開始。
-					if(this.mode == Mode.Wait){
-						this.mode = Mode.Start;
+					//マスターに接続。
+
+					if(Fee.Network.Network.GetInstance().IsBusy() == false){
+						if(Fee.Network.Network.GetInstance().IsConnectMaster() == false){
+							Fee.Network.Network.GetInstance().RequestConnectMaster();
+						}else{
+							Fee.Network.Network.GetInstance().RequestDisconnectMaster();
+						}
 					}
 				}break;
-			case ButtonId.End:
+			case FocusID.NetworkLobby:
 				{
-					//終了。
-					if(this.mode == Mode.Do){
-						this.mode = Mode.DisConnect;
+					//ロビーに接続。
+
+					if(Fee.Network.Network.GetInstance().IsBusy() == false){
+						if(Fee.Network.Network.GetInstance().IsConnectLobby() == false){
+							Fee.Network.Network.GetInstance().RequestConnectLobby();
+						}else{
+							Fee.Network.Network.GetInstance().RequestDisconnectLobby();
+						}
+					}
+				}break;
+			case FocusID.NetworkRoom:
+				{
+					//ルームに接続。
+
+					if(Fee.Network.Network.GetInstance().IsBusy() == false){
+						if(Fee.Network.Network.GetInstance().IsConnectRoom() == false){
+							Fee.Network.Network.GetInstance().RequestConnectRoom("room_name_1","room_info_1");
+						}else{
+							Fee.Network.Network.GetInstance().RequestDisconnectRoom();
+						}
+					}
+				}break;
+			case FocusID.NetworkPlayer:
+				{
+					//プレイヤー作成。
+
+					if(Fee.Network.Network.GetInstance().IsBusy() == false){
+						if(test16_network_player.s_network_player == null){
+							Fee.Network.Network.GetInstance().CreatePlayer(new Fee.File.Path("Test16/network_player"));
+						}
 					}
 				}break;
 			}
-			*/
 		}
 
 		/** FixedUpdate
@@ -319,184 +253,12 @@ namespace TestScript
 			//ネットワーク。
 			Fee.Network.Network.GetInstance().Main();
 
-			#if(false)
-			switch(this.mode){
-			case Mode.Init:
-				{
-					this.status_text.SetText("Mode.Init");
-					this.mode = Mode.Wait;
-				}break;
-			case Mode.Wait:
-				{
-					this.status_text.SetText("Mode.Wait");
-
-					if(this.IsChangeScene() == true){
-						this.mode = Mode.ChangeScene;
-					}else{
-						this.start_button.SetVisible(true);
-					}
-				}break;
-			case Mode.Start:
-				{
-					this.status_text.SetText("Mode.Start");
-
-					//開始。
-					Fee.Network.Network.GetInstance().Start_AutoJoinRandomRoom();
-
-					//ボタン。
-					this.start_button.SetVisible(false);
-					this.end_button.SetVisible(true);
-
-					this.mode = Mode.Do;
-				}break;
-			case Mode.Do:
-				{
-					List<Fee.Network.Player_MonoBehaviour> t_list = Fee.Network.Network.GetInstance().GetPlayerList();
-					Fee.Network.Player_MonoBehaviour t_myplayer = Fee.Network.Network.GetInstance().GetMyPlayer();
-
-					this.status_text.SetText("Mode.Do : " + t_list.Count.ToString());
-
-					{
-						if(Fee.Input.Mouse.GetInstance().right.down == true){
-							switch(this.inputmode){
-							case InputMode.Position:
-								{
-									this.inputmode = InputMode.Rotate;
-								}break;
-							case InputMode.Rotate:
-								{
-									this.inputmode = InputMode.Scale;
-								}break;
-							case InputMode.Scale:
-								{
-									this.inputmode = InputMode.Position;
-								}break;
-							}
-						}
-
-						if(Fee.Input.Mouse.GetInstance().left.down == true){
-							switch(this.inputmode){
-							case InputMode.Position:
-								{
-									float t_x = ((float)Fee.Input.Mouse.GetInstance().cursor.pos.x - Fee.Render2D.Render2D.VIRTUAL_W / 2) / 100;
-									float t_y = ((float)Fee.Input.Mouse.GetInstance().cursor.pos.y - Fee.Render2D.Render2D.VIRTUAL_H / 2) / 100;
-
-									if(t_myplayer != null){
-										t_myplayer.SetPosition(t_x,t_y,0.0f);
-									}
-								}break;
-							case InputMode.Rotate:
-								{
-									float t_angle = Fee.Input.Mouse.GetInstance().cursor.pos.x;
-
-									Quaternion t_quaternion = Quaternion.AngleAxis(t_angle,new Vector3(0.0f,1.0f,0.0f));
-
-									if(t_myplayer != null){
-										t_myplayer.SetQuaternion(in t_quaternion);
-									}
-								}break;
-							case InputMode.Scale:
-								{
-									float t_x = 1.0f + (float)Fee.Input.Mouse.GetInstance().cursor.pos.x / Fee.Render2D.Render2D.VIRTUAL_W;
-									float t_y = 1.0f + (float)Fee.Input.Mouse.GetInstance().cursor.pos.y / Fee.Render2D.Render2D.VIRTUAL_H;
-
-									if(t_myplayer != null){
-										t_myplayer.SetScale(t_x,t_y,1.0f);
-									}
-								}break;
-							}
-						}
-
-						//■送信。
-						if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Enter).digital.down == true){
-							if(t_myplayer != null){
-								//自分赤。
-								t_myplayer.RemoteCallInt(999,1);
-								t_myplayer.RemoteCallString(777,"red");
-							}
-						}else if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Esc).digital.down == true){
-							if(t_myplayer != null){
-								//自分白。
-								t_myplayer.RemoteCallInt(999,0);
-							}
-						}
-
-						if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Z).digital.down == true){
-							//全部赤。
-
-							List<Fee.Network.Player_MonoBehaviour> t_player_list = Fee.Network.Network.GetInstance().GetPlayerList();
-							for(int ii=0;ii<t_player_list.Count;ii++){
-								t_player_list[ii].RemoteCallInt(888,1);
-							}
-						}else if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.X).digital.down == true){
-							//全部白。
-							List<Fee.Network.Player_MonoBehaviour> t_player_list = Fee.Network.Network.GetInstance().GetPlayerList();
-							for(int ii=0;ii<t_player_list.Count;ii++){
-								t_player_list[ii].RemoteCallInt(888,0);
-							}
-						}
-					}
-
-					for(int ii=0;ii<this.player_text.Length;ii++){
-						if(ii < t_list.Count){
-
-							string t_text = "";
-							t_text += "IsMine = " + t_list[ii].IsMine().ToString() + " ";
-							t_text += "IsMasterClient = " + t_list[ii].IsMasterClient().ToString() + " ";
-							t_text += "NickName = " + t_list[ii].GetNickName() + " ";
-							t_text += "UserID = " + t_list[ii].GetUniqueID().ToString() + "\n";
-
-							t_text += "Pos = " + t_list[ii].GetPosition().ToString() + " ";
-							t_text += "Rotate = " + t_list[ii].GetQuaternion().ToString() + " ";
-							t_text += "Scale = " + t_list[ii].GetScale().ToString() + " ";
-
-							this.player_text[ii].SetText(t_text);
-
-							this.player_list[ii].SetActive(true);
-							this.player_list[ii].transform.position = t_list[ii].GetPosition();
-							this.player_list[ii].transform.rotation = t_list[ii].GetQuaternion();
-							this.player_list[ii].transform.localScale = t_list[ii].GetScale();
-						}else{
-							this.player_text[ii].SetText("---");
-							this.player_list[ii].SetActive(false);
-						}
-					}
-
-					if(this.IsChangeScene() == true){
-						this.mode = Mode.DisConnect;
-					}
-				}break;
-			case Mode.DisConnect:
-				{
-					this.status_text.SetText("Mode.DisConnect");
-
-					for(int ii=0;ii<this.player_text.Length;ii++){
-						this.player_text[ii].SetText("");
-						this.player_list[ii].SetActive(false);
-					}
-
-					//切断リクエスト。
-					Fee.Network.Network.GetInstance().DisconnectRequest();
-
-					//ボタン。
-					this.end_button.SetVisible(false);
-
-					this.mode = Mode.DisConnectNow;
-				}break;
-			case Mode.DisConnectNow:
-				{
-					this.status_text.SetText("Mode.DisConnectNow");
-
-					if(Fee.Network.Network.GetInstance().IsBusy() == false){
-						this.mode = Mode.Wait;
-					}
-				}break;
-			case Mode.ChangeScene:
-				{
-					//シーン変更可能。
-				}break;
+			{
+				this.network_master_text.SetText("Master : " + Fee.Network.Network.GetInstance().IsConnectMaster().ToString());
+				this.network_lobby_text.SetText("Lobby : " + Fee.Network.Network.GetInstance().IsConnectLobby().ToString());
+				this.network_room_text.SetText("Room : " + Fee.Network.Network.GetInstance().IsConnectRoom().ToString());
+				this.network_player_text.SetText("Player : " + (test16_network_player.s_network_player != null).ToString());
 			}
-			#endif
 
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_After();
@@ -514,15 +276,16 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
-			//TODO:
-			/*
-			if(this.mode == Mode.ChangeScene){
+			if(Fee.Network.Network.GetInstance().IsConnectMaster() == true){
+				if(Fee.Network.Network.GetInstance().IsBusy() == false){
+					Fee.Network.Network.GetInstance().RequestDisconnectMaster();
+				}
+
+				//切断するまでシーンを終了させない。
+				return false;
+			}else{
 				return true;
 			}
-			return false;
-			*/
-
-			return true;
 		}
 
 		/** 削除。
