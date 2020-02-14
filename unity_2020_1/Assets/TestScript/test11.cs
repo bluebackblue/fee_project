@@ -156,7 +156,8 @@ namespace TestScript
 			Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 			//関数呼び出し。
-			Fee.Function.Function.SetMonoBehaviour(this);
+			Fee.Function.Function.CreateInstance();
+			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
 
 			//ファイル。インスタンス作成。
 			Fee.File.Config.LOG_ENABLE = true;

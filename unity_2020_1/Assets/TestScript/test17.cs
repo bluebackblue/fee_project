@@ -305,7 +305,8 @@ namespace TestScript
 			Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 			//関数呼び出し。
-			Fee.Function.Function.SetMonoBehaviour(this);
+			Fee.Function.Function.CreateInstance();
+			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
 
 			//２Ｄ描画。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;

@@ -24,7 +24,7 @@ namespace TestScript
 			{
 			}
 
-			//アセットバンドル。
+			//アセットバンドルリスト。
 			{
 				Fee.AssetBundleList.AssetBundleList.DeleteInstance();
 			}
@@ -94,9 +94,18 @@ namespace TestScript
 				Fee.File.File.DeleteInstance();
 			}
 
+			//フォーカス。
+			{
+				Fee.Focus.Focus.DeleteInstance();
+			}
+
 			//関数呼び出し。
 			{
-				Fee.Function.Function.SetMonoBehaviour(null);
+				Fee.Function.Function.DeleteInstance();
+			}
+
+			//ジオメトリ。
+			{
 			}
 
 			//入力。
@@ -123,8 +132,21 @@ namespace TestScript
 			{
 			}
 
-			//アセットバンドル作成。
+			//キー。
 			{
+			}
+
+			//マテリアル。
+			{
+			}
+
+			//ＭＤ５。
+			{
+			}
+
+			//ミラー。
+			{
+				Fee.Mirror.Mirror.DeleteInstance();
 			}
 
 			//モデル。
@@ -136,6 +158,14 @@ namespace TestScript
 				Fee.Network.Network.DeleteInstance();
 			}
 
+			//パターン。
+			{
+			}
+
+			//パーセプトロン。
+			{
+			}
+
 			//パフォーマンスカウンター。
 			{
 				Fee.PerformanceCounter.PerformanceCounter.DeleteInstance();
@@ -143,9 +173,18 @@ namespace TestScript
 
 			//プラットフォーム。
 			{
+				Fee.Platform.Platform.DeleteInstance();
 			}
 
 			//プレイヤーループシステム。
+			{
+			}
+
+			//プール。
+			{
+			}
+
+			//リフレクションツール。
 			{
 			}
 
@@ -168,6 +207,10 @@ namespace TestScript
 				Fee.SoundPool.SoundPool.DeleteInstance();
 			}
 
+			//文字列コンバート。
+			{
+			}
+
 			//タスク。
 			{
 				Fee.TaskW.TaskW.DeleteInstance();
@@ -181,6 +224,11 @@ namespace TestScript
 			//ＵＮＩＶＲＭ。
 			{
 				Fee.UniVrm.UniVrm.DeleteInstance();
+			}
+
+			//ビデオ。
+			{
+				Fee.Video.Video.DeleteInstance();
 			}
 		}
 	}
