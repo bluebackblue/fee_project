@@ -74,6 +74,55 @@ namespace TestScript
 		private Fee.Ui.Button network_player_button;
 		private Fee.Render2D.Text2D network_player_text;
 
+		/** NetworkPlayer
+		*/
+		public class NetworkPlayer : Fee.Network.NetworkObject_Player_Base
+		{
+			public static NetworkPlayer s_myplayer;
+
+			/** [Fee.Network.NetworkObject_Player_Base.OnConnect]プレイヤーが接続。
+			*/
+			public override void OnConnect()
+			{
+				if(this.self == true){
+					s_myplayer = this;
+				}
+			}
+
+			/** [Fee.Network.NetworkObject_Player_Base.OnDisconnect]プレイヤーが切断。
+			*/
+			public override void OnDisconnect()
+			{
+				if(this.self == true){
+					s_myplayer = null;
+				}
+			}
+
+			/** [Fee.Network.NetworkObject_Player_Base.OnSendPlayer]送信。
+			*/
+			public override void OnSendPlayer(Fee.Network.Stream_Base a_stream)
+			{
+			}
+
+			/** [Fee.Network.NetworkObject_Player_Base.OnRecvPlayer]受信。
+			*/
+			public override void OnRecvPlayer(Fee.Network.Stream_Base a_stream)
+			{
+			}
+
+			/** [Fee.Network.NetworkObject_Player_Base.OnSendStatus]送信。
+			*/
+			public override void OnSendStatus(Fee.Network.Stream_Base a_stream)
+			{
+			}
+
+			/** [Fee.Network.NetworkObject_Player_Base.OnRecvStatus]受信。
+			*/
+			public override void OnRecvStatus(Fee.Network.Stream_Base a_stream)
+			{
+			}
+		}
+
 		/** Start
 		*/
 		private void Start()
@@ -116,6 +165,7 @@ namespace TestScript
 			//ネットワーク。インスタンス作成。
 			Fee.Network.Config.LOG_ENABLE = true;
 			Fee.Network.Network.CreateInstance();
+			Fee.Network.Network.GetInstance().SetPlayeType<NetworkPlayer>();
 
 			//プレハブリスト。
 			this.prefablist = new Common.PrefabList();
@@ -224,8 +274,8 @@ namespace TestScript
 					//プレイヤー作成。
 
 					if(Fee.Network.Network.GetInstance().IsBusy() == false){
-						if(test16_network_player.s_network_player == null){
-							Fee.Network.Network.GetInstance().CreatePlayer(new Fee.File.Path("Test16/network_player"));
+						if(NetworkPlayer.s_myplayer == null){
+							Fee.Network.Network.GetInstance().CreatePlayer();
 						}
 					}
 				}break;
@@ -258,7 +308,7 @@ namespace TestScript
 				this.network_master_text.SetText("Master : " + Fee.Network.Network.GetInstance().IsConnectMaster().ToString());
 				this.network_lobby_text.SetText("Lobby : " + Fee.Network.Network.GetInstance().IsConnectLobby().ToString());
 				this.network_room_text.SetText("Room : " + Fee.Network.Network.GetInstance().IsConnectRoom().ToString());
-				this.network_player_text.SetText("Player : " + (test16_network_player.s_network_player != null).ToString());
+				this.network_player_text.SetText("Player : " + (NetworkPlayer.s_myplayer != null).ToString());
 			}
 
 			//２Ｄ描画。
