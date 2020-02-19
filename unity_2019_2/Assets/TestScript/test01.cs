@@ -75,7 +75,7 @@ namespace TestScript
 
 		/** ライン。
 		*/
-		private Fee.Ui.Line2D line;
+		private Fee.Ui.Line line;
 
 		/** スプライト。
 		*/
@@ -287,7 +287,7 @@ namespace TestScript
 
 			{
 				//line
-				this.line = Fee.Ui.Line2D.Create(this.deleter,t_drawpriority + 1);
+				this.line = Fee.Ui.Line.Create(this.deleter,t_drawpriority + 1);
 				this.line.SetSize(30);
 
 				//start

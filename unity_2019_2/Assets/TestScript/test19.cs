@@ -83,7 +83,7 @@ namespace TestScript
 
 			/** line
 			*/
-			Fee.Ui.Line2D[] line;
+			Fee.Ui.Line[] line;
 
 			/** constructor
 			*/
@@ -127,9 +127,9 @@ namespace TestScript
 					this.text.SetColor(1.0f,0.2f,0.2f,1.0f);
 
 					//line
-					this.line = new Fee.Ui.Line2D[a_node.link_list.Count];
+					this.line = new Fee.Ui.Line[a_node.link_list.Count];
 					for(int ii=0;ii<a_node.link_list.Count;ii++){
-						this.line[ii] = Fee.Ui.Line2D.Create(a_deleter,3);
+						this.line[ii] = Fee.Ui.Line.Create(a_deleter,3);
 						this.line[ii].SetSize(2);
 						int t_x_to = t_offset_x + t_alignment_x * a_node.link_list[ii].node_to.layer_parent.layer_index;
 						int t_y_to = t_offset_y + t_alignment_y * a_node.link_list[ii].node_to.node_index;

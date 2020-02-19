@@ -412,7 +412,7 @@ namespace TestScript
 					}
 
 					//暗号化開始。
-					this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestEncryptPass(this.plane_binary,this.pass,this.salt);
+					this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestEncryptPass(this.plane_binary,0,this.plane_binary.Length,this.pass,this.salt);
 
 					this.step = Step.EncryptPass_Do;
 				}break;
@@ -447,7 +447,7 @@ namespace TestScript
 			case Step.DecryptPass_Start:
 				{
 					//複合化開始。
-					this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestDecryptPass(this.encrypt_binary,this.pass,this.salt);
+					this.crypt_item = Fee.Crypt.Crypt.GetInstance().RequestDecryptPass(this.encrypt_binary,0,this.encrypt_binary.Length,this.pass,this.salt);
 
 					this.step = Step.DecryptPass_Do;
 				}break;

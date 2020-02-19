@@ -54,7 +54,7 @@ namespace TestScript
 
 		/** sprite
 		*/
-		private Fee.Ui.Sprite2D_Clip sprite;
+		private Fee.Ui.Sprite_Clip sprite;
 
 		/** text
 		*/
