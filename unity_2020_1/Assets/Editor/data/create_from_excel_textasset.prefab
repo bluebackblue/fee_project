@@ -48,6 +48,6 @@ MonoBehaviour:
   - TEST07_PUBLIC_KEY
   - TEST07_PRIVATE_KEY
   textasset_list:
-  - {fileID: 4900000, guid: 1e392bd266fe2ba438e3e64d35bc1869, type: 3}
+  - {fileID: 4900000, guid: 64d584f0594b89a499aa6945f0f89819, type: 3}
   - {fileID: 4900000, guid: 72606c4d6aea61744ba57def727b7a71, type: 3}
   - {fileID: 4900000, guid: 7ac5d1789e545354e97db56f19e0c37d, type: 3}

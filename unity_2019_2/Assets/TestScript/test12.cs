@@ -358,7 +358,7 @@ namespace TestScript
 			this.info_assetbundle_text.SetText("AssetBundle : NONE");
 
 			//パブリックキー。
-			Fee.File.File.GetInstance().RegistCertificate("blueback","^https\\:\\/\\/blueback\\.ddns\\.net\\:8081\\/.*$",this.prefablist.GetTextAsset(Common.TextAssetType.Ssl_PublicKey).text);
+			Fee.File.File.GetInstance().RegistCertificate(Common.Data.Url.CERTIFICATE_NAME,Common.Data.Url.CERTIFICATE_PATTERN,this.prefablist.GetTextAsset(Common.TextAssetType.Certificate).text);
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。

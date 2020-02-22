@@ -75,26 +75,32 @@ namespace TestScript.Common
 		*/
 		public static class Url
 		{
+			/** CERTIFICATE
+			*/
+			public const string CERTIFICATE_NAME = "blueback";
+			public const string CERTIFICATE_PATTERN = "^https\\:\\/\\/blueback\\.myqnapcloud\\.com\\:8081\\/.*$";
+
+
 			/** TEST04_TEXT
 			*/
-			public const string TEST04_TEXT = "https://blueback.ddns.net:8081/project_fee/StreamingAssets/Test04/text.txt";
+			public const string TEST04_TEXT = "https://blueback.myqnapcloud.com:8081/project_fee/StreamingAssets/Test04/text.txt";
 
 			/** TEST04_BINARY
 			*/
-			public const string TEST04_BINARY = "https://blueback.ddns.net:8081/project_fee/StreamingAssets/Test04/binary.dat";
+			public const string TEST04_BINARY = "https://blueback.myqnapcloud.com:8081/project_fee/StreamingAssets/Test04/binary.dat";
 
 			/** TEST04_TEXTURE
 			*/
-			public const string TEST04_TEXTURE = "https://blueback.ddns.net:8081/project_fee/StreamingAssets/Test04/texture.png";
+			public const string TEST04_TEXTURE = "https://blueback.myqnapcloud.com:8081/project_fee/StreamingAssets/Test04/texture.png";
 
 			/** TEST12_ASSETBUNDLE
 			*/
 			#if(UNITY_WEBGL)
-			public const string TEST12_ASSETBUNDLE = "https://blueback.ddns.net:8081/project_fee/StreamingAssets/AssetBundle_WebGL/test.assetbundle";
+			public const string TEST12_ASSETBUNDLE = "https://blueback.myqnapcloud.com:8081/project_fee/StreamingAssets/AssetBundle_WebGL/test.assetbundle";
 			#elif(UNITY_ANDROID)
-			public const string TEST12_ASSETBUNDLE = "https://blueback.ddns.net:8081/project_fee/StreamingAssets/AssetBundle_Android/test.assetbundle";
+			public const string TEST12_ASSETBUNDLE = "https://blueback.myqnapcloud.com:8081/project_fee/StreamingAssets/AssetBundle_Android/test.assetbundle";
 			#else
-			public const string TEST12_ASSETBUNDLE = "https://blueback.ddns.net:8081/project_fee/StreamingAssets/AssetBundle_StandaloneWindows/test.assetbundle";
+			public const string TEST12_ASSETBUNDLE = "https://blueback.myqnapcloud.com:8081/project_fee/StreamingAssets/AssetBundle_StandaloneWindows/test.assetbundle";
 			#endif
 		}
 

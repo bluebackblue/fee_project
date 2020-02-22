@@ -43,7 +43,7 @@ namespace TestScript
 		*/
 		#if(UNITY_EDITOR)
 		[UnityEditor.MenuItem("TestScript/Tool/ReMakeEditSceneList")]
-		private static void MenuItem_EditSceneList()
+		private static void MenuItem_Tool_ReMakeEditSceneList()
 		{
 			//フォルダ内のファイルを列挙。
 			System.Collections.Generic.List<string> t_file_list = Fee.EditorTool.Utility.CreateFileNameList(new Fee.File.Path("TestScene/"));
@@ -81,7 +81,7 @@ namespace TestScript
 		/** 鍵の作成。
 		*/
 		[UnityEditor.MenuItem("TestScript/Tool/CreatePublicKeyPrivateKey")]
-		private static void MenuItem_Convert_CreatePublicKeyPrivateKey()
+		private static void MenuItem_Tool_CreatePublicKeyPrivateKey()
 		{
 			Fee.EditorTool.Crypt.CreatePublicKeyPrivateKey(
 				new Fee.File.Path("Editor/data/public_key.json"),
@@ -92,24 +92,11 @@ namespace TestScript
 		/** 証明書の作成。
 		*/
 		[UnityEditor.MenuItem("TestScript/Tool/CreateCertificate")]
-		private static void MenuItem_Convert_CreatePublicKey()
+		private static void MenuItem_Tool_CreateCertificate()
 		{
 			Fee.File.CustomCertificateHandler t_certificate = new Fee.File.CustomCertificateHandler("");
-			Fee.EditorTool.Utility.CreateWebRequest(new Fee.File.Path("https://blueback.ddns.net:8081/"),t_certificate);
-			Fee.EditorTool.Utility.WriteTextFile(new Fee.File.Path("Editor/data/ssl_publickey.txt"),t_certificate.GetReceiveCertificateString(),true);
-		}
-
-		/** アニメーションをリストアップ。
-		*/
-		[UnityEditor.MenuItem("TestScript/Tool/ListUpAnimation")]
-		private static void MenuItem_Listup_Animation()
-		{
-			System.Collections.Generic.List<Fee.Instantiate.AnimationClipList_Tool.FindItem> t_list = new System.Collections.Generic.List<Fee.Instantiate.AnimationClipList_Tool.FindItem>();
-			Fee.Instantiate.AnimationClipList_Tool.ListUpAnimationClip(new Fee.File.Path(""),t_list);
-
-			foreach(Fee.Instantiate.AnimationClipList_Tool.FindItem t_item in t_list){
-				UnityEngine.Debug.Log(t_item.animationclip.name + " : " + t_item.path.GetPath());
-			}
+			Fee.EditorTool.Utility.CreateWebRequest(new Fee.File.Path("https://blueback.myqnapcloud.com:8081/"),t_certificate);
+			Fee.EditorTool.Utility.WriteTextFile(new Fee.File.Path("Editor/data/certificate.txt"),t_certificate.GetReceiveCertificateString(),true);
 		}
 
 		/** エクセルをコンバート。
