@@ -27,7 +27,7 @@ namespace Fee.JsonSheet
 	{
 		/** COMMAND
 		*/
-		public const string COMMAND = "<texture>";
+		public const string COMMAND = "<texture_prefab>";
 
 		/** リストアイテム。
 		*/
