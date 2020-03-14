@@ -425,7 +425,7 @@ namespace TestScript
 			}
 
 			//パブリックキー。
-			Fee.File.File.GetInstance().RegistCertificate(Common.Data.Url.CERTIFICATE_NAME,Common.Data.Url.CERTIFICATE_PATTERN,this.prefablist.GetTextAsset(Common.TextAssetType.Certificate).text);
+			Fee.File.File.GetInstance().RegistCertificate(Common.Data.Url.CERTIFICATE_NAME,Common.Data.Url.CERTIFICATE_PATTERN,Common.Data.Url.CERTIFICATE);
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。

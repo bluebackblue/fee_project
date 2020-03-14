@@ -10,10 +10,6 @@ namespace TestScript.Common
 	{
 		/** 
 		*/
-		Certificate,
-
-		/** 
-		*/
 		Test07_PublicKey,
 
 		/** 

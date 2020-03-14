@@ -53,11 +53,11 @@ MonoBehaviour:
   - TEST16_CUBE
   - TEST18_CUBE
   prefab_list:
-  - {fileID: 149337192769616745, guid: e7a17145bbf0c6746b0bc1dd2a70d270, type: 3}
-  - {fileID: 261670297300748531, guid: c12309a68f708a149bda088374044979, type: 3}
-  - {fileID: 2245478394785694744, guid: 2a0b6ae1758c8c3468e1f0696a00f0dd, type: 3}
-  - {fileID: 6639113289591569345, guid: 77630e0b5b856434a8f0b6d418faa971, type: 3}
-  - {fileID: 7030710995260584652, guid: b785e11bab988b64d8ee4bae301c20de, type: 3}
+  - {fileID: 4151868210595249695, guid: 5e38611b71d8d2a46bde8ea5ec7ff7e9, type: 3}
+  - {fileID: 5605643762519269814, guid: 96b3de75842a79b42bbad0a6b48d7ce4, type: 3}
+  - {fileID: 58101229640623578, guid: f82332a2dba99d9468aa0ed472a86e71, type: 3}
+  - {fileID: 2799674911683083410, guid: d475c95b7deba074d91ecb6af799a64d, type: 3}
+  - {fileID: 1299507731853144810, guid: 0b0068d8a2fee66438c4ee753c54d376, type: 3}
   - {fileID: 1023134246023269692, guid: 8eaf3c4d346e7b34986619eefbd72b7e, type: 3}
   - {fileID: 1023134246023269692, guid: 8eaf3c4d346e7b34986619eefbd72b7e, type: 3}
   - {fileID: 1023134246023269692, guid: 8eaf3c4d346e7b34986619eefbd72b7e, type: 3}
