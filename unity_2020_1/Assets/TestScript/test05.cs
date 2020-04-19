@@ -185,8 +185,8 @@ namespace TestScript
 			Fee.TaskW.TaskW.CreateInstance();
 
 			//パフォーマンスカウンター。インスタンス作成。
-			//Fee.PerformanceCounter.Config.LOG_ENABLE = true;
-			//Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
+			Fee.PerformanceCounter.Config.LOG_ENABLE = true;
+			Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
