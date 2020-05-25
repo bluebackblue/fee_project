@@ -76,15 +76,15 @@ namespace TestScript
 
 		/** NetworkPlayer
 		*/
-		public class NetworkPlayer : Fee.Network.NetworkObject_Player_Base
+		public class NetworkPlayer_MonoBehaviour : Fee.Network.NetworkObject_Player_MonoBehaviour_Base
 		{
-			public static NetworkPlayer s_myplayer;
+			public static NetworkPlayer_MonoBehaviour s_myplayer;
 
 			/** [Fee.Network.NetworkObject_Player_Base.OnConnect]プレイヤーが接続。
 			*/
 			public override void OnConnect()
 			{
-				if(this.self == true){
+				if(this.IsSelf() == true){
 					s_myplayer = this;
 				}
 			}
@@ -93,7 +93,7 @@ namespace TestScript
 			*/
 			public override void OnDisconnect()
 			{
-				if(this.self == true){
+				if(this.IsSelf() == true){
 					s_myplayer = null;
 				}
 			}
@@ -165,7 +165,7 @@ namespace TestScript
 			//ネットワーク。インスタンス作成。
 			Fee.Network.Config.LOG_ENABLE = true;
 			Fee.Network.Network.CreateInstance();
-			Fee.Network.Network.GetInstance().SetPlayeType<NetworkPlayer>();
+			Fee.Network.Network.GetInstance().SetPlayeType<NetworkPlayer_MonoBehaviour>();
 
 			//プレハブリスト。
 			this.prefablist = new Common.PrefabList();
@@ -274,7 +274,7 @@ namespace TestScript
 					//プレイヤー作成。
 
 					if(Fee.Network.Network.GetInstance().IsBusy() == false){
-						if(NetworkPlayer.s_myplayer == null){
+						if(NetworkPlayer_MonoBehaviour.s_myplayer == null){
 							Fee.Network.Network.GetInstance().CreatePlayer();
 						}
 					}
@@ -308,7 +308,7 @@ namespace TestScript
 				this.network_master_text.SetText("Master : " + Fee.Network.Network.GetInstance().IsConnectMaster().ToString());
 				this.network_lobby_text.SetText("Lobby : " + Fee.Network.Network.GetInstance().IsConnectLobby().ToString());
 				this.network_room_text.SetText("Room : " + Fee.Network.Network.GetInstance().IsConnectRoom().ToString());
-				this.network_player_text.SetText("Player : " + (NetworkPlayer.s_myplayer != null).ToString());
+				this.network_player_text.SetText("Player : " + (NetworkPlayer_MonoBehaviour.s_myplayer != null).ToString());
 			}
 
 			//２Ｄ描画。

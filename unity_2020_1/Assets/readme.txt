@@ -1,31 +1,31 @@
-ƒƒjƒ…[
+ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 	Build
 		BuildFeePackage
-			uFeev‚ÌƒpƒbƒP[ƒW‚ğì¬B
+			ã€ŒFeeã€ã®ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ä½œæˆã€‚
 
 	Initialize
 		CreateMainScript
-			uFeev‚Ì‰Šú‰»‚ğˆêŠ‡‚Ås‚¤ƒXƒNƒŠƒvƒguMain.csv‚ğo—Í‚·‚éB
+			ã€ŒFeeã€ã®åˆæœŸåŒ–ã‚’ä¸€æ‹¬ã§è¡Œã†ã‚¹ã‚¯ãƒªãƒ—ãƒˆã€ŒMain.csã€ã‚’å‡ºåŠ›ã™ã‚‹ã€‚
 
 		InitializeInputManager
-			ƒCƒ“ƒvƒbƒgƒ}ƒl[ƒWƒƒ‚Ìİ’è‚ÉuFeev—p‚Ìƒpƒbƒhİ’è‚ğ’Ç‰Á‚·‚éB
+			ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ã®è¨­å®šã«ã€ŒFeeã€ç”¨ã®ãƒ‘ãƒƒãƒ‰è¨­å®šã‚’è¿½åŠ ã™ã‚‹ã€‚
 
 	Test
 		Initialize
 			EditSceneList
-				ƒrƒ‹ƒhİ’è‚ÉƒeƒXƒgƒV[ƒ“‚ğİ’è‚·‚éB
+				ãƒ“ãƒ«ãƒ‰è¨­å®šã«ãƒ†ã‚¹ãƒˆã‚·ãƒ¼ãƒ³ã‚’è¨­å®šã™ã‚‹ã€‚
 
 		Convert
 			CreatePublicKeyPrivateKey
-				”é–§Œ®AŒöŠJŒ®‚ğì¬‚·‚éB
-				uEditor/data/public_key.jsonv
-				u Editor/data/private_key.jsonv
+				ç§˜å¯†éµã€å…¬é–‹éµã‚’ä½œæˆã™ã‚‹ã€‚
+				ã€ŒEditor/data/public_key.jsonã€
+				ã€Œ Editor/data/private_key.jsonã€
 
 			ConvertFromExcel
-				uEditor/data/excel.xlsxv‚Ìİ’è‚ğ‚à‚Æ‚ÉƒRƒ“ƒo[ƒg‚·‚éB
+				ã€ŒEditor/data/excel.xlsxã€ã®è¨­å®šã‚’ã‚‚ã¨ã«ã‚³ãƒ³ãƒãƒ¼ãƒˆã™ã‚‹ã€‚
 
 			CreatePrefab
-				ƒeƒXƒg‚Åg—p‚·‚éƒvƒŒƒnƒu‚ğì¬‚·‚éB
+				ãƒ†ã‚¹ãƒˆã§ä½¿ç”¨ã™ã‚‹ãƒ—ãƒ¬ãƒãƒ–ã‚’ä½œæˆã™ã‚‹ã€‚
 
 
 

@@ -74,7 +74,8 @@ namespace TestScript
 			//スクリプト自動生成。
 			t_script =  SCRIPT_START + t_script +  SCRIPT_END;
 
-			Fee.EditorTool.Utility.WriteTextFile(new Fee.File.Path("TestScript/System/SceneList.cs"),t_script,true);
+			Fee.EditorTool.Utility.WriteTextFile(new Fee.File.Path("TestScript/System/SceneList.cs"),t_script);
+			Fee.EditorTool.Utility.Refresh();
 		}
 		#endif
 
@@ -96,7 +97,8 @@ namespace TestScript
 		{
 			Fee.File.CustomCertificateHandler t_certificate = new Fee.File.CustomCertificateHandler("");
 			Fee.EditorTool.Utility.CreateWebRequest(new Fee.File.Path("https://blueback.myqnapcloud.com:8081/"),t_certificate);
-			Fee.EditorTool.Utility.WriteTextFile(new Fee.File.Path("Editor/data/certificate.txt"),t_certificate.GetReceiveCertificateString(),true);
+			Fee.EditorTool.Utility.WriteTextFile(new Fee.File.Path("Editor/data/certificate.txt"),t_certificate.GetReceiveCertificateString());
+			Fee.EditorTool.Utility.Refresh();
 		}
 
 		/** エクセルをコンバート。
