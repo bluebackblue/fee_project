@@ -110,14 +110,7 @@ namespace TestScript
 
 			//入力。
 			{
-				//マウス。
-				Fee.Input.Mouse.DeleteInstance();
-	
-				//キー。
-				Fee.Input.Key.DeleteInstance();
-	
-				//パッド。
-				Fee.Input.Pad.DeleteInstance();
+				Fee.Input.Input.DeleteInstance();
 			}
 
 			//インスタンス作成。
@@ -178,6 +171,7 @@ namespace TestScript
 
 			//プレイヤーループシステム。
 			{
+				Fee.PlayerLoopSystem.PlayerLoopSystem.DeleteInstance();
 			}
 
 			//プール。

@@ -259,8 +259,8 @@ namespace TestScript.Common
 		{
 			Fee.Ui.Sprite_Clip t_sprite = Fee.Ui.Sprite_Clip.Create(a_deleter,a_drawpriority);
 			{
-				t_sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
-				t_sprite.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
+				t_sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
+				t_sprite.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
 			}
 			return t_sprite;
 		}

@@ -145,6 +145,9 @@ namespace TestScript
 		*/
 		private void Start()
 		{
+			//プレイヤーループシステム。インスタンス作成。
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
 
@@ -179,8 +182,8 @@ namespace TestScript
 			Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
 
-			//マウス。インスタンス作成。
-			Fee.Input.Mouse.CreateInstance();
+			//入力。インスタンス作成。
+			Fee.Input.Input.CreateInstance();
 
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
@@ -195,7 +198,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//サウンドプールモード。
 			this.soundpool_mode = SoundPool_Mode.Wait;
@@ -371,11 +374,8 @@ namespace TestScript
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
 
-			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
-
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
 
 			switch(this.soundpool_mode){
 			case SoundPool_Mode.Wait:
@@ -419,8 +419,8 @@ namespace TestScript
 			}
 
 			//再生。
-			if(Fee.Geometry.Range.IsRectIn(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX,in Fee.Input.Mouse.GetInstance().cursor.pos) == true){
-				if(Fee.Input.Mouse.GetInstance().left.down == true){
+			if(Fee.Geometry.Range.IsRectIn(in Fee.Render2D.Config.VIRTUAL_RECT_MAX,in Fee.Input.Input.GetInstance().mouse.cursor.pos) == true){
+				if(Fee.Input.Input.GetInstance().mouse.left.down == true){
 					Fee.Audio.Audio.GetInstance().PlaySe(SE_ID,0);
 				}
 			}

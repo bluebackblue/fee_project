@@ -95,7 +95,7 @@ namespace TestScript
 				{
 					int t_size = 100;
 
-					this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+					this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 					this.sprite.SetTexture(Texture2D.whiteTexture);
 					this.sprite.SetColor(Random.value,Random.value,Random.value,1.0f);
 					this.sprite.SetRect(this.touch_phase.value_x-t_size/2,this.touch_phase.value_y-t_size/2,t_size,t_size);
@@ -148,6 +148,9 @@ namespace TestScript
 		*/
 		private void Start()
 		{
+			//プレイヤーループシステム。インスタンス作成。
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
 
@@ -167,12 +170,9 @@ namespace TestScript
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
-			//マウス。インスタンス作成。
-			Fee.Input.Mouse.CreateInstance();
-
-			//タッチ。
-			Fee.Input.Touch.CreateInstance();
-			Fee.Input.Touch.GetInstance().SetCallBack(CallBack_OnTouch);
+			//入力。インスタンス作成。
+			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.GetInstance().touch.SetCallBack(CallBack_OnTouch);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -192,15 +192,15 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//背景。
 			int t_layerindex = 0;
-			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
+			long t_drawpriority = t_layerindex * Fee.Render2D.Config.DRAWPRIORITY_STEP;
 			this.bg = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
-			this.bg.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+			this.bg.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			this.bg.SetTexture(Texture2D.whiteTexture);
-			this.bg.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
+			this.bg.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
 			this.bg.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 			this.bg.SetColor(0.0f,0.0f,0.0f,1.0f);
 
@@ -310,23 +310,17 @@ namespace TestScript
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_Before();
 
-			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
-
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
 
 			//タッチ。
-			Fee.Input.Touch.GetInstance().Main(Fee.Render2D.Render2D.GetInstance());
-
-			//タッチ。
 			Fee.Input.Touch.UpdateTouchList(this.touchview_list);
 
 			//タッチ数。
-			this.touch_text.SetText(Fee.Input.Touch.GetInstance().device_item_list_count.ToString());
+			this.touch_text.SetText(Fee.Input.Input.GetInstance().touch.device_item_list_count.ToString());
 
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_After();

@@ -100,6 +100,9 @@ namespace TestScript
 		*/
 		private void Start()
 		{
+			//プレイヤーループシステム。インスタンス作成。
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
 
@@ -121,7 +124,7 @@ namespace TestScript
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//ブラー。インスタンス作成。
-			Fee.Blur.Blur.LOG_ENABLE = true;
+			Fee.Blur.Config.LOG_ENABLE = true;
 			Fee.Blur.Blur.CreateInstance();
 
 			//ブルーム。インスタンス作成。
@@ -130,8 +133,8 @@ namespace TestScript
 			//深度。インスタンス作成。
 			Fee.Depth.Depth.CreateInstance();
 
-			//マウス。インスタンス作成。
-			Fee.Input.Mouse.CreateInstance();
+			//入力。インスタンス作成。
+			Fee.Input.Input.CreateInstance();
 
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
@@ -150,7 +153,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//深度。カメラに設定。
 			{
@@ -195,13 +198,13 @@ namespace TestScript
 			{
 				int t_w = 200;
 				int t_h = 200;
-				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) / 2;
-				int t_y = (Fee.Render2D.Render2D.VIRTUAL_H - t_h) / 2;
+				int t_x = (Fee.Render2D.Config.VIRTUAL_W - t_w) / 2;
+				int t_y = (Fee.Render2D.Config.VIRTUAL_H - t_h) / 2;
 
 				int t_layerindex = 0;
-				long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
+				long t_drawpriority = t_layerindex * Fee.Render2D.Config.DRAWPRIORITY_STEP;
 				this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
-				this.sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+				this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 				this.sprite.SetRect(t_x,t_y,t_w,t_h);
 				this.sprite.SetTexture(this.prefablist.GetTexture(Common.TextureType.Test10_Texture));
 			}
@@ -282,11 +285,8 @@ namespace TestScript
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_Before();
 
-			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
-
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();

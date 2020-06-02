@@ -178,6 +178,9 @@ namespace TestScript
 		*/
 		private void Start()
 		{
+			//プレイヤーループシステム。インスタンス作成。
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
 
@@ -197,18 +200,12 @@ namespace TestScript
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
-			//マウス。インスタンス作成。
-			Fee.Input.Mouse.CreateInstance();
-
-			//キー。インスタンス作成。
-			Fee.Input.Key.CreateInstance();
-			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Up);
-			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Down);
-			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Left);
-			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Right);
-
-			//パッド。インスタンス作成。
-			Fee.Input.Pad.CreateInstance();
+			//入力。インスタンス作成。
+			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Up);
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Down);
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Left);
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Right);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -228,22 +225,22 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//背景。
 			int t_layerindex = 0;
-			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
+			long t_drawpriority = t_layerindex * Fee.Render2D.Config.DRAWPRIORITY_STEP;
 			this.bg = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
-			this.bg.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+			this.bg.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			this.bg.SetTexture(Texture2D.whiteTexture);
-			this.bg.SetRect(in Fee.Render2D.Render2D.VIRTUAL_RECT_MAX);
+			this.bg.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
 			this.bg.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 			this.bg.SetColor(0.0f,0.0f,0.0f,1.0f);
 
 
 			//マウス。
 			this.mouse_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority + 1);
-			this.mouse_sprite.SetTextureRect(in Fee.Render2D.Render2D.TEXTURE_RECT_MAX);
+			this.mouse_sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			this.mouse_sprite.SetTexture(Texture2D.whiteTexture);
 			this.mouse_sprite.SetRect(0,0,10,10);
 			this.mouse_sprite.SetColor(1.0f,1.0f,1.0f,1.0f);
@@ -291,13 +288,8 @@ namespace TestScript
 				this.pad_index_button.SetText(this.pad_index.ToString());
 			}
 
-			for(int ii=0;ii<Fee.Input.Pad.GetInstance().pad_status.Length;ii++){
-				if(ii == this.pad_index){
-					//Fee.Input.Pad.GetInstance().pad_status[ii].enable = true;
-				}else{
-					//Fee.Input.Pad.GetInstance().pad_status[ii].enable = false;
-				}
-				Fee.Input.Pad.GetInstance().pad_status[ii].pad_type = this.pad_type;
+			for(int ii=0;ii<Fee.Input.Input.GetInstance().pad.status.Length;ii++){
+				Fee.Input.Input.GetInstance().pad.status[ii].pad_type = this.pad_type;
 			}
 
 			int t_xx = 10;
@@ -513,27 +505,17 @@ namespace TestScript
 					this.pad_type = (Fee.Input.Pad_InputManagerItemName.PadType)(((int)this.pad_type + 1) % (int)Fee.Input.Pad_InputManagerItemName.PadType.Max);
 					this.pad_type_button.SetText(this.pad_type.ToString());
 
-					for(int ii=0;ii<Fee.Input.Pad.GetInstance().pad_status.Length;ii++){
-						if(ii == this.pad_index){
-							//Fee.Input.Pad.GetInstance().pad_status[ii].enable = true;
-						}else{
-							//Fee.Input.Pad.GetInstance().pad_status[ii].enable = false;
-						}
-						Fee.Input.Pad.GetInstance().pad_status[ii].pad_type = this.pad_type;
+					for(int ii=0;ii<Fee.Input.Input.GetInstance().pad.status.Length;ii++){
+						Fee.Input.Input.GetInstance().pad.status[ii].pad_type = this.pad_type;
 					}
 				}break;
 			case ButtonId.PadIndex:
 				{
-					this.pad_index = (this.pad_index + 1) % (Fee.Input.Pad.GetInstance().pad_status.Length);
+					this.pad_index = (this.pad_index + 1) % (Fee.Input.Input.GetInstance().pad.status.Length);
 					this.pad_index_button.SetText(this.pad_index.ToString());
 
-					for(int ii=0;ii<Fee.Input.Pad.GetInstance().pad_status.Length;ii++){
-						if(ii == this.pad_index){
-							//Fee.Input.Pad.GetInstance().pad_status[ii].enable = true;
-						}else{
-							//Fee.Input.Pad.GetInstance().pad_status[ii].enable = false;
-						}
-						Fee.Input.Pad.GetInstance().pad_status[ii].pad_type = this.pad_type;
+					for(int ii=0;ii<Fee.Input.Input.GetInstance().pad.status.Length;ii++){
+						Fee.Input.Input.GetInstance().pad.status[ii].pad_type = this.pad_type;
 					}
 				}break;
 			case ButtonId.Fix:
@@ -651,25 +633,16 @@ namespace TestScript
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_Before();
 
-			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
-
-			//キー。
-			Fee.Input.Key.GetInstance().Main(true);
-
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
 
-			//パッド。
-			Fee.Input.Pad.GetInstance().Main(true);
-
 			//モーター。
-			for(int ii=0;ii<Fee.Input.Pad.GetInstance().pad_status.Length;ii++){
-				Fee.Input.Pad.GetInstance().pad_status[ii].moter_low.Request(Fee.Input.Pad.GetInstance().pad_status[ii].l_trigger_2.value);
-				Fee.Input.Pad.GetInstance().pad_status[ii].moter_high.Request(Fee.Input.Pad.GetInstance().pad_status[ii].r_trigger_2.value);
+			for(int ii=0;ii<Fee.Input.Input.GetInstance().pad.status.Length;ii++){
+				Fee.Input.Input.GetInstance().pad.status[ii].motor_low.Request(Fee.Input.Input.GetInstance().pad.status[ii].l_trigger_2.value);
+				Fee.Input.Input.GetInstance().pad.status[ii].motor_high.Request(Fee.Input.Input.GetInstance().pad.status[ii].r_trigger_2.value);
 			}
 
 			if(this.backup_rollbackcount > 0){
@@ -691,65 +664,63 @@ namespace TestScript
 			{
 				string t_text = "mouse\n";
 
-				t_text += "left   = " + Fee.Input.Mouse.GetInstance().left.on.ToString() + "\n";
-				t_text += "right  = " + Fee.Input.Mouse.GetInstance().right.on.ToString() + "\n";
-				t_text += "middle = " + Fee.Input.Mouse.GetInstance().middle.on.ToString() + "\n";
+				t_text += "left   = " + Fee.Input.Input.GetInstance().mouse.left.on.ToString() + "\n";
+				t_text += "right  = " + Fee.Input.Input.GetInstance().mouse.right.on.ToString() + "\n";
+				t_text += "middle = " + Fee.Input.Input.GetInstance().mouse.middle.on.ToString() + "\n";
 
-				t_text += "x = " + Fee.Input.Mouse.GetInstance().cursor.pos.x.ToString() + "\n";
-				t_text += "y = " + Fee.Input.Mouse.GetInstance().cursor.pos.y.ToString() + "\n";
-				t_text += "m = " + Fee.Input.Mouse.GetInstance().mouse_wheel.pos.y.ToString() + "\n";
-
-				t_text += "name = " + Fee.Input.Mouse.GetInstance().cursor.devicename.ToLower() + "\n";
+				t_text += "x = " + Fee.Input.Input.GetInstance().mouse.cursor.pos.x.ToString() + "\n";
+				t_text += "y = " + Fee.Input.Input.GetInstance().mouse.cursor.pos.y.ToString() + "\n";
+				t_text += "m = " + Fee.Input.Input.GetInstance().mouse.mouse_wheel.pos.y.ToString() + "\n";
 
 				this.mouse_text.SetText(t_text);
 
-				this.mouse_sprite.SetXY(Fee.Input.Mouse.GetInstance().cursor.pos.x,Fee.Input.Mouse.GetInstance().cursor.pos.y);
+				this.mouse_sprite.SetXY(Fee.Input.Input.GetInstance().mouse.cursor.pos.x,Fee.Input.Input.GetInstance().mouse.cursor.pos.y);
 			}
 
 			//キー。
 			{
 				string t_text = "key\n";
 
-				t_text += "left        = " + Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Left).digital.on.ToString() + "\n";
-				t_text += "right       = " + Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Right).digital.on.ToString() + "\n";
-				t_text += "up          = " + Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Up).digital.on.ToString() + "\n";
-				t_text += "down        = " + Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Down).digital.on.ToString() + "\n";
+				t_text += "left        = " + Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Left).digital.on.ToString() + "\n";
+				t_text += "right       = " + Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Right).digital.on.ToString() + "\n";
+				t_text += "up          = " + Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Up).digital.on.ToString() + "\n";
+				t_text += "down        = " + Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Down).digital.on.ToString() + "\n";
 
 				this.key_text.SetText(t_text);
 			}
 
 			//パッド。
 			{
-				string t_text = "pad : " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].devicename + "\n";
+				string t_text = "";
 
-				t_text += "left        = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].left.on.ToString() + "\n";
-				t_text += "right       = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].right.on.ToString() + "\n";
-				t_text += "up          = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].up.on.ToString() + "\n";
-				t_text += "down        = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].down.on.ToString() + "\n";
+				t_text += "left        = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].left.on.ToString() + "\n";
+				t_text += "right       = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].right.on.ToString() + "\n";
+				t_text += "up          = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].up.on.ToString() + "\n";
+				t_text += "down        = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].down.on.ToString() + "\n";
 
-				t_text += "enter       = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].enter.on.ToString() + "\n";
-				t_text += "escape      = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].escape.on.ToString() + "\n";
-				t_text += "sub1        = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].sub1.on.ToString() + "\n";
-				t_text += "sub2        = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].sub2.on.ToString() + "\n";
+				t_text += "enter       = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].enter.on.ToString() + "\n";
+				t_text += "escape      = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].escape.on.ToString() + "\n";
+				t_text += "sub1        = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].sub1.on.ToString() + "\n";
+				t_text += "sub2        = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].sub2.on.ToString() + "\n";
 
-				t_text += "left_menu   = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].left_menu.on.ToString() + "\n";
-				t_text += "right_menu  = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].right_menu.on.ToString() + "\n";
+				t_text += "left_menu   = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].left_menu.on.ToString() + "\n";
+				t_text += "right_menu  = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].right_menu.on.ToString() + "\n";
 
-				t_text += "l_trigger_1 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_trigger_1.on.ToString() + "\n";
-				t_text += "r_trigger_1 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_trigger_1.on.ToString() + "\n";
-				t_text += "l_trigger_2 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_trigger_2.on.ToString() + "\n";
-				t_text += "r_trigger_2 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_trigger_2.on.ToString() + "\n";
+				t_text += "l_trigger_1 = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].l_trigger_1.on.ToString() + "\n";
+				t_text += "r_trigger_1 = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].r_trigger_1.on.ToString() + "\n";
+				t_text += "l_trigger_2 = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].l_trigger_2.on.ToString() + "\n";
+				t_text += "r_trigger_2 = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].r_trigger_2.on.ToString() + "\n";
 
-				t_text += "l_trigger_2 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_trigger_2.value.ToString() + "\n";
-				t_text += "r_trigger_2 = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_trigger_2.value.ToString() + "\n";
+				t_text += "l_trigger_2 = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].l_trigger_2.value.ToString() + "\n";
+				t_text += "r_trigger_2 = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].r_trigger_2.value.ToString() + "\n";
 
-				t_text += "l_stick_x   = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_stick.x.ToString() + "\n";
-				t_text += "l_stick_y   = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_stick.y.ToString() + "\n";
-				t_text += "r_stick_x   = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_stick.x.ToString() + "\n";
-				t_text += "r_stick_y   = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_stick.y.ToString() + "\n";
+				t_text += "l_stick_x   = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].l_stick.x.ToString() + "\n";
+				t_text += "l_stick_y   = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].l_stick.y.ToString() + "\n";
+				t_text += "r_stick_x   = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].r_stick.x.ToString() + "\n";
+				t_text += "r_stick_y   = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].r_stick.y.ToString() + "\n";
 
-				t_text += "l_stick_button = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].l_stick_button.on.ToString() + "\n";
-				t_text += "r_stick_button = " + Fee.Input.Pad.GetInstance().pad_status[this.pad_index].r_stick_button.on.ToString() + "\n";
+				t_text += "l_stick_button = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].l_stick_button.on.ToString() + "\n";
+				t_text += "r_stick_button = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].r_stick_button.on.ToString() + "\n";
 
 				this.pad_text.SetText(t_text);
 			}

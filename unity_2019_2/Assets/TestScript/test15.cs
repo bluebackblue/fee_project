@@ -80,6 +80,9 @@ namespace TestScript
 		*/
 		private void Start()
 		{
+			//プレイヤーループシステム。インスタンス作成。
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
 
@@ -99,13 +102,10 @@ namespace TestScript
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
-			//マウス。インスタンス作成。
-			Fee.Input.Mouse.CreateInstance();
-
-			//キ。インスタンス作成。
-			Fee.Input.Key.CreateInstance();
-			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Enter);
-			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Esc);
+			//入力。インスタンス作成。
+			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Enter);
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Esc);
 
 			//ＵＩ。インスタンス作成。
 			Fee.Ui.Ui.CreateInstance();
@@ -123,7 +123,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//is_clip
 			this.is_clip = true;
@@ -132,7 +132,7 @@ namespace TestScript
 			this.update_clip_rect = true;
 
 			int t_layerindex = 0;
-			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
+			long t_drawpriority = t_layerindex * Fee.Render2D.Config.DRAWPRIORITY_STEP;
 
 			//sprite
 			{
@@ -144,7 +144,7 @@ namespace TestScript
 
 			//text
 			{
-				int t_x = Fee.Render2D.Render2D.VIRTUAL_W / 2;
+				int t_x = Fee.Render2D.Config.VIRTUAL_W / 2;
 				int t_y = 100;
 
 				this.text = this.prefablist.CreateText(this.deleter,t_drawpriority + 1);
@@ -161,7 +161,7 @@ namespace TestScript
 			{
 				int t_w = 100;
 				int t_h = 30;
-				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
+				int t_x = (Fee.Render2D.Config.VIRTUAL_W - t_w) /2;
 				int t_y = 300;
 
 				this.button = this.prefablist.CreateButton(this.deleter,t_drawpriority + 2);
@@ -173,7 +173,7 @@ namespace TestScript
 			{
 				int t_w = 50;
 				int t_h = 50;
-				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
+				int t_x = (Fee.Render2D.Config.VIRTUAL_W - t_w) /2;
 				int t_y = 200;
 
 				this.checkbutton = this.prefablist.CreateCheckButton(this.deleter,t_drawpriority + 2);
@@ -197,7 +197,7 @@ namespace TestScript
 			{
 				int t_w = 300;
 				int t_h = 20;
-				int t_x = (Fee.Render2D.Render2D.VIRTUAL_W - t_w) /2;
+				int t_x = (Fee.Render2D.Config.VIRTUAL_W - t_w) /2;
 				int t_y = 350;
 
 				this.slider = this.prefablist.CreateSlider(this.deleter,t_drawpriority + 2);
@@ -224,19 +224,13 @@ namespace TestScript
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_Before();
 
-			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
-
-			//キー。
-			Fee.Input.Key.GetInstance().Main(true);
-
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
 
-			if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Enter).digital.down == true){
+			if(Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Enter).digital.down == true){
 				this.is_clip = !this.is_clip;
 
 				this.sprite.SetClip(this.is_clip);
@@ -247,7 +241,7 @@ namespace TestScript
 				this.slider.SetClip(this.is_clip);
 			}
 
-			if(Fee.Input.Key.GetInstance().GetKey(Fee.Input.Key_Type.Esc).digital.down == true){
+			if(Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Esc).digital.down == true){
 				this.update_clip_rect = !this.update_clip_rect;
 			}
 
@@ -256,8 +250,8 @@ namespace TestScript
 				{
 					t_cliprect.w = 200;
 					t_cliprect.h = 200;
-					t_cliprect.x = Fee.Input.Mouse.GetInstance().cursor.pos.x - t_cliprect.w / 2;
-					t_cliprect.y = Fee.Input.Mouse.GetInstance().cursor.pos.y - t_cliprect.h / 2;
+					t_cliprect.x = Fee.Input.Input.GetInstance().mouse.cursor.pos.x - t_cliprect.w / 2;
+					t_cliprect.y = Fee.Input.Input.GetInstance().mouse.cursor.pos.y - t_cliprect.h / 2;
 				}
 
 				this.sprite.SetClipRect(in t_cliprect);

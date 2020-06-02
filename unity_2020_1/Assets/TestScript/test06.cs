@@ -50,7 +50,7 @@ namespace TestScript
 			public bool Main()
 			{
 				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
-					if(Fee.Input.Mouse.GetInstance().left.down == true){
+					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
 						Debug.Log("SceneA : request");
 						//遷移リクエスト。
 						Fee.Scene.Scene.GetInstance().SetNextScene(new SceneB());
@@ -123,7 +123,7 @@ namespace TestScript
 			public bool Main()
 			{
 				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
-					if(Fee.Input.Mouse.GetInstance().left.down == true){
+					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
 						//遷移リクエスト。
 						Debug.Log("SceneB : request");
 						Fee.Scene.Scene.GetInstance().SetNextScene(new SceneA());
@@ -199,6 +199,9 @@ namespace TestScript
 		*/
 		private void Start()
 		{
+			//プレイヤーループシステム。インスタンス作成。
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
 
@@ -230,8 +233,8 @@ namespace TestScript
 			Fee.Fade.Fade.GetInstance().SetToColor(0.0f,0.0f,0.0f,1.0f);
 			Fee.Fade.Fade.GetInstance().SetAnime();
 
-			//マウス。インスタンス作成。
-			Fee.Input.Mouse.CreateInstance();
+			//入力。インスタンス作成。
+			Fee.Input.Input.CreateInstance();
 
 			//シーン。インスタンス作成。
 			Fee.Scene.Scene.CreateInstance();
@@ -246,7 +249,7 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//bg
 			this.bg = Fee.Render2D.Sprite2D.Create(this.deleter,0);
@@ -273,11 +276,8 @@ namespace TestScript
 			//フェード。
 			Fee.Fade.Fade.GetInstance().Main();
 
-			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
-
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();

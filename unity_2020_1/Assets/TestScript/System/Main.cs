@@ -217,6 +217,9 @@ namespace TestScript
 		*/
 		public void MainScene_LibCreateInstance()
 		{
+			//プレイヤーループシステム。
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+
 			//２Ｄ描画。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 			Fee.Render2D.Config.ReCalcWH();
@@ -228,8 +231,8 @@ namespace TestScript
 			//イベントプレート。
 			Fee.EventPlate.EventPlate.CreateInstance();
 
-			//マウス。
-			Fee.Input.Mouse.CreateInstance();
+			//入力。
+			Fee.Input.Input.CreateInstance();
 
 			//フォント。
 			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont(Common.FontType.Font));
@@ -314,11 +317,8 @@ namespace TestScript
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_Before();
 
-			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(true,Fee.Render2D.Render2D.GetInstance());
-
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();

@@ -127,6 +127,9 @@ namespace TestScript
 		*/
 		private void Start()
 		{
+			//プレイヤーループシステム。インスタンス作成。
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
 
@@ -146,15 +149,12 @@ namespace TestScript
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
-			//マウス。インスタンス作成。
-			Fee.Input.Mouse.CreateInstance();
-
-			//キ。インスタンス作成。
-			Fee.Input.Key.CreateInstance();
-			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Enter);
-			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Esc);
-			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.Z);
-			Fee.Input.Key.GetInstance().Regist(Fee.Input.Key_Type.X);
+			//入力。インスタンス作成。
+			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Enter);
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Esc);
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Z);
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.X);
 
 			//ＵＩ。インスタンス作成。
 			Fee.Ui.Ui.CreateInstance();
@@ -165,7 +165,7 @@ namespace TestScript
 			//ネットワーク。インスタンス作成。
 			Fee.Network.Config.LOG_ENABLE = true;
 			Fee.Network.Network.CreateInstance();
-			Fee.Network.Network.GetInstance().SetPlayeType<NetworkPlayer_MonoBehaviour>();
+			Fee.Network.Network.GetInstance().SetPlayerType<NetworkPlayer_MonoBehaviour>();
 
 			//プレハブリスト。
 			this.prefablist = new Common.PrefabList();
@@ -177,11 +177,11 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//layerindex
 			int t_layerindex = 0;
-			long t_drawpriority = t_layerindex * Fee.Render2D.Render2D.DRAWPRIORITY_STEP;
+			long t_drawpriority = t_layerindex * Fee.Render2D.Config.DRAWPRIORITY_STEP;
 
 			//network_master
 			{
@@ -289,14 +289,8 @@ namespace TestScript
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_Before();
 
-			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
-
-			//キー。
-			Fee.Input.Key.GetInstance().Main(true);
-
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();

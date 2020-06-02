@@ -94,6 +94,9 @@ namespace TestScript
 		*/
 		private void Start()
 		{
+			//プレイヤーループシステム。インスタンス作成。
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
 
@@ -114,9 +117,10 @@ namespace TestScript
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
-			//マウス。インスタンス作成。
+			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
-			Fee.Input.Mouse.CreateInstance();
+			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -136,20 +140,20 @@ namespace TestScript
 			this.deleter = new Fee.Deleter.Deleter();
 
 			//戻るボタン作成。
-			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Render2D.MAX_LAYER - 1) * Fee.Render2D.Render2D.DRAWPRIORITY_STEP,this.name + ":Return");
+			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//レイヤインデックス。
 			int t_layerindex = 0;
 
 			//描画プライオリティ。
-			long t_drawpriority = Fee.Render2D.Render2D.DRAWPRIORITY_STEP * t_layerindex;
+			long t_drawpriority = Fee.Render2D.Config.DRAWPRIORITY_STEP * t_layerindex;
 
 			{
 				//スプライト。
 				this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
 				this.sprite.SetTexture(Texture2D.whiteTexture);
-				this.sprite.SetTextureRect(0,0,Fee.Render2D.Render2D.TEXTURE_W,Fee.Render2D.Render2D.TEXTURE_H);
-				this.sprite.SetRect(0,0,Fee.Render2D.Render2D.VIRTUAL_W,Fee.Render2D.Render2D.VIRTUAL_H);
+				this.sprite.SetTextureRect(0,0,Fee.Render2D.Config.TEXTURE_W,Fee.Render2D.Config.TEXTURE_H);
+				this.sprite.SetRect(0,0,Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H);
 				this.sprite.SetColor(0.0f,0.5f,0.0f,1.0f);
 				this.sprite.SetMaterialType(Fee.Render2D.Config.MaterialType.Simple);
 			}
@@ -326,12 +330,6 @@ namespace TestScript
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_Before();
 
-			//マウス。
-			Fee.Input.Mouse.GetInstance().Main(this.is_focus,Fee.Render2D.Render2D.GetInstance());
-
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Mouse.GetInstance().cursor.pos);
-
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
 
@@ -339,7 +337,7 @@ namespace TestScript
 				int t_start_x = Fee.Render2D.Config.VIRTUAL_W / 2;
 				int t_start_y = Fee.Render2D.Config.VIRTUAL_H / 2;
 
-				this.line.SetRect(new Fee.Geometry.Rect2D_A<int>(t_start_x,t_start_y,Fee.Input.Mouse.GetInstance().cursor.pos.x,Fee.Input.Mouse.GetInstance().cursor.pos.y));
+				this.line.SetRect(new Fee.Geometry.Rect2D_A<int>(t_start_x,t_start_y,Fee.Input.Input.GetInstance().mouse.cursor.pos.x,Fee.Input.Input.GetInstance().mouse.cursor.pos.y));
 				this.start.SetRect(t_start_x - 2,t_start_y - 2,4,4);
 			}
 
@@ -353,6 +351,14 @@ namespace TestScript
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
+		}
+
+		/** InputUpdate
+		*/
+		private void InputUpdate()
+		{
+			//イベントプレート。
+			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
 		}
 
 		/** 削除前。
