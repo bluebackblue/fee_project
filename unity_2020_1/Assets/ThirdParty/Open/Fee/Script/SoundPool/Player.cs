@@ -4,17 +4,17 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief オーディオ。
+ * @brief サウンドプール。ファイル。
 */
 
 
-/** Fee.Audio
+/** Fee.SoundPool
 */
-namespace Fee.Audio
+namespace Fee.SoundPool
 {
-	/** SoundPool
+	/** Player
 	*/
-	public class SoundPool
+	public class Player
 	{
 		/** Item
 		*/
@@ -84,7 +84,7 @@ namespace Fee.Audio
 
 		/** constructor
 		*/
-		public SoundPool()
+		public Player()
 		{
 			//list
 			this.list = new System.Collections.Generic.Dictionary<string,Item>();

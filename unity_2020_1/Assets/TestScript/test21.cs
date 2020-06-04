@@ -83,6 +83,7 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
@@ -93,7 +94,6 @@ namespace TestScript
 			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
 			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -172,51 +172,49 @@ namespace TestScript
 			Fee.Platform.Platform.GetInstance().OpenFileDialog(t_title,t_extension);
 		}
 
-		/** FixedUpdate
+		/** RowUpdate
 		*/
-		private void FixedUpdate()
+		private void RowUpdate()
 		{
-			{
-				string t_full_path = Fee.Platform.Platform.GetInstance().GetOpenFileDialogResult();
-				if(t_full_path == null){
-					t_full_path = "null";
-				}else if(t_full_path == ""){
-					t_full_path = "space";
-				}
-				this.text.SetText(t_full_path);
+			string t_full_path = Fee.Platform.Platform.GetInstance().GetOpenFileDialogResult();
+			if(t_full_path == null){
+				t_full_path = "null";
+			}else if(t_full_path == ""){
+				t_full_path = "space";
+			}
+			this.text.SetText(t_full_path);
 
-				if(this.file_item == null){
-					//開始。
+			if(this.file_item == null){
+				//開始。
 
-					if(this.filepath != t_full_path){
-						this.filepath = t_full_path;
-						if((this.filepath != "null")&&(this.filepath != "space")){
-							this.file_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadFullPathTextureFile,new Fee.File.Path(this.filepath));
-						}
+				if(this.filepath != t_full_path){
+					this.filepath = t_full_path;
+					if((this.filepath != "null")&&(this.filepath != "space")){
+						this.file_item = Fee.File.File.GetInstance().RequestLoad(Fee.File.File.LoadRequestType.LoadFullPathTextureFile,new Fee.File.Path(this.filepath));
 					}
-				}else{
-					//バイナリ取得。
+				}
+			}else{
+				//バイナリ取得。
 
-					if(this.file_item != null){
-						if(this.file_item.GetResultType() != Fee.File.Item.ResultType.None){
-							UnityEngine.Texture2D t_texture = this.file_item.GetResultAssetTexture();
+				if(this.file_item != null){
+					if(this.file_item.GetResultType() != Fee.File.Item.ResultType.None){
+						UnityEngine.Texture2D t_texture = this.file_item.GetResultAssetTexture();
 
-							if(t_texture == null){
-								this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
-							}else{
-								this.sprite.SetTexture(t_texture);
-							}
-
-							this.file_item = null;
+						if(t_texture == null){
+							this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
+						}else{
+							this.sprite.SetTexture(t_texture);
 						}
+
+						this.file_item = null;
 					}
 				}
 			}
 		}
 
-		/** InputUpdate
+		/** FixedUpdate
 		*/
-		private void InputUpdate()
+		private void FixedUpdate()
 		{
 		}
 
@@ -238,6 +236,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 

@@ -141,9 +141,9 @@ namespace TestScript
 				this.node = a_node;
 			}
 
-			/** Update
+			/** Main
 			*/
-			public void Update()
+			public void Main()
 			{
 				float t_color = this.node.value;
 				this.sprite.SetColor(t_color,t_color,t_color,1.0f);
@@ -234,6 +234,7 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
@@ -244,7 +245,6 @@ namespace TestScript
 			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
 			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -318,9 +318,9 @@ namespace TestScript
 			}
 		}
 
-		/** FixedUpdate
+		/** RowUpdate
 		*/
-		private void FixedUpdate()
+		private void RowUpdate()
 		{
 			if(this.backpropagation_flag == true){
 
@@ -374,16 +374,11 @@ namespace TestScript
 				//パーセプトロン。順方向計算。
 				this.perceptron.ForwardCalculation();
 			}
-
-			//表示更新。
-			for(int ii=0;ii<this.list.Count;ii++){
-				this.list[ii].Update();
-			}
 		}
 
-		/** InputUpdate
+		/** FixedUpdate
 		*/
-		private void InputUpdate()
+		private void FixedUpdate()
 		{
 		}
 
@@ -391,6 +386,10 @@ namespace TestScript
 		*/
 		private void Update()
 		{
+			//表示更新。
+			for(int ii=0;ii<this.list.Count;ii++){
+				this.list[ii].Main();
+			}
 		}
 
 		/** LateUpdate
@@ -418,6 +417,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 

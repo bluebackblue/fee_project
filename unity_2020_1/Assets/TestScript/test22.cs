@@ -78,6 +78,7 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
@@ -88,7 +89,6 @@ namespace TestScript
 			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
 			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -166,9 +166,24 @@ namespace TestScript
 			this.video_text_3.SetRect(this.video_sprite_3.GetX(),this.video_sprite_3.GetY() - 30,0,0);
 		}
 
+		/** RowUpdate
+		*/
+		private void RowUpdate()
+		{
+			this.video_text_1.SetText(this.video_item_1.GetFrame().ToString() + " " + this.video_item_1.GetFrameMax().ToString() + " " + this.video_item_1.GetTime().ToString("0.000") + " " + this.video_item_1.GetFrameRate().ToString("0.000")+ " " + this.video_item_1.IsPrepared().ToString() + " " + this.video_item_1.IsPlay().ToString() + " " + this.video_item_1.IsPause().ToString());
+			this.video_text_2.SetText(this.video_item_2.GetFrame().ToString() + " " + this.video_item_2.GetFrameMax().ToString() + " " + this.video_item_2.GetTime().ToString("0.000") + " " + this.video_item_2.GetFrameRate().ToString("0.000")+ " " + this.video_item_2.IsPrepared().ToString() + " " + this.video_item_2.IsPlay().ToString() + " " + this.video_item_2.IsPause().ToString());
+			this.video_text_3.SetText(this.video_item_3.GetFrame().ToString() + " " + this.video_item_3.GetFrameMax().ToString() + " " + this.video_item_3.GetTime().ToString("0.000") + " " + this.video_item_3.GetFrameRate().ToString("0.000")+ " " + this.video_item_3.IsPrepared().ToString() + " " + this.video_item_3.IsPlay().ToString() + " " + this.video_item_3.IsPause().ToString());
+		}
+
 		/** FixedUpdate
 		*/
 		private void FixedUpdate()
+		{
+		}
+
+		/** Update
+		*/
+		private void Update()
 		{
 			if(Fee.Input.Input.GetInstance().mouse.left.down == true){
 				this.video_item_1.Play();
@@ -179,22 +194,6 @@ namespace TestScript
 				this.video_item_2.Pause();
 				this.video_item_3.Pause();
 			}
-
-			this.video_text_1.SetText(this.video_item_1.GetFrame().ToString() + " " + this.video_item_1.GetFrameMax().ToString() + " " + this.video_item_1.GetTime().ToString("0.000") + " " + this.video_item_1.GetFrameRate().ToString("0.000")+ " " + this.video_item_1.IsPrepared().ToString() + " " + this.video_item_1.IsPlay().ToString() + " " + this.video_item_1.IsPause().ToString());
-			this.video_text_2.SetText(this.video_item_2.GetFrame().ToString() + " " + this.video_item_2.GetFrameMax().ToString() + " " + this.video_item_2.GetTime().ToString("0.000") + " " + this.video_item_2.GetFrameRate().ToString("0.000")+ " " + this.video_item_2.IsPrepared().ToString() + " " + this.video_item_2.IsPlay().ToString() + " " + this.video_item_2.IsPause().ToString());
-			this.video_text_3.SetText(this.video_item_3.GetFrame().ToString() + " " + this.video_item_3.GetFrameMax().ToString() + " " + this.video_item_3.GetTime().ToString("0.000") + " " + this.video_item_3.GetFrameRate().ToString("0.000")+ " " + this.video_item_3.IsPrepared().ToString() + " " + this.video_item_3.IsPlay().ToString() + " " + this.video_item_3.IsPause().ToString());
-		}
-
-		/** InputUpdate
-		*/
-		private void InputUpdate()
-		{
-		}
-
-		/** Update
-		*/
-		private void Update()
-		{
 		}
 
 		/** LateUpdate
@@ -209,6 +208,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 

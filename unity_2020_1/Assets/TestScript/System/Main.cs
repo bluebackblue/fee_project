@@ -229,7 +229,7 @@ namespace TestScript
 			this.loadscene_request = this.scene_list[a_id].scenename;
 		}
 
-		/** [Fee.Ui.OnButtonChangeOverFlag_CallBackInterface]クリック。
+		/** [Fee.Ui.OnButtonChangeOverFlag_CallBackInterface]オンオーバー。
 		*/
 		public void OnButtonChangeOverFlag(int a_id,bool a_is_onover)
 		{
@@ -253,7 +253,6 @@ namespace TestScript
 
 			//入力。
 			Fee.Input.Input.CreateInstance(true,true,true,true);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.EventPlate.CreateInstance();

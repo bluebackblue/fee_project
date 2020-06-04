@@ -111,6 +111,7 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
@@ -121,7 +122,6 @@ namespace TestScript
 			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
 			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -298,7 +298,7 @@ namespace TestScript
 				//start
 				this.start = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority + 2);
 				this.start.SetTexture(UnityEngine.Texture2D.whiteTexture);
-				this.start.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
+				this.start.SetRect(0,0,0,0);
 				this.start.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 				this.start.SetColor(1.0f,0.0f,0.0f,1.0f);
 			}
@@ -324,6 +324,17 @@ namespace TestScript
 			}
 		}
 
+		/** RowUpdate
+		*/
+		private void RowUpdate()
+		{
+			int t_start_x = Fee.Render2D.Config.VIRTUAL_W / 2;
+			int t_start_y = Fee.Render2D.Config.VIRTUAL_H / 2;
+
+			this.line.SetRect(new Fee.Geometry.Rect2D_A<int>(t_start_x,t_start_y,Fee.Input.Input.GetInstance().mouse.cursor.pos.x,Fee.Input.Input.GetInstance().mouse.cursor.pos.y));
+			this.start.SetRect(t_start_x - 2,t_start_y - 2,4,4);
+		}
+
 		/** FixedUpdate
 		*/
 		private void FixedUpdate()
@@ -334,10 +345,6 @@ namespace TestScript
 		*/
 		private void Update()
 		{
-			int t_start_x = Fee.Render2D.Config.VIRTUAL_W / 2;
-			int t_start_y = Fee.Render2D.Config.VIRTUAL_H / 2;
-			this.line.SetRect(new Fee.Geometry.Rect2D_A<int>(t_start_x,t_start_y,Fee.Input.Input.GetInstance().mouse.cursor.pos.x,Fee.Input.Input.GetInstance().mouse.cursor.pos.y));
-			this.start.SetRect(t_start_x - 2,t_start_y - 2,4,4);
 		}
 
 		/** LateUpdate
@@ -348,16 +355,11 @@ namespace TestScript
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
 		}
 
-		/** InputUpdate
-		*/
-		private void InputUpdate()
-		{
-		}
-
 		/** 削除前。
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 

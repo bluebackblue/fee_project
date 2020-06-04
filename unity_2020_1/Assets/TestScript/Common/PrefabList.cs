@@ -120,7 +120,7 @@ namespace TestScript.Common
 				}
 
 				//パック作成。
-				Fee.Audio.Pack_AudioClip t_pack = new Fee.Audio.Pack_AudioClip();
+				Fee.Audio.Pack t_pack = new Fee.Audio.Pack();
 
 				for(int ii=0;ii<t_audioclip_list.tag_list.Length;ii++){
 					UnityEngine.AudioClip t_audioclip = t_audioclip_list.audioclip_list[ii];
@@ -159,7 +159,7 @@ namespace TestScript.Common
 				}
 
 				//パック作成。
-				Fee.Audio.Pack_AudioClip t_pack = new Fee.Audio.Pack_AudioClip();
+				Fee.Audio.Pack t_pack = new Fee.Audio.Pack();
 
 				for(int ii=0;ii<t_audioclip_list.tag_list.Length;ii++){
 					UnityEngine.AudioClip t_audioclip = t_audioclip_list.audioclip_list[ii];

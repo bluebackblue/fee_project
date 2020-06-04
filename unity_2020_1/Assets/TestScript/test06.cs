@@ -216,10 +216,10 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//入力。インスタンス作成。
 			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -262,24 +262,16 @@ namespace TestScript
 			Fee.Scene.Scene.GetInstance().SetNextScene(new SceneA());
 		}
 
+		/** RowUpdate
+		*/
+		private void RowUpdate()
+		{
+		}
+
 		/** FixedUpdate
 		*/
 		private void FixedUpdate()
 		{
-			//パフォーマンスカウンター。インスタンス作成。
-			Fee.PerformanceCounter.Config.LOG_ENABLE = true;
-			Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
-
-			//フェード。
-			Fee.Fade.Fade.GetInstance().Main();
-		}
-
-		/** InputUpdate
-		*/
-		private void InputUpdate()
-		{
-			//シーン。
-			Fee.Scene.Scene.GetInstance().Main();
 		}
 
 		/** Update
@@ -287,7 +279,11 @@ namespace TestScript
 		private void Update()
 		{
 			//シーン。
+			Fee.Scene.Scene.GetInstance().Main();
 			Fee.Scene.Scene.GetInstance().Unity_Update(UnityEngine.Time.deltaTime);
+
+			//フェード。
+			Fee.Fade.Fade.GetInstance().Main();
 		}
 
 		/** LateUpdate
@@ -302,6 +298,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 
