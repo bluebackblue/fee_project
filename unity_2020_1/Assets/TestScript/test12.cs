@@ -250,6 +250,7 @@ namespace TestScript
 		{
 			//プレイヤーループシステム。インスタンス作成。
 			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().RemoveFromType(typeof( UnityEngine.Experimental.PlayerLoop.PreUpdate.SendMouseEvents));
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -527,9 +528,6 @@ namespace TestScript
 			//アセットバンドルリスト。
 			Fee.AssetBundleList.AssetBundleList.GetInstance().Main();
 
-			//ファイル。
-			Fee.File.File.GetInstance().Main();
-
 			if(this.item_file != null){
 				if(this.item_file.IsBusy() == true){
 					//処理中。
@@ -613,11 +611,6 @@ namespace TestScript
 		*/
 		private void InputUpdate()
 		{
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main();
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** Update

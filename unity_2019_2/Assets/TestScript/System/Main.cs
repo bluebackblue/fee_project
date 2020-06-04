@@ -220,11 +220,6 @@ namespace TestScript
 		*/
 		public void InputUpdate()
 		{
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main();
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
@@ -249,21 +244,22 @@ namespace TestScript
 		{
 			//プレイヤーループシステム。
 			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().RemoveFromType(typeof( UnityEngine.Experimental.PlayerLoop.PreUpdate.SendMouseEvents));
 
 			//２Ｄ描画。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
-			//ＵＩ。
-			Fee.Ui.Ui.CreateInstance();
+			//入力。
+			Fee.Input.Input.CreateInstance(true,true,true,true);
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.EventPlate.CreateInstance();
 
-			//入力。
-			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
+			//ＵＩ。
+			Fee.Ui.Ui.CreateInstance();
 
 			//フォント。
 			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont(Common.FontType.Font));

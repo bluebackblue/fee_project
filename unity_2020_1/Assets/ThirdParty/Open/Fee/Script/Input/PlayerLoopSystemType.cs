@@ -16,9 +16,9 @@ namespace Fee.Input
 	*/
 	public struct PlayerLoopSystemType
 	{
-		/** Update
+		/** Fee_Input_Main
 		*/
-		public struct Update
+		public struct Fee_Input_Main
 		{
 		}
 	}

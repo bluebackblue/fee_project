@@ -267,6 +267,7 @@ namespace TestScript
 		{
 			//プレイヤーループシステム。インスタンス作成。
 			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().RemoveFromType(typeof( UnityEngine.Experimental.PlayerLoop.PreUpdate.SendMouseEvents));
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -287,15 +288,15 @@ namespace TestScript
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
 
-			//ＵＩ。インスタンス作成。
-			Fee.Ui.Ui.CreateInstance();
-
 			//入力。インスタンス作成。
 			Fee.Input.Input.CreateInstance(true,false,true,false);
 			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
+
+			//ＵＩ。インスタンス作成。
+			Fee.Ui.Ui.CreateInstance();
 
 			//ファイル。インスタンス作成。
 			Fee.File.File.CreateInstance();
@@ -559,9 +560,6 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			//ファイル。
-			Fee.File.File.GetInstance().Main();
-
 			if(this.load_item != null){
 				if(this.load_item.IsBusy() == true){
 					//ロード中。
@@ -628,11 +626,6 @@ namespace TestScript
 		*/
 		private void InputUpdate()
 		{
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main();
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** Update

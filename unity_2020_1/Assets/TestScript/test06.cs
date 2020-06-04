@@ -199,6 +199,7 @@ namespace TestScript
 		{
 			//プレイヤーループシステム。インスタンス作成。
 			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().RemoveFromType(typeof( UnityEngine.Experimental.PlayerLoop.PreUpdate.SendMouseEvents));
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -216,6 +217,10 @@ namespace TestScript
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
 
+			//入力。インスタンス作成。
+			Fee.Input.Input.CreateInstance(true,false,true,false);
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
+
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
 			Fee.EventPlate.EventPlate.CreateInstance();
@@ -230,10 +235,6 @@ namespace TestScript
 			Fee.Fade.Fade.GetInstance().SetColor(0.0f,0.0f,0.0f,1.0f);
 			Fee.Fade.Fade.GetInstance().SetToColor(0.0f,0.0f,0.0f,1.0f);
 			Fee.Fade.Fade.GetInstance().SetAnime();
-
-			//入力。インスタンス作成。
-			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//シーン。インスタンス作成。
 			Fee.Scene.Scene.CreateInstance();
@@ -277,12 +278,6 @@ namespace TestScript
 		*/
 		private void InputUpdate()
 		{
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main();
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
-
 			//シーン。
 			Fee.Scene.Scene.GetInstance().Main();
 		}

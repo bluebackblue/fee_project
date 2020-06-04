@@ -47,6 +47,7 @@ namespace TestScript
 		{
 			//プレイヤーループシステム。インスタンス作成。
 			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().RemoveFromType(typeof( UnityEngine.Experimental.PlayerLoop.PreUpdate.SendMouseEvents));
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -70,7 +71,7 @@ namespace TestScript
 
 			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
-			Fee.Input.Input.CreateInstance(true,false,false,false);
+			Fee.Input.Input.CreateInstance(true,false,true,false);
 			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
@@ -104,11 +105,6 @@ namespace TestScript
 		*/
 		private void InputUpdate()
 		{
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main();
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** Update

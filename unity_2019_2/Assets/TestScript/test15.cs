@@ -82,6 +82,7 @@ namespace TestScript
 		{
 			//プレイヤーループシステム。インスタンス作成。
 			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().RemoveFromType(typeof( UnityEngine.Experimental.PlayerLoop.PreUpdate.SendMouseEvents));
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -108,11 +109,11 @@ namespace TestScript
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Enter);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Esc);
 
-			//ＵＩ。インスタンス作成。
-			Fee.Ui.Ui.CreateInstance();
-
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
+
+			//ＵＩ。インスタンス作成。
+			Fee.Ui.Ui.CreateInstance();
 
 			//プレハブリスト。
 			this.prefablist = new Common.PrefabList();
@@ -259,11 +260,6 @@ namespace TestScript
 		*/
 		private void InputUpdate()
 		{
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main();
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** Update

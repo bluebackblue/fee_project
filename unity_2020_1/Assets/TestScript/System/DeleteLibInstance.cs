@@ -169,9 +169,8 @@ namespace TestScript
 				Fee.Platform.Platform.DeleteInstance();
 			}
 
-			//プレイヤーループシステム。
+			//プレイヤーループシステム。順序変更。
 			{
-				Fee.PlayerLoopSystem.PlayerLoopSystem.DeleteInstance();
 			}
 
 			//プール。
@@ -223,6 +222,14 @@ namespace TestScript
 			//ビデオ。
 			{
 				Fee.Video.Video.DeleteInstance();
+			}
+
+			//順序変更。
+			{
+				//プレイヤーループシステム。
+				{
+					Fee.PlayerLoopSystem.PlayerLoopSystem.DeleteInstance();
+				}
 			}
 		}
 	}
