@@ -49,14 +49,6 @@ namespace TestScript
 			*/
 			public bool Main()
 			{
-				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
-					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
-						Debug.Log("SceneA : request");
-						//遷移リクエスト。
-						Fee.Scene.Scene.GetInstance().SetNextScene(new SceneB());
-					}
-				}
-
 				return Fee.Scene.Scene.GetInstance().IsNextScene();
 			}
 
@@ -64,6 +56,13 @@ namespace TestScript
 			*/
 			public void Unity_Update(float a_delta)
 			{
+				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
+					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
+						//遷移リクエスト。
+						Debug.Log("SceneA : request");
+						Fee.Scene.Scene.GetInstance().SetNextScene(new SceneB());
+					}
+				}
 			}
 
 			/** [Scene_Base]更新。
@@ -122,14 +121,6 @@ namespace TestScript
 			*/
 			public bool Main()
 			{
-				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
-					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
-						//遷移リクエスト。
-						Debug.Log("SceneB : request");
-						Fee.Scene.Scene.GetInstance().SetNextScene(new SceneA());
-					}
-				}
-
 				return Fee.Scene.Scene.GetInstance().IsNextScene();
 			}
 
@@ -137,6 +128,13 @@ namespace TestScript
 			*/
 			public void Unity_Update(float a_delta)
 			{
+				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
+					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
+						//遷移リクエスト。
+						Debug.Log("SceneB : request");
+						Fee.Scene.Scene.GetInstance().SetNextScene(new SceneA());
+					}
+				}
 			}
 
 			/** [Scene_Base]更新。
@@ -200,7 +198,7 @@ namespace TestScript
 		private void Start()
 		{
 			//プレイヤーループシステム。インスタンス作成。
-			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -234,7 +232,8 @@ namespace TestScript
 			Fee.Fade.Fade.GetInstance().SetAnime();
 
 			//入力。インスタンス作成。
-			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.CreateInstance(true,false,true,false);
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//シーン。インスタンス作成。
 			Fee.Scene.Scene.CreateInstance();
@@ -266,32 +265,39 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_Before();
-
 			//パフォーマンスカウンター。インスタンス作成。
 			Fee.PerformanceCounter.Config.LOG_ENABLE = true;
 			Fee.PerformanceCounter.PerformanceCounter.CreateInstance();
 
 			//フェード。
 			Fee.Fade.Fade.GetInstance().Main();
+		}
 
+		/** InputUpdate
+		*/
+		private void InputUpdate()
+		{
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main();
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
 
 			//シーン。
 			Fee.Scene.Scene.GetInstance().Main();
-
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_After();
 		}
 
 		/** Update
 		*/
 		private void Update()
+		{
+			//シーン。
+			Fee.Scene.Scene.GetInstance().Unity_Update(UnityEngine.Time.deltaTime);
+		}
+
+		/** LateUpdate
+		*/
+		private void LateUpdate()
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();

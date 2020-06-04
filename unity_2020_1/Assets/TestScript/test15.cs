@@ -81,7 +81,7 @@ namespace TestScript
 		private void Start()
 		{
 			//プレイヤーループシステム。インスタンス作成。
-			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -103,7 +103,8 @@ namespace TestScript
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//入力。インスタンス作成。
-			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.CreateInstance(true,false,true,false);
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Enter);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Esc);
 
@@ -221,15 +222,6 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_Before();
-
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
-
 			if(Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Enter).digital.down == true){
 				this.is_clip = !this.is_clip;
 
@@ -261,14 +253,28 @@ namespace TestScript
 				this.inputfield.SetClipRect(in t_cliprect);
 				this.slider.SetClipRect(in t_cliprect);
 			}
+		}
 
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_After();
+		/** InputUpdate
+		*/
+		private void InputUpdate()
+		{
+			//イベントプレート。
+			Fee.EventPlate.EventPlate.GetInstance().Main();
+
+			//ＵＩ。
+			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** Update
 		*/
 		private void Update()
+		{
+		}
+
+		/** LateUpdate
+		*/
+		private void LateUpdate()
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();

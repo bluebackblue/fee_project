@@ -146,7 +146,7 @@ namespace TestScript
 		private void Start()
 		{
 			//プレイヤーループシステム。インスタンス作成。
-			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -183,7 +183,8 @@ namespace TestScript
 			Fee.Ui.Ui.CreateInstance();
 
 			//入力。インスタンス作成。
-			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.CreateInstance(true,false,true,false);
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
@@ -362,20 +363,11 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_Before();
-
 			//ファイル。
 			Fee.File.File.GetInstance().Main();
 
 			//サウンドプール。
 			Fee.SoundPool.SoundPool.GetInstance().Main();
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
-
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
 
 			switch(this.soundpool_mode){
 			case SoundPool_Mode.Wait:
@@ -426,14 +418,28 @@ namespace TestScript
 			}
 
 			this.status_2.SetText("soundpool = " + Fee.Audio.Audio.GetInstance().GetSoundPoolCount().ToString());
+		}
 
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_After();
+		/** InputUpdate
+		*/
+		private void InputUpdate()
+		{
+			//イベントプレート。
+			Fee.EventPlate.EventPlate.GetInstance().Main();
+
+			//ＵＩ。
+			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** Update
 		*/
 		private void Update()
+		{
+		}
+
+		/** LateUpdate
+		*/
+		private void LateUpdate()
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();

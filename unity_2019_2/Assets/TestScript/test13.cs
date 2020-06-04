@@ -149,7 +149,7 @@ namespace TestScript
 		private void Start()
 		{
 			//プレイヤーループシステム。インスタンス作成。
-			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -171,7 +171,8 @@ namespace TestScript
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//入力。インスタンス作成。
-			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.CreateInstance(true,false,true,true);
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 			Fee.Input.Input.GetInstance().touch.SetCallBack(CallBack_OnTouch);
 
 			//イベントプレート。
@@ -307,28 +308,33 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_Before();
-
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
-
 			//タッチ。
 			Fee.Input.Touch.UpdateTouchList(this.touchview_list);
 
 			//タッチ数。
 			this.touch_text.SetText(Fee.Input.Input.GetInstance().touch.device_item_list_count.ToString());
+		}
 
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_After();
+		/** InputUpdate
+		*/
+		private void InputUpdate()
+		{
+			//イベントプレート。
+			Fee.EventPlate.EventPlate.GetInstance().Main();
+
+			//ＵＩ。
+			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** Update
 		*/
 		private void Update()
+		{
+		}
+
+		/** LateUpdate
+		*/
+		private void LateUpdate()
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();

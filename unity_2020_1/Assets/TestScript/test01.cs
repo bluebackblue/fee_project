@@ -95,7 +95,7 @@ namespace TestScript
 		private void Start()
 		{
 			//プレイヤーループシステム。インスタンス作成。
-			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -119,7 +119,7 @@ namespace TestScript
 
 			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
-			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.CreateInstance(true,false,true,false);
 			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
@@ -327,27 +327,21 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_Before();
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
-
-			{
-				int t_start_x = Fee.Render2D.Config.VIRTUAL_W / 2;
-				int t_start_y = Fee.Render2D.Config.VIRTUAL_H / 2;
-
-				this.line.SetRect(new Fee.Geometry.Rect2D_A<int>(t_start_x,t_start_y,Fee.Input.Input.GetInstance().mouse.cursor.pos.x,Fee.Input.Input.GetInstance().mouse.cursor.pos.y));
-				this.start.SetRect(t_start_x - 2,t_start_y - 2,4,4);
-			}
-
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_After();
 		}
 
 		/** Update
 		*/
 		private void Update()
+		{
+			int t_start_x = Fee.Render2D.Config.VIRTUAL_W / 2;
+			int t_start_y = Fee.Render2D.Config.VIRTUAL_H / 2;
+			this.line.SetRect(new Fee.Geometry.Rect2D_A<int>(t_start_x,t_start_y,Fee.Input.Input.GetInstance().mouse.cursor.pos.x,Fee.Input.Input.GetInstance().mouse.cursor.pos.y));
+			this.start.SetRect(t_start_x - 2,t_start_y - 2,4,4);
+		}
+
+		/** LateUpdate
+		*/
+		private void LateUpdate()
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
@@ -358,7 +352,10 @@ namespace TestScript
 		private void InputUpdate()
 		{
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main();
+
+			//ＵＩ。
+			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** 削除前。

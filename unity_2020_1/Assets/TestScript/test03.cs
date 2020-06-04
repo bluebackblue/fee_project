@@ -217,7 +217,7 @@ namespace TestScript
 		private void Start()
 		{
 			//プレイヤーループシステム。インスタンス作成。
-			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -241,7 +241,8 @@ namespace TestScript
 
 			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
-			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.CreateInstance(true,false,true,false);
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -286,9 +287,6 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_Before();
-
 			//window_list
 			if(this.window_list != null){
 				for(int ii=0;ii<this.window_list.Length;ii++){
@@ -301,20 +299,28 @@ namespace TestScript
 					}
 				}
 			}
+		}
 
+		/** InputUpdate
+		*/
+		private void InputUpdate()
+		{
 			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
+			Fee.EventPlate.EventPlate.GetInstance().Main();
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
-
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_After();
 		}
 
 		/** Update
 		*/
 		private void Update()
+		{
+		}
+
+		/** LateUpdate
+		*/
+		private void LateUpdate()
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();

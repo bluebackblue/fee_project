@@ -250,7 +250,7 @@ namespace Fee.EditorTool
 				//入力。
 				#if(DEF_INPUT)
 				{
-					Fee.Input.Input.CreateInstance();
+					Fee.Input.Input.CreateInstance(true,true,true,true);
 				}
 				#endif
 
@@ -322,7 +322,7 @@ namespace Fee.EditorTool
 				//プレイヤーループシステム。
 				#if(DEF_PLAYERLOOPSYSTEM)
 				{
-					Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+					Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
 				}
 				#endif
 
@@ -630,7 +630,7 @@ namespace Fee.EditorTool
 					//イベントプレート。
 					#if(DEF_EVENTPLATE)
 					{
-						Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
+						Fee.EventPlate.EventPlate.GetInstance().Main();
 					}
 					#endif
 

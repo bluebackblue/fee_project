@@ -295,7 +295,7 @@ namespace TestScript
 		private void Start()
 		{
 			//プレイヤーループシステム。インスタンス作成。
-			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -317,7 +317,8 @@ namespace TestScript
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//入力。インスタンス作成。
-			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.CreateInstance(true,false,true,false);
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントテンプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
@@ -669,26 +670,31 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_Before();
+		}
 
-			//イベントテンプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
+		/** InputUpdate
+		*/
+		private void InputUpdate()
+		{
+			//イベントプレート。
+			Fee.EventPlate.EventPlate.GetInstance().Main();
 
 			//ＵＩ。
 			Fee.Ui.Ui.GetInstance().Main();
-
-			//ドラッグスクロールアップデート。
-			this.v_scrollview.DragScrollUpdate(0.98f);
-			this.h_scrollview.DragScrollUpdate(0.98f);
-
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_After();
 		}
 
 		/** Update
 		*/
 		private void Update()
+		{
+			//ドラッグスクロールアップデート。
+			this.v_scrollview.DragScrollUpdate(0.98f,UnityEngine.Time.deltaTime);
+			this.h_scrollview.DragScrollUpdate(0.98f,UnityEngine.Time.deltaTime);
+		}
+
+		/** LateUpdate
+		*/
+		private void LateUpdate()
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();

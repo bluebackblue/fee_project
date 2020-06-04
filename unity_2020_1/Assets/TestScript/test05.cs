@@ -179,7 +179,7 @@ namespace TestScript
 		private void Start()
 		{
 			//プレイヤーループシステム。インスタンス作成。
-			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
 
 			//プラットフォーム。インスタンス作成。
 			Fee.Platform.Platform.CreateInstance();
@@ -201,7 +201,8 @@ namespace TestScript
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//入力。インスタンス作成。
-			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.CreateInstance(true,true,true,false);
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Up);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Down);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Left);
@@ -630,15 +631,6 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_Before();
-
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
-
 			//モーター。
 			for(int ii=0;ii<Fee.Input.Input.GetInstance().pad.status.Length;ii++){
 				Fee.Input.Input.GetInstance().pad.status[ii].motor_low.Request(Fee.Input.Input.GetInstance().pad.status[ii].l_trigger_2.value);
@@ -724,14 +716,28 @@ namespace TestScript
 
 				this.pad_text.SetText(t_text);
 			}
+		}
 
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_After();
+		/** InputUpdate
+		*/
+		private void InputUpdate()
+		{
+			//イベントプレート。
+			Fee.EventPlate.EventPlate.GetInstance().Main();
+
+			//ＵＩ。
+			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** Update
 		*/
 		private void Update()
+		{
+		}
+
+		/** LateUpdate
+		*/
+		private void LateUpdate()
 		{
 			//２Ｄ描画。
 			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();

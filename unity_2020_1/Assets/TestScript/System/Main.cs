@@ -131,12 +131,17 @@ namespace TestScript
 							//this.step_time++;
 
 							//更新。
-							this.MainScene_FixedUpdate();
-
 							if(this.loadscene_request != null){
+
+								if(this.deleter != null){
+									this.deleter.DeleteAll();
+									this.deleter = null;
+								}
+
 								this.step = Step.LibDelete;
 								this.step_time = 0;
 								continue;
+
 							}
 						}
 					}break;
@@ -174,7 +179,7 @@ namespace TestScript
 					{
 						if(this.step_time == 0){
 							//ロードシーン。
-							this.MainScene_LoadScene();
+							UnityEngine.SceneManagement.SceneManager.LoadScene(this.loadscene_request);
 							this.step_time++;
 							continue;
 						}
@@ -192,9 +197,34 @@ namespace TestScript
 			switch(this.step){
 			case Step.Main:
 				{
-					this.MainScene_Update();
 				}break;
 			}
+		}
+
+		/** 更新。
+		*/
+		private void LateUpdate()
+		{
+			switch(this.step){
+			case Step.Main:
+				{
+					//２Ｄ描画。
+					if(Fee.Render2D.Render2D.IsCreateInstance() == true){
+						Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
+					}
+				}break;
+			}
+		}
+
+		/** InputUpdate
+		*/
+		public void InputUpdate()
+		{
+			//イベントプレート。
+			Fee.EventPlate.EventPlate.GetInstance().Main();
+
+			//ＵＩ。
+			Fee.Ui.Ui.GetInstance().Main();
 		}
 
 		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
@@ -218,7 +248,7 @@ namespace TestScript
 		public void MainScene_LibCreateInstance()
 		{
 			//プレイヤーループシステム。
-			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance();
+			Fee.PlayerLoopSystem.PlayerLoopSystem.CreateInstance(null);
 
 			//２Ｄ描画。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
@@ -232,7 +262,8 @@ namespace TestScript
 			Fee.EventPlate.EventPlate.CreateInstance();
 
 			//入力。
-			Fee.Input.Input.CreateInstance();
+			Fee.Input.Input.CreateInstance(true,false,true,false);
+			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//フォント。
 			Fee.Render2D.Render2D.GetInstance().SetDefaultFont(this.prefablist.GetFont(Common.FontType.Font));
@@ -284,54 +315,6 @@ namespace TestScript
 		{
 			//全部削除。
 			DeleteLibInstance.DeleteAll();
-		}
-
-		/** 削除。
-		*/
-		public void MainScene_Delete()
-		{
-			this.deleter.DeleteAll();
-		}	
-
-		/** ロードシーン。
-		*/
-		public void MainScene_LoadScene()
-		{
-			UnityEngine.SceneManagement.SceneManager.LoadScene(this.loadscene_request);
-		}
-
-		/** 更新。
-		*/
-		public void MainScene_Update()
-		{
-			//２Ｄ描画。
-			if(Fee.Render2D.Render2D.IsCreateInstance() == true){
-				Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
-			}
-		}
-
-		/** 更新。
-		*/
-		public void MainScene_FixedUpdate()
-		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_Before();
-
-			//イベントプレート。
-			Fee.EventPlate.EventPlate.GetInstance().Main(in Fee.Input.Input.GetInstance().mouse.cursor.pos);
-
-			//ＵＩ。
-			Fee.Ui.Ui.GetInstance().Main();
-
-			if(this.loadscene_request != null){
-				if(this.deleter != null){
-					this.deleter.DeleteAll();
-					this.deleter = null;
-				}
-			}
-
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_After();
 		}
 	}
 }
