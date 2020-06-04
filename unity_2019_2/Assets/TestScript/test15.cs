@@ -97,6 +97,7 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
@@ -105,7 +106,6 @@ namespace TestScript
 
 			//入力。インスタンス作成。
 			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Enter);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Esc);
 
@@ -219,25 +219,10 @@ namespace TestScript
 			}
 		}
 
-		/** FixedUpdate
+		/** RowUpdate
 		*/
-		private void FixedUpdate()
+		private void RowUpdate()
 		{
-			if(Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Enter).digital.down == true){
-				this.is_clip = !this.is_clip;
-
-				this.sprite.SetClip(this.is_clip);
-				this.text.SetClip(this.is_clip);
-				this.button.SetClip(this.is_clip);
-				this.checkbutton.SetClip(this.is_clip);
-				this.inputfield.SetClip(this.is_clip);
-				this.slider.SetClip(this.is_clip);
-			}
-
-			if(Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Esc).digital.down == true){
-				this.update_clip_rect = !this.update_clip_rect;
-			}
-
 			if(this.update_clip_rect == true){
 				Fee.Geometry.Rect2D_R<int> t_cliprect;
 				{
@@ -256,9 +241,9 @@ namespace TestScript
 			}
 		}
 
-		/** InputUpdate
+		/** FixedUpdate
 		*/
-		private void InputUpdate()
+		private void FixedUpdate()
 		{
 		}
 
@@ -266,6 +251,20 @@ namespace TestScript
 		*/
 		private void Update()
 		{
+			if(Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Enter).digital.down == true){
+				this.is_clip = !this.is_clip;
+
+				this.sprite.SetClip(this.is_clip);
+				this.text.SetClip(this.is_clip);
+				this.button.SetClip(this.is_clip);
+				this.checkbutton.SetClip(this.is_clip);
+				this.inputfield.SetClip(this.is_clip);
+				this.slider.SetClip(this.is_clip);
+			}
+
+			if(Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Esc).digital.down == true){
+				this.update_clip_rect = !this.update_clip_rect;
+			}
 		}
 
 		/** LateUpdate
@@ -280,6 +279,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 

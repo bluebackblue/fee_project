@@ -162,6 +162,7 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//ファイル。インスタンス作成。
 			Fee.File.Config.LOG_ENABLE = true;
@@ -181,7 +182,6 @@ namespace TestScript
 
 			//入力。インスタンス作成。
 			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
@@ -360,9 +360,9 @@ namespace TestScript
 			}
 		}
 
-		/** FixedUpdate
+		/** RowUpdate
 		*/
-		private void FixedUpdate()
+		private void RowUpdate()
 		{
 			//サウンドプール。
 			Fee.SoundPool.SoundPool.GetInstance().Main();
@@ -373,7 +373,7 @@ namespace TestScript
 				}break;
 			case SoundPool_Mode.Start:
 				{
-					this.soundpool_loaditem = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsSoundPool(new Fee.File.Path(Common.Data.StreamingAssets.TEST11_SOUNDPOOL_SE),SOUNDPOOL_DATA_VERSION);
+					this.soundpool_loaditem = Fee.SoundPool.SoundPool.GetInstance().RequestLoadStreamingAssetsPack(new Fee.File.Path(Common.Data.StreamingAssets.TEST11_SOUNDPOOL_SE),SOUNDPOOL_DATA_VERSION);
 					this.soundpool_mode = SoundPool_Mode.Now;
 				}break;
 			case SoundPool_Mode.Now:
@@ -383,16 +383,16 @@ namespace TestScript
 							//ロード中。
 							this.status.SetText("soundpool : " + this.soundpool_loaditem.GetResultProgress().ToString());
 						}else{
-							if(this.soundpool_loaditem.GetResultType() == Fee.SoundPool.Item.ResultType.SoundPool){
-								Fee.Audio.Pack_SoundPool t_pack_soundpool = this.soundpool_loaditem.GetResultSoundPool();
-								if(t_pack_soundpool == null){
-									//不正なサウンドプールパック。
+							if(this.soundpool_loaditem.GetResultType() == Fee.SoundPool.Item.ResultType.Pack){
+								Fee.SoundPool.Pack t_pack = this.soundpool_loaditem.GetResultPack();
+								if(t_pack == null){
+									//不正なパック。
 									this.status.SetText("Error : " + this.soundpool_mode.ToString());
 									this.soundpool_loaditem = null;
 									this.soundpool_mode = SoundPool_Mode.Wait;
 								}else{
 									//成功。
-									Fee.Audio.Audio.GetInstance().LoadSe(new Fee.Audio.Bank(t_pack_soundpool),SE_ID);
+									Fee.Audio.Audio.GetInstance().LoadSe(new Fee.Audio.Bank(t_pack),SE_ID);
 									this.status.SetText("Success");
 									this.soundpool_loaditem = null;
 									this.soundpool_mode = SoundPool_Mode.Wait;
@@ -408,19 +408,12 @@ namespace TestScript
 				}break;
 			}
 
-			//再生。
-			if(Fee.Geometry.Range.IsRectIn(in Fee.Render2D.Config.VIRTUAL_RECT_MAX,in Fee.Input.Input.GetInstance().mouse.cursor.pos) == true){
-				if(Fee.Input.Input.GetInstance().mouse.left.down == true){
-					Fee.Audio.Audio.GetInstance().PlaySe(SE_ID,0);
-				}
-			}
-
-			this.status_2.SetText("soundpool = " + Fee.Audio.Audio.GetInstance().GetSoundPoolCount().ToString());
+			this.status_2.SetText("soundpool = " + Fee.SoundPool.SoundPool.GetInstance().GetPlayer().GetCount().ToString());
 		}
 
-		/** InputUpdate
+		/** FixedUpdate
 		*/
-		private void InputUpdate()
+		private void FixedUpdate()
 		{
 		}
 
@@ -428,6 +421,12 @@ namespace TestScript
 		*/
 		private void Update()
 		{
+			//再生。
+			if(Fee.Geometry.Range.IsRectIn(in Fee.Render2D.Config.VIRTUAL_RECT_MAX,in Fee.Input.Input.GetInstance().mouse.cursor.pos) == true){
+				if(Fee.Input.Input.GetInstance().mouse.left.down == true){
+					Fee.Audio.Audio.GetInstance().PlaySe(SE_ID,0);
+				}
+			}
 		}
 
 		/** LateUpdate
@@ -442,6 +441,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 

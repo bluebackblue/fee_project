@@ -4,17 +4,17 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief オーディオ。パック。
+ * @brief サウンドプール。パック。
 */
 
 
-/** Fee.Audio
+/** Fee.SoundPool
 */
-namespace Fee.Audio
+namespace Fee.SoundPool
 {
-	/** Pack_SoundPool
+	/** Pack
 	*/
-	public class Pack_SoundPool
+	public class Pack
 	{
 		/** データハッシュ。
 		*/
@@ -33,13 +33,16 @@ namespace Fee.Audio
 		public System.Collections.Generic.List<float> volume_list;
 
 		/** fullpath_list
+
+			ロード時に生成。
+
 		*/
 		[Fee.JsonItem.Ignore]
 		public System.Collections.Generic.List<File.Path> fullpath_list;
 
 		/** constructor
 		*/
-		public Pack_SoundPool()
+		public Pack()
 		{
 			//data_hash
 			this.data_hash = 0;

@@ -195,6 +195,7 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//２Ｄ描画。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
@@ -203,7 +204,6 @@ namespace TestScript
 
 			//入力。インスタンス作成。
 			Fee.Input.Input.CreateInstance(true,true,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Up);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Down);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Left);
@@ -628,9 +628,21 @@ namespace TestScript
 			this.prefablist.SetButtonActive(this.button_inputsystem_gamepad_padmotor,				Fee.Input.Config.USE_INPUTSYSTEM_GAMEPAD_PADMOTOR);
 		}
 
+		/** RowUpdate
+		*/
+		private void RowUpdate()
+		{
+		}
+
 		/** FixedUpdate
 		*/
 		private void FixedUpdate()
+		{
+		}
+
+		/** Update
+		*/
+		private void Update()
 		{
 			//モーター。
 			for(int ii=0;ii<Fee.Input.Input.GetInstance().pad.status.Length;ii++){
@@ -719,18 +731,6 @@ namespace TestScript
 			}
 		}
 
-		/** InputUpdate
-		*/
-		private void InputUpdate()
-		{
-		}
-
-		/** Update
-		*/
-		private void Update()
-		{
-		}
-
 		/** LateUpdate
 		*/
 		private void LateUpdate()
@@ -743,6 +743,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 

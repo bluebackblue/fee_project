@@ -160,6 +160,7 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
@@ -168,7 +169,6 @@ namespace TestScript
 
 			//入力。インスタンス作成。
 			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。インスタンス作成。
 			Fee.EventPlate.EventPlate.CreateInstance();
@@ -306,9 +306,9 @@ namespace TestScript
 			}
 		}
 
-		/** FixedUpdate
+		/** RowUpdate
 		*/
-		private void FixedUpdate()
+		private void RowUpdate()
 		{
 			//暗号。
 			Fee.Crypt.Crypt.GetInstance().Main();
@@ -551,9 +551,9 @@ namespace TestScript
 			}
 		}
 
-		/** InputUpdate
+		/** FixedUpdate
 		*/
-		private void InputUpdate()
+		private void FixedUpdate()
 		{
 		}
 
@@ -575,6 +575,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 

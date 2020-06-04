@@ -165,6 +165,7 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//２Ｄ描画。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
@@ -173,7 +174,6 @@ namespace TestScript
 
 			//入力。インスタンス作成。
 			Fee.Input.Input.CreateInstance(true,false,true,true);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 			Fee.Input.Input.GetInstance().touch.SetCallBack(CallBack_OnTouch);
 
 			//イベントプレート。
@@ -305,20 +305,15 @@ namespace TestScript
 			this.touchview_list.Add(new TouchView(this.prefablist,this.deleter,this.touchview_id,a_touch_phase),a_touch_phase);
 		}
 
+		/** RowUpdate
+		*/
+		private void RowUpdate()
+		{
+		}
+
 		/** FixedUpdate
 		*/
 		private void FixedUpdate()
-		{
-			//タッチ。
-			Fee.Input.Touch.UpdateTouchList(this.touchview_list);
-
-			//タッチ数。
-			this.touch_text.SetText(Fee.Input.Input.GetInstance().touch.device_item_list_count.ToString());
-		}
-
-		/** InputUpdate
-		*/
-		private void InputUpdate()
 		{
 		}
 
@@ -326,6 +321,11 @@ namespace TestScript
 		*/
 		private void Update()
 		{
+			//タッチ。
+			Fee.Input.Touch.UpdateTouchList(this.touchview_list);
+
+			//タッチ数。
+			this.touch_text.SetText(Fee.Input.Input.GetInstance().touch.device_item_list_count.ToString());
 		}
 
 		/** LateUpdate
@@ -340,6 +340,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 

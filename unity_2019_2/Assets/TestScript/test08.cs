@@ -221,11 +221,11 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
 			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -309,15 +309,15 @@ namespace TestScript
 			this.Listup(this.now_path);
 		}
 
-		/** FixedUpdate
+		/** RowUpdate
 		*/
-		private void FixedUpdate()
+		private void RowUpdate()
 		{
 		}
 
-		/** InputUpdate
+		/** FixedUpdate
 		*/
-		private void InputUpdate()
+		private void FixedUpdate()
 		{
 		}
 
@@ -341,6 +341,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 

@@ -77,6 +77,7 @@ namespace TestScript
 			//関数呼び出し。
 			Fee.Function.Function.CreateInstance();
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
+			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
@@ -87,7 +88,6 @@ namespace TestScript
 			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
 			Fee.Input.Input.CreateInstance(true,false,true,false);
-			Fee.Input.Input.GetInstance().SetCallBack(this.InputUpdate);
 
 			//イベントプレート。
 			Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -123,9 +123,9 @@ namespace TestScript
 			}
 		}
 
-		/** FixedUpdate
+		/** RowUpdate
 		*/
-		private void FixedUpdate()
+		private void RowUpdate()
 		{
 			//プレーンリスト更新。
 			this.frustum_culling.UpdatePlaneList(this.main_camera);
@@ -145,9 +145,9 @@ namespace TestScript
 			}
 		}
 
-		/** InputUpdate
+		/** FixedUpdate
 		*/
-		private void InputUpdate()
+		private void FixedUpdate()
 		{
 		}
 
@@ -169,6 +169,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
 
