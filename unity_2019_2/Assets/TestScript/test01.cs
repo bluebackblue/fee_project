@@ -335,90 +335,16 @@ namespace TestScript
 			this.start.SetRect(t_start_x - 2,t_start_y - 2,4,4);
 		}
 
-		/** Buffer
-		*/
-		public struct Buffer
-		{
-			/** position
-			*/
-			public UnityEngine.Vector3 position;
-			
-			/** constructor
-			*/
-			public Buffer(in UnityEngine.Vector3 a_position)
-			{
-				this.position = a_position;
-			}
-		}
-
-		public class Item : Fee.List.NodeItem
-		{
-			/** time
-			*/
-			public int time;
-		}
-
 		/** FixedUpdate
 		*/
 		private void FixedUpdate()
 		{
 		}
 
-		/** instancelist
-		*/
-		public Fee.List.NodeList<Item,Buffer> instancelist;
-
 		/** Update
 		*/
 		private void Update()
 		{
-			//初期化。
-			if(this.instancelist == null){
-
-				//buffer
-				Buffer[] t_buffer = new Buffer[10];
-				for(int ii=0;ii<t_buffer.Length;ii++){
-					t_buffer[ii] = new Buffer(UnityEngine.Vector3.zero);
-				}
-
-				//instancelist
-				this.instancelist = new Fee.List.NodeList<Item,Buffer>(t_buffer);
-			}
-
-			//作成。
-			if(UnityEngine.Input.GetKey(KeyCode.Alpha0) == true){
-				System.Collections.Generic.LinkedListNode<Item> t_node = this.instancelist.Alloc();
-				if(t_node != null){
-					t_node.Value.time = 0;
-				}
-			}
-
-			{
-				System.Collections.Generic.LinkedListNode<Item> t_node = this.instancelist.list_use.First;
-				while(t_node != null){
-					System.Collections.Generic.LinkedListNode<Item> t_node_next = t_node.Next;
-
-					//前進。
-					t_node.Value.time++;
-					this.instancelist.buffer[t_node.Value.GetNodeIndex()].position = UnityEngine.Vector3.forward * t_node.Value.time;
-
-					//削除。
-					if(t_node.Value.time > 10){
-						this.instancelist.Free(t_node);
-					}
-
-					//次へ。
-					t_node = t_node_next;
-				}
-			}
-
-			//隙間を埋める。
-			this.instancelist.GarbageCollection();
-
-			//バッファーの表示。
-			for(int ii=0;ii<this.instancelist.GetUseCount();ii++){
-				UnityEngine.Debug.Log(ii.ToString() + ":" + this.instancelist.buffer[ii].position.ToString());
-			}
 		}
 
 		/** LateUpdate
