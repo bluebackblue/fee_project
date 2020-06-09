@@ -10,7 +10,11 @@ namespace TestScript.Common
 	{
 		/** コメント
 		*/
-		Bgm,
+		Bgm01,
+
+		/** コメント
+		*/
+		Bgm02,
 
 	}
 }

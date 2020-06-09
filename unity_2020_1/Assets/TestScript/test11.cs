@@ -173,6 +173,8 @@ namespace TestScript
 
 			//オーディオ。インスタンス作成。
 			Fee.Audio.Config.LOG_ENABLE = true;
+			Fee.Audio.Config.BGM_PLAY_FADEIN = true;
+			Fee.Audio.Config.BGM_CROSSFADE_SPEED = 0.004f;
 			Fee.Audio.Audio.CreateInstance();
 
 			//２Ｄ描画。インスタンス作成。
@@ -347,12 +349,21 @@ namespace TestScript
 				{
 					//ＢＧＭ。
 
-					//ロード。
-					Fee.Audio.Bank t_bank = this.prefablist.GetBgmBank();
-					if(t_bank != null){
-						//ロード。
-						Fee.Audio.Audio.GetInstance().LoadBgm(t_bank);
+					if(Fee.Audio.Audio.GetInstance().GetBgmPlayIndex() < 0){
 
+						//ロード。
+						Fee.Audio.Bank t_bank = this.prefablist.GetBgmBank();
+						if(t_bank != null){
+							//ロード。
+							Fee.Audio.Audio.GetInstance().LoadBgm(t_bank);
+
+							//再生。
+							Fee.Audio.Audio.GetInstance().PlayBgm(1);
+						}
+					}else if(Fee.Audio.Audio.GetInstance().GetBgmPlayIndex() == 0){
+						//再生。
+						Fee.Audio.Audio.GetInstance().PlayBgm(1);
+					}else{
 						//再生。
 						Fee.Audio.Audio.GetInstance().PlayBgm(0);
 					}

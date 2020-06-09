@@ -87,7 +87,7 @@ namespace Fee.Audio
 		private Audio()
 		{
 			//ボリューム。マスター。
-			this.volume_master = new Volume(Config.DEFAULT_VOLUME_MASTER);
+			this.volume_master = new Volume(null,Config.DEFAULT_VOLUME_MASTER);
 
 			//bgm
 			this.bgm = new Bgm(this.volume_master);
@@ -154,8 +154,8 @@ namespace Fee.Audio
 		public void SetMasterVolume(float a_volume)
 		{
 			this.volume_master.SetVolume(a_volume);
-			this.se.UpdateVolume();
-			this.bgm.UpdateVolume();
+			this.se.ApplyVolume();
+			this.bgm.ApplyVolume();
 		}
 
 		/** ＳＥボリューム。設定。
@@ -163,7 +163,7 @@ namespace Fee.Audio
 		public void SetSeVolume(float a_volume)
 		{
 			this.se.SetVolume(a_volume);
-			this.se.UpdateVolume();
+			this.se.ApplyVolume();
 		}
 
 		/** ＢＧＭボリューム。設定。
@@ -171,7 +171,7 @@ namespace Fee.Audio
 		public void SetBgmVolume(float a_volume)
 		{
 			this.bgm.SetVolume(a_volume);
-			this.bgm.UpdateVolume();
+			this.bgm.ApplyVolume();
 		}
 
 		/** マスターボリューム。取得。
@@ -290,6 +290,13 @@ namespace Fee.Audio
 		public float GetBgmPlayPosition()
 		{
 			return this.bgm.GetPlayPosition();
+		}
+
+		/** ＢＧＭ再生インデックス。取得。
+		*/
+		public int GetBgmPlayIndex()
+		{
+			return this.bgm.GetPlayIndex();
 		}
 	}
 }

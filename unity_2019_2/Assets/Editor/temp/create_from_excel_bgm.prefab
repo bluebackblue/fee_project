@@ -46,7 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tag_list:
   - BGM01
+  - BGM02
   audioclip_list:
+  - {fileID: 8300000, guid: 24557e744dc0ffd45ac8f1dc1c0c5b53, type: 3}
   - {fileID: 8300000, guid: 24557e744dc0ffd45ac8f1dc1c0c5b53, type: 3}
 --- !u!114 &6795530916332333545
 MonoBehaviour:
@@ -62,5 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tag_list:
   - BGM01
+  - BGM02
   audiovolume_list:
+  - 1
   - 1

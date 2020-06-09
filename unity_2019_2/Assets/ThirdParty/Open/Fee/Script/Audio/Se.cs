@@ -16,21 +16,17 @@ namespace Fee.Audio
 	*/
 	public class Se
 	{
-		/** ＳＥ。オーディオソース。
+		/** ボリューム。
 		*/
-		private UnityEngine.GameObject se_audiosource_gameobject;
+		private Volume volume;
 
-		/** ボリューム。マスター。
+		/** audiosource
 		*/
-		private Volume volume_master;
+		private System.Collections.Generic.List<UnityAudioSource> audiosource;
 
-		/** ボリューム。ＳＥ。
+		/** ゲームオブジェクト。
 		*/
-		private Volume volume_se;
-
-		/** オーディオソース。
-		*/
-		private UnityEngine.AudioSource myaudiosource;
+		private UnityEngine.GameObject gameobject;
 
 		/** バンクリスト。
 		*/
@@ -48,26 +44,26 @@ namespace Fee.Audio
 		*/
 		public Se(Volume a_volume_master)
 		{
-			//オーディオソース。ＳＥ。
-			{
-				this.se_audiosource_gameobject = new UnityEngine.GameObject();
-				this.se_audiosource_gameobject.name = "Se";
-				this.se_audiosource_gameobject.AddComponent<UnityEngine.AudioSource>();
+			//audiosource
+			this.audiosource = new System.Collections.Generic.List<UnityAudioSource>();
 
-				UnityEngine.GameObject.DontDestroyOnLoad(this.se_audiosource_gameobject);
+			//volume
+			this.volume = new Volume(a_volume_master,Config.DEFAULT_VOLUME_SE);
+
+			//ゲームオブジェクト。
+			{
+				this.gameobject = new UnityEngine.GameObject();
+				this.gameobject.name = "Se";
+				this.audiosource.Add(new UnityAudioSource(this.gameobject.AddComponent<UnityEngine.AudioSource>(),this.volume));
+
+				UnityEngine.GameObject.DontDestroyOnLoad(this.gameobject);
 			}
 
-			//volume_master
-			this.volume_master = a_volume_master;
-
-			//volume_se
-			this.volume_se = new Volume(Config.DEFAULT_VOLUME_SE);
-
-			//myaudiosource
-			this.myaudiosource = this.se_audiosource_gameobject.GetComponent<UnityEngine.AudioSource>();
-			this.myaudiosource.playOnAwake = false;
-			this.myaudiosource.volume = this.volume_master.GetVolume() * this.volume_se.GetVolume();
-
+			//設定。
+			for(int ii=0;ii<this.audiosource.Count;ii++){
+				this.audiosource[ii].SetOperationVolume(1.0f);
+			}
+			
 			//bank_list
 			this.bank_list = new System.Collections.Generic.Dictionary<long,Bank>();
 
@@ -82,28 +78,30 @@ namespace Fee.Audio
 		*/
 		public void Delete()
 		{
-			UnityEngine.GameObject.Destroy(this.se_audiosource_gameobject);
+			UnityEngine.GameObject.Destroy(this.gameobject);
 		}
 
 		/** ボリューム。設定。
 		*/
 		public void SetVolume(float a_volume)
 		{
-			this.volume_se.SetVolume(a_volume);
+			this.volume.SetVolume(a_volume);
 		}
 
 		/** ボリューム。取得。
 		*/
 		public float GetVolume()
 		{
-			return this.volume_se.GetVolume();
+			return this.volume.GetVolume();
 		}
 
-		/** ボリューム更新。
+		/** ボリューム。更新。
 		*/
-		public void UpdateVolume()
+		public void ApplyVolume()
 		{
-			this.myaudiosource.volume = this.volume_master.GetVolume() * this.volume_se.GetVolume();
+			for(int ii=0;ii<this.audiosource.Count;ii++){
+				this.audiosource[ii].ApplyVolume();
+			}
 		}
 
 		/** SetBank
@@ -179,17 +177,21 @@ namespace Fee.Audio
 			Fee.Audio.Bank t_bank = this.GetBank(a_id);
 			if(t_bank != null){
 
-				float t_volume = 0.0f;
+				float t_data_volume = 0.0f;
 				UnityEngine.AudioClip t_audioclip = null;
 				string t_name = null;
 
-				t_bank.GetAudioClip(a_index,out t_audioclip,out t_volume);
+				t_bank.GetAudioClip(a_index,out t_audioclip,out t_data_volume);
 				if(t_audioclip != null){
-					this.myaudiosource.PlayOneShot(t_audioclip,this.volume_master.GetVolume() * this.volume_se.GetVolume() * t_volume);
+					this.audiosource[0].SetAudioClip(t_audioclip);
+					this.audiosource[0].SetDataVolume(t_data_volume);
+					this.audiosource[0].ApplyVolume();
+
+					this.audiosource[0].PlayOneShot();
 				}else{
-					t_bank.GetSoundPool(a_index,out t_name,out t_volume);
+					t_bank.GetSoundPool(a_index,out t_name,out t_data_volume);
 					if(t_name != null){
-						Fee.SoundPool.SoundPool.GetInstance().GetPlayer().Play(t_name,this.volume_master.GetVolume() * this.volume_se.GetVolume() * t_volume);
+						Fee.SoundPool.SoundPool.GetInstance().GetPlayer().Play(t_name,this.volume.CalcAudioSourceVolume() * t_data_volume);
 					}
 				}
 			}
@@ -200,14 +202,18 @@ namespace Fee.Audio
 		public void Main()
 		{
 			if(this.load_worklist.Count > 0){
+				int t_index = this.load_worklist.Count - 1;
+
 				//ロード。
-				if(this.load_worklist[0].LoadMain() == true){
-					this.load_worklist.RemoveAt(0);
+				if(this.load_worklist[t_index].LoadMain() == true){
+					this.load_worklist.RemoveAt(t_index);
 				}
 			}else if(this.unload_worklist.Count > 0){
+				int t_index = this.unload_worklist.Count - 1;
+
 				//アンロード。
-				if(this.unload_worklist[0].UnloadMain() == true){
-					this.unload_worklist.RemoveAt(0);
+				if(this.unload_worklist[t_index].UnloadMain() == true){
+					this.unload_worklist.RemoveAt(t_index);
 				}
 			}
 		}
