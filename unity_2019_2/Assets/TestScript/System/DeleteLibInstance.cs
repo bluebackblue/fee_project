@@ -99,9 +99,8 @@ namespace TestScript
 				Fee.Focus.Focus.DeleteInstance();
 			}
 
-			//関数呼び出し。
+			//関数呼び出し。順序変更。
 			{
-				Fee.Function.Function.DeleteInstance();
 			}
 
 			//ジオメトリ。
@@ -226,6 +225,11 @@ namespace TestScript
 
 			//順序変更。
 			{
+				//関数呼び出し。
+				{
+					Fee.Function.Function.DeleteInstance();
+				}
+
 				//プレイヤーループシステム。
 				{
 					Fee.PlayerLoopSystem.PlayerLoopSystem.DeleteInstance();

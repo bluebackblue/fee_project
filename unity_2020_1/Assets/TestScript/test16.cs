@@ -288,15 +288,10 @@ namespace TestScript
 		*/
 		private void RowUpdate()
 		{
-			//ネットワーク。
-			Fee.Network.Network.GetInstance().Main();
-
-			{
-				this.network_master_text.SetText("Master : " + Fee.Network.Network.GetInstance().IsConnectMaster().ToString());
-				this.network_lobby_text.SetText("Lobby : " + Fee.Network.Network.GetInstance().IsConnectLobby().ToString());
-				this.network_room_text.SetText("Room : " + Fee.Network.Network.GetInstance().IsConnectRoom().ToString());
-				this.network_player_text.SetText("Player : " + (NetworkPlayer_MonoBehaviour.s_myplayer != null).ToString());
-			}
+			this.network_master_text.SetText("Master : " + Fee.Network.Network.GetInstance().IsConnectMaster().ToString());
+			this.network_lobby_text.SetText("Lobby : " + Fee.Network.Network.GetInstance().IsConnectLobby().ToString());
+			this.network_room_text.SetText("Room : " + Fee.Network.Network.GetInstance().IsConnectRoom().ToString());
+			this.network_player_text.SetText("Player : " + (NetworkPlayer_MonoBehaviour.s_myplayer != null).ToString());
 		}
 
 		/** FixedUpdate
