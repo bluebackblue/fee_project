@@ -364,9 +364,6 @@ namespace TestScript
 		*/
 		private void RowUpdate()
 		{
-			//サウンドプール。
-			Fee.SoundPool.SoundPool.GetInstance().Main();
-
 			switch(this.soundpool_mode){
 			case SoundPool_Mode.Wait:
 				{

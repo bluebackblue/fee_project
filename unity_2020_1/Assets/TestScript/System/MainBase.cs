@@ -23,28 +23,16 @@ namespace TestScript
 		*/
 		public Fee.Ui.Button return_button = null;
 
-		/** is_focus
-		*/
-		public bool is_focus;
-
 		/** アプリ終了時。
 		*/
 		void OnApplicationQuit()
 		{
 		}
 
-		/** アプリフォーカス変更時。
-		*/
-		void OnApplicationFocus(bool a_flag)
-		{
-			this.is_focus = a_flag;
-		}
-
 		/** constructor
 		*/
 		public MainBase()
 		{
-			this.is_focus = true;
 		}
 
 		/** 戻るボタン作成。
