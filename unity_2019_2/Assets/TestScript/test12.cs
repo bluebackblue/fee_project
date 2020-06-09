@@ -282,6 +282,9 @@ namespace TestScript
 			//Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
 
+			//ファイル。インスタンス作成。
+			Fee.File.File.CreateInstance();
+
 			//データ。インスタンス作成。
 			Fee.Data.Config.LOG_ENABLE = true;
 			Fee.Data.Data.CreateInstance();
@@ -289,9 +292,6 @@ namespace TestScript
 			//アセットバンドルリスト。インスタンス作成。
 			Fee.AssetBundleList.Config.LOG_ENABLE = true;
 			Fee.AssetBundleList.AssetBundleList.CreateInstance();
-
-			//ファイル。インスタンス作成。
-			Fee.File.File.CreateInstance();
 
 			//プレハブリスト。
 			{
@@ -522,12 +522,6 @@ namespace TestScript
 		*/
 		private void RowUpdate()
 		{
-			//データ。
-			Fee.Data.Data.GetInstance().Main();
-
-			//アセットバンドルリスト。
-			Fee.AssetBundleList.AssetBundleList.GetInstance().Main();
-
 			if(this.item_file != null){
 				if(this.item_file.IsBusy() == true){
 					//処理中。

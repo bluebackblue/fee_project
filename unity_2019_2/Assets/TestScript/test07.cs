@@ -310,9 +310,6 @@ namespace TestScript
 		*/
 		private void RowUpdate()
 		{
-			//暗号。
-			Fee.Crypt.Crypt.GetInstance().Main();
-
 			//ステップ。
 			switch(this.step){
 			case Step.EncryptPublicKey_Start:
