@@ -4,7 +4,7 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief オーディオ。オーディオソース。
+ * @brief オーディオ。ＳＥ。
 */
 
 
@@ -12,10 +12,14 @@
 */
 namespace Fee.Audio
 {
-	/** Se_AudioSource_MonoBehaviour
+	/** Se
 	*/
-	public class Se_AudioSource_MonoBehaviour : UnityEngine.MonoBehaviour
+	public class Se
 	{
+		/** ＳＥ。オーディオソース。
+		*/
+		private UnityEngine.GameObject se_audiosource_gameobject;
+
 		/** ボリューム。マスター。
 		*/
 		private Volume volume_master;
@@ -42,16 +46,25 @@ namespace Fee.Audio
 
 		/** 初期化。
 		*/
-		public void Initialize(Volume a_volume_master,Volume a_volume_se)
+		public Se(Volume a_volume_master)
 		{
+			//オーディオソース。ＳＥ。
+			{
+				this.se_audiosource_gameobject = new UnityEngine.GameObject();
+				this.se_audiosource_gameobject.name = "Se";
+				this.se_audiosource_gameobject.AddComponent<UnityEngine.AudioSource>();
+
+				UnityEngine.GameObject.DontDestroyOnLoad(this.se_audiosource_gameobject);
+			}
+
 			//volume_master
 			this.volume_master = a_volume_master;
 
 			//volume_se
-			this.volume_se = a_volume_se;
+			this.volume_se = new Volume(Config.DEFAULT_VOLUME_SE);
 
 			//myaudiosource
-			this.myaudiosource = this.GetComponent<UnityEngine.AudioSource>();
+			this.myaudiosource = this.se_audiosource_gameobject.GetComponent<UnityEngine.AudioSource>();
 			this.myaudiosource.playOnAwake = false;
 			this.myaudiosource.volume = this.volume_master.GetVolume() * this.volume_se.GetVolume();
 
@@ -69,6 +82,21 @@ namespace Fee.Audio
 		*/
 		public void Delete()
 		{
+			UnityEngine.GameObject.Destroy(this.se_audiosource_gameobject);
+		}
+
+		/** ボリューム。設定。
+		*/
+		public void SetVolume(float a_volume)
+		{
+			this.volume_se.SetVolume(a_volume);
+		}
+
+		/** ボリューム。取得。
+		*/
+		public float GetVolume()
+		{
+			return this.volume_se.GetVolume();
 		}
 
 		/** ボリューム更新。
@@ -169,7 +197,7 @@ namespace Fee.Audio
 
 		/** 更新。
 		*/
-		public void Update()
+		public void Main()
 		{
 			if(this.load_worklist.Count > 0){
 				//ロード。

@@ -4,7 +4,7 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief オーディオ。オーディオソース。
+ * @brief オーディオ。ＢＧＭ。
 */
 
 
@@ -12,9 +12,9 @@
 */
 namespace Fee.Audio
 {
-	/** Bgm_AudioSource_MonoBehaviour
+	/** Bgm
 	*/
-	public class Bgm_AudioSource_MonoBehaviour : UnityEngine.MonoBehaviour
+	public class Bgm
 	{
 		/** Mode
 		*/
@@ -34,6 +34,10 @@ namespace Fee.Audio
 			Cross0To1,
 			Cross1To0,
 		};
+
+		/** ＢＧＭ。オーディオソース。
+		*/
+		private UnityEngine.GameObject bgm_audiosource_gameobject;
 
 		/** ボリューム。マスター。
 		*/
@@ -87,18 +91,28 @@ namespace Fee.Audio
 		*/
 		private Bank unload_work;
 
-		/** 初期化。
+		/** constructor
 		*/
-		public void Initialize(Volume a_volume_master,Volume a_volume_bgm)
+		public Bgm(Volume a_volume_master)
 		{
+			//オーディオソース。ＢＧＭ。
+			{
+				this.bgm_audiosource_gameobject = new UnityEngine.GameObject();
+				this.bgm_audiosource_gameobject.name = "Bgm";
+				this.bgm_audiosource_gameobject.AddComponent<UnityEngine.AudioSource>();
+				this.bgm_audiosource_gameobject.AddComponent<UnityEngine.AudioSource>();
+
+				UnityEngine.GameObject.DontDestroyOnLoad(this.bgm_audiosource_gameobject);
+			}
+			
 			//volume_master
 			this.volume_master = a_volume_master;
 
 			//volume_se
-			this.volume_bgm = a_volume_bgm;
+			this.volume_bgm = new Volume(Config.DEFAULT_VOLUME_BGM);
 
 			//myaudiosource
-			this.myaudiosource = this.GetComponents<UnityEngine.AudioSource>();
+			this.myaudiosource = this.bgm_audiosource_gameobject.GetComponents<UnityEngine.AudioSource>();
 			for(int ii=0;ii<this.myaudiosource.Length;ii++){
 				this.myaudiosource[ii].playOnAwake = false;
 				this.myaudiosource[ii].loop = true;
@@ -158,9 +172,24 @@ namespace Fee.Audio
 		*/
 		public void Delete()
 		{
+			UnityEngine.GameObject.Destroy(this.bgm_audiosource_gameobject);
 		}
 
-		/** ボリューム更新。
+		/** ボリューム。設定。
+		*/
+		public void SetVolume(float a_volume)
+		{
+			this.volume_bgm.SetVolume(a_volume);
+		}
+
+		/** ボリューム。取得。
+		*/
+		public float GetVolume()
+		{
+			return this.volume_bgm.GetVolume();
+		}
+
+		/** ボリューム。更新。
 		*/
 		public void UpdateVolume()
 		{
@@ -230,7 +259,7 @@ namespace Fee.Audio
 
 		/** 更新。
 		*/
-		public void Update()
+		public void Main()
 		{
 			int t_request_index = this.request_index;
 
