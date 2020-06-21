@@ -426,7 +426,7 @@ namespace Fee.EditorTool
 			}
 
 			//■シーン開始。
-			#if(USE_DEF_FEE_TEMP)
+			#if(false)
 			{
 				Fee.Scene.Scene.GetInstance().SetNextScene(new Game.Scene.Scene_Init());
 			}

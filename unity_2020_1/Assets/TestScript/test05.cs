@@ -174,6 +174,11 @@ namespace TestScript
 		private bool backup_INPUTSYSTEM_POINTER_MOUSEBUTTON = false;
 		private bool backup_INPUTMANAGER_INPUTMOUSE_MOUSEBUTTON = false;
 
+		/** マウスホイール。値。
+		*/
+		private int mousewheel_value_x;
+		private int mousewheel_value_y;
+
 		/** Start
 		*/
 		private void Start()
@@ -464,6 +469,9 @@ namespace TestScript
 
 			this.backup_rollbackcount = 0;
 			this.SaveFlag();
+
+			this.mousewheel_value_x = 0;
+			this.mousewheel_value_y = 0;
 		}
 
 		/** SaveFlag
@@ -665,6 +673,10 @@ namespace TestScript
 				this.button_fix.SetText("確定(" + (this.backup_rollbackcount / 60).ToString() + ")");
 			}
 
+			//マウスホイール。
+			this.mousewheel_value_x += Fee.Input.Input.GetInstance().mouse.mouse_wheel.pos.x;
+			this.mousewheel_value_y += Fee.Input.Input.GetInstance().mouse.mouse_wheel.pos.y;
+
 			//マウス。
 			{
 				string t_text = "mouse\n";
@@ -675,7 +687,7 @@ namespace TestScript
 
 				t_text += "x = " + Fee.Input.Input.GetInstance().mouse.cursor.pos.x.ToString() + "\n";
 				t_text += "y = " + Fee.Input.Input.GetInstance().mouse.cursor.pos.y.ToString() + "\n";
-				t_text += "m = " + Fee.Input.Input.GetInstance().mouse.mouse_wheel.pos.y.ToString() + "\n";
+				t_text += "m = " + this.mousewheel_value_x.ToString() + " : " + this.mousewheel_value_y.ToString() + "\n";
 
 				this.mouse_text.SetText(t_text);
 
