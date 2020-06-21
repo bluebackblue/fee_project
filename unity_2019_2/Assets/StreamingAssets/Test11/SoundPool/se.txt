@@ -1,1 +1,0 @@
-{"volume_list":[1.0,0.8000000119,0.6000000238,0.400000006],"name_list":["se_maoudamashii_system23.mp3","se_maoudamashii_system23.mp3","se_maoudamashii_system23.mp3","se_maoudamashii_system23.mp3"],"data_version":0,"data_hash":-1734160448}
