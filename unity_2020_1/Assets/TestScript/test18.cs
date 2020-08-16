@@ -161,8 +161,6 @@ namespace TestScript
 		*/
 		private void LateUpdate()
 		{
-			//２Ｄ描画。
-			Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
 		}
 
 		/** 削除前。

@@ -95,18 +95,18 @@ namespace Fee.Render2D
 		*/
 		private LayerList layerlist;
 
-		/** バーテックス計算タスク。
+		/** リソースリスト。
 		*/
-		private Task_CalcVertex task_calcvertex;
-
-		/** ソートリストタスク。
-		*/
-		private Task_SortList task_sortlist;
+		private ResourceList resource_list;
 
 		/** OnChangeScreenSize
 		*/
 		public delegate void OnChangeScreenSize();
 		OnChangeScreenSize callback_on_change_screen_size;
+
+		/** playerloop_flag
+		*/
+		private bool playerloop_flag;
 
 		/** [シングルトン]constructor
 		*/
@@ -141,23 +141,28 @@ namespace Fee.Render2D
 			//レイヤーリスト。
 			this.layerlist = new LayerList(this.root_gameobject.GetComponent<UnityEngine.Transform>());
 
-			//バーテックス計算タスク。
-			this.task_calcvertex = new Task_CalcVertex(this);
-
-			//ソートリストタスク。
-			this.task_sortlist = new Task_SortList(this);
+			//Resourceリスト。
+			this.resource_list = new ResourceList(this);
 
 			//callback_on_change_screen_size
 			this.callback_on_change_screen_size = null;
+
+			//playerloop_flag
+			this.playerloop_flag = true;
+
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(PlayerLoopSystem.AddType.AddFirst,typeof(UnityEngine.PlayerLoop.PostLateUpdate),typeof(Fee.Render2D.PlayerLoopType.PreDraw),this.PreDraw);
 		}
 
 		/** [シングルトン]削除。
 		*/
 		private void Delete()
 		{
-			//タスク終了。
-			this.task_calcvertex.Delete();
-			this.task_sortlist.Delete();
+			//playerloop_flag
+			this.playerloop_flag = false;
+
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().RemoveFromType(typeof(Fee.Render2D.PlayerLoopType.PreDraw));
+
+			this.resource_list.Delete();
 
 			this.spritelist.DeleteAll();
 			this.textlist.DeleteAll();
@@ -362,111 +367,50 @@ namespace Fee.Render2D
 			return Config.CAMERADEPTH_START + a_layerindex * Config.CAMERADEPTH_STEP + Config.CAMERADEPTH_OFFSET_AFTER;
 		}
 
-		/** 前処理。
-
-			タスクを停止し、スプライト操作を可能にする。
-
-			１、終了していないタスクの終了待ち。
-
-		*/
-		/*
-		public void Main_Before()
-		{
-			//バーテックス計算タスク。終了待ち。
-			this.task_calcvertex.Wait();
-
-			//ソートリストタスク。キャンセル終了待ち。
-			this.task_sortlist.CancelWait();
-		}
-		*/
-
-		/** 後処理。
-
-			タスクを開始する。ここからはスプライト操作は不可。
-
-			１、ソートリストタスクの開始。
-
-		*/
-		/*
-		public void Main_After()
-		{
-			//ソートリストタスク。開始。
-			this.task_sortlist.Start();
-		}
-		*/
-
 		/** 描画前処理。
 
-			１、バーテックス計算タスクの終了待ち。
-			２、ソートリストタスクの終了待ち。
+			１、リソース。削除、ソート、レイヤーインデックスの計算。
+			２、ソート。
 			３、ソート結果に合わせてカメラの非表示化、ＵＩオブジェクトの関連付け。
 			４、画面サイズ変更チェック。
 			５、バーテックス計算タスクを開始。
 			６、ＵＩオブジェクトのサイズ更新。
 
 		*/
-		public void Main_PreDraw()
+		private void PreDraw()
 		{
-			//ソートリストタスク。開始。
-			this.task_sortlist.Start();
+			if(this.playerloop_flag == true){
+				//リソースリスト。計算。
+				this.resource_list.Calc_Sort();
 
-			/*
-			//バーテックス計算タスク。終了待ち。
-			this.task_calcvertex.Wait();
+				//スクリーンサイズ変更チェック。
+				{
+					Fee.Render2D.Render2D.GetInstance().screen.SetChangeScreenSizeFlag(false);
+					Fee.Render2D.Render2D.GetInstance().screen.CalcScreen();
 
-			//ソートリストタスク。終了待ち。
-			this.task_sortlist.Wait();
-			*/
-
-			{
-				//表示物のないカメラを非アクティブにする。
-				if((this.spritelist.sortend_flag == true)||(this.textlist.sortend_flag == true)||(this.inputfieldlist.sortend_flag == true)){
-					this.layerlist.ChangeActiveCamera();
-				}
-
-				//テキスト。描画プライオリティに対応したカメラに関連付ける。
-				if(this.textlist.sortend_flag == true){
-					this.textlist.ChangeParentLayer(this.layerlist);
-				}
-
-				//入力フィールド。描画プライオリティに対応したカメラに関連付ける。
-				if(this.inputfieldlist.sortend_flag == true){
-					this.inputfieldlist.ChangeParentLayer(this.layerlist);
-				}
-
-				//フラグリセット。
-				this.spritelist.sortend_flag = false;
-				this.textlist.sortend_flag = false;
-				this.inputfieldlist.sortend_flag = false;
-			}
-
-			//スクリーンサイズ変更チェック。
-			{
-				Fee.Render2D.Render2D.GetInstance().screen.SetChangeScreenSizeFlag(false);
-				Fee.Render2D.Render2D.GetInstance().screen.CalcScreen();
-
-				//スクリーンサイズ変更あり。
-				if(Fee.Render2D.Render2D.GetInstance().screen.GetChangeScreenSizeFlag() == true){
+					//スクリーンサイズ変更あり。
+					if(Fee.Render2D.Render2D.GetInstance().screen.GetChangeScreenSizeFlag() == true){
 					
-					//スクリーンサイズ変更通知。
-					//ソートリストタスク終了後、バーテックス計算タスク開始前。
-					if(this.callback_on_change_screen_size != null){
-						this.callback_on_change_screen_size();
+						//スクリーンサイズ変更通知。
+						//ソートリストタスク終了後、バーテックス計算タスク開始前。
+						if(this.callback_on_change_screen_size != null){
+							this.callback_on_change_screen_size();
+						}
+
+						this.spritelist.ChangeScreenSize();
+						this.textlist.ChangeScreenSize();
+						this.inputfieldlist.ChangeScreenSize();
 					}
-
-					this.spritelist.ChangeScreenSize();
-					this.textlist.ChangeScreenSize();
-					this.inputfieldlist.ChangeScreenSize();
 				}
-			}
 
-			//バーテックス計算タスク。開始。
-			this.task_calcvertex.Start();
+				//リソースリスト。計算。
+				this.resource_list.Calc_Vertex();
 
-			//ＵＩの位置計算。
-			{
-				for(int ii=0;ii<this.layerlist.GetListMax();ii++){
-					this.CalcUI(ii);
+				//ＵＩの位置計算。
+				{
+					for(int ii=0;ii<this.layerlist.GetListMax();ii++){
+						this.CalcUI(ii);
+					}
 				}
 			}
 		}
@@ -622,11 +566,6 @@ namespace Fee.Render2D
 		*/
 		public void OnPostRender_DrawGL(int a_layer_index)
 		{
-			/*
-			//バーテックス計算タスク。終了待ち。
-			this.task_calcvertex.Wait(a_layer_index);
-			*/
-
 			Material_Item t_current_material_item = null;
 
 			int t_start_index = this.layerlist.GetStartIndex_Sprite(a_layer_index);
@@ -644,8 +583,7 @@ namespace Fee.Render2D
 				bool t_is_begin = false;
 
 				if(Fee.Graphic.Gl.PushMatrix() == true){
-					if(Fee.Graphic.Gl.LoadOrtho() == true){
-					
+					if(Fee.Graphic.Gl.LoadOrthographicMatrix() == true){
 						for(int ii=t_start_index;ii<=t_last_index;ii++){
 							Sprite2D t_sprite = this.spritelist.GetItem(ii);
 							if((t_sprite.IsVisible() == true)&&(t_sprite.GetDrawPriority() >= 0)&&(t_sprite.IsDeleteRequest() == false)&&(t_sprite.GetW() != 0)&&(t_sprite.GetH() != 0)){

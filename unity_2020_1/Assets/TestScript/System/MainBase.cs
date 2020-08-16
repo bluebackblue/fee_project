@@ -23,10 +23,13 @@ namespace TestScript
 		*/
 		public Fee.Ui.Button return_button = null;
 
-		/** アプリ終了時。
+		/** 終了処理。
 		*/
-		void OnApplicationQuit()
+		private void OnApplicationQuit()
 		{
+			//全部削除。
+			DeleteLibInstance.DeleteAll();
+			UnityEngine.Debug.Log("OnApplicationQuit");
 		}
 
 		/** constructor

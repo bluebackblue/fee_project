@@ -194,26 +194,12 @@ namespace TestScript
 		*/
 		private void Update()
 		{
-			switch(this.step){
-			case Step.Main:
-				{
-				}break;
-			}
 		}
 
 		/** 更新。
 		*/
 		private void LateUpdate()
 		{
-			switch(this.step){
-			case Step.Main:
-				{
-					//２Ｄ描画。
-					if(Fee.Render2D.Render2D.IsCreateInstance() == true){
-						Fee.Render2D.Render2D.GetInstance().Main_PreDraw();
-					}
-				}break;
-			}
 		}
 
 		/** InputUpdate
@@ -310,6 +296,16 @@ namespace TestScript
 		{
 			//全部削除。
 			DeleteLibInstance.DeleteAll();
+		}
+
+		/** 終了処理。
+		*/
+		private void OnApplicationQuit()
+		{
+			//全部削除。
+			DeleteLibInstance.DeleteAll();
+
+			UnityEngine.Debug.Log("OnApplicationQuit");
 		}
 	}
 }
