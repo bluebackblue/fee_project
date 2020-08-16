@@ -89,9 +89,9 @@ namespace TestScript
 				this.is_on = false;
 			}
 
-			/** SetFocus
+			/** SetFocusGroup
 			*/
-			public void SetFocus(Fee.Focus.FocusGroup<int> a_focusgroup,int a_focus_id)
+			public void SetFocusGroup(Fee.Focus.FocusGroup<int> a_focusgroup,int a_focus_id)
 			{
 				this.focus_id = a_focus_id;
 				this.focusgroup = a_focusgroup;
@@ -120,7 +120,7 @@ namespace TestScript
 				OnFocusCheckを呼び出す。
 
 			*/
-			public void SetFocus_CallOnFocusCheck(bool a_flag)
+			public void SetFocus(bool a_flag)
 			{
 				this.SetFocus_NoCall(a_flag);
 				this.focusgroup.OnFocusCheck(this.focus_id);
@@ -297,7 +297,7 @@ namespace TestScript
 				this.button_1.SetOnFocusCheck(this.focusgroup,0);
 				this.button_2.SetOnFocusCheck(this.focusgroup,1);
 				this.input_1.SetOnFocusCheck(this.focusgroup,2);
-				this.custom_1.SetFocus(this.focusgroup,3);
+				this.custom_1.SetFocusGroup(this.focusgroup,3);
 			}
 		}
 
@@ -319,7 +319,7 @@ namespace TestScript
 		{
 			if(this.custom_1.is_on == true){
 				if(Fee.Input.Input.GetInstance().mouse.left.down == true){
-					this.custom_1.SetFocus_CallOnFocusCheck(true);
+					this.custom_1.SetFocus(true);
 				}
 			}
 
