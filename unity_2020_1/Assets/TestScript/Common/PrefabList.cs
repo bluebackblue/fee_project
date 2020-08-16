@@ -287,9 +287,9 @@ namespace TestScript.Common
 
 		/** 入力フィールド。作成。
 		*/
-		public Fee.Render2D.InputField2D CreateInputField(Fee.Deleter.Deleter a_deleter,long a_drawpriority)
+		public Fee.Ui.Input CreateInputField(Fee.Deleter.Deleter a_deleter,long a_drawpriority)
 		{
-			Fee.Render2D.InputField2D t_inputfield = Fee.Render2D.InputField2D.Create(a_deleter,a_drawpriority);
+			Fee.Ui.Input t_inputfield = Fee.Ui.Input.Create(a_deleter,a_drawpriority);
 			{
 			}
 			return t_inputfield;

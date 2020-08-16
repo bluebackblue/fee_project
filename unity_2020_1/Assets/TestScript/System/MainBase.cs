@@ -27,6 +27,8 @@ namespace TestScript
 		*/
 		private void OnApplicationQuit()
 		{
+			this.Shutdown();
+
 			//全部削除。
 			DeleteLibInstance.DeleteAll();
 			UnityEngine.Debug.Log("OnApplicationQuit");
@@ -69,6 +71,12 @@ namespace TestScript
 		/** 削除。
 		*/
 		public virtual void Destroy()
+		{
+		}
+
+		/** 強制終了。
+		*/
+		public virtual void Shutdown()
 		{
 		}
 

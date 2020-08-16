@@ -61,7 +61,7 @@ namespace TestScript
 
 		/** 入力フィールド。
 		*/
-		private Fee.Render2D.InputField2D inputfield;
+		private Fee.Ui.Input inputfield;
 
 		/** ステータス。
 		*/
@@ -351,6 +351,13 @@ namespace TestScript
 		*/
 		private void LateUpdate()
 		{
+		}
+
+		/** 強制終了。
+		*/
+		public override void Shutdown()
+		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 		}
 
 		/** 削除前。

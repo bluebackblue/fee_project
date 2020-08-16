@@ -147,19 +147,17 @@ namespace Fee.Render2D
 			//callback_on_change_screen_size
 			this.callback_on_change_screen_size = null;
 
-			//playerloop_flag
+			//PlayerLoopType
 			this.playerloop_flag = true;
-
-			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(PlayerLoopSystem.AddType.AddFirst,typeof(UnityEngine.PlayerLoop.PostLateUpdate),typeof(Fee.Render2D.PlayerLoopType.PreDraw),this.PreDraw);
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(PlayerLoopSystem.AddType.AddFirst,typeof(UnityEngine.PlayerLoop.PostLateUpdate),typeof(PlayerLoopType.PreDraw),this.PreDraw);
 		}
 
 		/** [シングルトン]削除。
 		*/
 		private void Delete()
 		{
-			//playerloop_flag
+			//PlayerLoopType
 			this.playerloop_flag = false;
-
 			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().RemoveFromType(typeof(Fee.Render2D.PlayerLoopType.PreDraw));
 
 			this.resource_list.Delete();

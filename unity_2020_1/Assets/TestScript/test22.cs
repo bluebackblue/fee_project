@@ -202,6 +202,13 @@ namespace TestScript
 		{
 		}
 
+		/** 強制終了。
+		*/
+		public override void Shutdown()
+		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
+		}
+
 		/** 削除前。
 		*/
 		public override bool PreDestroy(bool a_first)

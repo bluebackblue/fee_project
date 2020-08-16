@@ -41,9 +41,9 @@ namespace TestScript
 		*/
 		private Common.PrefabList prefablist;
 
-		/** PlayerLoopSystemType
+		/** PlayerLoopType
 		*/
-		private struct PlayerLoopSystemType
+		private struct PlayerLoopType
 		{
 			public struct EarlyUpdate_First{}
 			public struct EarlyUpdate_Last{}
@@ -186,40 +186,40 @@ namespace TestScript
 			//list
 			this.list = new LinkedList<Item>();
 
-			//PlayerLoopSystem
+			//PlayerLoopType
 			{
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.EarlyUpdate),			typeof(PlayerLoopSystemType.EarlyUpdate_First),		this.EarlyUpdate_First);
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.EarlyUpdate),			typeof(PlayerLoopSystemType.EarlyUpdate_Last),		this.EarlyUpdate_Last);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.EarlyUpdate),			typeof(PlayerLoopType.EarlyUpdate_First),		this.EarlyUpdate_First);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.EarlyUpdate),			typeof(PlayerLoopType.EarlyUpdate_Last),		this.EarlyUpdate_Last);
 				this.list.AddLast(new Item("EarlyUpdate_First"));
 				this.list.AddLast(new Item("EarlyUpdate_Last"));
 
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.FixedUpdate),			typeof(PlayerLoopSystemType.FixedUpdate_First),		this.FixedUpdate_First);
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.FixedUpdate),			typeof(PlayerLoopSystemType.FixedUpdate_Last),		this.FixedUpdate_Last);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.FixedUpdate),			typeof(PlayerLoopType.FixedUpdate_First),		this.FixedUpdate_First);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.FixedUpdate),			typeof(PlayerLoopType.FixedUpdate_Last),		this.FixedUpdate_Last);
 				this.list.AddLast(new Item("FixedUpdate_First"));
 				this.list.AddLast(new Item("FixedUpdate_Last"));
 
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.Initialization),		typeof(PlayerLoopSystemType.Initialization_First),	this.Initialization_First);
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.Initialization),		typeof(PlayerLoopSystemType.Initialization_Last),	this.Initialization_Last);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.Initialization),		typeof(PlayerLoopType.Initialization_First),	this.Initialization_First);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.Initialization),		typeof(PlayerLoopType.Initialization_Last),		this.Initialization_Last);
 				this.list.AddLast(new Item("Initialization_First"));
 				this.list.AddLast(new Item("Initialization_Last"));
 
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.PostLateUpdate),		typeof(PlayerLoopSystemType.PostLateUpdate_First),	this.PostLateUpdate_First);
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.PostLateUpdate),		typeof(PlayerLoopSystemType.PostLateUpdate_Last),	this.PostLateUpdate_Last);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.PostLateUpdate),		typeof(PlayerLoopType.PostLateUpdate_First),	this.PostLateUpdate_First);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.PostLateUpdate),		typeof(PlayerLoopType.PostLateUpdate_Last),		this.PostLateUpdate_Last);
 				this.list.AddLast(new Item("PostLateUpdate_First"));
 				this.list.AddLast(new Item("PostLateUpdate_Last"));
 
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.PreLateUpdate),		typeof(PlayerLoopSystemType.PreLateUpdate_First),	this.PreLateUpdate_First);
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.PreLateUpdate),		typeof(PlayerLoopSystemType.PreLateUpdate_Last),	this.PreLateUpdate_Last);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.PreLateUpdate),		typeof(PlayerLoopType.PreLateUpdate_First),		this.PreLateUpdate_First);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.PreLateUpdate),		typeof(PlayerLoopType.PreLateUpdate_Last),		this.PreLateUpdate_Last);
 				this.list.AddLast(new Item("PreLateUpdate_First"));
 				this.list.AddLast(new Item("PreLateUpdate_Last"));
 
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.PreUpdate),			typeof(PlayerLoopSystemType.PreUpdate_First),		this.PreUpdate_First);
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.PreUpdate),			typeof(PlayerLoopSystemType.PreUpdate_Last),		this.PreUpdate_Last);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.PreUpdate),			typeof(PlayerLoopType.PreUpdate_First),			this.PreUpdate_First);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.PreUpdate),			typeof(PlayerLoopType.PreUpdate_Last),			this.PreUpdate_Last);
 				this.list.AddLast(new Item("PreUpdate_First"));
 				this.list.AddLast(new Item("PreUpdate_Last"));
 
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.Update),				typeof(PlayerLoopSystemType.Update_First),			this.Update_First);
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.Update),				typeof(PlayerLoopSystemType.Update_Last),			this.Update_Last);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.Update),				typeof(PlayerLoopType.Update_First),			this.Update_First);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.Update),				typeof(PlayerLoopType.Update_Last),				this.Update_Last);
 				this.list.AddLast(new Item("Update_First"));
 				this.list.AddLast(new Item("Update_Last"));
 			}
@@ -610,6 +610,13 @@ namespace TestScript
 		*/
 		private void LateUpdate()
 		{
+		}
+
+		/** 強制終了。
+		*/
+		public override void Shutdown()
+		{
+			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 		}
 
 		/** 削除前。
