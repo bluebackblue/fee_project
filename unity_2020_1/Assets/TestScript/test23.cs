@@ -79,19 +79,19 @@ namespace TestScript
 
 			/** constructor
 			*/
-			public Custom(Fee.Deleter.Deleter a_deleter)
+			public Custom(Fee.Deleter.Deleter a_deleter,Common.PrefabList a_prefablist)
 			{
 				this.deleter = a_deleter;
-				this.text = null;
+				this.text = a_prefablist.CreateText(this.deleter,0);
 				this.is_focus = false;
 				this.eventplate = new Fee.EventPlate.Item(this.deleter,Fee.EventPlate.EventType.Button,0);
 				this.eventplate.SetOnEventPlateOver(this,0);
 				this.is_on = false;
 			}
 
-			/** SetFocusGroup
+			/** SetOnFocusCheck
 			*/
-			public void SetFocusGroup(Fee.Focus.FocusGroup<int> a_focusgroup,int a_focus_id)
+			public void SetOnFocusCheck(Fee.Focus.FocusGroup<int> a_focusgroup,int a_focus_id)
 			{
 				this.focus_id = a_focus_id;
 				this.focusgroup = a_focusgroup;
@@ -107,7 +107,7 @@ namespace TestScript
 
 			/** [Fee.Focus.FocusItem_Base]フォーカス。設定。
 
-				OnFocusCheckを呼び出さない。。
+				OnFocusCheckを呼び出さない。
 
 			*/
 			public void SetFocus_NoCall(bool a_flag)
@@ -148,12 +148,14 @@ namespace TestScript
 			}
 		}
 
-		/** button
+		/** インスタンス。
 		*/
 		private Fee.Ui.Button button_1;
 		private Fee.Ui.Button button_2;
 		private Fee.Ui.Input input_1;
+		private Fee.Ui.Input input_2;
 		private Custom custom_1;
+		private Custom custom_2;
 
 		/** Start
 		*/
@@ -187,6 +189,7 @@ namespace TestScript
 			//入力。インスタンス作成。
 			Fee.Input.Config.LOG_ENABLE = true;
 			Fee.Input.Input.CreateInstance(true,false,true,false);
+			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Space);
 
 			//イベントプレート。
 			//Fee.EventPlate.Config.LOG_ENABLE = true;
@@ -212,8 +215,6 @@ namespace TestScript
 			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			{
-				this.focusgroup = new Fee.Focus.FocusGroup<int>(-1);
-
 				this.button_1 = this.prefablist.CreateButton(this.deleter,0);
 				this.button_1.SetRect(100 + 100 * 0,100,100,60);
 				this.button_1.SetText("button_1");
@@ -225,79 +226,70 @@ namespace TestScript
 				this.input_1 = this.prefablist.CreateInputField(this.deleter,0);
 				this.input_1.SetRect(100 + 100 * 2,100,100,60);
 
-				this.custom_1 = new Custom(this.deleter);
-				this.custom_1.text = this.prefablist.CreateText(this.deleter,0);
-				this.custom_1.SetRect(100 + 100 * 3,100,100,60);
+				this.input_2 = this.prefablist.CreateInputField(this.deleter,0);
+				this.input_2.SetRect(100 + 100 * 3,100,100,60);
+
+				this.custom_1 = new Custom(this.deleter,this.prefablist);
+				this.custom_1.SetRect(100 + 100 * 4,100,100,60);
 				this.custom_1.text.SetText("custom_1");
 
-				this.focusgroup.AddID<Fee.Ui.Button>(
-					0,
-					this.button_1,
-					(Fee.Ui.Button a_item,bool a_change) => {
+				this.custom_2 = new Custom(this.deleter,this.prefablist);
+				this.custom_2.SetRect(100 + 100 * 5,100,100,60);
+				this.custom_2.text.SetText("custom_2");
+
+				this.focusgroup = new Fee.Focus.FocusGroup<int>(-1);
+				{
+					System.Action<Fee.Ui.Button,bool> t_button_on = (Fee.Ui.Button a_item,bool a_change) => {
 						if(a_change == true){
 							a_item.SetOnTextColor(1.0f,0.0f,0.0f,1.0f);
 							a_item.SetNormalTextColor(1.0f,0.0f,0.0f,1.0f);
 						}
-					},
-					(Fee.Ui.Button a_item,bool a_change) => {
+					};
+					System.Action<Fee.Ui.Button,bool> t_button_off = (Fee.Ui.Button a_item,bool a_change) => {
 						if(a_change == true){
 							a_item.SetOnTextColor(1.0f,1.0f,1.0f,1.0f);
 							a_item.SetNormalTextColor(1.0f,1.0f,1.0f,1.0f);
 						}
-					}
-				);
+					};
 
-				this.focusgroup.AddID<Fee.Ui.Button>(
-					1,
-					this.button_2,
-					(Fee.Ui.Button a_item,bool a_change) => {
-						if(a_change == true){
-							a_item.SetOnTextColor(1.0f,0.0f,0.0f,1.0f);
-							a_item.SetNormalTextColor(1.0f,0.0f,0.0f,1.0f);
-						}
-					},
-					(Fee.Ui.Button a_item,bool a_change) => {
-						if(a_change == true){
-							a_item.SetOnTextColor(1.0f,1.0f,1.0f,1.0f);
-							a_item.SetNormalTextColor(1.0f,1.0f,1.0f,1.0f);
-						}
-					}
-				);
-
-				this.focusgroup.AddID<Fee.Ui.Input>(
-					2,
-					this.input_1,
-					(Fee.Ui.Input a_item,bool a_change) => {
+					System.Action<Fee.Ui.Input,bool> t_input_on = (Fee.Ui.Input a_item,bool a_change) => {
 						if(a_change == true){
 							a_item.SetTextColor(1.0f,0.0f,0.0f,1.0f);
 						}
-					},
-					(Fee.Ui.Input a_item,bool a_change) => {
+					};
+					System.Action<Fee.Ui.Input,bool> t_input_off = (Fee.Ui.Input a_item,bool a_change) => {
 						if(a_change == true){
 							a_item.SetTextColor(0.0f,0.0f,0.0f,1.0f);
 						}
-					}
-				);
+					};
 
-				this.focusgroup.AddID<Custom>(
-					3,
-					this.custom_1,
-					(Custom a_item,bool a_change) => {
+					System.Action<Custom,bool> t_custom_on = (Custom a_item,bool a_change) => {
 						if(a_change == true){
 							a_item.text.SetColor(1.0f,0.0f,0.0f,1.0f);
 						}
-					},
-					(Custom a_item,bool a_change) => {
+					};
+					System.Action<Custom,bool> t_custom_off = (Custom a_item,bool a_change) => {
 						if(a_change == true){
 							a_item.text.SetColor(1.0f,1.0f,1.0f,1.0f);
 						}
-					}
-				);
+					};
 
+					//ＩＤ、コールバックの関連付け。
+					this.focusgroup.AddID<Fee.Ui.Button>(0,this.button_1,t_button_on,t_button_off);
+					this.focusgroup.AddID<Fee.Ui.Button>(1,this.button_2,t_button_on,t_button_off);
+					this.focusgroup.AddID<Fee.Ui.Input>(2,this.input_1,t_input_on,t_input_off);
+					this.focusgroup.AddID<Fee.Ui.Input>(3,this.input_2,t_input_on,t_input_off);
+					this.focusgroup.AddID<Custom>(4,this.custom_1,t_custom_on,t_custom_off);
+					this.focusgroup.AddID<Custom>(5,this.custom_2,t_custom_on,t_custom_off);
+				}
+
+				//インスタンス、ＩＤの関連付け。
 				this.button_1.SetOnFocusCheck(this.focusgroup,0);
 				this.button_2.SetOnFocusCheck(this.focusgroup,1);
 				this.input_1.SetOnFocusCheck(this.focusgroup,2);
-				this.custom_1.SetFocusGroup(this.focusgroup,3);
+				this.input_2.SetOnFocusCheck(this.focusgroup,3);
+				this.custom_1.SetOnFocusCheck(this.focusgroup,4);
+				this.custom_2.SetOnFocusCheck(this.focusgroup,5);
 			}
 		}
 
@@ -321,13 +313,15 @@ namespace TestScript
 				if(Fee.Input.Input.GetInstance().mouse.left.down == true){
 					this.custom_1.SetFocus(true);
 				}
+			}else if(this.custom_2.is_on == true){
+				if(Fee.Input.Input.GetInstance().mouse.left.down == true){
+					this.custom_2.SetFocus(true);
+				}
 			}
 
-			/*
-			if(Fee.Input.Input.GetInstance().mouse.right.down == true){
+			if(Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Space).digital.down == true){
 				this.focusgroup.SetFocusAllOff_CallOnFocusCheck();
 			}
-			*/
 		}
 
 		/** LateUpdate
