@@ -15,7 +15,6 @@ namespace Fee.Focus
 	/** FocusGroup
 	*/
 	public class FocusGroup<ID> : Fee.Focus.OnFocusCheck_CallBackInterface<ID>
-		where ID : System.IComparable
 	{
 		/** current
 		*/
@@ -29,9 +28,27 @@ namespace Fee.Focus
 		*/
 		private System.Collections.Generic.Dictionary<ID,FocusGroup_Item> list;
 
+		/** compare
+		*/
+		private CompareProc<ID> compare;
+
+		/** DefaultCompare
+		*/
+		private static bool DefaultCompare(ID a_id_a,ID a_id_b)
+		{
+			System.IComparable t_id_a = a_id_a as System.IComparable;
+			System.IComparable t_id_b = a_id_b as System.IComparable;
+
+			if(t_id_a.CompareTo(t_id_b) == 0){
+				return true;
+			}
+
+			return false;
+		}
+
 		/** constructor
 		*/
-		public FocusGroup(ID a_none)
+		public FocusGroup(ID a_none,CompareProc<ID> a_compare)
 		{
 			//current
 			this.current = a_none;
@@ -41,6 +58,9 @@ namespace Fee.Focus
 
 			//list
 			this.list = new System.Collections.Generic.Dictionary<ID,FocusGroup_Item>();
+
+			//compare
+			this.compare = a_compare;
 		}
 
 		/** ＩＤ。追加。
@@ -102,13 +122,13 @@ namespace Fee.Focus
 					//フォーカスＯＮ。
 
 					bool t_change = false;
-					if(a_id.CompareTo(this.current) != 0){
+					if(this.compare(a_id,this.current) == false){
 						t_change = true;
 					}
 
 					//他のものをＯＦＦにする。
 					foreach(System.Collections.Generic.KeyValuePair<ID,FocusGroup_Item> t_pair in this.list){
-						if(a_id.CompareTo(t_pair.Key) != 0){
+						if(this.compare(a_id,t_pair.Key) == false){
 							t_pair.Value.item.SetFocus_NoCall(false);
 
 							//コールバック呼び出し。
@@ -126,7 +146,7 @@ namespace Fee.Focus
 
 					//自分がカレントだった場合はカレントをＮＯＮＥにする。
 					bool t_change = false;
-					if(a_id.CompareTo(this.current) == 0){
+					if(this.compare(a_id,this.current) == true){
 						this.current = this.none;
 						t_change = true;
 					}
