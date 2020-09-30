@@ -17,7 +17,7 @@ namespace TestScript
 {
 	/** test23
 	*/
-	public class test23 : MainBase
+	public class test23 : MainBase , Fee.Focus.Compare_Base<int>
 	{
 		/** CreateStatus
 		*/
@@ -47,7 +47,7 @@ namespace TestScript
 
 		/** Custom
 		*/
-		private class Custom : Fee.Focus.FocusItem_Base , Fee.EventPlate.OnEventPlateOver_CallBackInterface<int> , Fee.Focus.Compare_Base<int>
+		private class Custom : Fee.Focus.FocusItem_Base , Fee.EventPlate.OnEventPlateOver_CallBackInterface<int>
 		{
 			/** is_focus
 			*/
@@ -105,13 +105,6 @@ namespace TestScript
 				this.text.SetRect(a_x,a_y,0,0);
 			}
 
-			/** [Fee.Focus.Compare_Base]比較。
-			*/
-			public bool Compare(int a_id_a,int a_id_b)
-			{
-				return (a_id_a == a_id_b);
-			}
-
 			/** [Fee.Focus.FocusItem_Base]フォーカス。設定。
 
 				OnFocusCheckを呼び出さない。
@@ -163,6 +156,13 @@ namespace TestScript
 		private Fee.Ui.Input input_2;
 		private Custom custom_1;
 		private Custom custom_2;
+
+		/** [Fee.Focus.Compare_Base]比較。
+		*/
+		public bool Compare(int a_id_a,int a_id_b)
+		{
+			return (a_id_a == a_id_b);
+		}
 
 		/** Start
 		*/
@@ -244,7 +244,7 @@ namespace TestScript
 				this.custom_2.SetRect(100 + 100 * 5,100,100,60);
 				this.custom_2.text.SetText("custom_2");
 
-				this.focusgroup = new Fee.Focus.FocusGroup<int>(-1);
+				this.focusgroup = new Fee.Focus.FocusGroup<int>(-1,this);
 				{
 					System.Action<Fee.Ui.Button,bool> t_button_on = (Fee.Ui.Button a_item,bool a_change) => {
 						if(a_change == true){
@@ -327,7 +327,7 @@ namespace TestScript
 			}
 
 			if(Fee.Input.Input.GetInstance().key.GetKey(Fee.Input.Status_Key_Type.Space).digital.down == true){
-				this.focusgroup.SetFocusAllOff_CallOnFocusCheck();
+				this.focusgroup.SetFocusAllOff();
 			}
 		}
 
