@@ -30,25 +30,11 @@ namespace Fee.Focus
 
 		/** compare
 		*/
-		private CompareProc<ID> compare;
-
-		/** DefaultCompare
-		*/
-		private static bool DefaultCompare(ID a_id_a,ID a_id_b)
-		{
-			System.IComparable t_id_a = a_id_a as System.IComparable;
-			System.IComparable t_id_b = a_id_b as System.IComparable;
-
-			if(t_id_a.CompareTo(t_id_b) == 0){
-				return true;
-			}
-
-			return false;
-		}
+		private Compare_Base<ID> compare;
 
 		/** constructor
 		*/
-		public FocusGroup(ID a_none,CompareProc<ID> a_compare)
+		public FocusGroup(ID a_none,Compare_Base<ID> a_compare)
 		{
 			//current
 			this.current = a_none;
@@ -122,13 +108,13 @@ namespace Fee.Focus
 					//フォーカスＯＮ。
 
 					bool t_change = false;
-					if(this.compare(a_id,this.current) == false){
+					if(this.compare.Compare(a_id,this.current) == false){
 						t_change = true;
 					}
 
 					//他のものをＯＦＦにする。
 					foreach(System.Collections.Generic.KeyValuePair<ID,FocusGroup_Item> t_pair in this.list){
-						if(this.compare(a_id,t_pair.Key) == false){
+						if(this.compare.Compare(a_id,t_pair.Key) == false){
 							t_pair.Value.item.SetFocus_NoCall(false);
 
 							//コールバック呼び出し。
@@ -146,7 +132,7 @@ namespace Fee.Focus
 
 					//自分がカレントだった場合はカレントをＮＯＮＥにする。
 					bool t_change = false;
-					if(this.compare(a_id,this.current) == true){
+					if(this.compare.Compare(a_id,this.current) == true){
 						this.current = this.none;
 						t_change = true;
 					}

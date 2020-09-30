@@ -47,7 +47,7 @@ namespace TestScript
 
 		/** Custom
 		*/
-		private class Custom : Fee.Focus.FocusItem_Base , Fee.EventPlate.OnEventPlateOver_CallBackInterface<int>
+		private class Custom : Fee.Focus.FocusItem_Base , Fee.EventPlate.OnEventPlateOver_CallBackInterface<int> , Fee.Focus.Compare_Base<int>
 		{
 			/** is_focus
 			*/
@@ -103,6 +103,13 @@ namespace TestScript
 			{
 				this.eventplate.SetRect(a_x,a_y,a_w,a_h);
 				this.text.SetRect(a_x,a_y,0,0);
+			}
+
+			/** [Fee.Focus.Compare_Base]比較。
+			*/
+			public bool Compare(int a_id_a,int a_id_b)
+			{
+				return (a_id_a == a_id_b);
 			}
 
 			/** [Fee.Focus.FocusItem_Base]フォーカス。設定。
