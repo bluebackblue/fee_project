@@ -197,6 +197,8 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
+			Fee.Pause.Pause.GetInstance().SetNextFrameTimeScale(1.0f);
+
 			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
 		}
