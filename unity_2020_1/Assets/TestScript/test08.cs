@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -254,7 +251,7 @@ namespace TestScript
 			this.scroll = Fee.Ui.Scroll<Scroll_Item>.Create(this.deleter,0,Fee.Ui.Scroll_Type.Vertical,Scroll_Item.GetItemLength());
 			this.scroll.SetRect(this.text.GetX(),this.text.GetY() + 30,550,250);
 
-			this.prev_list = new List<string>();
+			this.prev_list = new System.Collections.Generic.List<string>();
 			this.now_path = Fee.File.Path.CreateLocalPath().GetPath();
 
 			//Listup
@@ -279,14 +276,14 @@ namespace TestScript
 			}
 
 			//directory
-			List<Fee.Directory.Item> t_directory_list = t_item_root.GetDirectoryList();
+			System.Collections.Generic.List<Fee.Directory.Item> t_directory_list = t_item_root.GetDirectoryList();
 			for(int ii=0;ii<t_directory_list.Count;ii++){
 				string t_path = t_item_root.GetRoot().GetFullPath() + t_directory_list[ii].GetName();
 				this.scroll.AddItem(new Scroll_Item(this.prefablist,this.deleter_scrollitem,t_directory_list[ii].GetName(),this.CallBackType_Select,t_path),this.scroll.GetListCount());
 			}
 
 			//file
-			List<Fee.Directory.Item> t_file_list = t_item_root.GetFileList();
+			System.Collections.Generic.List<Fee.Directory.Item> t_file_list = t_item_root.GetFileList();
 			for(int ii=0;ii<t_file_list.Count;ii++){
 				this.scroll.AddItem(new Scroll_Item(this.prefablist,this.deleter_scrollitem,t_file_list[ii].GetName(),null,null),this.scroll.GetListCount());
 			}

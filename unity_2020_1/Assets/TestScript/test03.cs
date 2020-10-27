@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -75,7 +72,7 @@ namespace TestScript
 					this.window = Fee.Ui.Window.Create(this.deleter,this);
 					this.window.RegistWindowResume(a_label,in t_new_rect);
 
-					Color t_color = new Color(0.0f,0.0f,0.0f,0.5f);
+					UnityEngine.Color t_color = new UnityEngine.Color(0.0f,0.0f,0.0f,0.5f);
 					switch(a_index){
 					case 0:
 						{

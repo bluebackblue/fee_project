@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -358,7 +355,7 @@ namespace TestScript
 					//コストをランダム設定。
 					{
 						for(int ii=0;ii<this.sprite_map.Length;ii++){
-							if(Random.value < 0.7f){
+							if(UnityEngine.Random.value < 0.7f){
 								this.dijkstra.GetNode(ii).nodedata.tipcost = 1;
 							}else{
 								this.dijkstra.GetNode(ii).nodedata.tipcost = 100;

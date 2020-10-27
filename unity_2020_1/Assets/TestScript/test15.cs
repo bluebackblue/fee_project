@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -139,7 +136,7 @@ namespace TestScript
 			//sprite
 			{
 				this.sprite = this.prefablist.CreateClipSprite(this.deleter,t_drawpriority + 1);
-				this.sprite.SetTexture(Texture2D.whiteTexture);
+				this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 				this.sprite.SetColor(0.7f,0.7f,0.7f,1.0f);
 				this.sprite.SetTexture(this.prefablist.GetTexture(Common.TextureType.Test15_Texture));
 			}

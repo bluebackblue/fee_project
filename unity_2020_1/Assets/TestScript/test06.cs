@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -59,7 +56,7 @@ namespace TestScript
 				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
 					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
 						//遷移リクエスト。
-						Debug.Log("SceneA : request");
+						UnityEngine.Debug.Log("SceneA : request");
 						Fee.Scene.Scene.GetInstance().SetNextScene(new SceneB());
 					}
 				}
@@ -75,7 +72,7 @@ namespace TestScript
 			*/
 			public void Delete()
 			{
-				Debug.Log("SceneA : Delete");
+				UnityEngine.Debug.Log("SceneA : Delete");
 			}
 
 			/** [Scene.Scene_Base]シーン開始。
@@ -85,7 +82,7 @@ namespace TestScript
 			*/
 			public bool SceneStart()
 			{
-				Debug.Log("SceneA : SceneStart");
+				UnityEngine.Debug.Log("SceneA : SceneStart");
 
 				Fee.Fade.Fade.GetInstance().FadeIn();
 				return true;
@@ -98,7 +95,7 @@ namespace TestScript
 			*/
 			public bool SceneEnd()
 			{
-				Debug.Log("SceneA : SceneEnd");
+				UnityEngine.Debug.Log("SceneA : SceneEnd");
 
 				Fee.Fade.Fade.GetInstance().FadeOut();
 
@@ -131,7 +128,7 @@ namespace TestScript
 				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
 					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
 						//遷移リクエスト。
-						Debug.Log("SceneB : request");
+						UnityEngine.Debug.Log("SceneB : request");
 						Fee.Scene.Scene.GetInstance().SetNextScene(new SceneA());
 					}
 				}
@@ -147,7 +144,7 @@ namespace TestScript
 			*/
 			public void Delete()
 			{
-				Debug.Log("SceneB : Delete");
+				UnityEngine.Debug.Log("SceneB : Delete");
 			}
 
 			/** [Scene.Scene_Base]シーン開始。
@@ -157,7 +154,7 @@ namespace TestScript
 			*/
 			public bool SceneStart()
 			{
-				Debug.Log("SceneB : SceneStart");
+				UnityEngine.Debug.Log("SceneB : SceneStart");
 
 				Fee.Fade.Fade.GetInstance().FadeIn();
 				return true;
@@ -170,7 +167,7 @@ namespace TestScript
 			*/
 			public bool SceneEnd()
 			{
-				Debug.Log("SceneB : SceneEnd");
+				UnityEngine.Debug.Log("SceneB : SceneEnd");
 
 				Fee.Fade.Fade.GetInstance().FadeOut();
 

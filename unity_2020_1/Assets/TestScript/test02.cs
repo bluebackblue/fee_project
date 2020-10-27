@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 
 /**
  * Copyright (c) blueback
@@ -146,7 +144,7 @@ namespace TestScript
 			*/
 			public SpeedTest_ListItem(bool a_create)
 			{
-				this.dictionary = new Dictionary<string, SpeedTest_DictionaryItem>();
+				this.dictionary = new System.Collections.Generic.Dictionary<string, SpeedTest_DictionaryItem>();
 				for(int ii=0;ii<20;ii++){
 					this.dictionary.Add(ii.ToString(),new SpeedTest_DictionaryItem(a_create));
 				}
@@ -171,7 +169,7 @@ namespace TestScript
 			*/
 			public SpeedTest_ArrayItem(bool a_create)
 			{
-				this.list = new List<SpeedTest_ListItem>();
+				this.list = new System.Collections.Generic.List<SpeedTest_ListItem>();
 				for(int ii=0;ii<20;ii++){
 					this.list.Add(new SpeedTest_ListItem(a_create));
 				}
@@ -446,19 +444,19 @@ namespace TestScript
 					//random
 
 					this.savedata = new SaveData();
-					this.savedata.ignore = Random.Range(0,9999);
+					this.savedata.ignore = UnityEngine.Random.Range(0,9999);
 
-					this.savedata.maindata.a = Random.Range(0,9999);
+					this.savedata.maindata.a = UnityEngine.Random.Range(0,9999);
 					this.savedata.maindata.sub = new SaveData.SubData();
-					this.savedata.maindata.sub.a = Random.Range(0,9999);
+					this.savedata.maindata.sub.a = UnityEngine.Random.Range(0,9999);
 					this.savedata.maindata.sub.subsub = new SaveData.SubSubData();
-					this.savedata.maindata.sub.subsub.a = Random.Range(0,9999);
+					this.savedata.maindata.sub.subsub.a = UnityEngine.Random.Range(0,9999);
 
 					this.savedata.data_dictionary = new System.Collections.Generic.Dictionary<string,SaveData.Item>();
-					this.savedata.data_dictionary.Add("a",new SaveData.Item(Random.Range(0,9999)));
+					this.savedata.data_dictionary.Add("a",new SaveData.Item(UnityEngine.Random.Range(0,9999)));
 
 					this.savedata.data_list = new System.Collections.Generic.List<SaveData.Item>();
-					this.savedata.data_list.Add(new SaveData.Item(Random.Range(0,9999)));
+					this.savedata.data_list.Add(new SaveData.Item(UnityEngine.Random.Range(0,9999)));
 
 					this.SetStatus("Random",this.savedata);
 				}break;
@@ -493,7 +491,7 @@ namespace TestScript
 				t_log += "Fee : ToJsonString : Time = " + (t_end - t_start).ToString() + " : Size = " + t_jsonstring_fee.Length.ToString() + "\n";
 			}catch(System.Exception t_exception){
 				t_log += "Fee : ToJsonString : ----------------- \n";
-				Debug.LogError(t_exception);
+				UnityEngine.Debug.LogError(t_exception);
 			}
 
 			t_log += "\n";
@@ -512,7 +510,7 @@ namespace TestScript
 				t_log += "Fee : JsonStringToObject : Time = " + (t_end - t_start).ToString() + " : Value = " + t_value.ToString() + "\n";
 			}catch(System.Exception t_exception){
 				t_log += "Fee : JsonStringToObject : ----------------- \n";
-				Debug.LogError(t_exception);
+				UnityEngine.Debug.LogError(t_exception);
 			}
 
 			this.status.SetText(t_log);
@@ -538,7 +536,7 @@ namespace TestScript
 				}
 			
 				if(a_data.data_dictionary != null){
-					foreach(KeyValuePair<string,SaveData.Item> t_pair in a_data.data_dictionary){
+					foreach(System.Collections.Generic.KeyValuePair<string,SaveData.Item> t_pair in a_data.data_dictionary){
 						if(t_pair.Value.subsub != null){
 							t_text += t_pair.Key.ToString() + " = " +  t_pair.Value.subsub.a.ToString() + "\n";
 						}

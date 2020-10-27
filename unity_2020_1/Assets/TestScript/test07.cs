@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -340,7 +337,7 @@ namespace TestScript
 								for(int ii=0;ii<t_binary.Length;ii++){
 									t_log += t_binary[ii].ToString() + " ";
 								}
-								Debug.Log(t_log);
+								UnityEngine.Debug.Log(t_log);
 							}
 
 							this.encrypt_binary = t_binary;
@@ -379,7 +376,7 @@ namespace TestScript
 								for(int ii=0;ii<t_binary.Length;ii++){
 									t_log += t_binary[ii].ToString() + " ";
 								}
-								Debug.Log(t_log);
+								UnityEngine.Debug.Log(t_log);
 							}
 
 							this.crypt_item = null;
@@ -418,7 +415,7 @@ namespace TestScript
 							this.text.SetText(this.step.ToString() + " : Success");
 
 							{
-								Debug.Log("Encrypt = " + System.BitConverter.ToString(t_binary));
+								UnityEngine.Debug.Log("Encrypt = " + System.BitConverter.ToString(t_binary));
 							}
 
 							this.encrypt_binary = t_binary;
@@ -457,7 +454,7 @@ namespace TestScript
 								for(int ii=0;ii<t_binary.Length;ii++){
 									t_log += t_binary[ii].ToString() + " ";
 								}
-								Debug.Log(t_log);
+								UnityEngine.Debug.Log(t_log);
 							}
 
 							this.encrypt_binary = t_binary;
@@ -501,7 +498,7 @@ namespace TestScript
 								for(int ii=0;ii<t_binary.Length;ii++){
 									t_log += t_binary[ii].ToString() + " ";
 								}
-								Debug.Log(t_log);
+								UnityEngine.Debug.Log(t_log);
 							}
 
 							this.signature_binary = t_binary;

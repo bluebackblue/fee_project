@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -239,7 +236,7 @@ namespace TestScript
 			long t_drawpriority = t_layerindex * Fee.Render2D.Config.DRAWPRIORITY_STEP;
 			this.bg = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
 			this.bg.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
-			this.bg.SetTexture(Texture2D.whiteTexture);
+			this.bg.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.bg.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
 			this.bg.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 			this.bg.SetColor(0.0f,0.0f,0.0f,1.0f);
@@ -248,7 +245,7 @@ namespace TestScript
 			//マウス。
 			this.mouse_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority + 1);
 			this.mouse_sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
-			this.mouse_sprite.SetTexture(Texture2D.whiteTexture);
+			this.mouse_sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.mouse_sprite.SetRect(0,0,10,10);
 			this.mouse_sprite.SetColor(1.0f,1.0f,1.0f,1.0f);
 

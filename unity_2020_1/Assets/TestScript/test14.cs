@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -184,26 +181,26 @@ namespace TestScript
 			Fee.Function.Function.GetInstance().StartCoroutine(this.WaitFrame());
 
 			//list
-			this.list = new LinkedList<Item>();
+			this.list = new System.Collections.Generic.LinkedList<Item>();
 
 			//PlayerLoopType
 			{
 				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.EarlyUpdate),			typeof(PlayerLoopType.EarlyUpdate_First),		this.EarlyUpdate_First);
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.EarlyUpdate),			typeof(PlayerLoopType.EarlyUpdate_Last),		this.EarlyUpdate_Last);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.EarlyUpdate),			typeof(PlayerLoopType.EarlyUpdate_Last),			this.EarlyUpdate_Last);
 				this.list.AddLast(new Item("EarlyUpdate_First"));
 				this.list.AddLast(new Item("EarlyUpdate_Last"));
 
 				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.FixedUpdate),			typeof(PlayerLoopType.FixedUpdate_First),		this.FixedUpdate_First);
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.FixedUpdate),			typeof(PlayerLoopType.FixedUpdate_Last),		this.FixedUpdate_Last);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.FixedUpdate),			typeof(PlayerLoopType.FixedUpdate_Last),			this.FixedUpdate_Last);
 				this.list.AddLast(new Item("FixedUpdate_First"));
 				this.list.AddLast(new Item("FixedUpdate_Last"));
 
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.Initialization),		typeof(PlayerLoopType.Initialization_First),	this.Initialization_First);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.Initialization),		typeof(PlayerLoopType.Initialization_First),		this.Initialization_First);
 				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.Initialization),		typeof(PlayerLoopType.Initialization_Last),		this.Initialization_Last);
 				this.list.AddLast(new Item("Initialization_First"));
 				this.list.AddLast(new Item("Initialization_Last"));
 
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.PostLateUpdate),		typeof(PlayerLoopType.PostLateUpdate_First),	this.PostLateUpdate_First);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.PostLateUpdate),		typeof(PlayerLoopType.PostLateUpdate_First),		this.PostLateUpdate_First);
 				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.PostLateUpdate),		typeof(PlayerLoopType.PostLateUpdate_Last),		this.PostLateUpdate_Last);
 				this.list.AddLast(new Item("PostLateUpdate_First"));
 				this.list.AddLast(new Item("PostLateUpdate_Last"));
@@ -218,7 +215,7 @@ namespace TestScript
 				this.list.AddLast(new Item("PreUpdate_First"));
 				this.list.AddLast(new Item("PreUpdate_Last"));
 
-				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.Update),				typeof(PlayerLoopType.Update_First),			this.Update_First);
+				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddFirst,	typeof(UnityEngine.PlayerLoop.Update),				typeof(PlayerLoopType.Update_First),				this.Update_First);
 				Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Fee.PlayerLoopSystem.AddType.AddLast,	typeof(UnityEngine.PlayerLoop.Update),				typeof(PlayerLoopType.Update_Last),				this.Update_Last);
 				this.list.AddLast(new Item("Update_First"));
 				this.list.AddLast(new Item("Update_Last"));

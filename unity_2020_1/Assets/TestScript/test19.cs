@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -287,7 +284,7 @@ namespace TestScript
 			}
 
 			//表示。
-			this.list = new List<Item>();
+			this.list = new System.Collections.Generic.List<Item>();
 			
 			//計算レイヤー。
 			for(int t_layerindex=0;t_layerindex<this.perceptron.layer_list.Count;t_layerindex++){

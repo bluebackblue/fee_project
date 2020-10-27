@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -115,9 +112,9 @@ namespace TestScript
 
 				//sprite
 				this.sprite = a_prefablist.CreateClipSprite(this.deleter,t_drawpriority);
-				this.sprite.SetTexture(Texture2D.whiteTexture);
+				this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 				this.sprite.SetClipRect(0,0,0,0);
-				this.sprite.SetColor(Random.value,Random.value,Random.value,1.0f);
+				this.sprite.SetColor(UnityEngine.Random.value,UnityEngine.Random.value,UnityEngine.Random.value,1.0f);
 				this.sprite.SetClip(true);
 				this.sprite.SetVisible(false);
 

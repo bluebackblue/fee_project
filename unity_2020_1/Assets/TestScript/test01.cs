@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 
 /**
  * Copyright (c) blueback
@@ -152,7 +150,7 @@ namespace TestScript
 			{
 				//スプライト。
 				this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
-				this.sprite.SetTexture(Texture2D.whiteTexture);
+				this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 				this.sprite.SetTextureRect(0,0,Fee.Render2D.Config.TEXTURE_W,Fee.Render2D.Config.TEXTURE_H);
 				this.sprite.SetRect(0,0,Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H);
 				this.sprite.SetColor(0.0f,0.5f,0.0f,1.0f);
@@ -193,12 +191,12 @@ namespace TestScript
 			{
 				string t_text = "";
 
-				t_text += "UnityVersion = "		+ Application.unityVersion + "\n";
-				t_text += "Screen = "			+ Screen.width.ToString() + " x " + Screen.height.ToString() + "\n";
-				t_text += "Data = "				+ Application.dataPath + "\n";
-				t_text += "Persistent Data = "	+ Application.persistentDataPath + "\n";
-				t_text += "Streaming Assets = "	+ Application.streamingAssetsPath + "\n";
-				t_text += "Temporary Cache = "	+ Application.temporaryCachePath + "\n";
+				t_text += "UnityVersion = "		+ UnityEngine.Application.unityVersion + "\n";
+				t_text += "Screen = "			+ UnityEngine.Screen.width.ToString() + " x " + UnityEngine.Screen.height.ToString() + "\n";
+				t_text += "Data = "				+ UnityEngine.Application.dataPath + "\n";
+				t_text += "Persistent Data = "	+ UnityEngine.Application.persistentDataPath + "\n";
+				t_text += "Streaming Assets = "	+ UnityEngine.Application.streamingAssetsPath + "\n";
+				t_text += "Temporary Cache = "	+ UnityEngine.Application.temporaryCachePath + "\n";
 
 				{
 					#if(USE_DEF_FEE_INPUTSYSTEM)

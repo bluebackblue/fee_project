@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -351,7 +348,7 @@ namespace TestScript
 			this.sprite = Fee.Render2D.Sprite2D.Create(this.deleter,0);
 			this.sprite.SetRect(50,400,100,100);
 			this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
-			this.sprite.SetTexture(Texture2D.whiteTexture);
+			this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.sprite.SetVisible(false);
 
 			this.info_deta_text = Fee.Render2D.Text2D.Create(this.deleter,0);

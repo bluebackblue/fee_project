@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -181,7 +178,7 @@ namespace TestScript
 
 			/** GetResultTexture
 			*/
-			public Texture2D GetResultTexture()
+			public UnityEngine.Texture2D GetResultTexture()
 			{
 				if(this.item_file != null){
 					return this.item_file.GetResultAssetTexture();
@@ -397,7 +394,7 @@ namespace TestScript
 
 			//progress_sprite
 			this.progress_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
-			this.progress_sprite.SetTexture(Texture2D.whiteTexture);
+			this.progress_sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.progress_sprite.SetRect(50,90,300,10);
 
 			//loaditem
@@ -511,13 +508,13 @@ namespace TestScript
 				{
 					//セーブローカル。テクスチャファイル。
 
-					Texture2D t_texture = new Texture2D(64,64);
+					UnityEngine.Texture2D t_texture = new UnityEngine.Texture2D(64,64);
 					{
-						t_texture.filterMode = FilterMode.Point;
-						t_texture.wrapMode = TextureWrapMode.Clamp;
+						t_texture.filterMode = UnityEngine.FilterMode.Point;
+						t_texture.wrapMode = UnityEngine.TextureWrapMode.Clamp;
 						for(int xx=0;xx<t_texture.width;xx++){
 							for(int yy=0;yy<t_texture.height;yy++){
-								t_texture.SetPixel(xx,yy,new Color((float)xx / t_texture.width,(float)yy / t_texture.height,0.0f,(float)xx / t_texture.width));
+								t_texture.SetPixel(xx,yy,new UnityEngine.Color((float)xx / t_texture.width,(float)yy / t_texture.height,0.0f,(float)xx / t_texture.width));
 							}
 						}
 						t_texture.Apply();

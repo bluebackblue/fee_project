@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -54,7 +51,7 @@ namespace TestScript
 
 		/** cube
 		*/
-		private GameObject[] cube;
+		private UnityEngine.GameObject[] cube;
 
 		/** ブルーム。
 		*/
@@ -74,8 +71,8 @@ namespace TestScript
 
 		/** render_texture
 		*/
-		RenderTexture render_texture_color;
-		RenderTexture render_texture_depth;
+		UnityEngine.RenderTexture render_texture_color;
+		UnityEngine.RenderTexture render_texture_depth;
 
 		/** ButtonId
 		*/
@@ -159,10 +156,10 @@ namespace TestScript
 
 			//深度。カメラに設定。
 			{
-				Camera t_main_camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+				UnityEngine.Camera t_main_camera = UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>();
 
-				t_main_camera.clearFlags = CameraClearFlags.Nothing;
-				t_main_camera.depthTextureMode = DepthTextureMode.Depth;
+				t_main_camera.clearFlags = UnityEngine.CameraClearFlags.Nothing;
+				t_main_camera.depthTextureMode = UnityEngine.DepthTextureMode.Depth;
 				t_main_camera.depth = 20.0f;
 
 				Fee.Depth.Depth.GetInstance().SetBlendRate(0.5f);
@@ -185,14 +182,14 @@ namespace TestScript
 
 			//キューブ。
 			{
-				this.cube = new GameObject[2];
+				this.cube = new UnityEngine.GameObject[2];
 				for(int ii=0;ii<this.cube.Length;ii++){
 					if(ii == 0){
-						this.cube[ii] = GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test10_Cube),new Vector3(1 + 1,0,10),Quaternion.identity);
+						this.cube[ii] = UnityEngine.GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test10_Cube),new UnityEngine.Vector3(1 + 1,0,10),UnityEngine.Quaternion.identity);
 					}else{
-						this.cube[ii] = GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test10_Cube),new Vector3(1 + 4,0,10),Quaternion.identity);
+						this.cube[ii] = UnityEngine.GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test10_Cube),new UnityEngine.Vector3(1 + 4,0,10),UnityEngine.Quaternion.identity);
 					}
-					this.cube[ii].transform.localScale = new Vector3(2,2,2);
+					this.cube[ii].transform.localScale = new UnityEngine.Vector3(2,2,2);
 				}
 			}
 
@@ -287,9 +284,9 @@ namespace TestScript
 			//キューブ。
 			for(int ii=0;ii<this.cube.Length;ii++){
 				if(ii == 0){
-					this.cube[ii].transform.Rotate(Vector3.up,0.1f);
+					this.cube[ii].transform.Rotate(UnityEngine.Vector3.up,0.1f);
 				}else{
-					this.cube[ii].transform.Rotate(Vector3.up,-0.1f);
+					this.cube[ii].transform.Rotate(UnityEngine.Vector3.up,-0.1f);
 				}
 			}
 		}

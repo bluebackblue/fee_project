@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -113,13 +110,13 @@ namespace TestScript
 			this.frustum_culling = new Fee.Geometry.FrustumCulling();
 
 			//main_camera
-			this.main_camera = GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>();
+			this.main_camera = UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>();
 			this.main_camera.depth = Fee.Render2D.Render2D.GetInstance().GetCameraAfterDepth(Fee.Render2D.Config.MAX_LAYER);
-			this.main_camera.clearFlags = CameraClearFlags.Nothing;
+			this.main_camera.clearFlags = UnityEngine.CameraClearFlags.Nothing;
 
 			//キューブ。
 			{
-				this.cube = GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test18_Cube),Vector3.zero,Quaternion.identity);
+				this.cube = UnityEngine.GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test18_Cube),UnityEngine.Vector3.zero,UnityEngine.Quaternion.identity);
 			}
 		}
 
@@ -134,14 +131,14 @@ namespace TestScript
 			{
 				float t_x = (Fee.Input.Input.GetInstance().mouse.cursor.pos.x - Fee.Render2D.Config.VIRTUAL_W  / 2) / 50.0f;
 				float t_y = (Fee.Input.Input.GetInstance().mouse.cursor.pos.y - Fee.Render2D.Config.VIRTUAL_H  / 2) / 50.0f;
-				this.cube.transform.position = new Vector3(t_x,-t_y,0);
+				this.cube.transform.position = new UnityEngine.Vector3(t_x,-t_y,0);
 			}
 			
 			//カリングテスト。
 			if(this.frustum_culling.CullingTest(this.cube.transform.position) == true){
-				this.cube.GetComponent<MeshRenderer>().material.color = new Color(1.0f,0.0f,0.0f,1.0f);
+				this.cube.GetComponent<UnityEngine.MeshRenderer>().material.color = new UnityEngine.Color(1.0f,0.0f,0.0f,1.0f);
 			}else{
-				this.cube.GetComponent<MeshRenderer>().material.color = new Color(0.0f,0.0f,1.0f,1.0f);
+				this.cube.GetComponent<UnityEngine.MeshRenderer>().material.color = new UnityEngine.Color(0.0f,0.0f,1.0f,1.0f);
 			}
 		}
 

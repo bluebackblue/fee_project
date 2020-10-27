@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 
 /**
@@ -96,8 +93,8 @@ namespace TestScript
 					int t_size = 100;
 
 					this.sprite.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
-					this.sprite.SetTexture(Texture2D.whiteTexture);
-					this.sprite.SetColor(Random.value,Random.value,Random.value,1.0f);
+					this.sprite.SetTexture(UnityEngine.Texture2D.whiteTexture);
+					this.sprite.SetColor(UnityEngine.Random.value,UnityEngine.Random.value,UnityEngine.Random.value,1.0f);
 					this.sprite.SetRect(this.touch_phase.value_x-t_size/2,this.touch_phase.value_y-t_size/2,t_size,t_size);
 				}
 
@@ -201,7 +198,7 @@ namespace TestScript
 			long t_drawpriority = t_layerindex * Fee.Render2D.Config.DRAWPRIORITY_STEP;
 			this.bg = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority);
 			this.bg.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
-			this.bg.SetTexture(Texture2D.whiteTexture);
+			this.bg.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.bg.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
 			this.bg.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
 			this.bg.SetColor(0.0f,0.0f,0.0f,1.0f);
