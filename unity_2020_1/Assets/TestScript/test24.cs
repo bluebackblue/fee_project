@@ -25,7 +25,7 @@ namespace TestScript
 				"test24",
 
 				@"
-				ポーズ
+				タイム
 				"
 			);
 		}
@@ -96,8 +96,8 @@ namespace TestScript
 			Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
 
-			//ポーズ。インスタンス作成。
-			Fee.Pause.Pause.CreateInstance();
+			//タイム。インスタンス作成。
+			Fee.Time.Time.CreateInstance();
 
 			//プレハブリスト。
 			this.prefablist = new Common.PrefabList();
@@ -133,7 +133,7 @@ namespace TestScript
 		*/
 		private void RowUpdate()
 		{
-			this.time_rowupdate += Fee.Function.Config.ROWUPDATE_DELTA * Fee.Pause.Pause.GetInstance().GetTimeScale();
+			this.time_rowupdate += Fee.Function.Config.ROWUPDATE_DELTA * Fee.Time.Time.GetInstance().GetTimeScale();
 			this.count_rowupdate++;
 		}
 
@@ -165,18 +165,18 @@ namespace TestScript
 			);
 			
 			if(Fee.Input.Input.GetInstance().mouse.right.down == true){
-				if(Fee.Pause.Pause.GetInstance().GetTimeScale() > 0.0f){
+				if(Fee.Time.Time.GetInstance().GetTimeScale() > 0.0f){
 					//停止。
-					Fee.Pause.Pause.GetInstance().SetNextFrameTimeScale(0.0f);
+					Fee.Time.Time.GetInstance().SetNextFrameTimeScale(0.0f);
 				}else{
 					//再生。
-					Fee.Pause.Pause.GetInstance().SetNextFrameTimeScale(1.0f);
+					Fee.Time.Time.GetInstance().SetNextFrameTimeScale(1.0f);
 				}
 			}
 
 			if(Fee.Input.Input.GetInstance().mouse.left.down == true){
 				//ステップ。
-				Fee.Pause.Pause.GetInstance().StepOneFrame(1.0f);
+				Fee.Time.Time.GetInstance().StepOneFrame(1.0f);
 			}
 		}
 
@@ -197,7 +197,7 @@ namespace TestScript
 		*/
 		public override bool PreDestroy(bool a_first)
 		{
-			Fee.Pause.Pause.GetInstance().SetNextFrameTimeScale(1.0f);
+			Fee.Time.Time.GetInstance().SetNextFrameTimeScale(1.0f);
 
 			Fee.Function.Function.GetInstance().UnSetRowUpdate(this.RowUpdate);
 			return true;
