@@ -14,7 +14,7 @@ namespace TestScript
 {
 	/** test25
 	*/
-	public class test25 : MainBase , Fee.Function.UnityOnRenderImage_CallBackInterface<int>
+	public class test25 : MainBase , Fee.Function.UnityOnRenderImage_CallBackInterface<int> , Fee.Ui.OnButtonClick_CallBackInterface<test25.ButtonId> , Fee.Ui.OnSliderChangeValue_CallBackInterface<test25.SliderId>
 	{
 		/** CreateStatus
 		*/
@@ -25,7 +25,7 @@ namespace TestScript
 				"test25",
 
 				@"
-				---
+				ブルーム。
 				"
 			);
 		}
@@ -40,29 +40,52 @@ namespace TestScript
 
 		/** ブルーム。
 		*/
-		private UnityEngine.Material material_bloom_downsampling;
-		private UnityEngine.Material material_bloom_upsampling;
+		private UnityEngine.Material bloom_downsampling;
+		private UnityEngine.Material bloom_upsampling;
+		private Fee.Bloom.Material_FirstDownSampling bloom_firstdownsampling;
+		private Fee.Bloom.Material_LastAddUpSampling bloom_lastupsampling;
 		private UnityEngine.RenderTexture[] bloom_rendertexture;
-		private Fee.Bloom.Material_FirstDownSampling material_bloom_firstdownsampling;
-		private Fee.Bloom.Material_LastAddUpSampling material_bloom_lastupsampling;
-
-		/** 箱。
-		*/
-		private UnityEngine.Material box_material;
 
 		/** 輝度抽出閾値。
 		*/
 		[UnityEngine.SerializeField,UnityEngine.Range(0.0f,1.0f)]
-		private float threshold;
+		private float bloom_threshold;
 
 		/** 加算強度。
 		*/
 		[UnityEngine.SerializeField,UnityEngine.Range(0.0f,30.0f)]
-		private float intensity;
+		private float bloom_intensity;
 
-		/** 色。
+		/** 箱。
 		*/
-		public UnityEngine.Color color;
+		private UnityEngine.Material box_material;
+		public UnityEngine.Color box_color;
+		private UnityEngine.Transform box_transform;
+
+		/** ＵＩ。
+		*/
+		private Fee.Ui.Button ui_button;
+		private Fee.Ui.Slider ui_threshold_slider;
+		private Fee.Ui.Slider ui_intensity_slider;
+
+		/** camera
+		*/
+		private Fee.Function.UnityOnRenderImage_MonoBehaviour camera_onrenderimage;
+
+		/** ButtonId
+		*/
+		public enum ButtonId
+		{
+			Bloom,
+		}
+
+		/** SliderId
+		*/
+		public enum SliderId
+		{
+			Threshold,
+			Intensity,
+		}
 
 		/** Start
 		*/
@@ -117,26 +140,25 @@ namespace TestScript
 			//戻るボタン作成。
 			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
-			//操作。
+			//ブルーム。
 			{
-				this.threshold = Fee.Bloom.Config.DEFAULT_THRESHOLD;
-				this.intensity =  Fee.Bloom.Config.DEFAULT_INTENSITY;
-				this.color = new UnityEngine.Color(0.6f,0.5f,0.4f,1.0f);
+				this.bloom_threshold = Fee.Bloom.Config.DEFAULT_THRESHOLD;
+				this.bloom_intensity =  Fee.Bloom.Config.DEFAULT_INTENSITY;
+
+				this.bloom_downsampling = new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_DOWNSAMPLING));
+				this.bloom_upsampling = new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_ADDUPSAMPLING));
+				this.bloom_firstdownsampling = new Fee.Bloom.Material_FirstDownSampling(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_FIRSTDOWNSAMPLING)));
+				this.bloom_lastupsampling = new Fee.Bloom.Material_LastAddUpSampling(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_LASTADDUPSAMPLING)));
+				this.bloom_rendertexture = new UnityEngine.RenderTexture[3];
 			}
 
-			//ブルーム。
-			this.material_bloom_downsampling = new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_DOWNSAMPLING));
-			this.material_bloom_upsampling = new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_ADDUPSAMPLING));
-			this.bloom_rendertexture = new UnityEngine.RenderTexture[3];
-			this.material_bloom_firstdownsampling = new Fee.Bloom.Material_FirstDownSampling(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_FIRSTDOWNSAMPLING)));
-			this.material_bloom_lastupsampling = new Fee.Bloom.Material_LastAddUpSampling(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_LASTADDUPSAMPLING)));
-
 			//箱。
-			UnityEngine.Transform t_box_transform = null;
 			{
+				this.box_color = new UnityEngine.Color(0.6f,0.5f,0.4f,1.0f);
+
 				UnityEngine.GameObject t_box_gameobject = new UnityEngine.GameObject("box");
-				t_box_transform = t_box_gameobject.GetComponent<UnityEngine.Transform>();
-				t_box_transform.position = new UnityEngine.Vector3(0.0f,0.0f,0.0f);
+				this.box_transform = t_box_gameobject.GetComponent<UnityEngine.Transform>();
+				this.box_transform.position = new UnityEngine.Vector3(0.0f,0.0f,0.0f);
 
 				UnityEngine.MeshFilter t_box_meshfilter = t_box_gameobject.AddComponent<UnityEngine.MeshFilter>();
 				UnityEngine.MeshRenderer t_box_meshrenderer = t_box_gameobject.AddComponent<UnityEngine.MeshRenderer>();
@@ -148,7 +170,7 @@ namespace TestScript
 				t_box_meshfilter.mesh = Fee.Mesh.Box.CreateMesh(t_box_vertex_list,t_box_index_list);
 				
 				this.box_material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/Color_CfZelon"));
-				this.box_material.SetColor("_Color",this.color);
+				this.box_material.SetColor("_Color",this.box_color);
 
 				t_box_meshrenderer.material = this.box_material;
 				t_box_meshrenderer.sharedMaterial = this.box_material;
@@ -159,14 +181,83 @@ namespace TestScript
 				UnityEngine.GameObject t_camera_gameobject = UnityEngine.GameObject.Find("Main Camera");
 				UnityEngine.Transform t_camera_transform = t_camera_gameobject.GetComponent<UnityEngine.Transform>();
 				UnityEngine.Camera t_camera_camera = t_camera_gameobject.GetComponent<UnityEngine.Camera>();
-					
-				t_camera_transform.position = new UnityEngine.Vector3(0.0f,0.0f,-10.0f);
-				t_camera_transform.rotation = UnityEngine.Quaternion.LookRotation((t_box_transform.position - t_camera_transform.position).normalized,UnityEngine.Vector3.up);
+				
+				//３Ｄカメラ。設定。
+				t_camera_transform.position = new UnityEngine.Vector3(0.0f,0.0f,-5.0f);
+				t_camera_transform.rotation = UnityEngine.Quaternion.LookRotation((this.box_transform.position - t_camera_transform.position).normalized,UnityEngine.Vector3.up);
 				t_camera_camera.depth = 20.0f;
 				t_camera_camera.clearFlags = UnityEngine.CameraClearFlags.Nothing;
 
-				Fee.Function.UnityOnRenderImage_MonoBehaviour t_callback = t_camera_gameobject.AddComponent<Fee.Function.UnityOnRenderImage_MonoBehaviour>();
-				t_callback.SetCallBack(this,0);
+				//UnityOnRenderImage
+				this.camera_onrenderimage = t_camera_gameobject.AddComponent<Fee.Function.UnityOnRenderImage_MonoBehaviour>();
+				this.camera_onrenderimage.SetCallBack(this,0);
+			}
+
+			//ＵＩ。
+			{
+				int t_y = 100;
+
+				int t_button_h = 25;
+				int t_button_w = 120;
+
+				this.ui_button = this.prefablist.CreateButton(this.deleter,0);
+				this.ui_button.SetOnButtonClick(this,ButtonId.Bloom);
+				this.ui_button.SetRect(100,t_y,t_button_w,t_button_h);
+				this.ui_button.SetText("Bloom : " + this.camera_onrenderimage.enabled.ToString());
+
+				t_y += 40;
+
+				this.ui_threshold_slider = this.prefablist.CreateSlider(this.deleter,0);
+				this.ui_threshold_slider.SetOnSliderChangeValue(this,SliderId.Threshold);
+				this.ui_threshold_slider.SetRect(100,t_y,200,10);
+				this.ui_threshold_slider.SetButtonSize(20,25);
+				this.ui_threshold_slider.SetValue(this.bloom_threshold);
+
+				t_y += 30;
+
+				this.ui_intensity_slider = this.prefablist.CreateSlider(this.deleter,0);
+				this.ui_intensity_slider.SetOnSliderChangeValue(this,SliderId.Intensity);
+				this.ui_intensity_slider.SetRect(100,t_y,200,10);
+				this.ui_intensity_slider.SetButtonSize(20,25);
+				this.ui_intensity_slider.SetValue(this.bloom_intensity);
+				this.ui_intensity_slider.SetValueScale(5.0f);
+			}
+		}
+
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
+		*/
+		public void OnButtonClick(ButtonId a_id)
+		{
+			switch(a_id){
+			case ButtonId.Bloom:
+				{
+					//ブルーム。
+
+					if(this.camera_onrenderimage.enabled == true){
+						this.camera_onrenderimage.enabled = false;
+					}else{
+						this.camera_onrenderimage.enabled = true;
+					}
+
+					this.ui_button.SetText("Bloom : " + this.camera_onrenderimage.enabled.ToString());
+
+				}break;
+			}
+		}
+
+		/** [Fee.Ui.OnSliderChangeValue_CallBackInterface]値変更。
+		*/
+		public void OnSliderChangeValue(SliderId a_id,float a_value)
+		{
+			switch(a_id){
+			case SliderId.Threshold:
+				{
+					this.bloom_threshold = a_value;
+				}break;
+			case SliderId.Intensity:
+				{
+					this.bloom_intensity = a_value;
+				}break;
 			}
 		}
 
@@ -180,15 +271,16 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
+			this.box_transform.rotation = UnityEngine.Quaternion.AngleAxis(0.1f,UnityEngine.Vector3.up) * this.box_transform.rotation;
 		}
 
 		/** Update
 		*/
 		private void Update()
 		{
-			this.box_material.SetColor("_Color",this.color);
-			this.material_bloom_firstdownsampling.SetThreshold(this.threshold);
-			this.material_bloom_lastupsampling.SetIntensity(this.intensity);
+			this.box_material.SetColor("_Color",this.box_color);
+			this.bloom_firstdownsampling.SetThreshold(this.bloom_threshold);
+			this.bloom_lastupsampling.SetIntensity(this.bloom_intensity);
 		}
 
 		/** LateUpdate
@@ -214,9 +306,9 @@ namespace TestScript
 
 			try{
 				//マテリアル。更新。
-				this.material_bloom_lastupsampling.SetOriginalTexture(a_source);
-				this.material_bloom_firstdownsampling.Apply();
-				this.material_bloom_lastupsampling.Apply();
+				this.bloom_lastupsampling.SetOriginalTexture(a_source);
+				this.bloom_firstdownsampling.Apply();
+				this.bloom_lastupsampling.Apply();
 
 				//ダウンサンプリング。
 				for(int ii=0;ii<this.bloom_rendertexture.Length;ii++) {
@@ -225,13 +317,13 @@ namespace TestScript
 						UnityEngine.RenderTexture t_from = a_source;
 
 						//初回ダウンサンプリング（輝度抽出）。
-						UnityEngine.Graphics.Blit(t_from,t_to,this.material_bloom_firstdownsampling.material);
+						UnityEngine.Graphics.Blit(t_from,t_to,this.bloom_firstdownsampling.material);
 					}else{
 						UnityEngine.RenderTexture t_to = this.bloom_rendertexture[ii];
 						UnityEngine.RenderTexture t_from = this.bloom_rendertexture[ii - 1];
 
 						//ダウンサンプリング。
-						UnityEngine.Graphics.Blit(t_from,t_to,this.material_bloom_downsampling);
+						UnityEngine.Graphics.Blit(t_from,t_to,this.bloom_downsampling);
 					}
 				}
 
@@ -242,11 +334,11 @@ namespace TestScript
 
 					//アップサンプリング。
 					this.bloom_rendertexture[this.bloom_rendertexture.Length - ii - 2].MarkRestoreExpected();
-					UnityEngine.Graphics.Blit(t_from,t_to,this.material_bloom_upsampling);
+					UnityEngine.Graphics.Blit(t_from,t_to,this.bloom_upsampling);
 				}
 
 				//最終アップサンプリング（加算）。
-				UnityEngine.Graphics.Blit(this.bloom_rendertexture[0],a_dest,this.material_bloom_lastupsampling.material);
+				UnityEngine.Graphics.Blit(this.bloom_rendertexture[0],a_dest,this.bloom_lastupsampling.material);
 			}catch(System.Exception t_exception){
 				Fee.EditorTool.Tool.EditorLogError(t_exception.Message);
 			}

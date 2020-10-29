@@ -30,7 +30,6 @@ namespace TestScript
 				"test10",
 
 				@"
-				ブルーム
 				ブラー
 				デプス
 				"
@@ -53,12 +52,6 @@ namespace TestScript
 		*/
 		private UnityEngine.GameObject[] cube;
 
-		/** ブルーム。
-		*/
-		private Fee.Ui.Button bloom_button;
-		private Fee.Ui.Slider bloom_threshold_slider;
-		private Fee.Ui.Slider bloom_intensity_slider;
-
 		/** ブラー。
 		*/
 		private Fee.Ui.Button blur_button;
@@ -78,7 +71,6 @@ namespace TestScript
 		*/
 		public enum ButtonId
 		{
-			Bloom,
 			Blur,
 			Depth,
 		}
@@ -87,8 +79,6 @@ namespace TestScript
 		*/
 		public enum SliderId
 		{
-			Threshold,
-			Intensity,
 			BlurBlendrate,
 			DepthBlendrate,
 		}
@@ -211,35 +201,6 @@ namespace TestScript
 				int t_button_h = 25;
 				int t_button_w = 120;
 
-				//ブルーム。
-				/*
-				{
-					this.bloom_button = this.prefablist.CreateButton(this.deleter,0);
-					this.bloom_button.SetOnButtonClick(this,ButtonId.Bloom);
-					this.bloom_button.SetRect(100,t_y,t_button_w,t_button_h);
-					this.bloom_button.SetText("Bloom : " + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
-
-					t_y += 40;
-
-					this.bloom_threshold_slider = this.prefablist.CreateSlider(this.deleter,0);
-					this.bloom_threshold_slider.SetOnSliderChangeValue(this,SliderId.Threshold);
-					this.bloom_threshold_slider.SetRect(100,t_y,200,10);
-					this.bloom_threshold_slider.SetButtonSize(20,25);
-					this.bloom_threshold_slider.SetValue(Fee.Bloom.Bloom.GetInstance().GetThreshold());
-
-					t_y += 30;
-
-					this.bloom_intensity_slider = this.prefablist.CreateSlider(this.deleter,0);
-					this.bloom_intensity_slider.SetOnSliderChangeValue(this,SliderId.Intensity);
-					this.bloom_intensity_slider.SetRect(100,t_y,200,10);
-					this.bloom_intensity_slider.SetButtonSize(20,25);
-					this.bloom_intensity_slider.SetValue(Fee.Bloom.Bloom.GetInstance().GetIntensity());
-					this.bloom_intensity_slider.SetValueScale(5.0f);
-				}
-
-				t_y += 60;
-				*/
-
 				//ブラー。
 				{
 					this.blur_button = this.prefablist.CreateButton(this.deleter,0);
@@ -313,18 +274,6 @@ namespace TestScript
 		public void OnButtonClick(ButtonId a_id)
 		{
 			switch(a_id){
-			case ButtonId.Bloom:
-				{
-					/*
-					//ブルーム。
-					if(Fee.Bloom.Bloom.GetInstance().IsEnable() == true){
-						Fee.Bloom.Bloom.GetInstance().SetEnable(false);
-					}else{
-						Fee.Bloom.Bloom.GetInstance().SetEnable(true);
-					}
-					this.bloom_button.SetText("Bloom " + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
-					*/
-				}break;
 			case ButtonId.Blur:
 				{
 					//ブラー。
@@ -353,18 +302,6 @@ namespace TestScript
 		public void OnSliderChangeValue(SliderId a_id,float a_value)
 		{
 			switch(a_id){
-			case SliderId.Threshold:
-				{
-					/*
-					Fee.Bloom.Bloom.GetInstance().SetThreshold(a_value);
-					*/
-				}break;
-			case SliderId.Intensity:
-				{
-					/*
-					Fee.Bloom.Bloom.GetInstance().SetIntensity(a_value);
-					*/
-				}break;
 			case SliderId.BlurBlendrate:
 				{
 					Fee.Blur.Blur.GetInstance().SetBlendRate(a_value);
