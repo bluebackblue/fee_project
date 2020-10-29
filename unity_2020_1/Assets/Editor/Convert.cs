@@ -46,7 +46,7 @@ namespace TestScript
 		private static void MenuItem_Tool_ReMakeEditSceneList()
 		{
 			//フォルダ内のファイルを列挙。
-			System.Collections.Generic.List<string> t_file_list = Fee.EditorTool.Utility.CreateFileNameList(new Fee.File.Path("TestScene/"));
+			System.Collections.Generic.List<string> t_file_list = Fee.EditorTool.AssetTool.CreateFileNameList(new Fee.File.Path("TestScene/"));
 
 			//シーン追加。
 			System.Collections.Generic.List<UnityEditor.EditorBuildSettingsScene> t_scene_list = new System.Collections.Generic.List<UnityEditor.EditorBuildSettingsScene>();
@@ -74,8 +74,8 @@ namespace TestScript
 			//スクリプト自動生成。
 			t_script =  SCRIPT_START + t_script +  SCRIPT_END;
 
-			Fee.EditorTool.Utility.WriteTextFile(new Fee.File.Path("TestScript/System/SceneList.cs"),t_script);
-			Fee.EditorTool.Utility.Refresh();
+			Fee.EditorTool.AssetTool.WriteTextFile(new Fee.File.Path("TestScript/System/SceneList.cs"),t_script);
+			Fee.EditorTool.AssetTool.Refresh();
 		}
 		#endif
 
@@ -84,7 +84,7 @@ namespace TestScript
 		[UnityEditor.MenuItem("TestScript/Tool/CreatePublicKeyPrivateKey")]
 		private static void MenuItem_Tool_CreatePublicKeyPrivateKey()
 		{
-			Fee.EditorTool.Crypt.CreatePublicKeyPrivateKey(
+			Fee.EditorTool.CryptTool.CreatePublicKeyPrivateKey(
 				new Fee.File.Path("Editor/data/public_key.json"),
 				new Fee.File.Path("Editor/data/private_key.json")
 			);
@@ -96,9 +96,9 @@ namespace TestScript
 		private static void MenuItem_Tool_CreateCertificate()
 		{
 			Fee.File.CustomCertificateHandler t_certificate = new Fee.File.CustomCertificateHandler("");
-			Fee.EditorTool.Utility.CreateWebRequest(new Fee.File.Path("https://blueback.myqnapcloud.com:8081/"),t_certificate);
-			Fee.EditorTool.Utility.WriteTextFile(new Fee.File.Path("Editor/data/certificate.txt"),t_certificate.GetReceiveCertificateString());
-			Fee.EditorTool.Utility.Refresh();
+			Fee.EditorTool.NetworkTool.CreateWebRequest(new Fee.File.Path("https://blueback.myqnapcloud.com:8081/"),t_certificate);
+			Fee.EditorTool.AssetTool.WriteTextFile(new Fee.File.Path("Editor/data/certificate.txt"),t_certificate.GetReceiveCertificateString());
+			Fee.EditorTool.AssetTool.Refresh();
 		}
 
 		/** エクセルをコンバート。
