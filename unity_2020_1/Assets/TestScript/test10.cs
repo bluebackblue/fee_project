@@ -126,9 +126,6 @@ namespace TestScript
 			Fee.Blur.Config.LOG_ENABLE = true;
 			Fee.Blur.Blur.CreateInstance();
 
-			//ブルーム。インスタンス作成。
-			Fee.Bloom.Bloom.CreateInstance();
-
 			//深度。インスタンス作成。
 			Fee.Depth.Depth.CreateInstance();
 
@@ -215,6 +212,7 @@ namespace TestScript
 				int t_button_w = 120;
 
 				//ブルーム。
+				/*
 				{
 					this.bloom_button = this.prefablist.CreateButton(this.deleter,0);
 					this.bloom_button.SetOnButtonClick(this,ButtonId.Bloom);
@@ -240,6 +238,7 @@ namespace TestScript
 				}
 
 				t_y += 60;
+				*/
 
 				//ブラー。
 				{
@@ -316,6 +315,7 @@ namespace TestScript
 			switch(a_id){
 			case ButtonId.Bloom:
 				{
+					/*
 					//ブルーム。
 					if(Fee.Bloom.Bloom.GetInstance().IsEnable() == true){
 						Fee.Bloom.Bloom.GetInstance().SetEnable(false);
@@ -323,6 +323,7 @@ namespace TestScript
 						Fee.Bloom.Bloom.GetInstance().SetEnable(true);
 					}
 					this.bloom_button.SetText("Bloom " + Fee.Bloom.Bloom.GetInstance().IsEnable().ToString());
+					*/
 				}break;
 			case ButtonId.Blur:
 				{
@@ -354,11 +355,15 @@ namespace TestScript
 			switch(a_id){
 			case SliderId.Threshold:
 				{
+					/*
 					Fee.Bloom.Bloom.GetInstance().SetThreshold(a_value);
+					*/
 				}break;
 			case SliderId.Intensity:
 				{
+					/*
 					Fee.Bloom.Bloom.GetInstance().SetIntensity(a_value);
+					*/
 				}break;
 			case SliderId.BlurBlendrate:
 				{

@@ -34,11 +34,6 @@ namespace TestScript
 				Fee.Audio.Audio.DeleteInstance();
 			}
 
-			//ブルーム。
-			{
-				Fee.Bloom.Bloom.DeleteInstance();
-			}
-
 			//ブラー。
 			{
 				Fee.Blur.Blur.DeleteInstance();
