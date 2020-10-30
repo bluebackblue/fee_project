@@ -38,6 +38,9 @@ namespace TestScript
 				test23.CreateStatus(),
 				test24.CreateStatus(),
 				test25.CreateStatus(),
+				test26.CreateStatus(),
+				test27.CreateStatus(),
+				test28.CreateStatus(),
 			};
 		}
 	}
