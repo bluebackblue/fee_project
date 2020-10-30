@@ -83,4 +83,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TestScene/test25.unity
     guid: 43aceccbb03042a47b65accd55f7d66c
+  - enabled: 1
+    path: Assets/TestScene/test26.unity
+    guid: 8ee9cda754b0bed47a852673b812efe1
+  - enabled: 1
+    path: Assets/TestScene/test27.unity
+    guid: d7835da7da8295646a138eb2c64eb7e4
+  - enabled: 1
+    path: Assets/TestScene/test28.unity
+    guid: fa1de2a54a0e62b4cbf27a6b4a54ba7d
   m_configObjects: {}
