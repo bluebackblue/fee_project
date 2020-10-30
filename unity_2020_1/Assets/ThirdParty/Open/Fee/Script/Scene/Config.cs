@@ -32,9 +32,13 @@ namespace Fee.Scene
 		*/
 		public static bool DEBUGRETHROW_ENABLE = false;
 
-		/** MAINTYPE
+		/** プレイヤーループ。追加先
 		*/
-		public static MainType MAINTYPE = MainType.UnityUpdate;
+		public static System.Type PLAYERLOOP_TARGETTYPE = typeof(UnityEngine.PlayerLoop.Update.ScriptRunBehaviourUpdate);
+		
+		/** プレイヤーループ。追加方法。
+		*/
+		public static Fee.PlayerLoopSystem.AddType PLAYERLOOP_ADDTYPE = Fee.PlayerLoopSystem.AddType.AddAfter;
 	}
 }
 

@@ -14,7 +14,7 @@ namespace Fee.Fade
 {
 	/** Fade
 	*/
-	public class Fade : Fee.Function.UnityFixedUpdate_CallBackInterface<int>
+	public class Fade
 	{
 		/** [シングルトン]s_instance
 		*/
@@ -74,6 +74,10 @@ namespace Fee.Fade
 		*/
 		private UnityEngine.GameObject gameobject;
 
+		/** playerloop_flag
+		*/
+		private bool playerloop_flag;
+
 		/** [シングルトン]constructor
 		*/
 		private Fade()
@@ -94,12 +98,9 @@ namespace Fee.Fade
 			//ソートリストタスク終了後、バーテックス計算タスク開始前。
 			Fee.Render2D.Render2D.GetInstance().RegistOnChangeScreenSize(this.OnChangeScreenSize);
 
-			{
-				this.gameobject = new UnityEngine.GameObject("fade");
-				UnityEngine.GameObject.DontDestroyOnLoad(this.gameobject);
-
-				this.gameobject.AddComponent<Fee.Function.UnityFixedUpdate_MonoBehaviour>().SetCallBack(this,0);
-			}
+			//PlayerLoopType
+			this.playerloop_flag = true;
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().Add(Config.PLAYERLOOP_ADDTYPE,Config.PLAYERLOOP_TARGETTYPE,typeof(PlayerLoopType.Fee_Fade_Main),this.Main);
 		}
 
 		/** [シングルトン]削除。
@@ -114,6 +115,10 @@ namespace Fee.Fade
 
 			UnityEngine.GameObject.DestroyImmediate(this.gameobject);
 			this.gameobject = null;
+
+			//PlayerLoopType
+			this.playerloop_flag = false;
+			Fee.PlayerLoopSystem.PlayerLoopSystem.GetInstance().RemoveFromType(typeof(PlayerLoopType.Fee_Fade_Main));
 		}
 
 		/** SetRectFromScreenSize
@@ -136,82 +141,84 @@ namespace Fee.Fade
 			this.SetRectFromScreenSize();
 		}
 
-		/** [Fee.Graphic.UnityFixedUpdate_CallBackInterface]UnityFixedUpdate
+		/** Main
 		*/
-		public void UnityFixedUpdate(int a_id)
+		private void Main()
 		{
 			try{
-				if(this.flag.anime_now == true){
-					bool t_fix = true;
+				if(this.playerloop_flag == true){
+					if(this.flag.anime_now == true){
+						bool t_fix = true;
 
-					if(this.flag.anime_color.r < this.flag.anime_color_to.r){
-						t_fix = false;
-						this.flag.anime_color.r += this.flag.anime_speed;
-						if(this.flag.anime_color.r >= this.flag.anime_color_to.r){
-							this.flag.anime_color.r = this.flag.anime_color_to.r;
+						if(this.flag.anime_color.r < this.flag.anime_color_to.r){
+							t_fix = false;
+							this.flag.anime_color.r += this.flag.anime_speed;
+							if(this.flag.anime_color.r >= this.flag.anime_color_to.r){
+								this.flag.anime_color.r = this.flag.anime_color_to.r;
+							}
+						}else if(this.flag.anime_color.r > this.flag.anime_color_to.r){
+							t_fix = false;
+							this.flag.anime_color.r -= this.flag.anime_speed;
+							if(this.flag.anime_color.r <= this.flag.anime_color_to.r){
+								this.flag.anime_color.r = this.flag.anime_color_to.r;
+							}
 						}
-					}else if(this.flag.anime_color.r > this.flag.anime_color_to.r){
-						t_fix = false;
-						this.flag.anime_color.r -= this.flag.anime_speed;
-						if(this.flag.anime_color.r <= this.flag.anime_color_to.r){
-							this.flag.anime_color.r = this.flag.anime_color_to.r;
-						}
-					}
 
-					if(this.flag.anime_color.g < this.flag.anime_color_to.g){
-						t_fix = false;
-						this.flag.anime_color.g += this.flag.anime_speed;
-						if(this.flag.anime_color.g >= this.flag.anime_color_to.g){
-							this.flag.anime_color.g = this.flag.anime_color_to.g;
+						if(this.flag.anime_color.g < this.flag.anime_color_to.g){
+							t_fix = false;
+							this.flag.anime_color.g += this.flag.anime_speed;
+							if(this.flag.anime_color.g >= this.flag.anime_color_to.g){
+								this.flag.anime_color.g = this.flag.anime_color_to.g;
+							}
+						}else if(this.flag.anime_color.g > this.flag.anime_color_to.g){
+							t_fix = false;
+							this.flag.anime_color.g -= this.flag.anime_speed;
+							if(this.flag.anime_color.g <= this.flag.anime_color_to.g){
+								this.flag.anime_color.g = this.flag.anime_color_to.g;
+							}
 						}
-					}else if(this.flag.anime_color.g > this.flag.anime_color_to.g){
-						t_fix = false;
-						this.flag.anime_color.g -= this.flag.anime_speed;
-						if(this.flag.anime_color.g <= this.flag.anime_color_to.g){
-							this.flag.anime_color.g = this.flag.anime_color_to.g;
-						}
-					}
 
-					if(this.flag.anime_color.b < this.flag.anime_color_to.b){
-						t_fix = false;
-						this.flag.anime_color.b += this.flag.anime_speed;
-						if(this.flag.anime_color.b >= this.flag.anime_color_to.b){
-							this.flag.anime_color.b = this.flag.anime_color_to.b;
+						if(this.flag.anime_color.b < this.flag.anime_color_to.b){
+							t_fix = false;
+							this.flag.anime_color.b += this.flag.anime_speed;
+							if(this.flag.anime_color.b >= this.flag.anime_color_to.b){
+								this.flag.anime_color.b = this.flag.anime_color_to.b;
+							}
+						}else if(this.flag.anime_color.b > this.flag.anime_color_to.b){
+							t_fix = false;
+							this.flag.anime_color.b -= this.flag.anime_speed;
+							if(this.flag.anime_color.b <= this.flag.anime_color_to.b){
+								this.flag.anime_color.b = this.flag.anime_color_to.b;
+							}
 						}
-					}else if(this.flag.anime_color.b > this.flag.anime_color_to.b){
-						t_fix = false;
-						this.flag.anime_color.b -= this.flag.anime_speed;
-						if(this.flag.anime_color.b <= this.flag.anime_color_to.b){
-							this.flag.anime_color.b = this.flag.anime_color_to.b;
+
+						if(this.flag.anime_color.a < this.flag.anime_color_to.a){
+							t_fix = false;
+							this.flag.anime_color.a += this.flag.anime_speed;
+							if(this.flag.anime_color.a >= this.flag.anime_color_to.a){
+								this.flag.anime_color.a = this.flag.anime_color_to.a;
+							}
+						}else if(this.flag.anime_color.a > this.flag.anime_color_to.a){
+							t_fix = false;
+							this.flag.anime_color.a -= this.flag.anime_speed;
+							if(this.flag.anime_color.a <= this.flag.anime_color_to.a){
+								this.flag.anime_color.a = this.flag.anime_color_to.a;
+							}
 						}
-					}
 
-					if(this.flag.anime_color.a < this.flag.anime_color_to.a){
-						t_fix = false;
-						this.flag.anime_color.a += this.flag.anime_speed;
-						if(this.flag.anime_color.a >= this.flag.anime_color_to.a){
-							this.flag.anime_color.a = this.flag.anime_color_to.a;
+						if(this.flag.anime_color.a <= 0.0f){
+							this.sprite.SetVisible(false);
+							this.flag.anime_color = this.flag.anime_color_to;
+							t_fix = true;
+						}else{
+							this.sprite.SetVisible(true);
 						}
-					}else if(this.flag.anime_color.a > this.flag.anime_color_to.a){
-						t_fix = false;
-						this.flag.anime_color.a -= this.flag.anime_speed;
-						if(this.flag.anime_color.a <= this.flag.anime_color_to.a){
-							this.flag.anime_color.a = this.flag.anime_color_to.a;
+
+						this.sprite.SetColor(in this.flag.anime_color);
+
+						if(t_fix == true){
+							this.flag.anime_now = false;
 						}
-					}
-
-					if(this.flag.anime_color.a <= 0.0f){
-						this.sprite.SetVisible(false);
-						this.flag.anime_color = this.flag.anime_color_to;
-						t_fix = true;
-					}else{
-						this.sprite.SetVisible(true);
-					}
-
-					this.sprite.SetColor(in this.flag.anime_color);
-
-					if(t_fix == true){
-						this.flag.anime_now = false;
 					}
 				}
 			}catch(System.Exception t_exception){
