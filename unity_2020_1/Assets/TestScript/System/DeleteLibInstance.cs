@@ -34,6 +34,10 @@ namespace TestScript
 				Fee.Audio.Audio.DeleteInstance();
 			}
 
+			//ブルーム。
+			{
+			}
+
 			//ブラー。
 			{
 				Fee.Blur.Blur.DeleteInstance();
@@ -201,6 +205,11 @@ namespace TestScript
 			//タスク。
 			{
 				Fee.TaskW.TaskW.DeleteInstance();
+			}
+
+			//タイム。
+			{
+				Fee.Time.Time.DeleteInstance();
 			}
 
 			//ＵＩ。
