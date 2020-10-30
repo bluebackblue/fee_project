@@ -14,7 +14,7 @@ namespace Fee.Scene
 {
 	/** Scene
 	*/
-	public class Scene
+	public class Scene : Fee.Function.UnityUpdate_CallBackInterface<int> , Fee.Function.UnityLateUpdate_CallBackInterface<int> , Fee.Function.UnityFixedUpdate_CallBackInterface<int>
 	{
 		/** [シングルトン]s_instance
 		*/
@@ -74,6 +74,10 @@ namespace Fee.Scene
 		*/
 		private bool is_scene;
 
+		/** gameobject
+		*/
+		private UnityEngine.GameObject gameobject;
+
 		/** mode
 		*/
 		enum Mode
@@ -107,12 +111,22 @@ namespace Fee.Scene
 
 			//mode
 			this.mode = Mode.WaitRequest;
+
+			{
+				this.gameobject = new UnityEngine.GameObject("scene");
+				UnityEngine.GameObject.DontDestroyOnLoad(this.gameobject);
+
+				this.gameobject.AddComponent<Fee.Function.UnityUpdate_MonoBehaviour>().SetCallBack(this,0);
+				this.gameobject.AddComponent<Fee.Function.UnityLateUpdate_MonoBehaviour>().SetCallBack(this,0);
+			}
 		}
 
 		/** [シングルトン]削除。
 		*/
 		private void Delete()
 		{
+			UnityEngine.GameObject.DestroyImmediate(this.gameobject);
+			this.gameobject = null;
 		}
 
 		/** 次のシーン。設定。
@@ -142,27 +156,40 @@ namespace Fee.Scene
 			return true;
 		}
 
-		/** 更新。
+		/** [Fee.Graphic.UnityUpdate_CallBackInterface]UnityUpdate
 		*/
-		public void Unity_Update(float a_delta)
+		public void UnityUpdate(int a_id)
 		{
+			if(Config.MAINTYPE == MainType.UnityUpdate){
+				this.Main();
+			}
+
 			if(this.is_scene == true){
-				this.current.Unity_Update(a_delta);
+				this.current.Unity_Update();
 			}
 		}
 
-		/** 更新。
+		/** [Fee.Graphic.UnityLateUpdate_CallBackInterface]UnityLateUpdate
 		*/
-		public void Unity_LateUpdate(float a_delta)
+		public void UnityLateUpdate(int a_id)
 		{
 			if(this.is_scene == true){
-				this.current.Unity_LateUpdate(a_delta);
+				this.current.Unity_LateUpdate();
 			}
 		}
 
-		/** 更新。
+		/** [Fee.Graphic.UnityFixedUpdate_CallBackInterface]UnityFixedUpdate
 		*/
-		public void Main()
+		public void UnityFixedUpdate(int a_id)
+		{
+			if(Config.MAINTYPE == MainType.UnityFixedUpdate){
+				this.Main();
+			}
+		}
+
+		/** Main
+		*/
+		private void Main()
 		{
 			switch(this.mode){
 			case Mode.WaitRequest:
@@ -211,6 +238,7 @@ namespace Fee.Scene
 					}
 				}break;
 			}
+
 		}
 	}
 }

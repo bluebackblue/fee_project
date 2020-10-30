@@ -14,7 +14,7 @@ namespace Fee.Fade
 {
 	/** Fade
 	*/
-	public class Fade
+	public class Fade : Fee.Function.UnityFixedUpdate_CallBackInterface<int>
 	{
 		/** [シングルトン]s_instance
 		*/
@@ -70,6 +70,10 @@ namespace Fee.Fade
 		*/
 		private Sprite2D_Fade sprite;
 
+		/** gameobject
+		*/
+		private UnityEngine.GameObject gameobject;
+
 		/** [シングルトン]constructor
 		*/
 		private Fade()
@@ -89,6 +93,13 @@ namespace Fee.Fade
 			//スクリーンサイズ変更通知。登録。
 			//ソートリストタスク終了後、バーテックス計算タスク開始前。
 			Fee.Render2D.Render2D.GetInstance().RegistOnChangeScreenSize(this.OnChangeScreenSize);
+
+			{
+				this.gameobject = new UnityEngine.GameObject("fade");
+				UnityEngine.GameObject.DontDestroyOnLoad(this.gameobject);
+
+				this.gameobject.AddComponent<Fee.Function.UnityFixedUpdate_MonoBehaviour>().SetCallBack(this,0);
+			}
 		}
 
 		/** [シングルトン]削除。
@@ -100,6 +111,9 @@ namespace Fee.Fade
 
 			//OnDelete
 			this.sprite.OnDelete();
+
+			UnityEngine.GameObject.DestroyImmediate(this.gameobject);
+			this.gameobject = null;
 		}
 
 		/** SetRectFromScreenSize
@@ -122,9 +136,9 @@ namespace Fee.Fade
 			this.SetRectFromScreenSize();
 		}
 
-		/** 更新。
+		/** [Fee.Graphic.UnityFixedUpdate_CallBackInterface]UnityFixedUpdate
 		*/
-		public void Main()
+		public void UnityFixedUpdate(int a_id)
 		{
 			try{
 				if(this.flag.anime_now == true){

@@ -51,7 +51,7 @@ namespace TestScript
 
 			/** [Scene_Base]更新。
 			*/
-			public void Unity_Update(float a_delta)
+			public void Unity_Update()
 			{
 				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
 					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
@@ -64,7 +64,7 @@ namespace TestScript
 
 			/** [Scene_Base]更新。
 			*/
-			public void Unity_LateUpdate(float a_delta)
+			public void Unity_LateUpdate()
 			{
 			}
 
@@ -123,7 +123,7 @@ namespace TestScript
 
 			/** [Scene_Base]更新。
 			*/
-			public void Unity_Update(float a_delta)
+			public void Unity_Update()
 			{
 				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
 					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
@@ -136,7 +136,7 @@ namespace TestScript
 
 			/** [Scene_Base]更新。
 			*/
-			public void Unity_LateUpdate(float a_delta)
+			public void Unity_LateUpdate()
 			{
 			}
 
@@ -228,7 +228,7 @@ namespace TestScript
 
 			//フェード。インスタンス作成。
 			Fee.Fade.Fade.CreateInstance();
-			Fee.Fade.Fade.GetInstance().SetSpeed(0.05f);
+			Fee.Fade.Fade.GetInstance().SetSpeed(0.01f);
 			Fee.Fade.Fade.GetInstance().SetColor(0.0f,0.0f,0.0f,1.0f);
 			Fee.Fade.Fade.GetInstance().SetToColor(0.0f,0.0f,0.0f,1.0f);
 			Fee.Fade.Fade.GetInstance().SetAnime();
@@ -275,12 +275,6 @@ namespace TestScript
 		*/
 		private void Update()
 		{
-			//シーン。
-			Fee.Scene.Scene.GetInstance().Main();
-			Fee.Scene.Scene.GetInstance().Unity_Update(UnityEngine.Time.deltaTime);
-
-			//フェード。
-			Fee.Fade.Fade.GetInstance().Main();
 		}
 
 		/** LateUpdate

@@ -31,6 +31,10 @@ namespace Fee.Scene
 		/** デバッグリスロー。
 		*/
 		public static bool DEBUGRETHROW_ENABLE = false;
+
+		/** MAINTYPE
+		*/
+		public static MainType MAINTYPE = MainType.UnityUpdate;
 	}
 }
 
