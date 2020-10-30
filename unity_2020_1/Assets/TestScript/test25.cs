@@ -25,7 +25,7 @@ namespace TestScript
 				"test25",
 
 				@"
-				ブルーム。
+				ブルーム
 				"
 			);
 		}

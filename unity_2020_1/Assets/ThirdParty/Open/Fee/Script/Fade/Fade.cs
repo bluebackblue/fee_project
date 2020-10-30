@@ -70,10 +70,6 @@ namespace Fee.Fade
 		*/
 		private Sprite2D_Fade sprite;
 
-		/** gameobject
-		*/
-		private UnityEngine.GameObject gameobject;
-
 		/** playerloop_flag
 		*/
 		private bool playerloop_flag;
@@ -112,9 +108,6 @@ namespace Fee.Fade
 
 			//OnDelete
 			this.sprite.OnDelete();
-
-			UnityEngine.GameObject.DestroyImmediate(this.gameobject);
-			this.gameobject = null;
 
 			//PlayerLoopType
 			this.playerloop_flag = false;

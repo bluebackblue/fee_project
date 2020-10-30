@@ -165,11 +165,15 @@ namespace TestScript
 			);
 			
 			if(Fee.Input.Input.GetInstance().mouse.right.down == true){
-				if(Fee.Time.Time.GetInstance().GetTimeScale() > 0.0f){
+				float t_timescale = Fee.Time.Time.GetInstance().GetTimeScale();
+
+				if(t_timescale > 0.0f){
 					//停止。
+					UnityEngine.Debug.Log("Stop : " + t_timescale.ToString());
 					Fee.Time.Time.GetInstance().SetNextFrameTimeScale(0.0f);
 				}else{
 					//再生。
+					UnityEngine.Debug.Log("Play : " + t_timescale.ToString());
 					Fee.Time.Time.GetInstance().SetNextFrameTimeScale(1.0f);
 				}
 			}
