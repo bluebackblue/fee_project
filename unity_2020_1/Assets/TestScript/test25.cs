@@ -48,12 +48,10 @@ namespace TestScript
 
 		/** 輝度抽出閾値。
 		*/
-		[UnityEngine.SerializeField,UnityEngine.Range(0.0f,1.0f)]
 		private float bloom_threshold;
 
 		/** 加算強度。
 		*/
-		[UnityEngine.SerializeField,UnityEngine.Range(0.0f,30.0f)]
 		private float bloom_intensity;
 
 		/** 箱。
@@ -169,7 +167,7 @@ namespace TestScript
 				Fee.Mesh.Box.CreateIndexList(t_box_index_list);
 				t_box_meshfilter.mesh = Fee.Mesh.Box.CreateMesh(t_box_vertex_list,t_box_index_list);
 				
-				this.box_material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/Color_CfZelon"));
+				this.box_material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/Color_CfZleon"));
 				this.box_material.SetColor("_Color",this.box_color);
 
 				t_box_meshrenderer.material = this.box_material;

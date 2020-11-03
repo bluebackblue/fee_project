@@ -635,13 +635,13 @@ namespace Fee.Render2D
 											UnityEngine.GL.TexCoord2(t_texcord[0],t_texcord[1]);
 											UnityEngine.GL.Vertex3(t_vertex[0],t_vertex[1],0.0f);
 
-											//右上。
-											UnityEngine.GL.TexCoord2(t_texcord[2],t_texcord[1]);
-											UnityEngine.GL.Vertex3(t_vertex[2],t_vertex[3],0.0f);
-
 											//左下。
 											UnityEngine.GL.TexCoord2(t_texcord[0],t_texcord[3]);
 											UnityEngine.GL.Vertex3(t_vertex[4],t_vertex[5],0.0f);
+
+											//右上。
+											UnityEngine.GL.TexCoord2(t_texcord[2],t_texcord[1]);
+											UnityEngine.GL.Vertex3(t_vertex[2],t_vertex[3],0.0f);
 										}
 
 										{
@@ -649,13 +649,13 @@ namespace Fee.Render2D
 											UnityEngine.GL.TexCoord2(t_texcord[0],t_texcord[3]);
 											UnityEngine.GL.Vertex3(t_vertex[4],t_vertex[5],0.0f);
 
-											//右上。
-											UnityEngine.GL.TexCoord2(t_texcord[2],t_texcord[1]);
-											UnityEngine.GL.Vertex3(t_vertex[2],t_vertex[3],0.0f);
-
 											//右下。
 											UnityEngine.GL.TexCoord2(t_texcord[2],t_texcord[3]);
 											UnityEngine.GL.Vertex3(t_vertex[6],t_vertex[7],0.0f);	
+
+											//右上。
+											UnityEngine.GL.TexCoord2(t_texcord[2],t_texcord[1]);
+											UnityEngine.GL.Vertex3(t_vertex[2],t_vertex[3],0.0f);
 										}
 									}
 								}

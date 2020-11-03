@@ -10,54 +10,50 @@
 
 /** Fee.Bloom
 */
-namespace Fee.Bloom
+namespace Fee.Blur
 {
-	/** Material_LastAddUpSampling
+	/** Material_BlurY
 	*/
-	public class Material_LastAddUpSampling
+	public class Material_BlurY
 	{
 		/** material
 		*/
 		public UnityEngine.Material material;
 
-		/** 加算強度。
+		/** ブレンド率。
 		*/
-		public float intensity;
+		public float blendrate;
 
 		/** texture_original
 		*/
-		private UnityEngine.Texture texture_original;
+		public UnityEngine.Texture texture_original;
 
 		/** constructor
 		*/
-		public Material_LastAddUpSampling(UnityEngine.Material a_material)
+		public Material_BlurY(UnityEngine.Material a_material)
 		{
 			//material
 			this.material = a_material;
 
-			//intensity
-			this.intensity = Config.DEFAULT_INTENSITY;
+			//blendrate
+			this.blendrate = Config.DEFAULT_BLENDRATE;
 
-			//texture_original
+			//texture
 			this.texture_original = null;
 		}
 
-		/** 加算強度。設定。
+		/** SetBlendRate
 		*/
-		public void SetIntensity(float a_intensity)
+		public void SetBlendRate(float a_value)
 		{
-			this.intensity = a_intensity;
-
-			if(this.intensity < 0.0f){
-				this.intensity = 0.0f;
-			}
+			this.blendrate = a_value;
 		}
 
-		/** 加算強度。取得。
+		/** GetBlendRate
 		*/
-		public float GetIntensity()
+		public float GetBlendRate()
 		{
-			return this.intensity;
+			return this.blendrate;
 		}
 
 		/** SetOriginalTexture
@@ -78,8 +74,8 @@ namespace Fee.Bloom
 		*/
 		public void Apply()
 		{
-			//threshold
-			this.material.SetFloat("intensity",this.intensity);
+			//blendrate
+			this.material.SetFloat("blendrate",this.blendrate);
 
 			//texture_original
 			this.material.SetTexture("texture_original",this.texture_original);

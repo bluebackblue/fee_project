@@ -14,6 +14,7 @@ namespace Fee.Blur
 {
 	/** Camera_MonoBehaviour
 	*/
+	#if(false)
 	public class Camera_MonoBehaviour : UnityEngine.MonoBehaviour
 	{
 		/** mycamera
@@ -143,5 +144,6 @@ namespace Fee.Blur
 			}
 		}
 	}
+	#endif
 }
 

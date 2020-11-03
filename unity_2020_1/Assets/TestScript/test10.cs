@@ -113,8 +113,10 @@ namespace TestScript
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//ブラー。インスタンス作成。
+			/*
 			Fee.Blur.Config.LOG_ENABLE = true;
 			Fee.Blur.Blur.CreateInstance();
+			*/
 
 			//深度。インスタンス作成。
 			Fee.Depth.Depth.CreateInstance();
@@ -202,6 +204,7 @@ namespace TestScript
 				int t_button_w = 120;
 
 				//ブラー。
+				/*
 				{
 					this.blur_button = this.prefablist.CreateButton(this.deleter,0);
 					this.blur_button.SetOnButtonClick(this,ButtonId.Blur);
@@ -216,6 +219,7 @@ namespace TestScript
 					this.blur_rate_blend_slider.SetButtonSize(20,25);
 					this.blur_rate_blend_slider.SetValue(Fee.Blur.Blur.GetInstance().GetBlendRate());
 				}
+				*/
 
 				t_y += 60;
 
@@ -224,7 +228,7 @@ namespace TestScript
 					this.depth_button = this.prefablist.CreateButton(this.deleter,0);
 					this.depth_button.SetOnButtonClick(this,ButtonId.Depth);
 					this.depth_button.SetRect(100,t_y,t_button_w,t_button_h);
-					this.depth_button.SetText("Depth : " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
+					this.depth_button.SetText("Depth : " + Fee.Depth.Depth.GetInstance().IsEnable().ToString());
 
 					t_y += 40;
 
@@ -276,6 +280,7 @@ namespace TestScript
 			switch(a_id){
 			case ButtonId.Blur:
 				{
+					/*
 					//ブラー。
 					if(Fee.Blur.Blur.GetInstance().IsEnable() == true){
 						Fee.Blur.Blur.GetInstance().SetEnable(false);
@@ -283,6 +288,7 @@ namespace TestScript
 						Fee.Blur.Blur.GetInstance().SetEnable(true);
 					}
 					this.blur_button.SetText("Blur " + Fee.Blur.Blur.GetInstance().IsEnable().ToString());
+					*/
 				}break;
 			case ButtonId.Depth:
 				{
@@ -304,7 +310,9 @@ namespace TestScript
 			switch(a_id){
 			case SliderId.BlurBlendrate:
 				{
+					/*
 					Fee.Blur.Blur.GetInstance().SetBlendRate(a_value);
+					*/
 				}break;
 			case SliderId.DepthBlendrate:
 				{

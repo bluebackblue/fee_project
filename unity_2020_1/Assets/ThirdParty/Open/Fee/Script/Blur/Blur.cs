@@ -14,6 +14,7 @@ namespace Fee.Blur
 {
 	/** Blur
 	*/
+	#if(false)
 	public class Blur
 	{
 		/** [シングルトン]s_instance
@@ -150,5 +151,6 @@ namespace Fee.Blur
 			return this.camera_monobehaviour.GetBlendRate();
 		}
 	}
+	#endif
 }
 

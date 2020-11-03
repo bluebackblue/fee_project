@@ -4,7 +4,7 @@
 */
 
 
-Shader "Fee/Shader/Color_CfZelon"
+Shader "Fee/Shader/Color_CbZleon"
 {
 	Properties
 	{
@@ -18,7 +18,7 @@ Shader "Fee/Shader/Color_CfZelon"
 		}
 		Pass
 		{
-			Cull Front
+			Cull Back
 			ZTest LEqual
 			ZWrite On
 

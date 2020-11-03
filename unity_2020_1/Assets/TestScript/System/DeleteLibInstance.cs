@@ -40,7 +40,6 @@ namespace TestScript
 
 			//ブラー。
 			{
-				Fee.Blur.Blur.DeleteInstance();
 			}
 
 			//暗号。
