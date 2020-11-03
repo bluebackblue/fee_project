@@ -14,7 +14,7 @@ namespace TestScript
 {
 	/** test27
 	*/
-	public class test27 : MainBase
+	public class test27 : MainBase , Fee.Function.UnityOnRenderImage_CallBackInterface<int> , Fee.Ui.OnButtonClick_CallBackInterface<test27.ButtonId> , Fee.Ui.OnSliderChangeValue_CallBackInterface<test27.SliderId>
 	{
 		/** CreateStatus
 		*/
@@ -25,7 +25,7 @@ namespace TestScript
 				"test27",
 
 				@"
-				---
+				デプス
 				"
 			);
 		}
@@ -37,6 +37,52 @@ namespace TestScript
 		/** prefablist
 		*/
 		private Common.PrefabList prefablist;
+
+		/** マテリアル。
+		*/
+		private Fee.Depth.Material_DepthTexture depth_material_depthtexture;
+
+		/** レンダーテクスチャー。
+		*/
+		private UnityEngine.RenderTexture depth_rendertexture_color;
+		private UnityEngine.RenderTexture depth_rendertexture_depth;
+
+		/** ブレンド率。
+		*/
+		private float depth_blendrate;
+
+		/** maincamera
+		*/
+		private UnityEngine.Camera maincamera_camera;
+
+		/** 箱。
+		*/
+		private UnityEngine.Material box_material;
+		public UnityEngine.Color box_color;
+		private UnityEngine.Transform box_transform;
+
+		/** ＵＩ。
+		*/
+		private Fee.Ui.Button ui_button;
+		private Fee.Ui.Slider ui_blendrate_slider;
+
+		/** postcamera
+		*/
+		private Fee.Function.UnityOnRenderImage_MonoBehaviour postcamera_onrenderimage;
+
+		/** ButtonId
+		*/
+		public enum ButtonId
+		{
+			Depth,
+		}
+
+		/** SliderId
+		*/
+		public enum SliderId
+		{
+			BlendRate,
+		}
 
 		/** Start
 		*/
@@ -90,6 +136,129 @@ namespace TestScript
 
 			//戻るボタン作成。
 			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
+
+			//デプス。
+			{
+				this.depth_blendrate = Fee.Depth.Config.DEFAULT_BLENDRATE;
+				this.depth_material_depthtexture = new Fee.Depth.Material_DepthTexture(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Depth.Config.SHADER_NAME_DEPTHTEXTURE)));
+				this.depth_rendertexture_color = new UnityEngine.RenderTexture(UnityEngine.Screen.width,UnityEngine.Screen.height,0,UnityEngine.RenderTextureFormat.ARGB32);
+				this.depth_rendertexture_color.Create();
+				this.depth_rendertexture_depth = new UnityEngine.RenderTexture(UnityEngine.Screen.width,UnityEngine.Screen.height,24,UnityEngine.RenderTextureFormat.Depth);
+				this.depth_rendertexture_depth.Create();
+
+				this.depth_material_depthtexture.SetDepthTexture(this.depth_rendertexture_depth);
+			}
+
+			//箱。
+			{
+				this.box_color = new UnityEngine.Color(0.6f,0.5f,0.4f,1.0f);
+
+				UnityEngine.GameObject t_box_gameobject = new UnityEngine.GameObject("box");
+				this.box_transform = t_box_gameobject.GetComponent<UnityEngine.Transform>();
+				this.box_transform.position = new UnityEngine.Vector3(0.0f,-1.0f,0.0f);
+				this.box_transform.localScale = new UnityEngine.Vector3(6.0f,0.1f,6.0f);
+
+				UnityEngine.MeshFilter t_box_meshfilter = t_box_gameobject.AddComponent<UnityEngine.MeshFilter>();
+				UnityEngine.MeshRenderer t_box_meshrenderer = t_box_gameobject.AddComponent<UnityEngine.MeshRenderer>();
+
+				System.Collections.Generic.List<UnityEngine.Vector3> t_box_vertex_list = new System.Collections.Generic.List<UnityEngine.Vector3>(Fee.Mesh.Box.CAPACITY_VERTEX_LIST);
+				System.Collections.Generic.List<int> t_box_index_list = new System.Collections.Generic.List<int>(Fee.Mesh.Box.CAPACITY_INDEX_LIST);
+				Fee.Mesh.Box.CreateVertexList(t_box_vertex_list);
+				Fee.Mesh.Box.CreateIndexList(t_box_index_list);
+				t_box_meshfilter.mesh = Fee.Mesh.Box.CreateMesh(t_box_vertex_list,t_box_index_list);
+				
+				this.box_material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/Color_CbZleon"));
+				this.box_material.SetColor("_Color",this.box_color);
+
+				t_box_meshrenderer.material = this.box_material;
+				t_box_meshrenderer.sharedMaterial = this.box_material;
+			}
+
+			//ポストカメラ。
+			{
+				UnityEngine.GameObject t_postcamera_gameobject = new UnityEngine.GameObject("Post Camera");
+				UnityEngine.Camera t_postcamera_camera = t_postcamera_gameobject.AddComponent<UnityEngine.Camera>();
+				this.postcamera_onrenderimage = t_postcamera_gameobject.AddComponent<Fee.Function.UnityOnRenderImage_MonoBehaviour>();
+				this.postcamera_onrenderimage.SetCallBack(this,0);
+
+				//最後。描画しない。クリアしない。
+				t_postcamera_camera.Reset();
+				t_postcamera_camera.depth = 30.0f;
+				t_postcamera_camera.clearFlags = UnityEngine.CameraClearFlags.Nothing;
+				t_postcamera_camera.cullingMask = 0;
+			}
+
+			//カメラ。
+			{
+				UnityEngine.GameObject t_camera_gameobject = UnityEngine.GameObject.Find("Main Camera");
+				UnityEngine.Transform t_camera_transform = t_camera_gameobject.GetComponent<UnityEngine.Transform>();
+				this.maincamera_camera = t_camera_gameobject.GetComponent<UnityEngine.Camera>();
+				t_camera_transform.position = new UnityEngine.Vector3(0.0f,0.0f,-5.0f);
+				t_camera_transform.rotation = UnityEngine.Quaternion.LookRotation((this.box_transform.position - t_camera_transform.position).normalized,UnityEngine.Vector3.up);
+				
+				//最初。全部描画。デプスクリア。
+				this.maincamera_camera.depth = 0.0f;
+				this.maincamera_camera.cullingMask = -1;
+				this.maincamera_camera.clearFlags = UnityEngine.CameraClearFlags.Depth;
+				this.maincamera_camera.nearClipPlane = 1.0f;
+				this.maincamera_camera.farClipPlane = 6.0f;
+
+				this.maincamera_camera.SetTargetBuffers(this.depth_rendertexture_color.colorBuffer,this.depth_rendertexture_depth.depthBuffer);
+			}
+
+			//ＵＩ。
+			{
+				int t_y = 100;
+
+				int t_button_h = 25;
+				int t_button_w = 120;
+
+				this.ui_button = this.prefablist.CreateButton(this.deleter,0);
+				this.ui_button.SetOnButtonClick(this,ButtonId.Depth);
+				this.ui_button.SetRect(100,t_y,t_button_w,t_button_h);
+				this.ui_button.SetText("Depth : " + this.postcamera_onrenderimage.enabled.ToString());
+
+				t_y += 40;
+
+				this.ui_blendrate_slider = this.prefablist.CreateSlider(this.deleter,0);
+				this.ui_blendrate_slider.SetOnSliderChangeValue(this,SliderId.BlendRate);
+				this.ui_blendrate_slider.SetRect(100,t_y,200,10);
+				this.ui_blendrate_slider.SetButtonSize(20,25);
+				this.ui_blendrate_slider.SetValue(this.depth_blendrate);
+			}
+		}
+
+		/** [Fee.Ui.OnButtonClick_CallBackInterface]クリック。
+		*/
+		public void OnButtonClick(ButtonId a_id)
+		{
+			switch(a_id){
+			case ButtonId.Depth:
+				{
+					//デプス。
+
+					if(this.postcamera_onrenderimage.enabled == true){
+						this.postcamera_onrenderimage.enabled = false;
+					}else{
+						this.postcamera_onrenderimage.enabled = true;
+					}
+
+					this.ui_button.SetText("Depth : " + this.postcamera_onrenderimage.enabled.ToString());
+
+				}break;
+			}
+		}
+
+		/** [Fee.Ui.OnSliderChangeValue_CallBackInterface]値変更。
+		*/
+		public void OnSliderChangeValue(SliderId a_id,float a_value)
+		{
+			switch(a_id){
+			case SliderId.BlendRate:
+				{
+					this.depth_blendrate = a_value;
+				}break;
+			}
 		}
 
 		/** RowUpdate
@@ -102,18 +271,36 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
+			this.box_transform.rotation = UnityEngine.Quaternion.AngleAxis(0.1f,UnityEngine.Vector3.up) * this.box_transform.rotation;
 		}
 
 		/** Update
 		*/
 		private void Update()
 		{
+			this.box_material.SetColor("_Color",this.box_color);
+			this.depth_material_depthtexture.SetBlendRate(this.depth_blendrate);
+			this.depth_material_depthtexture.SetNear(this.maincamera_camera.nearClipPlane);
+			this.depth_material_depthtexture.SetFar(this.maincamera_camera.farClipPlane);
 		}
 
 		/** LateUpdate
 		*/
 		private void LateUpdate()
 		{
+		}
+
+		/** [Fee.Graphic.UnityOnRenderImage_CallBackInterface]UnityOnRenderImage
+		*/
+		public void UnityOnRenderImage(int a_id,UnityEngine.RenderTexture a_source,UnityEngine.RenderTexture a_dest)
+		{
+			try{
+				this.depth_material_depthtexture.Apply();
+
+				UnityEngine.Graphics.Blit(a_source,a_dest,this.depth_material_depthtexture.material);
+			}catch(System.Exception t_exception){
+				Fee.EditorTool.Tool.EditorLogError(t_exception.Message);
+			}
 		}
 
 		/** 強制終了。

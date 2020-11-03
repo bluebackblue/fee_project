@@ -4,15 +4,16 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief ブルーム。
+ * @brief デプス。
 */
 
 
-Shader "Fee/Bloom/DownSampling"
+Shader "_Fee/Depth/CameraDepthTexture"
 {
 	Properties
 	{
-		_MainTex("_MainTex",2D) = "white"{}
+		_MainTex					("_MainTex",2D)						= "white"{}
+		blendrate				("blendrate",Range(0.0,1.0))			= 1.0
 	}
 	SubShader
 	{
@@ -52,7 +53,14 @@ Shader "Fee/Bloom/DownSampling"
 			/** _MainTex
 			*/
 			sampler2D _MainTex;
-			float4 _MainTex_TexelSize;
+
+			/** _CameraDepthTexture
+			*/
+			sampler2D _CameraDepthTexture;
+
+			/** blendrate
+			*/
+			float blendrate;
 
 			/** vert
 			*/
@@ -70,14 +78,15 @@ Shader "Fee/Bloom/DownSampling"
 			*/
 			fixed4 frag(v2f a_v2f) : SV_Target
 			{
-				//ダウンサンプリング。
-				half3 t_color_a = tex2D(_MainTex,a_v2f.uv + float2( _MainTex_TexelSize.x, _MainTex_TexelSize.y)).rgb;
-				half3 t_color_b = tex2D(_MainTex,a_v2f.uv + float2( _MainTex_TexelSize.x,-_MainTex_TexelSize.y)).rgb;
-				half3 t_color_c = tex2D(_MainTex,a_v2f.uv + float2(-_MainTex_TexelSize.x, _MainTex_TexelSize.y)).rgb;
-				half3 t_color_d = tex2D(_MainTex,a_v2f.uv + float2(-_MainTex_TexelSize.x,-_MainTex_TexelSize.y)).rgb;
-				half3 t_color = (t_color_a + t_color_b + t_color_c + t_color_d) * 0.25;
+				fixed3 t_color = tex2D(_MainTex,a_v2f.uv).rgb;
 
-				return fixed4(t_color,1.0);
+				if(blendrate > 0.0f){
+					float t_depth = UNITY_SAMPLE_DEPTH(tex2D(_CameraDepthTexture,a_v2f.uv));
+					t_depth = Linear01Depth(t_depth);
+					t_color = t_color * (1.0f - blendrate) + fixed3(t_depth,t_depth,t_depth) * blendrate;
+				}
+
+				return fixed4(t_color,1.0f);
 			}
 			ENDCG
 		}

@@ -56,9 +56,8 @@ namespace TestScript
 			{
 			}
 
-			//深度。
+			//デプス。
 			{
-				Fee.Depth.Depth.DeleteInstance();
 			}
 
 			//ダイクストラ法。

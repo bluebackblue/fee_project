@@ -4,7 +4,7 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief シェーダ。ブラー。
+ * @brief ブラー。
 */
 
 
@@ -47,8 +47,8 @@ Shader "Fee/Blur/BlurY"
 			*/
 			struct v2f
 			{
+				float4 vertex		: SV_POSITION;
 				float2 uv			: TEXCOORD0;
-				float4 pos			: SV_POSITION;
 			};
 
 			/** _MainTex
@@ -70,7 +70,7 @@ Shader "Fee/Blur/BlurY"
 			{
 				v2f t_ret;
 				{
-					t_ret.pos = UnityObjectToClipPos(a_appdata.vertex);
+					t_ret.vertex = UnityObjectToClipPos(a_appdata.vertex);
 					t_ret.uv = a_appdata.uv;
 				}
 				return t_ret;

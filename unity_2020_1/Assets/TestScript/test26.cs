@@ -38,10 +38,13 @@ namespace TestScript
 		*/
 		private Common.PrefabList prefablist;
 
-		/** ブラー。
+		/** マテリアル。
 		*/
-		private UnityEngine.Material blur_blurx;
-		private Fee.Blur.Material_BlurY blur_blury;
+		private UnityEngine.Material blur_material_blurx;
+		private Fee.Blur.Material_BlurY blur_material_blury;
+
+		/** レンダーテクスチャー。
+		*/
 		private UnityEngine.RenderTexture blur_rendertexture;
 
 		/** ブレンド率。
@@ -59,9 +62,9 @@ namespace TestScript
 		private Fee.Ui.Button ui_button;
 		private Fee.Ui.Slider ui_blendrate_slider;
 
-		/** camera
+		/** postcamera
 		*/
-		private Fee.Function.UnityOnRenderImage_MonoBehaviour camera_onrenderimage;
+		private Fee.Function.UnityOnRenderImage_MonoBehaviour postcamera_onrenderimage;
 
 		/** ButtonId
 		*/
@@ -134,8 +137,8 @@ namespace TestScript
 			{
 				this.blur_blendrate = Fee.Blur.Config.DEFAULT_BLENDRATE;
 				
-				this.blur_blurx = new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Blur.Config.SHADER_NAME_BLURX));
-				this.blur_blury = new Fee.Blur.Material_BlurY(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Blur.Config.SHADER_NAME_BLURY)));
+				this.blur_material_blurx = new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Blur.Config.SHADER_NAME_BLURX));
+				this.blur_material_blury = new Fee.Blur.Material_BlurY(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Blur.Config.SHADER_NAME_BLURY)));
 				this.blur_rendertexture = null;
 			}
 
@@ -156,11 +159,25 @@ namespace TestScript
 				Fee.Mesh.Box.CreateIndexList(t_box_index_list);
 				t_box_meshfilter.mesh = Fee.Mesh.Box.CreateMesh(t_box_vertex_list,t_box_index_list);
 				
-				this.box_material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/Color_CfZleon"));
+				this.box_material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/Color_CbZleon"));
 				this.box_material.SetColor("_Color",this.box_color);
 
 				t_box_meshrenderer.material = this.box_material;
 				t_box_meshrenderer.sharedMaterial = this.box_material;
+			}
+
+			//ポストカメラ。
+			{
+				UnityEngine.GameObject t_postcamera_gameobject = new UnityEngine.GameObject("Post Camera");
+				UnityEngine.Camera t_postcamera_camera = t_postcamera_gameobject.AddComponent<UnityEngine.Camera>();
+				this.postcamera_onrenderimage = t_postcamera_gameobject.AddComponent<Fee.Function.UnityOnRenderImage_MonoBehaviour>();
+				this.postcamera_onrenderimage.SetCallBack(this,0);
+
+				//最後。描画しない。クリアしない。
+				t_postcamera_camera.Reset();
+				t_postcamera_camera.depth = 30.0f;
+				t_postcamera_camera.clearFlags = UnityEngine.CameraClearFlags.Nothing;
+				t_postcamera_camera.cullingMask = 0;
 			}
 
 			//カメラ。
@@ -168,16 +185,13 @@ namespace TestScript
 				UnityEngine.GameObject t_camera_gameobject = UnityEngine.GameObject.Find("Main Camera");
 				UnityEngine.Transform t_camera_transform = t_camera_gameobject.GetComponent<UnityEngine.Transform>();
 				UnityEngine.Camera t_camera_camera = t_camera_gameobject.GetComponent<UnityEngine.Camera>();
-				
-				//３Ｄカメラ。設定。
 				t_camera_transform.position = new UnityEngine.Vector3(0.0f,0.0f,-5.0f);
 				t_camera_transform.rotation = UnityEngine.Quaternion.LookRotation((this.box_transform.position - t_camera_transform.position).normalized,UnityEngine.Vector3.up);
+				
+				//Fee.Render2Dの後。全部描画。クリアしない。
 				t_camera_camera.depth = 20.0f;
+				t_camera_camera.cullingMask = -1;
 				t_camera_camera.clearFlags = UnityEngine.CameraClearFlags.Nothing;
-
-				//UnityOnRenderImage
-				this.camera_onrenderimage = t_camera_gameobject.AddComponent<Fee.Function.UnityOnRenderImage_MonoBehaviour>();
-				this.camera_onrenderimage.SetCallBack(this,0);
 			}
 
 			//ＵＩ。
@@ -190,7 +204,7 @@ namespace TestScript
 				this.ui_button = this.prefablist.CreateButton(this.deleter,0);
 				this.ui_button.SetOnButtonClick(this,ButtonId.Blur);
 				this.ui_button.SetRect(100,t_y,t_button_w,t_button_h);
-				this.ui_button.SetText("Blur : " + this.camera_onrenderimage.enabled.ToString());
+				this.ui_button.SetText("Blur : " + this.postcamera_onrenderimage.enabled.ToString());
 
 				t_y += 40;
 
@@ -211,13 +225,13 @@ namespace TestScript
 				{
 					//ブラー。
 
-					if(this.camera_onrenderimage.enabled == true){
-						this.camera_onrenderimage.enabled = false;
+					if(this.postcamera_onrenderimage.enabled == true){
+						this.postcamera_onrenderimage.enabled = false;
 					}else{
-						this.camera_onrenderimage.enabled = true;
+						this.postcamera_onrenderimage.enabled = true;
 					}
 
-					this.ui_button.SetText("Blur : " + this.camera_onrenderimage.enabled.ToString());
+					this.ui_button.SetText("Blur : " + this.postcamera_onrenderimage.enabled.ToString());
 
 				}break;
 			}
@@ -253,7 +267,7 @@ namespace TestScript
 		private void Update()
 		{
 			this.box_material.SetColor("_Color",this.box_color);
-			this.blur_blury.SetBlendRate(this.blur_blendrate);
+			this.blur_material_blury.SetBlendRate(this.blur_blendrate);
 		}
 
 		/** LateUpdate
@@ -271,14 +285,14 @@ namespace TestScript
 
 			try{
 				//マテリアル。更新。
-				this.blur_blury.SetOriginalTexture(a_source);
-				this.blur_blury.Apply();
+				this.blur_material_blury.SetOriginalTexture(a_source);
+				this.blur_material_blury.Apply();
 
 				//x
-				UnityEngine.Graphics.Blit(a_source,this.blur_rendertexture,this.blur_blurx);
+				UnityEngine.Graphics.Blit(a_source,this.blur_rendertexture,this.blur_material_blurx);
 
 				//y
-				UnityEngine.Graphics.Blit(this.blur_rendertexture,a_dest,this.blur_blury.material);
+				UnityEngine.Graphics.Blit(this.blur_rendertexture,a_dest,this.blur_material_blury.material);
 			}catch(System.Exception t_exception){
 				Fee.EditorTool.Tool.EditorLogError(t_exception.Message);
 			}

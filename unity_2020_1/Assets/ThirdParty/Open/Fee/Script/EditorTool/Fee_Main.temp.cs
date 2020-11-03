@@ -29,7 +29,6 @@
 #define DEF_TASK
 #define DEF_TIME
 #define DEF_UNIVRM
-#define DEF_DEPTH
 #define DEF_FUNCTION
 #define DEF_PERFORMANCECOUNTER
 #define DEF_VIDEO
@@ -189,12 +188,9 @@ namespace Fee.EditorTool
 				{
 				}
 
-				//深度。
-				#if(DEF_DEPTH)
+				//デプス。
 				{
-					Fee.Depth.Depth.CreateInstance();
 				}
-				#endif
 
 				//ダイクストラ法。
 				{
@@ -460,9 +456,8 @@ namespace Fee.EditorTool
 			{
 			}
 
-			//深度。
+			//デプス。
 			{
-				Fee.Depth.Depth.DeleteInstance();
 			}
 
 			//ダイクストラ法。

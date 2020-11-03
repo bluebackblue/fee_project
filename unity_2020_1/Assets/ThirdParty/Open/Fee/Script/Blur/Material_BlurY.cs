@@ -4,11 +4,11 @@
  * Copyright (c) blueback
  * Released under the MIT License
  * https://github.com/bluebackblue/fee/blob/master/LICENSE.txt
- * @brief ブルーム。
+ * @brief ブラー。
 */
 
 
-/** Fee.Bloom
+/** Fee.Blur
 */
 namespace Fee.Blur
 {
