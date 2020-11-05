@@ -38,6 +38,10 @@ namespace TestScript
 		*/
 		private Common.PrefabList prefablist;
 
+		/** cloud
+		*/
+		private Fee.Cloud.Material_VolumeCloud cloud_material_volumecloud;
+
 		/** Start
 		*/
 		private void Start()
@@ -90,6 +94,32 @@ namespace TestScript
 
 			//戻るボタン作成。
 			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
+
+			//maincamera
+			{
+				UnityEngine.GameObject t_meincamera_gameobject = UnityEngine.GameObject.Find("Main Camera");
+				UnityEngine.Camera t_maincamera_camera = t_meincamera_gameobject.GetComponent<UnityEngine.Camera>();
+				t_maincamera_camera.depth = 20.0f;
+				t_maincamera_camera.clearFlags = UnityEngine.CameraClearFlags.Depth;
+			}
+
+			//cloud
+			this.cloud_material_volumecloud = new Fee.Cloud.Material_VolumeCloud(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Cloud.Config.SHADER_NAME_VOLUMECLOUD)));
+
+			//box
+			{
+				UnityEngine.GameObject t_box_gameobject = new UnityEngine.GameObject("box");
+				System.Collections.Generic.List<UnityEngine.Vector3> t_box_vertex_list = new System.Collections.Generic.List<UnityEngine.Vector3>();
+				System.Collections.Generic.List<int> t_box_index_list = new System.Collections.Generic.List<int>();
+				Fee.Mesh.Box.CreateVertexList(t_box_vertex_list);
+				Fee.Mesh.Box.CreateIndexList(t_box_index_list);
+				t_box_gameobject.AddComponent<UnityEngine.MeshFilter>().mesh = Fee.Mesh.Box.CreateMesh(t_box_vertex_list,t_box_index_list);
+				t_box_gameobject.AddComponent<UnityEngine.MeshRenderer>().material = this.cloud_material_volumecloud.material;
+
+				UnityEngine.Transform t_box_transform = t_box_gameobject.GetComponent<UnityEngine.Transform>();
+				t_box_transform.localScale = new UnityEngine.Vector3(6.0f,6.0f,6.0f);
+				t_box_transform.position = new UnityEngine.Vector3(0.0f,0.0f,10.0f);
+			}
 		}
 
 		/** RowUpdate
@@ -108,6 +138,11 @@ namespace TestScript
 		*/
 		private void Update()
 		{
+			float t_offset_x = UnityEngine.Mathf.Sin(UnityEngine.Time.realtimeSinceStartup * 0.1f + 0) * 10.0f;
+			float t_offset_y = UnityEngine.Mathf.Sin(UnityEngine.Time.realtimeSinceStartup * 0.1f + 120) * 10.0f;
+			float t_offset_z = UnityEngine.Mathf.Sin(UnityEngine.Time.realtimeSinceStartup * 0.1f + 240) * 10.0f;
+			this.cloud_material_volumecloud.SetNoiseOffset(new UnityEngine.Vector3(t_offset_x,t_offset_y,t_offset_z));
+			this.cloud_material_volumecloud.Apply();
 		}
 
 		/** LateUpdate
