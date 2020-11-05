@@ -14,7 +14,7 @@ namespace TestScript
 {
 	/** test10
 	*/
-	public class test10 : MainBase
+	public class test10 : MainBase , Fee.Ui.OnSliderChangeValue_CallBackInterface<test10.SliderId>
 	{
 		/** CreateStatus
 		*/
@@ -25,7 +25,7 @@ namespace TestScript
 				"test10",
 
 				@"
-				---
+				雲
 				"
 			);
 		}
@@ -41,6 +41,25 @@ namespace TestScript
 		/** cloud
 		*/
 		private Fee.Cloud.Material_VolumeCloud cloud_material_volumecloud;
+		private float cloud_speed;
+		private UnityEngine.Vector3 cloud_offset;
+
+		/** SliderId
+		*/
+		public enum SliderId
+		{
+			Power,
+			NoiseSacle,
+			InvScale,
+			Speed,
+		}
+
+		/** ＵＩ。
+		*/
+		private Fee.Ui.Slider ui_power_slider;
+		private Fee.Ui.Slider ui_noisescale_slider;
+		private Fee.Ui.Slider ui_invscale_slider;
+		private Fee.Ui.Slider ui_speed_slider;
 
 		/** Start
 		*/
@@ -105,6 +124,8 @@ namespace TestScript
 
 			//cloud
 			this.cloud_material_volumecloud = new Fee.Cloud.Material_VolumeCloud(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Cloud.Config.SHADER_NAME_VOLUMECLOUD)));
+			this.cloud_speed = 0.1f;
+			this.cloud_offset = UnityEngine.Vector3.zero;
 
 			//box
 			{
@@ -120,6 +141,69 @@ namespace TestScript
 				t_box_transform.localScale = new UnityEngine.Vector3(6.0f,6.0f,6.0f);
 				t_box_transform.position = new UnityEngine.Vector3(0.0f,0.0f,10.0f);
 			}
+
+			//ＵＩ。
+			{
+				int t_y = 100;
+
+				this.ui_power_slider = this.prefablist.CreateSlider(this.deleter,0);
+				this.ui_power_slider.SetOnSliderChangeValue(this,SliderId.Power);
+				this.ui_power_slider.SetRect(100,t_y,200,10);
+				this.ui_power_slider.SetButtonSize(20,25);
+				this.ui_power_slider.SetValueScale(10.0f);
+				this.ui_power_slider.SetValue(this.cloud_material_volumecloud.GetPower());
+
+				t_y += 30;
+
+				this.ui_noisescale_slider = this.prefablist.CreateSlider(this.deleter,0);
+				this.ui_noisescale_slider.SetOnSliderChangeValue(this,SliderId.NoiseSacle);
+				this.ui_noisescale_slider.SetRect(100,t_y,200,10);
+				this.ui_noisescale_slider.SetButtonSize(20,25);
+				this.ui_noisescale_slider.SetValueScale(10.0f);
+				this.ui_noisescale_slider.SetValue(this.cloud_material_volumecloud.GetNoiseScale());
+
+				t_y += 30;
+
+				this.ui_invscale_slider = this.prefablist.CreateSlider(this.deleter,0);
+				this.ui_invscale_slider.SetOnSliderChangeValue(this,SliderId.InvScale);
+				this.ui_invscale_slider.SetRect(100,t_y,200,10);
+				this.ui_invscale_slider.SetButtonSize(20,25);
+				this.ui_invscale_slider.SetValueScale(5.0f);
+				this.ui_invscale_slider.SetValue(this.cloud_material_volumecloud.GetInvScale());
+
+				t_y += 30;
+
+				this.ui_speed_slider = this.prefablist.CreateSlider(this.deleter,0);
+				this.ui_speed_slider.SetOnSliderChangeValue(this,SliderId.Speed);
+				this.ui_speed_slider.SetRect(100,t_y,200,10);
+				this.ui_speed_slider.SetButtonSize(20,25);
+				this.ui_speed_slider.SetValueScale(0.3f);
+				this.ui_speed_slider.SetValue(this.cloud_speed);
+			}
+		}
+
+		/** [Fee.Ui.OnSliderChangeValue_CallBackInterface]値変更。
+		*/
+		public void OnSliderChangeValue(SliderId a_id,float a_value)
+		{
+			switch(a_id){
+			case SliderId.Power:
+				{
+					this.cloud_material_volumecloud.SetPower(a_value);
+				}break;
+			case SliderId.NoiseSacle:
+				{
+					this.cloud_material_volumecloud.SetNoiseScale(a_value);
+				}break;
+			case SliderId.InvScale:
+				{
+					this.cloud_material_volumecloud.SetInvScale(a_value);
+				}break;
+			case SliderId.Speed:
+				{
+					this.cloud_speed = a_value;
+				}break;
+			}
 		}
 
 		/** RowUpdate
@@ -132,16 +216,14 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
+			this.cloud_offset += UnityEngine.Vector3.one * this.cloud_speed;
 		}
 
 		/** Update
 		*/
 		private void Update()
 		{
-			float t_offset_x = UnityEngine.Mathf.Sin(UnityEngine.Time.realtimeSinceStartup * 0.1f + 0) * 10.0f;
-			float t_offset_y = UnityEngine.Mathf.Sin(UnityEngine.Time.realtimeSinceStartup * 0.1f + 120) * 10.0f;
-			float t_offset_z = UnityEngine.Mathf.Sin(UnityEngine.Time.realtimeSinceStartup * 0.1f + 240) * 10.0f;
-			this.cloud_material_volumecloud.SetNoiseOffset(new UnityEngine.Vector3(t_offset_x,t_offset_y,t_offset_z));
+			this.cloud_material_volumecloud.SetNoiseOffset(this.cloud_offset);
 			this.cloud_material_volumecloud.Apply();
 		}
 
