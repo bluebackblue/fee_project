@@ -47,14 +47,9 @@ namespace TestScript
 		*/
 		private UnityEngine.RenderTexture blur_rendertexture;
 
-		/** ブレンド率。
-		*/
-		private float blur_blendrate;
-
 		/** 箱。
 		*/
 		private UnityEngine.Material box_material;
-		public UnityEngine.Color box_color;
 		private UnityEngine.Transform box_transform;
 
 		/** ＵＩ。
@@ -135,8 +130,6 @@ namespace TestScript
 
 			//ブラー。
 			{
-				this.blur_blendrate = Fee.Blur.Config.DEFAULT_BLENDRATE;
-				
 				this.blur_material_blurx = new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Blur.Config.SHADER_NAME_BLURX));
 				this.blur_material_blury = new Fee.Blur.Material_BlurY(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Blur.Config.SHADER_NAME_BLURY)));
 				this.blur_rendertexture = null;
@@ -144,8 +137,6 @@ namespace TestScript
 
 			//箱。
 			{
-				this.box_color = new UnityEngine.Color(0.6f,0.5f,0.4f,1.0f);
-
 				UnityEngine.GameObject t_box_gameobject = new UnityEngine.GameObject("box");
 				this.box_transform = t_box_gameobject.GetComponent<UnityEngine.Transform>();
 				this.box_transform.position = new UnityEngine.Vector3(0.0f,0.0f,0.0f);
@@ -160,10 +151,9 @@ namespace TestScript
 				t_box_meshfilter.mesh = Fee.Mesh.Box.CreateMesh(t_box_vertex_list,t_box_index_list);
 				
 				this.box_material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/Color_CbZleon"));
-				this.box_material.SetColor("_Color",this.box_color);
+				this.box_material.SetColor("_Color",new UnityEngine.Color(0.6f,0.5f,0.4f,1.0f));
 
 				t_box_meshrenderer.material = this.box_material;
-				t_box_meshrenderer.sharedMaterial = this.box_material;
 			}
 
 			//ポストカメラ。
@@ -212,7 +202,7 @@ namespace TestScript
 				this.ui_blendrate_slider.SetOnSliderChangeValue(this,SliderId.BlendRate);
 				this.ui_blendrate_slider.SetRect(100,t_y,200,10);
 				this.ui_blendrate_slider.SetButtonSize(20,25);
-				this.ui_blendrate_slider.SetValue(this.blur_blendrate);
+				this.ui_blendrate_slider.SetValue(this.blur_material_blury.GetBlendRate());
 			}
 		}
 
@@ -244,7 +234,7 @@ namespace TestScript
 			switch(a_id){
 			case SliderId.BlendRate:
 				{
-					this.blur_blendrate = a_value;
+					this.blur_material_blury.SetBlendRate(a_value);
 				}break;
 			}
 		}
@@ -266,8 +256,6 @@ namespace TestScript
 		*/
 		private void Update()
 		{
-			this.box_material.SetColor("_Color",this.box_color);
-			this.blur_material_blury.SetBlendRate(this.blur_blendrate);
 		}
 
 		/** LateUpdate

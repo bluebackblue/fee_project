@@ -49,18 +49,9 @@ namespace TestScript
 		*/
 		private UnityEngine.RenderTexture[] bloom_rendertexture;
 
-		/** 輝度抽出閾値。
-		*/
-		private float bloom_threshold;
-
-		/** 加算強度。
-		*/
-		private float bloom_intensity;
-
 		/** 箱。
 		*/
 		private UnityEngine.Material box_material;
-		public UnityEngine.Color box_color;
 		private UnityEngine.Transform box_transform;
 
 		/** ＵＩ。
@@ -143,9 +134,6 @@ namespace TestScript
 
 			//ブルーム。
 			{
-				this.bloom_threshold = Fee.Bloom.Config.DEFAULT_THRESHOLD;
-				this.bloom_intensity =  Fee.Bloom.Config.DEFAULT_INTENSITY;
-
 				this.bloom_material_downsampling = new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_DOWNSAMPLING));
 				this.bloom_material_upsampling = new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_ADDUPSAMPLING));
 				this.bloom_material_firstdownsampling = new Fee.Bloom.Material_FirstDownSampling(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Bloom.Config.SHADER_NAME_FIRSTDOWNSAMPLING)));
@@ -155,8 +143,6 @@ namespace TestScript
 
 			//箱。
 			{
-				this.box_color = new UnityEngine.Color(0.6f,0.5f,0.4f,1.0f);
-
 				UnityEngine.GameObject t_box_gameobject = new UnityEngine.GameObject("box");
 				this.box_transform = t_box_gameobject.GetComponent<UnityEngine.Transform>();
 				this.box_transform.position = new UnityEngine.Vector3(0.0f,0.0f,0.0f);
@@ -171,10 +157,9 @@ namespace TestScript
 				t_box_meshfilter.mesh = Fee.Mesh.Box.CreateMesh(t_box_vertex_list,t_box_index_list);
 				
 				this.box_material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/Color_CbZleon"));
-				this.box_material.SetColor("_Color",this.box_color);
+				this.box_material.SetColor("_Color",new UnityEngine.Color(0.6f,0.5f,0.4f,1.0f));
 
 				t_box_meshrenderer.material = this.box_material;
-				t_box_meshrenderer.sharedMaterial = this.box_material;
 			}
 
 			//ポストカメラ。
@@ -223,7 +208,7 @@ namespace TestScript
 				this.ui_threshold_slider.SetOnSliderChangeValue(this,SliderId.Threshold);
 				this.ui_threshold_slider.SetRect(100,t_y,200,10);
 				this.ui_threshold_slider.SetButtonSize(20,25);
-				this.ui_threshold_slider.SetValue(this.bloom_threshold);
+				this.ui_threshold_slider.SetValue(this.bloom_material_firstdownsampling.GetThreshold());
 
 				t_y += 30;
 
@@ -231,7 +216,7 @@ namespace TestScript
 				this.ui_intensity_slider.SetOnSliderChangeValue(this,SliderId.Intensity);
 				this.ui_intensity_slider.SetRect(100,t_y,200,10);
 				this.ui_intensity_slider.SetButtonSize(20,25);
-				this.ui_intensity_slider.SetValue(this.bloom_intensity);
+				this.ui_intensity_slider.SetValue(this.bloom_material_lastupsampling.GetIntensity());
 				this.ui_intensity_slider.SetValueScale(5.0f);
 			}
 		}
@@ -264,11 +249,11 @@ namespace TestScript
 			switch(a_id){
 			case SliderId.Threshold:
 				{
-					this.bloom_threshold = a_value;
+					this.bloom_material_firstdownsampling.SetThreshold(a_value);
 				}break;
 			case SliderId.Intensity:
 				{
-					this.bloom_intensity = a_value;
+					this.bloom_material_lastupsampling.SetIntensity(a_value);
 				}break;
 			}
 		}
@@ -290,9 +275,6 @@ namespace TestScript
 		*/
 		private void Update()
 		{
-			this.box_material.SetColor("_Color",this.box_color);
-			this.bloom_material_firstdownsampling.SetThreshold(this.bloom_threshold);
-			this.bloom_material_lastupsampling.SetIntensity(this.bloom_intensity);
 		}
 
 		/** LateUpdate

@@ -41,6 +41,18 @@ namespace TestScript
 				test26.CreateStatus(),
 				test27.CreateStatus(),
 				test28.CreateStatus(),
+				test29.CreateStatus(),
+				test30.CreateStatus(),
+				test31.CreateStatus(),
+				test32.CreateStatus(),
+				test33.CreateStatus(),
+				test34.CreateStatus(),
+				test35.CreateStatus(),
+				test36.CreateStatus(),
+				test37.CreateStatus(),
+				test38.CreateStatus(),
+				test39.CreateStatus(),
+				test40.CreateStatus(),
 			};
 		}
 	}

@@ -42,7 +42,6 @@ namespace TestScript
 		*/
 		private Fee.Cloud.Material_VolumeCloud cloud_material_volumecloud;
 		private float cloud_speed;
-		private UnityEngine.Vector3 cloud_offset;
 
 		/** SliderId
 		*/
@@ -125,7 +124,6 @@ namespace TestScript
 			//cloud
 			this.cloud_material_volumecloud = new Fee.Cloud.Material_VolumeCloud(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Cloud.Config.SHADER_NAME_VOLUMECLOUD)));
 			this.cloud_speed = 0.1f;
-			this.cloud_offset = UnityEngine.Vector3.zero;
 
 			//box
 			{
@@ -216,14 +214,13 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			this.cloud_offset += UnityEngine.Vector3.one * this.cloud_speed;
+			this.cloud_material_volumecloud.SetNoiseOffset(this.cloud_material_volumecloud.GetNoiseOffset() + UnityEngine.Vector3.one * this.cloud_speed);
 		}
 
 		/** Update
 		*/
 		private void Update()
 		{
-			this.cloud_material_volumecloud.SetNoiseOffset(this.cloud_offset);
 			this.cloud_material_volumecloud.Apply();
 		}
 

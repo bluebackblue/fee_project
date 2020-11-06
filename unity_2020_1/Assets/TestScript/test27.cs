@@ -47,10 +47,6 @@ namespace TestScript
 		private UnityEngine.RenderTexture depth_rendertexture_color;
 		private UnityEngine.RenderTexture depth_rendertexture_depth;
 
-		/** ブレンド率。
-		*/
-		private float depth_blendrate;
-
 		/** maincamera
 		*/
 		private UnityEngine.Camera maincamera_camera;
@@ -58,7 +54,6 @@ namespace TestScript
 		/** 箱。
 		*/
 		private UnityEngine.Material box_material;
-		public UnityEngine.Color box_color;
 		private UnityEngine.Transform box_transform;
 
 		/** ＵＩ。
@@ -139,7 +134,6 @@ namespace TestScript
 
 			//デプス。
 			{
-				this.depth_blendrate = Fee.Depth.Config.DEFAULT_BLENDRATE;
 				this.depth_material_depthtexture = new Fee.Depth.Material_DepthTexture(new UnityEngine.Material(UnityEngine.Shader.Find(Fee.Depth.Config.SHADER_NAME_DEPTHTEXTURE)));
 				this.depth_rendertexture_color = new UnityEngine.RenderTexture(UnityEngine.Screen.width,UnityEngine.Screen.height,0,UnityEngine.RenderTextureFormat.ARGB32);
 				this.depth_rendertexture_color.Create();
@@ -151,8 +145,6 @@ namespace TestScript
 
 			//箱。
 			{
-				this.box_color = new UnityEngine.Color(0.6f,0.5f,0.4f,1.0f);
-
 				UnityEngine.GameObject t_box_gameobject = new UnityEngine.GameObject("box");
 				this.box_transform = t_box_gameobject.GetComponent<UnityEngine.Transform>();
 				this.box_transform.position = new UnityEngine.Vector3(0.0f,-1.0f,0.0f);
@@ -168,10 +160,9 @@ namespace TestScript
 				t_box_meshfilter.mesh = Fee.Mesh.Box.CreateMesh(t_box_vertex_list,t_box_index_list);
 				
 				this.box_material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/Color_CbZleon"));
-				this.box_material.SetColor("_Color",this.box_color);
+				this.box_material.SetColor("_Color",new UnityEngine.Color(0.6f,0.5f,0.4f,1.0f));
 
 				t_box_meshrenderer.material = this.box_material;
-				t_box_meshrenderer.sharedMaterial = this.box_material;
 			}
 
 			//ポストカメラ。
@@ -224,7 +215,7 @@ namespace TestScript
 				this.ui_blendrate_slider.SetOnSliderChangeValue(this,SliderId.BlendRate);
 				this.ui_blendrate_slider.SetRect(100,t_y,200,10);
 				this.ui_blendrate_slider.SetButtonSize(20,25);
-				this.ui_blendrate_slider.SetValue(this.depth_blendrate);
+				this.ui_blendrate_slider.SetValue(this.depth_material_depthtexture.GetBlendRate());
 			}
 		}
 
@@ -256,7 +247,7 @@ namespace TestScript
 			switch(a_id){
 			case SliderId.BlendRate:
 				{
-					this.depth_blendrate = a_value;
+					this.depth_material_depthtexture.SetBlendRate(a_value);
 				}break;
 			}
 		}
@@ -278,8 +269,6 @@ namespace TestScript
 		*/
 		private void Update()
 		{
-			this.box_material.SetColor("_Color",this.box_color);
-			this.depth_material_depthtexture.SetBlendRate(this.depth_blendrate);
 			this.depth_material_depthtexture.SetNear(this.maincamera_camera.nearClipPlane);
 			this.depth_material_depthtexture.SetFar(this.maincamera_camera.farClipPlane);
 		}
