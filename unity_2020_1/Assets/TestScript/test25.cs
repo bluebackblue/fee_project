@@ -288,6 +288,7 @@ namespace TestScript
 
 		/** [Fee.Graphic.UnityOnRenderImage_CallBackInterface]UnityOnRenderImage
 		*/
+		#pragma warning disable 0168
 		public void UnityOnRenderImage(int a_id,UnityEngine.RenderTexture a_source,UnityEngine.RenderTexture a_dest)
 		{
 			//レンダリングテクスチャ作成。
@@ -337,7 +338,9 @@ namespace TestScript
 				//最終アップサンプリング（加算）。
 				UnityEngine.Graphics.Blit(this.bloom_rendertexture[0],a_dest,this.bloom_material_lastupsampling.material);
 			}catch(System.Exception t_exception){
+				#if(UNITY_EDITOR)
 				Fee.EditorTool.Tool.EditorLogError(t_exception.Message);
+				#endif
 			}
 
 			//レンダーテクスチャ解放。
@@ -348,6 +351,7 @@ namespace TestScript
 				}
 			}
 		}
+		#pragma warning restore
 
 		/** 強制終了。
 		*/

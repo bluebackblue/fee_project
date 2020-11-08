@@ -28,18 +28,6 @@ namespace TestScript.Common
 		*/
 		Se,
 
-		/** 
-		*/
-		Test10_Cube,
-
-		/** 
-		*/
-		Test16_Cube,
-
-		/** 
-		*/
-		Test18_Cube,
-
 	}
 }
 

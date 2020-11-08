@@ -92,4 +92,40 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TestScene/test28.unity
     guid: fa1de2a54a0e62b4cbf27a6b4a54ba7d
+  - enabled: 1
+    path: Assets/TestScene/test29.unity
+    guid: 03646889f1563494d8c52a1a5db930f7
+  - enabled: 1
+    path: Assets/TestScene/test30.unity
+    guid: 82838552f5ad541489246ae5c44b3ad9
+  - enabled: 1
+    path: Assets/TestScene/test31.unity
+    guid: ba85ea755f38d8f4c976896ace828c4b
+  - enabled: 1
+    path: Assets/TestScene/test32.unity
+    guid: 9e5985381e1dba54d86f927952384682
+  - enabled: 1
+    path: Assets/TestScene/test33.unity
+    guid: 89a51c201e18ca44d8f874f3686e313e
+  - enabled: 1
+    path: Assets/TestScene/test34.unity
+    guid: 861813f7baf46aa418d1a14068a0fb1d
+  - enabled: 1
+    path: Assets/TestScene/test35.unity
+    guid: 3ccfa01da75dac94c92f033e932cc582
+  - enabled: 1
+    path: Assets/TestScene/test36.unity
+    guid: a34af51b0bd92fa43a4135297e9d65a8
+  - enabled: 1
+    path: Assets/TestScene/test37.unity
+    guid: 8769f9e2523291e4d90b95c40cec8a51
+  - enabled: 1
+    path: Assets/TestScene/test38.unity
+    guid: 79c74468648bb6d48b5ae7f3b346c650
+  - enabled: 1
+    path: Assets/TestScene/test39.unity
+    guid: 65ed56a9e53197b42aa102a62143a5bb
+  - enabled: 1
+    path: Assets/TestScene/test40.unity
+    guid: 77ed3ebdb54b000468874cea6ab0a020
   m_configObjects: {}

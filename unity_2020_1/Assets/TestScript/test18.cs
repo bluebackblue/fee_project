@@ -49,9 +49,10 @@ namespace TestScript
 		*/
 		private UnityEngine.Camera main_camera;
 
-		/** cube
+		/** box
 		*/
-		private UnityEngine.GameObject cube;
+		private UnityEngine.Transform box_transform;
+		private UnityEngine.Material box_material;
 
 		/** Start
 		*/
@@ -117,9 +118,24 @@ namespace TestScript
 			this.main_camera.depth = Fee.Render2D.Render2D.GetInstance().GetCameraAfterDepth(Fee.Render2D.Config.MAX_LAYER);
 			this.main_camera.clearFlags = UnityEngine.CameraClearFlags.Nothing;
 
-			//キューブ。
+			//箱。
 			{
-				this.cube = UnityEngine.GameObject.Instantiate(this.prefablist.GetPrefab(Common.PrefabType.Test18_Cube),UnityEngine.Vector3.zero,UnityEngine.Quaternion.identity);
+				UnityEngine.GameObject t_box_gameobject = new UnityEngine.GameObject("box");
+				this.box_transform = t_box_gameobject.GetComponent<UnityEngine.Transform>();
+				this.box_transform.position = new UnityEngine.Vector3(0.0f,0.0f,0.0f);
+				this.box_transform.localScale = new UnityEngine.Vector3(3.0f,3.0f,3.0f);
+
+				UnityEngine.MeshFilter t_box_meshfilter = t_box_gameobject.AddComponent<UnityEngine.MeshFilter>();
+				UnityEngine.MeshRenderer t_box_meshrenderer = t_box_gameobject.AddComponent<UnityEngine.MeshRenderer>();
+
+				System.Collections.Generic.List<UnityEngine.Vector3> t_box_vertex_list = new System.Collections.Generic.List<UnityEngine.Vector3>(Fee.Mesh.Box.CAPACITY_VERTEX_LIST);
+				System.Collections.Generic.List<int> t_box_index_list = new System.Collections.Generic.List<int>(Fee.Mesh.Box.CAPACITY_INDEX_LIST);
+				Fee.Mesh.Box.CreateVertexList(t_box_vertex_list);
+				Fee.Mesh.Box.CreateIndexList(t_box_index_list);
+				t_box_meshfilter.mesh = Fee.Mesh.Box.CreateMesh(t_box_vertex_list,t_box_index_list);
+				
+				this.box_material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/Color_CbZleon"));
+				t_box_meshrenderer.material = this.box_material;
 			}
 		}
 
@@ -134,14 +150,14 @@ namespace TestScript
 			{
 				float t_x = (Fee.Input.Input.GetInstance().mouse.cursor.pos.x - Fee.Render2D.Config.VIRTUAL_W  / 2) / 50.0f;
 				float t_y = (Fee.Input.Input.GetInstance().mouse.cursor.pos.y - Fee.Render2D.Config.VIRTUAL_H  / 2) / 50.0f;
-				this.cube.transform.position = new UnityEngine.Vector3(t_x,-t_y,0);
+				this.box_transform.position = new UnityEngine.Vector3(t_x,-t_y,0);
 			}
 			
 			//カリングテスト。
-			if(this.frustum_culling.CullingTest(this.cube.transform.position) == true){
-				this.cube.GetComponent<UnityEngine.MeshRenderer>().material.color = new UnityEngine.Color(1.0f,0.0f,0.0f,1.0f);
+			if(this.frustum_culling.CullingTest(this.box_transform.position) == true){
+				this.box_material.color = new UnityEngine.Color(1.0f,0.0f,0.0f,1.0f);
 			}else{
-				this.cube.GetComponent<UnityEngine.MeshRenderer>().material.color = new UnityEngine.Color(0.0f,0.0f,1.0f,1.0f);
+				this.box_material.color = new UnityEngine.Color(0.0f,0.0f,1.0f,1.0f);
 			}
 		}
 

@@ -269,6 +269,7 @@ namespace TestScript
 
 		/** [Fee.Graphic.UnityOnRenderImage_CallBackInterface]UnityOnRenderImage
 		*/
+		#pragma warning disable 0168
 		public void UnityOnRenderImage(int a_id,UnityEngine.RenderTexture a_source,UnityEngine.RenderTexture a_dest)
 		{
 			//レンダリングテクスチャ作成。
@@ -285,7 +286,9 @@ namespace TestScript
 				//y
 				UnityEngine.Graphics.Blit(this.blur_rendertexture,a_dest,this.blur_material_blury.material);
 			}catch(System.Exception t_exception){
+				#if(UNITY_EDITOR)
 				Fee.EditorTool.Tool.EditorLogError(t_exception.Message);
+				#endif
 			}
 
 			//レンダーテクスチャ解放。
@@ -294,6 +297,7 @@ namespace TestScript
 				this.blur_rendertexture = null;
 			}
 		}
+		#pragma warning restore
 
 		/** 強制終了。
 		*/

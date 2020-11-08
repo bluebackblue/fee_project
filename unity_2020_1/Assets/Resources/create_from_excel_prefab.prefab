@@ -49,15 +49,9 @@ MonoBehaviour:
   - FONTLIST
   - BGM
   - SE
-  - TEST10_CUBE
-  - TEST16_CUBE
-  - TEST18_CUBE
   prefab_list:
   - {fileID: 2018840569004539768, guid: fb080338fc18e4540964a94fb7a73c69, type: 3}
   - {fileID: 2644698543133476387, guid: 13c1c8b28b80aef48b15f45a9400d66a, type: 3}
   - {fileID: 557907285337030891, guid: 24098ab1de62bbe4d836de1597b01365, type: 3}
   - {fileID: 5608046524895242086, guid: 7192c73243776ad4b93fabeeda322ec6, type: 3}
   - {fileID: 7996391364665218093, guid: 3d852deac3cf43a40b54ebe2828a366d, type: 3}
-  - {fileID: 1023134246023269692, guid: 8eaf3c4d346e7b34986619eefbd72b7e, type: 3}
-  - {fileID: 1023134246023269692, guid: 8eaf3c4d346e7b34986619eefbd72b7e, type: 3}
-  - {fileID: 1023134246023269692, guid: 8eaf3c4d346e7b34986619eefbd72b7e, type: 3}

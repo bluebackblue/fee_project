@@ -284,6 +284,7 @@ namespace TestScript
 
 		/** [Fee.Graphic.UnityOnRenderImage_CallBackInterface]UnityOnRenderImage
 		*/
+		#pragma warning disable 0168
 		public void UnityOnRenderImage(int a_id,UnityEngine.RenderTexture a_source,UnityEngine.RenderTexture a_dest)
 		{
 			try{
@@ -291,9 +292,12 @@ namespace TestScript
 
 				UnityEngine.Graphics.Blit(a_source,a_dest,this.depth_material_depthtexture.material);
 			}catch(System.Exception t_exception){
+				#if(UNITY_EDITOR)
 				Fee.EditorTool.Tool.EditorLogError(t_exception.Message);
+				#endif
 			}
 		}
+		#pragma warning restore
 
 		/** 強制終了。
 		*/
