@@ -25,7 +25,7 @@ namespace TestScript
 				"test29",
 
 				@"
-				---
+				ミラー
 				"
 			);
 		}
@@ -37,6 +37,11 @@ namespace TestScript
 		/** prefablist
 		*/
 		private Common.PrefabList prefablist;
+
+		/** box
+		*/
+		private UnityEngine.Transform box_transform;
+		private float box_angle;
 
 		/** Start
 		*/
@@ -65,7 +70,7 @@ namespace TestScript
 			Fee.Instantiate.Instantiate.CreateInstance();
 
 			//２Ｄ描画。インスタンス作成。
-			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
+			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = false;
 			Fee.Render2D.Config.LOG_ENABLE = true;
 			Fee.Render2D.Config.ReCalcWH();
 			Fee.Render2D.Render2D.CreateInstance();
@@ -82,6 +87,9 @@ namespace TestScript
 			Fee.Ui.Config.LOG_ENABLE = true;
 			Fee.Ui.Ui.CreateInstance();
 
+			//ミラー。インスタンス作成。
+			Fee.Mirror.Mirror.CreateInstance();
+
 			//プレハブリスト。
 			this.prefablist = new Common.PrefabList();
 
@@ -93,6 +101,51 @@ namespace TestScript
 
 			//戻るボタン作成。
 			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
+
+			//ミラー。
+			UnityEngine.GameObject t_mirror_gameobject;
+			if(true){
+
+				t_mirror_gameobject = new UnityEngine.GameObject("mirror");
+				UnityEngine.MeshFilter t_mirror_meshfilter = t_mirror_gameobject.AddComponent<UnityEngine.MeshFilter>();
+				UnityEngine.MeshRenderer t_mirror_meshrenderer = t_mirror_gameobject.AddComponent<UnityEngine.MeshRenderer>();
+
+				System.Collections.Generic.List<UnityEngine.Vector3> t_mirror_vertex_list = new System.Collections.Generic.List<UnityEngine.Vector3>(Fee.Mesh.Plate.CAPACITY_VERTEX_LIST);
+				System.Collections.Generic.List<int> t_mirror_index_list = new System.Collections.Generic.List<int>(Fee.Mesh.Plate.CAPACITY_INDEX_LIST);
+				System.Collections.Generic.List<UnityEngine.Vector2> t_mirror_uv_list = new System.Collections.Generic.List<UnityEngine.Vector2>(Fee.Mesh.Plate.CAPACITY_UV_LIST);
+				Fee.Mesh.Plate.CreateVertexList(t_mirror_vertex_list);
+				Fee.Mesh.Plate.CreateIndexList(t_mirror_index_list);
+				Fee.Mesh.Plate.CreateUvList(t_mirror_uv_list);
+				
+				t_mirror_meshfilter.mesh = Fee.Mesh.Plate.CreateMesh(t_mirror_vertex_list,t_mirror_index_list,t_mirror_uv_list);
+				t_mirror_meshrenderer.material = null;
+
+				t_mirror_gameobject.GetComponent<UnityEngine.Transform>().localScale = new UnityEngine.Vector3(100.0f,100.0f,100.0f);
+			}
+
+			//箱。
+			{
+				UnityEngine.GameObject t_box_gameobject = new UnityEngine.GameObject("box");
+				this.box_transform = t_box_gameobject.GetComponent<UnityEngine.Transform>();
+				this.box_transform.position = new UnityEngine.Vector3(0.0f,0.0f,0.0f);
+				this.box_transform.localScale = new UnityEngine.Vector3(1.0f,1.0f,1.0f);
+
+				UnityEngine.MeshFilter t_box_meshfilter = t_box_gameobject.AddComponent<UnityEngine.MeshFilter>();
+				UnityEngine.MeshRenderer t_box_meshrenderer = t_box_gameobject.AddComponent<UnityEngine.MeshRenderer>();
+
+				System.Collections.Generic.List<UnityEngine.Vector3> t_box_vertex_list = new System.Collections.Generic.List<UnityEngine.Vector3>(Fee.Mesh.Box.CAPACITY_VERTEX_LIST);
+				System.Collections.Generic.List<int> t_box_index_list = new System.Collections.Generic.List<int>(Fee.Mesh.Box.CAPACITY_INDEX_LIST);
+				Fee.Mesh.Box.CreateVertexList(t_box_vertex_list);
+				Fee.Mesh.Box.CreateIndexList(t_box_index_list);
+				t_box_meshfilter.mesh = Fee.Mesh.Box.CreateMesh(t_box_vertex_list,t_box_index_list);
+				t_box_meshrenderer.material = new UnityEngine.Material(UnityEngine.Shader.Find("Fee/Shader/NormalTest"));
+
+				this.box_angle = 0.0f;
+			}
+
+			{
+				Fee.Mirror.Mirror.GetInstance().CreateMirror(Fee.Mirror.RenderTextureSizeType.Size_1024,t_mirror_gameobject,UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>());
+			}
 		}
 
 		/** RowUpdate
@@ -111,6 +164,8 @@ namespace TestScript
 		*/
 		private void Update()
 		{
+			this.box_angle += UnityEngine.Time.deltaTime;
+			this.box_transform.position = new UnityEngine.Vector3(UnityEngine.Mathf.Cos(this.box_angle) * 5.0f,1.0f,UnityEngine.Mathf.Sin(this.box_angle) * 5.0f);
 		}
 
 		/** LateUpdate
