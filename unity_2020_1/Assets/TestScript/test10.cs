@@ -189,6 +189,7 @@ namespace TestScript
 				this.ui_dir_slider.SetButtonSize(20,25);
 				this.ui_dir_slider.SetValueScale(6.28f);
 				this.ui_dir_slider.SetValue(0.0f);
+				this.ui_dir_slider.CallChangeCallBack();
 			}
 		}
 
