@@ -82,6 +82,9 @@ namespace TestScript
 			Fee.Function.Function.GetInstance().SetMonoBehaviour(this);
 			Fee.Function.Function.GetInstance().SetRowUpdate(this.RowUpdate);
 
+			//インスタンス作成。
+			Fee.Instantiate.Instantiate.CreateInstance();
+
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 			Fee.Render2D.Config.LOG_ENABLE = true;

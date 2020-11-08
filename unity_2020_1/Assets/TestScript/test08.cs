@@ -206,6 +206,9 @@ namespace TestScript
 			//タスク。インスタンス作成。
 			Fee.TaskW.TaskW.CreateInstance();
 
+			//インスタンス作成。
+			Fee.Instantiate.Instantiate.CreateInstance();
+
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 			Fee.Render2D.Config.ReCalcWH();

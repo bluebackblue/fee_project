@@ -174,6 +174,9 @@ namespace TestScript
 			Fee.Audio.Config.BGM_CROSSFADE_SPEED = 0.004f;
 			Fee.Audio.Audio.CreateInstance();
 
+			//インスタンス作成。
+			Fee.Instantiate.Instantiate.CreateInstance();
+
 			//２Ｄ描画。インスタンス作成。
 			Fee.Render2D.Config.FIRSTGLCAMERA_CLEAR_RENDERTEXTURE = true;
 			Fee.Render2D.Config.ReCalcWH();
