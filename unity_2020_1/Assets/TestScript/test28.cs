@@ -25,7 +25,7 @@ namespace TestScript
 				"test28",
 
 				@"
-				---
+				ワイヤーフレーム
 				"
 			);
 		}

@@ -42,6 +42,7 @@ namespace TestScript
 		*/
 		private Fee.Cloud.Material_VolumeCloud cloud_material_volumecloud;
 		private float cloud_speed;
+		private UnityEngine.Vector3 cloud_dir;
 
 		/** SliderId
 		*/
@@ -51,6 +52,7 @@ namespace TestScript
 			NoiseSacle,
 			InvScale,
 			Speed,
+			Dir,
 		}
 
 		/** ＵＩ。
@@ -59,6 +61,7 @@ namespace TestScript
 		private Fee.Ui.Slider ui_noisescale_slider;
 		private Fee.Ui.Slider ui_invscale_slider;
 		private Fee.Ui.Slider ui_speed_slider;
+		private Fee.Ui.Slider ui_dir_slider;
 
 		/** Start
 		*/
@@ -177,6 +180,15 @@ namespace TestScript
 				this.ui_speed_slider.SetButtonSize(20,25);
 				this.ui_speed_slider.SetValueScale(0.3f);
 				this.ui_speed_slider.SetValue(this.cloud_speed);
+
+				t_y += 30;
+
+				this.ui_dir_slider = this.prefablist.CreateSlider(this.deleter,0);
+				this.ui_dir_slider.SetOnSliderChangeValue(this,SliderId.Dir);
+				this.ui_dir_slider.SetRect(100,t_y,200,10);
+				this.ui_dir_slider.SetButtonSize(20,25);
+				this.ui_dir_slider.SetValueScale(6.28f);
+				this.ui_dir_slider.SetValue(0.0f);
 			}
 		}
 
@@ -201,6 +213,10 @@ namespace TestScript
 				{
 					this.cloud_speed = a_value;
 				}break;
+			case SliderId.Dir:
+				{
+					this.cloud_dir = new UnityEngine.Vector3(UnityEngine.Mathf.Cos(a_value),UnityEngine.Mathf.Sin(a_value),0.0f);
+				}break;
 			}
 		}
 
@@ -214,7 +230,7 @@ namespace TestScript
 		*/
 		private void FixedUpdate()
 		{
-			this.cloud_material_volumecloud.SetNoiseOffset(this.cloud_material_volumecloud.GetNoiseOffset() + UnityEngine.Vector3.one * this.cloud_speed);
+			this.cloud_material_volumecloud.SetNoiseOffset(this.cloud_material_volumecloud.GetNoiseOffset() + this.cloud_dir * this.cloud_speed);
 		}
 
 		/** Update
