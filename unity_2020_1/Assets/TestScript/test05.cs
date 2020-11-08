@@ -238,7 +238,7 @@ namespace TestScript
 			this.bg.SetTextureRect(in Fee.Render2D.Config.TEXTURE_RECT_MAX);
 			this.bg.SetTexture(UnityEngine.Texture2D.whiteTexture);
 			this.bg.SetRect(in Fee.Render2D.Config.VIRTUAL_RECT_MAX);
-			this.bg.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
+			this.bg.SetMaterialType(Fee.Render2D.MaterialType.Alpha);
 			this.bg.SetColor(0.0f,0.0f,0.0f,1.0f);
 
 

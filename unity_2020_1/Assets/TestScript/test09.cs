@@ -256,7 +256,7 @@ namespace TestScript
 			this.cursor_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,10);
 			this.cursor_sprite.SetRect(0,0,0,0);
 			this.cursor_sprite.SetColor(0.5f,0.5f,0.5f,0.5f);
-			this.cursor_sprite.SetMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
+			this.cursor_sprite.SetMaterialType(Fee.Render2D.MaterialType.Alpha);
 
 			//dijkstra,sprite_map
 			this.dijkstra = new Fee.Dijkstra.Dijkstra<int,NodeData,LinkData>();

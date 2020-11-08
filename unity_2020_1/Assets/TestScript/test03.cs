@@ -97,7 +97,7 @@ namespace TestScript
 						{
 							t_color.a = 0.5f;
 							this.window.SetBgColor(in t_color);
-							this.window.SetBgMaterialType(Fee.Render2D.Config.MaterialType.Alpha);
+							this.window.SetBgMaterialType(Fee.Render2D.MaterialType.Alpha);
 						}break;
 					default:
 						{

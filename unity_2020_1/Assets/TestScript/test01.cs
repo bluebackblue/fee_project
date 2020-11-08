@@ -154,7 +154,7 @@ namespace TestScript
 				this.sprite.SetTextureRect(0,0,Fee.Render2D.Config.TEXTURE_W,Fee.Render2D.Config.TEXTURE_H);
 				this.sprite.SetRect(0,0,Fee.Render2D.Config.VIRTUAL_W,Fee.Render2D.Config.VIRTUAL_H);
 				this.sprite.SetColor(0.0f,0.5f,0.0f,1.0f);
-				this.sprite.SetMaterialType(Fee.Render2D.Config.MaterialType.Simple);
+				this.sprite.SetMaterialType(Fee.Render2D.MaterialType.Simple);
 			}
 
 			{
