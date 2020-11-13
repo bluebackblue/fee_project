@@ -199,8 +199,6 @@ namespace TestScript
 		{
 			this.box_angle += UnityEngine.Time.deltaTime;
 			this.box_transform.position = new UnityEngine.Vector3(UnityEngine.Mathf.Cos(this.box_angle) * 5.0f,1.0f,UnityEngine.Mathf.Sin(this.box_angle) * 5.0f);
-
-			UnityEngine.Debug.Log("update");
 		}
 
 		/** LateUpdate
