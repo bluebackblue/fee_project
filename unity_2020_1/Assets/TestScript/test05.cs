@@ -176,6 +176,10 @@ namespace TestScript
 		private int mousewheel_value_x;
 		private int mousewheel_value_y;
 
+		/** rapidcount
+		*/
+		private int rapidcount;
+
 		/** Start
 		*/
 		private void Start()
@@ -208,6 +212,8 @@ namespace TestScript
 			Fee.Render2D.Render2D.CreateInstance();
 
 			//入力。インスタンス作成。
+			Fee.Input.Config.DEFAULT_RAPID_TIME_MAX_FIRST = 60;
+			Fee.Input.Config.DEFAULT_RAPID_TIME_MAX = 20;
 			Fee.Input.Input.CreateInstance(true,true,true,false);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Up);
 			Fee.Input.Input.GetInstance().key.Regist(Fee.Input.Status_Key_Type.Down);
@@ -244,6 +250,8 @@ namespace TestScript
 			this.bg.SetMaterialType(Fee.Render2D.MaterialType.Alpha);
 			this.bg.SetColor(0.0f,0.0f,0.0f,1.0f);
 
+			//rapidcount
+			this.rapidcount = 0;
 
 			//マウス。
 			this.mouse_sprite = Fee.Render2D.Sprite2D.Create(this.deleter,t_drawpriority + 1);
@@ -708,6 +716,11 @@ namespace TestScript
 
 			//パッド。
 			{
+				if(Fee.Input.Input.GetInstance().pad.status[this.pad_index].enter.rapid == true){
+					this.rapidcount++;
+				}
+
+
 				string t_text = "";
 
 				t_text += "left        = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].left.on.ToString() + "\n";
@@ -719,6 +732,8 @@ namespace TestScript
 				t_text += "escape      = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].escape.on.ToString() + "\n";
 				t_text += "sub1        = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].sub1.on.ToString() + "\n";
 				t_text += "sub2        = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].sub2.on.ToString() + "\n";
+
+				t_text += "rapid       = " + this.rapidcount.ToString() + "\n";
 
 				t_text += "left_menu   = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].left_menu.on.ToString() + "\n";
 				t_text += "right_menu  = " + Fee.Input.Input.GetInstance().pad.status[this.pad_index].right_menu.on.ToString() + "\n";
