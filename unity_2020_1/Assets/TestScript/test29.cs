@@ -161,6 +161,7 @@ namespace TestScript
 				this.box_transform = t_box_gameobject.GetComponent<UnityEngine.Transform>();
 				this.box_transform.position = new UnityEngine.Vector3(0.0f,0.0f,0.0f);
 				this.box_transform.localScale = new UnityEngine.Vector3(1.0f,1.0f,1.0f);
+				t_box_gameobject.layer = 0;
 
 				UnityEngine.MeshFilter t_box_meshfilter = t_box_gameobject.AddComponent<UnityEngine.MeshFilter>();
 				UnityEngine.MeshRenderer t_box_meshrenderer = t_box_gameobject.AddComponent<UnityEngine.MeshRenderer>();
@@ -181,6 +182,10 @@ namespace TestScript
 				this.mirror_1 = Fee.Mirror.Mirror.GetInstance().CreateMirror(Fee.Mirror.RenderTextureSizeType.Size_1024,t_mirror_1_gameobject,UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>(),"Mirror Camera 1");
 				this.mirror_1.mirror_camera.raw_camera.clearFlags = UnityEngine.CameraClearFlags.Skybox;
 				this.mirror_1.enabled = true;
+				this.mirror_1.gameObject.layer = 4;
+
+				//ボックスを表示。ミラーオブジェクトは写さない。
+				this.mirror_1.mirror_camera.raw_camera.cullingMask = 1;
 			}
 
 			//メインカメラのUnityOnPreRenderでミラーを描画。
@@ -188,9 +193,17 @@ namespace TestScript
 				this.mirror_2 = Fee.Mirror.Mirror.GetInstance().CreateMirror(Fee.Mirror.RenderTextureSizeType.Size_1024,t_mirror_2_gameobject,UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>(),"Mirror Camera 2");
 				this.mirror_2.mirror_camera.raw_camera.clearFlags = UnityEngine.CameraClearFlags.Skybox;
 				this.mirror_2.enabled = false;
+				this.mirror_2.gameObject.layer = 4;
+
+				//ボックスを表示。ミラーオブジェクトは写さない。
+				this.mirror_2.mirror_camera.raw_camera.cullingMask = 1;
 			}
 
-			UnityEngine.GameObject.Find("Main Camera").AddComponent<Fee.Function.UnityOnPreRender_MonoBehaviour>().SetCallBack(this,0);
+			//ボックスとミラーを表示。
+			{
+				UnityEngine.GameObject.Find("Main Camera").AddComponent<Fee.Function.UnityOnPreRender_MonoBehaviour>().SetCallBack(this,0);
+				UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>().cullingMask = (1) | (1 << 4);
+			}
 		}
 
 		/** [Fee.Graphic.UnityOnPreRender_CallBackInterface]UnityOnPreRender
