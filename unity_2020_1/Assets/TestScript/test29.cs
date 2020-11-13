@@ -17,7 +17,7 @@ namespace TestScript
 		ミラー
 
 	*/
-	public class test29 : MainBase
+	public class test29 : MainBase , Fee.Function.UnityOnPreRender_CallBackInterface<int>
 	{
 		/** CreateStatus
 		*/
@@ -45,6 +45,11 @@ namespace TestScript
 		*/
 		private UnityEngine.Transform box_transform;
 		private float box_angle;
+
+		/** mirror
+		*/
+		private Fee.Mirror.MirrorObject_MonoBehaviour mirror_1;
+		private Fee.Mirror.MirrorObject_MonoBehaviour mirror_2;
 
 		/** Start
 		*/
@@ -170,15 +175,29 @@ namespace TestScript
 				this.box_angle = 0.0f;
 			}
 
+			
+			//ミラーオブジェクトのOnWillRenderObjectでミラーを描画。
 			{
-				Fee.Mirror.MirrorCamera_MonoBehaviour t_camera_monobehaviour = Fee.Mirror.Mirror.GetInstance().CreateMirror(Fee.Mirror.RenderTextureSizeType.Size_1024,t_mirror_1_gameobject,UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>(),"Mirror Camera 1");
-				t_camera_monobehaviour.raw_camera.clearFlags = UnityEngine.CameraClearFlags.Skybox;
+				this.mirror_1 = Fee.Mirror.Mirror.GetInstance().CreateMirror(Fee.Mirror.RenderTextureSizeType.Size_1024,t_mirror_1_gameobject,UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>(),"Mirror Camera 1");
+				this.mirror_1.mirror_camera.raw_camera.clearFlags = UnityEngine.CameraClearFlags.Skybox;
+				this.mirror_1.enabled = true;
 			}
 
+			//メインカメラのUnityOnPreRenderでミラーを描画。
 			{
-				Fee.Mirror.MirrorCamera_MonoBehaviour t_camera_monobehaviour = Fee.Mirror.Mirror.GetInstance().CreateMirror(Fee.Mirror.RenderTextureSizeType.Size_1024,t_mirror_2_gameobject,UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>(),"Mirror Camera 2");
-				t_camera_monobehaviour.raw_camera.clearFlags = UnityEngine.CameraClearFlags.Skybox;
+				this.mirror_2 = Fee.Mirror.Mirror.GetInstance().CreateMirror(Fee.Mirror.RenderTextureSizeType.Size_1024,t_mirror_2_gameobject,UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>(),"Mirror Camera 2");
+				this.mirror_2.mirror_camera.raw_camera.clearFlags = UnityEngine.CameraClearFlags.Skybox;
+				this.mirror_2.enabled = false;
 			}
+
+			UnityEngine.GameObject.Find("Main Camera").AddComponent<Fee.Function.UnityOnPreRender_MonoBehaviour>().SetCallBack(this,0);
+		}
+
+		/** [Fee.Graphic.UnityOnPreRender_CallBackInterface]UnityOnPreRender
+		*/
+		public void UnityOnPreRender(int a_id)
+		{
+			this.mirror_2.Render();
 		}
 
 		/** RowUpdate
