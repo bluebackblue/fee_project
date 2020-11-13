@@ -13,6 +13,9 @@
 namespace TestScript
 {
 	/** test22
+
+		ビデオ
+
 	*/
 	public class test22 : MainBase
 	{

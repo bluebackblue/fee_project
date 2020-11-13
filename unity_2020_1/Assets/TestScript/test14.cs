@@ -13,6 +13,9 @@
 namespace TestScript
 {
 	/** test14
+
+		プレイヤーループシステム
+
 	*/
 	public class test14 : MainBase , Fee.Function.UnityOnPreRender_CallBackInterface<int> , Fee.Function.UnityOnPostRender_CallBackInterface<int> , Fee.Function.UnityUpdate_CallBackInterface<int> , Fee.Function.UnityStart_CallBackInterface<int> , Fee.Function.UnityOnDestroy_CallBackInterface<int>
 	{
@@ -373,10 +376,6 @@ namespace TestScript
 				t_node.Value.time_log = t_node.Value.time;
 
 				t_node = t_node.Next;
-			}
-
-
-			for(int ii=0;ii<this.list.Count;ii++){
 			}
 
 			Item t_item = Find("Initialization_First");

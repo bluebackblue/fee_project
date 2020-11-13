@@ -13,6 +13,9 @@
 namespace TestScript
 {
 	/** test21
+
+		オープンファイルダイアログ
+
 	*/
 	public class test21 : MainBase , Fee.Ui.OnButtonClick_CallBackInterface<int>
 	{

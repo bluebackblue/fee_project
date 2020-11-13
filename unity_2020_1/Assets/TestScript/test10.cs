@@ -13,6 +13,9 @@
 namespace TestScript
 {
 	/** test10
+
+		雲
+
 	*/
 	public class test10 : MainBase , Fee.Ui.OnSliderChangeValue_CallBackInterface<test10.SliderId>
 	{

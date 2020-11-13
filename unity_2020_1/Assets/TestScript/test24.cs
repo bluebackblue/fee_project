@@ -13,6 +13,9 @@
 namespace TestScript
 {
 	/** test24
+
+		タイム
+
 	*/
 	public class test24 : MainBase
 	{

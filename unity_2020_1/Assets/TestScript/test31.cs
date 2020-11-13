@@ -13,6 +13,9 @@
 namespace TestScript
 {
 	/** test31
+
+		---
+
 	*/
 	public class test31 : MainBase
 	{

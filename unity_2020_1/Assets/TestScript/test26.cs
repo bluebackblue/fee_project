@@ -13,6 +13,9 @@
 namespace TestScript
 {
 	/** test26
+
+		ブラー
+
 	*/
 	public class test26 : MainBase , Fee.Function.UnityOnRenderImage_CallBackInterface<int> , Fee.Ui.OnButtonClick_CallBackInterface<test26.ButtonId> , Fee.Ui.OnSliderChangeValue_CallBackInterface<test26.SliderId>
 	{

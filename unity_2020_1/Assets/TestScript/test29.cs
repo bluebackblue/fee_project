@@ -13,6 +13,9 @@
 namespace TestScript
 {
 	/** test29
+
+		ミラー
+
 	*/
 	public class test29 : MainBase
 	{
@@ -103,12 +106,11 @@ namespace TestScript
 			this.CreateReturnButton(this.prefablist,this.deleter,(Fee.Render2D.Config.MAX_LAYER - 1) * Fee.Render2D.Config.DRAWPRIORITY_STEP,this.name + ":Return");
 
 			//ミラー。
-			UnityEngine.GameObject t_mirror_gameobject;
-			if(true){
-
-				t_mirror_gameobject = new UnityEngine.GameObject("mirror");
-				UnityEngine.MeshFilter t_mirror_meshfilter = t_mirror_gameobject.AddComponent<UnityEngine.MeshFilter>();
-				UnityEngine.MeshRenderer t_mirror_meshrenderer = t_mirror_gameobject.AddComponent<UnityEngine.MeshRenderer>();
+			UnityEngine.GameObject t_mirror_1_gameobject;
+			{
+				t_mirror_1_gameobject = new UnityEngine.GameObject("mirror1");
+				UnityEngine.MeshFilter t_mirror_meshfilter = t_mirror_1_gameobject.AddComponent<UnityEngine.MeshFilter>();
+				UnityEngine.MeshRenderer t_mirror_meshrenderer = t_mirror_1_gameobject.AddComponent<UnityEngine.MeshRenderer>();
 
 				System.Collections.Generic.List<UnityEngine.Vector3> t_mirror_vertex_list = new System.Collections.Generic.List<UnityEngine.Vector3>(Fee.Mesh.Plate.CAPACITY_VERTEX_LIST);
 				System.Collections.Generic.List<int> t_mirror_index_list = new System.Collections.Generic.List<int>(Fee.Mesh.Plate.CAPACITY_INDEX_LIST);
@@ -120,7 +122,32 @@ namespace TestScript
 				t_mirror_meshfilter.mesh = Fee.Mesh.Plate.CreateMesh(t_mirror_vertex_list,t_mirror_index_list,t_mirror_uv_list);
 				t_mirror_meshrenderer.material = null;
 
-				t_mirror_gameobject.GetComponent<UnityEngine.Transform>().localScale = new UnityEngine.Vector3(100.0f,100.0f,100.0f);
+				UnityEngine.Transform t_mirror_transform = t_mirror_1_gameobject.GetComponent<UnityEngine.Transform>();
+				t_mirror_transform.localScale = new UnityEngine.Vector3(100.0f,100.0f,100.0f);
+				t_mirror_transform.position = new UnityEngine.Vector3(0.0f,0.0f,0.0f);
+			}
+
+			//ミラー。
+			UnityEngine.GameObject t_mirror_2_gameobject;
+			{
+				t_mirror_2_gameobject = new UnityEngine.GameObject("mirror2");
+				UnityEngine.MeshFilter t_mirror_meshfilter = t_mirror_2_gameobject.AddComponent<UnityEngine.MeshFilter>();
+				UnityEngine.MeshRenderer t_mirror_meshrenderer = t_mirror_2_gameobject.AddComponent<UnityEngine.MeshRenderer>();
+
+				System.Collections.Generic.List<UnityEngine.Vector3> t_mirror_vertex_list = new System.Collections.Generic.List<UnityEngine.Vector3>(Fee.Mesh.Plate.CAPACITY_VERTEX_LIST);
+				System.Collections.Generic.List<int> t_mirror_index_list = new System.Collections.Generic.List<int>(Fee.Mesh.Plate.CAPACITY_INDEX_LIST);
+				System.Collections.Generic.List<UnityEngine.Vector2> t_mirror_uv_list = new System.Collections.Generic.List<UnityEngine.Vector2>(Fee.Mesh.Plate.CAPACITY_UV_LIST);
+				Fee.Mesh.Plate.CreateVertexList(t_mirror_vertex_list);
+				Fee.Mesh.Plate.CreateIndexList(t_mirror_index_list);
+				Fee.Mesh.Plate.CreateUvList(t_mirror_uv_list);
+				
+				t_mirror_meshfilter.mesh = Fee.Mesh.Plate.CreateMesh(t_mirror_vertex_list,t_mirror_index_list,t_mirror_uv_list);
+				t_mirror_meshrenderer.material = null;
+
+				UnityEngine.Transform t_mirror_transform = t_mirror_2_gameobject.GetComponent<UnityEngine.Transform>();
+				t_mirror_transform.localScale = new UnityEngine.Vector3(10.0f,10.0f,10.0f);
+				t_mirror_transform.position = new UnityEngine.Vector3(0.0f,5.0f,11.0f);
+				t_mirror_transform.rotation = UnityEngine.Quaternion.AngleAxis(90.0f,UnityEngine.Vector3.left);
 			}
 
 			//箱。
@@ -144,7 +171,13 @@ namespace TestScript
 			}
 
 			{
-				Fee.Mirror.Mirror.GetInstance().CreateMirror(Fee.Mirror.RenderTextureSizeType.Size_1024,t_mirror_gameobject,UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>());
+				Fee.Mirror.MirrorCamera_MonoBehaviour t_camera_monobehaviour = Fee.Mirror.Mirror.GetInstance().CreateMirror(Fee.Mirror.RenderTextureSizeType.Size_1024,t_mirror_1_gameobject,UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>(),"Mirror Camera 1");
+				t_camera_monobehaviour.raw_camera.clearFlags = UnityEngine.CameraClearFlags.Skybox;
+			}
+
+			{
+				Fee.Mirror.MirrorCamera_MonoBehaviour t_camera_monobehaviour = Fee.Mirror.Mirror.GetInstance().CreateMirror(Fee.Mirror.RenderTextureSizeType.Size_1024,t_mirror_2_gameobject,UnityEngine.GameObject.Find("Main Camera").GetComponent<UnityEngine.Camera>(),"Mirror Camera 2");
+				t_camera_monobehaviour.raw_camera.clearFlags = UnityEngine.CameraClearFlags.Skybox;
 			}
 		}
 
@@ -166,6 +199,8 @@ namespace TestScript
 		{
 			this.box_angle += UnityEngine.Time.deltaTime;
 			this.box_transform.position = new UnityEngine.Vector3(UnityEngine.Mathf.Cos(this.box_angle) * 5.0f,1.0f,UnityEngine.Mathf.Sin(this.box_angle) * 5.0f);
+
+			UnityEngine.Debug.Log("update");
 		}
 
 		/** LateUpdate

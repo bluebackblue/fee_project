@@ -13,6 +13,9 @@
 namespace TestScript
 {
 	/** test23
+
+		フォーカス
+
 	*/
 	public class test23 : MainBase , Fee.Focus.Compare_Base<int>
 	{

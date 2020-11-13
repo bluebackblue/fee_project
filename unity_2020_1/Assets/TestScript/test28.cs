@@ -13,6 +13,9 @@
 namespace TestScript
 {
 	/** test28
+
+		ワイヤーフレーム
+
 	*/
 	public class test28 : MainBase , Fee.Ui.OnSliderChangeValue_CallBackInterface<test28.SliderId>
 	{
