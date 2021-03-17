@@ -39,7 +39,13 @@ namespace TestScript
 		*/
 		class SceneA : Fee.Scene.Scene_Base
 		{
-			/** [Scene.Scene_Base]更新。
+			/** [Fee.Scene.Scene_Base]ロック。
+			*/
+			public void Lock()
+			{
+			}
+
+			/** [Fee.Scene.Scene_Base]更新。
 
 				return == true : 終了。
 
@@ -49,9 +55,9 @@ namespace TestScript
 				return Fee.Scene.Scene.GetInstance().IsNextScene();
 			}
 
-			/** [Scene_Base]更新。
+			/** [Fee.Scene.Scene_Base]更新。
 			*/
-			public void Unity_Update()
+			public void UnityUpdate()
 			{
 				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
 					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
@@ -62,25 +68,31 @@ namespace TestScript
 				}
 			}
 
-			/** [Scene_Base]更新。
+			/** [Fee.Scene.Scene_Base]更新。
 			*/
-			public void Unity_LateUpdate()
+			public void UnityLateUpdate()
 			{
 			}
 
-			/** [Scene.Scene_Base]削除。
+			/** [Fee.Scene.Scene_Base]更新。
+			*/
+			public void UnityFixedUpdate()
+			{
+			}
+
+			/** [Fee.Scene.Scene_Base]削除。
 			*/
 			public void Delete()
 			{
 				UnityEngine.Debug.Log("SceneA : Delete");
 			}
 
-			/** [Scene.Scene_Base]シーン開始。
+			/** [Fee.Scene.Scene_Base]シーン開始。
 
 				return == true : 開始処理完了。
 
 			*/
-			public bool SceneStart()
+			public bool SceneStart(bool a_first)
 			{
 				UnityEngine.Debug.Log("SceneA : SceneStart");
 
@@ -88,12 +100,12 @@ namespace TestScript
 				return true;
 			}
 
-			/** [Scene.Scene_Base]シーン終了。
+			/** [Fee.Scene.Scene_Base]シーン終了。
 
 				return == true : 終了処理完了。
 
 			*/
-			public bool SceneEnd()
+			public bool SceneEnd(bool a_first)
 			{
 				UnityEngine.Debug.Log("SceneA : SceneEnd");
 
@@ -111,7 +123,13 @@ namespace TestScript
 		*/
 		class SceneB : Fee.Scene.Scene_Base
 		{
-			/** [Scene.Scene_Base]更新。
+			/** [Fee.Scene.Scene_Base]ロック。
+			*/
+			public void Lock()
+			{
+			}
+
+			/** [Fee.Scene.Scene_Base]更新。
 
 				return == true : 終了。
 
@@ -121,9 +139,9 @@ namespace TestScript
 				return Fee.Scene.Scene.GetInstance().IsNextScene();
 			}
 
-			/** [Scene_Base]更新。
+			/** [Fee.Scene.Scene_Base]更新。
 			*/
-			public void Unity_Update()
+			public void UnityUpdate()
 			{
 				if(Fee.Fade.Fade.GetInstance().IsAnime() == false){
 					if(Fee.Input.Input.GetInstance().mouse.left.down == true){
@@ -134,25 +152,31 @@ namespace TestScript
 				}
 			}
 
-			/** [Scene_Base]更新。
+			/** [Fee.Scene.Scene_Base]更新。
 			*/
-			public void Unity_LateUpdate()
+			public void UnityLateUpdate()
 			{
 			}
 
-			/** [Scene.Scene_Base]削除。
+			/** [Fee.Scene.Scene_Base]更新。
+			*/
+			public void UnityFixedUpdate()
+			{
+			}
+
+			/** [Fee.Scene.Scene_Base]削除。
 			*/
 			public void Delete()
 			{
 				UnityEngine.Debug.Log("SceneB : Delete");
 			}
 
-			/** [Scene.Scene_Base]シーン開始。
+			/** [Fee.Scene.Scene_Base]シーン開始。
 
 				return == true : 開始処理完了。
 
 			*/
-			public bool SceneStart()
+			public bool SceneStart(bool a_first)
 			{
 				UnityEngine.Debug.Log("SceneB : SceneStart");
 
@@ -160,12 +184,12 @@ namespace TestScript
 				return true;
 			}
 
-			/** [Scene.Scene_Base]シーン終了。
+			/** [Fee.Scene.Scene_Base]シーン終了。
 
 				return == true : 終了処理完了。
 
 			*/
-			public bool SceneEnd()
+			public bool SceneEnd(bool a_first)
 			{
 				UnityEngine.Debug.Log("SceneB : SceneEnd");
 

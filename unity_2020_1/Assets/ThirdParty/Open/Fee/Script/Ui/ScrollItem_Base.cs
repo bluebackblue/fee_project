@@ -16,10 +16,6 @@ namespace Fee.Ui
 	*/
 	public abstract class ScrollItem_Base : Fee.Deleter.OnDelete_CallBackInterface
 	{
-		/** is_viewin
-		*/
-		private bool is_viewin;
-
 		/** capture_viewout
 		*/
 		private bool capture_viewout;
@@ -28,21 +24,6 @@ namespace Fee.Ui
 		*/
 		public ScrollItem_Base()
 		{
-			this.is_viewin = false;
-		}
-
-		/** 表示。チェック。
-		*/
-		public bool IsViewIn()
-		{
-			return this.is_viewin;
-		}
-
-		/** 表示。設定。
-		*/
-		public void SetViewIn(bool a_flag)
-		{
-			this.is_viewin = a_flag;
 		}
 
 		/** キャプチャアイテム表示範囲外移動フラグ。設定。
@@ -72,8 +53,12 @@ namespace Fee.Ui
 		public abstract void OnChangeRectY(int a_y);
 
 		/** [Fee.Ui.ScrollItem_Base]矩形変更。
+
+			a_w : parent_w / item_length
+			a_h : parent_h / item_length
+
 		*/
-		public abstract void OnChangeParentRectWH(int a_parent_w,int a_parent_h);
+		public abstract void OnChangeParentRectWH(int a_w,int a_h);
 
 		/** [Fee.Ui.ScrollItem_Base]クリップ矩形変更。
 		*/

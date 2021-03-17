@@ -16,38 +16,46 @@ namespace Fee.Scene
 	*/
 	public interface Scene_Base
 	{
-		/** [Scene_Base]更新。
+		/** [Fee.Scene.Scene_Base]ロック。
+		*/
+		void Lock();
+
+		/** [Fee.Scene.Scene_Base]更新。
 
 			return == true : 終了。
 
 		*/
 		bool Main();
 
-		/** [Scene_Base]更新。
+		/** [Fee.Scene.Scene_Base]更新。
 		*/
-		void Unity_Update();
+		void UnityUpdate();
 
-		/** [Scene_Base]更新。
+		/** [Fee.Scene.Scene_Base]更新。
 		*/
-		void Unity_LateUpdate();
+		void UnityLateUpdate();
 
-		/** [Scene_Base]削除。
+		/** [Fee.Scene.Scene_Base]更新。
+		*/
+		void UnityFixedUpdate();
+
+		/** [Fee.Scene.Scene_Base]削除。
 		*/
 		void Delete();
 
-		/** [Scene_Base]シーン開始。
+		/** [Fee.Scene.Scene_Base]シーン開始。
 
 			return == true : 開始処理完了。
 
 		*/
-		bool SceneStart();
+		bool SceneStart(bool a_first);
 
-		/** [Scene_Base]シーン終了。
+		/** [Fee.Scene.Scene_Base]シーン終了。
 
 			return == true : 終了処理完了。
 
 		*/
-		bool SceneEnd();
+		bool SceneEnd(bool a_first);
 	}
 }
 
